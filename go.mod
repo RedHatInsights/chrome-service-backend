@@ -2,7 +2,12 @@ module github.com/RedHatInsights/chrome-service-backend
 
 go 1.18
 
-require github.com/go-chi/chi/v5 v5.0.7
+require (
+	github.com/go-chi/chi/v5 v5.0.7
+	github.com/joho/godotenv v1.4.0
+	gorm.io/driver/postgres v1.3.8
+	gorm.io/gorm v1.23.8
+)
 
 require (
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
@@ -18,7 +23,5 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.14 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gorm.io/driver/postgres v1.3.8 // indirect
 	gorm.io/driver/sqlite v1.3.6 // indirect
-	gorm.io/gorm v1.23.8 // indirect
 )

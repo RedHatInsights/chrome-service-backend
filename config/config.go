@@ -22,23 +22,25 @@ type ChromeServiceConfig struct {
 var config *ChromeServiceConfig
 
 func Init() {
-  config = &ChromeServiceConfig{}
-  config.ServerAddr = ":8000"
-  config.Test = false
+	options := &ChromeServiceConfig{}
+	options.ServerAddr = ":8000"
+	options.Test = false
 
-  // Ignoring Clowder setup for now
-  config.DbUser = os.Getenv("PGSQL_USER")
-	config.DbPassword = os.Getenv("PGSQL_PASSWORD")
-	config.DbHost = os.Getenv("PGSQL_HOSTNAME")
+	// Ignoring Clowder setup for now
+	options.DbUser = os.Getenv("PGSQL_USER")
+	options.DbPassword = os.Getenv("PGSQL_PASSWORD")
+	options.DbHost = os.Getenv("PGSQL_HOSTNAME")
 	port, _ := strconv.Atoi(os.Getenv("PGSQL_PORT"))
-	config.DbPort = port
-	config.DbName = os.Getenv("PGSQL_DATABASE")
-	config.MetricsPort = 8080
-	config.DbSSLMode = "disable"
-	config.DbSSLRootCert = ""
+	options.DbPort = port
+	options.DbName = os.Getenv("PGSQL_DATABASE")
+	options.MetricsPort = 8080
+	options.DbSSLMode = "disable"
+	options.DbSSLRootCert = ""
+
+	config = options
 }
 
 // Returning chrome-service configuration
 func Get() *ChromeServiceConfig {
-  return config
+	return config
 }

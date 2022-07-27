@@ -1,22 +1,20 @@
 package main
 
 import (
-	"net/http"
-	// "strings"
 	"flag"
-	// "fmt"
+	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	// "github.com/go-chi/docgen"
-	// "github.com/go-chi/render"
+	"github.com/joho/godotenv"
 )
 
 var routes = flag.Bool("routes", false, "Generate router documentation")
 
 func main() {
+	godotenv.Load()
 	flag.Parse()
 	initDependencies()
 	router := chi.NewRouter()

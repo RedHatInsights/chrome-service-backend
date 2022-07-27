@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 
@@ -26,6 +27,8 @@ var config *ChromeServiceConfig
 func Init() {
 	godotenv.Load()
 	options := &ChromeServiceConfig{}
+	fmt.Println("Printing our db opt")
+	fmt.Println(os.LookupEnv("PGSQL_USER"))
 	options.ServerAddr = ":8000"
 	options.Test = false
 
@@ -40,6 +43,8 @@ func Init() {
 	options.DbSSLMode = "disable"
 	options.DbSSLRootCert = ""
 
+	fmt.Println("Printing our db options")
+	fmt.Println(options)
 	config = options
 }
 

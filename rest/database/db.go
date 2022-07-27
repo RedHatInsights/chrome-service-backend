@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"gorm.io/gorm"
 
@@ -28,6 +29,10 @@ func Init() {
 	dialector = postgres.Open(dbdns)
 
 	DB, err = gorm.Open(dialector, &gorm.Config{})
+
+	if !DB.Migrator().HasTable(&models.FavoritePage{}) {
+		DB.Migrator().CreateTable(&models.FavoritePage{})
+	}
 
 	if err != nil {
 		panic(fmt.Sprintf("Database connection failed: %s", err.Error()))

@@ -3,6 +3,8 @@ package config
 import (
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 type ChromeServiceConfig struct {
@@ -22,6 +24,7 @@ type ChromeServiceConfig struct {
 var config *ChromeServiceConfig
 
 func Init() {
+	godotenv.Load()
 	options := &ChromeServiceConfig{}
 	options.ServerAddr = ":8000"
 	options.Test = false

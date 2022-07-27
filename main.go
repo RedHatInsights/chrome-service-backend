@@ -6,8 +6,7 @@ import (
   "flag"
   // "fmt"
 
-  // "chrome-backend-service/rest/database"
-  
+  "github.com/RedHatInsights/chrome-backend-service/rest/database/db"
   "github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	// "github.com/go-chi/docgen"
@@ -18,7 +17,7 @@ var routes = flag.Bool("routes", false, "Generate router documentation")
 
 func main() {
   flag.Parse()
-
+  initDependencies()
   router := chi.NewRouter()
 
   router.Use(middleware.RequestID)
@@ -43,6 +42,6 @@ func HealthProbe(response http.ResponseWriter, request *http.Request) {
   response.Write([]byte("Why yes thank you, I am quite healthy :D"))
 }
 
-// func initDependencies() {
-//  database.Init() 
-// }
+func initDependencies() {
+ db.Init()
+}

@@ -1,4 +1,4 @@
-module chrome-service-backend
+module github.com/RedHatInsights/chrome-service-backend
 
 go 1.18
 

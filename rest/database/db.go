@@ -3,10 +3,10 @@ package database
 import (
 	"fmt"
 
-	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/config"
-	"gorm.io/gorm"
+	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
@@ -29,14 +29,8 @@ func Init() {
 	DB, err = gorm.Open(dialector, &gorm.Config{})
 
 	// Migration/Creation of data tables for DB
-	if !DB.Migrator().HasTable(&models.UserIdentity{}) {
-		DB.Migrator().CreateTable(&models.UserIdentity{})
-	}
 	if !DB.Migrator().HasTable(&models.FavoritePage{}) {
 		DB.Migrator().CreateTable(&models.FavoritePage{})
-	}
-	if !DB.Migrator().HasTable(&models.LastVisitedPage{}) {
-		DB.Migrator().CreateTable(&models.LastVisitedPage{})
 	}
 
 	if err != nil {

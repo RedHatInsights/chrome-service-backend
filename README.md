@@ -1,7 +1,11 @@
 # chrome-service-backend
 Source code repository for chrome backend
 
-## Setup steps for xander
+# Requirements
+Postgre 14
+Go 1.18 
+
+## Local Testing
 
 1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. 
 2. Run the server by using `go run .` or `go run main.go`

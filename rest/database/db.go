@@ -4,10 +4,9 @@ import (
 	"fmt"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
-	"gorm.io/gorm"
-
-	// "gorm.io/driver/sqlite"
+	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
@@ -28,6 +27,11 @@ func Init() {
 	dialector = postgres.Open(dbdns)
 
 	DB, err = gorm.Open(dialector, &gorm.Config{})
+
+	// Migration/Creation of data tables for DB
+	if !DB.Migrator().HasTable(&models.FavoritePage{}) {
+		DB.Migrator().CreateTable(&models.FavoritePage{})
+	}
 
 	if err != nil {
 		panic(fmt.Sprintf("Database connection failed: %s", err.Error()))

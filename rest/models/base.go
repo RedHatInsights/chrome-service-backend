@@ -1,14 +1,13 @@
 package models
 
 import (
-  "time"
-  "gorm.io/gorm"
+	"time"
 )
 
 // Generic Struct used throughout models in this service.
 type BaseModel struct {
-  Id uint
-  CreatedAt time.Time
-  UpdatedAt time.Time
-  DeletedAt gorm.DeletedAt
+	Id        uint
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt time.Time
 }

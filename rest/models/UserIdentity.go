@@ -9,6 +9,6 @@ type UserIdentity struct {
   FirstLogin        bool                `json:"firstLogin"`
   DayOne            bool                `json:"dayOne"`
   LastLogin         time.Time           `json:"lastLogin"`
-  LastVisitedPages  []LastVisitedPage   `gorm:"one2many:user_last_visited_pages"`
-  FavoritePages     []FavoritePage      `gorm:"one2many:user_favorited_pages"`
+  LastVisitedPages  []LastVisitedPage   `gorm:"foreignKey:UserId" json:"lastVisitedPages"`
+  FavoritePages     []FavoritePage      `gorm:"foreignKey:UserId" json:"favoritePages"`
 }

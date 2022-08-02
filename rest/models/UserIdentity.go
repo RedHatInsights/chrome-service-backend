@@ -5,10 +5,10 @@ import (
 
 type UserIdentity struct {
   BaseModel
-  AccountId string
-  FirstLoging bool
-  DayOne bool
-  LastLogin time.Time
-  LastVisitedPages []LastVisitedPage `gorm:"many2many:user_last_visited_pages"`
-  FavoritePages []FavoritePage `gorm:"many2many:user_favorited_pages"`
+  AccountId         string              `json:"accountId,omitempty"`
+  FirstLogin        bool                `json:"firstLogin"`
+  DayOne            bool                `json:"dayOne"`
+  LastLogin         time.Time           `json:"lastLogin"`
+  LastVisitedPages  []LastVisitedPage   `gorm:"one2many:user_last_visited_pages"`
+  FavoritePages     []FavoritePage      `gorm:"one2many:user_favorited_pages"`
 }

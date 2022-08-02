@@ -2,6 +2,6 @@ package models
 
 type LastVisitedPage struct {
   BaseModel
-  Pathname string
-  Title string
+  Pathname string `json:"pathname"`
+  Title string    `json:"title"`
 }

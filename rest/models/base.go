@@ -6,8 +6,8 @@ import (
 
 // Generic Struct used throughout models in this service.
 type BaseModel struct {
-	Id        uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt time.Time
+	Id        uint 			`gorm:"primarykey" json:"id,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+	DeletedAt time.Time `json:"deletedAt,omitempty"`
 }

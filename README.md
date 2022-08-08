@@ -14,3 +14,13 @@ Go 1.18
 GET http://localhost:8000/health
 GET http://localhost:8000/api/chrome/v1/hello-world
 ```
+
+### Headers
+
+To query any endpoint, you will need a `x-rh-identity` header in your request.
+
+You can use this value as an example:
+
+```
+eyJpZGVudGl0eSI6eyJ1c2VyIjp7InVzZXJfaWQiOiIxMiJ9fX0=
+```

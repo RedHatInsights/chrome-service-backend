@@ -25,7 +25,7 @@ func ParseHeaders(next http.Handler) http.Handler {
 				w.Write([]byte("Internal server error"))
 				return
 			}
-			ctx = context.WithValue(ctx, "identity", identity)
+			ctx = context.WithValue(ctx, util.IDENTITY_CTX_KEY, identity)
 		}
 
 		next.ServeHTTP(w, r.WithContext(ctx))

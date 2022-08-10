@@ -41,6 +41,21 @@ func StoreLastVisistedPage(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+func GetLastVisitedPages(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	userId := user.ID
+
+	pages, err := service.GetUserslastVisistedPages(userId)
+
+	if err != nil {
+		panic(err)
+	}
+	resp := make(map[string][]models.LastVisitedPage)
+	resp["data"] = pages
+	json.NewEncoder(w).Encode(resp)
+}
+
 func MakeLastVisitedRoutes(sub chi.Router) {
 	sub.Post("/", StoreLastVisistedPage)
+	sub.Get("/", GetLastVisitedPages)
 }

@@ -28,6 +28,7 @@ func main() {
 
 	router.Route("/api/chrome/v1/", func(subrouter chi.Router) {
 		subrouter.Use(m.ParseHeaders)
+		subrouter.Use(m.InjectUser)
 		subrouter.Get("/hello-world", HelloWorld)
 		subrouter.Route("/last-visited", routes.MakeLastVisitedRoutes)
 	})

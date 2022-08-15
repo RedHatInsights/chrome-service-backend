@@ -36,8 +36,14 @@ func StoreLastVisistedPage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	resp := make(map[string][]models.LastVisitedPage)
-	resp["data"] = pages
+
+	resp := util.ListResponse[models.LastVisitedPage]{
+		Data: pages,
+		Meta: util.ListMeta{
+			Count: len(pages),
+			Total: len(pages),
+		},
+	}
 	json.NewEncoder(w).Encode(resp)
 }
 
@@ -50,8 +56,13 @@ func GetLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	resp := make(map[string][]models.LastVisitedPage)
-	resp["data"] = pages
+	resp := util.ListResponse[models.LastVisitedPage]{
+		Data: pages,
+		Meta: util.ListMeta{
+			Count: len(pages),
+			Total: len(pages),
+		},
+	}
 	json.NewEncoder(w).Encode(resp)
 }
 

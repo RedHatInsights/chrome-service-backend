@@ -10,17 +10,14 @@ import (
   "github.com/go-chi/chi/v5"
 )
 
+// Use the user obj in context to pull full data row from DB
 func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
-  user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity) 
-  userID := user.ID
-  response := make(map[string]models.UserIdentity)
-  
-  userData, err := service.GetUserIdentityByID(userID)
+  user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+  updatedUser, err := service.GetUserIdentityData(user)
   if err != nil {
     panic(err)
   }
-  response["data"] = userData
-  json.NewEncoder(w).Encode(response)
+  json.NewEncoder(w).Encode(updatedUser)
 }
 
 func MakeUserIdentityRoutes(sub chi.Router) {

@@ -8,7 +8,7 @@ import (
 func GetUserActiveFavoritePages(userID uint)([]models.FavoritePage, error) {
   var activeFavoritePages []models.FavoritePage
   
-  err := database.DB.Where("user_identity_id ?", userID).Where("favorite", true).Find(&activeFavoritePages).Error
+  err := database.DB.Where("user_identity_id = ?", userID).Where("favorite", true).Find(&activeFavoritePages).Error
   
   return activeFavoritePages, err
 }

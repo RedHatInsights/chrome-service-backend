@@ -23,6 +23,18 @@ func GetAllUserFavoritePages(userID uint)([]models.FavoritePage, error) {
   return favoritePages, err
 }
 
+func GetUserArchivedFavoritePages(userID uint)([]models.FavoritePage, error) {
+  var archivedFavorites []models.FavoritePage
+
+  err := database.DB.
+    Where("user_identity_id = ?", userID).
+    Where("favorite = ?", false).
+    Find(&archivedFavorites).
+    Error
+
+    return archivedFavorites, err
+}
+
 func CheckIfExistsInDB(allFavoritePages []models.FavoritePage, newFavoritePage models.FavoritePage)(bool) {
   pageExists := false
   

@@ -33,7 +33,7 @@ func GetFavoritePage(w http.ResponseWriter, r *http.Request) {
   if (getArchivedFavParam == "true") {
     userFavoritePages, err = service.GetAllUserFavoritePages(userID)
   } else if (getArchivedFavParam == "false") { 
-    userFavoritePages, err = service.GetUserActiveFavoritePages(userID)
+    userFavoritePages, err = service.GetUserArchivedFavoritePages(userID)
   }
   
   // Crude error handling for now, could return response instead

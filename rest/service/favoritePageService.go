@@ -2,6 +2,7 @@ package service
 
 import (
   "time"
+  "fmt"
 
   "github.com/RedHatInsights/chrome-service-backend/rest/models"
   "github.com/RedHatInsights/chrome-service-backend/rest/database"
@@ -10,7 +11,7 @@ import (
 func GetUserActiveFavoritePages(userID uint)([]models.FavoritePage, error) {
   var activeFavoritePages []models.FavoritePage
   
-  err := database.DB.Where("user_identity_id ?", userID).Where("favorite", true).Find(&activeFavoritePages).Error
+  err := database.DB.Where("user_identity_id = ?", userID).Where("favorite", true).Find(&activeFavoritePages).Error
   
   return activeFavoritePages, err
 }
@@ -18,7 +19,7 @@ func GetUserActiveFavoritePages(userID uint)([]models.FavoritePage, error) {
 func GetAllUserFavoritePages(userID uint)([]models.FavoritePage, error) {
   var favoritePages []models.FavoritePage
 
-  err := database.DB.Where("user_identity_id ?", userID).Find(&favoritePages).Error
+  err := database.DB.Where("user_identity_id = ?", userID).Find(&favoritePages).Error
   return favoritePages, err
 }
 
@@ -38,14 +39,16 @@ func CheckIfExistsInDB(allFavoritePages []models.FavoritePage, newFavoritePage m
 func UpdateFavoritePage(favoritePage models.FavoritePage)(error) {
   var currentPage models.FavoritePage
 
-  err := database.DB.Where("pathname ?", favoritePage.Pathname).First(&currentPage).Error
+  err := database.DB.Where("pathname = ?", favoritePage.Pathname).First(&currentPage).Error
   
+  fmt.Println("Testing out our currentPage: ", currentPage)
+
   if err != nil {
     return err
   }
   
   return database.DB.Model(&currentPage).
-    Update("favorite", true).
+    Update("favorite", favoritePage.Favorite).
     Update("updated_at", time.Now()).
     Error
 }

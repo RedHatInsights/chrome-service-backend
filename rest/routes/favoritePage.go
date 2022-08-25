@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
   "encoding/json"
   "github.com/go-chi/chi/v5"
@@ -14,23 +15,25 @@ func GetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	var userFavoritePages []models.FavoritePage
 	var err error
 	getAllParam := r.URL.Query().Get(util.GET_ALL_PARAM)
-	getActiveFavParam := r.URL.Query().Get(util.DEFAULT_PARAM)
+	getArchivedFavParam := r.URL.Query().Get(util.DEFAULT_PARAM)
   user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
   userID := user.ID
+
+	fmt.Println("Testing out our activeParam: ", getArchivedFavParam)
+	fmt.Println("Testing out our getAll param: ", getAllParam)
 
 	if getAllParam == "true" {
 		userFavoritePages, err = service.GetAllUserFavoritePages(userID)
 	}
 
-	if (getActiveFavParam == "") || (getActiveFavParam != "true" && getActiveFavParam != "false") {
+	if (getAllParam == "") && (getArchivedFavParam != "true" && getArchivedFavParam != "false") {
 		w.Write([]byte("There is a problem in your requests parameters. Please refer to docs."))
+		return
 	}
-  if (getActiveFavParam == "true") {
-    userFavoritePages, err = service.GetUserActiveFavoritePages(userID)
-  } else if (getActiveFavParam == "false") { 
-    w.Write([]byte("These are no longer nice, no favorited no more"))
-    // Apply logic for getting back all of the user favorite pages 
+  if (getArchivedFavParam == "true") {
     userFavoritePages, err = service.GetAllUserFavoritePages(userID)
+  } else if (getArchivedFavParam == "false") { 
+    userFavoritePages, err = service.GetUserActiveFavoritePages(userID)
   }
   
   // Crude error handling for now, could return response instead
@@ -56,6 +59,7 @@ func SetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&currentNewFavoritePage)
 
 	currentNewFavoritePage.UserIdentityID = userID
+	fmt.Println("Testing out our currentNewFavoritePage: ", currentNewFavoritePage)
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

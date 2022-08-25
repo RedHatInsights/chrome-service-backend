@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
   "encoding/json"
   "github.com/go-chi/chi/v5"
@@ -18,9 +17,6 @@ func GetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	getArchivedFavParam := r.URL.Query().Get(util.DEFAULT_PARAM)
   user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
   userID := user.ID
-
-	fmt.Println("Testing out our activeParam: ", getArchivedFavParam)
-	fmt.Println("Testing out our getAll param: ", getAllParam)
 
 	if getAllParam == "true" {
 		userFavoritePages, err = service.GetAllUserFavoritePages(userID)
@@ -59,7 +55,6 @@ func SetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&currentNewFavoritePage)
 
 	currentNewFavoritePage.UserIdentityID = userID
-	fmt.Println("Testing out our currentNewFavoritePage: ", currentNewFavoritePage)
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

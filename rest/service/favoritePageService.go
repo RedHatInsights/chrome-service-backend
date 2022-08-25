@@ -2,7 +2,6 @@ package service
 
 import (
   "time"
-  "fmt"
 
   "github.com/RedHatInsights/chrome-service-backend/rest/models"
   "github.com/RedHatInsights/chrome-service-backend/rest/database"
@@ -53,8 +52,6 @@ func UpdateFavoritePage(favoritePage models.FavoritePage)(error) {
 
   err := database.DB.Where("pathname = ?", favoritePage.Pathname).First(&currentPage).Error
   
-  fmt.Println("Testing out our currentPage: ", currentPage)
-
   if err != nil {
     return err
   }

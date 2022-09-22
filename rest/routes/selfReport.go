@@ -8,6 +8,7 @@ import (
   "github.com/RedHatInsights/chrome-service-backend/rest/service"
   "github.com/RedHatInsights/chrome-service-backend/rest/models"
   "github.com/go-chi/chi/v5"
+	"github.com/sirupsen/logrus"
 )
 
 func GetUserSelfReport(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +27,31 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
   user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
   userID := user.ID
   
-  updatedSelfReport = json.NewDecoder(r.Body).Decode(&updatedSelfReport)
+  err := json.NewDecoder(r.Body).Decode(&updatedSelfReport)
   updatedSelfReport.UserIdentityID = userID
+
+  if err != nil {
+    errString := "Invalid self report request payload, please refer to documentation."
+    w.WriteHeader(http.StatusBadRequest)
+    w.Write([]byte(errString))
+    logrus.Errorf("unable to request updating self report, %s", err.Error())
+    panic(err)
+  }
+
+  // This is where we hit the saving end point
+  err = service.HandleNewSelfReport(userID, updatedSelfReport)
+  
+  if err != nil {
+    panic(err)
+  }
+
+  resp, err := service.GetSelfReport(userID)
+  
+   if err != nil {
+    panic(err)
+   }
+
+   json.NewEncoder(w).Encode(resp)
 }
 
 func MakeSelfReportRoutes(sub chi.Router) {

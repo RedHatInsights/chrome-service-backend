@@ -25,6 +25,7 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 		LastLogin: time.Now(),
 		LastVisitedPages: []models.LastVisitedPage{},
 		FavoritePages: []models.FavoritePage{},
+		// SelfReport: models.SelfReport{},
 	}
 
 	err := database.DB.Where("account_id = ?", userId).FirstOrCreate(&identity).Error

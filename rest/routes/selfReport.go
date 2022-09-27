@@ -1,6 +1,7 @@
 package routes
 
 import (
+  "fmt"
   "encoding/json"
   "net/http"
 
@@ -27,8 +28,13 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
   user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
   userID := user.ID
   
+  // fmt.Println("This is the shape of our self report: "models.SelfReport)
+  fmt.Println("This is our userID in UpdateUserSelfReport", userID)
+  
   err := json.NewDecoder(r.Body).Decode(&updatedSelfReport)
   updatedSelfReport.UserIdentityID = userID
+
+  fmt.Println("This is our updatedSelfReport: ", updatedSelfReport)
 
   if err != nil {
     errString := "Invalid self report request payload, please refer to documentation."

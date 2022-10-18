@@ -9,5 +9,7 @@ type SelfReport struct {
   // ProductsOfInterest  []ProductOfInterest `json:"productsOfInterest"`
   ProductsOfInterest               pq.StringArray `gorm:"type:text[]" json:"productsOfInterest"`
   JobRole                          string 				`json:"jobRole"`
-  UserIdentityID                   uint 					`json:"userIdentityId"`
+  // UserIdentityID                   uint 					`json:"userIdentityId"`// `gorm:"foreignKey:ID" json:"userIdentityId"`
+  UserIdentityID                   uint 					`gorm:"foreignKey:id" json:"userIdentityId"`
+  
 }

@@ -28,7 +28,7 @@ func HandlePatchSelfReport(accountID uint, newSelfReport models.SelfReport)(mode
 func HandleNewSelfReport(accountID uint, newSelfReport models.SelfReport)(error) {
   var selfReport models.SelfReport 
 
-  err := database.DB.Statement.DB.Where("user_identity_id = ?", accountID).FirstOrCreate(&selfReport).Error
+  err := database.DB.Statement.DB.Where("user_identity_id = ?", accountID).Create(&selfReport).Error
   selfReport.UserIdentityID = accountID
 
   fmt.Println("checking our accountID at HandleNewSelfReport: ", accountID)

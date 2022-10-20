@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
@@ -19,7 +18,6 @@ func GetUserIdentityData(user models.UserIdentity) (models.UserIdentity, error) 
 
 // Create the user object and add the row if not already in DB
 func CreateIdentity(userId string) (models.UserIdentity, error) {
-	fmt.Println(userId)
 	identity := models.UserIdentity{
 		AccountId:        userId,
 		FirstLogin:       true,

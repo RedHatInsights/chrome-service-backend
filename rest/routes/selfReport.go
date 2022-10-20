@@ -29,25 +29,18 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 	userID := user.ID
 	var updatedSelfReport models.SelfReport
 	err := database.DB.Model(&models.SelfReport{}).Where("user_identity_id = ?", userID).Find(&updatedSelfReport).Error
+	
 	if err != nil {
 		fmt.Println(err)
 		updatedSelfReport = models.SelfReport{}
 	}
-	fmt.Println("existing self report", updatedSelfReport)
-
-	// fmt.Println("This is the shape of our self report: "models.SelfReport)
-	fmt.Println("This is our userID in UpdateUserSelfReport", userID)
 
 	err = json.NewDecoder(r.Body).Decode(&updatedSelfReport)
 	updatedSelfReport.UserIdentityID = userID
 
 	err = database.DB.Model(user).Preload("SelfReport").Find(&user).Error
-	fmt.Println("This is our updatedSelfReport: ", updatedSelfReport, user, user.SelfReport)
-	fmt.Println("user: ", user)
-	fmt.Println("user self report: ", user.SelfReport)
 	user.SelfReport = updatedSelfReport
 	database.DB.Save(&updatedSelfReport)
-	fmt.Println("user self report: ", user.SelfReport)
 
 	if err != nil {
 		errString := "Invalid self report request payload, please refer to documentation."
@@ -57,15 +50,7 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	// This is where we hit the saving end point
-	// err = service.HandleNewSelfReport(userID, &updatedSelfReport)
-
-	if err != nil {
-		panic(err)
-	}
-
 	resp := user.SelfReport
-	fmt.Println("resp", resp)
 
 	if err != nil {
 		panic(err)

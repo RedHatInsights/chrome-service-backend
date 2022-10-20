@@ -20,14 +20,6 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
   json.NewEncoder(w).Encode(updatedUser)
 }
 
-// func GetSelfReport(w http.ResponseWriter, r *http.Request){
-//   user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
-//
-//   userSelfReport, err := service.
-// }
-
 func MakeUserIdentityRoutes(sub chi.Router) {
   sub.Get("/", GetUserIdentity)
-  // sub.Get("/self-report", GetSelfReport)
-  // sub.Patch("/self-report", PatchSelfReport)
 }

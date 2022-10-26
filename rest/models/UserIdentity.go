@@ -12,4 +12,7 @@ type UserIdentity struct {
 	LastLogin        time.Time         `json:"lastLogin"`
 	LastVisitedPages []LastVisitedPage `json:"lastVisitedPages"`
 	FavoritePages    []FavoritePage    `json:"favoritePages"`
+	// SelfReport       *SelfReport       `gorm:"foreignKey:SelfReportId;references:ID" json:"selfReport"`
+	// SelfReportID        int              `json:"selfReportId"`
+	SelfReport SelfReport `json:"selfReport"`
 }

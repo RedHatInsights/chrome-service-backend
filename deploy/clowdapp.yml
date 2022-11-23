@@ -23,20 +23,20 @@ objects:
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /
+              path: /health
               port: 8000
               scheme: HTTP
-            initialDelaySeconds: 35
+            initialDelaySeconds: 30
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 120
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /
+              path: /health
               port: 8000
               scheme: HTTP
-            initialDelaySeconds: 35
+            initialDelaySeconds: 30
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 120
@@ -68,9 +68,6 @@ parameters:
 - description: Image name
   name: IMAGE
   value: quay.io/cloudservices/chrome-service
-- description: Determines Clowder deployment
-  name: CLOWDER_ENABLED
-  value: "false"
 - description: ClowdEnv Name
   name: ENV_NAME
   required: true

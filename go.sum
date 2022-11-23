@@ -101,6 +101,8 @@ github.com/onsi/gomega v1.5.0/go.mod h1:ex+gbHU/CVuBBDIJjb2X0qEXbFg53c61hWP/1Cpa
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/redhatinsights/app-common-go v1.6.4 h1:L6xhROlGEXN4zvw51whl+ZxtMN1fcs3yj0Gz5A8AVXw=
+github.com/redhatinsights/app-common-go v1.6.4/go.mod h1:6gzRyg8ZyejwMCksukeAhh2ZXOB3uHSmBsbP06fG2PQ=
 github.com/redhatinsights/platform-go-middlewares v0.20.0 h1:qwK9ArGYRlORsZ56PXXLJrGvzTsMe3bk2lR+WN5aIjM=
 github.com/redhatinsights/platform-go-middlewares v0.20.0/go.mod h1:i5gVDZJ/quCQhs5AW5CwkRPXlz1HfDBvyNtXHnlXZfM=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=

@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhel8/go-toolset:1.17 AS builder
+FROM registry.redhat.io/rhel8/go-toolset:1.18.4-8 AS builder
 WORKDIR $GOPATH/src/chrome-service-backend/
 COPY . .
 ENV GO111MODULE=on

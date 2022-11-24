@@ -1,0 +1,73 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: chrome-service
+objects:
+  - apiVersion: cloud.redhat.com/v1alpha1
+    kind: ClowdApp
+    metadata: 
+      name: chrome-service
+    spec:
+      envName: ${ENV_NAME}
+      database:
+        name: chrome-service
+      deployments:
+      - name: api
+        minRecplicas: ${{MIN_REPLICAS}}
+        webServices:
+            public:
+              enabled: true
+        podSpec:
+          image: ${IMAGE}:${IMAGE_TAG}
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 120
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 120
+          env:
+          - name: CLOWDER_ENABLED
+            value: ${CLOWDER_ENABLED}
+          resources:
+            limits:
+              cpu: ${CPU_LIMIT}
+              memory: ${MEMORY_LIMIT}
+            requests:
+              cpu: 250m
+              memory: 256Mi
+
+parameters:
+- name: LOG_LEVEL
+  value: INFO
+- description: Cpu limit of service
+  name: CPU_LIMIT
+  value: 500m
+- description: memory limit of service
+  name: MEMORY_LIMIT
+  value: 512Mi
+- name: MIN_REPLICAS
+  value: '1'
+- description: Image tag
+  name: IMAGE_TAG
+  required: true
+- description: Image name
+  name: IMAGE
+  value: quay.io/cloudservices/chrome-service
+- description: ClowdEnv Name
+  name: ENV_NAME
+  required: true

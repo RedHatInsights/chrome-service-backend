@@ -1,25 +1,23 @@
 #!/bin/bash
 
-# --------------------------------------------
-# Options that must be configured by app owner
-# --------------------------------------------
-export APP_NAME="chrome-service"  # name of app-sre "application" folder this component lives in
-export COMPONENT_NAME="chrome-service"  # name of app-sre "resourceTemplate" in deploy.yaml for this component
-export IMAGE="quay.io/cloudservices/chrome-service"
-export WORKSPACE=${WORKSPACE:-$APP_ROOT}  # if running in jenkins, use the build's workspace
-export APP_ROOT=$(pwd)
+set -exv
 
-# Install bonfire repo/initialize
-CICD_URL=https://raw.githubusercontent.com/RedHatInsights/bonfire/master/cicd
-curl -s $CICD_URL/bootstrap.sh > .cicd_bootstrap.sh && source .cicd_bootstrap.sh
+IMAGE="quay.io/cloudservices/chrome-service"
+IMAGE_TAG=$(git rev-parse --short=7 HEAD)
 
-# Need to make a dummy results file to make tests pass
-mkdir -p $WORKSPACE
-cat << EOF > $WORKSPACE/artifacts/junit-dummy.xml
-<testsuite tests="1">
-    <testcase classname="dummy" name="dummytest"/>
-</testsuite>
-EOF
+if [[ -z "$QUAY_USER" || -z "$QUAY_TOKEN" ]]; then
+    echo "QUAY_USER and QUAY_TOKEN must be set"
+    exit 1
+fi
 
-# builds and deploys to quay.io
-source $CICD_ROOT/build.sh
+if [[ -z "$RH_REGISTRY_USER" || -z "$RH_REGISTRY_TOKEN" ]]; then
+    echo "RH_REGISTRY_USER and RH_REGISTRY_TOKEN  must be set"
+    exit 1
+fi
+
+DOCKER_CONF="$PWD/.docker"
+mkdir -p "$DOCKER_CONF"
+DOCKER_CONFIG=$DOCKER_CONF docker login -u="$QUAY_USER" -p="$QUAY_TOKEN" quay.io
+DOCKER_CONFIG=$DOCKER_CONF docker login -u="$RH_REGISTRY_USER" -p="$RH_REGISTRY_TOKEN" registry.redhat.io
+DOCKER_CONFIG=$DOCKER_CONF docker build -t "${IMAGE}:${IMAGE_TAG}" .
+DOCKER_CONFIG=$DOCKER_CONF docker push "${IMAGE}:${IMAGE_TAG}"

@@ -18,7 +18,6 @@ func Init() {
 	cfg := config.Get()
 	var dbdns string
 
-	fmt.Println(cfg)
 	dbdns = fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=%v", cfg.DbHost, cfg.DbUser, cfg.DbPassword, cfg.DbName, cfg.DbPort, cfg.DbSSLMode)
 	if cfg.DbSSLRootCert != "" {
 		dbdns = fmt.Sprintf("%s  sslrootcert=%s", dbdns, cfg.DbSSLRootCert)

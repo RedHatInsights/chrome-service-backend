@@ -8,6 +8,8 @@ objects:
     kind: ClowdApp
     metadata: 
       name: chrome-service
+      annotations:
+        ${LINT_ANNOTATION}: "minimum three replicas not required"
     spec:
       envName: ${ENV_NAME}
       database:
@@ -71,3 +73,5 @@ parameters:
 - description: ClowdEnv Name
   name: ENV_NAME
   required: true
+- name: LINT_ANNOTATION
+  value: 'ignore-check.kube-linter.io/minimum-three-replicas'

@@ -1,12 +1,27 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 
 	"github.com/joho/godotenv"
 	clowder "github.com/redhatinsights/app-common-go/pkg/api/v1"
 )
+
+type KafkaSSLCfg struct {
+	KafkaCA       string
+	KafkaUsername string
+	KafkaPassword string
+	SASLMechanism string
+	Protocol      string
+}
+
+type KafkaCfg struct {
+	KafkaBrokers   []string
+	KafkaTopics    []string
+	KafkaSSlConfig KafkaSSLCfg
+}
 
 type ChromeServiceConfig struct {
 	WebPort         int
@@ -20,6 +35,7 @@ type ChromeServiceConfig struct {
 	Test            bool
 	DbSSLMode       string
 	DbSSLRootCert   string
+	KafkaConfig     KafkaCfg
 }
 
 const RdsCaLocation = "/app/rdsca.cert"
@@ -53,9 +69,32 @@ func Init() {
 		options.DbUser = cfg.Database.Username
 		options.DbPassword = cfg.Database.Password
 		options.MetricsPort = cfg.MetricsPort
+		options.WebPort = *cfg.PublicPort
 		options.DbSSLMode = cfg.Database.SslMode
 		options.DbSSLRootCert = options.getCert(cfg)
-		options.WebPort = *cfg.PublicPort
+
+		broker := cfg.Kafka.Brokers[0]
+		// pass all required topics names
+		for _, topic := range cfg.Kafka.Topics {
+			options.KafkaConfig.KafkaTopics = append(options.KafkaConfig.KafkaTopics, topic.Name)
+		}
+
+		options.KafkaConfig.KafkaBrokers = clowder.KafkaServers
+		// Kafka SSL Config
+		if broker.Authtype != nil {
+			options.KafkaConfig.KafkaSSlConfig.KafkaUsername = *broker.Sasl.Username
+			options.KafkaConfig.KafkaSSlConfig.KafkaPassword = *broker.Sasl.Password
+			options.KafkaConfig.KafkaSSlConfig.SASLMechanism = *broker.Sasl.SaslMechanism
+			options.KafkaConfig.KafkaSSlConfig.Protocol = *broker.Sasl.SecurityProtocol
+		}
+
+		if broker.Cacert != nil {
+			caPath, err := cfg.KafkaCa(broker)
+			if err != nil {
+				panic(fmt.Sprintln("Kafka CA failed to write", err))
+			}
+			options.KafkaConfig.KafkaSSlConfig.KafkaCA = caPath
+		}
 	} else {
 		options.WebPort = 8000
 		options.Test = false
@@ -70,6 +109,10 @@ func Init() {
 		options.MetricsPort = 9000
 		options.DbSSLMode = "disable"
 		options.DbSSLRootCert = ""
+		options.KafkaConfig = KafkaCfg{
+			KafkaTopics:  []string{},
+			KafkaBrokers: []string{"localhost:9092"},
+		}
 	}
 
 	config = options

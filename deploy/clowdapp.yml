@@ -24,6 +24,7 @@ objects:
         minRecplicas: ${{MIN_REPLICAS}}
         webServices:
             public:
+              apiPath: chrome-service
               enabled: true
         podSpec:
           image: ${IMAGE}:${IMAGE_TAG}

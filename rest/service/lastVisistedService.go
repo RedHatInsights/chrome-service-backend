@@ -1,8 +1,6 @@
 package service
 
 import (
-	"time"
-
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
@@ -50,7 +48,10 @@ func UpdateExistingPage(page models.LastVisitedPage) error {
 	if err != nil {
 		return err
 	}
-	return database.DB.Model(&currentPage).Update("updated_at", time.Now()).Error
+	return database.DB.Model(&currentPage).Updates(models.LastVisitedPage{
+		Title:    page.Title, // title of a page can change
+		Pathname: page.Pathname,
+	}).Error
 }
 
 func HandlePostLastVisitedPages(accountId uint, currentPage models.LastVisitedPage) error {

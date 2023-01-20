@@ -43,12 +43,7 @@ func AddNewPage(pages []models.LastVisitedPage, currentPage models.LastVisitedPa
 }
 
 func UpdateExistingPage(page models.LastVisitedPage) error {
-	var currentPage models.LastVisitedPage
-	err := database.DB.Where("pathname = ?", page.Pathname).First(&currentPage).Error
-	if err != nil {
-		return err
-	}
-	return database.DB.Model(&currentPage).Updates(models.LastVisitedPage{
+	return database.DB.Model(&models.LastVisitedPage{}).Where("pathname = ?", page.Pathname).Updates(models.LastVisitedPage{
 		Title:    page.Title, // title of a page can change
 		Pathname: page.Pathname,
 	}).Error

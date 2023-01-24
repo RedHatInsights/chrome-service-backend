@@ -46,6 +46,7 @@ func UpdateExistingPage(page models.LastVisitedPage) error {
 	return database.DB.Model(&models.LastVisitedPage{}).Where("pathname = ?", page.Pathname).Updates(models.LastVisitedPage{
 		Title:    page.Title, // title of a page can change
 		Pathname: page.Pathname,
+		Bundle:   page.Bundle,
 	}).Error
 }
 

@@ -6,6 +6,9 @@ USER root
 RUN go get -d -v
 RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
 
+# Build the migration binary.
+RUN CGO_ENABLED=0 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
+
 FROM registry.redhat.io/ubi8-minimal:latest
 
 # Setup permissions to allow RDSCA to be written from clowder to container
@@ -14,6 +17,7 @@ RUN mkdir -p /app
 RUN chgrp -R 0 /app && \
     chmod -R g=u /app
 COPY --from=builder   /go/bin/chrome-service-backend /app/chrome-service-backend
+COPY --from=builder /go/bin/chrome-migrate /usr/bin
 
 ENTRYPOINT ["/app/chrome-service-backend"]
 EXPOSE 8000

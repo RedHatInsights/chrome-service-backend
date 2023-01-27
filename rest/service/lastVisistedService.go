@@ -39,7 +39,7 @@ func AddNewPage(pages []models.LastVisitedPage, currentPage models.LastVisitedPa
 		}
 	} else if len(pages) > util.LAST_VISITED_MAX {
 		// if account gets in bad state, remove all until max allowed remain
-		for i := util.LAST_VISITED_MAX; i < len(pages); i++ {
+		for i := util.LAST_VISITED_MAX - 1; i < len(pages); i++ {
 			err = database.DB.Unscoped().Delete(pages[i]).Error
 			if err != nil {
 				return err

@@ -7,7 +7,14 @@ Go 1.18
 
 ## Local Testing
 
-1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. 
+1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. This repo also supports `docker-compose up` for its postgres server. An example `.env` for this would look like:
+```
+PGSQL_USER=chrome
+PGSQL_PASSWORD=chrome
+PGSQL_HOSTNAME=0.0.0.0
+PGSQL_PORT=5432
+PGSQL_DATABASE=postgres
+```
 2. Run the server by using `go run .` or `go run main.go`
 3. To test the service, at the moment, you are able to hit the followind endpoint:
 ```

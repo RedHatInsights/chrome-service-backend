@@ -2,7 +2,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
@@ -29,13 +28,17 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 	userID := user.ID
 	var updatedSelfReport models.SelfReport
 	err := database.DB.Model(&models.SelfReport{}).Where("user_identity_id = ?", userID).Find(&updatedSelfReport).Error
-	
+
 	if err != nil {
-		fmt.Println(err)
 		updatedSelfReport = models.SelfReport{}
+		panic(err)
 	}
 
 	err = json.NewDecoder(r.Body).Decode(&updatedSelfReport)
+	if err != nil {
+		updatedSelfReport = models.SelfReport{}
+		panic(err)
+	}
 	updatedSelfReport.UserIdentityID = userID
 
 	err = database.DB.Model(user).Preload("SelfReport").Find(&user).Error

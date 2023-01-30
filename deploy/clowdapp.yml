@@ -14,11 +14,17 @@ objects:
       envName: ${ENV_NAME}
       database:
         name: chrome-service
+      kafkaTopics:
+      # one replica for now; most of this will change
+      - replicas: 1
+        partitions: 64
+        topicName: platform.chrome
       deployments:
       - name: api
         minRecplicas: ${{MIN_REPLICAS}}
         webServices:
             public:
+              apiPath: chrome-service
               enabled: true
         podSpec:
           image: ${IMAGE}:${IMAGE_TAG}

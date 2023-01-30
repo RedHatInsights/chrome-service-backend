@@ -17,3 +17,6 @@
 
 # binaries
 chrome-service-backend
+
+# testing files
+deploy/debug.yml

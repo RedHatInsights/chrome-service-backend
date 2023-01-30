@@ -36,6 +36,10 @@ func main() {
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
 	})
 
+	router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+		subrouter.Route("/ws", routes.MakeWsRoute)
+	})
+
 	http.ListenAndServe(":8000", router)
 }
 

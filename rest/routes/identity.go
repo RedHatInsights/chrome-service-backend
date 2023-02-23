@@ -21,7 +21,12 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	json.NewEncoder(w).Encode(updatedUser)
+
+	resp := util.EntityResponse[models.UserIdentity]{
+		Data: updatedUser,
+	}
+
+	json.NewEncoder(w).Encode(resp)
 }
 
 func AddVisitedBundle(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +40,12 @@ func AddVisitedBundle(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	json.NewEncoder(w).Encode(updatedUser)
+
+	resp := util.EntityResponse[models.UserIdentity]{
+		Data: updatedUser,
+	}
+
+	json.NewEncoder(w).Encode(resp)
 }
 
 func GetVisitedBundles(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +54,11 @@ func GetVisitedBundles(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	json.NewEncoder(w).Encode(bundle)
+	resp := util.EntityResponse[map[string]bool]{
+		Data: bundle,
+	}
+
+	json.NewEncoder(w).Encode(resp)
 }
 
 func MakeUserIdentityRoutes(sub chi.Router) {

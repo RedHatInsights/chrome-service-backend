@@ -17,9 +17,16 @@ func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {
 // Get user data complete with it's related tables.
 func GetUserIdentityData(user models.UserIdentity) (models.UserIdentity, error) {
 	var lastVisitedPages []models.LastVisitedPage
+	var favoritePages []models.FavoritePage
 
 	err := database.DB.Model(&user).Association("LastVisitedPages").Find(&lastVisitedPages)
+	if err != nil {
+		return user, err
+	}
+	err = database.DB.Model(&user).Association("FavoritePages").Find(&favoritePages)
+
 	user.LastVisitedPages = lastVisitedPages
+	user.FavoritePages = favoritePages
 	return user, err
 }
 

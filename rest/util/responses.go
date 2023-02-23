@@ -11,3 +11,7 @@ type ListResponse[T interface{}] struct {
 	Data []T      `json:"data"`
 	Meta ListMeta `json:"meta"`
 }
+
+type EntityResponse[T interface{}] struct {
+	Data T `json:"data"`
+}

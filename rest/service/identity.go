@@ -10,6 +10,10 @@ import (
 
 func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {
 	bundles := make(map[string]bool)
+	// make sure not to potentially marshal nil to map
+	if user.VisitedBundles == nil {
+		return bundles, nil
+	}
 	err := json.Unmarshal(user.VisitedBundles, &bundles)
 	return bundles, err
 }

@@ -15,5 +15,5 @@ type UserIdentity struct {
 	LastVisitedPages []LastVisitedPage `json:"lastVisitedPages"`
 	FavoritePages    []FavoritePage    `json:"favoritePages"`
 	SelfReport       SelfReport        `json:"selfReport"`
-	VisitedBundles   datatypes.JSON    `json:"visitedBundles" gorm:"type: JSONB"`
+	VisitedBundles   datatypes.JSON    `json:"visitedBundles,omitempty" gorm:"type: JSONB"`
 }

@@ -32,7 +32,7 @@ func main() {
 
 	router.Get("/health", HealthProbe)
 
-	router.With(routes.PrometheusMiddleware).Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
+	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
 		subrouter.Use(m.ParseHeaders)
 		subrouter.Use(m.InjectUser)
 		subrouter.Get("/hello-world", HelloWorld)

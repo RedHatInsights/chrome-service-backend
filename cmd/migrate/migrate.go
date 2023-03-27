@@ -23,7 +23,7 @@ func main() {
 			return err
 		}
 		// Migrate all nil visited_bundles to empty object
-		bundleRes = database.DB.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
+		bundleRes = tx.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
 		if bundleRes.Error != nil {
 			return bundleRes.Error
 		}

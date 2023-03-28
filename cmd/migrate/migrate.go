@@ -15,24 +15,37 @@ func main() {
 	database.Init()
 
 	var bundleRes *gorm.DB
-
-	// Wrap DB migration into a single transaction
-	err := database.DB.Transaction(func(tx *gorm.DB) error {
-		err := tx.AutoMigrate(&models.FavoritePage{}, &models.LastVisitedPage{}, &models.SelfReport{}, &models.UserIdentity{}, &models.ProductOfInterest{})
-		if err != nil {
-			return err
+	tx := database.DB.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
 		}
-		// Migrate all nil visited_bundles to empty object
-		bundleRes = database.DB.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
-		if bundleRes.Error != nil {
-			return bundleRes.Error
-		}
+	}()
 
-		return nil
-	})
+	if err := tx.Error; err != nil {
+		logrus.Error("Unable to migrate database!")
+		tx.Rollback()
+		panic(err)
+	}
+
+	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.LastVisitedPage{}, &models.SelfReport{}, &models.UserIdentity{}, &models.ProductOfInterest{}); err != nil {
+		logrus.Error("Unable to migrate database!")
+		tx.Rollback()
+		panic(err)
+	}
+
+	bundleRes = tx.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
+	if bundleRes.Error != nil {
+		logrus.Error("Unable to migrate database!")
+		tx.Rollback()
+		panic(bundleRes.Error)
+	}
+
+	err := tx.Commit().Error
 
 	if err != nil {
 		logrus.Error("Unable to migrate database!")
+		tx.Rollback()
 		panic(err)
 	}
 

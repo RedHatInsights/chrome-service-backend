@@ -24,8 +24,12 @@
                 "id": "user-preferences-notifications",
                 "module": "./RootApp",
                 "routes": [
-                    "/user-preferences",
-                    "/user-preferences/notifications"
+                    {
+                        "pathname": "/user-preferences"
+                    },
+                    {
+                        "pathname": "/user-preferences/notifications"
+                    }
                 ]
             }
         ]
@@ -37,7 +41,9 @@
                 "id": "learningResources",
                 "module": "./RootApp",
                 "routes": [
-                    "/settings/learning-resources"
+                    {
+                        "pathname": "/settings/learning-resources"
+                    }
                 ]
             }
         ]
@@ -50,22 +56,30 @@
                 "id": "my-user-access",
                 "module": "./MyUserAccess",
                 "routes": [
-                    "/iam",
-                    "/iam/my-user-access"
+                    {
+                        "pathname": "/iam"
+                    },
+                    {
+                        "pathname": "/iam/my-user-access"
+                    }
                 ]
             },
             {
                 "id": "settings-user-access",
                 "module": "./SettingsUserAccess",
                 "routes": [
-                    "/settings/rbac"
+                    {
+                        "pathname": "/settings/rbac"
+                    }
                 ]
             },
             {
                 "id": "iam-user-access",
                 "module": "./IamUserAccess",
                 "routes": [
-                    "/iam/user-access"
+                    {
+                        "pathname": "/iam/user-access"
+                    }
                 ]
             }
         ]
@@ -77,8 +91,12 @@
                 "id": "commit-tracker",
                 "module": "./RootApp",
                 "routes": [
-                    "/internal",
-                    "/internal/commit-tracker"
+                    {
+                        "pathname": "/internal"
+                    },
+                    {
+                        "pathname": "/internal/commit-tracker"
+                    }
                 ]
             }
         ]
@@ -90,9 +108,15 @@
                 "id": "internal-access",
                 "module": "./RootApp",
                 "routes": [
-                    "/internal/access-requests",
-                    "/settings/rbac/access-requests",
-                    "/iam/user-access/access-requests"
+                    {
+                        "pathname": "/internal/access-requests"
+                    },
+                    {
+                        "pathname": "/settings/rbac/access-requests"
+                    },
+                    {
+                        "pathname": "/iam/user-access/access-requests"
+                    }
                 ]
             }
         ]
@@ -105,7 +129,9 @@
                 "id": "sources",
                 "module": "./RootApp",
                 "routes": [
-                    "/settings/sources"
+                    {
+                        "pathname": "/settings/sources"
+                    }
                 ]
             }
         ]
@@ -117,14 +143,18 @@
                 "id": "notifications",
                 "module": "./RootApp",
                 "routes": [
-                    "/settings/notifications"
+                    {
+                        "pathname": "/settings/notifications"
+                    }
                 ]
             },
             {
                 "id": "integrations",
                 "module": "./RootApp",
                 "routes": [
-                    "/settings/integrations"
+                    {
+                        "pathname": "/settings/integrations"
+                    }
                 ]
             }
         ]
@@ -136,7 +166,9 @@
                 "id": "connector",
                 "module": "./RootApp",
                 "routes": [
-                    "/settings/connector"
+                    {
+                        "pathname": "/settings/connector"
+                    }
                 ]
             }
         ]
@@ -148,7 +180,9 @@
                 "id": "applications",
                 "module": "./RootApp",
                 "routes": [
-                    "/settings/applications"
+                    {
+                        "pathname": "/settings/applications"
+                    }
                 ]
             }
         ]
@@ -160,7 +194,9 @@
                 "id": "openshift",
                 "module": "./RootApp",
                 "routes": [
-                    "/openshift"
+                    {
+                        "pathname": "/openshift"
+                    }
                 ]
             }
         ]
@@ -172,7 +208,9 @@
                 "id": "cost-management",
                 "module": "./RootApp",
                 "routes": [
-                    "/openshift/cost-management"
+                    {
+                        "pathname": "/openshift/cost-management"
+                    }
                 ]
             }
         ]
@@ -185,8 +223,12 @@
                 "id": "rhel-dashboard",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights",
-                    "/insights/dashboard"
+                    {
+                        "pathname": "/insights"
+                    },
+                    {
+                        "pathname": "/insights/dashboard"
+                    }
                 ]
             }
         ]
@@ -203,7 +245,9 @@
                         "pathname": "/insights/advisor",
                         "isFedramp": true
                     },
-                    "/ansible/advisor"
+                    {
+                        "pathname": "/ansible/advisor"
+                    }
                 ]
             }
         ]
@@ -215,7 +259,9 @@
                 "id": "ocp-advisor",
                 "module": "./RootApp",
                 "routes": [
-                    "/openshift/insights/advisor"
+                    {
+                        "pathname": "/openshift/insights/advisor"
+                    }
                 ]
             }
         ]
@@ -227,7 +273,9 @@
                 "id": "ocp-vulnerability",
                 "module": "./RootApp",
                 "routes": [
-                    "/openshift/insights/vulnerability"
+                    {
+                        "pathname": "/openshift/insights/vulnerability"
+                    }
                 ]
             }
         ]
@@ -243,7 +291,9 @@
                         "pathname": "/insights/drift",
                         "isFedramp": true
                     },
-                    "/ansible/drift"
+                    {
+                        "pathname": "/ansible/drift"
+                    }
                 ]
             }
         ]
@@ -259,7 +309,9 @@
                         "pathname": "/insights/inventory",
                         "isFedramp": true
                     },
-                    "/ansible/inventory"
+                    {
+                        "pathname": "/ansible/inventory"
+                    }
                 ]
             }
         ]
@@ -272,7 +324,9 @@
                 "id": "vulnerability",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/vulnerability"
+                    {
+                        "pathname": "/insights/vulnerability"
+                    }
                 ]
             }
         ]
@@ -285,7 +339,9 @@
                 "id": "compliance",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/compliance"
+                    {
+                        "pathname": "/insights/compliance"
+                    }
                 ]
             }
         ]
@@ -301,7 +357,9 @@
                         "pathname": "/insights/policies",
                         "isFedramp": true
                     },
-                    "/ansible/policies"
+                    {
+                        "pathname": "/ansible/policies"
+                    }
                 ]
             }
         ]
@@ -314,7 +372,9 @@
                 "id": "patch",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/patch"
+                    {
+                        "pathname": "/insights/patch"
+                    }
                 ]
             }
         ]
@@ -330,21 +390,27 @@
                 "id": "application-services-subscriptions",
                 "module": "./RootApp",
                 "routes": [
-                    "/application-services/subscriptions"
+                    {
+                        "pathname": "/application-services/subscriptions"
+                    }
                 ]
             },
             {
                 "id": "insights-subscriptions",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/subscriptions"
+                    {
+                        "pathname": "/insights/subscriptions"
+                    }
                 ]
             },
             {
                 "id": "openshift-subscriptions",
                 "module": "./RootApp",
                 "routes": [
-                    "/openshift/subscriptions"
+                    {
+                        "pathname": "/openshift/subscriptions"
+                    }
                 ]
             }
         ]
@@ -356,7 +422,9 @@
                 "id": "subscription-inventory",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/subscriptions/inventory"
+                    {
+                        "pathname": "/insights/subscriptions/inventory"
+                    }
                 ]
             }
         ]
@@ -368,7 +436,9 @@
                 "id": "manifests",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/subscriptions/manifests"
+                    {
+                        "pathname": "/insights/subscriptions/manifests"
+                    }
                 ]
             }
         ]
@@ -381,7 +451,9 @@
                 "id": "ros",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/ros"
+                    {
+                        "pathname": "/insights/ros"
+                    }
                 ]
             }
         ]
@@ -393,8 +465,12 @@
                 "id": "registration",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/registration",
-                    "/ansible/registration"
+                    {
+                        "pathname": "/insights/registration"
+                    },
+                    {
+                        "pathname": "/ansible/registration"
+                    }
                 ]
             }
         ]
@@ -410,7 +486,9 @@
                         "pathname": "/insights/remediations",
                         "isFedramp": true
                     },
-                    "/ansible/remediations"
+                    {
+                        "pathname": "/ansible/remediations"
+                    }
                 ]
             }
         ]
@@ -426,7 +504,9 @@
                         "pathname": "/insights/tasks",
                         "isFedramp": true
                     },
-                    "/ansible/tasks"
+                    {
+                        "pathname": "/ansible/tasks"
+                    }
                 ]
             }
         ]
@@ -443,7 +523,9 @@
                         "dynamic": true,
                         "exact": true
                     },
-                    "/ansible/ansible-dashboard"
+                    {
+                        "pathname": "/ansible/ansible-dashboard"
+                    }
                 ]
             }
         ]
@@ -455,7 +537,9 @@
                 "id": "approval",
                 "module": "./RootApp",
                 "routes": [
-                    "/ansible/catalog/approval"
+                    {
+                        "pathname": "/ansible/catalog/approval"
+                    }
                 ]
             }
         ]
@@ -467,7 +551,9 @@
                 "id": "catalog",
                 "module": "./RootApp",
                 "routes": [
-                    "/ansible/catalog"
+                    {
+                        "pathname": "/ansible/catalog"
+                    }
                 ]
             }
         ]
@@ -479,7 +565,9 @@
                 "id": "ansible-automation-hub",
                 "module": "./RootApp",
                 "routes": [
-                    "/ansible/automation-hub"
+                    {
+                        "pathname": "/ansible/automation-hub"
+                    }
                 ]
             }
         ]
@@ -491,14 +579,30 @@
                 "id": "ansible-automation-analytics",
                 "module": "./RootApp",
                 "routes": [
-                    "/ansible/automation-analytics",
-                    "/ansible/reports",
-                    "/ansible/savings-planner",
-                    "/ansible/automation-calculator",
-                    "/ansible/organization-statistics",
-                    "/ansible/job-explorer",
-                    "/ansible/clusters",
-                    "/ansible/notifications"
+                    {
+                        "pathname": "/ansible/automation-analytics"
+                    },
+                    {
+                        "pathname": "/ansible/reports"
+                    },
+                    {
+                        "pathname": "/ansible/savings-planner"
+                    },
+                    {
+                        "pathname": "/ansible/automation-calculator"
+                    },
+                    {
+                        "pathname": "/ansible/organization-statistics"
+                    },
+                    {
+                        "pathname": "/ansible/job-explorer"
+                    },
+                    {
+                        "pathname": "/ansible/clusters"
+                    },
+                    {
+                        "pathname": "/ansible/notifications"
+                    }
                 ]
             }
         ]
@@ -509,7 +613,11 @@
             {
                 "id": "rhosak",
                 "module": "./RootApp",
-                "routes": ["/application-services/streams"]
+                "routes": [
+                    {
+                        "pathname": "/application-services/streams"
+                    }
+                ]
             }
         ]
     },
@@ -526,26 +634,18 @@
         "modules": []
     },
     "applicationServices": {
-      "manifestLocation": "/apps/application-services/fed-mods.json",
-      "analytics": {
-        "APIKey": "TpKcgYihGHSaBRom5Yg4wudB808Uk4XL"
-      },
-      "modules": [
-        {
-          "id": "application-services",
-          "module": "./RootApp",
-          "routes": ["/application-services"]
-        }
-      ]
-    },
-    "trust": {
-        "dynamic": false,
+        "manifestLocation": "/apps/application-services/fed-mods.json",
+        "analytics": {
+            "APIKey": "TpKcgYihGHSaBRom5Yg4wudB808Uk4XL"
+        },
         "modules": [
             {
-                "id": "trust",
-                "dynamic": false,
+                "id": "application-services",
+                "module": "./RootApp",
                 "routes": [
-                    "/security/insights"
+                    {
+                        "pathname": "/application-services"
+                    }
                 ]
             }
         ]
@@ -557,8 +657,12 @@
                 "id": "api-docs",
                 "module": "./RootApp",
                 "routes": [
-                    "/docs/api",
-                    "/docs"
+                    {
+                        "pathname": "/docs/api"
+                    },
+                    {
+                        "pathname": "/docs"
+                    }
                 ]
             }
         ]
@@ -570,22 +674,26 @@
                 "id": "edge",
                 "module": "./RootApp",
                 "routes": [
-                    "/edge"
+                    {
+                        "pathname": "/edge"
+                    }
                 ]
             }
         ]
     },
     "hacCore": {
-      "manifestLocation": "/apps/hac-core/fed-mods.json",
-      "modules": [
-          {
-              "id": "hacCore",
-              "module": "./RootApp",
-              "routes": [
-                  "/hac"
-              ]
-          }
-      ]
+        "manifestLocation": "/apps/hac-core/fed-mods.json",
+        "modules": [
+            {
+                "id": "hacCore",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/hac"
+                    }
+                ]
+            }
+        ]
     },
     "hacDev": {
         "manifestLocation": "/apps/hac-dev/fed-mods.json",
@@ -594,19 +702,9 @@
                 "id": "hacDev",
                 "module": "./RootApp",
                 "routes": [
-                    "/hac/app-studio"
-                ]
-            }
-        ]
-      },
-    "docsFrontend": {
-        "dynamic": false,
-        "modules": [
-            {
-                "id": "docs-frontend",
-                "dynamic": false,
-                "routes": [
-                    "/docs/product"
+                    {
+                        "pathname": "/hac/app-studio"
+                    }
                 ]
             }
         ]
@@ -618,19 +716,9 @@
                 "id": "starter",
                 "module": "./RootApp",
                 "routes": [
-                    "/staging/starter"
-                ]
-            }
-        ]
-    },
-    "ruledev": {
-        "dynamic": false,
-        "modules": [
-            {
-                "id": "ruledev",
-                "dynamic": false,
-                "routes": [
-                    "/staging/ruledev"
+                    {
+                        "pathname": "/staging/starter"
+                    }
                 ]
             }
         ]
@@ -642,7 +730,9 @@
                 "id": "image-builder",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/image-builder"
+                    {
+                        "pathname": "/insights/image-builder"
+                    }
                 ]
             }
         ]
@@ -654,7 +744,9 @@
                 "id": "cloud-tutorials",
                 "module": "./RootApp",
                 "routes": [
-                    "/mosaic/cloud-tutorials"
+                    {
+                        "pathname": "/mosaic/cloud-tutorials"
+                    }
                 ]
             }
         ]
@@ -667,7 +759,9 @@
                 "id": "malware",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/malware"
+                    {
+                        "pathname": "/insights/malware"
+                    }
                 ]
             }
         ]
@@ -679,7 +773,9 @@
                 "id": "dbaas",
                 "module": "./RootApp",
                 "routes": [
-                    "/application-services/databases"
+                    {
+                        "pathname": "/application-services/databases"
+                    }
                 ]
             }
         ]
@@ -691,7 +787,9 @@
                 "id": "bonfire",
                 "module": "./RootApp",
                 "routes": [
-                    "/internal/bonfire"
+                    {
+                        "pathname": "/internal/bonfire"
+                    }
                 ]
             }
         ]
@@ -703,22 +801,26 @@
                 "id": "sandbox",
                 "module": "./RootApp",
                 "routes": [
-                    "/openshift/sandbox"
+                    {
+                        "pathname": "/openshift/sandbox"
+                    }
                 ]
             }
-      ]
+        ]
     },
     "acs": {
         "manifestLocation": "/apps/acs/fed-mods.json",
         "modules": [
-          {
-              "id": "acs",
-              "module": "./RootApp",
-              "routes": [
-                  "/application-services/acs"
-              ]
-          }
-      ]
+            {
+                "id": "acs",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/application-services/acs"
+                    }
+                ]
+            }
+        ]
     },
     "appStudioDocs": {
         "manifestLocation": "/apps/app-studio-docs/fed-mods.json",
@@ -727,22 +829,26 @@
                 "id": "app-studio-docs",
                 "module": "./RootApp",
                 "routes": [
-                    "/hac/app-studio-docs"
+                    {
+                        "pathname": "/hac/app-studio-docs"
+                    }
                 ]
             }
         ]
     },
     "iam": {
-      "manifestLocation": "/apps/iam/fed-mods.json",
-      "modules": [
-          {
-              "id": "authentication-policy",
-              "module": "./RootApp",
-              "routes": [
-                  "/iam/authentication-policy"
-              ]
-          }
-      ]
+        "manifestLocation": "/apps/iam/fed-mods.json",
+        "modules": [
+            {
+                "id": "authentication-policy",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/iam/authentication-policy"
+                    }
+                ]
+            }
+        ]
     },
     "hybridCommittedSpend": {
         "manifestLocation": "/apps/hybrid-committed-spend/fed-mods.json",
@@ -751,7 +857,9 @@
                 "id": "hybrid-committed-spend",
                 "module": "./RootApp",
                 "routes": [
-                    "/business-services/hybrid-committed-spend"
+                    {
+                        "pathname": "/business-services/hybrid-committed-spend"
+                    }
                 ]
             }
         ]
@@ -761,11 +869,13 @@
         "modules": [
             {
                 "id": "connect",
-		        "module": "./RootApp",
-		        "routes": [
-		            "/connect"
-		        ]
-	        }
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/connect"
+                    }
+                ]
+            }
         ]
     },
     "contentSources": {
@@ -776,10 +886,14 @@
                 "id": "insights-content-sources",
                 "module": "./RootApp",
                 "routes": [
-                    "/insights/content",
-                    "/settings/content"
+                    {
+                        "pathname": "/insights/content"
+                    },
+                    {
+                        "pathname": "/settings/content"
+                    }
                 ]
             }
-	]
+        ]
     }
 }

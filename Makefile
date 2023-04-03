@@ -7,6 +7,7 @@ help:
 	@echo "database 	- start database with .env vars"
 	@echo "clean		- tear down database"
 	@echo "dev-static	- serve only the static direcory"
+	@echo "validate-schema	- validates chrome static JSON schemas"
 
 dev-static:
 	go run cmd/static/static.go
@@ -22,3 +23,6 @@ database:
 
 clean:
 	podman-compose down
+
+validate-schema:
+	go run cmd/validate/*

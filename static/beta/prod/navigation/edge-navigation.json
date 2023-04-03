@@ -1,0 +1,39 @@
+{
+  "id": "edge",
+  "title": "Edge Management",
+  "navItems": [
+    {
+      "title": "Inventory",
+      "expandable": true,
+      "routes": [
+        {
+          "title": "Groups",
+          "appId": "edge",
+          "href": "/edge/fleet-management"
+        },
+        {
+          "title": "Systems",
+          "appId": "edge",
+          "href": "/edge/inventory"
+        }
+      ]
+    },
+    {
+      "title": "Manage Images",
+      "expandable": true,
+      "routes": [
+        {
+          "title": "Images",
+          "appId": "edge",
+          "href": "/edge/manage-images"
+        }
+      ]
+    },
+    {
+      "title": "Learning resources",
+      "filterable": false,
+      "appId": "edge",
+      "href": "/edge/learning-resources"
+    }
+  ]
+}

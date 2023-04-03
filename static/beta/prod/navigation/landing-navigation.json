@@ -1,0 +1,47 @@
+[
+  {
+    "groupId": "application-services",
+    "title": "Build and Deploy Applications",
+    "icon": "code",
+    "navItems": [
+      {
+        "appId": "applicationServices",
+        "title": "Application and Data Services",
+        "href": "/application-services/overview"
+      }
+    ]
+  },
+  {
+    "groupId": "manage-infrastructure",
+    "title": "Manage Infrastructure",
+    "icon": "wrench",
+    "navItems": [
+      {
+        "appId": "openshift",
+        "title": "OpenShift",
+        "href": "/openshift"
+      },
+      {
+        "title": "Red Hat Enterprise Linux",
+        "expandable": true,
+        "routes": [
+          {
+            "appId": "dashboard",
+            "title": "Red Hat Insights",
+            "href": "/insights/dashboard"
+          },           
+          {
+            "appId": "edge",
+            "title": "Edge Management",
+            "href": "/edge"
+          }
+        ]
+      },
+      {
+        "appId": "ansibleDashboard",
+        "title": "Ansible Automation Platform",
+        "href":  "/ansible/ansible-dashboard"
+      }
+    ]
+  }
+]

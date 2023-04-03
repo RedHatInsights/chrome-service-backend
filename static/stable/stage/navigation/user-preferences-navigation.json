@@ -1,0 +1,11 @@
+{
+    "id": "user-preferences",
+    "title": "User preferences",
+    "navItems": [
+        {
+            "appId": "userPreferences",
+            "title": "My Notifications",
+            "href": "/user-preferences/notifications"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "hac",
+  "title": "HAC",
+  "navItems": [
+      {
+          "title": "Example",
+          "appId": "hacCore",
+          "href": "/hac"
+      },
+      {
+        "title": "Flat nav",
+        "dynamicNav": "hacCore"
+      }
+  ]
+}

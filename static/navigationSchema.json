@@ -3,19 +3,23 @@
   "title": "HCC navigation files json schema",
   "$defs": {
     "permission": {
-      "method": {
-        "type": "string"
-      },
-      "apps": {
-        "type": "array",
-        "items": {
+      "type": "object",
+      "properties": {
+        "method": {
           "type": "string"
+        },
+        "apps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "type": "array",
+          "items": {}
         }
       },
-      "args": {
-        "type": "array",
-        "items": {}
-      }
+      "additionalAttributes": false
     },
     "route": {
       "type": "object",
@@ -51,7 +55,6 @@
           "type": "string"
         }
       },
-
       "if": {
         "properties": {
           "isExternal": {
@@ -66,7 +69,8 @@
         "required": [
           "appId"
         ]
-      }
+      },
+      "additionalAttributes": false
     },
     "navItem": {
       "type": "object",
@@ -131,7 +135,8 @@
             "$ref": "#/$defs/permission"
           }
         }
-      }
+      },
+      "additionalAttributes": false
     }
   },
   "properties": {
@@ -180,8 +185,9 @@
           ]
         }
       }
-    }
+    }    
   },
+  "additionalAttributes": false,
   "required": [
     "id",
     "title",

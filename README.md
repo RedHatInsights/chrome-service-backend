@@ -1,3 +1,7 @@
+# Looking for cloud services config?
+
+Follow [this link](./docs/cloud-services-config.md) for docs
+
 # chrome-service-backend
 Source code repository for chrome backend
 

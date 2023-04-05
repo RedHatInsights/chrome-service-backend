@@ -1,0 +1,36 @@
+{
+  "id": "hac",
+  "title": "HAC",
+  "navItems": [
+      {
+          "title": "Example",
+          "appId": "hacCore",
+          "href": "/hac"
+      },
+      {
+        "appId": "hacCore",
+        "title": "Demo Plugin",
+        "dynamicNav": "hacCore/admin-demo-section"
+      },
+      {
+        "appId": "hacCore",
+        "title": "Demo Plugin",
+        "dynamicNav": "hacCore/dev-demo-section"
+      },
+      {
+        "appId": "hacCore",
+        "title": "Flat nav",
+        "dynamicNav": "hacCore"
+      },
+      {
+          "title": "App Studio",
+          "appId": "hacDev",
+          "href": "/hac/app-studio"
+      },
+      {
+        "title": "App Studio Docs",
+        "appId": "appStudioDocs",
+        "href": "/hac/app-studio-docs"
+      }
+  ]
+}

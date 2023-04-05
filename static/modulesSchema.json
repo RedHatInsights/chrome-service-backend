@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HCC federated modules json schema",
+  "$defs": {
+    "moduleRoute": {
+      "type": "object",
+      "properties": {
+        "pathname": {
+          "type": "string"
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "isFedramp": {
+          "type": "boolean"
+        },
+        "fullProfile": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "pathname"
+      ],
+      "additionalProperties": false
+    },
+    "moduleEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/moduleRoute"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "module",
+        "routes"
+      ],
+      "additionalProperties": false
+    },
+    "analytics": {
+      "type": "object",
+      "properties": {
+        "APIKey": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "APIKey"
+      ]
+    },
+    "module": {
+      "type": "object",
+      "properties": {
+        "manifestLocation": {
+          "type": "string"
+        },
+        "defaultDocumentTitle": {
+          "type": "string"
+        },
+        "isFedramp": {
+          "type": "boolean"
+        },
+        "fullProfile": {
+          "type": "boolean"
+        },
+        "analytics": {
+          "$ref": "#/$defs/analytics"
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/moduleEntry"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "/": {}
+  },
+  "patternProperties": {
+    ".+": {
+      "$ref": "#/$defs/module",
+      "required": [
+        "manifestLocation"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

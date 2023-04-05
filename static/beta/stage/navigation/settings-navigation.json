@@ -1,0 +1,104 @@
+{
+    "id": "settings",
+    "title": "Settings",
+    "navItems": [
+        {
+            "appId": "sources",
+            "title": "Sources",
+            "href": "/settings/sources"
+        },
+        {
+            "appId": "contentSources",
+            "title": "Repositories",
+            "href": "/settings/content"
+        },
+	{
+            "appId": "notifications",
+            "title": "Integrations",
+            "href": "/settings/integrations"
+        },
+        {
+            "title": "Notifications",
+            "expandable": true,
+            "routes": [
+                {
+                    "appId": "notifications",
+                    "title": "Application Services",
+                    "href": "/settings/notifications/application-services"
+                },
+                {
+                    "appId": "notifications",
+                    "title": "OpenShift",
+                    "href": "/settings/notifications/openshift"
+                },
+                {
+                    "appId": "notifications",
+                    "title": "Red Hat Enterprise Linux",
+                    "href": "/settings/notifications/rhel"
+                },
+                {
+                    "appId": "notifications",
+                    "title": "Console",
+                    "href": "/settings/notifications/console"
+                }
+            ]
+        },
+        {
+            "title": "Remote Host Configuration",
+            "expandable": true,
+            "routes": [
+                {
+                    "appId": "connector",
+                    "title": "Manage configuration",
+                    "href": "/settings/connector"
+                },
+                {
+                    "appId": "connector",
+                    "title": "Activation Keys",
+                    "href": "/settings/connector/activation-keys"
+                }
+            ]
+        },
+        {
+            "title": "Applications",
+            "expandable": true,
+            "permissions": [
+                {
+                    "method": "hasPermissions",
+                    "apps": [
+                        "cost-management:*:*",
+                        "advisor:*:*"
+                    ]
+                }
+            ],
+            "routes": [
+                {
+                    "appId": "applications",
+                    "title": "Cost Management",
+                    "href": "/settings/applications/cost-management",
+                    "permissions": [
+                        {
+                            "method": "isEntitled",
+                            "args": [
+                                "cost_management"
+                            ]
+                        },
+                        {
+                            "method": "hasPermissions",
+                            "args": [
+                                [
+                                    "cost-management:*:*"
+                                ]
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/settings/learning-resources"
+        }
+    ]
+}

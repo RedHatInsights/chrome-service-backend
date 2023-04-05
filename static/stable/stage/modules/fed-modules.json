@@ -1,0 +1,858 @@
+{
+  "landing": {
+      "manifestLocation": "/apps/landing/fed-mods.json",
+      "defaultDocumentTitle": "Home",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "landing",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "exact": true,
+                      "pathname": "/"
+                  }
+              ]
+          }
+      ]
+  },
+  "userPreferences": {
+      "manifestLocation": "/apps/user-preferences/fed-mods.json",
+      "modules": [
+          {
+              "id": "user-preferences-notifications",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/user-preferences"
+                  },
+                  {
+                      "pathname": "/user-preferences/notifications"
+                  }
+              ]
+          }
+      ]
+  },
+  "rbac": {
+      "manifestLocation": "/apps/rbac/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "my-user-access",
+              "module": "./MyUserAccess",
+              "routes": [
+                  {
+                      "pathname": "/settings"
+                  },
+                  {
+                      "pathname": "/settings/my-user-access"
+                  }
+              ]
+          },
+          {
+              "id": "settings-user-access",
+              "module": "./SettingsUserAccess",
+              "routes": [
+                  {
+                      "pathname": "/settings/rbac"
+                  }
+              ]
+          },
+          {
+              "id": "iam-user-access",
+              "module": "./IamUserAccess",
+              "routes": [
+                  {
+                      "pathname": "/iam"
+                  },
+                  {
+                      "pathname": "/iam/user-access"
+                  }
+              ]
+          }
+      ]
+  },
+  "commitTracker": {
+      "manifestLocation": "/apps/commit-tracker/fed-mods.json",
+      "modules": [
+          {
+              "id": "commit-tracker",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/internal"
+                  },
+                  {
+                      "pathname": "/internal/commit-tracker"
+                  }
+              ]
+          }
+      ]
+  },
+  "accessRequests": {
+      "manifestLocation": "/apps/access-requests/fed-mods.json",
+      "modules": [
+          {
+              "id": "internal-access",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/internal/access-requests"
+                  },
+                  {
+                      "pathname": "/settings/rbac/access-requests"
+                  },
+                  {
+                      "pathname": "/iam/user-access/access-requests"
+                  }
+              ]
+          }
+      ]
+  },
+  "sources": {
+      "manifestLocation": "/apps/sources/fed-mods.json",
+      "fullProfile": true,
+      "modules": [
+          {
+              "id": "sources",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/sources"
+                  }
+              ]
+          }
+      ]
+  },
+  "notifications": {
+      "manifestLocation": "/apps/notifications/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "notifications",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/notifications"
+                  }
+              ]
+          },
+          {
+              "id": "integrations",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/integrations"
+                  }
+              ]
+          }
+      ]
+  },
+  "connector": {
+      "manifestLocation": "/apps/connector/fed-mods.json",
+      "modules": [
+          {
+              "id": "connector",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/connector"
+                  }
+              ]
+          }
+      ]
+  },
+  "applications": {
+      "manifestLocation": "/apps/applications/fed-mods.json",
+      "modules": [
+          {
+              "id": "applications",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/applications"
+                  }
+              ]
+          }
+      ]
+  },
+  "openshift": {
+      "manifestLocation": "/apps/openshift/fed-mods.json",
+      "modules": [
+          {
+              "id": "openshift",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/openshift"
+                  }
+              ]
+          }
+      ]
+  },
+  "costManagement": {
+      "manifestLocation": "/apps/cost-management/fed-mods.json",
+      "modules": [
+          {
+              "id": "cost-management",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/openshift/cost-management"
+                  }
+              ]
+          }
+      ]
+  },
+  "dashboard": {
+      "manifestLocation": "/apps/dashboard/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "rhel-dashboard",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights"
+                  },
+                  {
+                      "pathname": "/insights/dashboard"
+                  }
+              ]
+          }
+      ]
+  },
+  "advisor": {
+      "manifestLocation": "/apps/advisor/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "advisor",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/advisor"
+                  },
+                  {
+                      "pathname": "/ansible/advisor"
+                  }
+              ]
+          }
+      ]
+  },
+  "ocpAdvisor": {
+      "manifestLocation": "/apps/ocp-advisor/fed-mods.json",
+      "modules": [
+          {
+              "id": "ocp-advisor",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/openshift/insights/advisor"
+                  }
+              ]
+          }
+      ]
+  },
+  "ocpVulnerability": {
+      "manifestLocation": "/apps/ocp-vulnerability/fed-mods.json",
+      "modules": [
+          {
+              "id": "ocp-vulnerability",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/openshift/insights/vulnerability"
+                  }
+              ]
+          }
+      ]
+  },
+  "drift": {
+      "manifestLocation": "/apps/drift/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "drift",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/drift",
+                      "isFedramp": true
+                  },
+                  {
+                      "pathname": "/ansible/drift"
+                  }
+              ]
+          }
+      ]
+  },
+  "inventory": {
+      "manifestLocation": "/apps/inventory/fed-mods.json",
+      "modules": [
+          {
+              "id": "inventory",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/inventory",
+                      "isFedramp": true
+                  },
+                  {
+                      "pathname": "/ansible/inventory"
+                  }
+              ]
+          }
+      ]
+  },
+  "vulnerability": {
+      "manifestLocation": "/apps/vulnerability/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "vulnerability",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/vulnerability"
+                  }
+              ]
+          }
+      ]
+  },
+  "compliance": {
+      "manifestLocation": "/apps/compliance/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "compliance",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/compliance"
+                  }
+              ]
+          }
+      ]
+  },
+  "policies": {
+      "manifestLocation": "/apps/policies/fed-mods.json",
+      "modules": [
+          {
+              "id": "policies",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/policies",
+                      "isFedramp": true
+                  },
+                  {
+                      "pathname": "/ansible/policies"
+                  }
+              ]
+          }
+      ]
+  },
+  "patch": {
+      "manifestLocation": "/apps/patch/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "patch",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/patch"
+                  }
+              ]
+          }
+      ]
+  },
+  "provisioning": {
+      "manifestLocation": "/apps/provisioning/fed-mods.json",
+      "modules": []
+  },
+  "subscriptions": {
+      "manifestLocation": "/apps/subscriptions/fed-mods.json",
+      "modules": [
+          {
+              "id": "application-services-subscriptions",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/application-services/subscriptions"
+                  }
+              ]
+          },
+          {
+              "id": "insights-subscriptions",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/subscriptions"
+                  }
+              ]
+          },
+          {
+              "id": "openshift-subscriptions",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/openshift/subscriptions"
+                  }
+              ]
+          }
+      ]
+  },
+  "subscriptionInventory": {
+      "manifestLocation": "/apps/subscription-inventory/fed-mods.json",
+      "modules": [
+          {
+              "id": "subscription-inventory",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/subscriptions/inventory"
+                  }
+              ]
+          }
+      ]
+  },
+  "manifests": {
+      "manifestLocation": "/apps/manifests/fed-mods.json",
+      "modules": [
+          {
+              "id": "manifests",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/subscriptions/manifests"
+                  }
+              ]
+          }
+      ]
+  },
+  "ros": {
+      "manifestLocation": "/apps/ros/fed-mods.json",
+      "modules": [
+          {
+              "id": "ros",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/ros"
+                  }
+              ]
+          }
+      ]
+  },
+  "registration": {
+      "manifestLocation": "/apps/registration/fed-mods.json",
+      "modules": [
+          {
+              "id": "registration",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/registration"
+                  },
+                  {
+                      "pathname": "/ansible/registration"
+                  }
+              ]
+          }
+      ]
+  },
+  "remediations": {
+      "manifestLocation": "/apps/remediations/fed-mods.json",
+      "modules": [
+          {
+              "id": "remediations",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/remediations",
+                      "isFedramp": true
+                  },
+                  {
+                      "pathname": "/ansible/remediations"
+                  }
+              ]
+          }
+      ]
+  },
+  "tasks": {
+      "manifestLocation": "/apps/tasks/fed-mods.json",
+      "modules": [
+          {
+              "id": "tasks",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/tasks",
+                      "isFedramp": true
+                  },
+                  {
+                      "pathname": "/ansible/tasks"
+                  }
+              ]
+          }
+      ]
+  },
+  "ansibleDashboard": {
+      "manifestLocation": "/apps/ansible-dashboard/fed-mods.json",
+      "modules": [
+          {
+              "id": "ansible-dashboard",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/ansible",
+                      "exact": true
+                  },
+                  {
+                      "pathname": "/ansible/ansible-dashboard"
+                  }
+              ]
+          }
+      ]
+  },
+  "automationHub": {
+      "manifestLocation": "/apps/automation-hub/fed-mods.json",
+      "modules": [
+          {
+              "id": "ansible-automation-hub",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/ansible/automation-hub"
+                  }
+              ]
+          }
+      ]
+  },
+  "automationAnalytics": {
+      "manifestLocation": "/apps/automation-analytics/fed-mods.json",
+      "modules": [
+          {
+              "id": "ansible-automation-analytics",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/ansible/automation-analytics"
+                  },
+                  {
+                      "pathname": "/ansible/reports"
+                  },
+                  {
+                      "pathname": "/ansible/savings-planner"
+                  },
+                  {
+                      "pathname": "/ansible/automation-calculator"
+                  },
+                  {
+                      "pathname": "/ansible/organization-statistics"
+                  },
+                  {
+                      "pathname": "/ansible/job-explorer"
+                  },
+                  {
+                      "pathname": "/ansible/clusters"
+                  },
+                  {
+                      "pathname": "/ansible/notifications"
+                  }
+              ]
+          }
+      ]
+  },
+  "rhosak": {
+      "manifestLocation": "/apps/rhosak/fed-mods.json",
+      "modules": [
+          {
+              "id": "rhosak",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/application-services/streams"
+                  }
+              ]
+          }
+      ]
+  },
+  "srs": {
+      "manifestLocation": "/apps/srs-ui-build/fed-mods.json",
+      "modules": []
+  },
+  "ar": {
+      "manifestLocation": "/apps/sr-ui-build/fed-mods.json",
+      "modules": []
+  },
+  "guides": {
+      "manifestLocation": "/apps/rhoas-guides-build/fed-mods.json",
+      "modules": []
+  },
+  "applicationServices": {
+      "manifestLocation": "/apps/application-services/fed-mods.json",
+      "analytics": {
+          "APIKey": "TpKcgYihGHSaBRom5Yg4wudB808Uk4XL"
+      },
+      "modules": [
+          {
+              "id": "application-services",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/application-services"
+                  }
+              ]
+          }
+      ]
+  },
+  "apiDocs": {
+      "manifestLocation": "/apps/api-docs/fed-mods.json",
+      "modules": [
+          {
+              "id": "api-docs",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/docs/api"
+                  },
+                  {
+                      "pathname": "/docs"
+                  }
+              ]
+          }
+      ]
+  },
+  "edge": {
+      "manifestLocation": "/apps/edge/fed-mods.json",
+      "modules": [
+          {
+              "id": "edge",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/edge"
+                  }
+              ]
+          }
+      ]
+  },
+  "hacCore": {
+      "manifestLocation": "/apps/hac-core/fed-mods.json",
+      "modules": [
+          {
+              "id": "hacCore",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/hac"
+                  }
+              ]
+          }
+      ]
+  },
+  "hacDev": {
+      "manifestLocation": "/apps/hac-dev/fed-mods.json",
+      "modules": [
+          {
+              "id": "hacDev",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/hac/app-studio"
+                  }
+              ]
+          }
+      ]
+  },
+  "starter": {
+      "manifestLocation": "/apps/starter/fed-mods.json",
+      "modules": [
+          {
+              "id": "starter",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/staging/starter"
+                  }
+              ]
+          }
+      ]
+  },
+  "imageBuilder": {
+      "manifestLocation": "/apps/image-builder/fed-mods.json",
+      "modules": [
+          {
+              "id": "image-builder",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/image-builder"
+                  }
+              ]
+          }
+      ]
+  },
+  "cloudTutorials": {
+      "manifestLocation": "/apps/cloud-tutorials/fed-mods.json",
+      "modules": [
+          {
+              "id": "cloud-tutorials",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/mosaic/cloud-tutorials"
+                  }
+              ]
+          }
+      ]
+  },
+  "malware": {
+      "manifestLocation": "/apps/malware/fed-mods.json",
+      "isFedramp": true,
+      "modules": [
+          {
+              "id": "malware",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/malware"
+                  }
+              ]
+          }
+      ]
+  },
+  "dbaas": {
+      "manifestLocation": "/apps/dbaas/fed-mods.json",
+      "modules": [
+          {
+              "id": "dbaas",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/application-services/databases"
+                  }
+              ]
+          }
+      ]
+  },
+  "bonfire": {
+      "manifestLocation": "/apps/bonfire/fed-mods.json",
+      "modules": [
+          {
+              "id": "bonfire",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/internal/bonfire"
+                  }
+              ]
+          }
+      ]
+  },
+  "sandbox": {
+      "manifestLocation": "/apps/sandbox/fed-mods.json",
+      "modules": [
+          {
+              "id": "sandbox",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/openshift/sandbox"
+                  }
+              ]
+          }
+      ]
+  },
+  "acs": {
+      "manifestLocation": "/apps/acs/fed-mods.json",
+      "modules": [
+          {
+              "id": "acs",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/application-services/acs"
+                  }
+              ]
+          }
+      ]
+  },
+  "appStudioDocs": {
+      "manifestLocation": "/apps/app-studio-docs/fed-mods.json",
+      "modules": [
+          {
+              "id": "app-studio-docs",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/hac/app-studio-docs"
+                  }
+              ]
+          }
+      ]
+  },
+  "iam": {
+      "manifestLocation": "/apps/iam/fed-mods.json",
+      "modules": [
+          {
+              "id": "authentication-policy",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/iam/authentication-policy"
+                  }
+              ]
+          }
+      ]
+  },
+  "connect": {
+      "manifestLocation": "/apps/connect/fed-mods.json",
+      "modules": [
+          {
+              "id": "connect",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/connect"
+                  }
+              ]
+          }
+      ]
+  },
+  "contentSources": {
+      "manifestLocation": "/apps/content-sources/fed-mods.json",
+      "defaultDocumentTitle": "Repositories",
+      "modules": [
+          {
+              "id": "insights-content-sources",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/insights/content"
+                  },
+                  {
+                      "pathname": "/settings/content"
+                  }
+              ]
+          }
+      ]
+  },
+  "learningResources": {
+      "manifestLocation": "/apps/learningResources/fed-mods.json",
+      "modules": [
+          {
+              "id": "learningResources",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/learning-resources"
+                  }
+              ]
+          }
+      ]
+  }
+}

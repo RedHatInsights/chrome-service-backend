@@ -4,6 +4,7 @@ COPY . .
 ENV GO111MODULE=on
 USER root
 RUN go get -d -v
+RUN make validate-schema
 RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
 
 # Build the migration binary.
@@ -18,6 +19,8 @@ RUN chgrp -R 0 /app && \
     chmod -R g=u /app
 COPY --from=builder   /go/bin/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /go/bin/chrome-migrate /usr/bin
+# Copy chrome static JSON assets to server binary dir
+COPY --from=builder $GOPATH/src/chrome-service-backend/static /app/static
 
 ENTRYPOINT ["/app/chrome-service-backend"]
 EXPOSE 8000

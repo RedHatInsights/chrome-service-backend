@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HCC navigation files json schema",
+  "$defs": {
+    "permission": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "apps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "additionalAttributes": false
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/permission"
+          }
+        },
+        "appId": {
+          "type": "string"
+        },
+        "filterable": {
+          "type": "boolean"
+        },
+        "isBeta": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "isExternal": {
+          "type": "boolean"
+        },
+        "product": {
+          "type": "string"
+        },
+        "notifier": {
+          "type": "string"
+        }
+      },
+      "if": {
+        "properties": {
+          "isExternal": {
+            "enum": [
+              false,
+              null
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "appId"
+        ]
+      },
+      "additionalAttributes": false
+    },
+    "navItem": {
+      "type": "object",
+      "properties": {
+        "isHidden": {
+          "type": "boolean"
+        },
+        "filterable": {
+          "type": "boolean"
+        },
+        "expandable": {
+          "type": "boolean"
+        },
+        "href": {
+          "type": "string"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "isExternal": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "notifier": {
+          "type": "string"
+        },
+        "icon": {
+          "enum": [
+            "wrench",
+            "trend-up",
+            "shield",
+            "database",
+            "cloud"
+          ]
+        },
+        "navItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/navItem"
+          }
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/route"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/permission"
+          }
+        }
+      },
+      "additionalAttributes": false
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Navigation snippet ID"
+    },
+    "title": {
+      "type": "string",
+      "description": "Navigation snippet title"
+    },
+    "navItems": {
+      "description": "Navigation snippet items",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/navItem",
+        "required": [
+          "title"
+        ],
+        "if": {
+          "properties": {
+            "isExternal": {
+              "enum": [
+                false,
+                null
+              ]
+            },
+            "expandable": {
+              "enum": [
+                false,
+                null
+              ]
+            },
+            "groupId": {
+              "const": null
+            },
+            "dynamicNav": {
+              "const": null
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "appId",
+            "href"
+          ]
+        }
+      }
+    }    
+  },
+  "additionalAttributes": false,
+  "required": [
+    "id",
+    "title",
+    "navItems"
+  ]
+}

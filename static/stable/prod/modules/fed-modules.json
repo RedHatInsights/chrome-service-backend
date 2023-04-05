@@ -509,7 +509,6 @@
                 "routes": [
                     {
                         "pathname": "/ansible",
-                        "dynamic": true,
                         "exact": true
                     },
                     {

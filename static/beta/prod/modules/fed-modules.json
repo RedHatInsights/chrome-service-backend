@@ -13,10 +13,7 @@
                     }
                 ]
             }
-        ],
-        "analytics": {
-            "foo": "bar"
-        }
+        ]
     },
     "userPreferences": {
         "manifestLocation": "/apps/user-preferences/fed-mods.json",
@@ -465,7 +462,6 @@
                 "routes": [
                     {
                         "pathname": "/ansible",
-                        "dynamic": true,
                         "exact": true
                     },
                     {

@@ -1,55 +1,30 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
+	"fmt"
 	"path/filepath"
 
-	"github.com/gookit/validate"
+	"github.com/xeipuuv/gojsonschema"
 )
 
-type route struct {
-	Pathname  string `json:"pathname" validate:"required"`
-	Exact     bool   `json:"exact"`
-	IsFedramp bool   `json:"isFedramp"`
-}
-
-type routeModule struct {
-	Id     string  `json:"id" validate:"required"`
-	Module string  `json:"module" validate:"required"`
-	Routes []route `json:"routes" validate:"required"`
-}
-
-type analyticsConfig struct {
-	APIKey *string `json:"APIkey" validate:"minLen:1"`
-}
-
-type moduleItem struct {
-	DefaultDocumentTitle string          `json:"defaultDocumentTitle,omitempty"`
-	ManifestLocation     string          `json:"manifestLocation" validate:"required"`
-	IsFedramp            bool            `json:"isFedramp"`
-	Modules              []routeModule   `json:"modules"`
-	Analytics            analyticsConfig `json:"analytics,omitempty"`
-}
-
 func validateModules(cwd string) error {
-	// get the all fed-modules.json files
+	schemaLoader := gojsonschema.NewReferenceLoader("file://./static/modulesSchema.json")
 	modulesFiles, err := filepath.Glob(cwd + "/static/**/**/**/fed-modules.json")
-	for _, filePath := range modulesFiles {
-		file, err := ioutil.ReadFile(filePath)
-		handleErr(err)
-		var m map[string]moduleItem
-		err = json.Unmarshal([]byte(file), &m)
-		handleErr(err)
-		// iterate over values
-		for moduleId, v := range m {
-			res := validate.Struct(&v)
-			if !res.Validate() {
-				handleValidationError(res, moduleId)
+	handleErr(err)
 
-			}
+	for _, file := range modulesFiles {
+		documentLoader := gojsonschema.NewReferenceLoader(fmt.Sprintf("file://%s", file))
+		result, err := gojsonschema.Validate(schemaLoader, documentLoader)
+		if err != nil {
+			panic(err.Error())
 		}
 
+		if !result.Valid() {
+			for _, desc := range result.Errors() {
+				fmt.Printf("- %s\n", desc)
+			}
+			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
+		}
 	}
-	return err
+	return nil
 }

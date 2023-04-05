@@ -7,7 +7,7 @@ import (
 	"github.com/xeipuuv/gojsonschema"
 )
 
-func validateModules(cwd string) error {
+func validateModules(cwd string) {
 	schemaLoader := gojsonschema.NewReferenceLoader("file://./static/modulesSchema.json")
 	modulesFiles, err := filepath.Glob(cwd + "/static/**/**/**/fed-modules.json")
 	handleErr(err)
@@ -26,5 +26,4 @@ func validateModules(cwd string) error {
 			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
 		}
 	}
-	return nil
 }

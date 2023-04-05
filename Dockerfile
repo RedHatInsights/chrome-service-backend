@@ -4,6 +4,7 @@ COPY . .
 ENV GO111MODULE=on
 USER root
 RUN go get -d -v
+RUN make validate-schema
 RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
 
 # Build the migration binary.

@@ -7,7 +7,7 @@ import (
 	"github.com/xeipuuv/gojsonschema"
 )
 
-func validateNavigation(cwd string) error {
+func validateNavigation(cwd string) {
 	schemaLoader := gojsonschema.NewReferenceLoader("file://./static/navigationSchema.json")
 	modulesFiles, err := filepath.Glob(cwd + "/static/**/**/**/*-navigation.json")
 	handleErr(err)
@@ -26,5 +26,4 @@ func validateNavigation(cwd string) error {
 			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
 		}
 	}
-	return nil
 }

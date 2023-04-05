@@ -8,14 +8,17 @@
           "href": "/hac"
       },
       {
+        "appId": "hacCore",
         "title": "Demo Plugin",
         "dynamicNav": "hacCore/admin-demo-section"
       },
       {
+        "appId": "hacCore",
         "title": "Demo Plugin",
         "dynamicNav": "hacCore/dev-demo-section"
       },
       {
+        "appId": "hacCore",
         "title": "Flat nav",
         "dynamicNav": "hacCore"
       },

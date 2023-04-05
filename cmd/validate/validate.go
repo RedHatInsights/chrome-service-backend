@@ -30,4 +30,6 @@ func main() {
 
 	err = validateModules(cwd)
 	handleErr(err)
+	err = validateNavigation(cwd)
+	handleErr(err)
 }

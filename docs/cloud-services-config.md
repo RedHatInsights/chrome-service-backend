@@ -55,6 +55,13 @@ All CSC files are located under the `/static` directory. Based on the required e
 - `/static/beta/prod/navigation/*.-navigation.json` for prod-beta
 - `/static/beta/stage/navigation/*.-navigation.json` for stage-beta
 
+**Services**
+
+- `/static/stable/prod/services/services.json` for prod-stable
+- `/static/stable/stage/services/services.json` for stage-stable
+- `/static/beta/prod/services/services.json` for prod-beta
+- `/static/beta/stage/services/services.json` for stage-beta
+
 ### Making changes
 
 You can use the [CSC documentation](https://github.com/RedHatInsights/cloud-services-config#chromefed-modulesjson) for reference.

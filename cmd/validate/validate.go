@@ -18,4 +18,6 @@ func main() {
 	validateModules(cwd)
 	fmt.Println("Validating navigation definitions")
 	validateNavigation(cwd)
+	fmt.Println("Validating section definitions")
+	validateServices(cwd)
 }

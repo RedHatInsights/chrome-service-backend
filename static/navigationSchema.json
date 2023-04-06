@@ -30,6 +30,9 @@
             "$ref": "#/$defs/permission"
           }
         },
+        "id": {
+          "type": "string"
+        },
         "appId": {
           "type": "string"
         },

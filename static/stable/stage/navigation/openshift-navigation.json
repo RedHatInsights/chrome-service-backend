@@ -20,7 +20,15 @@
             "description": "Overview of your Openshift Environment."
         },
         {
+<<<<<<< HEAD
             "id": "releases",
+=======
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/openshift/learning-resources"
+        },
+        {
+>>>>>>> f2423b6 (add entrypoints to learning resources and update nav items)
             "appId": "openshift",
             "href": "/openshift/releases",
             "title": "Releases",

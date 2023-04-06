@@ -33,7 +33,7 @@ func main() {
 	router.Get("/health", HealthProbe)
 	fs := http.FileServer(http.Dir("./static/"))
 
-	// can't be in sub router as we don't enforce indentity header
+	// can't be in sub router as we don't enforce identity header
 	router.Handle("/api/chrome-service/v1/static/*", http.StripPrefix("/api/chrome-service/v1/static", fs))
 
 	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {

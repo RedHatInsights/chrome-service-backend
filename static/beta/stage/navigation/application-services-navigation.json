@@ -3,6 +3,7 @@
   "title": "Application and Data Services",
   "navItems": [
     {
+<<<<<<< HEAD
         "id": "overview",
         "appId": "applicationServices",
         "title": "Overview",
@@ -14,6 +15,17 @@
         "appId": "applicationServices",
         "title": "Learning Resources",
         "href": "/application-services/learning-resources"
+=======
+      "appId": "applicationServices",
+      "title": "Overview",
+      "filterable": false,
+      "href": "/application-services/overview"
+    },
+    {
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/application-services/learning-resources"
+>>>>>>> 9b89b9e (add entrypoints to learning resources and update nav items)
     },
     {
       "groupId": "application-services",
@@ -144,6 +156,7 @@
       "title": "Advanced Cluster Security",
       "expandable": true,
       "routes": [
+<<<<<<< HEAD
           {
               "id": "clusterOverview",
               "appId": "acs",
@@ -164,6 +177,24 @@
               "isExternal": true,
               "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
           }
+=======
+        {
+          "appId": "acs",
+          "title": "Overview",
+          "href": "/application-services/acs/overview"
+        },
+        {
+          "appId": "acs",
+          "title": "ACS Instances",
+          "isBeta": true,
+          "href": "/application-services/acs/instances"
+        },
+        {
+          "title": "Documentation",
+          "isExternal": true,
+          "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
+        }
+>>>>>>> 9b89b9e (add entrypoints to learning resources and update nav items)
       ]
     },
     {

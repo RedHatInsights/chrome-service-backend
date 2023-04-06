@@ -28,6 +28,9 @@
         },
         "fullProfile": {
           "type": "boolean"
+        },
+        "props": {
+          "type": "object"
         }
       },
       "required": [

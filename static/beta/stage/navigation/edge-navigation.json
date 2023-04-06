@@ -16,10 +16,14 @@
           "permissions": [
             {
               "method": "withEmail",
-              "args": ["@redhat.com", "@sbb.ch"]
+              "args": [
+                "@redhat.com",
+                "@sbb.ch"
+              ]
             }
           ]
-        }, {
+        },
+        {
           "id": "systems",
           "title": "Systems",
           "appId": "edge",
@@ -28,7 +32,10 @@
           "permissions": [
             {
               "method": "withEmail",
-              "args": ["@redhat.com", "@sbb.ch"]
+              "args": [
+                "@redhat.com",
+                "@sbb.ch"
+              ]
             }
           ]
         }
@@ -36,7 +43,10 @@
       "permissions": [
         {
           "method": "withEmail",
-          "args": ["@redhat.com", "@sbb.ch"]
+          "args": [
+            "@redhat.com",
+            "@sbb.ch"
+          ]
         }
       ]
     },
@@ -53,10 +63,14 @@
           "permissions": [
             {
               "method": "withEmail",
-              "args": ["@redhat.com", "@sbb.ch"]
+              "args": [
+                "@redhat.com",
+                "@sbb.ch"
+              ]
             }
           ]
-        }, {
+        },
+        {
           "id": "customRepositories",
           "title": "Custom repositories",
           "appId": "edge",
@@ -65,21 +79,27 @@
           "permissions": [
             {
               "method": "withEmail",
-              "args": ["@redhat.com", "@sbb.ch"]
+              "args": [
+                "@redhat.com",
+                "@sbb.ch"
+              ]
             }
           ]
         }
       ]
-    }, {
-      "id": "learningResources",
-      "title": "Learning resources",
-      "appId": "edge",
+    },
+    {
+      "title": "Learning Resources",
+      "appId": "learningResources",
       "filterable": false,
       "href": "/edge/learning-resources",
       "permissions": [
         {
           "method": "withEmail",
-          "args": ["@redhat.com", "@sbb.ch"]
+          "args": [
+            "@redhat.com",
+            "@sbb.ch"
+          ]
         }
       ]
     }

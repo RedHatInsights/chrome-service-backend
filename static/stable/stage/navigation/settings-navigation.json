@@ -58,7 +58,10 @@
             "href": "/settings/content"
         },
         {
+<<<<<<< HEAD
             "id": "integrations",
+=======
+>>>>>>> f2423b6 (add entrypoints to learning resources and update nav items)
             "appId": "notifications",
             "title": "Integrations",
             "href": "/settings/integrations"
@@ -115,14 +118,11 @@
         },
         {
             "title": "Applications",
-            "expandable": true,            
+            "expandable": true,
             "permissions": [
                 {
                     "method": "hasPermissions",
-                    "apps": [
-                        "cost-management:*:*",
-                        "advisor:*:*"
-                    ]
+                    "apps": ["cost-management:*:*", "advisor:*:*"]
                 }
             ],
             "routes": [
@@ -134,17 +134,11 @@
                     "permissions": [
                         {
                             "method": "isEntitled",
-                            "args": [
-                                "cost_management"
-                            ]
+                            "args": ["cost_management"]
                         },
                         {
                             "method": "hasPermissions",
-                            "args": [
-                                [
-                                    "cost-management:*:*"
-                                ]
-                            ]
+                            "args": [["cost-management:*:*"]]
                         }
                     ]
                 }
@@ -156,6 +150,5 @@
             "title": "Learning Resources",
             "href": "/settings/learning-resources"
         }
-        
     ]
 }

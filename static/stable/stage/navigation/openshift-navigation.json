@@ -113,56 +113,72 @@
                     "expandable": true,
                     "routes": [
                         {
+                            "id": "costManagementOverview",
                             "appId": "costManagement",
                             "title": "Overview",
                             "filterable": false,
                             "href": "/openshift/cost-management",
+                            "product": "Red Hat Cost Management",
+                            "description": "Understand and track costs for your OpenShift clusters and workloads."
+                        },
+                        {
+                            "id": "costManagementOptimizations",
+                            "appId": "costManagement",
+                            "title": "Optimizations",
+                            "href": "/openshift/cost-management/optimizations",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "openshift",
                             "appId": "costManagement",
                             "title": "OpenShift",
                             "href": "/openshift/cost-management/ocp",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "amazonWebServices",
                             "appId": "costManagement",
                             "title": "Amazon Web Services",
                             "href": "/openshift/cost-management/aws",
                             "product": "Red Hat Cost Management"
                         },
-
                         {
+                            "id": "googleCloudPlatform",
                             "appId": "costManagement",
                             "title": "Google Cloud Platform",
                             "href": "/openshift/cost-management/gcp",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "ibmCloud",
                             "appId": "costManagement",
                             "title": "IBM Cloud",
                             "href": "/openshift/cost-management/ibm",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "microsoftAzure",
                             "appId": "costManagement",
                             "title": "Microsoft Azure",
                             "href": "/openshift/cost-management/azure",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "oracleCloudInfrastructure",
                             "appId": "costManagement",
                             "title": "Oracle Cloud Infrastructure",
                             "href": "/openshift/cost-management/oci",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "costModels",
                             "appId": "costManagement",
                             "title": "Cost Models",
                             "href": "/openshift/cost-management/cost-models",
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "costExplorer",
                             "appId": "costManagement",
                             "title": "Cost Explorer",
                             "href": "/openshift/cost-management/explorer",

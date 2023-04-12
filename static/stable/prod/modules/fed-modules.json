@@ -171,6 +171,11 @@
     "openshift": {
         "manifestLocation": "/apps/openshift/fed-mods.json",
         "fullProfile": true,
+        "config": {
+            "ssoScopes": [
+                "rhfull"
+            ]
+        },
         "modules": [
             {
                 "id": "openshift",
@@ -650,6 +655,11 @@
     },
     "iam": {
         "manifestLocation": "/apps/iam/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.iam.organization"
+            ]
+        },
         "modules": [
             {
                 "id": "authentication-policy",

@@ -142,7 +142,7 @@
                             "description": "Understand and track costs for your OpenShift clusters and workloads."
                         },
                         {
-                            "id": "costManagementRecommendations",
+                            "id": "costManagementOptimizations",
                             "appId": "costManagement",
                             "title": "Optimizations",
                             "href": "/openshift/cost-management/optimizations",

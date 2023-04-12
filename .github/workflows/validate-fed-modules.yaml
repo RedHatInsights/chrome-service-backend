@@ -1,0 +1,31 @@
+name: Validate fed-modules.json
+on:
+  pull_request:
+    branches: [main]
+    # Run only when fed-modules.json is changed in any subdirectory of the static folder.
+    paths:
+      - 'static/**/fed-modules.json'
+
+    
+
+concurrency:
+  # Only run once for latest commit per ref and cancel other (previous) runs.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-20.04
+    # prevents from running in forked repositories
+    if: github.repository_owner == 'RedHatInsights'
+    steps:
+      - name: Checkout Code Ref '${{ github.ref }}'
+        uses: actions/checkout@v3
+
+      - name: Run validation script
+        run: |
+        ./.github/scripts/validate-fed-modules.sh
+        if [ "$?" -ne 0 ]; then
+          echo "Validation failed. Exiting workflow."
+          exit 1
+        fi

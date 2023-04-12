@@ -145,6 +145,13 @@
                             "description": "Understand and track costs for your OpenShift clusters and workloads."
                         },
                         {
+                            "id": "costManagementOptimizations",
+                            "appId": "costManagement",
+                            "title": "Optimizations",
+                            "href": "/openshift/cost-management/optimizations",
+                            "product": "Red Hat Cost Management"
+                        },
+                        {
                             "id": "openshift",
                             "appId": "costManagement",
                             "title": "OpenShift",
@@ -166,6 +173,7 @@
                             "product": "Red Hat Cost Management"
                         },
                         {
+                            "id": "microsoftAzure",
                             "appId": "costManagement",
                             "title": "Microsoft Azure",
                             "href": "/openshift/cost-management/azure",

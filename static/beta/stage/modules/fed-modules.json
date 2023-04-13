@@ -911,7 +911,7 @@
             }
         ]
     },
-    "seats-admin": {
+    "seatsAdmin": {
         "manifestLocation": "/apps/seats-admin/fed-mods.json",
         "modules": [
             {

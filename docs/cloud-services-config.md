@@ -62,6 +62,45 @@ All CSC files are located under the `/static` directory. Based on the required e
 - `/static/beta/prod/services/services.json` for prod-beta
 - `/static/beta/stage/services/services.json` for stage-beta
 
+### Serving files locally
+
+There are two options to start an asset server for local development
+
+### I have golang installed and running
+
+If your machine has golang setup, you can run the following command:
+
+```sh
+dev-static
+```
+This command will start dev server on `http://localhost:8000`
+
+You can adjust the server port by adding port argument:
+
+```sh
+make dev-static port=9999
+```
+
+This command will start dev server on `http://localhost:9999`
+
+### I have Node.js installed and running
+
+If your machine does not have golang or you don't want to use golang, there is an alternative using nodejs:
+
+```sh
+make dev-static-node
+```
+
+This command will start dev server on `http://localhost:8000`
+
+You can adjust the server port by adding port argument:
+
+```sh
+make dev-static-node port=9999
+```
+
+This command will start dev server on `http://localhost:9999`
+
 ### Making changes
 
 You can use the [CSC documentation](https://github.com/RedHatInsights/cloud-services-config#chromefed-modulesjson) for reference.

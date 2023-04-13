@@ -2,6 +2,18 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "HCC federated modules json schema",
   "$defs": {
+    "moduleConfig": {
+      "type": "object",
+      "properties": {
+        "ssoScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "moduleRoute": {
       "type": "object",
       "properties": {
@@ -72,6 +84,9 @@
         },
         "fullProfile": {
           "type": "boolean"
+        },
+        "config": {
+          "$ref": "#/$defs/moduleConfig"
         },
         "analytics": {
           "$ref": "#/$defs/analytics"

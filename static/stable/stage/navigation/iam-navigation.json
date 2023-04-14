@@ -53,11 +53,6 @@
     },
     {
       "id": "documentation",
-      "appId": "learningResources",
-      "title": "Learning Resources",
-      "href": "/iam/learning-resources"
-    },
-    {
       "title": "Documentation",
       "isExternal": true,
       "filterable": false,

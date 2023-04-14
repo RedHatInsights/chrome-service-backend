@@ -3,7 +3,6 @@
   "title": "Application and Data Services",
   "navItems": [
     {
-<<<<<<< HEAD
         "id": "overview",
         "appId": "applicationServices",
         "title": "Overview",
@@ -15,17 +14,6 @@
         "appId": "applicationServices",
         "title": "Learning Resources",
         "href": "/application-services/learning-resources"
-=======
-      "appId": "applicationServices",
-      "title": "Overview",
-      "filterable": false,
-      "href": "/application-services/overview"
-    },
-    {
-      "appId": "applicationServices",
-      "title": "Learning Resources",
-      "href": "/application-services/learning-resources"
->>>>>>> f2423b6 (add entrypoints to learning resources and update nav items)
     },
     {
       "groupId": "application-services",

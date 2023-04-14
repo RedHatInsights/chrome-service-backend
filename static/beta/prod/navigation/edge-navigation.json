@@ -8,11 +8,14 @@
       "routes": [
         {
           "title": "Groups",
+          "id": "groups",
           "appId": "edge",
-          "href": "/edge/fleet-management"
+          "href": "/edge/fleet-management",
+          "description": "Manage the lifecycle and enhance security of your RHEL systems at the edge."
         },
         {
           "title": "Systems",
+          "id": "systems",
           "appId": "edge",
           "href": "/edge/inventory"
         }
@@ -24,6 +27,7 @@
       "routes": [
         {
           "title": "Images",
+          "id": "images",
           "appId": "edge",
           "href": "/edge/manage-images"
         }
@@ -31,6 +35,7 @@
     },
     {
       "title": "Learning resources",
+      "id": "learningResources",
       "filterable": false,
       "appId": "edge",
       "href": "/edge/learning-resources"

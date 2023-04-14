@@ -1,4 +1,3 @@
-
 {
   "id": "iam",
   "title": "Identity & Access Management",
@@ -9,24 +8,29 @@
       "filterable": false,
       "routes": [
         {
+          "id": "users",
           "appId": "rbac",
           "title": "Users",
           "href": "/iam/user-access/users",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "description": "Manage your organization's role-based access control (RBAC) to services."
         },
         {
+          "id": "roles",
           "appId": "rbac",
           "title": "Roles",
           "href": "/iam/user-access/roles",
           "product": "Identity & Access Management"
         },
         {
+          "id": "groups",
           "appId": "rbac",
           "title": "Groups",
           "href": "/iam/user-access/groups",
           "product": "Identity & Access Management"
         },
         {
+          "id": "accessRequests",
           "appId": "rbac",
           "title": "Red Hat Access Requests",
           "href": "/iam/user-access/access-requests",
@@ -40,14 +44,17 @@
       "filterable": false,
       "routes": [
         {
+          "id": "authFactors",
           "appId": "iam",
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "description": "Manage how your organization authenticates to Red Hat services."
         }
       ]
     },
     {
+      "id": "documentation",
       "title": "Documentation",
       "isExternal": true,
       "filterable": false,

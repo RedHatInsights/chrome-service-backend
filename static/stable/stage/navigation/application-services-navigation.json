@@ -3,12 +3,14 @@
   "title": "Application and Data Services",
   "navItems": [
     {
+        "id": "overview",
         "appId": "applicationServices",
         "title": "Overview",
         "filterable": false,
         "href": "/application-services/overview"
     },
     {
+        "id": "learningResources",
         "appId": "applicationServices",
         "title": "Learning Resources",
         "href": "/application-services/learning-resources"
@@ -23,11 +25,14 @@
           "expandable": true,
           "routes": [
             {
+              "id": "apiDesigner",
               "appId": "applicationServices",
+              "description": "Create, import, edit, and manage API definitions and event schemas in a visual editor.",
               "title": "API and Schema Designs",
               "href": "/application-services/api-designer"
             },
             {
+              "id": "documentation",
               "title": "Documentation",
               "isExternal": true,
               "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_api_designer"
@@ -35,8 +40,10 @@
           ]
         },
         {
+          "id": "apiManagement",
           "appId": "applicationServices",
           "title": "API Management",
+          "description": "Manage API access, policy, and traffic controls for microservice-based applications.",
           "href": "/application-services/api-management"
         },
         {
@@ -44,16 +51,20 @@
           "expandable": true,
           "routes": [
             {
+              "id": "overview",
               "appId": "applicationServices",
               "title": "Overview",
               "href": "/application-services/streams/overview"
             },
             {
+              "id": "kafkaInstances",
               "appId": "applicationServices",
               "title": "Kafka Instances",
-              "href": "/application-services/streams"
+              "href": "/application-services/streams",
+              "description": "Create, discover, and connect to real-time events and data streams."
             },
             {
+              "id": "streamsDocumentation",
               "title": "Documentation",
               "isExternal": true,
               "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka"
@@ -65,11 +76,14 @@
           "expandable": true,
           "routes": [
             {
+              "id": "serviceRegistryInstances",
               "appId": "applicationServices",
               "title": "Service Registry Instances",
-              "href": "/application-services/service-registry"
+              "href": "/application-services/service-registry",
+              "description": "Discover, publish, and reuse event schemas and API definitions in a shared repository."
             },
             {
+              "id": "serviceRegistryDocumenation",
               "title": "Documentation",
               "isExternal": true,
               "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_service_registry"
@@ -81,11 +95,14 @@
           "expandable": true,
           "routes": [
             {
+              "id": "connectorsInstances",
               "appId": "applicationServices",
               "title": "Connectors Instances",
+              "description": "Send data between event streams and third-party systems with pre-built integrations.",
               "href": "/application-services/connectors"
             },
             {
+              "id": "connectorsDocumentation",
               "title": "Documentation",
               "isExternal": true,
               "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_connectors"
@@ -93,9 +110,11 @@
           ]
         },
         {
+          "id": "serviceAccounts",
           "appId": "applicationServices",
           "title": "Service Accounts",
-          "href": "/application-services/service-accounts"
+          "href": "/application-services/service-accounts",
+          "description": "Authenticate and connect securely to APIs from multiple services."
         }
       ]
     },
@@ -105,14 +124,18 @@
       "icon": "database",
       "navItems": [
         {
+          "id": "databaseAccess",
           "appId": "dbaas",
           "title": "Database Access",
-          "href": "/application-services/databases"
+          "href": "/application-services/databases",
+          "description": "Provision, monitor, and connect to cloud-hosted partner database services."
         },
         {
+          "id": "dataScience",
           "appId": "applicationServices",
           "title": "Data Science",
-          "href": "/application-services/data-science"
+          "href": "/application-services/data-science",
+          "description": "Develop, train, and test artificial intelligence and machine learning (AI/ML) models."
         }
       ]
     },
@@ -121,17 +144,21 @@
       "expandable": true,
       "routes": [
         {
+          "id": "clusterOverview",
           "appId": "acs",
           "title": "Overview",
-          "href": "/application-services/acs/overview"
+          "href": "/application-services/acs/overview",
+          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
         },
         {
+          "id": "acsInstances",
           "appId": "acs",
           "title": "ACS Instances",
           "isBeta": true,
           "href": "/application-services/acs/instances"
         },
         {
+          "id": "clustersDocumentation",
           "title": "Documentation",
           "isExternal": true,
           "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
@@ -148,11 +175,13 @@
           "expandable": true,
           "routes": [
             {
+              "id": "streamdForApacheKafka",
               "appId": "subscriptions",
               "title": "Streams for Apache Kafka",
               "href": "/application-services/subscriptions/streams"
             },
             {
+              "id": "openshiftDataScience",
               "appId": "subscriptions",
               "title": "OpenShift Data Science",
               "href": "/application-services/subscriptions/rhods"

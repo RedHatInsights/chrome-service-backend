@@ -19,7 +19,8 @@
               "args": ["@redhat.com", "@sbb.ch"]
             }
           ]
-        }, {
+        },
+        {
           "id": "systems",
           "title": "Systems",
           "appId": "edge",
@@ -56,7 +57,8 @@
               "args": ["@redhat.com", "@sbb.ch"]
             }
           ]
-        }, {
+        },
+        {
           "id": "customRepositories",
           "title": "Custom repositories",
           "appId": "edge",
@@ -70,10 +72,10 @@
           ]
         }
       ]
-    }, {
-      "id": "learningResources",
-      "title": "Learning resources",
-      "appId": "edge",
+    },
+    {
+      "title": "Learning Resources",
+      "appId": "learningResources",
       "filterable": false,
       "href": "/edge/learning-resources",
       "permissions": [

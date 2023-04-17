@@ -3,17 +3,17 @@
   "title": "Application and Data Services",
   "navItems": [
     {
-        "id": "overview",
-        "appId": "applicationServices",
-        "title": "Overview",
-        "filterable": false,
-        "href": "/application-services/overview"
+      "id": "overview",
+      "appId": "applicationServices",
+      "title": "Overview",
+      "filterable": false,
+      "href": "/application-services/overview"
     },
     {
-        "id": "learningResources",
-        "appId": "applicationServices",
-        "title": "Learning Resources",
-        "href": "/application-services/learning-resources"
+      "id": "learningResources",
+      "appId": "applicationServices",
+      "title": "Learning Resources",
+      "href": "/application-services/learning-resources"
     },
     {
       "groupId": "application-services",
@@ -144,26 +144,26 @@
       "title": "Advanced Cluster Security",
       "expandable": true,
       "routes": [
-          {
-              "id": "clusterOverview",
-              "appId": "acs",
-              "title": "Overview",
-              "href": "/application-services/acs/overview",
-              "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
-          },
-          {
-              "id": "acsInstances",
-              "appId": "acs",
-              "title": "ACS Instances",
-              "isBeta": true,
-              "href": "/application-services/acs/instances"
-          },
-          {
-              "id": "clustersDocumentation",
-              "title": "Documentation",
-              "isExternal": true,
-              "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
-          }
+        {
+          "id": "clusterOverview",
+          "appId": "acs",
+          "title": "Overview",
+          "href": "/application-services/acs/overview",
+          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
+        },
+        {
+          "id": "acsInstances",
+          "appId": "acs",
+          "title": "ACS Instances",
+          "isBeta": true,
+          "href": "/application-services/acs/instances"
+        },
+        {
+          "id": "clustersDocumentation",
+          "title": "Documentation",
+          "isExternal": true,
+          "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
+        }
       ]
     },
     {

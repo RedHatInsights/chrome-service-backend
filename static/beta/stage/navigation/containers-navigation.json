@@ -1,0 +1,10 @@
+{
+  "id": "containers",
+  "title": "Containers",
+  "navItems": [{
+    "id": "quay",
+    "appId": "quay-ui-plugin",
+    "title": "Quay",
+    "href": "/containers/quay"
+  }]
+}

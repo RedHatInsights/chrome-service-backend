@@ -61,8 +61,31 @@ func GetVisitedBundles(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+func GetIntercomHash(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	bundleParam := r.URL.Query()["bundle"]
+	bundle := "fallback"
+
+	if len(bundleParam) > 0 {
+		bundle = bundleParam[0]
+	}
+	hash, err := service.GetUserIntercomHash(user.AccountId, service.IntercomBundle(bundle))
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Internal server error."))
+		return
+	}
+
+	resp := util.EntityResponse[string]{
+		Data: hash,
+	}
+
+	json.NewEncoder(w).Encode(resp)
+}
+
 func MakeUserIdentityRoutes(sub chi.Router) {
 	sub.Get("/", GetUserIdentity)
+	sub.Get("/intercom", GetIntercomHash)
 	sub.Route("/visited-bundles", func(r chi.Router) {
 		r.Post("/", AddVisitedBundle)
 		r.Get("/", GetVisitedBundles)

@@ -23,6 +23,10 @@ type KafkaCfg struct {
 	KafkaSSlConfig KafkaSSLCfg
 }
 
+type IntercomConfig struct {
+	fallback string
+}
+
 type ChromeServiceConfig struct {
 	WebPort         int
 	OpenApiSpecPath string
@@ -36,6 +40,7 @@ type ChromeServiceConfig struct {
 	DbSSLMode       string
 	DbSSLRootCert   string
 	KafkaConfig     KafkaCfg
+	IntercomConfig  IntercomConfig
 }
 
 const RdsCaLocation = "/app/rdsca.cert"
@@ -115,6 +120,10 @@ func Init() {
 		}
 	}
 
+	// env variables from .env or pod env variables
+	options.IntercomConfig = IntercomConfig{
+		fallback: os.Getenv("INTERCOM_DEFAULT"),
+	}
 	config = options
 }
 

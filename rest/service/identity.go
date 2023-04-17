@@ -1,12 +1,34 @@
 package service
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
+	"fmt"
+	"reflect"
 	"time"
 
+	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/sirupsen/logrus"
 )
+
+type IntercomBundle string
+
+const (
+	Fallback IntercomBundle = "fallback"
+)
+
+func (ib IntercomBundle) IsValidBundle() error {
+	switch ib {
+	case Fallback:
+		return nil
+	}
+
+	return fmt.Errorf("invalid bundle string. Expected one of %s, got %s", Fallback, ib)
+}
 
 func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {
 	bundles := make(map[string]bool)
@@ -84,4 +106,28 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 	err = res.Error
 
 	return identity, err
+}
+
+func GetUserIntercomHash(userId string, namespace IntercomBundle) (string, error) {
+	err := namespace.IsValidBundle()
+	bundle := namespace
+	if err != nil {
+		logrus.Infof("Unable to verify intercom namespace %s. Using fallback key.\n", string(namespace))
+		bundle = Fallback
+	}
+	// get this form env
+	c := config.Get()
+	// access struct value via string variable
+	v := reflect.ValueOf(c.IntercomConfig)
+	key := reflect.Indirect(v).FieldByName(string(bundle))
+
+	fmt.Print(key.String(), namespace)
+	intercomHash := hmac.New(sha256.New, []byte(key.String()))
+	_, err = intercomHash.Write([]byte(userId))
+	if err != nil {
+		return "", err
+	}
+
+	hash := hex.EncodeToString(intercomHash.Sum(nil))
+	return hash, nil
 }

@@ -58,6 +58,11 @@ objects:
           env:
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
+          - name: INTERCOM_DEFAULT
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_DEFAULT
           resources:
             limits:
               cpu: ${CPU_LIMIT}
@@ -65,11 +70,6 @@ objects:
             requests:
               cpu: 250m
               memory: 256Mi
-          - name: INTERCOM_DEFAULT
-            valueFrom:
-              secretKeyRef:
-                name: chrome-service-backend
-                key: INTERCOM_DEFAULT
 
 parameters:
 - name: LOG_LEVEL

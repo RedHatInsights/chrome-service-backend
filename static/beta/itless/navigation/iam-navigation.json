@@ -1,0 +1,35 @@
+{
+  "id": "iam",
+  "title": "Identity & Access Management",
+  "navItems": [
+    {
+      "title": "User Access",
+      "expandable": true,
+      "filterable": false,
+      "routes": [
+        {
+          "id": "users",
+          "appId": "rbac",
+          "title": "Users",
+          "href": "/iam/user-access/users",
+          "product": "Identity & Access Management",
+          "description": "Manage your organization's role-based access control (RBAC) to services."
+        },
+        {
+          "id": "roles",
+          "appId": "rbac",
+          "title": "Roles",
+          "href": "/iam/user-access/roles",
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "groups",
+          "appId": "rbac",
+          "title": "Groups",
+          "href": "/iam/user-access/groups",
+          "product": "Identity & Access Management"
+        }
+      ]
+    }
+  ]
+}

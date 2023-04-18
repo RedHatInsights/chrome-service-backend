@@ -74,6 +74,7 @@
       ]
     },
     {
+      "id": "learningResources",
       "title": "Learning Resources",
       "appId": "learningResources",
       "filterable": false,

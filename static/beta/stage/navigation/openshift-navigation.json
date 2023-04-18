@@ -20,6 +20,7 @@
             "description": "Overview of your Openshift Environment."
         },
         {
+            "id": "learningResources",
             "appId": "learningResources",
             "title": "Learning Resources",
             "href": "/openshift/learning-resources"

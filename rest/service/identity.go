@@ -15,15 +15,18 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type IntercomBundle string
+type IntercomApp string
 
 const (
-	Fallback IntercomBundle = "fallback"
+	Fallback      IntercomApp = "fallback"
+	OpenShift     IntercomApp = "openshift"
+	OpenShift_Dev IntercomApp = "openshift_dev"
+	HacCore       IntercomApp = "hacCore"
 )
 
-func (ib IntercomBundle) IsValidBundle() error {
+func (ib IntercomApp) IsValidApp() error {
 	switch ib {
-	case Fallback:
+	case Fallback, OpenShift, OpenShift_Dev, HacCore:
 		return nil
 	}
 
@@ -108,8 +111,8 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 	return identity, err
 }
 
-func GetUserIntercomHash(userId string, namespace IntercomBundle) (string, error) {
-	err := namespace.IsValidBundle()
+func GetUserIntercomHash(userId string, namespace IntercomApp) (string, error) {
+	err := namespace.IsValidApp()
 	bundle := namespace
 	if err != nil {
 		logrus.Infof("Unable to verify intercom namespace %s. Using fallback key.\n", string(namespace))

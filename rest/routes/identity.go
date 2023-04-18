@@ -2,6 +2,7 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
@@ -63,13 +64,19 @@ func GetVisitedBundles(w http.ResponseWriter, r *http.Request) {
 
 func GetIntercomHash(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
-	bundleParam := r.URL.Query()["bundle"]
-	bundle := "fallback"
+	appParam := r.URL.Query()["app"]
+	devParam := r.URL.Query()["dev"]
+	app := string(service.Fallback)
 
-	if len(bundleParam) > 0 {
-		bundle = bundleParam[0]
+	if len(appParam) > 0 {
+		app = appParam[0]
 	}
-	hash, err := service.GetUserIntercomHash(user.AccountId, service.IntercomBundle(bundle))
+
+	// append _dev to create dev namespace key for hash base
+	if app != string(service.Fallback) && len(devParam) > 0 && devParam[0] == "true" {
+		app = fmt.Sprintf("%s_dev", app)
+	}
+	hash, err := service.GetUserIntercomHash(user.AccountId, service.IntercomApp(app))
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Internal server error."))

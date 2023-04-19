@@ -980,5 +980,22 @@
                 ]
             }
         ]
+    },
+    "trust": {
+        "manifestLocation": "/apps/trust/fed-mods.json",
+        "modules": [
+            {
+                "id": "trust",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/inventory"
+                    },
+                    {
+                        "pathname": "/package"
+                    }
+                ]
+            }
+        ]
     }
 }

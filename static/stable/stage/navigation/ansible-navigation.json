@@ -108,6 +108,7 @@
             ]
         },
         {
+            "id":"ansibleExternalDocumentation",
             "title": "Documentation",
             "isExternal": true,
             "filterable": false,

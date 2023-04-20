@@ -19,7 +19,7 @@ dev-static:
 
 
 dev-static-node:
-	npx http-server . -p $(port)
+	npx http-server . -a :: -p $(port)
 
 migrate:
 	go run cmd/migrate/migrate.go 

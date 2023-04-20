@@ -1,0 +1,295 @@
+access-requests:
+  title: Access Requests
+  api:
+    versions:
+      -v1
+
+acs:
+  title: Advanced Cluster Security
+  api:
+    versions:
+      - v1
+
+advisor:
+  title: Advisor
+  api:
+    versions:
+      - v1
+    apiName: insights
+
+automation-analytics:
+  title: Analytics
+  api:
+    versions:
+      - v1
+    isBeta: true
+
+automation-hub:
+  title: Automation Hub
+  api:
+    versions:
+      - v3
+
+ccx:
+  title: OpenShift Insights
+  api:
+    subItems:
+      insights-results-aggregator:
+        title: Insights Results Aggregator
+        versions:
+          - v1
+          - v2
+      gathering:
+        title: Insights Operator Gathering Conditions Service
+        versions:
+          - v1
+      ocp-vulnerability:
+        title: Vulnerability
+        versions:
+          - v1
+
+cloud-tutorials:
+  title: Cloud Tutorials
+  api:
+    versions:
+      -v1
+
+commit-tracker:
+  title: Commit Tracker
+  api:
+    versions:
+      -v1
+
+compliance:
+  title: Compliance
+  api:
+    versions:
+      - v1
+
+content-sources:
+  title: Repositories
+  api:
+    versions:
+      - v1
+
+cost-management:
+  title: Cost Management
+  api:
+    versions:
+      - v1
+    isBeta: true
+
+drift:
+  title: Drift
+  api:
+    subItems:
+      drift:
+        versions:
+          - v1
+        title: Comparison reports
+      system-baseline:
+        versions:
+          - v1
+        title: Baselines
+      historical-system-profiles:
+        versions:
+          - v1
+        title: Historical system profiles
+
+image-builder:
+  title: Image Builder
+  api:
+    versions:
+      - v1
+    isBeta: true
+
+ingress:
+  title: Ingress
+  api:
+    versions:
+      - v1
+
+integrations:
+  title: Integrations
+  api:
+    versions:
+      - v1
+
+inventory:
+  title: Managed Inventory
+  api:
+    versions:
+      - v1
+
+malware:
+  title: Malware
+  api:
+    versions:
+      - v1
+    alias:
+      - malware-detection
+
+notifications:
+  title: Notifications
+  api:
+    versions:
+      - v1
+
+openshift:
+  title: OpenShift (OCM)
+  api:
+    versions:
+      - v1
+
+provisioning:
+  title: Launch
+  api:
+    versions:
+      - v1
+
+streams:
+  title: "Streams for Apache Kafka"
+  api:
+    url: https://api.openshift.com/api/kafkas_mgmt/v1/openapi
+
+app-services-apis:
+  title: Application Services
+  api:
+    subItems:
+      kafkamgmt:
+        title: "OpenShift Streams for Apache Kafka Management API"
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: kas-fleet-manager.yaml?ref=doc-portal
+      connectormgmt:
+        title: "OpenShift Connectors Management API "
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: connector_mgmt.yaml?ref=doc-portal
+      serviceregistrymgmt:
+        title: "OpenShift Service Registry Management API"
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: srs-fleet-manager.json?ref=doc-portal
+      smarteventsmgmt:
+        title: "Smart Events Management API"
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: smartevents-mgmt.yaml?ref=doc-portal
+      serviceaccountsmgmt:
+        title: "Service Accounts Management API"
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: service-accounts.yaml?ref=doc-portal
+      kafkainstance:
+        title: "OpenShift Streams for Apache Kafka Instance API"
+        readonly: true
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: kafka-admin-rest.yaml?ref=doc-portal
+      registryinstance:
+        title: "OpenShift Service Registry Instance API"
+        readonly: true
+        github:
+          owner: redhat-developer
+          repo: app-services-sdk-core
+          path: registry-instance.json?ref=doc-portal
+
+application-services:
+  title: Application Services
+  api:
+    isBeta: true
+
+patch:
+  title: Patch
+  api:
+    versions:
+      - v2
+      - v1
+    isBeta: true
+
+playbook-dispatcher:
+  title: Playbook Dispatcher
+  api:
+    versions:
+      - v1
+
+policies:
+  title: Policies
+  api:
+    versions:
+      - v1
+
+rbac:
+  title: Role-based Access Control
+  api:
+    versions:
+      - v1
+
+connector:
+  title: Red Hat Connector
+  api:
+    versions:
+      - v1
+    apiName: config-manager
+
+remediations:
+  title: Remediations
+  api:
+    versions:
+      - v1
+
+ros:
+  title: Resource Optimization
+  api:
+    versions:
+      - v1
+
+ruledev:
+  title: Rule Development
+  api:
+    versions:
+      - v1
+    isBeta: true
+    tags:
+      - value: "experimental"
+        title: "Experimental API"
+
+sources:
+  title: Sources
+  api:
+    versions:
+      - v3.1
+
+starter:
+  title: Starter
+  api:
+    versions:
+      - v1
+    apiName: insights
+
+subscriptions:
+  title: Subscriptions
+  api:
+    versions:
+      - v1
+    alias:
+      - rhsm-subscriptions
+
+tasks:
+  title: Tasks
+  api:
+    versions:
+      - v1
+
+vulnerability:
+  title: Vulnerability Management
+  api:
+    versions:
+      - v1

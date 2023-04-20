@@ -122,12 +122,16 @@
         "isGroup": true,
         "title": "RHEL",
         "links": [
-          "rhel.recommendations",
-          "rhel.advisories",
-          "rhel.comparision",
-          "rhel.policies",
-          "rhel.remediations",
-          "rhel.resourceOptimization"
+          "rhel.systems",
+          "rhel.images",
+          "rhel.vulnerability",
+          "rhel.compliance",
+          "rhel.malware",
+          "rhel.activationKeys",
+          "rhel.rhc",
+          "rhel.subscriptionInventory",
+          "rhel.manifests",
+          "rhel.ros"
         ]
       }
     ]

@@ -129,7 +129,10 @@
         "routes": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/route"
+            "anyOf": [
+              {"ref": "#/$defs/route"},
+              {"ref": "#/$defs/navItem"}
+            ]
           }
         },
         "permissions": {

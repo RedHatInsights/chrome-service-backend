@@ -10,6 +10,9 @@ RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
 # Build the migration binary.
 RUN CGO_ENABLED=0 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
 
+# Build the search index binary.
+RUN CGO_ENABLED=0 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
+
 FROM registry.redhat.io/ubi8-minimal:latest
 
 # Setup permissions to allow RDSCA to be written from clowder to container
@@ -19,6 +22,7 @@ RUN chgrp -R 0 /app && \
     chmod -R g=u /app
 COPY --from=builder   /go/bin/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /go/bin/chrome-migrate /usr/bin
+COPY --from=builder /go/bin/chrome-search-index /usr/bin
 # Copy chrome static JSON assets to server binary entry point
 COPY --from=builder $GOPATH/src/chrome-service-backend/static /static
 

@@ -14,26 +14,27 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type searchEnv string
+type SearchEnv string
 
 const (
-	Prod          searchEnv = "prod"
-	Stage         searchEnv = "stage"
+	Prod          SearchEnv = "prod"
+	Stage         SearchEnv = "stage"
 	ssoPathname   string    = "/auth/realms/redhat-external/protocol/openid-connect/token"
 	hydraPathname string    = "/hydra/rest/search/console/index"
 )
 
-type clientSecrets struct {
-	Stage string
-	Prod  string
+func (se SearchEnv) IsValidEnv() error {
+	switch se {
+	case Prod, Stage:
+		return nil
+	}
+
+	return fmt.Errorf("invalid environment. Expected one of %s, %s, got %s", Prod, Stage, se)
 }
 
-type ssoEndpoint struct {
-	Prod  string
-	Stage string
-}
+type EnvMap map[SearchEnv]string
 
-type tokenResponse struct {
+type TokenResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
@@ -214,20 +215,14 @@ func injectLinks(templateData []byte, flatLinks []LinkEntry) ([]ServiceEntry, er
 		services = append(services, serviceEntry)
 	}
 
-	servicesFile, err := json.MarshalIndent(services, "", " ")
-	if err != nil {
-		return services, err
-	}
-
-	err = ioutil.WriteFile("t.json", servicesFile, 0644)
-	if err != nil {
-		return services, err
-	}
-
 	return services, nil
 }
 
-func flattenIndexBase(indexBase []ServiceEntry) ([]ModuleIndexEntry, error) {
+func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEntry, error) {
+	hccOrigins := EnvMap{
+		Prod:  "https://console.redhat.com",
+		Stage: "https://console.stage.redhat.com",
+	}
 	bundleMapping := map[string]string{
 		"application-services": "Application and Data Services",
 		"openshift":            "OpenShift",
@@ -251,39 +246,28 @@ func flattenIndexBase(indexBase []ServiceEntry) ([]ModuleIndexEntry, error) {
 				Bundle:          []string{bundle},
 				BundleTitle:     []string{bundleMapping[bundle]},
 				Id:              fmt.Sprintf("hcc-module-%s", e.Href),
-				// FIXME: base origin on env
-				Uri:         fmt.Sprintf("https://console.stage.redhat.com-%s", e.Href),
-				SolrCommand: "index",
-				ContentType: "moduleDefinition",
-				// FIXME: base origin on env
-				ViewUri:     fmt.Sprintf("https://console.stage.redhat.com-%s", e.Href),
-				RelativeUri: e.Href,
+				Uri:             fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
+				SolrCommand:     "index",
+				ContentType:     "moduleDefinition",
+				ViewUri:         fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
+				RelativeUri:     e.Href,
 			}
 			flatLinks = append(flatLinks, newLink)
 		}
 	}
-
-	linksFile, err := json.MarshalIndent(flatLinks, "", " ")
-	if err != nil {
-		return flatLinks, err
-	}
-
-	err = ioutil.WriteFile("l.json", linksFile, 0644)
-	if err != nil {
-		return flatLinks, err
-
-	}
 	return flatLinks, nil
 }
 
-func constructIndex() ([]ModuleIndexEntry, error) {
-	stageContent, err := ioutil.ReadFile("static/stable/stage/services/services.json")
-
+// create search index compatible documents array
+func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
+	// get services template file
+	stageContent, err := ioutil.ReadFile(fmt.Sprintf("static/stable/%s/services/services.json", env))
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
 
-	stageNavFiles, err := filepath.Glob("static/stable/stage/navigation/*-navigation.json")
+	// get all environment navigation files paths request to fill in template file
+	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/stable/%s/navigation/*-navigation.json", env))
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
@@ -325,7 +309,7 @@ func constructIndex() ([]ModuleIndexEntry, error) {
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
-	envIdex, err := flattenIndexBase(indexBase)
+	envIdex, err := flattenIndexBase(indexBase, env)
 
 	if err != nil {
 		return []ModuleIndexEntry{}, err
@@ -334,12 +318,7 @@ func constructIndex() ([]ModuleIndexEntry, error) {
 	return envIdex, nil
 }
 
-func getEnvToken(secret string) (string, error) {
-	ssoHosts := ssoEndpoint{
-		Prod:  "https://sso.redhat.com",
-		Stage: "https://sso.stage.redhat.com",
-	}
-
+func getEnvToken(secret string, host string) (string, error) {
 	data := url.Values{}
 	// set payload data
 	data.Set("client_id", "CRC-search-indexing")
@@ -348,7 +327,7 @@ func getEnvToken(secret string) (string, error) {
 	data.Set("client_secret", secret)
 
 	// create request and encode data
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", ssoHosts.Stage, ssoPathname), strings.NewReader(data.Encode()))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", host, ssoPathname), strings.NewReader(data.Encode()))
 	if err != nil {
 		return "", err
 	}
@@ -374,7 +353,7 @@ func getEnvToken(secret string) (string, error) {
 	defer res.Body.Close()
 
 	// retrieve access token
-	var respJson tokenResponse
+	var respJson TokenResponse
 	err = json.Unmarshal([]byte(bodyString), &respJson)
 	if err != nil {
 		return "", err
@@ -388,11 +367,7 @@ type UploadPayload struct {
 	Documents  []ModuleIndexEntry `json:"documents"`
 }
 
-func uploadIndex(token string, index []ModuleIndexEntry) error {
-	hydraHost := ssoEndpoint{
-		Prod:  "https://access.redhat.com",
-		Stage: "https://access.stage.redhat.com",
-	}
+func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
 
 	payload := UploadPayload{
 		DataSource: "console",
@@ -402,7 +377,7 @@ func uploadIndex(token string, index []ModuleIndexEntry) error {
 	if err != nil {
 		return err
 	}
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", hydraHost.Stage, hydraPathname), bytes.NewBuffer(b))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", host, hydraPathname), bytes.NewBuffer(b))
 	if err != nil {
 		return err
 	}
@@ -436,25 +411,54 @@ func uploadIndex(token string, index []ModuleIndexEntry) error {
 	return nil
 }
 
+func deployIndex(env SearchEnv, envSecret string, ssoHost string, hydraHost string) error {
+	err := env.IsValidEnv()
+	if err != nil {
+		return err
+	}
+	token, err := getEnvToken(envSecret, ssoHost)
+	if err != nil {
+		return err
+	}
+
+	index, err := constructIndex(env)
+	if err != nil {
+		return err
+	}
+
+	err = uploadIndex(token, index, hydraHost)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func main() {
 	// load env variables
 	godotenv.Load()
 	fmt.Println("Publishing search index")
-	secrets := clientSecrets{
+	secrets := EnvMap{
 		Prod:  os.Getenv("SEARCH_CLIENT_SECRET_PROD"),
 		Stage: os.Getenv("SEARCH_CLIENT_SECRET_STAGE"),
 	}
-	token, err := getEnvToken(secrets.Stage)
-	if err != nil {
-		panic(err)
+	ssoHosts := EnvMap{
+		Prod:  "https://sso.redhat.com",
+		Stage: "https://sso.stage.redhat.com",
 	}
-	index, err := constructIndex()
-	if err != nil {
-		panic(err)
+
+	hydraHost := EnvMap{
+		Prod:  "https://access.redhat.com",
+		Stage: "https://access.stage.redhat.com",
 	}
-	err = uploadIndex(token, index)
-	if err != nil {
-		panic(err)
+
+	for _, env := range []SearchEnv{Stage, Prod} {
+		fmt.Println("Attempt to publish search index for ", env, " environment.")
+		err := deployIndex(env, secrets[env], ssoHosts[env], hydraHost[env])
+		if err != nil {
+			fmt.Println("Failed to deploy search index for ", env, "environment.")
+			panic(err)
+		}
 	}
 
 	fmt.Println("Search index published successfully")

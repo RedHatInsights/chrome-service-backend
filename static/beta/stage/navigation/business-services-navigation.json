@@ -12,7 +12,8 @@
             "id": "overview",
             "appId": "hybridCommittedSpend",
             "title": "Overview",
-            "href": "/business-services/hybrid-committed-spend"
+            "href": "/business-services/hybrid-committed-spend",
+            "description": "Compare the difference between the commitment and actual Red Hat spending."
           },
           {
             "id": "details",

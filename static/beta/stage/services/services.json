@@ -182,7 +182,8 @@
     "links": [
       "openshift.costManagementOverview",
       "rhel.subscriptionsInventory",
-      "rhel.resourceOptimization"
+      "rhel.resourceOptimization",
+      "business-services.overview"
     ]
   },
   {

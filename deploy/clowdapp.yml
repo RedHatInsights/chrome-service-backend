@@ -35,6 +35,12 @@ objects:
                 - -c
                 - chrome-migrate 
               inheritEnv: true
+            - name: publish search index
+              command:
+                - bash
+                - -c
+                - chrome-search-index
+              inheritEnv: true
           livenessProbe:
             failureThreshold: 3
             httpGet:

@@ -35,3 +35,6 @@ clean:
 
 validate-schema:
 	go run cmd/validate/*
+
+publish-search-index:
+	go run cmd/search/*

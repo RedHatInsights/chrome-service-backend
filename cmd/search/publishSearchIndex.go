@@ -457,7 +457,7 @@ func main() {
 		err := deployIndex(env, secrets[env], ssoHosts[env], hydraHost[env])
 		if err != nil {
 			fmt.Println("Failed to deploy search index for ", env, "environment.")
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 

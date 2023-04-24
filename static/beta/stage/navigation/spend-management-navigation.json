@@ -1,0 +1,26 @@
+{
+    "id": "spend-management",
+    "title": "Spend Management",
+    "navItems": [
+        {
+            "title": "Hybrid Committed Spend",
+            "expandable": true,
+            "filterable": false,
+            "routes": [
+                {
+                    "id": "overview",
+                    "appId": "hybridCommittedSpend",
+                    "title": "Overview",
+                    "href": "/spend-management/hybrid-committed-spend",
+                    "description": "Compare the difference between the commitment and actual Red Hat spending."
+                },
+                {
+                    "id": "details",
+                    "appId": "hybridCommittedSpend",
+                    "title": "Details",
+                    "href": "/spend-management/hybrid-committed-spend/details"
+                }
+            ]
+        }
+    ]
+}

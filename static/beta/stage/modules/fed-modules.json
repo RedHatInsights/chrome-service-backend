@@ -912,7 +912,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/business-services/hybrid-committed-spend"
+                        "pathname": "/spend-management/hybrid-committed-spend"
                     }
                 ]
             }

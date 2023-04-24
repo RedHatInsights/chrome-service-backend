@@ -66,6 +66,16 @@ All CSC files are located under the `/static` directory. Based on the required e
 
 There are two options to start an asset server for local development
 
+### Proxy route is different
+
+```js
+routes: {
+  "/api/chrome-service/v1/static": {
+    host: "http://localhost:<port>"
+  }
+}
+```
+
 ### I have golang installed and running
 
 If your machine has golang setup, you can run the following command:

@@ -35,7 +35,7 @@ objects:
                 - -c
                 - chrome-migrate 
               inheritEnv: true
-            - name: publish search index
+            - name: publish-search-index
               command:
                 - bash
                 - -c

@@ -31,13 +31,13 @@
           "description": "Build and manage Red Hat Enterprise Linux images and environments."
         },
         {
-          "title": "System configuration",
+          "title": "System Configuration",
           "expandable": true,
           "routes": [
             {
               "id": "rhc",
               "appId": "connector",
-              "title": "Remote host configuration (RHC)",
+              "title": "Remote Host Configuration (RHC)",
               "href": "/settings/connector",
               "product": "Red Hat Insights",
               "description": "Configure your systems to execute Ansible Playbooks."
@@ -45,7 +45,7 @@
             {
               "id": "activationKeys",
               "appId": "connector",
-              "title": "Activation keys",
+              "title": "Activation Keys",
               "href": "/settings/connector/activation-keys",
               "product": "Red Hat Insights",
               "description": "Create activation keys to register your systems and configure repositories without using a username and password."
@@ -302,7 +302,7 @@
       ]
     },
     {
-      "title": "Automation toolkit",
+      "title": "Automation Toolkit",
       "expandable": true,
       "routes": [
         {

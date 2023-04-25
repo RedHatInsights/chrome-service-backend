@@ -1,0 +1,24 @@
+{
+  "id": "hac",
+  "title": "CI/CD",
+  "navItems": [
+      {
+        "id": "demoPlugin",
+        "appId": "hacCore",
+        "title": "Demo Plugin",
+        "dynamicNav": "hacCore/admin-demo-section"
+      },
+      {
+        "id": "devDemoPlugin",
+        "appId": "hacCore",
+        "title": "Demo Plugin",
+        "dynamicNav": "hacCore/dev-demo-section"
+      },
+      {
+        "id": "flatNav",
+        "appId": "hacCore",
+        "title": "Flat nav",
+        "dynamicNav": "hacCore"
+      }
+  ]
+}

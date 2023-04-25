@@ -738,6 +738,9 @@
                 "module": "./RootApp",
                 "routes": [
                     {
+                        "pathname": "/application-pipeline"
+                    },
+                    {
                         "pathname": "/hac"
                     }
                 ]

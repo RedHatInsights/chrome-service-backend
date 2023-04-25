@@ -69,6 +69,31 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_DEFAULT
+          - name: INTERCOM_HAC_CORE
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_HAC_CORE
+          - name: INTERCOM_OPENSHIFT
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_OPENSHIFT
+          - name: INTERCOM_OPENSHIFT_DEV
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_OPENSHIFT_DEV
+          - name: SEARCH_CLIENT_SECRET_PROD
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: SEARCH_CLIENT_SECRET_PROD
+          - name: SEARCH_CLIENT_SECRET_STAGE
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: SEARCH_CLIENT_SECRET_STAGE
           resources:
             limits:
               cpu: ${CPU_LIMIT}

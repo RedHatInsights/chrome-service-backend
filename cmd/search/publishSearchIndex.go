@@ -384,14 +384,8 @@ func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{
-		Transport: &http.Transport{
-			Proxy: http.ProxyURL(&url.URL{
-				Scheme: "http",
-				Host:   "squid.corp.redhat.com:3128",
-			}),
-		},
-	}
+	client := &http.Client{}
+
 	res, err := client.Do(req)
 	if err != nil {
 		return err

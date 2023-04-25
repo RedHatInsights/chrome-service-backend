@@ -13,16 +13,7 @@
             "appId": "hybridCommittedSpend",
             "title": "Overview",
             "href": "/business-services/hybrid-committed-spend",
-            "description": "Compare the difference between the commitment and actual Red Hat spending.",
-            "permissions": [
-              {
-                "method": "apiRequest",
-                "args": [{
-                  "url": "https://billing.qa.api.redhat.com/v1/authorization/hcsEnrollment",
-                  "accessor": "hcsDeal"
-                }]
-              }
-            ]
+            "description": "Compare the difference between the commitment and actual Red Hat spending."
           },
           {
             "id": "details",

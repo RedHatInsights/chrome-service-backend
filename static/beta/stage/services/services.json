@@ -26,6 +26,28 @@
     ]
   },
   {
+    "id": "containers",
+    "title": "Containers",
+    "links": [
+      {
+        "title": "Create Cluster",
+        "href": "/openshift/create",
+        "description": "Select an OpenShift cluster type to create."
+      },
+      {
+        "title": "Clusters",
+        "href": "/openshift",
+        "description": "View, Register, or Create a Openshift Cluster."
+      },
+      {
+        "title": "Releases",
+        "href": "/openshift/releases",
+        "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
+      },
+      "containers.quayOrganizations"
+    ]
+  },
+  {
     "id": "dataset",
     "icon": "DatabaseIcon",
     "title": "Data Services",

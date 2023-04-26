@@ -14,7 +14,7 @@
             "method": "apiRequest",
             "args": [
                 {
-                    "url": "/beta/apps/quay/plugin-manifest.json",
+                    "url": "/apps/quay/plugin-manifest.json",
                     "matcher": "isNotEmpty",
                     "accessor": "version"
                 }

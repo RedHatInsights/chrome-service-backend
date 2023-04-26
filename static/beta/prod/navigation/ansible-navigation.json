@@ -29,17 +29,10 @@
                     "product": "Ansible Automation Hub"
                 },
                 {
-                    "id": "repositories",
+                    "id": "repoManagement",
                     "appId": "automationHub",
-                    "title": "Repositories",
-                    "href": "/ansible/automation-hub/ansible/repositories",
-                    "product": "Ansible Automation Hub"
-                },
-                {
-                    "id": "remotes",
-                    "appId": "automationHub",
-                    "title": "Remotes",
-                    "href": "/ansible/automation-hub/ansible/remotes",
+                    "title": "Repo Management",
+                    "href": "/ansible/automation-hub/repositories",
                     "product": "Ansible Automation Hub"
                 },
                 {

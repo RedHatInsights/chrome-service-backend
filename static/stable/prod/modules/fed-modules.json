@@ -1,7 +1,7 @@
 {
     "landing": {
         "manifestLocation": "/apps/landing/fed-mods.json",
-        "defaultDocumentTitle": "Home",
+        "defaultDocumentTitle": "Hybrid Cloud Console Home",
         "modules": [
             {
                 "id": "landing",
@@ -17,6 +17,7 @@
     },
     "userPreferences": {
         "manifestLocation": "/apps/user-preferences/fed-mods.json",
+        "defaultDocumentTitle": "User Preferences | User Preferences",
         "modules": [
             {
                 "id": "user-preferences-email",
@@ -43,6 +44,7 @@
     },
     "rbac": {
         "manifestLocation": "/apps/rbac/fed-mods.json",
+        "defaultDocumentTitle": "User Access | Identity & Access Management",
         "isFedramp": true,
         "modules": [
             {
@@ -105,6 +107,7 @@
     },
     "sources": {
         "manifestLocation": "/apps/sources/fed-mods.json",
+        "defaultDocumentTitle": "Sources | Settings",
         "modules": [
             {
                 "id": "sources",
@@ -119,6 +122,7 @@
     },
     "notifications": {
         "manifestLocation": "/apps/notifications/fed-mods.json",
+        "defaultDocumentTitle": "Notifications | Settings",
         "modules": [
             {
                 "id": "notifications",
@@ -142,6 +146,7 @@
     },
     "connector": {
         "manifestLocation": "/apps/connector/fed-mods.json",
+        "defaultDocumentTitle": "Remote Host Configuration | Settings",
         "modules": [
             {
                 "id": "connector",
@@ -190,6 +195,7 @@
     },
     "costManagement": {
         "manifestLocation": "/apps/cost-management/fed-mods.json",
+        "defaultDocumentTitle": "Applications Settings - Applications | Settings",
         "modules": [
             {
                 "id": "cost-management",
@@ -624,6 +630,7 @@
     },
     "apiDocs": {
         "manifestLocation": "/apps/api-docs/fed-mods.json",
+        "defaultDocumentTitle": "API Documentation | Documentation",
         "modules": [
             {
                 "id": "api-docs",

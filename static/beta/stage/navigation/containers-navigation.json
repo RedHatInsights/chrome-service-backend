@@ -1,10 +1,27 @@
 {
   "id": "containers",
   "title": "Containers",
-  "navItems": [{
-    "id": "quay",
-    "appId": "quay-ui-plugin",
-    "title": "Quay",
-    "href": "/containers/quay"
-  }]
+  "navItems": [
+    {
+      "id": "quay",
+      "appId": "quay-ui-plugin",
+      "title": "Quay",
+      "href": "/containers/quay",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "quayOrganizations",
+          "appId": "quay-ui-plugin",
+          "title": "Organizations",
+          "href": "/containers/quay/organization"
+        },
+        {
+          "id": "quayRepositories",
+          "appId": "quay-ui-plugin",
+          "title": "Repositories",
+          "href": "/containers/quay/repository"
+        }
+      ]
+    }
+  ]
 }

@@ -23,6 +23,20 @@
           "description": "View details about your Red Hat Enterprise Linux systems."
         },
         {
+          "id": "groups",
+          "appId": "groups",
+          "title": "Groups",
+          "href": "/insights/inventory/groups",
+          "product": "Red Hat Insights",
+          "description": "Inventory groups",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["hbi.ui.inventory-groups", true]
+            }
+          ]
+        },
+        {
           "id": "images",
           "appId": "imageBuilder",
           "title": "Images",

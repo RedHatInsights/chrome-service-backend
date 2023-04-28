@@ -169,11 +169,18 @@
         ]
       },
       {
+        "id": "acsSecurity",
+        "isGroup": true,
+        "title": "Advanced Cluster Security",
+        "links": [
+          "application-services.clusterOverview"          
+        ]
+      },
+      {
         "id": "openshiftsecurity",
         "isGroup": true,
         "title": "OpenShift",
         "links": [
-          "application-services.clusterOverview",
           "openshift.cves"
         ]
       },

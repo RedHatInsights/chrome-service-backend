@@ -54,6 +54,14 @@
           "href": "/iam/authentication-policy/authentication-factors",
           "product": "Identity & Access Management",
           "description": "Manage how your organization authenticates to Red Hat services."
+        },
+        {
+          "id": "idpintegration",
+          "appId": "iam",
+          "title": "Identity Provider Integration",
+          "href": "/iam/authentication-policy/identity-provider-integration",
+          "product": "Identity & Access Management",
+          "description": "Manage how your organization authenticates to Red Hat services."
         }
       ]
     },

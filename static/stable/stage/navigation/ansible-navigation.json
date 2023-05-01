@@ -10,6 +10,12 @@
             "href": "/ansible/ansible-dashboard"
         },
         {
+            "id": "learningResources",
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/ansible/learning-resources"
+        },
+        {
             "title": "Automation Hub",
             "expandable": true,
             "routes": [
@@ -115,7 +121,7 @@
             ]
         },
         {
-            "id":"ansibleExternalDocumentation",
+            "id": "ansibleExternalDocumentation",
             "title": "Documentation",
             "isExternal": true,
             "filterable": false,

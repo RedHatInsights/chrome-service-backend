@@ -37,7 +37,7 @@
     },
     "learningResources": {
         "manifestLocation": "/apps/learningResources/fed-mods.json",
-        "defaultDocumentTitle": "Learning Resources | Settings",
+        "defaultDocumentTitle": "Learning Resources",
         "modules": [
             {
                 "id": "learningResources",

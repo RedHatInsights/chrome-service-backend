@@ -74,7 +74,7 @@
     }, {
       "id": "learningResources",
       "title": "Learning resources",
-      "appId": "edge",
+      "appId": "learningResources",
       "filterable": false,
       "href": "/edge/learning-resources",
       "permissions": [

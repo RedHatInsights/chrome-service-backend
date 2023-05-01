@@ -11,7 +11,7 @@
     },
     {
       "id": "learningResources",
-      "appId": "applicationServices",
+      "appId": "learningResources",
       "title": "Learning Resources",
       "href": "/application-services/learning-resources"
     },

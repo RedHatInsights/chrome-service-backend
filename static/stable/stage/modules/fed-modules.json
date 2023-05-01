@@ -887,50 +887,50 @@
           {
               "id": "learningResources",
               "module": "./RootApp",
-            "routes": [
-                {
-                    "pathname": "/application-services/learning-resources",
-                    "props": {
-                        "bundle": "application-services"
-                    }
-                },
-                {
-                    "pathname": "/openshift/learning-resources",
-                    "props": {
-                        "bundle": "openshift"
-                    }
-                },
-                {
-                    "pathname": "/ansible/learning-resources",
-                    "props": {
-                        "bundle": "ansible"
-                    }
-                },
-                {
-                    "pathname": "/insights/learning-resources",
-                    "props": {
-                        "bundle": "insights"
-                    }
-                },
-                {
-                    "pathname": "/edge/learning-resources",
-                    "props": {
-                        "bundle": "edge"
-                    }
-                },
-                {
-                    "pathname": "/settings/learning-resources",
-                    "props": {
-                        "bundle": "settings"
-                    }
-                },
-                {
-                    "pathname": "/iam/learning-resources",
-                    "props": {
-                        "bundle": "iam"
-                    }
-                }
-            ]
+              "routes": [
+                  {
+                      "pathname": "/application-services/learning-resources",
+                      "props": {
+                          "bundle": "application-services"
+                      }
+                  },
+                  {
+                      "pathname": "/openshift/learning-resources",
+                      "props": {
+                          "bundle": "openshift"
+                      }
+                  },
+                  {
+                      "pathname": "/ansible/learning-resources",
+                      "props": {
+                          "bundle": "ansible"
+                      }
+                  },
+                  {
+                      "pathname": "/insights/learning-resources",
+                      "props": {
+                          "bundle": "insights"
+                      }
+                  },
+                  {
+                      "pathname": "/edge/learning-resources",
+                      "props": {
+                          "bundle": "edge"
+                      }
+                  },
+                  {
+                      "pathname": "/settings/learning-resources",
+                      "props": {
+                          "bundle": "settings"
+                      }
+                  },
+                  {
+                      "pathname": "/iam/learning-resources",
+                      "props": {
+                          "bundle": "iam"
+                      }
+                  }
+              ]
           }
       ]
   }

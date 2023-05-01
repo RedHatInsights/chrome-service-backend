@@ -180,7 +180,13 @@
                             "appId": "costManagement",
                             "title": "IBM Cloud",
                             "href": "/openshift/cost-management/ibm",
-                            "product": "Red Hat Cost Management"
+                            "product": "Red Hat Cost Management",
+                            "permissions": [
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["cost-management.ui.ibm", true]
+                                }
+                            ]
                         },
                         {
                             "id": "microsoftAzure",

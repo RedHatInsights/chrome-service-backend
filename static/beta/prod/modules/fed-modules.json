@@ -43,10 +43,10 @@
                 "module": "./MyUserAccess",
                 "routes": [
                     {
-                        "pathname": "/settings"
+                        "pathname": "/iam"
                     },
                     {
-                        "pathname": "/settings/my-user-access"
+                        "pathname": "/iam/my-user-access"
                     }
                 ]
             },
@@ -63,9 +63,6 @@
                 "id": "iam-user-access",
                 "module": "./IamUserAccess",
                 "routes": [
-                    {
-                        "pathname": "/iam"
-                    },
                     {
                         "pathname": "/iam/user-access"
                     }

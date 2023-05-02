@@ -3,6 +3,12 @@
   "title": "Identity & Access Management",
   "navItems": [
     {
+      "appId": "rbac",
+      "title": "My User Access",
+      "href": "/iam/my-user-access",
+      "description": "View your account permissions for Red Hat Hybrid Cloud Console services."
+    },
+    {
       "title": "User Access",
       "expandable": true,
       "filterable": false,

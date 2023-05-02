@@ -3,6 +3,7 @@
   "title": "Identity & Access Management",
   "navItems": [
     {
+      "id": "my-user-access",
       "appId": "rbac",
       "title": "My User Access",
       "href": "/iam/my-user-access",

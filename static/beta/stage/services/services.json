@@ -44,7 +44,7 @@
         "href": "/openshift/releases",
         "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
       },
-      "containers.quayOrganizations"
+      "containers.quay"
     ]
   },
   {

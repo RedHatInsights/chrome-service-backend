@@ -6,7 +6,6 @@
       "id": "quay",
       "appId": "quay-ui-plugin",
       "title": "Quay",
-      "href": "/containers/quay",
       "description": "Quay builds, analyzes, distributes your container images.",
       "expandable": true,
       "permissions": [

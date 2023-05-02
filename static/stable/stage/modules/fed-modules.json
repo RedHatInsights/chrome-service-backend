@@ -123,6 +123,9 @@
               "module": "./RootApp",
               "routes": [
                   {
+                      "pathname": "/settings"
+                  },
+                  {
                       "pathname": "/settings/sources"
                   }
               ]

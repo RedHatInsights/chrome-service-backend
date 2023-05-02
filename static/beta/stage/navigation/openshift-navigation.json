@@ -184,7 +184,7 @@
                             "permissions": [
                                 {
                                     "method": "featureFlag",
-                                    "args": ["cost-management.ui.ibm", true]
+                                    "args": ["cost-management.ui.nav.ibm", true]
                                 }
                             ]
                         },
@@ -225,7 +225,7 @@
                             "permissions": [
                                 {
                                     "method": "featureFlag",
-                                    "args": ["cost-management.ui.settings", true]
+                                    "args": ["cost-management.ui.nav.settings", true]
                                 }
                             ]
                         }

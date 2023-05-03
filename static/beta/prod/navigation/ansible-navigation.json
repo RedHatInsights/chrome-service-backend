@@ -198,7 +198,8 @@
             "id": "remediations",
             "title": "Remediations",
             "href": "/ansible/remediations",
-            "product": "Red Hat Insights"
+            "product": "Red Hat Insights",
+            "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
         },
         {
             "appId": "tasks",

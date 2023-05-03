@@ -37,7 +37,7 @@
           ]
         },
         {
-          "id": "images",
+          "id": "imageBuilder",
           "appId": "imageBuilder",
           "title": "Images",
           "href": "/insights/image-builder",
@@ -73,10 +73,12 @@
       "expandable": true,
       "routes": [
         {
+          "id": "advisories",
           "appId": "patch",
           "title": "Advisories",
           "href": "/insights/patch/advisories",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
         },
         {
           "appId": "patch",
@@ -127,7 +129,7 @@
               "description": "View details about your Red Hat Enterprise Linux systems."
             },
             {
-              "id": "systems",
+              "id": "advisorSystems",
               "appId": "advisor",
               "title": "Systems",
               "href": "/insights/advisor/systems",
@@ -205,7 +207,7 @@
           "expandable": true,
           "routes": [
             {
-              "id": "compliance",
+              "id": "complianceReports",
               "appId": "compliance",
               "title": "Reports",
               "href": "/insights/compliance/reports",
@@ -233,7 +235,7 @@
           "expandable": true,
           "routes": [
             {
-              "id": "malware",
+              "id": "signatures",
               "appId": "malware",
               "title": "Signatures",
               "href": "/insights/malware/signatures",
@@ -281,7 +283,7 @@
               "product": "Subscription Watch"
             },
             {
-              "id": "subscriptionInventory",
+              "id": "subscriptionsInventory",
               "appId": "subscriptionInventory",
               "title": "Subscription Inventory",
               "href": "/insights/subscriptions/inventory",
@@ -337,11 +339,13 @@
       ]
     },
     {
+      "id": "registerSystems",
       "appId": "registration",
       "title": "Register Systems",
       "filterable": false,
       "href": "/insights/registration",
-      "product": "Red Hat Insights"
+      "product": "Red Hat Insights",
+      "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
     },
     {
       "title": "Product Materials",

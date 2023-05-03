@@ -40,7 +40,8 @@
                 "appId": "advisor",
                 "title": "Systems",
                 "href": "/insights/advisor/systems",
-                "product": "Red Hat Insights"
+                "product": "Red Hat Insights",
+                "description": "View details about your Red Hat Enterprise Linux systems."
               },
               {
                 "id": "topics",
@@ -91,7 +92,7 @@
             "expandable": true,
             "routes": [
               {
-                "id": "cves",
+                "id": "vulnerability",
                 "appId": "vulnerability",
                 "title": "CVEs",
                 "href": "/insights/vulnerability/cves",
@@ -185,7 +186,7 @@
             ]
           },
           {
-            "id": "resourceOptimization",
+            "id": "ros",
             "appId": "ros",
             "title": "Resource Optimization",
             "href": "/insights/ros",
@@ -252,7 +253,7 @@
           {
             "id": "imageBuilder",
             "appId": "imageBuilder",
-            "title": "Image builder",
+            "title": "Images",
             "href": "/insights/image-builder",
             "product": "Red Hat Insights",
             "description": "Build and manage Red Hat Enterprise Linux images and environments."

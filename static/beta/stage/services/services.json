@@ -27,6 +27,7 @@
   },
   {
     "id": "containers",
+    "icon": "CubeIcon",
     "title": "Containers",
     "links": [
       {
@@ -65,7 +66,8 @@
     "links": [
       "edge.groups",
       "rhel.imageBuilder",
-      "settings.repositories"
+      "settings.repositories",
+      "containers.quay"
     ]
   },
   {
@@ -199,6 +201,13 @@
           "rhel.signatures",
           "rhel.remediations",
           "rhel.cves"
+        ]
+      },
+      {
+        "isGroup": true,
+        "title": "Containers",
+        "links": [
+          "containers.quay"      
         ]
       }
     ]

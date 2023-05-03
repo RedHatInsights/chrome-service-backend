@@ -42,13 +42,6 @@
       "icon": "database",
       "navItems": [
         {
-          "id": "databaseAccess",
-          "appId": "dbaas",
-          "title": "Database Access",
-          "href": "/application-services/databases",
-          "description": "Provision, monitor, and connect to cloud-hosted partner database services."
-        },
-        {
           "id": "dataScience",
           "appId": "applicationServices",
           "title": "Data Science",

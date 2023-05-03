@@ -59,6 +59,28 @@ type LinkEntry struct {
 	Description string `json:"description"`
 }
 
+func findFirstValidChildLink(routes []interface{}) LinkEntry {
+	result := LinkEntry{}
+	for _, r := range routes {
+		route, ok := r.(map[string]interface{})
+		nestedRoutes, nestedOk := route["routes"].([]interface{})
+		href, hrefOk := route["href"].(string)
+		if hrefOk {
+			result.Href = href
+		} else if ok && route["expandable"] == true && nestedOk {
+			// deeply nested item
+			result = findFirstValidChildLink(nestedRoutes)
+		}
+
+		// exit if result was found
+		if len(result.Href) > 0 {
+			break
+		}
+	}
+
+	return result
+}
+
 func flattenLinks(data interface{}) ([]LinkEntry, error) {
 	flatData := []LinkEntry{}
 
@@ -83,9 +105,22 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 		return flatData, nil
 	}
 
-	// this is an expandable nav item
-	routes, ok := topLevel["routes"].([]interface{})
-	if topLevel["expandable"] == true && ok {
+	routes, routesOk := topLevel["routes"].([]interface{})
+	id, idOk := topLevel["id"].(string)
+	// expandable item is a valid indexable item
+	if topLevel["expandable"] == true && routesOk && idOk {
+		// need to find a firs valid child route
+		link := findFirstValidChildLink(routes)
+		link.Id = id
+		link.Title = topLevel["title"].(string)
+		description, ok := topLevel["description"].(string)
+		if ok {
+			link.Description = description
+		}
+		flatData = append(flatData, link)
+	}
+
+	if topLevel["expandable"] == true && routesOk {
 		for _, r := range routes {
 			i, ok := r.(map[string]interface{})
 			if ok {
@@ -234,6 +269,7 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 		"allservices":          "Home",
 		"iam":                  "Identity & Access Management",
 		"internal":             "Internal",
+		"containers":           "Containers",
 	}
 	var flatLinks []ModuleIndexEntry
 	for _, s := range indexBase {

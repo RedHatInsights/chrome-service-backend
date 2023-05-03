@@ -141,7 +141,7 @@
         "isGroup": true,
         "title": "RHEL",
         "links": [
-          "rhel.systems",
+          "rhel.recommendations",
           "rhel.images",
           "rhel.vulnerability",
           "rhel.compliance",

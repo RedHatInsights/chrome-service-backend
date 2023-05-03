@@ -42,13 +42,6 @@
       "icon": "database",
       "navItems": [
         {
-          "id": "databaseAccess",
-          "appId": "dbaas",
-          "title": "Database Access",
-          "href": "/application-services/databases",
-          "description": "Provision, monitor, and connect to cloud-hosted partner database services."
-        },
-        {
           "id": "dataScience",
           "appId": "applicationServices",
           "title": "Data Science",
@@ -92,12 +85,6 @@
           "title": "Subscriptions",
           "expandable": true,
           "routes": [
-            {
-              "id": "streamdForApacheKafka",
-              "appId": "subscriptions",
-              "title": "Streams for Apache Kafka",
-              "href": "/application-services/subscriptions/streams"
-            },
             {
               "id": "openshiftDataScience",
               "appId": "subscriptions",

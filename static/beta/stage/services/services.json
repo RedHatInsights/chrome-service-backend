@@ -50,7 +50,6 @@
     "title": "Data Services",
     "description": "Create, manage, and migrate relational and non-relational databases.",
     "links": [
-      "application-services.databaseAccess",
       "application-services.dataScience"
     ]
   },

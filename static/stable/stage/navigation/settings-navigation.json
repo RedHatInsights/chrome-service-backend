@@ -3,49 +3,6 @@
     "title": "Settings",
     "navItems": [
         {
-            "id": "rbac",
-            "appId": "rbac",
-            "title": "My User Access",
-            "href": "/settings/my-user-access"
-        },
-        {
-            "title": "User Access",
-            "expandable": true,
-            "permissions": [
-                {
-                    "method": "isEntitled"
-                }
-            ],
-            "routes": [
-                {
-                    "id": "users",
-                    "appId": "rbac",
-                    "title": "Users",
-                    "href": "/settings/rbac/users",
-                    "description": "Manage your organization's role-based access control (RBAC) to services."
-                },
-                {
-                    "id": "roles",
-                    "appId": "rbac",
-                    "title": "Roles",
-                    "href": "/settings/rbac/roles"
-                },
-                {
-                    "id": "groups",
-                    "appId": "rbac",
-                    "title": "Groups",
-                    "href": "/settings/rbac/groups"
-                },
-                {
-                    "id": "accessRequests",
-                    "appId": "accessRequests",
-                    "title": "Red Hat Access Requests",
-                    "href": "/settings/rbac/access-requests",
-                    "notifier": "chrome.accessRequests.hasUnseen"
-                }
-            ]
-        },
-        {
             "id": "sources",
             "appId": "sources",
             "title": "Sources",

@@ -5,12 +5,8 @@
     "icon": "CloudUploadAltIcon",
     "title": "Application services",
     "links": [
-      "application-services.apiDesigner",
       "application-services.apiManagement",
-      "application-services.connectorsInstances",
-      "application-services.serviceAccounts",
-      "application-services.serviceRegistryInstances",
-      "application-services.kafkaInstances"
+      "application-services.serviceAccounts"
     ]
   },
   {

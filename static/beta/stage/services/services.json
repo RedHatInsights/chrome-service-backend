@@ -27,6 +27,7 @@
   },
   {
     "id": "containers",
+    "icon": "CubeIcon",
     "title": "Containers",
     "links": [
       {

@@ -151,13 +151,29 @@
           "appId": "acs",
           "title": "ACS Instances",
           "isBeta": true,
-          "href": "/application-services/acs/instances"
+          "href": "/application-services/acs/instances",
+          "permissions": [
+            {
+              "method": "isEntitled",
+              "args": [
+                "acs"
+              ]
+            }
+          ]
         },
         {
           "id": "clustersDocumentation",
           "title": "Documentation",
           "isExternal": true,
-          "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
+          "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes",
+          "permissions": [
+            {
+              "method": "isEntitled",
+              "args": [
+                "acs"
+              ]
+            }
+          ]
         }
       ]
     },

@@ -135,6 +135,55 @@
       ]
     },
     {
+      "title": "Advanced Cluster Security",
+      "expandable": true,
+      "permissions": [
+        {
+            "method": "featureFlag",
+            "args": ["acs.prod.release", true]
+        }
+      ],
+      "routes": [
+        {
+          "id": "clusterOverview",
+          "appId": "acs",
+          "title": "Overview",
+          "isBeta": true,
+          "href": "/application-services/acs/overview",
+          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
+        },
+        {
+          "id": "acsInstances",
+          "appId": "acs",
+          "title": "ACS Instances",
+          "isBeta": true,
+          "href": "/application-services/acs/instances",
+          "permissions": [
+            {
+              "method": "isEntitled",
+              "args": [
+                "acs"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "clustersDocumentation",
+          "title": "Documentation",
+          "isExternal": true,
+          "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes",
+          "permissions": [
+            {
+              "method": "isEntitled",
+              "args": [
+                "acs"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "groupId": "insights",
       "icon": "trend-up",
       "title": "Red Hat Insights",

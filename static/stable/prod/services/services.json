@@ -163,19 +163,19 @@
     "description": "Meet your policy and compliance objectives.",
     "links": [
       {
-        "id": "ansibleSecurity",
-        "isGroup": true,
-        "title": "Ansible",
-        "links": [
-          "ansible.remediations"
-        ]
-      },
-      {
         "id": "acsSecurity",
         "isGroup": true,
         "title": "Advanced Cluster Security",
         "links": [
           "application-services.clusterOverview"          
+        ]
+      },
+      {
+        "id": "ansibleSecurity",
+        "isGroup": true,
+        "title": "Ansible",
+        "links": [
+          "ansible.remediations"
         ]
       },
       {

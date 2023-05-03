@@ -26,7 +26,19 @@
           "id": "quayOrganizations",
           "appId": "quay-ui-plugin",
           "title": "Organizations",
-          "href": "/containers/quay/organization"
+          "href": "/containers/quay/organization",
+          "permissions": [
+            {
+              "method": "apiRequest",
+              "args": [
+                {
+                  "url": "/beta/apps/quay/plugin-manifest.json",
+                  "matcher": "isNotEmpty",
+                  "accessor": "version"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "quayRepositories",

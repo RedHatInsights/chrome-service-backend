@@ -8,7 +8,7 @@
             "href": "/openshift",
             "title": "Clusters",
             "product": "Red Hat OpenShift Cluster Manager",
-            "description": "View, Register, or Create a Openshift Cluster."
+            "description": "View, Register, or Create an OpenShift Cluster."
         },
         {
             "id": "overview",
@@ -17,7 +17,7 @@
             "title": "Overview",
             "filterable": false,
             "product": "Red Hat OpenShift Cluster Manager",
-            "description": "Overview of your Openshift Environment."
+            "description": "Overview of your OpenShift Environment."
         },
         {
             "id": "releases",

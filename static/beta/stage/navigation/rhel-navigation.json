@@ -19,14 +19,15 @@
     {
       "title": "Inventory",
       "expandable": true,
+      "id": "inventory",
+      "description": "View details about your Red Hat Enterprise Linux systems.",
       "routes": [
         {
-          "id": "inventory",
+          "id": "systems",
           "appId": "inventory",
           "title": "Systems",
           "href": "/insights/inventory",
-          "product": "Red Hat Insights",
-          "description": "View details about your Red Hat Enterprise Linux systems."
+          "product": "Red Hat Insights"
         },
         {
           "id": "groups",

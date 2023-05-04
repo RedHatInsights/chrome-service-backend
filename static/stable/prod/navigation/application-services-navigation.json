@@ -21,88 +21,11 @@
       "icon": "cloud",
       "navItems": [
         {
-          "title": "API Designer",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "apiDesigner",
-              "appId": "applicationServices",
-              "description": "Create, import, edit, and manage API definitions and event schemas in a visual editor.",
-              "isBeta": true,
-              "title": "API and Schema Designs",
-              "href": "/application-services/api-designer"
-            },
-            {
-              "id": "documentation",
-              "title": "Documentation",
-              "isExternal": true,
-              "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_api_designer"
-            }
-          ]
-        },
-        {
           "id": "apiManagement",
           "appId": "applicationServices",
           "title": "API Management",
           "description": "Manage API access, policy, and traffic controls for microservice-based applications.",
           "href": "/application-services/api-management"
-        },
-        {
-          "title": "Streams for Apache Kafka",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "kafkaInstances",
-              "appId": "applicationServices",
-              "title": "Kafka Instances",
-              "href": "/application-services/streams",
-              "description": "Create, discover, and connect to real-time events and data streams."
-            },
-            {
-              "id": "streamsDocumentation",
-              "title": "Documentation",
-              "isExternal": true,
-              "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka"
-            }
-          ]
-        },
-        {
-          "title": "Service Registry",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "serviceRegistryInstances",
-              "appId": "applicationServices",
-              "title": "Service Registry Instances",
-              "href": "/application-services/service-registry",
-              "description": "Discover, publish, and reuse event schemas and API definitions in a shared repository."
-            },
-            {
-              "id": "serviceRegistryDocumenation",
-              "title": "Documentation",
-              "isExternal": true,
-              "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_service_registry"
-            }
-          ]
-        },
-        {
-          "title": "Connectors",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "connectorsInstances",
-              "appId": "applicationServices",
-              "title": "Connectors Instances",
-              "description": "Send data between event streams and third-party systems with pre-built integrations.",
-              "href": "/application-services/connectors"
-            },
-            {
-              "id": "connectorsDocumentation",
-              "title": "Documentation",
-              "isExternal": true,
-              "href": "https://access.redhat.com/documentation/en-us/red_hat_openshift_connectors"
-            }
-          ]
         },
         {
           "id": "serviceAccounts",
@@ -118,13 +41,6 @@
       "title": "Data Services",
       "icon": "database",
       "navItems": [
-        {
-          "id": "databaseAccess",
-          "appId": "dbaas",
-          "title": "Database Access",
-          "href": "/application-services/databases",
-          "description": "Provision, monitor, and connect to cloud-hosted partner database services."
-        },
         {
           "id": "dataScience",
           "appId": "applicationServices",
@@ -192,12 +108,6 @@
           "title": "Subscriptions",
           "expandable": true,
           "routes": [
-            {
-              "id": "streamdForApacheKafka",
-              "appId": "subscriptions",
-              "title": "Streams for Apache Kafka",
-              "href": "/application-services/subscriptions/streams"
-            },
             {
               "id": "openshiftDataScience",
               "appId": "subscriptions",

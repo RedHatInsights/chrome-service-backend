@@ -7,13 +7,14 @@
         "title": "Hybrid Committed Spend",
         "expandable": true,
         "filterable": false,
+        "id": "hybridCommittedSpend",
+        "description": "Compare the difference between the commitment and actual Red Hat spending.",
         "routes": [
           {
             "id": "overview",
             "appId": "hybridCommittedSpend",
             "title": "Overview",
             "href": "/business-services/hybrid-committed-spend",
-            "description": "Compare the difference between the commitment and actual Red Hat spending.",
             "permissions": [
               {
                 "method": "apiRequest",

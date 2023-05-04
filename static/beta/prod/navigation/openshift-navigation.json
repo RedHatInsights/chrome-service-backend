@@ -134,6 +134,8 @@
                     "title": "Cost Management",
                     "expandable": true,
                     "filterable": true,
+                    "description": "Understand and track costs for your OpenShift clusters and workloads.",
+                    "id": "costManagement",
                     "routes": [
                         {
                             "id": "costManagementOverview",
@@ -141,8 +143,7 @@
                             "title": "Overview",
                             "filterable": false,
                             "href": "/openshift/cost-management",
-                            "product": "Red Hat Cost Management",
-                            "description": "Understand and track costs for your OpenShift clusters and workloads."
+                            "product": "Red Hat Cost Management"
                         },
                         {
                             "id": "costManagementOptimizations",

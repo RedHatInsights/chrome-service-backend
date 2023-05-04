@@ -214,7 +214,7 @@
     "title": "Spend Management",
     "description": "Control costs and monitor committed spend.",
     "links": [
-      "openshift.costManagementOverview",
+      "openshift.costManagement",
       "rhel.subscriptionsInventory",
       "rhel.resourceOptimization"
     ]

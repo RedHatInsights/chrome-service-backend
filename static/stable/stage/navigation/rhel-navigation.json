@@ -3,9 +3,9 @@
     "title": "Red Hat Insights",
     "navItems": [
       {
-        "id": "overview",
+        "id": "dashboard",
         "appId": "dashboard",
-        "title": "Overview",
+        "title": "Dashboard",
         "filterable": false,
         "href": "/insights/dashboard",
         "product": "Red Hat Insights"
@@ -24,7 +24,7 @@
           {
             "id": "inventory",
             "appId": "inventory",
-            "title": "Inventory",
+            "title": "Systems",
             "href": "/insights/inventory",
             "product": "Red Hat Insights",
             "description": "View details about your Red Hat Enterprise Linux systems."

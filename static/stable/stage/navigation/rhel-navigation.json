@@ -11,6 +11,12 @@
         "product": "Red Hat Insights"
       },
       {
+        "id": "learningResources",
+        "appId": "learningResources",
+        "title": "Learning Resources",
+        "href": "/insights/learning-resources"
+      },
+      {
         "groupId": "business",
         "icon": "trend-up",
         "title": "Red Hat Insights",

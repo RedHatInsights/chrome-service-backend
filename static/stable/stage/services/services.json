@@ -141,7 +141,7 @@
         "isGroup": true,
         "title": "RHEL",
         "links": [
-          "rhel.advisorSystems",
+          "rhel.recommendations",
           "rhel.imageBuilder",
           "rhel.vulnerability",
           "rhel.complianceReports",
@@ -202,7 +202,7 @@
         "isGroup": true,
         "title": "Containers",
         "links": [
-          "quay.quay"
+          "quay.quay"      
         ]
       }
     ]

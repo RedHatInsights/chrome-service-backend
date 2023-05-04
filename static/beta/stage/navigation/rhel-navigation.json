@@ -11,12 +11,6 @@
       "product": "Red Hat Insights"
     },
     {
-      "id": "learningResources",
-      "appId": "learningResources",
-      "title": "Learning Resources",
-      "href": "/insights/learning-resources"
-    },
-    {
       "title": "Inventory",
       "expandable": true,
       "id": "inventory",
@@ -346,6 +340,12 @@
       "href": "/insights/registration",
       "product": "Red Hat Insights",
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
+    },
+    {
+      "id": "learningResources",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/insights/learning-resources"
     },
     {
       "title": "Product Materials",

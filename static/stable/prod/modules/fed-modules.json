@@ -14,7 +14,7 @@
                 ]
             }
         ]
-    },z
+    },
     "userPreferences": {
         "manifestLocation": "/apps/user-preferences/fed-mods.json",
         "defaultDocumentTitle": "User Preferences | User Preferences",

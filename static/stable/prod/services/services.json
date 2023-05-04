@@ -45,7 +45,7 @@
         "href": "/openshift/releases",
         "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
       },
-      "containers.quay"
+      "quay.quay"
     ]
   },
   {
@@ -67,7 +67,7 @@
       "edge.groups",
       "rhel.imageBuilder",
       "settings.repositories",
-      "containers.quay"
+      "quay.quay"
     ]
   },
   {
@@ -203,7 +203,7 @@
         "isGroup": true,
         "title": "Containers",
         "links": [
-          "containers.quay"
+          "quay.quay"
         ]
       }
     ]

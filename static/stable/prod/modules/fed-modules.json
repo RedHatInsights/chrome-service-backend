@@ -14,7 +14,7 @@
                 ]
             }
         ]
-    },
+    },z
     "userPreferences": {
         "manifestLocation": "/apps/user-preferences/fed-mods.json",
         "defaultDocumentTitle": "User Preferences | User Preferences",
@@ -653,6 +653,9 @@
                 "id": "dbaas",
                 "module": "./RootApp",
                 "routes": [
+                    {
+                        "pathname": "/application-services/trusted-content"
+                    },
                     {
                         "pathname": "/application-services/databases"
                     }

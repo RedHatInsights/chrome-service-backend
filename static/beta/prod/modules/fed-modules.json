@@ -708,6 +708,9 @@
                 "module": "./RootApp",
                 "routes": [
                     {
+                        "pathname": "/application-services/trusted-content"
+                    },
+                    {
                         "pathname": "/application-services/databases"
                     }
                 ]

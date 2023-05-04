@@ -143,11 +143,15 @@
         "title": "RHEL",
         "links": [
           "rhel.recommendations",
-          "rhel.advisories",
-          "rhel.comparision",
-          "rhel.policies",
-          "rhel.remediations",
-          "rhel.resourceOptimization"
+          "rhel.imageBuilder",
+          "rhel.vulnerability",
+          "rhel.complianceReports",
+          "rhel.signatures",
+          "rhel.activationKeys",
+          "rhel.rhc",
+          "rhel.subscriptionsInventory",
+          "rhel.manifests",
+          "rhel.ros"
         ]
       }
     ]
@@ -192,7 +196,7 @@
           "edge.groups",
           "rhel.signatures",
           "rhel.remediations",
-          "rhel.cves"
+          "rhel.vulnerability"
         ]
       },
       {

@@ -5,7 +5,7 @@
     {
       "id": "overview",
       "appId": "dashboard",
-      "title": "Overview",
+      "title": "Dashboard",
       "filterable": false,
       "href": "/insights/dashboard",
       "product": "Red Hat Insights"

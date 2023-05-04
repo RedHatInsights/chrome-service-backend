@@ -1,0 +1,9 @@
+[
+  {
+    "id": "quay",
+    "links": [
+      "quay.quayOrganizations",
+      "quay.quayRepositories"
+    ]
+  }
+]

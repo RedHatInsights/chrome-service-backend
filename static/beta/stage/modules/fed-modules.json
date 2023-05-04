@@ -986,10 +986,7 @@
                 "module": "QuayPluginMain",
                 "routes": [
                     {
-                        "pathname": "/containers"
-                    },
-                    {
-                        "pathname": "/containers/quay"
+                        "pathname": "/quay"
                     }
                 ]
             }

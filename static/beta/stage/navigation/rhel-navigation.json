@@ -14,7 +14,13 @@
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",
-      "href": "/insights/learning-resources"
+      "href": "/insights/learning-resources",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["rhel-insights.ui.nav.learning_resources", true]
+        }
+      ]
     },
     {
       "title": "Inventory",

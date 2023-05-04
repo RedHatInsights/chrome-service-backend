@@ -270,6 +270,7 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 		"iam":                  "Identity & Access Management",
 		"internal":             "Internal",
 		"containers":           "Containers",
+		"quay":                 "Quay.io",
 	}
 	var flatLinks []ModuleIndexEntry
 	for _, s := range indexBase {
@@ -302,8 +303,14 @@ func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
 		return []ModuleIndexEntry{}, err
 	}
 
+	// get static service template only for search index
+	staticContent, err := ioutil.ReadFile("cmd/search/static-services-entries.json")
+	if err != nil {
+		return []ModuleIndexEntry{}, err
+	}
+
 	// get all environment navigation files paths request to fill in template file
-	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/stable/%s/navigation/*-navigation.json", env))
+	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/stable/%s/navigation/quay-navigation.json", env))
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
@@ -334,18 +341,17 @@ func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
 			}
 			flatLinks = append(flatLinks, flatData...)
 		}
-
-		var data []map[string]interface{}
-		err = json.Unmarshal(stageContent, &data)
-		if err != nil {
-			return []ModuleIndexEntry{}, err
-		}
 	}
 	indexBase, err := injectLinks(stageContent, flatLinks)
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
-	envIdex, err := flattenIndexBase(indexBase, env)
+
+	staticBase, err := injectLinks(staticContent, flatLinks)
+	if err != nil {
+		return []ModuleIndexEntry{}, err
+	}
+	envIdex, err := flattenIndexBase(append(indexBase, staticBase...), env)
 
 	if err != nil {
 		return []ModuleIndexEntry{}, err

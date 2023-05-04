@@ -42,6 +42,13 @@
       "icon": "database",
       "navItems": [
         {
+          "id": "trustedContent",
+          "appId": "applicationServices",
+          "title": "Trusted Content",
+          "href": "/application-services/trusted-content",
+          "description": "Increase trust and integrity in source code and accelerate the application development process."
+        },
+        {
           "id": "dataScience",
           "appId": "applicationServices",
           "title": "Data Science",

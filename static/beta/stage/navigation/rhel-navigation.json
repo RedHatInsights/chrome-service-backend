@@ -342,6 +342,12 @@
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
     },
     {
+      "id": "learningResources",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/insights/learning-resources"
+    },
+    {
       "title": "Product Materials",
       "expandable": true,
       "routes": [

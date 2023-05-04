@@ -11,12 +11,6 @@
       "product": "Red Hat Insights"
     },
     {
-      "id": "learningResources",
-      "appId": "learningResources",
-      "title": "Learning Resources",
-      "href": "/insights/learning-resources"
-    },
-    {
       "title": "Inventory",
       "expandable": true,
       "id": "inventory",

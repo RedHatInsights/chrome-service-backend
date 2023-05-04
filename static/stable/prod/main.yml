@@ -180,6 +180,7 @@ patch:
   title: Patch
   api:
     versions:
+      - v3
       - v2
       - v1
 

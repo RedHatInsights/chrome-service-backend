@@ -44,12 +44,6 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/application-services/learning-resources",
-                        "props": {
-                            "bundle": "application-services"
-                        }
-                    },
-                    {
                         "pathname": "/openshift/learning-resources",
                         "props": {
                             "bundle": "openshift"

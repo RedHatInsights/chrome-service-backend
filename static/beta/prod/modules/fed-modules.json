@@ -615,6 +615,11 @@
     },
     "hacCore": {
         "manifestLocation": "/apps/hac-core/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+               "profile_level.name_and_dev_terms" 
+            ]
+          },
         "modules": [
             {
                 "id": "hacCore",

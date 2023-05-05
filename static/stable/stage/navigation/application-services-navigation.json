@@ -69,10 +69,15 @@
           "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
         },
         {
+          "id": "acsGettingStarted",
+          "appId": "acs",
+          "title": "Getting Started",
+          "href": "/application-services/acs/getting-started"
+        },
+        {
           "id": "acsInstances",
           "appId": "acs",
           "title": "ACS Instances",
-          "isBeta": true,
           "href": "/application-services/acs/instances"
         },
         {

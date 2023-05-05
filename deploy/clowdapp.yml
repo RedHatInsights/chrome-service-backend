@@ -8,8 +8,6 @@ objects:
     kind: ClowdApp
     metadata: 
       name: chrome-service
-      annotations:
-        ${LINT_ANNOTATION}: "minimum three replicas not required"
     spec:
       envName: ${ENV_NAME}
       database:
@@ -112,7 +110,7 @@ parameters:
   name: MEMORY_LIMIT
   value: 512Mi
 - name: MIN_REPLICAS
-  value: '1'
+  value: '3'
 - description: Image tag
   name: IMAGE_TAG
   required: true

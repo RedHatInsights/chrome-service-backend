@@ -19,7 +19,7 @@ objects:
         topicName: platform.chrome
       deployments:
       - name: api
-        minRecplicas: ${{MIN_REPLICAS}}
+        minReplicas: ${{MIN_REPLICAS}}
         webServices:
             public:
               apiPath: chrome-service

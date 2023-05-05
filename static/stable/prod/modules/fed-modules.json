@@ -748,5 +748,19 @@
                 ]
             }
         ]
+    },
+    "quay-ui-plugin": {
+        "manifestLocation": "/apps/quay/plugin-manifest.json",
+        "modules": [
+            {
+                "id": "quay",
+                "module": "QuayPluginMain",
+                "routes": [
+                    {
+                        "pathname": "/quay"
+                    }
+                ]
+            }
+        ]
     }
 }

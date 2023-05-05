@@ -128,6 +128,13 @@
             "href": "https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/"
         },
         {
+            "id": "seatsAdministrators",
+            "appId": "ansibleSeatsAdmin",
+            "title": "Seats Administration",
+            "filterable": false,
+            "href": "/ansible/seats-administration"
+        },
+        {
             "groupId": "operations",
             "icon": "trend-up",
             "title": "Red Hat Insights",

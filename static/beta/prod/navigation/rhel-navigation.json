@@ -290,6 +290,12 @@
         ]
       },
       {
+        "id": "learningResources",
+        "appId": "learningResources",
+        "title": "Learning Resources",
+        "href": "/insights/learning-resources"
+      },
+      {
         "title": "Product Materials",
         "expandable": true,
         "routes": [

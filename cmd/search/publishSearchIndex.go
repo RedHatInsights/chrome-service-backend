@@ -123,10 +123,12 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 	if topLevel["expandable"] == true && routesOk {
 		for _, r := range routes {
 			i, ok := r.(map[string]interface{})
-			if ok {
+			id, idOk := i["id"].(string)
+			_, nestedRoutesOk := i["routes"].([]interface{})
+			if ok && idOk {
 				// all of these are required and type assertion can't fail
 				link := LinkEntry{
-					Id:    i["id"].(string),
+					Id:    id,
 					Title: i["title"].(string),
 					Href:  i["href"].(string),
 				}
@@ -137,6 +139,14 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 					link.Description = description
 				}
 				flatData = append(flatData, link)
+			} else if nestedRoutesOk {
+				nestedItems, err := flattenLinks(r)
+				if err != nil {
+					return []LinkEntry{}, err
+				}
+				flatData = append(flatData, nestedItems...)
+			} else {
+				fmt.Printf("[WARN] Unable to convert link id %v to string. %v\n", id, i)
 			}
 		}
 		return flatData, nil
@@ -310,7 +320,7 @@ func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
 	}
 
 	// get all environment navigation files paths request to fill in template file
-	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/stable/%s/navigation/quay-navigation.json", env))
+	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/stable/%s/navigation/*-navigation.json", env))
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
@@ -426,7 +436,14 @@ func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
+	client := &http.Client{
+		Transport: &http.Transport{
+			Proxy: http.ProxyURL(&url.URL{
+				Scheme: "http",
+				Host:   "squid.corp.redhat.com:3128",
+			}),
+		},
+	}
 
 	res, err := client.Do(req)
 	if err != nil {

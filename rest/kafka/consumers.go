@@ -78,7 +78,7 @@ func createReader(topic string) *kafka.Reader {
 	return r
 }
 
-func InitializeConzumers() {
+func InitializeConsumers() {
 	config := config.Get()
 	topics := config.KafkaConfig.KafkaTopics
 	readers := make(map[string]*kafka.Reader)

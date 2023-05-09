@@ -1,7 +1,9 @@
 package routes
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 
@@ -23,6 +25,10 @@ func MakeWsRoute(sub chi.Router) {
 	sub.Get("/", HandleWsConnection)
 }
 
+func BroadcastMessage(sub chi.Router) {
+	sub.Post("/", EmitMessage)
+}
+
 func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	clientId := fmt.Sprint(rand.Int())
 	ws, err := upgrader.Upgrade(w, r, nil)
@@ -40,4 +46,42 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	connectionhub.ConnectionHub.Register <- client
 	go client.WritePump()
 	client.ReadPump()
+}
+
+func EmitMessage(w http.ResponseWriter, r *http.Request) {
+	var p connectionhub.WsMessage
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(&p)
+	if err != nil {
+		log.Println(err)
+		payload := make(map[string]string)
+		payload["msg"] = "Unable to decode payload!"
+		response, _ := json.Marshal(payload)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
+	data, err := json.Marshal(&p.Payload)
+	if err != nil {
+		log.Println(err)
+		payload := make(map[string]string)
+		payload["msg"] = "Unable to decode payload!"
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	fmt.Println("p", p)
+	newMessage := connectionhub.Message{
+		Destinations: connectionhub.MessageDestinations{
+			Users:         p.Users,
+			Roles:         p.Roles,
+			Organizations: p.Organizations,
+		},
+		Broadcast: true,
+		Data:      data,
+	}
+	connectionhub.ConnectionHub.Broadcast <- newMessage
+	w.WriteHeader(http.StatusOK)
 }

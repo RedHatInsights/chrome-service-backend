@@ -9,6 +9,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
 	"github.com/go-chi/chi/v5"
@@ -44,6 +45,7 @@ func main() {
 		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
 		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
+		subrouter.Route("/emit-message", routes.BroadcastMessage)
 	})
 
 	router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
@@ -76,4 +78,5 @@ func HealthProbe(response http.ResponseWriter, request *http.Request) {
 func initDependencies() {
 	config.Init()
 	database.Init()
+	kafka.InitializeConsumers()
 }

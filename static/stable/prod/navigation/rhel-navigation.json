@@ -300,6 +300,13 @@
               "product": "Subscription Watch"
             },
             {
+              "id": "satellite",
+              "appId": "subscriptions",
+              "title": "Satellite",
+              "href": "/insights/subscriptions/satellite",
+              "product": "Subscription Watch"
+            },
+            {
               "id": "subscriptions",
               "appId": "subscriptions",
               "title": "OpenShift Subscriptions",

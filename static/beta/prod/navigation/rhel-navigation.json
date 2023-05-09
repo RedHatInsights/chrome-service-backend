@@ -60,7 +60,7 @@
             {
               "id": "activationKeys",
               "appId": "connector",
-              "title": "Activation Keys",
+              "title": "Activation keys",
               "href": "/settings/connector/activation-keys",
               "product": "Red Hat Insights",
               "description": "Create activation keys to register your systems and configure repositories without using a username and password."
@@ -267,6 +267,13 @@
               "appId": "subscriptions",
               "title": "RHEL",
               "href": "/insights/subscriptions/rhel",
+              "product": "Subscription Watch"
+            },
+            {
+              "id": "satellite",
+              "appId": "subscriptions",
+              "title": "Satellite",
+              "href": "/insights/subscriptions/satellite",
               "product": "Subscription Watch"
             },
             {

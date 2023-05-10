@@ -1,6 +1,6 @@
 {
   "id": "hac",
-  "title": "CI/CD",
+  "title": "Trusted Application Pipeline",
   "navItems": [
       {
         "id": "demoPlugin",

@@ -16,6 +16,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/joho/godotenv"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -23,6 +24,7 @@ func main() {
 	flag.Parse()
 	initDependencies()
 	cfg := config.Get()
+	setupLogger(cfg)
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
 
@@ -79,4 +81,12 @@ func initDependencies() {
 	config.Init()
 	database.Init()
 	kafka.InitializeConsumers()
+}
+
+func setupLogger(opts *config.ChromeServiceConfig) {
+	logLevel, err := logrus.ParseLevel(opts.LogLevel)
+	if err != nil {
+		logLevel = logrus.InfoLevel
+	}
+	logrus.SetLevel(logLevel)
 }

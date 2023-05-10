@@ -69,7 +69,7 @@ func createReader(topic string) *kafka.Reader {
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:     config.KafkaConfig.KafkaBrokers,
 		Topic:       topic,
-		Logger:      kafka.LoggerFunc(logrus.Infof),
+		Logger:      kafka.LoggerFunc(logrus.Debugf),
 		ErrorLogger: kafka.LoggerFunc(logrus.Errorf),
 		MinBytes:    1,    // 1B
 		MaxBytes:    10e7, // 10MB

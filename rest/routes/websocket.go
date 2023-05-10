@@ -3,7 +3,6 @@ package routes
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"math/rand"
 	"net/http"
 
@@ -53,7 +52,7 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&p)
 	if err != nil {
-		log.Println(err)
+		logrus.Errorln(err)
 		payload := make(map[string]string)
 		payload["msg"] = "Unable to decode payload!"
 		response, _ := json.Marshal(payload)
@@ -65,7 +64,7 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 	}
 	data, err := json.Marshal(&p.Payload)
 	if err != nil {
-		log.Println(err)
+		logrus.Errorln(err)
 		payload := make(map[string]string)
 		payload["msg"] = "Unable to decode payload!"
 		w.Header().Set("Content-Type", "application/json")

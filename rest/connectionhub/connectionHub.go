@@ -206,13 +206,13 @@ func (c Client) ReadPump() {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
 				logrus.Errorln("error: %v", err)
 			}
-			logrus.Errorln("Unable to read incomming WS message: ", err)
+			logrus.Errorln("Unable to read incoming WS message: ", err)
 			break
 		}
 		var messagePayload WsMessage
 		json.Unmarshal(msg, &messagePayload)
 		if err != nil {
-			logrus.Errorln("Unable to unmarshall incomming WS message: ", err)
+			logrus.Errorln("Unable to unmarshall incoming WS message: ", err)
 			break
 		}
 
@@ -238,7 +238,7 @@ func (c *Connection) write(mt int, payload []byte) error {
 	return c.Ws.WriteMessage(mt, payload)
 }
 
-// pump incomming messages to connection hub
+// pump incoming messages to connection hub
 func (c Client) WritePump() {
 	conn := c.Conn
 	ticker := time.NewTicker(pingPeriod)

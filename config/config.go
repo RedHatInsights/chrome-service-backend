@@ -40,6 +40,7 @@ type ChromeServiceConfig struct {
 	DbName          string
 	MetricsPort     int
 	Test            bool
+	LogLevel        string
 	DbSSLMode       string
 	DbSSLRootCert   string
 	KafkaConfig     KafkaCfg
@@ -68,6 +69,14 @@ var config *ChromeServiceConfig
 func Init() {
 	godotenv.Load()
 	options := &ChromeServiceConfig{}
+
+	// Log level will default to "Info". Level should be one of
+	// info or debug
+	level, ok := os.LookupEnv("LOG_LEVEL")
+	if !ok {
+		level = "info"
+	}
+	options.LogLevel = level
 
 	if clowder.IsClowderEnabled() {
 		cfg := clowder.LoadedConfig

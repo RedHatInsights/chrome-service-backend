@@ -70,7 +70,7 @@ func Init() {
 	godotenv.Load()
 	options := &ChromeServiceConfig{}
 
-	// Log level will default to "Info". Level should be one of
+	// Log level will default to "info". Level should be one of
 	// info or debug
 	level, ok := os.LookupEnv("LOG_LEVEL")
 	if !ok {

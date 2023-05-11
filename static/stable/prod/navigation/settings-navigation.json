@@ -19,12 +19,6 @@
             "expandable": true,
             "routes": [
                 {
-                    "id": "applicationServices",
-                    "appId": "notifications",
-                    "title": "Application Services",
-                    "href": "/settings/notifications/application-services"
-                },
-                {
                     "id": "openshift",
                     "appId": "notifications",
                     "title": "OpenShift",

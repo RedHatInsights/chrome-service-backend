@@ -7,36 +7,6 @@
             "appId": "userPreferences",
             "title": "Email preferences",
             "href": "/user-preferences/email"
-        },
-        {
-            "title": "Notifications",
-            "expandable": true,
-            "routes": [
-                {
-                    "id": "applicationServices",
-                    "appId": "userPreferences",
-                    "title": "Application Services",
-                    "href": "/user-preferences/notifications/application-services"
-                },
-                {
-                    "id": "openshift",
-                    "appId": "userPreferences",
-                    "title": "OpenShift",
-                    "href": "/user-preferences/notifications/openshift"
-                },
-                {
-                    "id": "redhatEnterpriseLinux",
-                    "appId": "userPreferences",
-                    "title": "Red Hat Enterprise Linux",
-                    "href": "/user-preferences/notifications/rhel"
-                },
-                {
-                    "id": "console",
-                    "appId": "userPreferences",
-                    "title": "Console",
-                    "href": "/user-preferences/notifications/console"
-                }
-            ]
         }
     ]
 }

@@ -101,7 +101,7 @@
   },
   {
     "id": "inventories",
-    "icon": "InfrastructureIcon",
+    "icon": "BoxesIcon",
     "title": "Inventories",
     "description": "View OpenShift clusters, Edge systems, RHEL hosts, and your organization's subscriptions.",
     "links": [

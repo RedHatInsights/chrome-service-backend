@@ -71,7 +71,6 @@ cost-management:
   api:
     versions:
       - v1
-    isBeta: true
 
 drift:
   title: Drift

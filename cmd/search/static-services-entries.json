@@ -5,5 +5,17 @@
       "quay.quayOrganizations",
       "quay.quayRepositories"
     ]
+  },
+  {
+    "id": "rosa",
+    "links": [
+      {
+        "custom": true,
+        "id": "ROSA.custom",
+        "href": "/openshift/create/rosa/getstarted",
+        "title": "Red Hat OpenShift Service for AWS",
+        "description": "ROSA allows you to deploy fully operational and managed Red Hat OpenShift clusters while leveraging the full breadth and depth of AWS"
+      }
+    ]
   }
 ]

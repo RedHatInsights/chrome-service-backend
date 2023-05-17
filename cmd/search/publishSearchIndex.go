@@ -254,6 +254,15 @@ func injectLinks(templateData []byte, flatLinks []LinkEntry) ([]ServiceEntry, er
 
 				}
 
+				// custom static entry
+				custom, customOk := g["custom"].(bool)
+				if customOk && custom {
+					var customLink ServiceLink
+					err := json.Unmarshal(gStr, &customLink)
+					if err == nil {
+						finalLinks = append(finalLinks, customLink)
+					}
+				}
 			}
 		}
 		serviceEntry.Links = finalLinks
@@ -361,13 +370,13 @@ func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
-	envIdex, err := flattenIndexBase(append(indexBase, staticBase...), env)
+	envIndex, err := flattenIndexBase(append(indexBase, staticBase...), env)
 
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
 
-	return envIdex, nil
+	return envIndex, nil
 }
 
 func getEnvToken(secret string, host string) (string, error) {

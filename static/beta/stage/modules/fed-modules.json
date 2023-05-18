@@ -969,7 +969,7 @@
             "ssoScopes": [
                 "api.iam.access"
             ]
-        }
+        },
         "modules": [
             {
                 "id": "seats-admin",

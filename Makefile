@@ -6,7 +6,8 @@ help:
 	@echo "test             - run all tests"
 	@echo "database         - start database with .env vars"
 	@echo "kafka            - start local kafka"
-	@echo "infra            - start all infrastructure locally (kafka and postgres db)"
+	@echo "unleash          - start local unleash server"
+	@echo "infra            - start all infrastructure locally (kafka, unleash, and postgres db)"
 	@echo "clean            - tear down database"
 	@echo "clean-all        - tear down all local infrastructure"
 	@echo "validate-schema  - validates chrome static JSON schemas"
@@ -44,6 +45,9 @@ publish-search-index:
 
 kafka:
 	podman-compose -f local/kafka-compose.yaml up
+
+unleash:
+	podman-compose -f local/unleash-compose.yaml up
 
 infra:
 	podman-compose -f local/full-stack-compose.yaml up

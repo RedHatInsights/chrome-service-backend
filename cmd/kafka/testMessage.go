@@ -24,7 +24,7 @@ func main() {
 
 	defer kafkaWriter.Close()
 
-	body := `{"broadcast": true, "payload": {"check": "me out"}}`
+	body := `{"broadcast": true, "payload": {"Ya know what I want?": "Orange Box 3."}}`
 	msg := kafka.Message{
 		Key:   []byte(fmt.Sprintf("Key-%v", time.Now().Unix())),
 		Value: []byte(body),

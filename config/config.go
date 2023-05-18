@@ -30,21 +30,30 @@ type IntercomConfig struct {
 	hacCore       string
 }
 
+type FeatureFlagsConfig struct {
+	ClientAccessToken string
+	Hostname          string
+	Port              int
+	Scheme            string
+	FullURL           string
+}
+
 type ChromeServiceConfig struct {
-	WebPort         int
-	OpenApiSpecPath string
-	DbHost          string
-	DbUser          string
-	DbPassword      string
-	DbPort          int
-	DbName          string
-	MetricsPort     int
-	Test            bool
-	LogLevel        string
-	DbSSLMode       string
-	DbSSLRootCert   string
-	KafkaConfig     KafkaCfg
-	IntercomConfig  IntercomConfig
+	WebPort           int
+	OpenApiSpecPath   string
+	DbHost            string
+	DbUser            string
+	DbPassword        string
+	DbPort            int
+	DbName            string
+	MetricsPort       int
+	Test              bool
+	LogLevel          string
+	DbSSLMode         string
+	DbSSLRootCert     string
+	KafkaConfig       KafkaCfg
+	IntercomConfig    IntercomConfig
+	FeatureFlagConfig FeatureFlagsConfig
 }
 
 const RdsCaLocation = "/app/rdsca.cert"
@@ -90,6 +99,12 @@ func Init() {
 		options.DbSSLMode = cfg.Database.SslMode
 		options.DbSSLRootCert = options.getCert(cfg)
 
+		options.FeatureFlagConfig.ClientAccessToken = *cfg.FeatureFlags.ClientAccessToken
+		options.FeatureFlagConfig.Hostname = cfg.FeatureFlags.Hostname
+		options.FeatureFlagConfig.Scheme = string(cfg.FeatureFlags.Scheme)
+		options.FeatureFlagConfig.Port = cfg.FeatureFlags.Port
+		options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
+
 		broker := cfg.Kafka.Brokers[0]
 		// pass all required topics names
 		for _, topic := range cfg.Kafka.Topics {
@@ -130,6 +145,13 @@ func Init() {
 			KafkaTopics:  []string{"platform-chrome"},
 			KafkaBrokers: []string{"localhost:9092"},
 		}
+
+		options.FeatureFlagConfig.ClientAccessToken = os.Getenv("UNLEASH_API_TOKEN")
+		options.FeatureFlagConfig.Hostname = "localhost"
+		options.FeatureFlagConfig.Scheme = "http"
+		options.FeatureFlagConfig.Port = 4242
+		options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
+
 	}
 
 	// env variables from .env or pod env variables

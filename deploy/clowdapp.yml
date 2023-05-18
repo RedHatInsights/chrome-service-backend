@@ -12,6 +12,7 @@ objects:
       envName: ${ENV_NAME}
       database:
         name: chrome-service
+      featureFlags: true
       kafkaTopics:
       # one replica for now; most of this will change
       - replicas: 1
@@ -62,6 +63,8 @@ objects:
           env:
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
+          - name: LOG_LEVEL 
+            value: ${LOG_LEVEL}
           - name: INTERCOM_DEFAULT
             valueFrom:
               secretKeyRef:
@@ -100,9 +103,24 @@ objects:
               cpu: 250m
               memory: 256Mi
 
+  # This is a dummy secret to make ephemeral deploy correctly. It will not roll out to stage or prod
+  # Unless we set "secret" in "managedResourceTypes" in the app-interface saas file.
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: chrome-service-backend
+    data:
+      INTERCOM_OPENSHIFT: aW5zaWdodHMtcmJhYw==
+      INTERCOM_DEFAULT: dGVzdFZhbHVl
+      INTERCOM_HAC_CORE: dGVzdFZhbHVl
+      INTERCOM_OPENSHIFT_DEV: dGVzdFZhbHVl
+      SEARCH_CLIENT_SECRET_PROD: dGVzdFZhbHVl
+      SEARCH_CLIENT_SECRET_STAGE: dGVzdFZhbHVl
+    type: Opaque
+
 parameters:
 - name: LOG_LEVEL
-  value: INFO
+  value: Inggo
 - description: Cpu limit of service
   name: CPU_LIMIT
   value: 500m

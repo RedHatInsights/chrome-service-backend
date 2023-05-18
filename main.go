@@ -12,6 +12,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
+	featureFlags "github.com/RedHatInsights/chrome-service-backend/rest/unleash"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/joho/godotenv"
@@ -27,6 +28,11 @@ func main() {
 	setupLogger(cfg)
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
+
+	ffClient, err := featureFlags.New(cfg)
+	if err != nil {
+		logrus.Infoln("all feature flags are set to false")
+	}
 
 	router.Use(middleware.RequestID)
 	router.Use(middleware.Logger)
@@ -50,9 +56,17 @@ func main() {
 		subrouter.Route("/emit-message", routes.BroadcastMessage)
 	})
 
-	router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
-		subrouter.Route("/ws", routes.MakeWsRoute)
-	})
+	// We might want to setup some event listeners at some point, but the pod will
+	// have to restart for these to take effect. We can't enable and disable websockets on the fly
+	if ffClient.IsEnabled("chrome-service.websockets.enabled") {
+		logrus.Infoln("Enabling WebSockets")
+		kafka.InitializeConsumers()
+		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+			subrouter.Route("/ws", routes.MakeWsRoute)
+		})
+	} else {
+		logrus.Infoln("WebSockets are currently disabled")
+	}
 
 	metricsRouter.Handle("/metrics", promhttp.Handler())
 
@@ -80,7 +94,6 @@ func HealthProbe(response http.ResponseWriter, request *http.Request) {
 func initDependencies() {
 	config.Init()
 	database.Init()
-	kafka.InitializeConsumers()
 }
 
 func setupLogger(opts *config.ChromeServiceConfig) {

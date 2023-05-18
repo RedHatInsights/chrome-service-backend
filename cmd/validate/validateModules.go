@@ -16,6 +16,7 @@ func validateModules(cwd string) {
 		documentLoader := gojsonschema.NewReferenceLoader(fmt.Sprintf("file://%s", file))
 		result, err := gojsonschema.Validate(schemaLoader, documentLoader)
 		if err != nil {
+			fmt.Println(file)
 			panic(err.Error())
 		}
 

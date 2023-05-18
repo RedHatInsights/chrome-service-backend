@@ -20,9 +20,11 @@ Any changes made to `prod-stable` or `prod-beta` will not be deployed after merg
 
 This API is not running on `qaprodauth` and can cause issues in these environments.
 
-### No more main.yml changes
+### main.yml changes
 
-This is also a legacy file. We will work on adding support for `main.yml` or an alternative to keep the API docs component up to date.
+The `main.yml` files is now used purely for the API frontend config. That is the last part of the platform using this file. Soon the contents will be migrated to the application manifest file.
+
+The `main.yml` files can be found in the [`static`](https://github.com/RedHatInsights/chrome-service-backend/tree/main/static)
 
 ### The `routes` attribute for modules has changed
 
@@ -154,13 +156,19 @@ Left navigation now supports extra nesting level. To add additional level to you
   
 ```
 
-### All services dropdown
+# All services dropdown and page<a name="allservices"></>
 
 There is a new schema that controls which items will be display in the all services dropdown and pages.
 
-The data is store in `service.json` files within `static` directory. Each environment has its own definition file. For example, for `stage-beta` environment, the file is located at `/static/beta/stage/services/services.json`
+The data is stored in `service.json` files within `static` directory. Each environment has its own definition file. For example, for `stage-beta` environment, the file is located at [/static/beta/stage/services/services.json](https://github.com/RedHatInsights/chrome-service-backend/blob/main/static/beta/stage/services/services.json)
 
-#### Link requirements
+**All the tiles (links) in the all services dropdown (page), must exist somewhere in the navigation files**. The tiles (links) are generated from these files. If no reference is found in the navigation files, the tile (link) will not show in the UI.
+
+**Changes to the navigation files can affect the all services dropdown (page)**. Before you submit the changes for review, make sure the all services will be in expected state.
+
+Be aware that changing the link IDs in navigation file and not reflecting the change in respective `services.json` will remove the tile from the all services dropdown (page).
+
+## Link requirements
 
 In order for a link to be eligible to display in the all services dropdown it must have following attributes inside the <bundle>-navigation.json file:
 
@@ -168,7 +176,93 @@ In order for a link to be eligible to display in the all services dropdown it mu
 - `description`: short description of the page the link leads to
 - `href`: pathname to be used
 
-#### Inserting link into services.json
+### Using expandable section as a link
+
+If your leaf links (clickable links in left navigation) are not descriptive enough for the services dropdown or page (for example Overview or Systems), the expandable section can be used. **The HREF attribute will be picked from a first valid link of expandable section.**
+
+In order to make expandable section eligible for usage in the all services dropdown/page, do the following:
+
+1. add unique id to the expandable section definition
+2. add short description of the section
+3. follow the [Inserting link into services.json](#insertlink)
+
+Example changes:
+
+```diff
+diff --git a/static/stable/stage/navigation/settings-navigation.json b/static/stable/stage/navigation/settings-navigation.json
+index 30bb92f..16155ba 100644
+--- a/static/stable/stage/navigation/settings-navigation.json
++++ b/static/stable/stage/navigation/settings-navigation.json
+@@ -23,6 +23,8 @@
+         {
+             "title": "Notifications",
+             "expandable": true,
++            "id": "foobar",
++            "description": "Some nice description....",
+             "routes": [
+                 {
+                     "id": "openshift",
+diff --git a/static/stable/stage/services/services.json b/static/stable/stage/services/services.json
+index a1cfa81..f3e1037 100644
+--- a/static/stable/stage/services/services.json
++++ b/static/stable/stage/services/services.json
+@@ -6,7 +6,8 @@
+     "title": "Application services",
+     "links": [
+       "application-services.apiManagement",
+-      "application-services.serviceAccounts"
++      "application-services.serviceAccounts",
++      "settings.foobar"
+     ]
+   },
+   {
+
+```
+
+### Using bundle title as a link
+
+If your bundle has a root page with non descriptive title (like Overview for example), or your application is the entire bundle (like Quay), bundle titles can be used for all services tiles/links.
+
+**The HREF attribute will be picked from a first valid link of the bundle.**
+
+In order to make expandable section eligible for usage in the all services dropdown/page, do the following:
+
+1. add short description of the section
+2. follow the [Inserting link into services.json](#insertlink)
+
+Example changes:
+
+```diff
+diff --git a/static/stable/stage/navigation/settings-navigation.json b/static/stable/stage/navigation/settings-navigation.json
+index 30bb92f..9540df5 100644
+--- a/static/stable/stage/navigation/settings-navigation.json
++++ b/static/stable/stage/navigation/settings-navigation.json
+@@ -1,6 +1,7 @@
+ {
+     "id": "settings",
+     "title": "Settings",
++    "description": "Some nice description...",
+     "navItems": [
+         {
+             "id": "sources",
+diff --git a/static/stable/stage/services/services.json b/static/stable/stage/services/services.json
+index a1cfa81..98167dd 100644
+--- a/static/stable/stage/services/services.json
++++ b/static/stable/stage/services/services.json
+@@ -6,7 +6,8 @@
+     "title": "Application services",
+     "links": [
+       "application-services.apiManagement",
+-      "application-services.serviceAccounts"
++      "application-services.serviceAccounts",
++      "settings.settings"
+     ]
+   },
+   {
+
+```
+
+## Inserting link into services.json<a name="insertlink"></a>
 
 To add a link to `services.json` follow these steps:
 
@@ -179,7 +273,7 @@ To add a link to `services.json` follow these steps:
 
 > Note: the navigation file prefix means the a part of the navigation file name before the `-navigation.json` string. For example prefix for `ansible-navigation.json` is `ansible`. In this case, valid id would be `ansible.linkId`.
 
-#### Inserting new section
+## Inserting new section
 
 If your link does not fit into any existing section and you need a new one, follow these steps.
 

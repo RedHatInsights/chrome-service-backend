@@ -25,6 +25,7 @@
     "id": "containers",
     "icon": "CubeIcon",
     "title": "Containers",
+    "description": "Run your applications in a consistent and isolated environment.",
     "links": [
       {
         "title": "Create Cluster",

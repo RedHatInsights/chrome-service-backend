@@ -82,7 +82,7 @@
     "id": "infrastructure",
     "icon": "InfrastructureIcon",
     "title": "Infrastructure",
-    "description": "Manage your infrastructure across the hybrid cloud.",
+    "description": "Manage your OpenShift infrastructure across the hybrid cloud.",
     "links": [
       "openshift.clusters",
       "openshift.overview",

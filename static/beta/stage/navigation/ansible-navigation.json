@@ -35,20 +35,6 @@
                     "product": "Ansible Automation Hub"
                 },
                 {
-                    "id": "repositories",
-                    "appId": "automationHub",
-                    "title": "Repositories",
-                    "href": "/ansible/automation-hub/ansible/repositories",
-                    "product": "Ansible Automation Hub"
-                },
-                {
-                    "id": "remotes",
-                    "appId": "automationHub",
-                    "title": "Remotes",
-                    "href": "/ansible/automation-hub/ansible/remotes",
-                    "product": "Ansible Automation Hub"
-                },
-                {
                     "id": "taskManagement",
                     "appId": "automationHub",
                     "title": "Task Management",

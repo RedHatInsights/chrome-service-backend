@@ -1,0 +1,38 @@
+{
+    "id": "openshift",
+    "title": "OpenShift",
+    "navItems": [
+        {
+            "id": "clusters",
+            "appId": "openshift",
+            "href": "/openshift",
+            "title": "Clusters",
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "View, Register, or Create an OpenShift Cluster."
+        },
+        {
+            "id": "overview",
+            "appId": "openshift",
+            "href": "/openshift/overview",
+            "title": "Overview",
+            "filterable": false,
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "Overview of your OpenShift Environment."
+        },
+        {
+            "id": "learningResources",
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/openshift/learning-resources"
+        },
+        {
+            "id": "releases",
+            "appId": "openshift",
+            "href": "/openshift/releases",
+            "title": "Releases",
+            "filterable": false,
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
+        }
+    ]
+}

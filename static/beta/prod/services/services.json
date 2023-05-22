@@ -84,11 +84,7 @@
     "title": "Infrastructure",
     "description": "Manage your OpenShift infrastructure across the hybrid cloud.",
     "links": [
-      {
-        "title": "Clusters",
-        "href": "/openshift",
-        "description": "View, Register, or Create an OpenShift Cluster."
-      },
+      "openshift.clusters",
       "openshift.overview",
       "openshift.releases"
     ]

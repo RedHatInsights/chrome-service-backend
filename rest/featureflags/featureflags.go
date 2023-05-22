@@ -1,4 +1,4 @@
-package unleash
+package featureflags
 
 import (
 	"net/http"
@@ -7,6 +7,15 @@ import (
 	"github.com/Unleash/unleash-client-go/v3"
 	"github.com/sirupsen/logrus"
 )
+
+// This is a wrapper struct to setup our own requests to avoid calling
+// a nil client. It's all a bit deranged, but I cannot get the library to
+// guarantee any sane defaults
+type FFClient struct {
+	unleashClient *unleash.Client
+}
+
+var ffClient *FFClient
 
 func newClientWrapper(cfg *config.ChromeServiceConfig) (*unleash.Client, error) {
 	client, err := unleash.NewClient(
@@ -32,29 +41,26 @@ func newClientWrapper(cfg *config.ChromeServiceConfig) (*unleash.Client, error) 
 
 }
 
-// This is a wrapper struct to setup our own requests to avoid calling
-// a nil client. It's all a bit deranged, but I cannot get the library to
-// guarantee any sane defaults
-type FFClient struct {
-	unleashClient *unleash.Client
-}
-
-func New(cfg *config.ChromeServiceConfig) (*FFClient, error) {
+func New(cfg *config.ChromeServiceConfig) error {
+	// If there is already an established connection, don't make a new one
+	if ffClient != nil {
+		return nil
+	}
 	c, err := newClientWrapper(cfg)
 	if err != nil {
 		logrus.Infof("Unable to contact unleash server due to: %v", err)
-		return nil, err
+		return err
 	}
-	ffc := &FFClient{
+	ffClient = &FFClient{
 		unleashClient: c,
 	}
-	return ffc, nil
+	return nil
 }
 
 // Wrap the unleash to avoid having to do
 // if (unleashClient != nil && unleashClient.IsEnabled("FeatureFlag"))
 // every single call
-func (ffClient *FFClient) IsEnabled(flag string) bool {
+func IsEnabled(flag string) bool {
 	if ffClient != nil {
 		return ffClient.unleashClient.IsEnabled(flag)
 	} else {
@@ -62,6 +68,15 @@ func (ffClient *FFClient) IsEnabled(flag string) bool {
 	}
 }
 
-func (ffClient *FFClient) Close() {
+func Close() {
 	ffClient.unleashClient.Close()
+}
+
+// Called before main() and when the library is imported
+func init() {
+	cfg := config.Get()
+	err := New(cfg)
+	if err != nil {
+		logrus.Infoln("all feature flags are set to false")
+	}
 }

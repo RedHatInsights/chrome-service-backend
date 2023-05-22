@@ -9,10 +9,10 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
-	featureFlags "github.com/RedHatInsights/chrome-service-backend/rest/unleash"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/joho/godotenv"
@@ -20,19 +20,17 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func main() {
+func init() {
 	godotenv.Load()
 	flag.Parse()
-	initDependencies()
+	database.Init()
+}
+
+func main() {
 	cfg := config.Get()
 	setupLogger(cfg)
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
-
-	ffClient, err := featureFlags.New(cfg)
-	if err != nil {
-		logrus.Infoln("all feature flags are set to false")
-	}
 
 	router.Use(middleware.RequestID)
 	router.Use(middleware.Logger)
@@ -58,7 +56,7 @@ func main() {
 
 	// We might want to setup some event listeners at some point, but the pod will
 	// have to restart for these to take effect. We can't enable and disable websockets on the fly
-	if ffClient.IsEnabled("chrome-service.websockets.enabled") {
+	if featureflags.IsEnabled("chrome-service.websockets.enabled") {
 		logrus.Infoln("Enabling WebSockets")
 		kafka.InitializeConsumers()
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
@@ -89,11 +87,6 @@ func HelloWorld(response http.ResponseWriter, request *http.Request) {
 
 func HealthProbe(response http.ResponseWriter, request *http.Request) {
 	response.Write([]byte("Why yes thank you, I am quite healthy :D"))
-}
-
-func initDependencies() {
-	config.Init()
-	database.Init()
 }
 
 func setupLogger(opts *config.ChromeServiceConfig) {

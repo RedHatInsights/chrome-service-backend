@@ -75,7 +75,7 @@ func (c *ChromeServiceConfig) getCert(cfg *clowder.AppConfig) string {
 
 var config *ChromeServiceConfig
 
-func Init() {
+func init() {
 	godotenv.Load()
 	options := &ChromeServiceConfig{}
 

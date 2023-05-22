@@ -87,5 +87,3 @@ services:
 volumes:
   chrome-db:
     driver: local
-  db:
-    driver: local

@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
 	"github.com/sirupsen/logrus"
@@ -21,6 +22,9 @@ var upgrader = websocket.Upgrader{
 }
 
 func MakeWsRoute(sub chi.Router) {
+	if featureflags.IsEnabled("moo.moo") {
+		logrus.Infoln("wow")
+	}
 	sub.Get("/", HandleWsConnection)
 }
 

@@ -81,9 +81,13 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 			Roles:         p.Roles,
 			Organizations: p.Organizations,
 		},
-		Broadcast: true,
+		Broadcast: p.Broadcast,
 		Data:      data,
 	}
-	connectionhub.ConnectionHub.Broadcast <- newMessage
+	if newMessage.Broadcast {
+		connectionhub.ConnectionHub.Broadcast <- newMessage
+	} else {
+		connectionhub.ConnectionHub.Emit <- newMessage
+	}
 	w.WriteHeader(http.StatusOK)
 }

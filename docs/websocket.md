@@ -29,6 +29,11 @@ header is only a test value and will not work in any other environment.
 fetch("/api/chrome-service/v1/emit-message", {
   method: "POST",
   body: JSON.stringify({
+    type: "notifications.drawer", // type of the event
+    broadcast: true, // should be send to every client
+    users: [], // list of user ids that should receive the message
+    roles: [], // list of roles that should receive the message, should be used with organizations only
+    organizations: [], // list of org ids to receive the message
     payload: { foo: "bar" },
   }),
   headers: {

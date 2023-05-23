@@ -53,27 +53,25 @@ func parseJSONIDs(data map[string]interface{}, file string) {
 	if idMap, ok := idValue.(string); ok {
 		hashMap[idMap] = 1
 	}
-	// hashMap[data["id"].(string)] = 1
 	navItems, ok := data["navItems"].([]interface{})
-	if !ok {
-		return
-	}
-	for i := 0; i < len(navItems); i++ {
-		navItem, ok := navItems[i].(map[string]interface{})
-		if !ok {
-			continue
-		}
-		value, ok := navItem["id"]
-		if id, ok := value.(string); ok {
-			if _, exists := hashMap[id]; exists {
-				panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
-			} else {
-				hashMap[id] = 1
+	if ok {
+		for i := 0; i < len(navItems); i++ {
+			navItem, ok := navItems[i].(map[string]interface{})
+			if !ok {
+				continue
 			}
-			fmt.Println("----")
-			fmt.Println(id)
-		} else {
-			continue
+			value, ok := navItem["id"]
+			if id, ok := value.(string); ok {
+				if _, exists := hashMap[id]; exists {
+					panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
+				} else {
+					hashMap[id] = 1
+				}
+				fmt.Println("----")
+				fmt.Println(id)
+			} else {
+				continue
+			}
 		}
 	}
 }

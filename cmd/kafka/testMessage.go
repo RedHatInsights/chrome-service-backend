@@ -13,7 +13,6 @@ import (
 
 func main() {
 	godotenv.Load()
-	config.Init()
 	cfg := config.Get()
 
 	kafkaWriter := kafka.NewWriter(kafka.WriterConfig{

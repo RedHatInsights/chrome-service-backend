@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/joho/godotenv"
@@ -11,7 +10,6 @@ import (
 
 func main() {
 	godotenv.Load()
-	config.Init()
 	database.Init()
 
 	var bundleRes *gorm.DB

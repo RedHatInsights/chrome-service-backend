@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
+	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
@@ -56,7 +57,9 @@ func main() {
 
 	// We might want to setup some event listeners at some point, but the pod will
 	// have to restart for these to take effect. We can't enable and disable websockets on the fly
-	if featureflags.IsEnabled("chrome-service.websockets.enabled") {
+	if true || featureflags.IsEnabled("chrome-service.websockets.enabled") {
+		// start the connection hub
+		go connectionhub.ConnectionHub.Run()
 		logrus.Infoln("Enabling WebSockets")
 		kafka.InitializeConsumers()
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {

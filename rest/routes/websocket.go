@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net/http"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/cloudEvents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
@@ -15,6 +16,7 @@ import (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
+	Subprotocols:    []string{"cloudevents.json"},
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
@@ -62,7 +64,8 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.Write(response)
 		return
 	}
-	data, err := json.Marshal(&p.Payload)
+	event := cloudEvents.WrapPayload(p.Payload, "emit-message-endpoint", "foo-bar")
+	data, err := json.Marshal(event)
 	if err != nil {
 		logrus.Errorln(err)
 		payload := make(map[string]string)

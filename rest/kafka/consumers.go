@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
+	"github.com/RedHatInsights/chrome-service-backend/rest/cloudEvents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/segmentio/kafka-go"
 	"github.com/sirupsen/logrus"
@@ -35,7 +36,8 @@ func startKafkaReader(r *kafka.Reader) {
 		if err != nil {
 			log.Printf("Unable Unmarshal message %s\n", string(m.Value))
 		} else {
-			data, err := json.Marshal(&p.Payload)
+			event := cloudEvents.WrapPayload(p.Payload, "http://api-of-requestor", "id-send-by-requestor")
+			data, err := json.Marshal(event)
 			if err != nil {
 				log.Println("Unable marshal payload data", p, err)
 			} else {

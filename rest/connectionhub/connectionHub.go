@@ -204,9 +204,8 @@ func (c Client) ReadPump() {
 		_, msg, err := conn.Ws.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				logrus.Errorln("error: %v", err)
+				logrus.Infoln("Websocket client going away", err)
 			}
-			logrus.Errorln("Unable to read incoming WS message: ", err)
 			break
 		}
 		var messagePayload WsMessage

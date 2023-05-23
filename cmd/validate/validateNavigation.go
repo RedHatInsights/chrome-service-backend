@@ -24,12 +24,14 @@ func validateNavigation(cwd string) {
 
 		ok:= json.Unmarshal(fileContent, &data)
 		if ok == nil {
-			for key, value:=range data {
-				fmt.Println(key)
-				fmt.Println(value)
-				fmt.Println("---")
-			}
+			// for key, value:=range data {
+			// 	fmt.Println(key)
+			// 	fmt.Println(value)
+			// 	fmt.Println("---")
+			// }
 		}
+		
+		parseJSONIDs(data, file)
 
 		if err != nil {
 			fmt.Println("File", file)
@@ -43,32 +45,35 @@ func validateNavigation(cwd string) {
 			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
 		}
 	}
+}
 
-	// func parseJSONIDs(data map[string]interface{}) {
-	// 	hashMap := make(map[string]int)
-	// 	// var paths string[]
-	// 	// path, exists := data["navItems"]
-	// 	// paths = append(paths, "id")
-	// 	// if exists != nil {
-	// 	// 	for _, str := range path {
-	// 	// 		paths = append(paths, "")
-	// 	// 	}
-	// 	// }
-	// 	hashMap[data["id"]] = 1
-	// 	for i := 0; i < 2; i++ {
-	// 		value, ok := data[paths[i]]
-	// 		if ok != nil {
-	// 			break;
-	// 		}
-	// 		else {
-	// 			if val, status := paths[value]; status {
-	// 				hashMap[value] += 1
-	// 			}
-	// 			else {
-	// 				hashMap[value] = 1
-	// 			}
-	// 		}
-	// 	}
-	// 	string firstPath = ""
-	// }
+func parseJSONIDs(data map[string]interface{}, file string) {
+	hashMap := make(map[string]int)
+	idValue, ok := data["id"]
+	if idMap, ok := idValue.(string); ok {
+		hashMap[idMap] = 1
+	}
+	// hashMap[data["id"].(string)] = 1
+	navItems, ok := data["navItems"].([]interface{})
+	if !ok {
+		return
+	}
+	for i := 0; i < len(navItems); i++ {
+		navItem, ok := navItems[i].(map[string]interface{})
+		if !ok {
+			continue
+		}
+		value, ok := navItem["id"]
+		if id, ok := value.(string); ok {
+			if _, exists := hashMap[id]; exists {
+				panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
+			} else {
+				hashMap[id] = 1
+			}
+			fmt.Println("----")
+			fmt.Println(id)
+		} else {
+			continue
+		}
+	}
 }

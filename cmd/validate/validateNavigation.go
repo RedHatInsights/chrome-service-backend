@@ -24,8 +24,10 @@ func validateNavigation(cwd string) {
 
 		ok:= json.Unmarshal(fileContent, &data)
 		if ok == nil {
-			for key:=range data {
+			for key, value:=range data {
 				fmt.Println(key)
+				fmt.Println(value)
+				fmt.Println("---")
 			}
 		}
 

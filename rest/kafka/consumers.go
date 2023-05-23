@@ -31,26 +31,29 @@ func startKafkaReader(r *kafka.Reader) {
 		}
 		fmt.Printf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
 
-		var p connectionhub.WsMessage
+		var p cloudEvents.KafkaEnvelope
 		err = json.Unmarshal(m.Value, &p)
 		if err != nil {
 			log.Printf("Unable Unmarshal message %s\n", string(m.Value))
+		} else if p.Data.Payload == nil {
+			log.Printf("No message will be emitted doe to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value))
 		} else {
-			event := cloudEvents.WrapPayload(p.Payload, "http://api-of-requestor", "id-send-by-requestor")
+			event := cloudEvents.WrapPayload(p.Data.Payload, "http://api-of-requestor", "id-send-by-requestor")
+			event.Time = p.Time
 			data, err := json.Marshal(event)
 			if err != nil {
 				log.Println("Unable marshal payload data", p, err)
 			} else {
 				newMessage := connectionhub.Message{
 					Destinations: connectionhub.MessageDestinations{
-						Users:         p.Users,
-						Roles:         p.Roles,
-						Organizations: p.Organizations,
+						Users:         p.Data.Users,
+						Roles:         p.Data.Roles,
+						Organizations: p.Data.Organizations,
 					},
-					Broadcast: p.Broadcast,
+					Broadcast: p.Data.Broadcast,
 					Data:      data,
 				}
-				if p.Broadcast {
+				if p.Data.Broadcast {
 					logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
 					connectionhub.ConnectionHub.Broadcast <- newMessage
 				} else {

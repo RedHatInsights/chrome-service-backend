@@ -23,8 +23,10 @@ Once connected, you can log out any new wss messages with `x.onmessage = console
 You can send a test message with the following fetch request. Please note the 
 header is only a test value and will not work in any other environment.
 
+**When testing in chrome environment, make sure to allow the endpoint in the CSP headers in index.html!**
+
 ``` javascript
-fetch("/api/events/v1/emit-message", {
+fetch("/api/chrome-service/v1/emit-message", {
   method: "POST",
   body: JSON.stringify({
     payload: { foo: "bar" },

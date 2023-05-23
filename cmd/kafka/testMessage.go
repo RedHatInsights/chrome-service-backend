@@ -25,15 +25,17 @@ func main() {
 
 	body := `{
 		"specversion": "1.0.2",
-		"type": "chrome-notification",
+		"type": "notifications.drawer",
 		"source": "https://whatever.service.com",
 		"id": "test-message",
 		"time": "2023-05-23T11:54:03.879689005+02:00",
 		"datacontenttype": "application/json",
 		"data":{
-			"broadcast": true,
+			"broadcast": false,
+			"organizations": ["11789772"],
 			"payload": {
-				"Ya know what I want?": "Orange Box 4."
+				"title": "New notification",
+				"description": "Some longer description"
 			}
 		}
 	}`

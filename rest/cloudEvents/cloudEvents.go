@@ -50,10 +50,10 @@ type Envelope[D any] struct {
 	Data            D               `json:"data"`
 }
 
-func WrapPayload[P any](payload P, source string, id string) Envelope[P] {
+func WrapPayload[P any](payload P, source string, id string, messageType string) Envelope[P] {
 	event := Envelope[P]{
 		SpecVersion:     V102,
-		Type:            "Message",
+		Type:            messageType,
 		Source:          source,
 		Id:              id,
 		Time:            time.Now(),

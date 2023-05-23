@@ -38,7 +38,7 @@ func startKafkaReader(r *kafka.Reader) {
 		} else if p.Data.Payload == nil {
 			log.Printf("No message will be emitted doe to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value))
 		} else {
-			event := cloudEvents.WrapPayload(p.Data.Payload, "http://api-of-requestor", "id-send-by-requestor")
+			event := cloudEvents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
 			event.Time = p.Time
 			data, err := json.Marshal(event)
 			if err != nil {

@@ -39,8 +39,8 @@ func validateNavigation(cwd string) {
 		handleErr(status)
 
 		ok:= json.Unmarshal(fileContent, &data)
+
 		if ok == nil{
-			//Note, only works if there are no errors unmarshalling!
 			duplicateCounter = make(map[string]int)
 			parseJSONIDs(data, file)
 		} else {
@@ -52,7 +52,6 @@ func validateNavigation(cwd string) {
 					jsonArrayData[k] = v
 				}
 				loopOverFields(jsonArrayData, file)
-				//parsingSetup(rootJSONFile, file)
 			} else {
 				panic(ok.Error())
 			}
@@ -63,14 +62,15 @@ func validateNavigation(cwd string) {
 func parseJSONIDs(data map[string]interface{}, file string) {
 	if idValue, ok := data["id"]; ok {
 		if idMap, ok := idValue.(string); ok {
-			// duplicateCounter[idMap] = 1
 			if _, exists := duplicateCounter[idMap]; exists {
-				//panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
+				panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", idMap, file))
 			} else {
 				duplicateCounter[idMap] = 1
 			}
 			//FOR DEBUGGING PURPOSES
-			fmt.Sprintf(idMap)
+			// fmt.Println("----")
+			// fmt.Println(idMap)
+			// fmt.Println(file)
 		}
 	}
 	if navItems, ok := data["navItems"].([]interface{}); ok {
@@ -85,19 +85,6 @@ func parseJSONIDs(data map[string]interface{}, file string) {
 func loopOverFields(navItems []interface{}, file string) {
 	for i := 0; i < len(navItems); i++ {
 		if navItem, ok := navItems[i].(map[string]interface{}); ok {
-				//if value, ok := navItem["id"]; ok {
-					// if id, ok := value.(string); ok {
-					// 	if _, exists := duplicateCounter[id]; exists {
-					// 		//panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
-					// 	} else {
-					// 		duplicateCounter[id] = 1
-					// 	}
-					// 	//FOR DEBUGGING PURPOSES
-					// 	fmt.Println("----")
-					// 	fmt.Println(id)
-					// 	fmt.Println(file)
-					// }
-				//}
 				parseJSONIDs(navItem, file)
 			} else {
 				panic(fmt.Sprintf("Invalid format. The 'navItems' field MUST be a map"))

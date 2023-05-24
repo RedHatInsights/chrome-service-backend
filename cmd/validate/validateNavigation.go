@@ -31,30 +31,34 @@ func validateNavigation(cwd string) {
 			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
 		}
 
-		var data map[string]interface {}
+		unmarshalData(file)
+	}
+}
+
+func unmarshalData(file string) {
+	var data map[string]interface {}
 		
-		var arrayData [] map[string]interface {};
+	var arrayData [] map[string]interface {};
 
-		fileContent, status := ioutil.ReadFile(file)
-		handleErr(status)
+	fileContent, status := ioutil.ReadFile(file)
+	handleErr(status)
 
-		ok:= json.Unmarshal(fileContent, &data)
+	ok:= json.Unmarshal(fileContent, &data)
 
-		if ok == nil{
+	if ok == nil{
+		duplicateCounter = make(map[string]int)
+		parseJSONIDs(data, file)
+	} else {
+		ok := json.Unmarshal(fileContent, &arrayData)
+		if ok == nil {
 			duplicateCounter = make(map[string]int)
-			parseJSONIDs(data, file)
-		} else {
-			ok := json.Unmarshal(fileContent, &arrayData)
-			if ok == nil {
-				duplicateCounter = make(map[string]int)
-				jsonArrayData := make([]interface{}, len(arrayData))
-				for k,v := range arrayData {
-					jsonArrayData[k] = v
-				}
-				loopOverFields(jsonArrayData, file)
-			} else {
-				panic(ok.Error())
+			jsonArrayData := make([]interface{}, len(arrayData))
+			for k,v := range arrayData {
+				jsonArrayData[k] = v
 			}
+			loopOverFields(jsonArrayData, file)
+		} else {
+			panic(ok.Error())
 		}
 	}
 }

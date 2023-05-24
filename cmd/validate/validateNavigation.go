@@ -90,8 +90,8 @@ func loopOverFields(navItems []interface{}, file string) {
 	for i := 0; i < len(navItems); i++ {
 		if navItem, ok := navItems[i].(map[string]interface{}); ok {
 				parseJSONIDs(navItem, file)
-			} else {
-				panic(fmt.Sprintf("Invalid format. The 'navItems' field MUST be a map"))
-			}
+		} else {
+			panic(fmt.Sprintf("Invalid format. The 'navItems' field MUST be a map"))
+		}
 	}
 }

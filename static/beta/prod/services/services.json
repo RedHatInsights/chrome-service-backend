@@ -110,11 +110,33 @@
     "title": "Inventories",
     "description": "View OpenShift clusters, Edge systems, RHEL hosts, and your organization's subscriptions.",
     "links": [
-      "openshift.clusters",
-      "edge.groups",
-      "rhel.imageBuilder",
-      "rhel.subscriptionsInventory",
-      "rhel.inventory"
+      {
+        "isGroup": true,
+        "id": "openshift",
+        "title": "OpenShift",
+        "links": [
+          "openshift.clusters"
+        ]
+      },
+      {
+        "isGroup": true,
+        "id": "edge",
+        "title": "Edge",
+        "links": [
+          "edge.groups"
+
+        ]
+      },
+      {
+        "isGroup": true,
+        "id": "rhel",
+        "title": "RHEL",
+        "links": [
+          "rhel.imageBuilder",
+          "rhel.subscriptionsInventory",
+          "rhel.inventory"
+        ]
+      }
     ]
   },
   {

@@ -19,6 +19,18 @@ func validateNavigation(cwd string) {
 		documentLoader := gojsonschema.NewReferenceLoader(fmt.Sprintf("file://%s", file))
 		result, err := gojsonschema.Validate(schemaLoader, documentLoader)
 		
+		if err != nil {
+			fmt.Println("File", file)
+			panic(err.Error())
+		}
+
+		if !result.Valid() {
+			for _, desc := range result.Errors() {
+				fmt.Printf("- %s\n", desc)
+			}
+			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
+		}
+
 		var data map[string]interface {}
 		
 		var arrayData [1] map[string]interface {};
@@ -38,18 +50,6 @@ func validateNavigation(cwd string) {
 			} else {
 				panic(ok.Error())
 			}
-		}
-
-		if err != nil {
-			fmt.Println("File", file)
-			panic(err.Error())
-		}
-
-		if !result.Valid() {
-			for _, desc := range result.Errors() {
-				fmt.Printf("- %s\n", desc)
-			}
-			panic(fmt.Sprintf("The %s is not valid. see errors :\n", file))
 		}
 	}
 }

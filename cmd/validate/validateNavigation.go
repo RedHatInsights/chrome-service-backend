@@ -87,7 +87,7 @@ func loopOverFields(navItems []interface{}, file string) {
 				if ok {
 					if id, ok := value.(string); ok {
 						if _, exists := duplicateCounter[id]; exists {
-							//panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
+							panic(fmt.Sprintf("The id %s in %s is not valid because it is duplicated\n", id, file))
 						} else {
 							duplicateCounter[id] = 1
 						}

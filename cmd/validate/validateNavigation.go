@@ -45,7 +45,7 @@ func unmarshalData(file string) {
 
 	ok:= json.Unmarshal(fileContent, &data)
 
-	if ok == nil{
+	if ok == nil {
 		duplicateCounter = make(map[string]int)
 		parseJSONIDs(data, file)
 	} else {

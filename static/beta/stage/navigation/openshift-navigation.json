@@ -103,7 +103,7 @@
                         {
                             "id": "containerPlatform",
                             "appId": "subscriptions",
-                            "title": "Container Platform",
+                            "title": "Red Hat OpenShift",
                             "href": "/openshift/subscriptions/openshift",
                             "product": "Subscription Watch"
                         },

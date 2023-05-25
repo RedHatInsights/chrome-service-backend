@@ -156,14 +156,6 @@ image-builder:
     versions:
       - v1
 
-malware:
-  title: Malware
-  api:
-    versions:
-      - v1
-    alias:
-      - malware-detection
-
 notifications:
   title: Notifications
   api:

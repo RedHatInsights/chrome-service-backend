@@ -1,7 +1,6 @@
 package featureflags
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
@@ -19,7 +18,6 @@ type FFClient struct {
 var ffClient *FFClient
 
 func newClientWrapper(cfg *config.ChromeServiceConfig) (*unleash.Client, error) {
-	fmt.Println(cfg)
 	client, err := unleash.NewClient(
 		unleash.WithListener(&unleash.DebugListener{}),
 		unleash.WithAppName("chrome-service"),
@@ -76,7 +74,6 @@ func Close() {
 
 // Called before main() and when the library is imported
 func init() {
-	config.Init()
 	cfg := config.Get()
 	err := New(cfg)
 	if err != nil {

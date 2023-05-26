@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/RedHatInsights/chrome-service-backend/rest/cloudEvents"
+	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -79,7 +79,7 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.Write(response)
 		return
 	}
-	event := cloudEvents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
+	event := cloudevents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
 	data, err := json.Marshal(event)
 	if err != nil {
 		logrus.Errorln(err)

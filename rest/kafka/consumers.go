@@ -7,7 +7,7 @@ import (
 	"log"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
-	"github.com/RedHatInsights/chrome-service-backend/rest/cloudEvents"
+	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/segmentio/kafka-go"
 	"github.com/sirupsen/logrus"
@@ -31,14 +31,14 @@ func startKafkaReader(r *kafka.Reader) {
 		}
 		fmt.Printf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
 
-		var p cloudEvents.KafkaEnvelope
+		var p cloudevents.KafkaEnvelope
 		err = json.Unmarshal(m.Value, &p)
 		if err != nil {
 			log.Printf("Unable Unmarshal message %s\n", string(m.Value))
 		} else if p.Data.Payload == nil {
 			log.Printf("No message will be emitted doe to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value))
 		} else {
-			event := cloudEvents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
+			event := cloudevents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
 			event.Time = p.Time
 			data, err := json.Marshal(event)
 			if err != nil {

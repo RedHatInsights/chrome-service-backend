@@ -1,4 +1,4 @@
-package cloudEvents
+package cloudevents
 
 import (
 	"fmt"

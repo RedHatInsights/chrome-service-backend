@@ -13,7 +13,7 @@ Go 1.18
 
 ## Local Testing
 
-1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. This repo also supports `docker-compose up` for its postgres server. An example `.env` for this would look like:
+1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. This repo also supports `docker-compose up` for its postgres server and `make infra` to run all needed containers. An example `.env` for this would look like:
 ```
 PGSQL_USER=chrome
 PGSQL_PASSWORD=chrome
@@ -45,3 +45,5 @@ eyJpZGVudGl0eSI6eyJ1c2VyIjp7InVzZXJfaWQiOiIxMiJ9fX0=
 `make clean` will tear down the database.
 
 `make dev` run the service
+
+`make infra` will create the db and kafka locally

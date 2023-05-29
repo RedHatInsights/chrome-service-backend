@@ -8,20 +8,28 @@ import (
 	"strconv"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
+	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
+	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/joho/godotenv"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/sirupsen/logrus"
 )
 
-func main() {
+func init() {
 	godotenv.Load()
 	flag.Parse()
-	initDependencies()
+	database.Init()
+}
+
+func main() {
 	cfg := config.Get()
+	setupLogger(cfg)
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
 
@@ -44,11 +52,22 @@ func main() {
 		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
 		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
+		subrouter.Route("/emit-message", routes.BroadcastMessage)
 	})
 
-	router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
-		subrouter.Route("/ws", routes.MakeWsRoute)
-	})
+	// We might want to setup some event listeners at some point, but the pod will
+	// have to restart for these to take effect. We can't enable and disable websockets on the fly
+	if featureflags.IsEnabled("chrome-service.websockets.enabled") {
+		// start the connection hub
+		go connectionhub.ConnectionHub.Run()
+		logrus.Infoln("Enabling WebSockets")
+		kafka.InitializeConsumers()
+		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+			subrouter.Route("/ws", routes.MakeWsRoute)
+		})
+	} else {
+		logrus.Infoln("WebSockets are currently disabled")
+	}
 
 	metricsRouter.Handle("/metrics", promhttp.Handler())
 
@@ -73,7 +92,10 @@ func HealthProbe(response http.ResponseWriter, request *http.Request) {
 	response.Write([]byte("Why yes thank you, I am quite healthy :D"))
 }
 
-func initDependencies() {
-	config.Init()
-	database.Init()
+func setupLogger(opts *config.ChromeServiceConfig) {
+	logLevel, err := logrus.ParseLevel(opts.LogLevel)
+	if err != nil {
+		logLevel = logrus.InfoLevel
+	}
+	logrus.SetLevel(logLevel)
 }

@@ -126,22 +126,30 @@ func broadcast(m Message, h *connectionHub) {
 
 func emitMessage(m Message, h *connectionHub) {
 	connections := make(map[*Connection]*Client)
+
 	// get all individual connections
 	for _, cid := range m.Destinations.Users {
-		connections[h.Clients[cid].Conn] = h.Clients[cid]
+		// check if connection exists
+		if h.Clients[cid] != nil {
+			connections[h.Clients[cid].Conn] = h.Clients[cid]
+		}
 	}
 
 	// get all connections from rooms
 	for _, rid := range m.Destinations.Roles {
-		for conn, c := range h.Rooms.Roles[rid] {
-			connections[conn] = c
+		if h.Rooms.Roles[rid] != nil {
+			for conn, c := range h.Rooms.Roles[rid] {
+				connections[conn] = c
+			}
 		}
 	}
 
 	// get all connections from organizations
 	for _, oid := range m.Destinations.Organizations {
-		for conn, c := range h.Rooms.Organization[oid] {
-			connections[conn] = c
+		if h.Rooms.Organization[oid] != nil {
+			for conn, c := range h.Rooms.Organization[oid] {
+				connections[conn] = c
+			}
 		}
 	}
 
@@ -204,9 +212,8 @@ func (c Client) ReadPump() {
 		_, msg, err := conn.Ws.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				logrus.Errorln("error: %v", err)
+				logrus.Infoln("Websocket client going away", err)
 			}
-			logrus.Errorln("Unable to read incoming WS message: ", err)
 			break
 		}
 		var messagePayload WsMessage

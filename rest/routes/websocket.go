@@ -3,18 +3,26 @@ package routes
 import (
 	"encoding/json"
 	"fmt"
-	"math/rand"
 	"net/http"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
 	"github.com/sirupsen/logrus"
 )
 
+type WSRequestPayload struct {
+	connectionhub.WsMessage
+	Type string `json:"type"`
+	Id   string `json:"id"`
+}
+
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
+	Subprotocols:    []string{"cloudevents.json"},
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
@@ -29,7 +37,16 @@ func BroadcastMessage(sub chi.Router) {
 }
 
 func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
-	clientId := fmt.Sprint(rand.Int())
+	jwtCookie, err := r.Cookie("cs_jwt")
+	if err != nil {
+		logrus.Errorln("Unable to find cs_jwt cookie", err)
+		return
+	}
+	identity, err := util.ParseJWTToken(jwtCookie.Value)
+	if err != nil {
+		logrus.Errorln("Unable to parse jwt token", err)
+		return
+	}
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		logrus.Errorln("Unable to upgrade WS connection", err)
@@ -37,8 +54,8 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	}
 
 	client := connectionhub.Client{
-		User:         clientId,
-		Organization: "foo",
+		User:         identity.UserId,
+		Organization: identity.OrgId,
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}
@@ -48,7 +65,7 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 }
 
 func EmitMessage(w http.ResponseWriter, r *http.Request) {
-	var p connectionhub.WsMessage
+	var p WSRequestPayload
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&p)
 	if err != nil {
@@ -62,7 +79,8 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.Write(response)
 		return
 	}
-	data, err := json.Marshal(&p.Payload)
+	event := cloudevents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
+	data, err := json.Marshal(event)
 	if err != nil {
 		logrus.Errorln(err)
 		payload := make(map[string]string)
@@ -78,9 +96,13 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 			Roles:         p.Roles,
 			Organizations: p.Organizations,
 		},
-		Broadcast: true,
+		Broadcast: p.Broadcast,
 		Data:      data,
 	}
-	connectionhub.ConnectionHub.Broadcast <- newMessage
+	if newMessage.Broadcast {
+		connectionhub.ConnectionHub.Broadcast <- newMessage
+	} else {
+		connectionhub.ConnectionHub.Emit <- newMessage
+	}
 	w.WriteHeader(http.StatusOK)
 }

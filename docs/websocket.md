@@ -16,23 +16,51 @@ To open a new websocket locally, spin up chrome-service-backend open your browse
 
 Open the console, and add the following connection snippet.
 
-`x = new WebSocket("ws://localhost:8000/wss/chrome-service/v1/ws");`
+`x = new WebSocket("wss://stage.foo.redhat.com:1337/wss/chrome-service/v1/ws", 'cloudevents.json')`
 
 Once connected, you can log out any new wss messages with `x.onmessage = console.log`
 
 You can send a test message with the following fetch request. Please note the 
 header is only a test value and will not work in any other environment.
 
+**When testing in chrome environment, make sure to allow the endpoint in the CSP headers in index.html!**
+
 ``` javascript
-fetch("/api/events/v1/emit-message", {
+fetch("/api/chrome-service/v1/emit-message", {
   method: "POST",
   body: JSON.stringify({
-    payload: { foo: "bar" },
+    id: "message-id", // id of message
+    type: "notifications.drawer", // type of the event
+    broadcast: true, // should be send to every client
+    users: [], // list of user ids that should receive the message
+    roles: [], // list of roles that should receive the message, should be used with organizations only
+    organizations: [], // list of org ids to receive the message
+    payload: { title: "New notification", description: "Some longer body" },
   }),
-  headers: {
-    "x-rh-identity": "eyJpZGVudGl0eSI6eyJ1c2VyIjp7InVzZXJfaWQiOiIxMiJ9fX0="
-  }
 });
+```
+
+**Make sure your chrome has ws proxy setup fot the endpoint! This is required to have proper WS registration.**
+
+Sample proxy config:
+```jsx
+{ 
+  routes:
+    {
+    ...(process.env.CHROME_SERVICE && {
+      // web sockets
+      '/wss/chrome-service/': {
+        target: `ws://localhost:${process.env.CHROME_SERVICE}`,
+        // To upgrade the connection
+        ws: true,
+      },
+      // REST API
+      '/api/chrome-service/v1/': {
+        host: `http://localhost:${process.env.CHROME_SERVICE}`,
+      },
+    })
+  }
+}
 ```
 
 You should see data come into the console logs on the chrome-service terminal window.

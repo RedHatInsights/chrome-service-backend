@@ -3,13 +3,16 @@ package util
 import (
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"net/url"
+	"strings"
 
 	"github.com/redhatinsights/platform-go-middlewares/identity"
 	"github.com/sirupsen/logrus"
 )
 
-func ParseXRHIdentityheader(identityHeader string) (*identity.XRHID, error) {
+func ParseXRHIdentityHeader(identityHeader string) (*identity.XRHID, error) {
 	var XRHIdentity identity.XRHID
 	decodedIdentity, err := base64.StdEncoding.DecodeString(identityHeader)
 	if err != nil {
@@ -25,4 +28,53 @@ func ParseXRHIdentityheader(identityHeader string) (*identity.XRHID, error) {
 
 	// XRHIdentity.Identity.User.UserID
 	return &XRHIdentity, nil
+}
+
+type DecodedToken struct {
+	UserId        string `json:"user_id"`
+	OrgId         string `json:"org_id"`
+	AccountNumber string `json:"account_number"`
+}
+
+// Adaptation of chrome UI token parsing as we can't yse the JWT decode, because we do not have the decode key
+func ParseJWTToken(tokenString string) (DecodedToken, error) {
+	str := tokenString
+	str = strings.Split(str, ".")[1]
+	str = strings.ReplaceAll(str, "-/", "+")
+	str = strings.ReplaceAll(str, "_/", "/")
+
+	switch len(str) % 4 {
+	case 0:
+		break
+	case 2:
+		str += "=="
+	case 3:
+		str += "="
+	default:
+		return DecodedToken{}, errors.New("invalid token")
+	}
+
+	str = str + strings.Repeat("=", len(str)%4)
+	str = strings.ReplaceAll(str, "-", "+")
+	str = strings.ReplaceAll(str, "_", "/")
+
+	data, err := base64.RawURLEncoding.DecodeString(str)
+	if err != nil {
+		return DecodedToken{}, err
+	}
+
+	str = string(data)
+	str, err = url.QueryUnescape(str)
+	if err != nil {
+		return DecodedToken{}, err
+	}
+
+	var res DecodedToken
+	err = json.Unmarshal([]byte(str), &res)
+	fmt.Println(res)
+	if err != nil {
+		return DecodedToken{}, err
+	}
+
+	return res, nil
 }

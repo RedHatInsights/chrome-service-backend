@@ -67,7 +67,7 @@
                             "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
                         },
                         {
-                            "id": "clusters",
+                            "id": "advisor-clusters",
                             "appId": "ocpAdvisor",
                             "title": "Clusters",
                             "href": "/openshift/insights/advisor/clusters",

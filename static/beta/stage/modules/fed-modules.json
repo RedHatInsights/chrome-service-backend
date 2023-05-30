@@ -995,5 +995,18 @@
                 ]
             }
         ]
+    },
+    "subscriptionServices": {
+            "manifestLocation": "/apps/subscriptions-dashboard/fed-mods.json",
+            "modules": [
+                {
+                    "id": "subscriptions-dashboard",
+                    "module": "./RootApp",
+                    "routes": [
+                        "/subscriptions",
+                        "/subscriptions/dashboard"
+                    ]
+                }
+            ]
     }
 }

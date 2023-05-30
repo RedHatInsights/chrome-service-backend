@@ -204,7 +204,7 @@
             "title": "Subscriptions",
             "routes": [
               {
-                "id": "rhel",
+                "id": "subs.rhel",
                 "appId": "subscriptions",
                 "title": "RHEL",
                 "href": "/insights/subscriptions/rhel",

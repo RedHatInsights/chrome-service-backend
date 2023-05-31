@@ -12,8 +12,6 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/sirupsen/logrus"
 )
-import "io"
-
 
 type WSRequestPayload struct {
 	connectionhub.WsMessage
@@ -82,6 +80,31 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	event := cloudevents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
+	fmt.Println(event)
+	dctErr := event.DataContentType.IsValid()
+	if dctErr != nil {
+		logrus.Errorln(dctErr)
+		payload := make(map[string]string)
+		payload["msg"] = "The Data Content Type needs to be in application/json format!"
+		response, _ := json.Marshal(payload)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
+	svErr := event.SpecVersion.IsValid()
+	if svErr != nil {
+		logrus.Errorln(svErr)
+		payload := make(map[string]string)
+		payload["msg"] = "Spec version needs to be 1.0.2!"
+		response, _ := json.Marshal(payload)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
 	data, err := json.Marshal(event)
 	if err != nil {
 		logrus.Errorln(err)
@@ -91,14 +114,6 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		fmt.Printf("err")
-		return
-	}
-	fmt.Println(body)
-	// fmt.Println("-")
-	// fmt.Println(r)
 	fmt.Println("p", p)
 	newMessage := connectionhub.Message{
 		Destinations: connectionhub.MessageDestinations{

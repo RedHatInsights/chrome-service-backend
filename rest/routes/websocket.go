@@ -12,6 +12,8 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/sirupsen/logrus"
 )
+import "io"
+
 
 type WSRequestPayload struct {
 	connectionhub.WsMessage
@@ -73,7 +75,7 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		payload := make(map[string]string)
 		payload["msg"] = "Unable to decode payload!"
 		response, _ := json.Marshal(payload)
-
+		
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write(response)
@@ -89,6 +91,14 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		fmt.Printf("err")
+		return
+	}
+	fmt.Println(string(body))
+	fmt.Println("-")
+	fmt.Println(r)
 	fmt.Println("p", p)
 	newMessage := connectionhub.Message{
 		Destinations: connectionhub.MessageDestinations{

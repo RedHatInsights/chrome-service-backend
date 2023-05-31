@@ -150,7 +150,7 @@
                             "product": "Red Hat Cost Management"
                         },
                         {
-                            "id": "openshift",
+                            "id": "costManagement.openshift",
                             "appId": "costManagement",
                             "title": "OpenShift",
                             "href": "/openshift/cost-management/ocp",

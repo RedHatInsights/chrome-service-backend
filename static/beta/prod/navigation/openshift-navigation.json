@@ -159,7 +159,7 @@
                             ]
                         },
                         {
-                            "id": "openshift",
+                            "id": "costManagement.openshift",
                             "appId": "costManagement",
                             "title": "OpenShift",
                             "href": "/openshift/cost-management/ocp",

@@ -43,6 +43,7 @@ type ModuleIndexEntry struct {
 	Title           []string `json:"title"`
 	Bundle          []string `json:"bundle"`
 	BundleTitle     []string `json:"bundleTitle"`
+	AltTitle        []string `json:"alt_title,omitempty"`
 	Id              string   `json:"id"`
 	Uri             string   `json:"uri"`
 	SolrCommand     string   `json:"solrCommand"`
@@ -53,10 +54,11 @@ type ModuleIndexEntry struct {
 }
 
 type LinkEntry struct {
-	Id          string `json:"id"`
-	Title       string `json:"title"`
-	Href        string `json:"href"`
-	Description string `json:"description"`
+	Id          string   `json:"id"`
+	Title       string   `json:"title"`
+	Href        string   `json:"href"`
+	Description string   `json:"description"`
+	AltTitle    []string `json:"alt_title,omitempty"`
 }
 
 func findFirstValidChildLink(routes []interface{}) LinkEntry {
@@ -113,6 +115,11 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 		link := findFirstValidChildLink(routes)
 		link.Id = id
 		link.Title = topLevel["title"].(string)
+		// Alternative titles are optional
+		altTitles, ok := topLevel["alt_title"].([]string)
+		if ok {
+			link.AltTitle = altTitles
+		}
 		description, ok := topLevel["description"].(string)
 		if ok {
 			link.Description = description
@@ -131,6 +138,12 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 					Id:    id,
 					Title: i["title"].(string),
 					Href:  i["href"].(string),
+				}
+
+				// Alternative titles are optional
+				altTitles, ok := topLevel["alt_title"].([]string)
+				if ok {
+					link.AltTitle = altTitles
 				}
 
 				// description is optional
@@ -163,6 +176,12 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 				Href:  item["href"].(string),
 			}
 
+			// Alternative titles are optional
+			altTitles, ok := topLevel["alt_title"].([]string)
+			if ok {
+				link.AltTitle = altTitles
+			}
+
 			// description is optional
 			description, ok := item["description"].(string)
 			if ok {
@@ -192,8 +211,9 @@ type servicesTemplate struct {
 
 type ServiceLink struct {
 	LinkEntry
-	IsGroup bool        `json:"-"`
-	Links   []LinkEntry `json:"links,omitempty"`
+	IsGroup  bool        `json:"-"`
+	Links    []LinkEntry `json:"links,omitempty"`
+	AltTitle []string    `json:"alt_title,omitempty"`
 }
 
 type ServiceEntry struct {
@@ -301,12 +321,13 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 				Title:           []string{e.Title},
 				Bundle:          []string{bundle},
 				BundleTitle:     []string{bundleMapping[bundle]},
-				Id:              fmt.Sprintf("hcc-module-%s", e.Href),
+				Id:              fmt.Sprintf("hcc-module-%s-%s", e.Href, e.Id),
 				Uri:             fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
 				SolrCommand:     "index",
 				ContentType:     "moduleDefinition",
 				ViewUri:         fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
 				RelativeUri:     e.Href,
+				AltTitle:        e.AltTitle,
 			}
 			flatLinks = append(flatLinks, newLink)
 		}

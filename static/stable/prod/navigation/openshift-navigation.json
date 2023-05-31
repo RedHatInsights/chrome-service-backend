@@ -99,8 +99,8 @@
                         {
                             "id": "containerPlatform",
                             "appId": "subscriptions",
-                            "title": "Container Platform",
-                            "href": "/openshift/subscriptions/openshift-container",
+                            "title": "Red Hat OpenShift",
+                            "href": "/openshift/subscriptions/openshift",
                             "product": "Subscription Watch"
                         },
                         {
@@ -108,12 +108,6 @@
                             "appId": "openshift",
                             "title": "Dedicated (Annual)",
                             "href": "/openshift/quota"
-                        },
-                        {
-                            "id": "dedicatedOnDemant",
-                            "appId": "subscriptions",
-                            "title": "Dedicated (On-Demand)",
-                            "href": "/openshift/subscriptions/openshift-dedicated"
                         },
                         {
                             "id": "dedicatedOnDemandLimits",

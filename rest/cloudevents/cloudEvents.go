@@ -11,7 +11,6 @@ import (
 
 type DataContentType string
 type SpecVersion string
-type Data string
 
 const (
 	ApplicationJson DataContentType = "application/json"
@@ -37,15 +36,6 @@ func (sv SpecVersion) IsValid() error {
 	}
 	return fmt.Errorf("invalid cloud events spec version, expect %v, got %v", V102, sv)
 }
-
-// func JsonValidation(data Data) error {
-// 	var jsonValidation interface{}
-// 	err := json.Unmarshal([]byte(data), &jsonValidation)
-// 	if err != nil {
-// 		return fmt.Errorf("Data needs to be in JSON format")
-// 	}
-// 	return nil
-// } 
 
 // TODO: Specify accepted data payload
 // data type is generic, we accept any valid JSON for now

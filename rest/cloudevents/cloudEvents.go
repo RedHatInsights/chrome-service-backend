@@ -34,7 +34,6 @@ func (sv SpecVersion) IsValid() error {
 			return nil
 		}
 	}
-
 	return fmt.Errorf("invalid cloud events spec version, expect %v, got %v", V102, sv)
 }
 

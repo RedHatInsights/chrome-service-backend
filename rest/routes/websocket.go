@@ -96,9 +96,9 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("err")
 		return
 	}
-	fmt.Println(string(body))
-	fmt.Println("-")
-	fmt.Println(r)
+	fmt.Println(body)
+	// fmt.Println("-")
+	// fmt.Println(r)
 	fmt.Println("p", p)
 	newMessage := connectionhub.Message{
 		Destinations: connectionhub.MessageDestinations{

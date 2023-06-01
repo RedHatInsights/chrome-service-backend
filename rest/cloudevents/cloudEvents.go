@@ -3,6 +3,7 @@ package cloudevents
 import (
 	"fmt"
 	"time"
+	"net/url"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 )
@@ -35,6 +36,14 @@ func (sv SpecVersion) IsValid() error {
 		}
 	}
 	return fmt.Errorf("invalid cloud events spec version, expect %v, got %v", V102, sv)
+}
+
+func SourceIsValid(uri string) error {
+	_, err := url.ParseRequestURI(uri)
+	if err != nil {
+		return fmt.Errorf("URI is not valid. Expected a valid URI, but got %v.", uri)
+	}
+	return nil;
 }
 
 // TODO: Specify accepted data payload

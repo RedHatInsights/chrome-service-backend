@@ -44,30 +44,34 @@ func startKafkaReader(r *kafka.Reader) {
 			if err != nil {
 				log.Println("Unable marshal payload data", p, err)
 			} else {
-				//validDct := cloudevents.DataContentType(p.DataContentType)
 				err := p.DataContentType.IsValid()
 				if err != nil {
-					log.Println("DCT needs to be json formatted", p, err)
+					log.Println("Kafka message payload needs to be JSON formatted", err)
 				} else {
 					err := p.SpecVersion.IsValid()
 					if err != nil {
-						log.Println("Spec version needs to be 1.0.2", p, err)
+						log.Println(err)
 					} else {
-						newMessage := connectionhub.Message{
-							Destinations: connectionhub.MessageDestinations{
-								Users:         p.Data.Users,
-								Roles:         p.Data.Roles,
-								Organizations: p.Data.Organizations,
-							},
-							Broadcast: p.Data.Broadcast,
-							Data:      data,
-						}
-						if p.Data.Broadcast {
-							logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
-							connectionhub.ConnectionHub.Broadcast <- newMessage
+						err := cloudevents.SourceIsValid(p.Source)
+						if err != nil {
+							log.Println(err)
 						} else {
-							logrus.Infoln("Emitting new message from kafka reader: ", string(newMessage.Data))
-							connectionhub.ConnectionHub.Emit <- newMessage
+							newMessage := connectionhub.Message{
+								Destinations: connectionhub.MessageDestinations{
+									Users:         p.Data.Users,
+									Roles:         p.Data.Roles,
+									Organizations: p.Data.Organizations,
+								},
+								Broadcast: p.Data.Broadcast,
+								Data:      data,
+							}
+							if p.Data.Broadcast {
+								logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
+								connectionhub.ConnectionHub.Broadcast <- newMessage
+							} else {
+								logrus.Infoln("Emitting new message from kafka reader: ", string(newMessage.Data))
+								connectionhub.ConnectionHub.Emit <- newMessage
+							}
 						}
 					}
 				}

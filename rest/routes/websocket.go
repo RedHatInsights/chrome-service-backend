@@ -80,7 +80,6 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	event := cloudevents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
-	fmt.Println(event)
 	dctErr := event.DataContentType.IsValid()
 	if dctErr != nil {
 		logrus.Errorln(dctErr)
@@ -98,6 +97,18 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		logrus.Errorln(svErr)
 		payload := make(map[string]string)
 		payload["msg"] = "Spec version needs to be 1.0.2!"
+		response, _ := json.Marshal(payload)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
+	uriErr := cloudevents.SourceIsValid(event.Source)
+	if uriErr != nil {
+		logrus.Errorln(svErr)
+		payload := make(map[string]string)
+		payload["msg"] = "Invalid URI!"
 		response, _ := json.Marshal(payload)
 
 		w.Header().Set("Content-Type", "application/json")

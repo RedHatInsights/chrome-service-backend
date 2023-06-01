@@ -78,6 +78,9 @@
     "navItem": {
       "type": "object",
       "properties": {
+        "isFavoritable": {
+          "type": "boolean"
+        },
         "isHidden": {
           "type": "boolean"
         },

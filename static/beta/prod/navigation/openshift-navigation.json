@@ -3,6 +3,16 @@
     "title": "OpenShift",
     "navItems": [
         {
+            "id": "createCluster",
+            "appId": "openshift",
+            "href": "/openshift/create",
+            "title": "Create Cluster",
+            "isHidden": true,
+            "isFavoritable": true,
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "Select an OpenShift cluster type to create."
+        },
+        {
             "id": "clusters",
             "appId": "openshift",
             "href": "/openshift",

@@ -6,7 +6,8 @@
     "title": "Application services",
     "links": [
       "application-services.apiManagement",
-      "application-services.serviceAccounts"
+      "application-services.serviceAccounts",
+      "application-services.trustedContentOverview"
     ]
   },
   {

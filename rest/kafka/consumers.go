@@ -52,7 +52,7 @@ func startKafkaReader(r *kafka.Reader) {
 					if err != nil {
 						log.Println(err)
 					} else {
-						err := cloudevents.SourceIsValid(p.Source)
+						err := p.Source.IsValid()
 						if err != nil {
 							log.Println(err)
 						} else {

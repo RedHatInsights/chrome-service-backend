@@ -79,7 +79,7 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.Write(response)
 		return
 	}
-	event := cloudevents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
+	event := cloudevents.WrapPayload(p.Payload, cloudevents.URI(r.Host+r.URL.Path), p.Id, p.Type)
 	dctErr := event.DataContentType.IsValid()
 	if dctErr != nil {
 		logrus.Errorln(dctErr)
@@ -104,7 +104,7 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		w.Write(response)
 		return
 	}
-	uriErr := cloudevents.SourceIsValid(event.Source)
+	uriErr := event.Source.IsValid()
 	if uriErr != nil {
 		logrus.Errorln(svErr)
 		payload := make(map[string]string)

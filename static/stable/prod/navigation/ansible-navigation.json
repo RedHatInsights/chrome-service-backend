@@ -30,13 +30,6 @@
                 },
                 {
                     "appId": "automationHub",
-                    "id": "repoManagement",
-                    "title": "Repo Management",
-                    "href": "/ansible/automation-hub/repositories",
-                    "product": "Ansible Automation Hub"
-                },
-                {
-                    "appId": "automationHub",
                     "id": "taskManagement",
                     "title": "Task Management",
                     "href": "/ansible/automation-hub/tasks",

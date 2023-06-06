@@ -7,7 +7,7 @@ RUN go get -d -v
 RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
 
 # Build the migration binary.
-RUN CGO_ENABLED=0 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
+RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
 
 FROM registry.redhat.io/ubi8-minimal:latest
 

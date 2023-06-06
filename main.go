@@ -29,6 +29,7 @@ func init() {
 
 func main() {
 	cfg := config.Get()
+	featureflags.Init(cfg)
 	setupLogger(cfg)
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()

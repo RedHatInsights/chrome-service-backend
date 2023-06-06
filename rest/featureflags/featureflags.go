@@ -25,7 +25,6 @@ func newClientWrapper(cfg *config.ChromeServiceConfig) (*unleash.Client, error) 
 		unleash.WithCustomHeaders(http.Header{"Authorization": {cfg.FeatureFlagConfig.ClientAccessToken}}),
 	)
 	if err != nil {
-		client.Close()
 		return nil, err
 	}
 

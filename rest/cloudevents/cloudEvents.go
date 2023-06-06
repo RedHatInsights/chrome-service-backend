@@ -3,6 +3,7 @@ package cloudevents
 import (
 	"fmt"
 	"time"
+	"net/url"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 )
@@ -11,6 +12,7 @@ import (
 
 type DataContentType string
 type SpecVersion string
+type URI string
 
 const (
 	ApplicationJson DataContentType = "application/json"
@@ -34,8 +36,15 @@ func (sv SpecVersion) IsValid() error {
 			return nil
 		}
 	}
-
 	return fmt.Errorf("invalid cloud events spec version, expect %v, got %v", V102, sv)
+}
+
+func (uri URI) IsValid() error {
+	_, err := url.ParseRequestURI(string(uri))
+	if err != nil {
+		return fmt.Errorf("URI is not valid. Expected a valid URI, but got %v.", uri)
+	}
+	return nil;
 }
 
 // TODO: Specify accepted data payload
@@ -43,14 +52,14 @@ func (sv SpecVersion) IsValid() error {
 type Envelope[D any] struct {
 	SpecVersion     SpecVersion     `json:"specversion"`
 	Type            string          `json:"type"`
-	Source          string          `json:"source"`
+	Source          URI             `json:"source"`
 	Id              string          `json:"id"`
 	Time            time.Time       `json:"time"`
 	DataContentType DataContentType `json:"datacontenttype"`
 	Data            D               `json:"data"`
 }
 
-func WrapPayload[P any](payload P, source string, id string, messageType string) Envelope[P] {
+func WrapPayload[P any](payload P, source URI, id string, messageType string) Envelope[P] {
 	event := Envelope[P]{
 		SpecVersion:     V102,
 		Type:            messageType,

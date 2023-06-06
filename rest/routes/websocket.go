@@ -73,13 +73,49 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 		payload := make(map[string]string)
 		payload["msg"] = "Unable to decode payload!"
 		response, _ := json.Marshal(payload)
+		
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
+	event := cloudevents.WrapPayload(p.Payload, cloudevents.URI(r.Host+r.URL.Path), p.Id, p.Type)
+	dctErr := event.DataContentType.IsValid()
+	if dctErr != nil {
+		logrus.Errorln(dctErr)
+		payload := make(map[string]string)
+		payload["msg"] = "The Data Content Type needs to be in application/json format!"
+		response, _ := json.Marshal(payload)
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write(response)
 		return
 	}
-	event := cloudevents.WrapPayload(p.Payload, r.Host+r.URL.Path, p.Id, p.Type)
+	svErr := event.SpecVersion.IsValid()
+	if svErr != nil {
+		logrus.Errorln(svErr)
+		payload := make(map[string]string)
+		payload["msg"] = "Spec version needs to be 1.0.2!"
+		response, _ := json.Marshal(payload)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
+	uriErr := event.Source.IsValid()
+	if uriErr != nil {
+		logrus.Errorln(svErr)
+		payload := make(map[string]string)
+		payload["msg"] = "Invalid URI!"
+		response, _ := json.Marshal(payload)
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(response)
+		return
+	}
 	data, err := json.Marshal(event)
 	if err != nil {
 		logrus.Errorln(err)

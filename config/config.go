@@ -36,6 +36,8 @@ type FeatureFlagsConfig struct {
 	Port              int
 	Scheme            string
 	FullURL           string
+	// ONLY for local use, Clowder won't populate this
+	AdminToken string
 }
 
 type ChromeServiceConfig struct {
@@ -149,6 +151,8 @@ func init() {
 		}
 
 		options.FeatureFlagConfig.ClientAccessToken = os.Getenv("UNLEASH_API_TOKEN")
+		// Only for local use to seed the database, does not work in Clowder.
+		options.FeatureFlagConfig.AdminToken = os.Getenv("UNLEASH_ADMIN_TOKEN")
 		options.FeatureFlagConfig.Hostname = "localhost"
 		options.FeatureFlagConfig.Scheme = "http"
 		options.FeatureFlagConfig.Port = 4242

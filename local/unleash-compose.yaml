@@ -9,19 +9,13 @@ services:
     ports:
     - "4242:4242"
     environment:
-      # This points Unleash to its backing database (defined in the `db` section below)
       DATABASE_URL: "postgres://postgres:unleash@db/postgres"
-      # Disable SSL for database connections. @chriswk: why do we do this?
       DATABASE_SSL: "false"
-      # Changing log levels:
       LOG_LEVEL: "warn"
-      # Proxy clients must use one of these keys to connect to the
-      # Proxy. To add more keys, separate them with a comma (`key1,key2`).
       INIT_FRONTEND_API_TOKENS: "default:development.unleash-insecure-frontend-api-token"
-      # Initialize Unleash with a default set of client API tokens. To
-      # initialize Unleash with multiple tokens, separate them with a
-      # comma (`token1,token2`).
       INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
+      # This is setup to seed in feature flags, production is entirely different
+      INIT_ADMIN_API_TOKENS: "*:*.unleash-insecure-api-token"
     depends_on:
       db:
         condition: service_healthy
@@ -37,9 +31,7 @@ services:
     - "5432"
     image: postgres:15
     environment:
-      # create a database called `db`
       POSTGRES_DB: "db"
-      # trust incoming connections blindly (DON'T DO THIS IN PRODUCTION!)
       POSTGRES_HOST_AUTH_METHOD: "trust"
     healthcheck:
       test: ["CMD", "pg_isready", "--username=postgres", "--host=127.0.0.1", "--port=5432"]

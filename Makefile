@@ -54,3 +54,6 @@ infra:
 
 clean-all:
 	podman-compose -f local/full-stack-compose.yaml down
+
+test:
+	go test -v  ./...

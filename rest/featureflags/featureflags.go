@@ -25,7 +25,6 @@ func newClientWrapper(cfg *config.ChromeServiceConfig) (*unleash.Client, error) 
 		unleash.WithCustomHeaders(http.Header{"Authorization": {cfg.FeatureFlagConfig.ClientAccessToken}}),
 	)
 	if err != nil {
-		client.Close()
 		return nil, err
 	}
 
@@ -48,6 +47,7 @@ func New(cfg *config.ChromeServiceConfig) error {
 	}
 	c, err := newClientWrapper(cfg)
 	if err != nil {
+		ffClient = nil
 		logrus.Infof("Unable to contact unleash server due to: %v", err)
 		return err
 	}
@@ -69,14 +69,20 @@ func IsEnabled(flag string) bool {
 }
 
 func Close() {
-	ffClient.unleashClient.Close()
+	if ffClient != nil {
+		ffClient.unleashClient.Close()
+		ffClient = nil
+	}
 }
 
 // Called before main() and when the library is imported
-func init() {
-	cfg := config.Get()
+func Init(cfg *config.ChromeServiceConfig) {
 	err := New(cfg)
 	if err != nil {
 		logrus.Infoln("all feature flags are set to false")
 	}
+}
+
+func GetClient() *FFClient {
+	return ffClient
 }

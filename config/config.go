@@ -99,11 +99,13 @@ func init() {
 		options.DbSSLMode = cfg.Database.SslMode
 		options.DbSSLRootCert = options.getCert(cfg)
 
-		options.FeatureFlagConfig.ClientAccessToken = *cfg.FeatureFlags.ClientAccessToken
-		options.FeatureFlagConfig.Hostname = cfg.FeatureFlags.Hostname
-		options.FeatureFlagConfig.Scheme = string(cfg.FeatureFlags.Scheme)
-		options.FeatureFlagConfig.Port = cfg.FeatureFlags.Port
-		options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
+		if cfg.FeatureFlags != nil {
+			options.FeatureFlagConfig.ClientAccessToken = *cfg.FeatureFlags.ClientAccessToken
+			options.FeatureFlagConfig.Hostname = cfg.FeatureFlags.Hostname
+			options.FeatureFlagConfig.Scheme = string(cfg.FeatureFlags.Scheme)
+			options.FeatureFlagConfig.Port = cfg.FeatureFlags.Port
+			options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
+		}
 
 		broker := cfg.Kafka.Brokers[0]
 		// pass all required topics names

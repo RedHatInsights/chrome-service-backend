@@ -67,6 +67,8 @@
     {
       "title": "Advanced Cluster Security",
       "expandable": true,
+      "id": "application-services.acs-section",
+      "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
       "routes": [
         {
           "id": "clusterOverview",

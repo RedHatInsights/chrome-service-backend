@@ -19,6 +19,12 @@
     ]
   },
   {
+    "id": "ACS-custom",
+    "links": [
+      "application-services.acs-section"
+    ]
+  },
+  {
     "id": "create-clusters",
     "links": [
       {

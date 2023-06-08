@@ -73,13 +73,13 @@ func main() {
 	metricsRouter.Handle("/metrics", promhttp.Handler())
 
 	go func() {
-		metricsStringAddr := fmt.Sprintf("localhost:%s", strconv.Itoa(cfg.MetricsPort))
+		metricsStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.MetricsPort))
 		if err := http.ListenAndServe(metricsStringAddr, metricsRouter); err != nil {
 			log.Fatalf("Metrics server stopped %v", err)
 		}
 	}()
 
-	serverStringAddr := fmt.Sprintf("localhost:%s", strconv.Itoa(cfg.WebPort))
+	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
 	if err := http.ListenAndServe(serverStringAddr, router); err != nil {
 		log.Fatalf("Chrome-service-api has stopped due to %v", err)
 	}

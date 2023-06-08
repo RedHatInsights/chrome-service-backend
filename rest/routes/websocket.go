@@ -59,6 +59,7 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}
+	logrus.Infoln("New client added to the connection hub: ", client.User)
 	connectionhub.ConnectionHub.Register <- client
 	go client.WritePump()
 	client.ReadPump()
@@ -68,12 +69,13 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 	var p WSRequestPayload
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&p)
+	logrus.Infoln("Attempting to emit new broadcast message", p)
 	if err != nil {
 		logrus.Errorln(err)
 		payload := make(map[string]string)
 		payload["msg"] = "Unable to decode payload!"
 		response, _ := json.Marshal(payload)
-		
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write(response)

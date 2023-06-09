@@ -1,0 +1,65 @@
+name: Go package
+
+on: [push]
+
+jobs:
+  pr_check:
+    runs-on: ubuntu-latest
+    services:
+        unleash-db:
+          image: postgres:15
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+          env:
+            POSTGRES_DB: "db"
+            # trust incoming connections blindly (DON'T DO THIS IN PRODUCTION!)
+            POSTGRES_HOST_AUTH_METHOD: "trust"
+        chrome-db:
+          image: postgres:14.1-alpine
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+          env:
+            POSTGRES_USER: chrome
+            POSTGRES_PASSWORD: chrome
+          ports:
+            - "5432:5432"
+
+        unleash_web:
+          image: unleashorg/unleash-server:latest
+          options: >-
+            --health-cmd "wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1"
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+            --health-start-period 30s
+          ports:
+            - "4242:4242"
+          env:
+            DATABASE_URL: "postgres://postgres:unleash@unleash-db/postgres"
+            DATABASE_SSL: "false"
+            LOG_LEVEL: "warn"
+            INIT_FRONTEND_API_TOKENS: "default:development.unleash-insecure-frontend-api-token"
+            INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
+            # This is set up to seed in feature flags, production is entirely different
+            INIT_ADMIN_API_TOKENS: "*:*.unleash-insecure-api-token"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.18'
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: Test
+        run: make test

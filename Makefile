@@ -21,15 +21,11 @@ port?=8000
 dev-static:
 	go run cmd/static/static.go $(port)
 
-
 dev-static-node:
 	npx http-server . -a :: -p $(port)
 
 migrate:
 	go run cmd/migrate/migrate.go 
-
-dev:
-	go run main.go
 
 database:
 	podman-compose up
@@ -55,5 +51,11 @@ infra:
 clean-all:
 	podman-compose -f local/full-stack-compose.yaml down
 
-test:
+test: seed-unleash
 	go test -v  ./...
+
+seed-unleash:
+	go run cmd/unleash/seed.go
+
+dev: seed-unleash
+	go run main.go

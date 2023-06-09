@@ -59,6 +59,8 @@ services:
       LOG_LEVEL: "warn"
       INIT_FRONTEND_API_TOKENS: "default:development.unleash-insecure-frontend-api-token"
       INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
+      # This is setup to seed in feature flags, production is entirely different
+      INIT_ADMIN_API_TOKENS: "*:*.unleash-insecure-api-token"
     depends_on:
       db:
         condition: service_healthy

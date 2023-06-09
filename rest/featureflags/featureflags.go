@@ -34,7 +34,11 @@ func newClientWrapper(cfg *config.ChromeServiceConfig) (*unleash.Client, error) 
 	case errs := <-client.Errors():
 		client.Close()
 		return nil, errs
-	default:
+	// To avoid the race condition where the client asks for a flag before the connection is finalized,
+	// we have to block until the client is either ready or has an error.
+	// I thought this was better than a sleep(time.Second).
+	case <-client.Ready():
+		logrus.Infoln("Unleash client is ready")
 		return client, nil
 	}
 
@@ -75,7 +79,6 @@ func Close() {
 	}
 }
 
-// Called before main() and when the library is imported
 func Init(cfg *config.ChromeServiceConfig) {
 	err := New(cfg)
 	if err != nil {

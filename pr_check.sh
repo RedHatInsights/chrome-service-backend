@@ -26,7 +26,8 @@ cat << EOF > $WORKSPACE/artifacts/junit-dummy.xml
 </testsuite>
 EOF
 
+# Build and publish container image
 source $CICD_ROOT/build.sh
-# temporarily exit early to sucesfully deploy the image to quay
-exit 0
+
+## Roll out ephemeral env
 source $CICD_ROOT/deploy_ephemeral_env.sh

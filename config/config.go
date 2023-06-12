@@ -153,7 +153,7 @@ func init() {
 		options.FeatureFlagConfig.ClientAccessToken = os.Getenv("UNLEASH_API_TOKEN")
 		// Only for local use to seed the database, does not work in Clowder.
 		options.FeatureFlagConfig.AdminToken = os.Getenv("UNLEASH_ADMIN_TOKEN")
-		options.FeatureFlagConfig.Hostname = "localhost"
+		options.FeatureFlagConfig.Hostname = "0.0.0.0"
 		options.FeatureFlagConfig.Scheme = "http"
 		options.FeatureFlagConfig.Port = 4242
 		options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)

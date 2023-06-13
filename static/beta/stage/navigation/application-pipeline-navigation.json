@@ -1,13 +1,7 @@
 {
   "id": "hac",
-  "title": "HAC",
+  "title": "Trusted Application Pipeline",
   "navItems": [
-      {
-          "id": "example",
-          "title": "Example",
-          "appId": "hacCore",
-          "href": "/hac"
-      },
       {
         "id": "flatNav",
         "title": "Flat nav",

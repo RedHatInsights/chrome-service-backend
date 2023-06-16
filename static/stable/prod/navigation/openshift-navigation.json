@@ -71,7 +71,7 @@
                     ]
                 },
                 {
-                    "title": "Vulnerability",
+                    "title": "Vulnerability Dashboard",
                     "expandable": true,
                     "routes": [
                         {

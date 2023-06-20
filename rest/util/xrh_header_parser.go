@@ -58,7 +58,7 @@ func ParseJWTToken(tokenString string) (DecodedToken, error) {
 	str = strings.ReplaceAll(str, "-", "+")
 	str = strings.ReplaceAll(str, "_", "/")
 
-	data, err := base64.RawURLEncoding.DecodeString(str)
+	data, err := base64.URLEncoding.DecodeString(str)
 	if err != nil {
 		return DecodedToken{}, err
 	}

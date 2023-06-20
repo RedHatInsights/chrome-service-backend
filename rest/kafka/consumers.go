@@ -29,14 +29,14 @@ func startKafkaReader(r *kafka.Reader) {
 			logrus.Errorln("Error reading message: ", err)
 			break
 		}
-		fmt.Printf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
+		logrus.Infoln(fmt.Sprintf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value)))
 
 		var p cloudevents.KafkaEnvelope
 		err = json.Unmarshal(m.Value, &p)
 		if err != nil {
-			log.Printf("Unable Unmarshal message %s\n", string(m.Value))
+			logrus.Errorln(fmt.Sprintf("Unable Unmarshal message %s\n", string(m.Value)))
 		} else if p.Data.Payload == nil {
-			log.Printf("No message will be emitted doe to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value))
+			logrus.Errorln(fmt.Sprintf("No message will be emitted doe to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value)))
 		} else {
 			event := cloudevents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
 			event.Time = p.Time

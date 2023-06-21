@@ -18,7 +18,24 @@
           "title": "Users",
           "href": "/iam/user-access/users",
           "product": "Identity & Access Management",
-          "description": "Manage your organization's role-based access control (RBAC) to services."
+          "description": "Manage your organization's role-based access control (RBAC) to services.",
+          "alt_title": [
+            "role based access management",
+            "user management",
+            "user access",
+            "identity management",
+            "users",
+            "roles",
+            "groups",
+            "permissions",
+            "access",
+            "admin",
+            "administrator",
+            "editor",
+            "authorization",
+            "viewer",
+            "rbac"
+          ]
         },
         {
           "id": "roles",

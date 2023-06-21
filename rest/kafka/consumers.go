@@ -94,6 +94,8 @@ func createReader(topic string) *kafka.Reader {
 	config := config.Get()
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:     config.KafkaConfig.KafkaBrokers,
+		GroupID:     "platform.chrome",
+		StartOffset: kafka.LastOffset,
 		Topic:       topic,
 		Logger:      kafka.LoggerFunc(logrus.Debugf),
 		ErrorLogger: kafka.LoggerFunc(logrus.Errorf),

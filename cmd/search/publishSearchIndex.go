@@ -153,8 +153,8 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 				}
 
 				// Alternative titles are optional
-				if topLevel["alt_title"] != nil {
-					link.AltTitle = convertAltTitles(topLevel["alt_title"])
+				if i["alt_title"] != nil {
+					link.AltTitle = convertAltTitles(i["alt_title"])
 				}
 
 				// description is optional

@@ -20,7 +20,6 @@ func main() {
 		Topic:    cfg.KafkaConfig.KafkaTopics[0],
 		Balancer: &kafka.LeastBytes{},
 	})
-
 	defer kafkaWriter.Close()
 
 	body := `{
@@ -44,6 +43,9 @@ func main() {
 		Key:   []byte(fmt.Sprintf("Key-%v", time.Now().Unix())),
 		Value: []byte(body),
 	}
+
+	fmt.Println("Targeting Topic: ", kafkaWriter.Topic)
+	fmt.Println("Sending message", body)
 
 	err := kafkaWriter.WriteMessages(context.TODO(), msg)
 	if err != nil {

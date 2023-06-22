@@ -146,7 +146,7 @@ func init() {
 		options.DbSSLMode = "disable"
 		options.DbSSLRootCert = ""
 		options.KafkaConfig = KafkaCfg{
-			KafkaTopics:  []string{"platform-chrome"},
+			KafkaTopics:  []string{"platform.chrome"},
 			KafkaBrokers: []string{"localhost:9092"},
 		}
 

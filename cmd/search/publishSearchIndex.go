@@ -83,6 +83,19 @@ func findFirstValidChildLink(routes []interface{}) LinkEntry {
 	return result
 }
 
+func convertAltTitles(jsonEntry interface{}) []string {
+	altTitlesInterface, ok := jsonEntry.([]interface{})
+	if !ok {
+		fmt.Println("Cannot convert all title to array")
+		return []string{}
+	}
+	var altTitles []string
+	for _, v := range altTitlesInterface {
+		altTitles = append(altTitles, v.(string))
+	}
+	return altTitles
+}
+
 func flattenLinks(data interface{}) ([]LinkEntry, error) {
 	flatData := []LinkEntry{}
 
@@ -116,9 +129,8 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 		link.Id = id
 		link.Title = topLevel["title"].(string)
 		// Alternative titles are optional
-		altTitles, ok := topLevel["alt_title"].([]string)
-		if ok {
-			link.AltTitle = altTitles
+		if topLevel["alt_title"] != nil {
+			link.AltTitle = convertAltTitles(topLevel["alt_title"])
 		}
 		description, ok := topLevel["description"].(string)
 		if ok {
@@ -141,9 +153,8 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 				}
 
 				// Alternative titles are optional
-				altTitles, ok := topLevel["alt_title"].([]string)
-				if ok {
-					link.AltTitle = altTitles
+				if i["alt_title"] != nil {
+					link.AltTitle = convertAltTitles(i["alt_title"])
 				}
 
 				// description is optional
@@ -177,9 +188,8 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 			}
 
 			// Alternative titles are optional
-			altTitles, ok := topLevel["alt_title"].([]string)
-			if ok {
-				link.AltTitle = altTitles
+			if topLevel["alt_title"] != nil {
+				link.AltTitle = convertAltTitles(topLevel["alt_title"])
 			}
 
 			// description is optional
@@ -226,6 +236,7 @@ func findLinkById(id string, flatLinks []LinkEntry) (ServiceLink, bool) {
 	for _, l := range flatLinks {
 		if l.Id == id {
 			link.LinkEntry = l
+			link.AltTitle = l.AltTitle
 			return link, true
 		}
 	}
@@ -450,7 +461,8 @@ type UploadPayload struct {
 }
 
 func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
-
+	// fmt.Println(index)
+	// return nil
 	payload := UploadPayload{
 		DataSource: "console",
 		Documents:  index,

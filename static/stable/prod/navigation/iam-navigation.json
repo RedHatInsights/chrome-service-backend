@@ -18,7 +18,24 @@
           "appId": "rbac",
           "title": "Users",
           "href": "/iam/user-access/users",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "alt_title": [
+            "role based access management",
+            "user management",
+            "user access",
+            "identity management",
+            "users",
+            "roles",
+            "groups",
+            "permissions",
+            "access",
+            "admin",
+            "administrator",
+            "editor",
+            "authorization",
+            "viewer",
+            "rbac"
+          ]
         },
         {
           "id": "roles",

@@ -1,0 +1,126 @@
+{
+  "id": "application-services",
+  "title": "Application and Data Services",
+  "navItems": [
+    {
+      "id": "overview",
+      "appId": "applicationServices",
+      "title": "Overview",
+      "filterable": false,
+      "href": "/application-services/overview"
+    },
+    {
+      "id": "learningResources",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/application-services/learning-resources"
+    },
+    {
+      "groupId": "application-services",
+      "title": "Application Services",
+      "icon": "cloud",
+      "navItems": [
+        {
+          "id": "apiManagement",
+          "appId": "applicationServices",
+          "title": "API Management",
+          "description": "Manage API access, policy, and traffic controls for microservice-based applications.",
+          "href": "/application-services/api-management"
+        },
+        {
+          "id": "serviceAccounts",
+          "appId": "applicationServices",
+          "title": "Service Accounts",
+          "href": "/application-services/service-accounts",
+          "description": "Authenticate and connect securely to APIs from multiple services."
+        }
+      ]
+    },
+    {
+      "groupId": "data-services",
+      "title": "Data Services",
+      "icon": "database",
+      "navItems": [
+        {
+          "id": "dataScience",
+          "appId": "applicationServices",
+          "title": "Data Science",
+          "href": "/application-services/data-science",
+          "description": "Develop, train, and test artificial intelligence and machine learning (AI/ML) models."
+        }
+      ]
+    },
+    {
+      "groupId": "trusted-content",
+      "title": "Source Code Security",
+      "icon": "shield",
+      "navItems": [
+        {
+          "id": "trustedContentOverview",
+          "appId": "trustedContent",
+          "title": "Trusted Content",
+          "href": "/application-services/trusted-content",
+          "description": "Increase trust and integrity in source code and accelerate the application development process."
+        }
+      ]
+    },
+    {
+      "title": "Advanced Cluster Security",
+      "expandable": true,
+      "id": "acs-section",
+      "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
+      "routes": [
+        {
+          "id": "clusterOverview",
+          "appId": "acs",
+          "title": "Overview",
+          "href": "/application-services/acs/overview",
+          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
+        },
+        {
+          "id": "acsGettingStarted",
+          "appId": "acs",
+          "title": "Getting Started",
+          "href": "/application-services/acs/getting-started"
+        },
+        {
+          "id": "acsInstances",
+          "appId": "acs",
+          "title": "ACS Instances",
+          "href": "/application-services/acs/instances"
+        },
+        {
+          "id": "clustersDocumentation",
+          "title": "Documentation",
+          "isExternal": true,
+          "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
+        }
+      ]
+    },
+    {
+      "groupId": "insights",
+      "icon": "trend-up",
+      "title": "Red Hat Insights",
+      "navItems": [
+        {
+          "title": "Subscriptions",
+          "expandable": true,
+          "routes": [
+            {
+              "id": "openshiftDataScience",
+              "appId": "subscriptions",
+              "title": "OpenShift Data Science",
+              "href": "/application-services/subscriptions/rhods"
+            },
+            {
+              "id": "advancedClusterSecurityForKubernetes",
+              "appId": "subscriptions",
+              "title": "Advanced Cluster Security",
+              "href": "/application-services/subscriptions/rhacs"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

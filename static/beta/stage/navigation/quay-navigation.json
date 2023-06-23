@@ -1,0 +1,46 @@
+{
+  "id": "quay",
+  "title": "Quay.io",
+  "description": "Quay builds, analyzes, distributes your container images.",
+  "servicesId": "quay",
+  "navItems": [
+    {
+      "id": "quayOrganizations",
+      "appId": "quay-ui-plugin",
+      "title": "Organizations",
+      "description": "Group and manage repositories belonging to a particular team, group, or company.",
+      "href": "/quay/organization",
+      "permissions": [
+        {
+            "method": "apiRequest",
+            "args": [
+                {
+                    "url": "/beta/apps/quay/plugin-manifest.json",
+                    "matcher": "isNotEmpty",
+                    "accessor": "version"
+                }
+            ]
+        }
+      ]
+    },
+    {
+      "id": "quayRepositories",
+      "appId": "quay-ui-plugin",
+      "title": "Repositories",
+      "description": "Provide a central location for storing a related set of container images.",
+      "href": "/quay/repository",
+      "permissions": [
+        {
+            "method": "apiRequest",
+            "args": [
+                {
+                    "url": "/beta/apps/quay/plugin-manifest.json",
+                    "matcher": "isNotEmpty",
+                    "accessor": "version"
+                }
+            ]
+        }
+      ]
+    }
+  ]
+}

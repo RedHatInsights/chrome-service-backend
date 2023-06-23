@@ -4,10 +4,14 @@ COPY . .
 ENV GO111MODULE=on
 USER root
 RUN go get -d -v
+RUN make validate-schema
 RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
 
 # Build the migration binary.
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
+
+# Build the search index binary.
+RUN CGO_ENABLED=0 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
 
 FROM registry.redhat.io/ubi8-minimal:latest
 
@@ -18,6 +22,9 @@ RUN chgrp -R 0 /app && \
     chmod -R g=u /app
 COPY --from=builder   /go/bin/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /go/bin/chrome-migrate /usr/bin
+COPY --from=builder /go/bin/chrome-search-index /usr/bin
+# Copy chrome static JSON assets to server binary entry point
+COPY --from=builder $GOPATH/src/chrome-service-backend/static /static
 
 ENTRYPOINT ["/app/chrome-service-backend"]
 EXPOSE 8000

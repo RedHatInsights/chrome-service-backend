@@ -1,0 +1,212 @@
+{
+    "id": "ansible",
+    "title": "Ansible Automation Platform",
+    "navItems": [
+        {
+            "appId": "ansibleDashboard",
+            "id": "overview",
+            "title": "Overview",
+            "filterable": false,
+            "href": "/ansible/ansible-dashboard"
+        },
+        {
+            "title": "Automation Hub",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "collections",
+                    "appId": "automationHub",
+                    "title": "Collections",
+                    "href": "/ansible/automation-hub/",
+                    "product": "Ansible Automation Hub",
+                    "description": "Find and download Ansible Content Collections from Red Hat and partners."
+                },
+                {
+                    "appId": "automationHub",
+                    "id": "partners",
+                    "title": "Partners",
+                    "href": "/ansible/automation-hub/partners",
+                    "product": "Ansible Automation Hub"
+                },
+                {
+                    "appId": "automationHub",
+                    "id": "repoManagement",
+                    "title": "Repo Management",
+                    "href": "/ansible/automation-hub/repositories",
+                    "product": "Ansible Automation Hub"
+                },
+                {
+                    "appId": "automationHub",
+                    "id": "taskManagement",
+                    "title": "Task Management",
+                    "href": "/ansible/automation-hub/tasks",
+                    "product": "Ansible Automation Hub"
+                },
+                {
+                    "appId": "automationHub",
+                    "id": "connectToHub",
+                    "title": "Connect to Hub",
+                    "href": "/ansible/automation-hub/token",
+                    "product": "Ansible Automation Hub"
+                }
+            ]
+        },
+        {
+            "title": "Automation Analytics",
+            "expandable": true,
+            "routes": [
+                {
+                    "appId": "automationAnalytics",
+                    "id": "reports",
+                    "title": "Reports",
+                    "href": "/ansible/automation-analytics/reports",
+                    "product": "Ansible Automation Analytics",
+                    "description": "Plan, measure, and scale your automation using actionable data."
+                },
+                {
+                    "appId": "automationAnalytics",
+                    "id": "savingPlanner",
+                    "title": "Savings Planner",
+                    "href": "/ansible/automation-analytics/savings-planner",
+                    "product": "Ansible Automation Analytics"
+                },
+                {
+                    "appId": "automationAnalytics",
+                    "id": "automationCalculator",
+                    "title": "Automation Calculator",
+                    "href": "/ansible/automation-analytics/reports/automation_calculator/",
+                    "product": "Ansible Automation Analytics"
+                },
+                {
+                    "appId": "automationAnalytics",
+                    "id": "organizationStatistics",
+                    "title": "Organization Statistics",
+                    "href": "/ansible/automation-analytics/organization-statistics",
+                    "product": "Ansible Automation Analytics"
+                },
+                {
+                    "appId": "automationAnalytics",
+                    "id": "jobExplorer",
+                    "title": "Job Explorer",
+                    "href": "/ansible/automation-analytics/job-explorer",
+                    "product": "Ansible Automation Analytics"
+                },
+                {
+                    "appId": "automationAnalytics",
+                    "id": "clusters",
+                    "title": "Clusters",
+                    "href": "/ansible/automation-analytics/clusters",
+                    "product": "Ansible Automation Analytics"
+                },
+                {
+                    "appId": "automationAnalytics",
+                    "id": "notifications",
+                    "title": "Notifications",
+                    "href": "/ansible/automation-analytics/notifications",
+                    "product": "Ansible Automation Analytics"
+                }
+            ]
+        },
+        {
+            "title": "Documentation",
+            "id": "documentation",
+            "isExternal": true,
+            "filterable": false,
+            "href": "https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/"
+        },
+        {
+            "groupId": "operations",
+            "icon": "trend-up",
+            "title": "Red Hat Insights",
+            "navItems": [
+                {
+                    "appId": "inventory",
+                    "id": "inventory",
+                    "title": "Inventory",
+                    "href": "/ansible/inventory",
+                    "product": "Red Hat Insights",
+                    "description": "Get recommendations to prevent and resolve potential issues on your Ansible-managed ecosystem."
+                },
+                {
+                    "title": "Advisor",
+                    "expandable": true,
+                    "routes": [
+                        {
+                            "id": "recommendations",
+                            "appId": "advisor",
+                            "title": "Recommendations",
+                            "href": "/ansible/advisor/recommendations",
+                            "product": "Red Hat Insights",
+                            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
+                        },
+                        {
+                            "id": "systems",
+                            "appId": "advisor",
+                            "title": "Systems",
+                            "href": "/ansible/advisor/systems",
+                            "product": "Red Hat Insights"
+                        },
+                        {
+                            "id": "topics",
+                            "appId": "approval",
+                            "title": "Topics",
+                            "href": "/ansible/advisor/topics",
+                            "product": "Red Hat Insights"
+                        }
+                    ]
+                },
+                {
+                    "title": "Drift",
+                    "expandable": true,
+                    "routes": [
+                        {
+                            "id": "comparision",
+                            "appId": "drift",
+                            "title": "Comparison",
+                            "href": "/ansible/drift/",
+                            "product": "Red Hat Insights",
+                            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
+                        },
+                        {
+                            "id": "baselines",
+                            "appId": "drift",
+                            "title": "Baselines",
+                            "href": "/ansible/drift/baselines",
+                            "product": "Red Hat Insights"
+                        }
+                    ]
+                },
+                {
+                    "appId": "policies",
+                    "id": "policies",
+                    "title": "Policies",
+                    "href": "/ansible/policies",
+                    "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment."
+                }
+            ]
+        },
+        {
+            "id": "registerSystems",
+            "appId": "registration",
+            "title": "Register Systems",
+            "filterable": false,
+            "href": "/ansible/registration",
+            "product": "Red Hat Insights"
+        },
+        {
+            "id": "remediations",
+            "appId": "remediations",
+            "title": "Remediations",
+            "href": "/ansible/remediations",
+            "product": "Red Hat Insights",
+            "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
+        },
+        {
+            "id": "tasks",
+            "appId": "tasks",
+            "title": "Tasks",
+            "href": "/ansible/tasks",
+            "product": "Red Hat Insights"
+        }
+    ]
+}

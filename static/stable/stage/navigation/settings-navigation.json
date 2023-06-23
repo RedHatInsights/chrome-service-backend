@@ -1,0 +1,139 @@
+{
+    "id": "settings",
+    "title": "Settings",
+    "navItems": [
+        {
+            "id": "sources",
+            "appId": "sources",
+            "title": "Sources",
+            "description": "Sources provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
+            "href": "/settings/sources",
+            "alt_title": [
+                "providers",
+                "cloud providers",
+                "cloud sources",
+                "Red Hat sources",
+                "integrations",
+                "cloud integrations",
+                "cloud connection",
+                "aws",
+                "Amazon",
+                "Google",
+                "cloud",
+                "IBM",
+                "Microsoft",
+                "secrets",
+                "Azure",
+                "Oracle",
+                "Infrastructure",
+                "prediction",
+                "cost",
+                "subscriptions",
+                "account",
+                "credentials"
+            ]
+        },
+        {
+            "id": "repositories",
+            "appId": "contentSources",
+            "title": "Repositories",
+            "href": "/settings/content"
+        },
+        {
+            "id": "integrations",
+            "appId": "notifications",
+            "title": "Integrations",
+            "description": "Route event-triggered notifications to your preferred third-party tools and platforms, such as Splunk and ServiceNow.",
+            "href": "/settings/integrations"
+        },
+        {
+            "title": "Notifications",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "openshift",
+                    "appId": "notifications",
+                    "title": "OpenShift",
+                    "href": "/settings/notifications/openshift"
+                },
+                {
+                    "id": "redhatEntrpriseLinux",
+                    "appId": "notifications",
+                    "title": "Red Hat Enterprise Linux",
+                    "href": "/settings/notifications/rhel"
+                },
+                {
+                    "id": "console",
+                    "appId": "notifications",
+                    "title": "Console",
+                    "description": "Configure which notifications users within your organization receive.",
+                    "href": "/settings/notifications/console"
+                }
+            ]
+        },
+        {
+            "title": "Remote Host Configuration",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "manageConfiguration",
+                    "appId": "connector",
+                    "title": "Manage configuration",
+                    "href": "/settings/connector",
+                    "description": "Configure your systems to execute Ansible Playbooks."
+                },
+                {
+                    "id": "activationKeys",
+                    "appId": "connector",
+                    "title": "Activation Keys",
+                    "href": "/settings/connector/activation-keys",
+                    "description": "Create activation keys to register your systems and configure repositories without using a username and password."
+                }
+            ]
+        },
+        {
+            "title": "Applications",
+            "expandable": true,            
+            "permissions": [
+                {
+                    "method": "hasPermissions",
+                    "apps": [
+                        "cost-management:*:*",
+                        "advisor:*:*"
+                    ]
+                }
+            ],
+            "routes": [
+                {
+                    "id": "costManagement",
+                    "appId": "applications",
+                    "title": "Cost Management",
+                    "href": "/settings/applications/cost-management",
+                    "permissions": [
+                        {
+                            "method": "isEntitled",
+                            "args": [
+                                "cost_management"
+                            ]
+                        },
+                        {
+                            "method": "hasPermissions",
+                            "args": [
+                                [
+                                    "cost-management:*:*"
+                                ]
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "learningResources",
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/settings/learning-resources"
+        }
+        
+    ]
+}

@@ -1,12 +1,40 @@
 package service
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
+	"fmt"
+	"hash"
+	"reflect"
 	"time"
 
+	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/sirupsen/logrus"
 )
+
+type IntercomApp string
+type IntercomPayload struct {
+	Prod string `json:"prod,omitempty"`
+	Dev  string `json:"dev,omitempty"`
+}
+
+const (
+	OpenShift IntercomApp = "openshift"
+	HacCore   IntercomApp = "hacCore"
+)
+
+func (ib IntercomApp) IsValidApp() error {
+	switch ib {
+	case OpenShift, HacCore:
+		return nil
+	}
+
+	return fmt.Errorf("invalid bundle string. Expected one of %s, %s, got %s", OpenShift, HacCore, ib)
+}
 
 func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {
 	bundles := make(map[string]bool)
@@ -84,4 +112,47 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 	err = res.Error
 
 	return identity, err
+}
+
+func encodeKey(namespace string, userId string) (string, error) {
+	var intercomHash hash.Hash
+	var err error
+	c := config.Get()
+	v := reflect.ValueOf(c.IntercomConfig)
+	key := reflect.Indirect(v).FieldByName(string(namespace))
+	if key.IsValid() {
+		intercomHash = hmac.New(sha256.New, []byte(key.String()))
+		_, err = intercomHash.Write([]byte(userId))
+		if err != nil {
+			return "", err
+		}
+		return hex.EncodeToString(intercomHash.Sum(nil)), nil
+	}
+
+	// is not a valid key, do not encode
+	return "", nil
+}
+
+func GetUserIntercomHash(userId string, namespace IntercomApp) (IntercomPayload, error) {
+	err := namespace.IsValidApp()
+	response := IntercomPayload{}
+	if err != nil {
+		logrus.Infof("Unable to verify intercom namespace %s", namespace)
+		return response, nil
+	}
+	devNamespace := fmt.Sprintf("%s_dev", namespace)
+
+	prodKey, err := encodeKey(string(namespace), userId)
+	if err != nil {
+		return response, err
+	}
+	response.Prod = prodKey
+
+	devKey, err := encodeKey(devNamespace, userId)
+
+	if err != nil {
+		return response, err
+	}
+	response.Dev = devKey
+	return response, nil
 }

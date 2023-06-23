@@ -1,0 +1,30 @@
+{
+    "id": "docs",
+    "title": "Documentation",
+    "navItems": [
+        {
+            "id": "apiDocumentation",
+            "title": "API Documentation",
+            "appId": "apiDocs",
+            "href": "/docs/api"
+        },
+        {
+            "title": "Product Documentation",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "insights",
+                    "appId": "docsFrontend",
+                    "title": "Insights",
+                    "href": "/docs/product/insights"
+                },
+                {
+                    "id": "costManagement",
+                    "appId": "docsFrontend",
+                    "title": "Cost Management",
+                    "href": "/docs/product/cost-management"
+                }
+            ]
+        }
+    ]
+}

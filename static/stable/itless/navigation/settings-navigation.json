@@ -1,0 +1,30 @@
+{
+    "id": "settings",
+    "title": "Settings",
+    "navItems": [
+        {
+            "id": "rbac",
+            "appId": "rbac",
+            "title": "My User Access",
+            "href": "/settings/my-user-access"
+        },
+        {
+            "title": "Notifications",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "redhatEntrpriseLinux",
+                    "appId": "notifications",
+                    "title": "Red Hat Enterprise Linux",
+                    "href": "/settings/notifications/rhel"
+                },
+                {
+                    "id": "console",
+                    "appId": "notifications",
+                    "title": "Console",
+                    "href": "/settings/notifications/console"
+                }
+            ]
+        }
+    ]
+}

@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
+	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/segmentio/kafka-go"
 	"github.com/sirupsen/logrus"
@@ -28,32 +29,41 @@ func startKafkaReader(r *kafka.Reader) {
 			logrus.Errorln("Error reading message: ", err)
 			break
 		}
-		fmt.Printf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
+		logrus.Infoln(fmt.Sprintf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value)))
 
-		var p connectionhub.WsMessage
+		var p cloudevents.KafkaEnvelope
 		err = json.Unmarshal(m.Value, &p)
 		if err != nil {
-			log.Printf("Unable Unmarshal message %s\n", string(m.Value))
+			logrus.Errorln(fmt.Sprintf("Unable Unmarshal message %s\n", string(m.Value)))
+		} else if p.Data.Payload == nil {
+			logrus.Errorln(fmt.Sprintf("No message will be emitted doe to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value)))
 		} else {
-			data, err := json.Marshal(&p.Payload)
+			event := cloudevents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
+			event.Time = p.Time
+			data, err := json.Marshal(event)
 			if err != nil {
 				log.Println("Unable marshal payload data", p, err)
 			} else {
-				newMessage := connectionhub.Message{
-					Destinations: connectionhub.MessageDestinations{
-						Users:         p.Users,
-						Roles:         p.Roles,
-						Organizations: p.Organizations,
-					},
-					Broadcast: p.Broadcast,
-					Data:      data,
-				}
-				if p.Broadcast {
-					logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
-					connectionhub.ConnectionHub.Broadcast <- newMessage
+				validateErr := validatePayload(p)
+				if validateErr == nil {
+					newMessage := connectionhub.Message{
+						Destinations: connectionhub.MessageDestinations{
+							Users:         p.Data.Users,
+							Roles:         p.Data.Roles,
+							Organizations: p.Data.Organizations,
+						},
+						Broadcast: p.Data.Broadcast,
+						Data:      data,
+					}
+					if p.Data.Broadcast {
+						logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
+						connectionhub.ConnectionHub.Broadcast <- newMessage
+					} else {
+						logrus.Infoln("Emitting new message from kafka reader: ", string(newMessage.Data))
+						connectionhub.ConnectionHub.Emit <- newMessage
+					}
 				} else {
-					logrus.Infoln("Emitting new message from kafka reader: ", string(newMessage.Data))
-					connectionhub.ConnectionHub.Emit <- newMessage
+					logrus.Errorln(validateErr)
 				}
 			}
 		}
@@ -64,12 +74,30 @@ func startKafkaReader(r *kafka.Reader) {
 	}
 }
 
+func validatePayload(p cloudevents.KafkaEnvelope) error {
+	payloadErr := p.DataContentType.IsValid()
+	if payloadErr != nil {
+		return fmt.Errorf("Kafka message payload needs to be JSON formatted, %v", payloadErr)
+	}
+	specErr := p.SpecVersion.IsValid()
+	if specErr != nil {
+		return fmt.Errorf("%v", specErr)
+	}
+	sourceErr := p.Source.IsValid()
+	if sourceErr != nil {
+		return fmt.Errorf("%v", sourceErr)
+	}
+	return nil
+}
+
 func createReader(topic string) *kafka.Reader {
 	config := config.Get()
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:     config.KafkaConfig.KafkaBrokers,
+		GroupID:     "platform.chrome",
+		StartOffset: kafka.LastOffset,
 		Topic:       topic,
-		Logger:      kafka.LoggerFunc(logrus.Infof),
+		Logger:      kafka.LoggerFunc(logrus.Debugf),
 		ErrorLogger: kafka.LoggerFunc(logrus.Errorf),
 		MinBytes:    1,    // 1B
 		MaxBytes:    10e7, // 10MB
@@ -78,7 +106,7 @@ func createReader(topic string) *kafka.Reader {
 	return r
 }
 
-func InitializeConzumers() {
+func InitializeConsumers() {
 	config := config.Get()
 	topics := config.KafkaConfig.KafkaTopics
 	readers := make(map[string]*kafka.Reader)

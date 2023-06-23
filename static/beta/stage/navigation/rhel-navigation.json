@@ -1,0 +1,376 @@
+{
+  "id": "rhel",
+  "title": "Red Hat Insights",
+  "navItems": [
+    {
+      "id": "overview",
+      "appId": "dashboard",
+      "title": "Dashboard",
+      "filterable": false,
+      "href": "/insights/dashboard",
+      "product": "Red Hat Insights"
+    },
+    {
+      "title": "Inventory",
+      "expandable": true,
+      "id": "inventory",
+      "description": "View details about your Red Hat Enterprise Linux systems.",
+      "routes": [
+        {
+          "id": "systems",
+          "appId": "inventory",
+          "title": "Systems",
+          "href": "/insights/inventory",
+          "product": "Red Hat Insights"
+        },
+        {
+          "id": "groups",
+          "appId": "inventory",
+          "title": "Groups",
+          "href": "/insights/inventory/groups",
+          "product": "Red Hat Insights",
+          "description": "Inventory groups",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["hbi.ui.inventory-groups", true]
+            }
+          ]
+        },
+        {
+          "id": "imageBuilder",
+          "appId": "imageBuilder",
+          "title": "Images",
+          "href": "/insights/image-builder",
+          "product": "Red Hat Insights",
+          "description": "Build and manage Red Hat Enterprise Linux images and environments."
+        },
+        {
+          "title": "System Configuration",
+          "expandable": true,
+          "routes": [
+            {
+              "id": "rhc",
+              "appId": "connector",
+              "title": "Remote Host Configuration (RHC)",
+              "href": "/settings/connector",
+              "product": "Red Hat Insights",
+              "description": "Configure your systems to execute Ansible Playbooks."
+            },
+            {
+              "id": "activationKeys",
+              "appId": "connector",
+              "title": "Activation Keys",
+              "href": "/settings/connector/activation-keys",
+              "product": "Red Hat Insights",
+              "description": "Create activation keys to register your systems and configure repositories without using a username and password."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Content",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "advisories",
+          "appId": "patch",
+          "title": "Advisories",
+          "href": "/insights/patch/advisories",
+          "product": "Red Hat Insights",
+          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
+        },
+        {
+          "appId": "patch",
+          "title": "Packages",
+          "href": "/insights/patch/packages",
+          "product": "Red Hat Insights"
+        },
+        {
+          "appId": "contentSources",
+          "title": "Repositories",
+          "href": "/settings/content",
+          "product": "Red Hat Insights",
+          "isBeta": true
+        },
+        {
+          "title": "Patch",
+          "expandable": true,
+          "routes": [
+            {
+              "appId": "patch",
+              "title": "Systems",
+              "href": "/insights/patch/systems",
+              "product": "Red Hat Insights"
+            },
+            {
+              "appId": "patch",
+              "title": "Templates",
+              "href": "/insights/patch/templates",
+              "product": "Red Hat Insights"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Operations",
+      "expandable": true,
+      "routes": [
+        {
+          "title": "Advisor",
+          "expandable": true,
+          "routes": [
+            {
+              "id": "recommendations",
+              "appId": "advisor",
+              "title": "Recommendations",
+              "href": "/insights/advisor/recommendations",
+              "product": "Red Hat Insights",
+              "description": "View details about your Red Hat Enterprise Linux systems."
+            },
+            {
+              "id": "advisorSystems",
+              "appId": "advisor",
+              "title": "Systems",
+              "href": "/insights/advisor/systems",
+              "product": "Red Hat Insights",
+              "description": "View details about your Red Hat Enterprise Linux systems."
+            },
+            {
+              "id": "topics",
+              "appId": "advisor",
+              "title": "Topics",
+              "href": "/insights/advisor/topics",
+              "product": "Red Hat Insights"
+            }
+          ]
+        },
+        {
+          "title": "Drift",
+          "expandable": true,
+          "routes": [
+            {
+              "appId": "drift",
+              "title": "Comparison",
+              "href": "/insights/drift/",
+              "product": "Red Hat Insights"
+            },
+            {
+              "appId": "drift",
+              "title": "Baselines",
+              "href": "/insights/drift/baselines",
+              "product": "Red Hat Insights"
+            }
+          ]
+        },
+        {
+          "appId": "policies",
+          "title": "Policies",
+          "href": "/insights/policies"
+        }
+      ]
+    },
+    {
+      "title": "Security",
+      "expandable": true,
+      "routes": [
+        {
+          "title": "Vulnerability",
+          "expandable": true,
+          "routes": [
+            {
+              "id": "vulnerability",
+              "appId": "vulnerability",
+              "title": "CVEs",
+              "href": "/insights/vulnerability/cves",
+              "product": "Red Hat Insights",
+              "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
+            },
+            {
+              "id": "vulnerabilityReports",
+              "appId": "vulnerability",
+              "title": "Reports",
+              "href": "/insights/vulnerability/reports",
+              "product": "Red Hat Insights"
+            },
+            {
+              "id": "vulnerabilitySystems",
+              "appId": "vulnerability",
+              "title": "Systems",
+              "href": "/insights/vulnerability/systems",
+              "product": "Red Hat Insights"
+            }
+          ]
+        },
+        {
+          "title": "Compliance",
+          "expandable": true,
+          "routes": [
+            {
+              "id": "complianceReports",
+              "appId": "compliance",
+              "title": "Reports",
+              "href": "/insights/compliance/reports",
+              "product": "Red Hat Insights",
+              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+            },
+            {
+              "id": "scapPolicies",
+              "appId": "compliance",
+              "title": "SCAP Policies",
+              "href": "/insights/compliance/scappolicies",
+              "product": "Red Hat Insights"
+            },
+            {
+              "id": "complianceSystems",
+              "appId": "compliance",
+              "title": "Systems",
+              "href": "/insights/compliance/systems",
+              "product": "Red Hat Insights"
+            }
+          ]
+        },
+        {
+          "title": "Malware",
+          "expandable": true,
+          "routes": [
+            {
+              "id": "signatures",
+              "appId": "malware",
+              "title": "Signatures",
+              "href": "/insights/malware/signatures",
+              "product": "Red Hat Insights",
+              "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
+            },
+            {
+              "id": "malwareSystems",
+              "appId": "malware",
+              "title": "Systems",
+              "href": "/insights/malware/systems",
+              "product": "Red Hat Insights"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Business",
+      "expandable": true,
+      "routes": [
+        {
+          "expandable": true,
+          "title": "Subscriptions",
+          "routes": [
+            {
+              "id": "subs.rhel",
+              "appId": "subscriptions",
+              "title": "RHEL",
+              "href": "/insights/subscriptions/rhel",
+              "product": "Subscription Watch"
+            },
+            {
+              "id": "subscriptions",
+              "appId": "subscriptions",
+              "title": "OpenShift Subscriptions",
+              "href": "/openshift/subscriptions/openshift",
+              "product": "Subscription Watch"
+            },
+            {
+              "id": "subscriptionsInventory",
+              "appId": "subscriptionInventory",
+              "title": "Subscription Inventory",
+              "href": "/insights/subscriptions/inventory",
+              "product": "Subscription Watch",
+              "description": "List your purchased subscriptions and view more information about each one."
+            },
+            {
+              "id": "manifests",
+              "appId": "manifests",
+              "title": "Manifests",
+              "href": "/insights/subscriptions/manifests",
+              "product": "Subscription Watch",
+              "description": "Export subscription manifests for Red Hat Satellite."
+            },
+            {
+              "id": "subscriptionsDocumentation",
+              "title": "Documentation",
+              "isExternal": true,
+              "filterable": false,
+              "href": "https://access.redhat.com/products/subscription-central"
+            }
+          ]
+        },
+        {
+          "id": "ros",
+          "appId": "ros",
+          "title": "Resource Optimization",
+          "href": "/insights/ros",
+          "product": "Red Hat Insights",
+          "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
+        }
+      ]
+    },
+    {
+      "title": "Automation Toolkit",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "remediations",
+          "appId": "remediations",
+          "title": "Remediations",
+          "href": "/insights/remediations",
+          "product": "Red Hat Insights",
+          "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems."
+        },
+        {
+          "id": "tasks",
+          "appId": "tasks",
+          "title": "Tasks",
+          "href": "/insights/tasks",
+          "product": "Red Hat Insights"
+        }
+      ]
+    },
+    {
+      "id": "registerSystems",
+      "appId": "registration",
+      "title": "Register Systems",
+      "filterable": false,
+      "href": "/insights/registration",
+      "product": "Red Hat Insights",
+      "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
+    },
+    {
+      "id": "learningResources",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/insights/learning-resources"
+    },
+    {
+      "title": "Product Materials",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "productMaterialDocumentation",
+          "title": "Documentation",
+          "isExternal": true,
+          "href": "https://access.redhat.com/documentation/en-us/red_hat_insights/"
+        },
+        {
+          "id": "securityInformation",
+          "title": "Security Information",
+          "href": "https://www.redhat.com/en/technologies/management/insights/data-application-security",
+          "isExternal": true
+        },
+        {
+          "id": "apis",
+          "appId": "apiDocs",
+          "title": "APIs",
+          "href": "/docs/api"
+        }
+      ]
+    }
+  ]
+}

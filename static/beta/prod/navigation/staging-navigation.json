@@ -1,0 +1,12 @@
+{
+    "id": "staging",
+    "title": "Staging Bundle",
+    "navItems": [
+        {
+            "id": "starter",
+            "title": "Starter App",
+            "appId": "starter",
+            "href": "/staging/starter"
+        }
+    ]
+}

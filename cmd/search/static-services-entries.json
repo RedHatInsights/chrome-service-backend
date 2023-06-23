@@ -1,0 +1,60 @@
+[
+  {
+    "id": "quay",
+    "links": [
+      "quay.quayOrganizations",
+      "quay.quayRepositories"
+    ]
+  },
+  {
+    "id": "rosa",
+    "links": [
+      {
+        "custom": true,
+        "id": "ROSA.custom",
+        "href": "/openshift/create/rosa/getstarted",
+        "title": "Red Hat OpenShift Service for AWS",
+        "description": "ROSA allows you to deploy fully operational and managed Red Hat OpenShift clusters while leveraging the full breadth and depth of AWS"
+      }
+    ]
+  },
+  {
+    "id": "ACS-custom",
+    "links": [
+      "application-services.acs-section"
+    ]
+  },
+  {
+    "id": "create-clusters",
+    "links": [
+      {
+      "custom": true,
+      "id": "OPENSHIFT.cluster.create.aws",
+      "href": "/openshift/create",
+      "title": "Red Hat OpenShift Service on AWS",
+      "alt_title": ["ROSA", "AWS", "OpenShift on AWS"] 
+      },
+      {
+      "custom": true,
+      "id": "OPENSHIFT.cluster.create.dedicated",
+      "href": "/openshift/create",
+      "title": "Red Hat OpenShift Dedicated",
+      "alt_title": ["OSD","Dedicated", "GCP", "AWS", "OpenShift on AWS", "OpenShift on GCP"] 
+      },
+      {
+      "custom": true,
+      "id": "OPENSHIFT.cluster.create.azure",
+      "href": "/openshift/create",
+      "title": "Azure Red Hat OpenShift",
+      "alt_title": ["ARO", "Azure", "OpenShift on Azure"] 
+      },
+      {
+      "custom": true,
+      "id": "OPENSHIFT.cluster.create.ibm",
+      "href": "/openshift/create",
+      "title": "Red Hat OpenShift on IBM Cloud",
+      "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"] 
+      }
+    ]
+  }
+]

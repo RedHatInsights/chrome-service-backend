@@ -1,0 +1,12 @@
+{
+    "id": "user-preferences",
+    "title": "User preferences",
+    "navItems": [
+        {
+            "id": "emailPreferences",
+            "appId": "userPreferences",
+            "title": "Email preferences",
+            "href": "/user-preferences/email"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "edge",
+  "title": "Edge Management",
+  "navItems": [
+    {
+      "title": "Inventory",
+      "expandable": true,
+      "routes": [
+        {
+          "title": "Groups",
+          "id": "groups",
+          "appId": "edge",
+          "href": "/edge/fleet-management"
+        },
+        {
+          "title": "Systems",
+          "id": "systems",
+          "appId": "edge",
+          "href": "/edge/inventory"
+        }
+      ]
+    },
+    {
+      "title": "Manage Images",
+      "expandable": true,
+      "routes": [
+        {
+          "title": "Images",
+          "id": "images",
+          "appId": "edge",
+          "href": "/edge/manage-images"
+        },
+        {
+          "title": "Custom repositories",
+          "id": "customRepositories",
+          "appId": "edge",
+          "href": "/edge/repositories"
+        }
+      ]
+    },
+    {
+      "title": "Learning resources",
+      "id": "learningResources",
+      "filterable": false,
+      "appId": "edge",
+      "href": "/edge/learning-resources"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+
+{
+    "id": "business-services",
+    "title": "Business Services",
+    "navItems": [
+      {
+        "title": "Hybrid Committed Spend",
+        "expandable": true,
+        "filterable": false,
+        "id": "hybridCommittedSpend",
+        "description": "Compare the difference between the commitment and actual Red Hat spending.",
+        "routes": [
+          {
+            "id": "overview",
+            "appId": "hybridCommittedSpend",
+            "title": "Overview",
+            "href": "/business-services/hybrid-committed-spend"
+          },
+          {
+            "id": "details",
+            "appId": "hybridCommittedSpend",
+            "title": "Details",
+            "href": "/business-services/hybrid-committed-spend/details"
+          }
+        ]
+      }
+    ]
+  }

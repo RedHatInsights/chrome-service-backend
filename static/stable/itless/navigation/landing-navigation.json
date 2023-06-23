@@ -1,0 +1,27 @@
+[
+  {
+    "groupId": "manage-infrastructure",
+    "title": "Manage Infrastructure",
+    "icon": "wrench",
+    "navItems": [
+      {
+        "title": "Red Hat Enterprise Linux",
+        "expandable": true,
+        "routes": [
+          {
+            "id": "openshift",
+            "appId": "openshift",
+            "title": "OpenShift",
+            "href": "/openshift"
+          },
+          {
+            "id": "redhatInsights",
+            "appId": "dashboard",
+            "title": "Red Hat Insights",
+            "href": "/insights/dashboard"
+          }
+        ]
+      }
+    ]
+  }
+]

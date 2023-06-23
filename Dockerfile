@@ -5,13 +5,13 @@ ENV GO111MODULE=on
 USER root
 RUN go get -d -v
 RUN make validate-schema
-RUN CGO_ENABLED=0 go build -o /go/bin/chrome-service-backend
+RUN CGO_ENABLED=1 go build -o /go/bin/chrome-service-backend
 
 # Build the migration binary.
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
 
 # Build the search index binary.
-RUN CGO_ENABLED=0 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
+RUN CGO_ENABLED=1 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
 
 FROM registry.redhat.io/ubi8-minimal:latest
 

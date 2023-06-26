@@ -25,6 +25,8 @@ objects:
             public:
               apiPath: chrome-service
               enabled: true
+              whitelistPaths:
+                - /api/chrome-service/v1/static/*
         podSpec:
           image: ${IMAGE}:${IMAGE_TAG}
           initContainers:

@@ -76,7 +76,7 @@ func startKafkaReader(r *kafka.Reader) {
 		if err != nil {
 			logrus.Errorln(fmt.Sprintf("Unable to unmarshal message %s\n", string(m.Value)))
 		} else if p.Data.Payload == nil {
-			logrus.Errorln(fmt.Sprintf("No message will be emitted do to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value)))
+			logrus.Errorln(fmt.Sprintf("No message will be emitted due to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value)))
 		} else {
 			event := cloudevents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
 			event.Time = p.Time

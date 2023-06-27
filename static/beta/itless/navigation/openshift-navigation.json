@@ -18,6 +18,14 @@
             "filterable": false,
             "product": "Red Hat OpenShift Cluster Manager",
             "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
+        },
+        {
+            "id": "downloads",
+            "appId": "openshift",
+            "href": "/openshift/downloads",
+            "title": "Downloads",
+            "filterable": false,
+            "product": "Red Hat OpenShift Cluster Manager"
         }
     ]
 }

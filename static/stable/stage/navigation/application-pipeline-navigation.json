@@ -1,0 +1,11 @@
+{
+  "id": "hac",
+  "title": "Trusted Application Pipeline",
+  "navItems": [
+      {
+        "id": "flatNav",
+        "title": "Flat nav",
+        "dynamicNav": "hacCore"
+      }
+  ]
+}

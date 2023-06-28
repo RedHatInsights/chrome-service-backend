@@ -46,6 +46,13 @@
             ]
         },
         {
+            "id": "idmsvc",
+            "appId": "idmsvc",
+            "title": "Directory & Domain Services",
+            "description": "Directory and Domain Services for console.redhat.com",
+            "href": "/settings/idmsvc"
+        },
+        {
             "id": "integrations",
             "appId": "notifications",
             "title": "Integrations",

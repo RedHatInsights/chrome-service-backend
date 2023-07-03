@@ -70,22 +70,7 @@
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
           "product": "Identity & Access Management",
-          "description": "Manage how your organization authenticates to Red Hat services.",
-          "alt_title": [
-            "Authentication Policy",
-            "2FA",
-            "Identity and Access Management",
-            "IAM",
-            "User Access",
-            "User Management",
-            "access management",
-            "rbac",
-            "2FA",
-            "two factor auth",
-            "two factor authentication",
-            "two-factor auth",
-            "two-factor authentication"
-          ]
+          "description": "Manage how your organization authenticates to Red Hat services."
         },
         {
           "id": "idpintegration",
@@ -93,22 +78,7 @@
           "title": "Identity Provider Integration",
           "href": "/iam/authentication-policy/identity-provider-integration",
           "product": "Identity & Access Management",
-          "description": "Manage how your organization authenticates to Red Hat services.",
-          "alt_title": [
-            "Authentication Policy",
-            "2FA",
-            "Identity and Access Management",
-            "IAM",
-            "User Access",
-            "User Management",
-            "access management",
-            "rbac",
-            "2FA",
-            "two factor auth",
-            "two factor authentication",
-            "two-factor auth",
-            "two-factor authentication"
-          ]
+          "description": "Manage how your organization authenticates to Red Hat services."
         }
       ]
     },
@@ -118,5 +88,20 @@
       "title": "Learning Resources",
       "href": "/iam/learning-resources"
     }
+  ],
+  "alt_title": [
+    "Authentication Policy",
+    "2FA",
+    "Identity and Access Management",
+    "IAM",
+    "User Access",
+    "User Management",
+    "access management",
+    "rbac",
+    "2FA",
+    "two factor auth",
+    "two factor authentication",
+    "two-factor auth",
+    "two-factor authentication"
   ]
 }

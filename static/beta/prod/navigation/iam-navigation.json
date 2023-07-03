@@ -72,7 +72,22 @@
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
           "product": "Identity & Access Management",
-          "description": "Manage how your organization authenticates to Red Hat services."
+          "description": "Manage how your organization authenticates to Red Hat services.",
+          "alt_title": [
+            "Authentication Policy",
+            "2FA",
+            "Identity and Access Management",
+            "IAM",
+            "User Access",
+            "User Management",
+            "access management",
+            "rbac",
+            "2FA",
+            "two factor auth",
+            "two factor authentication",
+            "two-factor auth",
+            "two-factor authentication"
+          ]
         }
       ]
     },

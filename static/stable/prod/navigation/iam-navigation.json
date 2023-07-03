@@ -69,7 +69,22 @@
           "appId": "iam",
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "alt_title": [
+            "Authentication Policy",
+            "2FA",
+            "Identity and Access Management",
+            "IAM",
+            "User Access",
+            "User Management",
+            "access management",
+            "rbac",
+            "2FA",
+            "two factor auth",
+            "two factor authentication",
+            "two-factor auth",
+            "two-factor authentication"
+          ]
         }
       ]
     },

@@ -2,8 +2,8 @@ package cloudevents
 
 import (
 	"fmt"
-	"time"
 	"net/url"
+	"time"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 )
@@ -44,7 +44,7 @@ func (uri URI) IsValid() error {
 	if err != nil {
 		return fmt.Errorf("URI is not valid. Expected a valid URI, but got %v.", uri)
 	}
-	return nil;
+	return nil
 }
 
 // TODO: Specify accepted data payload
@@ -74,4 +74,20 @@ func WrapPayload[P any](payload P, source URI, id string, messageType string) En
 
 type KafkaEnvelope struct {
 	Envelope[connectionhub.WsMessage]
+}
+
+func ValidatePayload(p KafkaEnvelope) error {
+	payloadErr := p.DataContentType.IsValid()
+	if payloadErr != nil {
+		return fmt.Errorf("Kafka message payload needs to be JSON formatted, %v", payloadErr)
+	}
+	specErr := p.SpecVersion.IsValid()
+	if specErr != nil {
+		return fmt.Errorf("%v", specErr)
+	}
+	sourceErr := p.Source.IsValid()
+	if sourceErr != nil {
+		return fmt.Errorf("%v", sourceErr)
+	}
+	return nil
 }

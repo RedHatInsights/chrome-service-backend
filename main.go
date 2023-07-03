@@ -56,7 +56,7 @@ func main() {
 		subrouter.Route("/emit-message", routes.BroadcastMessage)
 	})
 
-	// We might want to setup some event listeners at some point, but the pod will
+	// We might want to set up some event listeners at some point, but the pod will
 	// have to restart for these to take effect. We can't enable and disable websockets on the fly
 	if featureflags.IsEnabled("chrome-service.websockets.enabled") {
 		// start the connection hub

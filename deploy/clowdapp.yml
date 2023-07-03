@@ -16,7 +16,7 @@ objects:
       kafkaTopics:
       # one replica for now; most of this will change
       - replicas: 1
-        partitions: 64
+        partitions: 8
         topicName: platform.chrome
       deployments:
       - name: api

@@ -1,9 +1,11 @@
 name: Go package
 
 on:
+  # These will only run from a known contributor
   push:
     branches:
       - main
+  # This can be a security risk, but our vars are container defaults with no data
   pull_request_target:
 
 jobs:
@@ -63,7 +65,7 @@ jobs:
 
       - name: 'Create env file'
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "${{ env.ENV_FILE }}" > .env
 
       - name: Test
         run: make test

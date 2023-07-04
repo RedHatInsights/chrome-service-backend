@@ -112,6 +112,13 @@
               "href": "/insights/vulnerability/systems",
               "product": "Red Hat Insights"
             }
+          ],
+          "alt_title": [
+            "Vulnerability",
+            "Vulnerability Management",
+            "Security",
+            "CVEs",
+            "risk"
           ]
         },
         {

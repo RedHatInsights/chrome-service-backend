@@ -43,7 +43,15 @@
           "title": "Images",
           "href": "/insights/image-builder",
           "product": "Red Hat Insights",
-          "description": "Build and manage Red Hat Enterprise Linux images and environments."
+          "description": "Build and manage Red Hat Enterprise Linux images and environments.",
+          "alt_title": [
+            "images",
+            "image builder",
+            "image-builder",
+            "build",
+            "builder",
+            "assemble"
+          ]
         },
         {
           "title": "System Configuration",

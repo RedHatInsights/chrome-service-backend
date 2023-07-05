@@ -251,6 +251,14 @@
               "href": "/insights/malware/systems",
               "product": "Red Hat Insights"
             }
+          ],
+          "alt_title": [
+            "Malware",
+            "security",
+            "X_Force",
+            "Yara",
+            "scanner",
+            "risk"
           ]
         }
       ]

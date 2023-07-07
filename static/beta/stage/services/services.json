@@ -260,6 +260,20 @@
     ]
   },
   {
+    "id": "subscription-services",
+    "icon": "ShoppingCartIcon",
+    "title": "Subscription Services",
+    "description": "Subscription Services empower buying decisions. SaMS provides software usage reporting that is designed to make your subscription choices data-driven.",
+    "link": [
+      "subscription-services.overview",
+      "subscription-services.subscriptionsInventory",
+      "subscription-services.subscriptionsUsage",
+      "hybridCommittedSpend.hybridCommittedSpend",
+      "hybridCommittedSpend.manifests",
+      "hybridCommittedSpend.learningResources"
+    ]
+  },
+  {
     "id": "tryBuy",
     "icon": "ShoppingCartIcon",
     "title": "Try and Buy",

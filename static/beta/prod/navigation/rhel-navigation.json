@@ -375,10 +375,10 @@
       "expandable": true,
       "routes": [
         {
-          "id": "productMaterialDocumentation",
-          "title": "Documentation",
-          "isExternal": true,
-          "href": "https://access.redhat.com/documentation/en-us/red_hat_insights/"
+          "id": "learningResources",
+          "appId": "learningResources",
+          "title": "Learning Resources",
+          "href": "/insights/learning-resources"
         },
         {
           "id": "securityInformation",

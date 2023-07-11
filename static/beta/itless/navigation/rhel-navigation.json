@@ -131,7 +131,28 @@
               "title": "Reports",
               "href": "/insights/compliance/reports",
               "product": "Red Hat Insights",
-              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
+              "alt_title": [
+                "Compliance",
+                "security",
+                "policies",
+                "SCAP",
+                "policy",
+                "insights",
+                "regulatory",
+                "regulations",
+                "OpenSCAP",
+                "PCI",
+                "HIPAA",
+                "DSS",
+                "CSI",
+                "C2S",
+                "rules",
+                "DISA STIG",
+                "PCI-DSS",
+                "NIST",
+                "OSPP"
+              ]
             },
             {
               "id": "scapPolicies",

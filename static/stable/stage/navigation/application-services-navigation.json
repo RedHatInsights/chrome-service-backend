@@ -62,12 +62,7 @@
           "href": "/application-services/trusted-content",
           "description": "Increase trust and integrity in source code and accelerate the application development process.",
           "alt_title": [
-            "IDE integration", 
-            "software life cycle",
             "software supply chain",
-            "Software Bill of Materials",
-            "source code security",
-            "Vulnerability Exploitability eXchange",
             "vulnerability",
             "security",
             "risk management",
@@ -79,8 +74,7 @@
             "SBOM",
             "source code",
             "remediation",
-            "software composition",
-            "rhtap"
+            "software composition"
           ]
         }
       ]

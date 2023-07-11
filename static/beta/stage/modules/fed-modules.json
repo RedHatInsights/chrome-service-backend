@@ -483,6 +483,20 @@
             }
         ]
     },
+    "subscriptionsDashboardUi": {
+        "manifestLocation": "/apps/subscriptions-dashboard-ui/fed-mods.json",
+        "modules": [
+            {
+                "id": "subscriptions-dashboard-ui",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/subscriptions/overview"
+                    }
+                ]
+            }
+        ]
+    },
     "manifests": {
         "manifestLocation": "/apps/manifests/fed-mods.json",
         "modules": [

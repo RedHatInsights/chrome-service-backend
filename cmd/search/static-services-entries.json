@@ -56,5 +56,28 @@
       "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"] 
       }
     ]
+  },
+  {
+    "id": "patch-system",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.patch",
+        "href": "/insights/patch/systems",
+        "title": "Red Hat Patch Systems",
+        "alt_title": [
+          "Patch",
+          "content",
+          "advisories",
+          "insights",
+          "Rhel", 
+          "patch",
+          "updates",
+          "update",
+          "systems",
+          "upgrade"
+        ]
+      }
+    ]
   }
 ]

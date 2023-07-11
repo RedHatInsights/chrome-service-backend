@@ -298,7 +298,29 @@
               "title": "Subscription Inventory",
               "href": "/insights/subscriptions/inventory",
               "product": "Subscription Watch",
-              "description": "List your purchased subscriptions and view more information about each one."
+              "description": "List your purchased subscriptions and view more information about each one.",
+              "alt_title": [
+                "subscription",
+                "subscriptions",
+                "subscription list",
+                "subscription inventory",
+                "inventory",
+                "Red Hat Subscription Management",
+                "yearly",
+                "on-demand",
+                "contract",
+                "purchase",
+                "annual",
+                "BYOS",
+                "bring your own subscription",
+                "PAYG",
+                "pay as you go",
+                "renew",
+                "renewals",
+                "expiring",
+                "expiration",
+                "expired"
+              ]
             },
             {
               "id": "manifests",

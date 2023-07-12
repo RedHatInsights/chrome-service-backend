@@ -89,5 +89,51 @@
         ]
       }
     ]
+  },
+  {
+    "id": "ansible-drift",
+    "links": [
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.Drift.drift",
+        "href": "/ansible/drift/",
+        "title": "Ansible Drift Comparison",
+        "description": "Compare systems in your Ansible inventory to one another or against a set baseline.",
+        "alt_title": [
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "drift"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.Drift.drift.baseline",
+        "href": "/ansible/drift/baselines",
+        "title": "Ansible Drift Baselines",
+        "alt_title": [
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "drift"
+        ]
+      }
+    ]
   }
 ]

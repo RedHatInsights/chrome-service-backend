@@ -89,5 +89,33 @@
         ]
       }
     ]
+  },
+  {
+    "id": "rhel-inventory-systems",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Inventory.systems",
+        "href": "/insights/inventory",
+        "title": "RHEL Inventory Systems",
+        "alt_title":[
+          "Inventory",
+          "rhel systems",
+          "my systems",
+          "hosts",
+          "boxes",
+          "rhel",
+          "linux",
+          "insights",
+          "systems",
+          "hosts",
+          "rhel",
+          "linux",
+          "hostname(s)",
+          "machine(s)",
+          "server(s)"
+        ]
+      }
+    ]
   }
 ]

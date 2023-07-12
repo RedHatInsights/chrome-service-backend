@@ -97,7 +97,7 @@
         "custom": true,
         "id": "RHEL.Operations.Drift.drift",
         "href": "/insights/drift/",
-        "title": "Drift Comparison",
+        "title": "RHEL Drift Comparison",
         "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
         "alt_title": [
           "Drift",
@@ -122,7 +122,7 @@
         "custom": true,
         "id": "RHEL.Operations.Drift.drift.baseline",
         "href": "/insights/drift/baselines",
-        "title": "Drift Baselines",
+        "title": "RHEL Drift Baselines",
         "alt_title": [
           "Drift",
           "Comparison",

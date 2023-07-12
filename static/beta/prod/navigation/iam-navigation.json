@@ -82,5 +82,20 @@
       "title": "Learning Resources",
       "href": "/iam/learning-resources"
     }
+  ],
+  "alt_title": [
+    "Authentication Policy",
+    "2FA",
+    "Identity and Access Management",
+    "IAM",
+    "User Access",
+    "User Management",
+    "access management",
+    "rbac",
+    "2FA",
+    "two factor auth",
+    "two factor authentication",
+    "two-factor auth",
+    "two-factor authentication"
   ]
 }

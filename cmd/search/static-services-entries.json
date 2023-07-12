@@ -79,5 +79,38 @@
         ]
       }
     ]
+  },
+  {
+    "id": "malware",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.security.malware.signatures",
+        "href": "/insights/malware/signatures",
+        "title": "Malware signatures",
+        "alt_title": [
+          "Malware",
+          "security",
+          "X_Force",
+          "Yara",
+          "scanner",
+          "risk"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.security.malware.malwareSystems",
+        "href": "/insights/malware/systems",
+        "title": "Malware signatures",
+        "alt_title": [
+          "Malware",
+          "security",
+          "X_Force",
+          "Yara",
+          "scanner",
+          "risk"
+        ]
+      }
+    ]
   }
 ]

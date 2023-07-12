@@ -43,7 +43,15 @@
           "title": "Images",
           "href": "/insights/image-builder",
           "product": "Red Hat Insights",
-          "description": "Build and manage Red Hat Enterprise Linux images and environments."
+          "description": "Build and manage Red Hat Enterprise Linux images and environments.",
+          "alt_title": [
+            "images",
+            "image builder",
+            "image-builder",
+            "build",
+            "builder",
+            "assemble"
+          ]
         },
         {
           "title": "System Configuration",
@@ -202,6 +210,13 @@
               "href": "/insights/vulnerability/systems",
               "product": "Red Hat Insights"
             }
+          ],
+          "alt_title": [
+            "Vulnerability",
+            "Vulnerability Management",
+            "Security",
+            "CVEs",
+            "risk"
           ]
         },
         {
@@ -308,7 +323,20 @@
           "title": "Resource Optimization",
           "href": "/insights/ros",
           "product": "Red Hat Insights",
-          "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
+          "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
+          "alt_title": [
+            "optimization",
+            "optimisation",
+            "optimize",
+            "optimise",
+            "usage",
+            "utilization",
+            "utilisation",
+            "save",
+            "savings",
+            "resource optimization",
+            "resource optimisation"
+          ]
         }
       ]
     },
@@ -343,20 +371,14 @@
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
     },
     {
-      "id": "learningResources",
-      "appId": "learningResources",
-      "title": "Learning Resources",
-      "href": "/insights/learning-resources"
-    },
-    {
       "title": "Product Materials",
       "expandable": true,
       "routes": [
         {
-          "id": "productMaterialDocumentation",
-          "title": "Documentation",
-          "isExternal": true,
-          "href": "https://access.redhat.com/documentation/en-us/red_hat_insights/"
+          "id": "learningResources",
+          "appId": "learningResources",
+          "title": "Learning Resources",
+          "href": "/insights/learning-resources"
         },
         {
           "id": "securityInformation",

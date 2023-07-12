@@ -1,10 +1,10 @@
 {
-  "id": "subscription-services",
+  "id": "subscriptions",
   "title": "Subscription Services",
   "navItems": [
     {
       "id": "overview",
-      "appId": "overview",
+      "appId": "subscriptionsDashboardUi",
       "title": "Overview",
       "href": "/subscriptions/overview"
     },

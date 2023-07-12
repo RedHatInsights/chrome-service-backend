@@ -114,11 +114,33 @@
             }
           ],
           "alt_title": [
+            "CVEs", 
+            "CVE",
+            "Security",
             "Vulnerability",
             "Vulnerability Management",
-            "Security",
-            "CVEs",
-            "risk"
+            "insights",
+            "Vulnerable",
+            "exposure",
+            "Weakness",
+            "compliance",
+            "security gap",
+            "breach",
+            "Hearltbleed",
+            "Spectre",
+            "Patch",
+            "security",
+            "vulnerabilities",
+            "cve",
+            "common vulnerability exposure",
+            "cvss",
+            "risk",
+            "critical",
+            "security rule",
+            "errata",
+            "affected but not vulnerable",
+            "severity", 
+            "CVE-"
           ]
         },
         {

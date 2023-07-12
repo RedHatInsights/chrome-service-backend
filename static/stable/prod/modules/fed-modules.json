@@ -153,7 +153,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/settings/connector"
+                        "pathname": "/insights/connector"
                     }
                 ]
             }

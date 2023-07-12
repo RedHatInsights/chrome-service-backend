@@ -68,7 +68,7 @@
         "description": "Manage the lifecycle and enhance security of your RHEL systems at the edge."
       },
       "rhel.imageBuilder",
-      "settings.repositories",
+      "rhel.repositories",
       "quay.quay"
     ]
   },
@@ -254,7 +254,7 @@
     "title": "System Configuration",
     "description": "Connect your RHEL systems to Hybrid Cloud Console services.",
     "links": [
-      "settings.activationKeys",
+      "rhel.activationKeys",
       "rhel.manifests",
       "rhel.registerSystems",
       "settings.manageConfiguration"

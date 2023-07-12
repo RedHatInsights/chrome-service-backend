@@ -44,7 +44,25 @@
             "appId": "notifications",
             "title": "Integrations",
             "description": "Route event-triggered notifications to your preferred third-party tools and platforms, such as Splunk and ServiceNow.",
-            "href": "/settings/integrations"
+            "href": "/settings/integrations",
+            "alt_title":[
+                "integrations",
+                "Splunk",
+                "Service Now",
+                "SNOW",
+                "integrate",
+                "webhook",
+                "Slack",
+                "Google Chat",
+                "Microsoft Teams",
+                "third party integration",
+                "event driven",
+                "alerting",
+                "automation",
+                "operational workflow",
+                "google spaces",
+                "ms teams"
+            ]
         },
         {
             "title": "Notifications",

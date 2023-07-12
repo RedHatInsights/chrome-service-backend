@@ -91,7 +91,7 @@
     ]
   },
   {
-    "id": "drift",
+    "id": "rhel-drift",
     "links": [
       {
         "custom": true,

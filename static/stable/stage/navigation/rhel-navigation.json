@@ -53,7 +53,7 @@
               "id": "rhc",
               "appId": "connector",
               "title": "Remote Host Configuration (RHC)",
-              "href": "/settings/connector",
+              "href": "/insights/connector",
               "product": "Red Hat Insights",
               "description": "Configure your systems to execute Ansible Playbooks."
             },
@@ -61,7 +61,7 @@
               "id": "activationKeys",
               "appId": "connector",
               "title": "Activation Keys",
-              "href": "/settings/connector/activation-keys",
+              "href": "/insights/connector/activation-keys",
               "product": "Red Hat Insights",
               "description": "Create activation keys to register your systems and configure repositories without using a username and password."
             }
@@ -88,9 +88,10 @@
           "product": "Red Hat Insights"
         },
         {
+          "id": "repositories",
           "appId": "contentSources",
           "title": "Repositories",
-          "href": "/settings/content",
+          "href": "/insights/content",
           "product": "Red Hat Insights",
           "isBeta": true
         },

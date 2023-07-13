@@ -89,5 +89,80 @@
         ]
       }
     ]
+  },
+  {
+    "title": "ansible-advisor",
+    "links": [
+        {
+            "custom": true,
+            "id": "ANSIBLE.operations.Advisor.advisor",
+            "href": "/ansible/advisor/recommendations",
+            "title": "Ansible Advisor Recommendations",
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
+            "alt_title": [
+              "Rules",
+              "recommendations",
+              "Configuration",
+              "security",
+              "stability",
+              "performance",
+              "advisor",
+              "incidents",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
+        },
+        {
+            "custom": true,
+            "id": "ANSIBLE.operations.Advisor.systems",
+            "href": "/ansible/advisor/systems",
+            "title": "Ansible Advisor Systems",
+            "alt_title": [
+              "Rules",
+              "recommendations",
+              "Configuration",
+              "security",
+              "stability",
+              "performance",
+              "advisor",
+              "incidents",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
+        },
+        {
+            "custom": true,
+            "id": "ANSIBLE.operations.Advisor.topics",
+            "href": "/ansible/advisor/topics",
+            "title": "Ansible Advisor Topics",
+            "alt_title": [
+              "Rules",
+              "recommendations",
+              "Configuration",
+              "security",
+              "stability",
+              "performance",
+              "advisor",
+              "incidents",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
+        }
+    ]
   }
 ]

@@ -164,5 +164,67 @@
             ]
         }
     ]
+  },
+  {
+    "id": "costManagement",
+    "links": [
+      {
+        "custom": true,
+        "id": "SETTINGS.applications.costManagement",
+        "href": "/settings/applications/cost-management",
+        "title": "Cost Management",
+        "alt_title": [
+          "cost management",
+          "cost",
+          "finsights",
+          "finops",
+          "chargeback",
+          "showback",
+          "cost management for openshift",
+          "openshift cost",
+          "rhcm",
+          "spend",
+          "distribute",
+          "cost model",
+          "money",
+          "bill",
+          "billing",
+          "financial",
+          "chargeback",
+          "showback",
+          "rate",
+          "save",
+          "savings"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compliance",
+    "links": [
+      {
+        "custom": true,
+        "id": "complianceReports",
+        "href": "/insights/compliance/reports",
+        "title": "Reports",
+        "alt_title": [
+          "Compliance",
+          "security",
+          "regulatory"
+        ],
+        "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+      },
+      {
+        "custom": true,
+        "id": "scapPolicies",
+        "href": "/insights/compliance/scappolicies",
+        "title": "SCAP Policies",
+        "alt_title": [
+          "SCAP",
+          "security content automation protocol",
+          "policies"
+        ]
+      }
+    ]
   }
 ]

@@ -954,6 +954,11 @@
   },
   "seatsAdmin": {
       "manifestLocation": "/apps/seats-admin/fed-mods.json",
+      "config": {
+        "ssoScopes": [
+              "api.iam.access"
+          ]
+      },
       "modules": [
           {
               "id": "seats-admin",

@@ -166,7 +166,7 @@
               "module": "./RootApp",
               "routes": [
                   {
-                      "pathname": "/settings/connector"
+                      "pathname": "/insights/connector"
                   }
               ]
           }
@@ -935,6 +935,11 @@
   },
   "quay-ui-plugin": {
       "manifestLocation": "/apps/quay/plugin-manifest.json",
+      "config": {
+            "ssoScopes": [
+                "api.iam.access"
+            ]
+      },
       "modules": [
           {
               "id": "quay",

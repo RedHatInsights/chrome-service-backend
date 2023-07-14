@@ -2,108 +2,8 @@
   {
     "id": "quay",
     "links": [
-      {
-        "custom": true,
-        "id": "QUAY.quayOrganizations",
-        "href": "/quay/organization",
-        "title": "Quay organization",
-        "description": "Group and manage repositories belonging to a particular team, group, or company.",
-        "alt_title": [
-          "artifact",
-          "clair",
-          "container",
-          "container image",
-          "Container image distribution and replication",
-          "Container image hosting platform",
-          "Container image management platform",
-          "Container image replication and synchronization",
-          "Container image repository and hosting",
-          "Container image scanning and vulnerability management",
-          "Container image storage",
-          "Container image versioning and tagging",
-          "container registry",
-          "Container registry solution",
-          "Container security and compliance",
-          "cosign",
-          "CRI-O",
-          "CVE",
-          "digest",
-          "docker",
-          "Docker container management",
-          "helm",
-          "image pull",
-          "image push",
-          "image tag",
-          "Kubernetes container registry",
-          "manifest",
-          "OCI",
-          "podman",
-          "Private container registry solution",
-          "Quay",
-          "quay.io",
-          "registry",
-          "repository",
-          "sbom",
-          "scanner",
-          "scanning",
-          "Secure container registry",
-          "security scan",
-          "tag",
-          "vulnerability",
-          "vulnerability scanning"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "QUAY.quayRepositories",
-        "href": "/quay/repository",
-        "title": "Quay Repository",
-        "description": "Provide a central location for storing a related set of container images.",
-        "alt_title": [
-          "artifact",
-          "clair",
-          "container",
-          "container image",
-          "Container image distribution and replication",
-          "Container image hosting platform",
-          "Container image management platform",
-          "Container image replication and synchronization",
-          "Container image repository and hosting",
-          "Container image scanning and vulnerability management",
-          "Container image storage",
-          "Container image versioning and tagging",
-          "container registry",
-          "Container registry solution",
-          "Container security and compliance",
-          "cosign",
-          "CRI-O",
-          "CVE",
-          "digest",
-          "docker",
-          "Docker container management",
-          "helm",
-          "image pull",
-          "image push",
-          "image tag",
-          "Kubernetes container registry",
-          "manifest",
-          "OCI",
-          "podman",
-          "Private container registry solution",
-          "Quay",
-          "quay.io",
-          "registry",
-          "repository",
-          "sbom",
-          "scanner",
-          "scanning",
-          "Secure container registry",
-          "security scan",
-          "tag",
-          "vulnerability",
-          "vulnerability scanning"
-        ]
-      }
+      "quay.quayOrganizations",
+      "quay.quayRepositories"
     ]
   },
   {
@@ -158,6 +58,29 @@
     ]
   },
   {
+    "id": "patch-system",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.patch",
+        "href": "/insights/patch/systems",
+        "title": "Red Hat Patch Systems",
+        "alt_title": [
+          "Patch",
+          "content",
+          "advisories",
+          "insights",
+          "Rhel", 
+          "patch",
+          "updates",
+          "update",
+          "systems",
+          "upgrade"
+        ]
+      }
+    ]
+  },
+  {
     "id": "malware",
     "links": [
       {
@@ -186,6 +109,68 @@
           "Yara",
           "scanner",
           "risk"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "costManagement",
+    "links": [
+      {
+        "custom": true,
+        "id": "SETTINGS.applications.costManagement",
+        "href": "/settings/applications/cost-management",
+        "title": "Cost Management",
+        "alt_title": [
+          "cost management",
+          "cost",
+          "finsights",
+          "finops",
+          "chargeback",
+          "showback",
+          "cost management for openshift",
+          "openshift cost",
+          "rhcm",
+          "spend",
+          "distribute",
+          "cost model",
+          "money",
+          "bill",
+          "billing",
+          "financial",
+          "chargeback",
+          "showback",
+          "rate",
+          "save",
+          "savings"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compliance",
+    "links": [
+      {
+        "custom": true,
+        "id": "complianceReports",
+        "href": "/insights/compliance/reports",
+        "title": "Reports",
+        "alt_title": [
+          "Compliance",
+          "security",
+          "regulatory"
+        ],
+        "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+      },
+      {
+        "custom": true,
+        "id": "scapPolicies",
+        "href": "/insights/compliance/scappolicies",
+        "title": "SCAP Policies",
+        "alt_title": [
+          "SCAP",
+          "security content automation protocol",
+          "policies"
         ]
       }
     ]

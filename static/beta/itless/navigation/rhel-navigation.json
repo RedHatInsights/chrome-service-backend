@@ -249,7 +249,20 @@
               "title": "Remediations",
               "href": "/insights/remediations",
               "product": "Red Hat Insights",
-              "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems."
+              "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
+              "alt_title": [
+                "Remediate",
+                "playbook",
+                "fix",
+                "solve",
+                "find it fix it",
+                "fifi",
+                "cloud connector",
+                "insights",
+                "automation",
+                "Ansible",
+                "patch"
+              ]
           },
           {
               "id": "tasks",

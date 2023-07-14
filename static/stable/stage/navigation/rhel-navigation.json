@@ -63,7 +63,18 @@
               "title": "Remote Host Configuration (RHC)",
               "href": "/insights/connector",
               "product": "Red Hat Insights",
-              "description": "Configure your systems to execute Ansible Playbooks."
+              "description": "Configure your systems to execute Ansible Playbooks.",
+              "alt-title": [
+                "Remote host configuration",
+                "connect systems",
+                "connection options",
+                "connect settings",
+                "settings",
+                "Register",
+                "rhc",
+                "RHC",
+                "rhcd"
+              ]
             },
             {
               "id": "activationKeys",

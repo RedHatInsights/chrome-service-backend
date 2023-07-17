@@ -174,5 +174,31 @@
         ]
       }
     ]
+  },
+  {
+    "id": "rhel-tasks",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.tasks",
+        "href": "/insights/tasks",
+        "title": "RHEL Tasks",
+        "alt_title": [
+          "Task",
+          "upgrade",
+          "update",
+          "insights",
+          "automation",
+          "leapp",
+          "migrate",
+          "version",
+          "9.0",
+          "8.0",
+          "convert",
+          "conversion",
+          "migration"
+        ]
+      }
+    ]
   }
 ]

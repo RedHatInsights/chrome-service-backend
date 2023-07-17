@@ -174,7 +174,27 @@
               "title": "Recommendations",
               "href": "/insights/advisor/recommendations",
               "product": "Red Hat Insights",
-              "description": "View details about your Red Hat Enterprise Linux systems."
+              "description": "View details about your Red Hat Enterprise Linux systems.",
+              "alt_title": [
+                "Rules",
+                "recommendations",
+                "insights",
+                "configuration",
+                "security",
+                "stability",
+                "performance",
+                "advisor",
+                "incidents",
+                "recommendations",
+                "configuration",
+                "pathways",
+                "critical",
+                "upgrade",
+                "upgrade risk",
+                "incident",
+                "recommendation",
+                "pathway"
+              ]
             },
             {
               "id": "advisorSystems",

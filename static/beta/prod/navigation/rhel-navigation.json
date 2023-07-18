@@ -90,7 +90,7 @@
               "href": "/settings/connector",
               "product": "Red Hat Insights",
               "description": "Configure your systems to execute Ansible Playbooks.",
-              "alt-title": [
+              "alt_title": [
                 "Remote host configuration",
                 "connect systems",
                 "connection options",
@@ -108,7 +108,19 @@
               "title": "Activation keys",
               "href": "/settings/connector/activation-keys",
               "product": "Red Hat Insights",
-              "description": "Create activation keys to register your systems and configure repositories without using a username and password."
+              "description": "Create activation keys to register your systems and configure repositories without using a username and password.",
+              "alt_title": [
+                "Subscription key",
+                "sca",
+                "simple content access",
+                "activate",
+                "register",
+                "AK",
+                "repositories",
+                "system purpose",
+                "sla",
+                "content" 
+              ]
             }
           ]
         }

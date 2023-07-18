@@ -935,11 +935,6 @@
   },
   "quay-ui-plugin": {
       "manifestLocation": "/apps/quay/plugin-manifest.json",
-      "config": {
-            "ssoScopes": [
-                "api.iam.access"
-            ]
-      },
       "modules": [
           {
               "id": "quay",
@@ -954,6 +949,11 @@
   },
   "seatsAdmin": {
       "manifestLocation": "/apps/seats-admin/fed-mods.json",
+      "config": {
+        "ssoScopes": [
+              "api.iam.access"
+          ]
+      },
       "modules": [
           {
               "id": "seats-admin",

@@ -61,7 +61,13 @@
               "title": "Advisories",
               "href": "/insights/patch/advisories",
               "product": "Red Hat Insights",
-              "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
+              "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+              "alt_title": [
+                "Errata",
+                "patch",
+                "updates",
+                "insights"
+              ]
             },
             {
               "id": "patchSystems",

@@ -446,7 +446,13 @@
               "title": "Manifests",
               "href": "/insights/subscriptions/manifests",
               "product": "Subscription Watch",
-              "description": "Export subscription manifests for Red Hat Satellite."
+              "description": "Export subscription manifests for Red Hat Satellite.",
+              "alt_title": [
+                "manifests",
+                "subscription allocations",
+                "distributors",
+                "Satellite"
+              ]
             },
             {
               "id": "subscriptionsDocumentation",

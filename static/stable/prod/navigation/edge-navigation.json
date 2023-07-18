@@ -21,6 +21,12 @@
       ]
     },
     {
+        "id": "learningResources",
+        "appId": "learningResources",
+        "title": "Learning Resources",
+        "href": "/edge/learning-resources"
+    },
+    {
       "title": "Manage Images",
       "expandable": true,
       "routes": [
@@ -37,13 +43,6 @@
           "href": "/edge/repositories"
         }
       ]
-    },
-    {
-      "title": "Learning resources",
-      "id": "learningResources",
-      "filterable": false,
-      "appId": "edge",
-      "href": "/edge/learning-resources"
     }
   ]
 }

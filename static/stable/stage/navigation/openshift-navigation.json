@@ -26,12 +26,6 @@
             "description": "Overview of your OpenShift Environment."
         },
         {
-            "id": "learningResources",
-            "appId": "learningResources",
-            "title": "Learning Resources",
-            "href": "/openshift/learning-resources"
-        },
-        {
             "id": "releases",
             "appId": "openshift",
             "href": "/openshift/releases",

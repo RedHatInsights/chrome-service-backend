@@ -84,6 +84,12 @@
                         "props": {
                             "bundle": "hac"
                         }
+                    },
+                    {
+                        "pathname": "/subscriptions/learning-resources",
+                        "props": {
+                            "bundle": "subscriptions"
+                        }
                     }
                 ]
             }

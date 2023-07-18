@@ -78,6 +78,12 @@
                         "props": {
                             "bundle": "iam"
                         }
+                    },
+                    {
+                        "pathname": "/hac/learning-resources",
+                        "props": {
+                            "bundle": "hac"
+                        }
                     }
                 ]
             }

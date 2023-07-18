@@ -260,14 +260,14 @@
     ]
   },
   {
-    "id": "subscription-services",
+    "id": "subscriptions",
     "icon": "CreditCardIcon",
     "title": "Subscription Services",
     "description": "Subscription Services empower buying decisions. SaMS provides software usage reporting that is designed to make your subscription choices data-driven.",
     "link": [
-      "subscription-services.overview",
-      "subscription-services.subscriptionsInventory",
-      "subscription-services.subscriptionsUsage",
+      "subscriptions.overview",
+      "subscriptions.subscriptionsInventory",
+      "subscriptions.subscriptionsUsage",
       "hybridCommittedSpend.hybridCommittedSpend",
       "hybridCommittedSpend.manifests",
       "hybridCommittedSpend.learningResources"

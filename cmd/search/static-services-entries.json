@@ -114,6 +114,70 @@
     ]
   },
   {
+    "id": "openshift-vulnerability",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.cves",
+        "href": "/openshift/insights/vulnerability/cves",
+        "title": "Red Hat Openshift Vulnerability Dashboard",
+        "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency.",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.vulnerabilityClusters",
+        "href": "/openshift/insights/vulnerability/clusters",
+        "title": "Red Hat Openshift Vulnerability Clusters",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      }
+    ]
+  },
+  {
     "id": "costManagement",
     "links": [
       {

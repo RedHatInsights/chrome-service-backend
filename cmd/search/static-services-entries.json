@@ -114,6 +114,70 @@
     ]
   },
   {
+    "id": "openshift-vulnerability",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.cves",
+        "href": "/openshift/insights/vulnerability/cves",
+        "title": "Red Hat Openshift Vulnerability Dashboard",
+        "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency.",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.vulnerabilityClusters",
+        "href": "/openshift/insights/vulnerability/clusters",
+        "title": "Red Hat Openshift Vulnerability Clusters",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      }
+    ]
+  },
+  {
     "id": "costManagement",
     "links": [
       {
@@ -183,15 +247,6 @@
         "id": "business-services.hybridCommittedSpend.overview",
         "href": "/business-services/hybrid-committed-spend",
         "title": "Hybrid Committed Spend Overview",
-        "permissions": [
-          {
-            "method": "apiRequest",
-            "args": [{
-              "url": "https://billing.api.redhat.com/v1/authorization/hcsEnrollment",
-              "accessor": "hcsDeal"
-            }]
-          }
-        ],
         "alt_title": [
           "HCS",
           "committed spend",
@@ -200,6 +255,32 @@
           "spend",
           "committed",
           "drawdown"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-tasks",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.tasks",
+        "href": "/insights/tasks",
+        "title": "RHEL Tasks",
+        "alt_title": [
+          "Task",
+          "upgrade",
+          "update",
+          "insights",
+          "automation",
+          "leapp",
+          "migrate",
+          "version",
+          "9.0",
+          "8.0",
+          "convert",
+          "conversion",
+          "migration"
         ]
       }
     ]

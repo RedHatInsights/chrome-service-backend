@@ -90,7 +90,7 @@
               "href": "/settings/connector",
               "product": "Red Hat Insights",
               "description": "Configure your systems to execute Ansible Playbooks.",
-              "alt-title": [
+              "alt_title": [
                 "Remote host configuration",
                 "connect systems",
                 "connection options",
@@ -108,7 +108,19 @@
               "title": "Activation keys",
               "href": "/settings/connector/activation-keys",
               "product": "Red Hat Insights",
-              "description": "Create activation keys to register your systems and configure repositories without using a username and password."
+              "description": "Create activation keys to register your systems and configure repositories without using a username and password.",
+              "alt_title": [
+                "Subscription key",
+                "sca",
+                "simple content access",
+                "activate",
+                "register",
+                "AK",
+                "repositories",
+                "system purpose",
+                "sla",
+                "content" 
+              ]
             }
           ]
         }
@@ -124,7 +136,13 @@
           "title": "Advisories",
           "href": "/insights/patch/advisories",
           "product": "Red Hat Insights",
-          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
+          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+          "alt_title": [
+            "Errata",
+            "patch",
+            "updates",
+            "insights"
+          ]
         },
         {
           "appId": "patch",
@@ -173,7 +191,27 @@
               "title": "Recommendations",
               "href": "/insights/advisor/recommendations",
               "product": "Red Hat Insights",
-              "description": "View details about your Red Hat Enterprise Linux systems."
+              "description": "View details about your Red Hat Enterprise Linux systems.",
+              "alt_title": [
+                "Rules",
+                "recommendations",
+                "insights",
+                "configuration",
+                "security",
+                "stability",
+                "performance",
+                "advisor",
+                "incidents",
+                "recommendations",
+                "configuration",
+                "pathways",
+                "critical",
+                "upgrade",
+                "upgrade risk",
+                "incident",
+                "recommendation",
+                "pathway"
+              ]
             },
             {
               "id": "advisorSystems",
@@ -408,7 +446,13 @@
               "title": "Manifests",
               "href": "/insights/subscriptions/manifests",
               "product": "Subscription Watch",
-              "description": "Export subscription manifests for Red Hat Satellite."
+              "description": "Export subscription manifests for Red Hat Satellite.",
+              "alt_title": [
+                "manifests",
+                "subscription allocations",
+                "distributors",
+                "Satellite"
+              ]
             },
             {
               "id": "subscriptionsDocumentation",

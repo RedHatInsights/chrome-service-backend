@@ -240,6 +240,26 @@
     ]
   },
   {
+    "id": "hybrid-committed-spend",
+    "links": [
+      {
+        "custom": true,
+        "id": "business-services.hybridCommittedSpend.overview",
+        "href": "/business-services/hybrid-committed-spend",
+        "title": "Hybrid Committed Spend Overview",
+        "alt_title": [
+          "HCS",
+          "committed spend",
+          "spend",
+          "commitment burndown",
+          "spend",
+          "committed",
+          "drawdown"
+        ]
+      }
+    ]
+  },
+  {
     "id": "rhel-tasks",
     "links": [
       {

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/go-chi/cors"
 	"log"
 	"net/http"
 	"strconv"
@@ -64,6 +65,12 @@ func main() {
 		logrus.Infoln("Enabling WebSockets")
 		kafka.InitializeConsumers()
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+			subrouter.Use(cors.Handler(cors.Options{
+				AllowedOrigins: []string{
+					"wss://stage.foo.redhat.com:1337",
+					"wss://prod.foo.redhat.com:1337",
+				},
+			}))
 			subrouter.Route("/ws", routes.MakeWsRoute)
 		})
 	} else {

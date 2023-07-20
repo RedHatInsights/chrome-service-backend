@@ -81,6 +81,38 @@
     ]
   },
   {
+    "id": "rhel-content-patch-packages",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.patch",
+        "href": "/insights/patch/packages",
+        "title": "RHEL Packages",
+        "alt_title": [
+          "Packages",
+          "updates",
+          "insights",
+          "repositories",
+          "rpm",
+          "dnf",
+          "yum",
+          "errata",
+          "patch",
+          "advisories",
+          "patching",
+          "templates",
+          "content management",
+          "content view",
+          "patch cycle",
+          "satellite",
+          "RHSA",
+          "RHBA",
+          "RHEA"
+        ]
+      }
+    ]
+  },
+  {
     "id": "malware",
     "links": [
       {
@@ -240,33 +272,21 @@
     ]
   },
   {
-    "id": "rhel-content-patch-packages",
+    "id": "hybrid-committed-spend",
     "links": [
       {
         "custom": true,
-        "id": "RHEL.patch",
-        "href": "/insights/patch/packages",
-        "title": "RHEL Packages",
+        "id": "business-services.hybridCommittedSpend.overview",
+        "href": "/business-services/hybrid-committed-spend",
+        "title": "Hybrid Committed Spend Overview",
         "alt_title": [
-          "Packages",
-          "updates",
-          "insights",
-          "repositories",
-          "rpm",
-          "dnf",
-          "yum",
-          "errata",
-          "patch",
-          "advisories",
-          "patching",
-          "templates",
-          "content management",
-          "content view",
-          "patch cycle",
-          "satellite",
-          "RHSA",
-          "RHBA",
-          "RHEA"
+          "HCS",
+          "committed spend",
+          "spend",
+          "commitment burndown",
+          "spend",
+          "committed",
+          "drawdown"
         ]
       }
     ]

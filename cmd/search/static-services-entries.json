@@ -113,60 +113,6 @@
       }
     ]
   },
-  {
-    "id": "rhel-drift",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.Operations.Drift.drift",
-        "href": "/insights/drift/",
-        "title": "RHEL Drift Comparison",
-        "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
-        "alt_title": [
-          "Drift",
-          "Comparison",
-          "Baseline",
-          "insights",
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "history"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.Operations.Drift.drift.baseline",
-        "href": "/insights/drift/baselines",
-        "title": "RHEL Drift Baselines",
-        "alt_title": [
-          "Drift",
-          "Comparison",
-          "Baseline",
-          "insights",
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "history"
-        ]
-      }
-    ]
-  },
   {  
     "id": "openshift-vulnerability",
     "links": [
@@ -226,6 +172,60 @@
           "risk",
           "critical",
           "errata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-drift",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Operations.Drift.drift",
+        "href": "/insights/drift/",
+        "title": "RHEL Drift Comparison",
+        "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
+        "alt_title": [
+          "Drift",
+          "Comparison",
+          "Baseline",
+          "insights",
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "history"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.Operations.Drift.drift.baseline",
+        "href": "/insights/drift/baselines",
+        "title": "RHEL Drift Baselines",
+        "alt_title": [
+          "Drift",
+          "Comparison",
+          "Baseline",
+          "insights",
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "history"
         ]
       }
     ]

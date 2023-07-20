@@ -130,7 +130,8 @@
         "custom": true,
         "id": "RHEL.Content.Patch.patch",
         "href": "/insights/patch/systems",
-        "title": "Red Hat Patch Systems",
+        "title": "Patch Systems",
+        "subtitle": "Red Hat Insights for RHEL",
         "alt_title": [
           "Patch",
           "content",
@@ -407,6 +408,23 @@
           "convert",
           "conversion",
           "migration"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-dashboard",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.dashboard",
+        "href": "/insights/dashboard",
+        "title": "Insights Dashboard",
+        "subtitle": "Red Hat Insights for RHEL",
+        "alt_title": [
+          "Dashboard",
+          "insights",
+          "Rhel"
         ]
       }
     ]

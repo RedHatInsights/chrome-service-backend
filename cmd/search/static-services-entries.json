@@ -19,6 +19,52 @@
     ]
   },
   {
+    "id": "ansible-drift",
+    "links": [
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.Drift.drift",
+        "href": "/ansible/drift/",
+        "title": "Ansible Drift Comparison",
+        "description": "Compare systems in your Ansible inventory to one another or against a set baseline.",
+        "alt_title": [
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "drift"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.Drift.drift.baseline",
+        "href": "/ansible/drift/baselines",
+        "title": "Ansible Drift Baselines",
+        "alt_title": [
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "drift"
+        ]
+      }
+    ]
+  },
+  {
     "id": "ACS-custom",
     "links": [
       "application-services.acs-section"
@@ -114,47 +160,64 @@
     ]
   },
   {
-    "id": "ansible-drift",
+    "id": "openshift-vulnerability",
     "links": [
       {
         "custom": true,
-        "id": "ANSIBLE.operations.Drift.drift",
-        "href": "/ansible/drift/",
-        "title": "Ansible Drift Comparison",
-        "description": "Compare systems in your Ansible inventory to one another or against a set baseline.",
+        "id": "OPENSHIFT.cves",
+        "href": "/openshift/insights/vulnerability/cves",
+        "title": "Red Hat Openshift Vulnerability Dashboard",
+        "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency.",
         "alt_title": [
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "drift"
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
         ]
       },
       {
-        "custom": true,
-        "id": "ANSIBLE.operations.Drift.drift.baseline",
-        "href": "/ansible/drift/baselines",
-        "title": "Ansible Drift Baselines",
+        "id": "OPENSHIFT.vulnerabilityClusters",
+        "href": "/openshift/insights/vulnerability/clusters",
+        "title": "Red Hat Openshift Vulnerability Clusters",
         "alt_title": [
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "drift"
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
         ]
       }
     ]
@@ -217,6 +280,52 @@
           "SCAP",
           "security content automation protocol",
           "policies"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hybrid-committed-spend",
+    "links": [
+      {
+        "custom": true,
+        "id": "business-services.hybridCommittedSpend.overview",
+        "href": "/business-services/hybrid-committed-spend",
+        "title": "Hybrid Committed Spend Overview",
+        "alt_title": [
+          "HCS",
+          "committed spend",
+          "spend",
+          "commitment burndown",
+          "spend",
+          "committed",
+          "drawdown"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-tasks",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.tasks",
+        "href": "/insights/tasks",
+        "title": "RHEL Tasks",
+        "alt_title": [
+          "Task",
+          "upgrade",
+          "update",
+          "insights",
+          "automation",
+          "leapp",
+          "migrate",
+          "version",
+          "9.0",
+          "8.0",
+          "convert",
+          "conversion",
+          "migration"
         ]
       }
     ]

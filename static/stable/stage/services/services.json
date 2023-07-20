@@ -170,12 +170,14 @@
           {
             "href": "/ansible/advisor/recommendations",
             "title": "Advisor Recommendations",
-            "subtitle": "Red Hat Insights for Ansible"
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
           },
           {
             "title": "Drift Comparison",
             "href": "/ansible/drift",
-            "subtitle": "Red Hat Insights for Ansible"
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
           },
           "ansible.policies"
         ]
@@ -188,12 +190,14 @@
           {
             "href": "/openshift/insights/advisor/recommendations",
             "title": "Advisor Recommendations",
-            "subtitle": "Red Hat Insights for OpenShift"
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
           },
           {
             "href": "/openshift/insights/vulnerability/cves",
             "title": "Vulnerability Dashboard",
-            "subtitle": "Red Hat Insights for OpenShift"
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
           }
         ]
       },
@@ -205,7 +209,8 @@
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor Recommendations",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "View details about your Red Hat Enterprise Linux systems."
           },
           "rhel.advisories",
           "rhel.remediations",
@@ -214,7 +219,8 @@
           {
             "href": "/insights/drift",
             "title": "Drift Comparison",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
           },
           {
             "href": "/insights/patch/templates",
@@ -269,25 +275,29 @@
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor recommendations",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "View details about your Red Hat Enterprise Linux systems."
           },
           "rhel.advisories",
           {
             "href": "/insights/compliance/reports",
             "title": "Compliance",
-            "subtitle":"Red Hat Insights for RHEL"
+            "subtitle":"Red Hat Insights for RHEL",
+            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
           },
           "edge.groups",
           {
             "href": "/insights/malware/signatures",
             "title": "Malware",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
           "rhel.remediations",
           {
             "href": "/insights/vulnerability/cves",
             "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
           }
         ]
       },
@@ -312,12 +322,14 @@
           {
             "href": "/ansible/advisor/recommendations",
             "title": "Advisor Recommendations",
-            "subtitle": "Red Hat Insights for Ansible"
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
           },
           {
             "href": "/ansible/drift",
             "title": "Drift Comparison",
-            "subtitle": "Red Hat Insights for Ansible"
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
           },
           "ansible.policies"
         ]
@@ -330,7 +342,8 @@
           {
             "href": "/openshift/insights/advisor/recommendations",
             "title": "Advisor Recommendations",
-            "subtitle": "Red Hat Insights for OpenShift"
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
           }
         ]
       },
@@ -342,12 +355,14 @@
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor Recommendations",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux hosts’ availability, performance, and security."
           },
           {
             "href": "/insights/drift",
             "title": "Drift Comparison",
-            "subtitle": "Red Hat Insights for RHEL"
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
           },
           "rhel.policies"
         ]
@@ -378,7 +393,8 @@
       {
         "href": "/insights/connector",
         "title": "Remote Host Configuration",
-        "subtitle": "Red Hat Insights for RHEL"
+        "subtitle": "Red Hat Insights for RHEL",
+        "description": "Configure your systems to execute Ansible Playbooks."
       }
     ]
   },

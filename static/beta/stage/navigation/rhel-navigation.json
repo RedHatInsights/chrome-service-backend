@@ -288,7 +288,8 @@
           "appId": "policies",
           "title": "Policies",
           "href": "/insights/policies",
-          "subtitle": "Red Hat Insights for RHEL"
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Monitor your RHEL hosts against set parameters to detect deviation or misalignment."
         }
       ]
     },

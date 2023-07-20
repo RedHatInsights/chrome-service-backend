@@ -193,6 +193,7 @@
         ]
       },
       {
+        "custom": true,
         "id": "OPENSHIFT.vulnerabilityClusters",
         "href": "/openshift/insights/vulnerability/clusters",
         "title": "Red Hat Openshift Vulnerability Clusters",

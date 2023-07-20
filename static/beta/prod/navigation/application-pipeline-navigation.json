@@ -3,22 +3,16 @@
   "title": "Trusted Application Pipeline",
   "navItems": [
       {
-        "id": "demoPlugin",
-        "appId": "hacCore",
-        "title": "Demo Plugin",
-        "dynamicNav": "hacCore/admin-demo-section"
-      },
-      {
-        "id": "devDemoPlugin",
-        "appId": "hacCore",
-        "title": "Demo Plugin",
-        "dynamicNav": "hacCore/dev-demo-section"
-      },
-      {
         "id": "flatNav",
         "appId": "hacCore",
         "title": "Flat nav",
         "dynamicNav": "hacCore"
+      },
+      {
+        "id": "learningResources",
+        "appId": "applicationServices",
+        "title": "Learning Resources",
+        "href": "/hac/learning-resources"
       }
   ]
 }

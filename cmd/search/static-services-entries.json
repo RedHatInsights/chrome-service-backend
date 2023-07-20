@@ -1,5 +1,71 @@
 [
   {
+    "id": "openshift-advisor",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.insights.Advisor.recommendations",
+        "href": "/openshift/insights/advisor/recommendations",
+        "title": "Red Hat OpenShift Cluster Manager Recommendations",
+        "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
+        "alt_title": [
+          "Insights Advisor",
+          "OpenShift Advisor",
+          "Advisor",
+          "Recommendations",
+          "Proactive support",
+          "Proactive support",
+          "risk",
+          "support",
+          "update",
+          "update risk",
+          "update",
+          "issues",
+          "remediation",
+          "cluster state",
+          "recommendation",
+          "cluster health",
+          "remote health",
+          "proactive",
+          "support",
+          "fix",
+          "problem",
+          "issue"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
+        "href": "/openshift/insights/advisor/clusters",
+        "title": "Red Hat OpenShift Cluster Manager Advisor",
+        "alt_title": [
+          "Insights Advisor",
+          "OpenShift Advisor",
+          "Advisor",
+          "Recommendations",
+          "Proactive support",
+          "Proactive support",
+          "risk",
+          "support",
+          "update",
+          "update risk",
+          "update",
+          "issues",
+          "remediation",
+          "cluster state",
+          "recommendation",
+          "cluster health",
+          "remote health",
+          "proactive",
+          "support",
+          "fix",
+          "problem",
+          "issue"
+        ]
+      }
+    ]
+  },
+  {
     "id": "quay",
     "links": [
       "quay.quayOrganizations",
@@ -58,6 +124,29 @@
     ]
   },
   {
+    "id": "patch-system",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.patch",
+        "href": "/insights/patch/systems",
+        "title": "Red Hat Patch Systems",
+        "alt_title": [
+          "Patch",
+          "content",
+          "advisories",
+          "insights",
+          "Rhel", 
+          "patch",
+          "updates",
+          "update",
+          "systems",
+          "upgrade"
+        ]
+      }
+    ]
+  },
+  {
     "id": "malware",
     "links": [
       {
@@ -91,68 +180,174 @@
     ]
   },
   {
-    "id": "openshift-advisor",
+    "id": "openshift-vulnerability",
     "links": [
       {
-      "custom": true,
-      "id": "OPENSHIFT.insights.Advisor.recommendations",
-      "href": "/openshift/insights/advisor/recommendations",
-      "title": "Red Hat OpenShift Cluster Manager Recommendations",
-      "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
-      "alt_title": [
-        "Insights Advisor",
-        "OpenShift Advisor",
-        "Advisor",
-        "Recommendations",
-        "Proactive support",
-        "Proactive support",
-        "risk",
-        "support",
-        "update",
-        "update risk",
-        "update",
-        "issues",
-        "remediation",
-        "cluster state",
-        "recommendation",
-        "cluster health",
-        "remote health",
-        "proactive",
-        "support",
-        "fix",
-        "problem",
-        "issue"
-      ]
+        "custom": true,
+        "id": "OPENSHIFT.cves",
+        "href": "/openshift/insights/vulnerability/cves",
+        "title": "Red Hat Openshift Vulnerability Dashboard",
+        "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency.",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
       },
       {
-      "custom": true,
-      "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
-      "href": "/openshift/insights/advisor/clusters",
-      "title": "Red Hat OpenShift Cluster Manager Advisor",
-      "alt_title": [
-        "Insights Advisor",
-        "OpenShift Advisor",
-        "Advisor",
-        "Recommendations",
-        "Proactive support",
-        "Proactive support",
-        "risk",
-        "support",
-        "update",
-        "update risk",
-        "update",
-        "issues",
-        "remediation",
-        "cluster state",
-        "recommendation",
-        "cluster health",
-        "remote health",
-        "proactive",
-        "support",
-        "fix",
-        "problem",
-        "issue"
-      ]
+        "custom": true,
+        "id": "OPENSHIFT.vulnerabilityClusters",
+        "href": "/openshift/insights/vulnerability/clusters",
+        "title": "Red Hat Openshift Vulnerability Clusters",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "costManagement",
+    "links": [
+      {
+        "custom": true,
+        "id": "SETTINGS.applications.costManagement",
+        "href": "/settings/applications/cost-management",
+        "title": "Cost Management",
+        "alt_title": [
+          "cost management",
+          "cost",
+          "finsights",
+          "finops",
+          "chargeback",
+          "showback",
+          "cost management for openshift",
+          "openshift cost",
+          "rhcm",
+          "spend",
+          "distribute",
+          "cost model",
+          "money",
+          "bill",
+          "billing",
+          "financial",
+          "chargeback",
+          "showback",
+          "rate",
+          "save",
+          "savings"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compliance",
+    "links": [
+      {
+        "custom": true,
+        "id": "complianceReports",
+        "href": "/insights/compliance/reports",
+        "title": "Reports",
+        "alt_title": [
+          "Compliance",
+          "security",
+          "regulatory"
+        ],
+        "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+      },
+      {
+        "custom": true,
+        "id": "scapPolicies",
+        "href": "/insights/compliance/scappolicies",
+        "title": "SCAP Policies",
+        "alt_title": [
+          "SCAP",
+          "security content automation protocol",
+          "policies"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hybrid-committed-spend",
+    "links": [
+      {
+        "custom": true,
+        "id": "business-services.hybridCommittedSpend.overview",
+        "href": "/business-services/hybrid-committed-spend",
+        "title": "Hybrid Committed Spend Overview",
+        "alt_title": [
+          "HCS",
+          "committed spend",
+          "spend",
+          "commitment burndown",
+          "spend",
+          "committed",
+          "drawdown"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-tasks",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.tasks",
+        "href": "/insights/tasks",
+        "title": "RHEL Tasks",
+        "alt_title": [
+          "Task",
+          "upgrade",
+          "update",
+          "insights",
+          "automation",
+          "leapp",
+          "migrate",
+          "version",
+          "9.0",
+          "8.0",
+          "convert",
+          "conversion",
+          "migration"
+        ]
       }
     ]
   }

@@ -166,7 +166,7 @@
               "module": "./RootApp",
               "routes": [
                   {
-                      "pathname": "/settings/connector"
+                      "pathname": "/insights/connector"
                   }
               ]
           }
@@ -928,6 +928,12 @@
                       "props": {
                           "bundle": "iam"
                       }
+                  },
+                  {
+                      "pathname": "/hac/learning-resources",
+                      "props": {
+                          "bundle": "hac"
+                      }
                   }
               ]
           }
@@ -949,6 +955,11 @@
   },
   "seatsAdmin": {
       "manifestLocation": "/apps/seats-admin/fed-mods.json",
+      "config": {
+        "ssoScopes": [
+              "api.iam.access"
+          ]
+      },
       "modules": [
           {
               "id": "seats-admin",

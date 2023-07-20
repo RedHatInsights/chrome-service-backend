@@ -41,6 +41,12 @@
       ]
     },
     {
+        "id": "learningResources",
+        "appId": "learningResources",
+        "title": "Learning Resources",
+        "href": "/edge/learning-resources"
+    },
+    {
       "title": "Manage Images",
       "expandable": true,
       "routes": [
@@ -69,19 +75,6 @@
               "args": ["@redhat.com", "@sbb.ch"]
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "learningResources",
-      "title": "Learning Resources",
-      "appId": "learningResources",
-      "filterable": false,
-      "href": "/edge/learning-resources",
-      "permissions": [
-        {
-          "method": "withEmail",
-          "args": ["@redhat.com", "@sbb.ch"]
         }
       ]
     }

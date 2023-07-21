@@ -199,7 +199,7 @@
         "custom": true,
         "id": "RHEL.security.malware.malwareSystems",
         "href": "/insights/malware/systems",
-        "title": "Malware signatures",
+        "title": "Malware systems",
         "alt_title": [
           "Malware",
           "security",
@@ -211,7 +211,7 @@
       }
     ]
   },
-  {
+  {  
     "id": "openshift-vulnerability",
     "links": [
       {
@@ -245,7 +245,6 @@
         ]
       },
       {
-        "custom": true,
         "id": "OPENSHIFT.vulnerabilityClusters",
         "href": "/openshift/insights/vulnerability/clusters",
         "title": "Red Hat Openshift Vulnerability Clusters",
@@ -271,6 +270,60 @@
           "risk",
           "critical",
           "errata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-drift",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Operations.Drift.drift",
+        "href": "/insights/drift/",
+        "title": "RHEL Drift Comparison",
+        "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
+        "alt_title": [
+          "Drift",
+          "Comparison",
+          "Baseline",
+          "insights",
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "history"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.Operations.Drift.drift.baseline",
+        "href": "/insights/drift/baselines",
+        "title": "RHEL Drift Baselines",
+        "alt_title": [
+          "Drift",
+          "Comparison",
+          "Baseline",
+          "insights",
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "history"
         ]
       }
     ]

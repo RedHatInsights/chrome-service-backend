@@ -12,7 +12,7 @@
       "id": "subscriptionsInventory",
       "appId": "subscriptionsInventory",
       "title": "Subscriptions Inventory",
-      "href": "/subscriptions/inventory"
+      "href": "/insights/subscriptions/inventory"
     },
     {
       "id": "subscriptionsUsage",
@@ -23,26 +23,7 @@
           "id": "rhel",
           "appId": "rhel",
           "title": "RHEL",
-          "href": "/subscriptions/rhel"
-        },
-        {
-          "id": "subscriptionsOpenshift",
-          "appId": "subscriptions",
-          "title": "OpenShift Subscriptions",
-          "href": "/subscriptions/openshift",
-          "product": "Subscription Watch"
-        },
-        {
-          "id": "openshiftDataScience",
-          "appId": "subscriptions",
-          "title": "OpenShift Data Science",
-          "href": "/subscriptions/rhods"
-        },
-        {
-          "id": "advancedClusterSecurityForKubernetes",
-          "appId": "subscriptions",
-          "title": "Advanced Cluster Security",
-          "href": "/application-services/subscriptions/rhacs"
+          "href": "/insights/subscriptions/rhel"
         }
       ]
     },
@@ -63,13 +44,13 @@
       "id": "manifests",
       "appId": "manifests",
       "title": "Manifests",
-      "href": "/subscriptions/manifests"
+      "href": "/insights/subscriptions/manifests"
     },
     {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",
-      "href": "/subscriptions/learning-resources"
+      "href": "/insights/subscriptions/learning-resources"
     }
   ]
 }

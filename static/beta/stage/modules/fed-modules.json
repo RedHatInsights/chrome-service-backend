@@ -488,9 +488,8 @@
                 "id": "subscription-inventory",
                 "module": "./RootApp",
                 "routes": [
-                    {
-                        "pathname": "/insights/subscriptions/inventory"
-                    }
+                    {"pathname": "/insights/subscriptions/inventory"},
+                    {"pathname": "/subscriptions/inventory"}
                 ]
             }
         ]

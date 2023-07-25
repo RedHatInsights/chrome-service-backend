@@ -403,6 +403,31 @@
     ]
   },
   {
+    "id": "rhel-policies",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.policies",
+        "href": "/insights/policies",
+        "title": "RHEL Policies",
+        "alt_title":[
+          "policies",
+          "facts",
+          "conditions",
+          "trigger", "notifications",
+          "alerts",
+          "insights",
+          "notify",
+          "integration",
+          "conditions",
+          "alerts",
+          "events",
+          "raise alerts on system configuration changes"
+        ]
+      }
+    ]
+  },
+  {
     "id": "costManagement",
     "links": [
       {

@@ -193,6 +193,28 @@
     ]
   },
   {
+    "id": "patch-template",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.template",
+        "href": "/insights/patch/templates",
+        "title": "Red Hat Patch Templates",
+        "alt_title": [
+          "Template",
+          "patch template",
+          "content template",
+          "insights",
+          "Patch cycle",
+          "content management",
+          "patching",
+          "update",
+          "content view"
+        ]
+      }
+    ]
+  },
+  {
     "id": "rhel-content-patch-packages",
     "links": [
       {

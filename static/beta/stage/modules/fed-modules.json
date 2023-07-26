@@ -465,9 +465,8 @@
                 "id": "insights-subscriptions",
                 "module": "./RootApp",
                 "routes": [
-                    {
-                        "pathname": "/insights/subscriptions"
-                    }
+                    {"pathname": "/insights/subscriptions"},
+                    {"pathname": "/subscriptions/rhel"}
                 ]
             },
             {

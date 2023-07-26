@@ -23,7 +23,7 @@
           "id": "rhel",
           "appId": "rhel",
           "title": "RHEL",
-          "href": "/insights/subscriptions/rhel"
+          "href": "/subscriptions/rhel"
         }
       ]
     },

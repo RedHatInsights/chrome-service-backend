@@ -109,27 +109,29 @@ func init() {
 			options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
 		}
 
-		broker := cfg.Kafka.Brokers[0]
-		// pass all required topics names
-		for _, topic := range cfg.Kafka.Topics {
-			options.KafkaConfig.KafkaTopics = append(options.KafkaConfig.KafkaTopics, topic.Name)
-		}
-
-		options.KafkaConfig.KafkaBrokers = clowder.KafkaServers
-		// Kafka SSL Config
-		if broker.Authtype != nil {
-			options.KafkaConfig.KafkaSSlConfig.KafkaUsername = *broker.Sasl.Username
-			options.KafkaConfig.KafkaSSlConfig.KafkaPassword = *broker.Sasl.Password
-			options.KafkaConfig.KafkaSSlConfig.SASLMechanism = *broker.Sasl.SaslMechanism
-			options.KafkaConfig.KafkaSSlConfig.Protocol = *broker.Sasl.SecurityProtocol
-		}
-
-		if broker.Cacert != nil {
-			caPath, err := cfg.KafkaCa(broker)
-			if err != nil {
-				panic(fmt.Sprintln("Kafka CA failed to write", err))
+		if cfg.Kafka != nil {
+			broker := cfg.Kafka.Brokers[0]
+			// pass all required topics names
+			for _, topic := range cfg.Kafka.Topics {
+				options.KafkaConfig.KafkaTopics = append(options.KafkaConfig.KafkaTopics, topic.Name)
 			}
-			options.KafkaConfig.KafkaSSlConfig.KafkaCA = caPath
+
+			options.KafkaConfig.KafkaBrokers = clowder.KafkaServers
+			// Kafka SSL Config
+			if broker.Authtype != nil {
+				options.KafkaConfig.KafkaSSlConfig.KafkaUsername = *broker.Sasl.Username
+				options.KafkaConfig.KafkaSSlConfig.KafkaPassword = *broker.Sasl.Password
+				options.KafkaConfig.KafkaSSlConfig.SASLMechanism = *broker.Sasl.SaslMechanism
+				options.KafkaConfig.KafkaSSlConfig.Protocol = *broker.Sasl.SecurityProtocol
+			}
+
+			if broker.Cacert != nil {
+				caPath, err := cfg.KafkaCa(broker)
+				if err != nil {
+					panic(fmt.Sprintln("Kafka CA failed to write", err))
+				}
+				options.KafkaConfig.KafkaSSlConfig.KafkaCA = caPath
+			}
 		}
 	} else {
 		options.WebPort = 8000

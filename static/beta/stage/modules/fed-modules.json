@@ -501,6 +501,9 @@
                 "module": "./RootApp",
                 "routes": [
                     {
+                        "pathname": "/subscriptions"
+                    },
+                    {
                         "pathname": "/subscriptions/overview"
                     }
                 ]
@@ -1003,6 +1006,20 @@
                 ]
             }
         ]
+    },
+    "serviceAccounts": {
+      "manifestLocation": "/apps/service-accounts/fed-mods.json",
+      "modules": [
+          {
+              "id": "service-accounts",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/iam/service-accounts"
+                  }
+              ]
+          }
+      ]
     },
     "quay-ui-plugin": {
         "manifestLocation": "/apps/quay/plugin-manifest.json",

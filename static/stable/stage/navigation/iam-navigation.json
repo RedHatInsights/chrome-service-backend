@@ -76,6 +76,11 @@
       ]
     },
     {
+      "title": "Service Accounts",
+      "appId": "serviceAccounts",
+      "href": "/iam/service-accounts"
+    },
+    {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",

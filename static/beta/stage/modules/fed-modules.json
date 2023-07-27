@@ -501,6 +501,9 @@
                 "module": "./RootApp",
                 "routes": [
                     {
+                        "pathname": "/subscriptions"
+                    },
+                    {
                         "pathname": "/subscriptions/overview"
                     }
                 ]

@@ -971,5 +971,19 @@
               ]
           }
       ]
+  },
+  "serviceAccounts": {
+    "manifestLocation": "/apps/service-accounts/fed-mods.json",
+    "modules": [
+        {
+            "id": "service-accounts",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/iam/service-accounts"
+                }
+            ]
+        }
+    ]
   }
 }

@@ -466,7 +466,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {"pathname": "/insights/subscriptions"},
-                    {"pathname": "/subscriptions/rhel"}
+                    {"pathname": "/subscriptions"}
                 ]
             },
             {

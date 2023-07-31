@@ -313,6 +313,7 @@
   {
     "id": "operations",
     "title": "Operations",
+    "icon": "MonitoringIcon",
     "links": [
       {
         "id": "ansible",

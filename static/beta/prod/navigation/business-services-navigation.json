@@ -19,7 +19,7 @@
               {
                 "method": "apiRequest",
                 "args": [{
-                  "url": "https://billing.api.redhat.com/v1/authorization/hcsEnrollment",
+                  "url": " https://console.redhat.com/api/billing/v1/authorization/hcsEnrollment",
                   "accessor": "hcsDeal"
                 }]
               }

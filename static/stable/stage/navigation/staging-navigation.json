@@ -3,9 +3,9 @@
     "title": "Staging Bundle",
     "navItems": [
         {
-            "id": "starter",
+            "id": "frontend-starter-app",
             "title": "Starter App",
-            "appId": "starter",
+            "appId": "frontend-starter-app",
             "href": "/staging/starter"
         }
     ]

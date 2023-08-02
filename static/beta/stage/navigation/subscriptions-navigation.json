@@ -33,10 +33,16 @@
       "expandable": true,
       "routes": [
         {
-          "id": "hybridCommittedSpend.hybridCommittedSpend",
+          "id": "hybridCommittedSpend.overview",
           "appId": "hybridCommittedSpend",
-          "title": "Hybrid Committed Spend",
+          "title": "Overview",
           "href": "/subscriptions/hybrid-committed-spend"
+        },
+        {
+          "id": "details",
+          "appId": "hybridCommittedSpend",
+          "title": "Details",
+          "href": "/subscriptions/hybrid-committed-spend/details"
         }
       ]
     },

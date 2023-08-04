@@ -198,6 +198,7 @@
                     "title": "Policies",
                     "href": "/ansible/policies",
                     "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment.",
+                    "subtitle": "Red Hat Insights for Ansible",
                     "alt_title": [
                         "Policies",
                         "Policy",

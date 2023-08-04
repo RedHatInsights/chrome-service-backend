@@ -15,13 +15,15 @@
       "expandable": true,
       "id": "inventory",
       "description": "View details about your Red Hat Enterprise Linux systems.",
+      "subtitle": "Red Hat Insights for RHEL",
       "routes": [
         {
           "id": "systems",
           "appId": "inventory",
           "title": "Systems",
           "href": "/insights/inventory",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL"
         },
         {
           "id": "groups",
@@ -43,6 +45,7 @@
           "title": "Images",
           "href": "/insights/image-builder",
           "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL",
           "description": "Build and manage Red Hat Enterprise Linux images and environments.",
           "alt_title": [
             "Images",
@@ -89,6 +92,7 @@
               "title": "Remote Host Configuration (RHC)",
               "href": "/insights/connector",
               "product": "Red Hat Insights",
+              "subtitle": "Red Hat Insights for RHEL",
               "description": "Configure your systems to execute Ansible Playbooks.",
               "alt_title": [
                 "Remote host configuration",
@@ -105,9 +109,10 @@
             {
               "id": "activationKeys",
               "appId": "connector",
-              "title": "Activation keys",
+              "title": "Activation Keys",
               "href": "/insights/connector/activation-keys",
               "product": "Red Hat Insights",
+              "subtitle": "Red Hat Insights for RHEL",
               "description": "Create activation keys to register your systems and configure repositories without using a username and password.",
               "alt_title": [
                 "Subscription key",
@@ -150,6 +155,7 @@
           "title": "Advisories",
           "href": "/insights/patch/advisories",
           "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL",
           "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
           "alt_title": [
             "Errata",
@@ -159,10 +165,12 @@
           ]
         },
         {
+          "id": "packages",
           "appId": "patch",
           "title": "Packages",
           "href": "/insights/patch/packages",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL"
         },
         {
           "id": "repositories",
@@ -170,6 +178,7 @@
           "title": "Repositories",
           "href": "/insights/content",
           "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL",
           "isBeta": true,
           "alt_title": [
             "Content",
@@ -290,9 +299,12 @@
           ]
         },
         {
+          "id": "policies",
           "appId": "policies",
           "title": "Policies",
-          "href": "/insights/policies"
+          "href": "/insights/policies/policies/list",
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Monitor your RHEL hosts against set parameters to detect deviation or misalignment."
         }
       ]
     },
@@ -301,15 +313,18 @@
       "expandable": true,
       "routes": [
         {
+          "id": "vulnerability",
           "title": "Vulnerability",
           "expandable": true,
+          "subtitle": "Red Hat Insights for RHEL",
           "routes": [
             {
-              "id": "vulnerability",
+              "id": "cves",
               "appId": "vulnerability",
               "title": "CVEs",
               "href": "/insights/vulnerability/cves",
               "product": "Red Hat Insights",
+              "subtitle": "Red Hat Insights for RHEL",
               "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
             },
             {
@@ -457,6 +472,7 @@
               "title": "Subscription Inventory",
               "href": "/insights/subscriptions/inventory",
               "product": "Subscription Watch",
+              "subtitle":"Red Hat Insights for RHEL",
               "description": "List your purchased subscriptions and view more information about each one.",
               "alt_title": [
                 "subscription",
@@ -487,6 +503,7 @@
               "title": "Manifests",
               "href": "/insights/subscriptions/manifests",
               "product": "Subscription Watch",
+              "subtitle": "Red Hat Insights for RHEL",
               "description": "Export subscription manifests for Red Hat Satellite.",
               "alt_title": [
                 "manifests",
@@ -510,6 +527,7 @@
           "title": "Resource Optimization",
           "href": "/insights/ros",
           "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL",
           "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
           "alt_title": [
             "optimization",
@@ -537,6 +555,7 @@
           "title": "Remediations",
           "href": "/insights/remediations",
           "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL",
           "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
           "alt_title": [
             "Remediate",
@@ -557,7 +576,8 @@
           "appId": "tasks",
           "title": "Tasks",
           "href": "/insights/tasks",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL"
         }
       ]
     },
@@ -568,6 +588,7 @@
       "filterable": false,
       "href": "/insights/registration",
       "product": "Red Hat Insights",
+      "subtitle": "Red Hat Insights for RHEL",
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
     },
     {

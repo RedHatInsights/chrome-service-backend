@@ -121,6 +121,20 @@
                 "sla",
                 "content" 
               ]
+            },
+            {
+              "id": "stalenessAndCulling",
+              "appId": "inventory",
+              "title": "Staleness and Culling",
+              "href": "/insights/inventory/staleness-and-culling",
+              "product": "Red Hat Insights",
+              "description": "Inventory Host Staleness and Culling",
+              "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["hbi.custom-staleness", true]
+                }
+              ]
             }
           ]
         }

@@ -41,7 +41,7 @@
             "permissions": [
                 {
                     "method": "featureFlag",
-                    "args": ["platform.notifications.overhaul", true]
+                    "args": ["platform.notifications.overhaul", false]
                 }
             ]
         },
@@ -195,18 +195,6 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "id": "learningResources",
-            "appId": "learningResources",
-            "title": "Learning Resources",
-            "href": "/settings/learning-resources",
-            "permissions": [
-                {
-                    "method": "featureFlag",
-                    "args": ["platform.notifications.overhaul", false]
                 }
             ]
         }

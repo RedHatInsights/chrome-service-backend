@@ -21,9 +21,27 @@
       "routes": [
         {
           "id": "rhel",
-          "appId": "rhel",
+          "appId": "subscriptions",
           "title": "RHEL",
-          "href": "/subscriptions/rhel"
+          "href": "/subscriptions/usage/rhel"
+        },
+        {
+          "id": "openshift",
+          "appId": "subscriptions",
+          "title": "Openshift",
+          "href": "/subscriptions/usage/openshift"
+        },
+        {
+          "id": "data-science",
+          "appId": "subscriptions",
+          "title": "Data science",
+          "href": "/subscriptions/usage/data-science"
+        },
+        {
+          "id": "acs",
+          "appId": "subscriptions",
+          "title": "Advanced cluster security",
+          "href": "/subscriptions/usage/acs"
         }
       ]
     },

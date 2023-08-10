@@ -35,13 +35,13 @@
           "id": "data-science",
           "appId": "subscriptions",
           "title": "Data science",
-          "href": "/subscriptions/usage/data-science"
+          "href": "/subscriptions/usage/rhods"
         },
         {
           "id": "acs",
           "appId": "subscriptions",
           "title": "Advanced cluster security",
-          "href": "/subscriptions/usage/acs"
+          "href": "/subscriptions/usage/rhacs"
         }
       ]
     },

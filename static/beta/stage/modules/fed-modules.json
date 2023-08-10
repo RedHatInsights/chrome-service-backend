@@ -466,7 +466,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {"pathname": "/insights/subscriptions"},
-                    {"pathname": "/subscriptions"}
+                    {"pathname": "/subscriptions/usage"}
                 ]
             },
             {
@@ -797,11 +797,11 @@
             }
         ]
     },
-    "starter": {
-        "manifestLocation": "/apps/starter/fed-mods.json",
+    "frontend-starter-app": {
+        "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
         "modules": [
             {
-                "id": "starter",
+                "id": "frontend-starter-app",
                 "module": "./RootApp",
                 "routes": [
                     {

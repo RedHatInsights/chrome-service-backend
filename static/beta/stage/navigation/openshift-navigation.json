@@ -140,7 +140,8 @@
                             "title": "Overview",
                             "filterable": false,
                             "href": "/openshift/cost-management",
-                            "product": "Red Hat Cost Management"
+                            "product": "Red Hat Cost Management",
+                            "subtitle": "Red Hat Insights for OpenShift"
                         },
                         {
                             "id": "costManagementOptimizations",

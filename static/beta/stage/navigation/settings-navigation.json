@@ -34,6 +34,18 @@
             ]
         },
         {
+            "id": "learningResources",
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/settings/learning-resources",
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.notifications.overhaul", false]
+                }
+            ]
+        },
+        {
             "id": "integrations",
             "appId": "notifications",
             "title": "Integrations",
@@ -66,20 +78,86 @@
                     "id": "openshift",
                     "appId": "notifications",
                     "title": "OpenShift",
-                    "href": "/settings/notifications/openshift"
+                    "href": "/settings/notifications/openshift",
+                    "permissions": [
+                        {
+                            "method": "featureFlag",
+                            "args": ["platform.notifications.overhaul", false]
+                        }
+                    ]
                 },
                 {
                     "id": "redhatEntrpriseLinux",
                     "appId": "notifications",
                     "title": "Red Hat Enterprise Linux",
-                    "href": "/settings/notifications/rhel"
+                    "href": "/settings/notifications/rhel",
+                    "permissions": [
+                        {
+                            "method": "featureFlag",
+                            "args": ["platform.notifications.overhaul", false]
+                        }
+                    ]
                 },
                 {
                     "id": "console",
                     "appId": "notifications",
                     "title": "Console",
                     "description": "Configure which notifications users within your organization receive.",
-                    "href": "/settings/notifications/console"
+                    "href": "/settings/notifications/console",
+                    "permissions": [
+                        {
+                            "method": "featureFlag",
+                            "args": ["platform.notifications.overhaul", false]
+                        }   
+                    ]
+                },
+                {
+                    "id": "notificationOverview",
+                    "appId": "notifications",
+                    "title": "Overview",
+                    "href": "/settings/notifications",
+                    "permissions": [
+                      {
+                        "method": "featureFlag",
+                        "args": ["platform.notifications.overhaul", true]
+                      }
+                    ]
+                },
+                {
+                    "id": "configureEvents",
+                    "appId": "notifications",
+                    "title": "Configure Events",
+                    "href": "/settings/notifications/configure-events",
+                    "permissions": [
+                      {
+                        "method": "featureFlag",
+                        "args": ["platform.notifications.overhaul", true]
+                      }
+                    ]
+                },
+                {
+                    "id": "eventLog",
+                    "appId": "notifications",
+                    "title": "Event Log",
+                    "href": "/settings/notifications/eventlog",
+                    "permissions": [
+                      {
+                        "method": "featureFlag",
+                        "args": ["platform.notifications.overhaul", true]
+                      }
+                    ]
+                },
+                {
+                    "id": "myUserPreferences",
+                    "appId": "notifications",
+                    "title": "My User Preferences",
+                    "href": "/settings/notifications/user-preferences",
+                    "permissions": [
+                      {
+                        "method": "featureFlag",
+                        "args": ["platform.notifications.overhaul", true]
+                      }
+                    ]
                 }
             ]
         },
@@ -119,12 +197,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "id": "learningResources",
-            "appId": "learningResources",
-            "title": "Learning Resources",
-            "href": "/settings/learning-resources"
         }
     ]
 }

@@ -144,7 +144,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/settings/connector"
+                        "pathname": "/insights/connector"
                     }
                 ]
             }
@@ -635,11 +635,11 @@
             }
         ]
     },
-    "starter": {
-        "manifestLocation": "/apps/starter/fed-mods.json",
+    "frontend-starter-app": {
+        "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
         "modules": [
             {
-                "id": "starter",
+                "id": "frontend-starter-app",
                 "module": "./RootApp",
                 "routes": [
                     {

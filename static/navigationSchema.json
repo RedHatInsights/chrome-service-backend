@@ -54,6 +54,9 @@
         "product": {
           "type": "string"
         },
+        "subtitle": {
+          "type": "string"
+        },
         "notifier": {
           "type": "string"
         }
@@ -106,6 +109,9 @@
           "type": "string"
         },
         "product": {
+          "type": "string"
+        },
+        "subtitle": {
           "type": "string"
         },
         "notifier": {

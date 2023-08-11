@@ -945,6 +945,11 @@
     },
     "hybridCommittedSpend": {
         "manifestLocation": "/apps/hybrid-committed-spend/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.billing.hcs_reports"
+            ]
+        },
         "modules": [
             {
                 "id": "hybrid-committed-spend",

@@ -988,8 +988,8 @@
             }
         ]
     },
-    "seatsAdmin": {
-        "manifestLocation": "/apps/seats-admin/fed-mods.json",
+    "seatsAdminUi": {
+        "manifestLocation": "/apps/seats-admin-ui/fed-mods.json",
         "config": {
             "ssoScopes": [
                 "api.iam.access"

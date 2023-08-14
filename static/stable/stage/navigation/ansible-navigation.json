@@ -114,7 +114,7 @@
             "href": "https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/"
         },
         {
-            "id": "seatsAdministrators",
+            "id": "seatsAdminUi",
             "appId": "ansibleSeatsAdmin",
             "title": "Seats Administration",
             "filterable": false,

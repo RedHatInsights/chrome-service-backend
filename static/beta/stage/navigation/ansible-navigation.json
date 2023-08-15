@@ -107,7 +107,7 @@
             ]
         },
         {
-            "id": "seatsAdministrators",
+            "id": "seatsAdminUi",
             "appId": "ansibleSeatsAdmin",
             "title": "Seats Administration",
             "filterable": false,

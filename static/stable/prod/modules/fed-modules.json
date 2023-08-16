@@ -514,6 +514,9 @@
     },
     "ansibleDashboard": {
         "manifestLocation": "/apps/ansible-dashboard/fed-mods.json",
+        "analytics": {
+            "APIKey": "AGLlIXeY0q6tUZVRqmRwr9zAYS95u2QJ"
+        },
         "modules": [
             {
                 "id": "ansible-dashboard",
@@ -532,6 +535,9 @@
     },
     "automationHub": {
         "manifestLocation": "/apps/automation-hub/fed-mods.json",
+        "analytics": {
+            "APIKey": "AGLlIXeY0q6tUZVRqmRwr9zAYS95u2QJ"
+        },
         "modules": [
             {
                 "id": "ansible-automation-hub",
@@ -546,6 +552,9 @@
     },
     "automationAnalytics": {
         "manifestLocation": "/apps/automation-analytics/fed-mods.json",
+        "analytics": {
+            "APIKey": "AGLlIXeY0q6tUZVRqmRwr9zAYS95u2QJ"
+        },
         "modules": [
             {
                 "id": "ansible-automation-analytics",

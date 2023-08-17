@@ -203,7 +203,13 @@
                             "appId": "costManagement",
                             "title": "Cost Models",
                             "href": "/openshift/cost-management/cost-models",
-                            "product": "Red Hat Cost Management"
+                            "product": "Red Hat Cost Management",
+                            "permissions": [
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["cost-management.ui.nav.settings", false]
+                                }
+                            ]
                         },
                         {
                             "id": "costExplorer",

@@ -39,6 +39,11 @@ validate-schema:
 publish-search-index:
 	go run cmd/search/*
 
+publish-search-index-dry-run: export SEARCH_INDEX_DRY_RUN = true
+
+publish-search-index-dry-run:
+	go run cmd/search/*
+
 kafka:
 	podman-compose -f local/kafka-compose.yaml up
 

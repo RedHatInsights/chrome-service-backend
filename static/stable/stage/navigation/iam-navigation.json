@@ -76,6 +76,7 @@
       ]
     },
     {
+      "id": "serviceAccounts",
       "title": "Service Accounts",
       "appId": "serviceAccounts",
       "href": "/iam/service-accounts"

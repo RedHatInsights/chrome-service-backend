@@ -188,6 +188,12 @@ policies:
     versions:
       - v1
 
+provisioning:
+  title: Launch
+  api:
+    versions:
+      - v1
+
 rbac:
   title: Role-based Access Control
   api:

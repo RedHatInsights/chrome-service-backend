@@ -5,6 +5,7 @@ ENV GO111MODULE=on
 USER root
 RUN go get -d -v
 RUN make validate-schema
+RUN make publish-search-index-dry-run
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-service-backend
 
 # Build the migration binary.

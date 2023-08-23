@@ -24,10 +24,14 @@ type KafkaCfg struct {
 }
 
 type IntercomConfig struct {
-	fallback      string
-	openshift     string
-	openshift_dev string
-	hacCore       string
+	fallback            string
+	acs                 string
+	ansibleDashboard    string
+	automationAnalytics string
+	automationHub       string
+	openshift           string
+	openshift_dev       string
+	hacCore             string
 }
 
 type FeatureFlagsConfig struct {
@@ -164,10 +168,14 @@ func init() {
 
 	// env variables from .env or pod env variables
 	options.IntercomConfig = IntercomConfig{
-		fallback:      os.Getenv("INTERCOM_DEFAULT"),
-		openshift:     os.Getenv("INTERCOM_OPENSHIFT"),
-		openshift_dev: os.Getenv("INTERCOM_OPENSHIFT_DEV"),
-		hacCore:       os.Getenv("INTERCOM_HAC_CORE"),
+		fallback:            os.Getenv("INTERCOM_DEFAULT"),
+		acs:                 os.Getenv("INTERCOM_ACS"),
+		ansibleDashboard:    os.Getenv("INTERCOM_ANSIBLE_DASHBOARD"),
+		automationAnalytics: os.Getenv("INTERCOM_AUTOMATION_ANALYTICS"),
+		automationHub:       os.Getenv("INTERCOM_AUTOMATION_HUB"),
+		openshift:           os.Getenv("INTERCOM_OPENSHIFT"),
+		openshift_dev:       os.Getenv("INTERCOM_OPENSHIFT_DEV"),
+		hacCore:             os.Getenv("INTERCOM_HAC_CORE"),
 	}
 	config = options
 }

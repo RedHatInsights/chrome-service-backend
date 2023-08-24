@@ -594,28 +594,12 @@
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
     },
     {
-      "title": "Product Materials",
-      "expandable": true,
-      "routes": [
-        {
-          "id": "learningResources",
-          "appId": "learningResources",
-          "title": "Learning Resources",
-          "href": "/insights/learning-resources"
-        },
-        {
-          "id": "securityInformation",
-          "title": "Security Information",
-          "href": "https://www.redhat.com/en/technologies/management/insights/data-application-security",
-          "isExternal": true
-        },
-        {
-          "id": "apis",
-          "appId": "apiDocs",
-          "title": "APIs",
-          "href": "/docs/api"
-        }
-      ]
+      "id": "learningResources",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "filterable": false,
+      "href": "/insights/learning-resources",
+      "product": "Red Hat Insights"
     }
   ]
 }

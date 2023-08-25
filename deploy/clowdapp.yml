@@ -77,21 +77,21 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_ACS
-          - name: INTERCOM_ANSIBLE_DASHBOARD
+          - name: INTERCOM_ACS_DEV
             valueFrom:
               secretKeyRef:
                 name: chrome-service-backend
-                key: INTERCOM_ANSIBLE_DASHBOARD
-          - name: INTERCOM_AUTOMATION_ANALYTICS
+                key: INTERCOM_ACS_DEV
+          - name: INTERCOM_ANSIBLE
             valueFrom:
               secretKeyRef:
                 name: chrome-service-backend
-                key: INTERCOM_AUTOMATION_ANALYTICS
-          - name: INTERCOM_AUTOMATION_HUB
+                key: INTERCOM_ANSIBLE
+          - name: INTERCOM_ANSIBLE_DEV
             valueFrom:
               secretKeyRef:
                 name: chrome-service-backend
-                key: INTERCOM_AUTOMATION_HUB
+                key: INTERCOM_ANSIBLE_DEV
           - name: INTERCOM_HAC_CORE
             valueFrom:
               secretKeyRef:

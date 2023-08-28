@@ -133,6 +133,10 @@ objects:
       name: chrome-service-backend
     data:
       INTERCOM_OPENSHIFT: aW5zaWdodHMtcmJhYw==
+      INTERCOM_ACS: dGVzdFZhbHVl
+      INTERCOM_ACS_DEV: dGVzdFZhbHVl
+      INTERCOM_ANSIBLE: dGVzdFZhbHVl
+      INTERCOM_ANSIBLE_DEV: dGVzdFZhbHVl
       INTERCOM_DEFAULT: dGVzdFZhbHVl
       INTERCOM_HAC_CORE: dGVzdFZhbHVl
       INTERCOM_OPENSHIFT_DEV: dGVzdFZhbHVl

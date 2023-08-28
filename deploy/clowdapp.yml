@@ -72,6 +72,26 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_DEFAULT
+          - name: INTERCOM_ACS
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_ACS
+          - name: INTERCOM_ACS_DEV
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_ACS_DEV
+          - name: INTERCOM_ANSIBLE
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_ANSIBLE
+          - name: INTERCOM_ANSIBLE_DEV
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_ANSIBLE_DEV
           - name: INTERCOM_HAC_CORE
             valueFrom:
               secretKeyRef:
@@ -113,6 +133,10 @@ objects:
       name: chrome-service-backend
     data:
       INTERCOM_OPENSHIFT: aW5zaWdodHMtcmJhYw==
+      INTERCOM_ACS: dGVzdFZhbHVl
+      INTERCOM_ACS_DEV: dGVzdFZhbHVl
+      INTERCOM_ANSIBLE: dGVzdFZhbHVl
+      INTERCOM_ANSIBLE_DEV: dGVzdFZhbHVl
       INTERCOM_DEFAULT: dGVzdFZhbHVl
       INTERCOM_HAC_CORE: dGVzdFZhbHVl
       INTERCOM_OPENSHIFT_DEV: dGVzdFZhbHVl

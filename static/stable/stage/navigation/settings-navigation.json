@@ -85,7 +85,7 @@
         },
         {
             "title": "Applications",
-            "expandable": true,            
+            "expandable": true,
             "permissions": [
                 {
                     "method": "hasPermissions",
@@ -115,6 +115,10 @@
                                     "cost-management:*:*"
                                 ]
                             ]
+                        },
+                        {
+                            "method": "featureFlag",
+                            "args": ["cost-management.ui.nav.settings", false]
                         }
                     ]
                 }
@@ -126,6 +130,6 @@
             "title": "Learning Resources",
             "href": "/settings/learning-resources"
         }
-        
+
     ]
 }

@@ -106,6 +106,10 @@
                             "args": [
                                 "cost_management"
                             ]
+                        },
+                        {
+                            "method": "featureFlag",
+                            "args": ["cost-management.ui.nav.settings", false]
                         }
                     ]
                 }

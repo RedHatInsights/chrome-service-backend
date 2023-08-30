@@ -108,7 +108,7 @@
                         {
                             "method": "featureFlag",
                             "args": ["platform.notifications.overhaul", false]
-                        }   
+                        }
                     ]
                 },
                 {
@@ -193,6 +193,10 @@
                                     "cost-management:*:*"
                                 ]
                             ]
+                        },
+                        {
+                            "method": "featureFlag",
+                            "args": ["cost-management.ui.nav.settings", false]
                         }
                     ]
                 }

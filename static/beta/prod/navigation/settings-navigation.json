@@ -84,38 +84,6 @@
             ]
         },
         {
-            "title": "Applications",
-            "expandable": true,
-            "permissions": [
-                {
-                    "method": "isOrgAdmin",
-                    "apps": [
-                        "cost-management"
-                    ]
-                }
-            ],
-            "routes": [
-                {
-                    "id": "costManagement",
-                    "appId": "applications",
-                    "title": "Cost Management",
-                    "href": "/settings/applications/cost-management",
-                    "permissions": [
-                        {
-                            "method": "isEntitled",
-                            "args": [
-                                "cost_management"
-                            ]
-                        },
-                        {
-                            "method": "featureFlag",
-                            "args": ["cost-management.ui.nav.settings", false]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "id": "learningResources",
             "appId": "learningResources",
             "title": "Learning Resources",

@@ -178,7 +178,6 @@
           "href": "/insights/content",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
-          "isBeta": true,
           "alt_title": [
             "Content",
             "custom content",

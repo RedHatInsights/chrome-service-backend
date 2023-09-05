@@ -390,6 +390,7 @@
       "rhel.activationKeys",
       "rhel.manifests",
       "rhel.registerSystems",
+      "settings.idmsvc",
       "settings.manageConfiguration",
       {
         "href": "/insights/connector",

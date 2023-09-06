@@ -14,16 +14,7 @@
             "id": "overview",
             "appId": "hybridCommittedSpend",
             "title": "Overview",
-            "href": "/business-services/hybrid-committed-spend",
-            "permissions": [
-              {
-                "method": "apiRequest",
-                "args": [{
-                  "url": "https://billing.api.redhat.com/v1/authorization/hcsEnrollment",
-                  "accessor": "hcsDeal"
-                }]
-              }
-            ]
+            "href": "/business-services/hybrid-committed-spend"
           },
           {
             "id": "details",

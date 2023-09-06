@@ -96,6 +96,12 @@ compliance:
     versions:
       - v1
 
+content-sources:
+  title: Repositories
+  api:
+    versions:
+      - v1
+
 cost-management:
   title: Cost Management
   api:
@@ -184,6 +190,12 @@ playbook-dispatcher:
 
 policies:
   title: Policies
+  api:
+    versions:
+      - v1
+
+provisioning:
+  title: Launch
   api:
     versions:
       - v1

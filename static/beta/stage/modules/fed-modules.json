@@ -30,13 +30,16 @@
                     },
                     {
                         "pathname": "/user-preferences/notifications"
+                    },
+                    {
+                        "pathname": "/settings/notifications/user-preferences"
                     }
                 ]
             }
         ]
     },
     "learningResources": {
-        "manifestLocation": "/apps/learningResources/fed-mods.json",
+        "manifestLocation": "/apps/learning-resources/fed-mods.json",
         "defaultDocumentTitle": "Learning Resources",
         "modules": [
             {
@@ -77,6 +80,18 @@
                         "pathname": "/iam/learning-resources",
                         "props": {
                             "bundle": "iam"
+                        }
+                    },
+                    {
+                        "pathname": "/hac/learning-resources",
+                        "props": {
+                            "bundle": "hac"
+                        }
+                    },
+                    {
+                        "pathname": "/subscriptions/learning-resources",
+                        "props": {
+                            "bundle": "subscriptions"
                         }
                     }
                 ]
@@ -214,7 +229,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/settings/connector"
+                        "pathname": "/insights/connector"
                     }
                 ]
             }
@@ -453,9 +468,8 @@
                 "id": "insights-subscriptions",
                 "module": "./RootApp",
                 "routes": [
-                    {
-                        "pathname": "/insights/subscriptions"
-                    }
+                    {"pathname": "/insights/subscriptions"},
+                    {"pathname": "/subscriptions/usage"}
                 ]
             },
             {
@@ -476,8 +490,24 @@
                 "id": "subscription-inventory",
                 "module": "./RootApp",
                 "routes": [
+                    {"pathname": "/insights/subscriptions/inventory"},
+                    {"pathname": "/subscriptions/inventory"}
+                ]
+            }
+        ]
+    },
+    "subscriptionsDashboardUi": {
+        "manifestLocation": "/apps/subscriptions-dashboard-ui/fed-mods.json",
+        "modules": [
+            {
+                "id": "subscriptions-dashboard-ui",
+                "module": "./RootApp",
+                "routes": [
                     {
-                        "pathname": "/insights/subscriptions/inventory"
+                        "pathname": "/subscriptions"
+                    },
+                    {
+                        "pathname": "/subscriptions/overview"
                     }
                 ]
             }
@@ -490,9 +520,8 @@
                 "id": "manifests",
                 "module": "./RootApp",
                 "routes": [
-                    {
-                        "pathname": "/insights/subscriptions/manifests"
-                    }
+                    {"pathname": "/insights/subscriptions/manifests"},
+                    {"pathname": "/subscriptions/manifests" }
                 ]
             }
         ]
@@ -567,6 +596,9 @@
     },
     "ansibleDashboard": {
         "manifestLocation": "/apps/ansible-dashboard/fed-mods.json",
+        "analytics": {
+            "APIKey": "WVTevO2VIHB27gmOUJcAdR9bj7XoSw0e"
+        },
         "modules": [
             {
                 "id": "ansible-dashboard",
@@ -613,6 +645,9 @@
     },
     "automationHub": {
         "manifestLocation": "/apps/automation-hub/fed-mods.json",
+        "analytics": {
+            "APIKey": "WVTevO2VIHB27gmOUJcAdR9bj7XoSw0e"
+        },
         "modules": [
             {
                 "id": "ansible-automation-hub",
@@ -627,6 +662,9 @@
     },
     "automationAnalytics": {
         "manifestLocation": "/apps/automation-analytics/fed-mods.json",
+        "analytics": {
+            "APIKey": "WVTevO2VIHB27gmOUJcAdR9bj7XoSw0e"
+        },
         "modules": [
             {
                 "id": "ansible-automation-analytics",
@@ -771,11 +809,11 @@
             }
         ]
     },
-    "starter": {
-        "manifestLocation": "/apps/starter/fed-mods.json",
+    "frontend-starter-app": {
+        "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
         "modules": [
             {
-                "id": "starter",
+                "id": "frontend-starter-app",
                 "module": "./RootApp",
                 "routes": [
                     {
@@ -919,14 +957,18 @@
     },
     "hybridCommittedSpend": {
         "manifestLocation": "/apps/hybrid-committed-spend/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.billing.hcs_reports"
+            ]
+        },
         "modules": [
             {
                 "id": "hybrid-committed-spend",
                 "module": "./RootApp",
                 "routes": [
-                    {
-                        "pathname": "/business-services/hybrid-committed-spend"
-                    }
+                        {"pathname": "/business-services/hybrid-committed-spend"},
+                        {"pathname": "/subscriptions/hybrid-committed-spend"}
                 ]
             }
         ]
@@ -963,8 +1005,23 @@
             }
         ]
     },
-    "seatsAdmin": {
-        "manifestLocation": "/apps/seats-admin/fed-mods.json",
+    "idmsvc": {
+        "manifestLocation": "/apps/idmsvc/fed-mods.json",
+        "defaultDocumentTitle": "Directory & Domain Services",
+        "modules": [
+            {
+                "id": "idmsvc",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/settings/idmsvc"
+                    }
+                ]
+            }
+        ]
+    },
+    "seatsAdminUi": {
+        "manifestLocation": "/apps/seats-admin-ui/fed-mods.json",
         "config": {
             "ssoScopes": [
                 "api.iam.access"
@@ -981,6 +1038,20 @@
                 ]
             }
         ]
+    },
+    "serviceAccounts": {
+      "manifestLocation": "/apps/service-accounts/fed-mods.json",
+      "modules": [
+          {
+              "id": "service-accounts",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/iam/service-accounts"
+                  }
+              ]
+          }
+      ]
     },
     "quay-ui-plugin": {
         "manifestLocation": "/apps/quay/plugin-manifest.json",

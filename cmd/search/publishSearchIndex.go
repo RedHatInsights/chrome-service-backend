@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
@@ -96,21 +97,44 @@ func convertAltTitles(jsonEntry interface{}) []string {
 	return altTitles
 }
 
-func flattenLinks(data interface{}) ([]LinkEntry, error) {
+func parseLinkEntry(item map[string]interface{}) (LinkEntry, bool) {
+	id, idOk := item["id"].(string)
+	if !idOk || len(id) == 0 {
+		return LinkEntry{}, false
+	}
+
+	title, titleOk := item["title"].(string)
+	if !titleOk || len(title) == 0 {
+		return LinkEntry{}, false
+	}
+
+	href, hrefOk := item["href"].(string)
+	if !hrefOk || len(href) == 0 {
+		return LinkEntry{}, false
+	}
+
+	return LinkEntry{
+		Id:    id,
+		Title: title,
+		Href:  href,
+	}, true
+}
+
+func flattenLinks(data interface{}, locator string) ([]LinkEntry, error) {
 	flatData := []LinkEntry{}
 
 	topLevel, ok := data.(map[string]interface{})
 	// this is top section or a group item of nav file
 	if ok && topLevel["navItems"] != nil {
-		data, err := flattenLinks(topLevel["navItems"])
+		data, err := flattenLinks(topLevel["navItems"], fmt.Sprintf("%s.%s", locator, "navItems"))
 		return append(flatData, data...), err
 	}
 
 	// argument came in as an array
 	isArray, ok := data.([]interface{})
 	if ok {
-		for _, item := range isArray {
-			items, err := flattenLinks(item)
+		for i, item := range isArray {
+			items, err := flattenLinks(item, fmt.Sprintf("%s[%d]", locator, i))
 			if err != nil {
 				return []LinkEntry{}, err
 			}
@@ -146,10 +170,10 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 			_, nestedRoutesOk := i["routes"].([]interface{})
 			if ok && idOk {
 				// all of these are required and type assertion can't fail
-				link := LinkEntry{
-					Id:    id,
-					Title: i["title"].(string),
-					Href:  i["href"].(string),
+				link, linkOk := parseLinkEntry(i)
+				if !linkOk {
+					err := fmt.Errorf("[ERROR] parsing link for href entry at %s", locator)
+					return []LinkEntry{}, err
 				}
 
 				// Alternative titles are optional
@@ -164,13 +188,13 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 				}
 				flatData = append(flatData, link)
 			} else if nestedRoutesOk {
-				nestedItems, err := flattenLinks(r)
+				nestedItems, err := flattenLinks(r, fmt.Sprintf("%s.%s", locator, "routes"))
 				if err != nil {
 					return []LinkEntry{}, err
 				}
 				flatData = append(flatData, nestedItems...)
 			} else {
-				fmt.Printf("[WARN] Unable to convert link id %v to string. %v\n", id, i)
+				fmt.Printf("[WARN] Unable to convert link id %v to string. %v in file %s\n", id, i, locator)
 			}
 		}
 		return flatData, nil
@@ -181,10 +205,10 @@ func flattenLinks(data interface{}) ([]LinkEntry, error) {
 	if ok {
 		href, ok := item["href"].(string)
 		if ok && len(href) > 0 {
-			link := LinkEntry{
-				Id:    item["id"].(string),
-				Title: item["title"].(string),
-				Href:  item["href"].(string),
+			link, linkOk := parseLinkEntry(item)
+			if !linkOk {
+				err := fmt.Errorf("[ERROR] parsing link for href entry at %s", locator)
+				return []LinkEntry{}, err
 			}
 
 			// Alternative titles are optional
@@ -379,7 +403,7 @@ func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
 				return []ModuleIndexEntry{}, err
 			}
 
-			flatData, err := flattenLinks(navItemData)
+			flatData, err := flattenLinks(navItemData, file)
 			if err != nil {
 				return []ModuleIndexEntry{}, err
 			}
@@ -515,7 +539,6 @@ func deployIndex(env SearchEnv, envSecret string, ssoHost string, hydraHost stri
 	if err != nil {
 		return err
 	}
-
 	index, err := constructIndex(env)
 	if err != nil {
 		return err
@@ -537,6 +560,7 @@ func main() {
 		Prod:  os.Getenv("SEARCH_CLIENT_SECRET_PROD"),
 		Stage: os.Getenv("SEARCH_CLIENT_SECRET_STAGE"),
 	}
+
 	ssoHosts := EnvMap{
 		Prod:  "https://sso.redhat.com",
 		Stage: "https://sso.stage.redhat.com",
@@ -547,14 +571,31 @@ func main() {
 		Stage: "https://access.stage.redhat.com",
 	}
 
+	dryRun, _ := strconv.ParseBool(os.Getenv("SEARCH_INDEX_DRY_RUN"))
+
+	errors := []error{}
 	for _, env := range []SearchEnv{Stage, Prod} {
-		fmt.Println("Attempt to publish search index for ", env, " environment.")
-		err := deployIndex(env, secrets[env], ssoHosts[env], hydraHost[env])
+		var err error
+		if dryRun {
+			fmt.Println("Attempt dry run search index for", env, "environment.")
+			_, err = constructIndex(env)
+		} else {
+			fmt.Println("Attempt to publish search index for", env, "environment.")
+			err = deployIndex(env, secrets[env], ssoHosts[env], hydraHost[env])
+		}
 		if err != nil {
-			fmt.Println("Failed to deploy search index for ", env, "environment.")
+			fmt.Println("[ERROR] Failed to deploy search index for", env, "environment.")
 			fmt.Println(err)
+			errors = append(errors, err)
 		}
 	}
 
-	fmt.Println("Search index published successfully")
+	if len(errors) == 0 {
+		fmt.Println("Search index published successfully")
+	} else {
+		fmt.Println("Search index publishing failed. See above errors.")
+		if dryRun {
+			os.Exit(1)
+		}
+	}
 }

@@ -1,0 +1,80 @@
+{
+  "id": "subscriptions",
+  "title": "Subscription Services",
+  "navItems": [
+    {
+      "id": "overview",
+      "appId": "subscriptionsDashboardUi",
+      "title": "Overview",
+      "href": "/subscriptions/overview"
+    },
+    {
+      "id": "subscriptionsInventory",
+      "appId": "subscriptionInventory",
+      "title": "Subscriptions Inventory",
+      "href": "/subscriptions/inventory"
+    },
+    {
+      "id": "subscriptionsUsage",
+      "title": "Subscriptions Usage",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "rhel",
+          "appId": "subscriptions",
+          "title": "RHEL",
+          "href": "/subscriptions/usage/rhel"
+        },
+        {
+          "id": "openshift",
+          "appId": "subscriptions",
+          "title": "Openshift",
+          "href": "/subscriptions/usage/openshift"
+        },
+        {
+          "id": "data-science",
+          "appId": "subscriptions",
+          "title": "Data science",
+          "href": "/subscriptions/usage/rhods"
+        },
+        {
+          "id": "acs",
+          "appId": "subscriptions",
+          "title": "Advanced cluster security",
+          "href": "/subscriptions/usage/rhacs"
+        }
+      ]
+    },
+    {
+      "id": "hybridCommittedSpend",
+      "title": "Hybrid Committed Spend",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "hybridCommittedSpend.overview",
+          "appId": "hybridCommittedSpend",
+          "title": "Overview",
+          "href": "/subscriptions/hybrid-committed-spend"
+        },
+        {
+          "id": "details",
+          "appId": "hybridCommittedSpend",
+          "title": "Details",
+          "href": "/subscriptions/hybrid-committed-spend/details"
+        }
+      ]
+    },
+    {
+      "id": "manifests",
+      "appId": "manifests",
+      "title": "Manifests",
+      "href": "/subscriptions/manifests"
+    },
+    {
+      "id": "learningResources",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/subscriptions/learning-resources"
+    }
+  ]
+}

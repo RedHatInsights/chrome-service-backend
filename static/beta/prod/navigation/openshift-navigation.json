@@ -11,6 +11,12 @@
             "description": "View, Register, or Create an OpenShift Cluster."
         },
         {
+            "id": "learningResources",
+            "appId": "learningResources",
+            "title": "Learning Resources",
+            "href": "/openshift/learning-resources"
+        },
+        {
             "id": "overview",
             "appId": "openshift",
             "href": "/openshift/overview",
@@ -137,7 +143,8 @@
                             "title": "Overview",
                             "filterable": false,
                             "href": "/openshift/cost-management",
-                            "product": "Red Hat Cost Management"
+                            "product": "Red Hat Cost Management",
+                            "subtitle": "Red Hat Insights for OpenShift"
                         },
                         {
                             "id": "costManagementOptimizations",
@@ -205,7 +212,13 @@
                             "appId": "costManagement",
                             "title": "Cost Models",
                             "href": "/openshift/cost-management/cost-models",
-                            "product": "Red Hat Cost Management"
+                            "product": "Red Hat Cost Management",
+                            "permissions": [
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["cost-management.ui.nav.settings", false]
+                                }
+                            ]
                         },
                         {
                             "id": "costExplorer",
@@ -213,6 +226,19 @@
                             "title": "Cost Explorer",
                             "href": "/openshift/cost-management/explorer",
                             "product": "Red Hat Cost Management"
+                        },
+                        {
+                            "id": "settings",
+                            "appId": "costManagement",
+                            "title": "Settings",
+                            "href": "/openshift/cost-management/settings",
+                            "product": "Red Hat Cost Management",
+                            "permissions": [
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["cost-management.ui.nav.settings", true]
+                                }
+                            ]
                         }
                     ]
                 }
@@ -222,13 +248,6 @@
             "id": "redhatMarketplace",
             "title": "Red Hat Marketplace",
             "href": "https://marketplace.redhat.com",
-            "filterable": false,
-            "isExternal": true
-        },
-        {
-            "id": "documentation",
-            "href": "https://access.redhat.com/documentation/en-us/openshift_cluster_manager/",
-            "title": "Documentation",
             "filterable": false,
             "isExternal": true
         }

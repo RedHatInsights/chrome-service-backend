@@ -16,10 +16,27 @@
     "icon": "AutomationIcon",
     "description": "Solve problems once, in one place, and scale up.",
     "links": [
-      "ansible.automationAnalytics",
-      "ansible.collections",
-      "ansible.inventory",
-      "ansible.remediations"
+      {
+        "isGroup": true,
+        "id": "ansible",
+        "title": "Ansible",
+        "links": [
+          "ansible.automationAnalytics",
+          "ansible.collections",
+          "ansible.inventory",
+          "ansible.remediations",
+          "ansible.tasks"
+        ]
+      },
+      {
+        "isGroup": true,
+        "id": "rhel",
+        "title": "RHEL",
+        "links": [
+          "rhel.remediations",
+          "rhel.tasks"
+        ]
+      }
     ]
   },
   {
@@ -67,7 +84,6 @@
         "description": "Manage the lifecycle and enhance security of your RHEL systems at the edge."
       },
       "rhel.imageBuilder",
-      "settings.repositories",
       "quay.quay"
     ]
   },
@@ -90,7 +106,8 @@
     "links": [
       "openshift.clusters",
       "openshift.overview",
-      "openshift.releases"
+      "openshift.releases",
+      "rhel.inventory"
     ]
   },
   {
@@ -150,8 +167,18 @@
         "isGroup": true,
         "title": "Ansible",
         "links": [
-          "ansible.recommendations",
-          "ansible.comparision",
+          {
+            "href": "/ansible/advisor/recommendations",
+            "title": "Advisor Recommendations",
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
+          },
+          {
+            "title": "Drift Comparison",
+            "href": "/ansible/drift",
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
+          },
           "ansible.policies"
         ]
       },
@@ -160,8 +187,18 @@
         "isGroup": true,
         "title": "OpenShift",
         "links": [
-          "openshift.recommendations",
-          "openshift.cves"
+          {
+            "href": "/openshift/insights/advisor/recommendations",
+            "title": "Advisor Recommendations",
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
+          },
+          {
+            "href": "/openshift/insights/vulnerability/cves",
+            "title": "Vulnerability Dashboard",
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
+          }
         ]
       },
       {
@@ -169,15 +206,29 @@
         "isGroup": true,
         "title": "RHEL",
         "links": [
-          "rhel.recommendations",
-          "rhel.imageBuilder",
-          "rhel.vulnerability",
-          "rhel.complianceReports",
-          "rhel.signatures",
-          "rhel.activationKeys",
-          "rhel.rhc",
-          "rhel.subscriptionsInventory",
-          "rhel.manifests",
+          {
+            "href": "/insights/advisor/recommendations",
+            "title": "Advisor Recommendations",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "View details about your Red Hat Enterprise Linux systems."
+          },
+          "rhel.advisories",
+          "rhel.remediations",
+          "rhel.packages",
+          "rhel.repositories",
+          {
+            "href": "/insights/drift",
+            "title": "Drift Comparison",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
+          },
+          {
+            "href": "/insights/patch/templates",
+            "title": "Patch Templates",
+            "subtitle": "Red Hat Insights for RHEL"
+          },
+          "rhel.tasks",
+          "rhel.policies",
           "rhel.ros"
         ]
       }
@@ -210,20 +261,44 @@
         "isGroup": true,
         "title": "OpenShift",
         "links": [
-          "openshift.cves"
+          {
+            "href": "/openshift/insights/vulnerability/cves",
+            "title": "Vulnerability Dashboard",
+            "subtitle": "Red Hat Insights for OpenShift"
+          }
         ]
       },
       {
         "isGroup": true,
         "title": "RHEL",
         "links": [
-          "rhel.recommendations",
+          {
+            "href": "/insights/advisor/recommendations",
+            "title": "Advisor recommendations",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "View details about your Red Hat Enterprise Linux systems."
+          },
           "rhel.advisories",
-          "rhel.complianceReports",
+          {
+            "href": "/insights/compliance/reports",
+            "title": "Compliance",
+            "subtitle":"Red Hat Insights for RHEL",
+            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+          },
           "edge.groups",
-          "rhel.signatures",
+          {
+            "href": "/insights/malware/signatures",
+            "title": "Malware",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
+          },
           "rhel.remediations",
-          "rhel.vulnerability"
+          {
+            "href": "/insights/vulnerability/cves",
+            "title": "Vulnerability",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
+          }
         ]
       },
       {
@@ -236,14 +311,73 @@
     ]
   },
   {
+    "id": "operations",
+    "title": "Operations",
+    "icon": "MonitoringIcon",
+    "links": [
+      {
+        "id": "ansible",
+        "isGroup": true,
+        "title": "Ansible",
+        "links": [
+          {
+            "href": "/ansible/advisor/recommendations",
+            "title": "Advisor Recommendations",
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
+          },
+          {
+            "href": "/ansible/drift",
+            "title": "Drift Comparison",
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
+          },
+          "ansible.policies"
+        ]
+      },
+      {
+        "isGroup": true,
+        "id": "openshift",
+        "title": "OpenShift",
+        "links": [
+          {
+            "href": "/openshift/insights/advisor/recommendations",
+            "title": "Advisor Recommendations",
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
+          }
+        ]
+      },
+      {
+        "isGroup": true,
+        "id": "rhel",
+        "title": "RHEL",
+        "links": [
+          {
+            "href": "/insights/advisor/recommendations",
+            "title": "Advisor Recommendations",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux hosts’ availability, performance, and security."
+          },
+          {
+            "href": "/insights/drift",
+            "title": "Drift Comparison",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
+          },
+          "rhel.policies"
+        ]
+      }
+    ]
+  },
+  {
     "id": "spendManagement",
     "icon": "CreditCardIcon",
     "title": "Spend Management",
     "description": "Control costs and monitor committed spend.",
     "links": [
       "openshift.costManagement",
-      "rhel.subscriptionsInventory",
-      "rhel.resourceOptimization",
+      "rhel.ros",
       "business-services.hybridCommittedSpend"
     ]
   },
@@ -253,10 +387,16 @@
     "title": "System Configuration",
     "description": "Connect your RHEL systems to Hybrid Cloud Console services.",
     "links": [
-      "settings.activationKeys",
+      "rhel.activationKeys",
       "rhel.manifests",
       "rhel.registerSystems",
-      "settings.manageConfiguration"
+      "settings.manageConfiguration",
+      {
+        "href": "/insights/connector",
+        "title": "Remote Host Configuration",
+        "subtitle": "Red Hat Insights for RHEL",
+        "description": "Configure your systems to execute Ansible Playbooks."
+      }
     ]
   },
   {

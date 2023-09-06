@@ -107,7 +107,7 @@
             ]
         },
         {
-            "id": "seatsAdministrators",
+            "id": "seatsAdminUi",
             "appId": "ansibleSeatsAdmin",
             "title": "Seats Administration",
             "filterable": false,
@@ -143,7 +143,24 @@
                             "title": "Recommendations",
                             "href": "/ansible/advisor/recommendations",
                             "product": "Red Hat Insights",
-                            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
+                            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
+                            "alt_title": [
+                                "Rules",
+                                "recommendations",
+                                "Configuration",
+                                "security",
+                                "stability",
+                                "performance",
+                                "advisor",
+                                "incidents",
+                                "pathways",
+                                "critical",
+                                "upgrade",
+                                "upgrade risk",
+                                "incident",
+                                "recommendation",
+                                "pathway"
+                            ]
                         },
                         {
                             "id": "systems",
@@ -187,7 +204,19 @@
                     "appId": "policies",
                     "title": "Policies",
                     "href": "/ansible/policies",
-                    "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment."
+                    "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment.",
+                    "subtitle": "Red Hat Insights for Ansible",
+                    "alt_title": [
+                        "Policies",
+                        "Policy",
+                        "notifications",
+                        "notify",
+                        "integration",
+                        "conditions",
+                        "alerts",
+                        "events",
+                        "raise alerts on system configuration changes"
+                    ]
                 }
             ]
         },

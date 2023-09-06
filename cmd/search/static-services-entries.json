@@ -1,5 +1,71 @@
 [
   {
+    "id": "openshift-advisor",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.insights.Advisor.recommendations",
+        "href": "/openshift/insights/advisor/recommendations",
+        "title": "Red Hat OpenShift Cluster Manager Recommendations",
+        "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
+        "alt_title": [
+          "Insights Advisor",
+          "OpenShift Advisor",
+          "Advisor",
+          "Recommendations",
+          "Proactive support",
+          "Proactive support",
+          "risk",
+          "support",
+          "update",
+          "update risk",
+          "update",
+          "issues",
+          "remediation",
+          "cluster state",
+          "recommendation",
+          "cluster health",
+          "remote health",
+          "proactive",
+          "support",
+          "fix",
+          "problem",
+          "issue"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
+        "href": "/openshift/insights/advisor/clusters",
+        "title": "Red Hat OpenShift Cluster Manager Advisor",
+        "alt_title": [
+          "Insights Advisor",
+          "OpenShift Advisor",
+          "Advisor",
+          "Recommendations",
+          "Proactive support",
+          "Proactive support",
+          "risk",
+          "support",
+          "update",
+          "update risk",
+          "update",
+          "issues",
+          "remediation",
+          "cluster state",
+          "recommendation",
+          "cluster health",
+          "remote health",
+          "proactive",
+          "support",
+          "fix",
+          "problem",
+          "issue"
+        ]
+      }
+    ]
+  },
+  {
     "id": "quay",
     "links": [
       "quay.quayOrganizations",
@@ -15,6 +81,52 @@
         "href": "/openshift/create/rosa/getstarted",
         "title": "Red Hat OpenShift Service for AWS",
         "description": "ROSA allows you to deploy fully operational and managed Red Hat OpenShift clusters while leveraging the full breadth and depth of AWS"
+      }
+    ]
+  },
+  {
+    "id": "ansible-drift",
+    "links": [
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.Drift.drift",
+        "href": "/ansible/drift/",
+        "title": "Ansible Drift Comparison",
+        "description": "Compare systems in your Ansible inventory to one another or against a set baseline.",
+        "alt_title": [
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "drift"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.Drift.drift.baseline",
+        "href": "/ansible/drift/baselines",
+        "title": "Ansible Drift Baselines",
+        "alt_title": [
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "drift"
+        ]
       }
     ]
   },
@@ -54,6 +166,412 @@
       "href": "/openshift/create",
       "title": "Red Hat OpenShift on IBM Cloud",
       "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"] 
+      }
+    ]
+  },
+  {
+    "id": "patch-system",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.patch",
+        "href": "/insights/patch/systems",
+        "title": "Patch Systems",
+        "subtitle": "Red Hat Insights for RHEL",
+        "alt_title": [
+          "Patch",
+          "content",
+          "advisories",
+          "insights",
+          "Rhel", 
+          "patch",
+          "updates",
+          "update",
+          "systems",
+          "upgrade"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "patch-template",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.template",
+        "href": "/insights/patch/templates",
+        "title": "Red Hat Patch Templates",
+        "alt_title": [
+          "Template",
+          "patch template",
+          "content template",
+          "insights",
+          "Patch cycle",
+          "content management",
+          "patching",
+          "update",
+          "content view"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-content-patch-packages",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.patch",
+        "href": "/insights/patch/packages",
+        "title": "RHEL Packages",
+        "alt_title": [
+          "Packages",
+          "updates",
+          "insights",
+          "repositories",
+          "rpm",
+          "dnf",
+          "yum",
+          "errata",
+          "patch",
+          "advisories",
+          "patching",
+          "templates",
+          "content management",
+          "content view",
+          "patch cycle",
+          "satellite",
+          "RHSA",
+          "RHBA",
+          "RHEA"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "malware",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.security.malware.signatures",
+        "href": "/insights/malware/signatures",
+        "title": "Malware signatures",
+        "alt_title": [
+          "Malware",
+          "security",
+          "X_Force",
+          "Yara",
+          "scanner",
+          "risk"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.security.malware.malwareSystems",
+        "href": "/insights/malware/systems",
+        "title": "Malware systems",
+        "alt_title": [
+          "Malware",
+          "security",
+          "X_Force",
+          "Yara",
+          "scanner",
+          "risk"
+        ]
+      }
+    ]
+  },
+  {  
+    "id": "openshift-vulnerability",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.cves",
+        "href": "/openshift/insights/vulnerability/cves",
+        "title": "Red Hat Openshift Vulnerability Dashboard",
+        "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency.",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      },
+      {
+        "id": "OPENSHIFT.vulnerabilityClusters",
+        "href": "/openshift/insights/vulnerability/clusters",
+        "title": "Red Hat Openshift Vulnerability Clusters",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "errata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-drift",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Operations.Drift.drift",
+        "href": "/insights/drift/",
+        "title": "RHEL Drift Comparison",
+        "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
+        "alt_title": [
+          "Drift",
+          "Comparison",
+          "Baseline",
+          "insights",
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "history"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.Operations.Drift.drift.baseline",
+        "href": "/insights/drift/baselines",
+        "title": "RHEL Drift Baselines",
+        "alt_title": [
+          "Drift",
+          "Comparison",
+          "Baseline",
+          "insights",
+          "Comparison",
+          "system details",
+          "system facts",
+          "troubleshooting",
+          "configuration drift",
+          "configuration differences",
+          "baseline",
+          "configuration standard",
+          "drift from baseline",
+          "drift over time",
+          "configuration changes",
+          "history"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-inventory-systems",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Inventory.systems",
+        "href": "/insights/inventory",
+        "title": "RHEL Inventory Systems",
+        "alt_title":[
+          "Inventory",
+          "rhel systems",
+          "my systems",
+          "hosts",
+          "boxes",
+          "rhel",
+          "linux",
+          "insights",
+          "systems",
+          "hosts",
+          "rhel",
+          "linux",
+          "hostname(s)",
+          "machine(s)",
+          "server(s)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-policies",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.policies",
+        "href": "/insights/policies",
+        "title": "RHEL Policies",
+        "alt_title":[
+          "policies",
+          "facts",
+          "conditions",
+          "trigger", "notifications",
+          "alerts",
+          "insights",
+          "notify",
+          "integration",
+          "conditions",
+          "alerts",
+          "events",
+          "raise alerts on system configuration changes"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "costManagement",
+    "links": [
+      {
+        "custom": true,
+        "id": "SETTINGS.applications.costManagement",
+        "href": "/settings/applications/cost-management",
+        "title": "Cost Management",
+        "alt_title": [
+          "cost management",
+          "cost",
+          "finsights",
+          "finops",
+          "chargeback",
+          "showback",
+          "cost management for openshift",
+          "openshift cost",
+          "rhcm",
+          "spend",
+          "distribute",
+          "cost model",
+          "money",
+          "bill",
+          "billing",
+          "financial",
+          "chargeback",
+          "showback",
+          "rate",
+          "save",
+          "savings"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compliance",
+    "links": [
+      {
+        "custom": true,
+        "id": "complianceReports",
+        "href": "/insights/compliance/reports",
+        "title": "Reports",
+        "alt_title": [
+          "Compliance",
+          "security",
+          "regulatory"
+        ],
+        "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+      },
+      {
+        "custom": true,
+        "id": "scapPolicies",
+        "href": "/insights/compliance/scappolicies",
+        "title": "SCAP Policies",
+        "alt_title": [
+          "SCAP",
+          "security content automation protocol",
+          "policies"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hybrid-committed-spend",
+    "links": [
+      {
+        "custom": true,
+        "id": "business-services.hybridCommittedSpend.overview",
+        "href": "/business-services/hybrid-committed-spend",
+        "title": "Hybrid Committed Spend Overview",
+        "alt_title": [
+          "HCS",
+          "committed spend",
+          "spend",
+          "commitment burndown",
+          "spend",
+          "committed",
+          "drawdown"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-tasks",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.tasks",
+        "href": "/insights/tasks",
+        "title": "RHEL Tasks",
+        "alt_title": [
+          "Task",
+          "upgrade",
+          "update",
+          "insights",
+          "automation",
+          "leapp",
+          "migrate",
+          "version",
+          "9.0",
+          "8.0",
+          "convert",
+          "conversion",
+          "migration"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-dashboard",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.dashboard",
+        "href": "/insights/dashboard",
+        "title": "Insights Dashboard",
+        "subtitle": "Red Hat Insights for RHEL",
+        "alt_title": [
+          "Dashboard",
+          "insights",
+          "Rhel"
+        ]
       }
     ]
   }

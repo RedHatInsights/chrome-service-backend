@@ -15,13 +15,15 @@
       "expandable": true,
       "id": "inventory",
       "description": "View details about your Red Hat Enterprise Linux systems.",
+      "subtitle": "Red Hat Insights for RHEL",
       "routes": [
         {
           "id": "systems",
           "appId": "inventory",
           "title": "Systems",
           "href": "/insights/inventory",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL"
         },
         {
           "id": "groups",
@@ -43,7 +45,42 @@
           "title": "Images",
           "href": "/insights/image-builder",
           "product": "Red Hat Insights",
-          "description": "Build and manage Red Hat Enterprise Linux images and environments."
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Build and manage Red Hat Enterprise Linux images and environments.",
+          "alt_title": [
+            "Images",
+            "image",
+            "image builder",
+            "my images",
+            "gold image",
+            "template image",
+            "vm template",
+            "image template",
+            "blueprint",
+            "image",
+            "builder",
+            "images",
+            "build",
+            "image-builder",
+            "insights",
+            "Build image",
+            "image builder",
+            "gold image",
+            "blueprint",
+            "template image",
+            "vm template",
+            "image template",
+            "vmware template",
+            "packer build",
+            "packer template",
+            "RHEL AMI",
+            "RHEL machine image",
+            "azure",
+            "aws",
+            "build",
+            "assemble",
+            "image-builder"
+          ]
         },
         {
           "title": "System Configuration",
@@ -53,17 +90,56 @@
               "id": "rhc",
               "appId": "connector",
               "title": "Remote Host Configuration (RHC)",
-              "href": "/settings/connector",
+              "href": "/insights/connector",
               "product": "Red Hat Insights",
-              "description": "Configure your systems to execute Ansible Playbooks."
+              "subtitle": "Red Hat Insights for RHEL",
+              "description": "Configure your systems to execute Ansible Playbooks.",
+              "alt_title": [
+                "Remote host configuration",
+                "connect systems",
+                "connection options",
+                "connect settings",
+                "settings",
+                "Register",
+                "rhc",
+                "RHC",
+                "rhcd"
+              ]
             },
             {
               "id": "activationKeys",
               "appId": "connector",
               "title": "Activation Keys",
-              "href": "/settings/connector/activation-keys",
+              "href": "/insights/connector/activation-keys",
               "product": "Red Hat Insights",
-              "description": "Create activation keys to register your systems and configure repositories without using a username and password."
+              "subtitle": "Red Hat Insights for RHEL",
+              "description": "Create activation keys to register your systems and configure repositories without using a username and password.",
+              "alt_title": [
+                "Subscription key",
+                "sca",
+                "simple content access",
+                "activate",
+                "register",
+                "AK",
+                "repositories",
+                "system purpose",
+                "sla",
+                "content" 
+              ]
+            },
+            {
+              "id": "stalenessAndCulling",
+              "appId": "inventory",
+              "title": "Staleness and Culling",
+              "href": "/insights/inventory/staleness-and-culling",
+              "product": "Red Hat Insights",
+              "description": "Inventory Host Staleness and Culling",
+              "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["hbi.custom-staleness", true]
+                }
+              ]
             }
           ]
         }
@@ -79,32 +155,70 @@
           "title": "Advisories",
           "href": "/insights/patch/advisories",
           "product": "Red Hat Insights",
-          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+          "alt_title": [
+            "Errata",
+            "patch",
+            "updates",
+            "insights"
+          ]
         },
         {
+          "id": "packages",
           "appId": "patch",
           "title": "Packages",
           "href": "/insights/patch/packages",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL"
         },
         {
+          "id": "repositories",
           "appId": "contentSources",
           "title": "Repositories",
-          "href": "/settings/content",
+          "href": "/insights/content",
           "product": "Red Hat Insights",
-          "isBeta": true
+          "subtitle": "Red Hat Insights for RHEL",
+          "alt_title": [
+            "Content",
+            "custom content",
+            "my content",
+            "my repos",
+            "repos",
+            "repo",
+            "repositories", 
+            "repository",
+            "insights",
+            "repository sets", 
+            "popular",
+            "Red hat repositories",
+            "Snapshots",
+            "compare",
+            "custom content",
+            "Red hat repositories",
+            "popular",
+            "nvidia",
+            "epel",
+            "add repositories",
+            "introspect",
+            "content",
+            "dnf",
+            "yum"
+          ]
         },
         {
           "title": "Patch",
           "expandable": true,
           "routes": [
             {
+              "id": "patchSystems",
               "appId": "patch",
               "title": "Systems",
               "href": "/insights/patch/systems",
               "product": "Red Hat Insights"
             },
             {
+              "id": "patchTemplates",
               "appId": "patch",
               "title": "Templates",
               "href": "/insights/patch/templates",
@@ -128,7 +242,27 @@
               "title": "Recommendations",
               "href": "/insights/advisor/recommendations",
               "product": "Red Hat Insights",
-              "description": "View details about your Red Hat Enterprise Linux systems."
+              "description": "View details about your Red Hat Enterprise Linux systems.",
+              "alt_title": [
+                "Rules",
+                "recommendations",
+                "insights",
+                "configuration",
+                "security",
+                "stability",
+                "performance",
+                "advisor",
+                "incidents",
+                "recommendations",
+                "configuration",
+                "pathways",
+                "critical",
+                "upgrade",
+                "upgrade risk",
+                "incident",
+                "recommendation",
+                "pathway"
+              ]
             },
             {
               "id": "advisorSystems",
@@ -152,12 +286,14 @@
           "expandable": true,
           "routes": [
             {
+              "id": "driftComparison",
               "appId": "drift",
               "title": "Comparison",
               "href": "/insights/drift/",
               "product": "Red Hat Insights"
             },
             {
+              "id": "driftBaselines",
               "appId": "drift",
               "title": "Baselines",
               "href": "/insights/drift/baselines",
@@ -166,9 +302,12 @@
           ]
         },
         {
+          "id": "policies",
           "appId": "policies",
           "title": "Policies",
-          "href": "/insights/policies"
+          "href": "/insights/policies/policies/list",
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Monitor your RHEL hosts against set parameters to detect deviation or misalignment."
         }
       ]
     },
@@ -179,13 +318,15 @@
         {
           "title": "Vulnerability",
           "expandable": true,
+          "subtitle": "Red Hat Insights for RHEL",
           "routes": [
             {
-              "id": "vulnerability",
+              "id": "cves",
               "appId": "vulnerability",
               "title": "CVEs",
               "href": "/insights/vulnerability/cves",
               "product": "Red Hat Insights",
+              "subtitle": "Red Hat Insights for RHEL",
               "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
             },
             {
@@ -202,6 +343,35 @@
               "href": "/insights/vulnerability/systems",
               "product": "Red Hat Insights"
             }
+          ],
+          "alt_title": [
+            "CVEs", 
+            "CVE",
+            "Security",
+            "Vulnerability",
+            "Vulnerability Management",
+            "insights",
+            "Vulnerable",
+            "exposure",
+            "Weakness",
+            "compliance",
+            "security gap",
+            "breach",
+            "Hearltbleed",
+            "Spectre",
+            "Patch",
+            "security",
+            "vulnerabilities",
+            "cve",
+            "common vulnerability exposure",
+            "cvss",
+            "risk",
+            "critical",
+            "security rule",
+            "errata",
+            "affected but not vulnerable",
+            "severity", 
+            "CVE-"
           ]
         },
         {
@@ -214,7 +384,28 @@
               "title": "Reports",
               "href": "/insights/compliance/reports",
               "product": "Red Hat Insights",
-              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
+              "alt_title": [
+                "Compliance",
+                "security",
+                "policies",
+                "SCAP",
+                "policy",
+                "insights",
+                "regulatory",
+                "regulations",
+                "OpenSCAP",
+                "PCI",
+                "HIPAA",
+                "DSS",
+                "CSI",
+                "C2S",
+                "rules",
+                "DISA STIG",
+                "PCI-DSS",
+                "NIST",
+                "OSPP"
+              ]
             },
             {
               "id": "scapPolicies",
@@ -283,7 +474,30 @@
               "title": "Subscription Inventory",
               "href": "/insights/subscriptions/inventory",
               "product": "Subscription Watch",
-              "description": "List your purchased subscriptions and view more information about each one."
+              "subtitle":"Red Hat Insights for RHEL",
+              "description": "List your purchased subscriptions and view more information about each one.",
+              "alt_title": [
+                "subscription",
+                "subscriptions",
+                "subscription list",
+                "subscription inventory",
+                "inventory",
+                "Red Hat Subscription Management",
+                "yearly",
+                "on-demand",
+                "contract",
+                "purchase",
+                "annual",
+                "BYOS",
+                "bring your own subscription",
+                "PAYG",
+                "pay as you go",
+                "renew",
+                "renewals",
+                "expiring",
+                "expiration",
+                "expired"
+              ]
             },
             {
               "id": "manifests",
@@ -291,7 +505,14 @@
               "title": "Manifests",
               "href": "/insights/subscriptions/manifests",
               "product": "Subscription Watch",
-              "description": "Export subscription manifests for Red Hat Satellite."
+              "subtitle": "Red Hat Insights for RHEL",
+              "description": "Export subscription manifests for Red Hat Satellite.",
+              "alt_title": [
+                "manifests",
+                "subscription allocations",
+                "distributors",
+                "Satellite"
+              ]
             },
             {
               "id": "subscriptionsDocumentation",
@@ -308,7 +529,21 @@
           "title": "Resource Optimization",
           "href": "/insights/ros",
           "product": "Red Hat Insights",
-          "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
+          "alt_title": [
+            "optimization",
+            "optimisation",
+            "optimize",
+            "optimise",
+            "usage",
+            "utilization",
+            "utilisation",
+            "save",
+            "savings",
+            "resource optimization",
+            "resource optimisation"
+          ]
         }
       ]
     },
@@ -322,14 +557,29 @@
           "title": "Remediations",
           "href": "/insights/remediations",
           "product": "Red Hat Insights",
-          "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems."
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
+          "alt_title": [
+            "Remediate",
+            "playbook",
+            "fix",
+            "solve",
+            "find it fix it",
+            "fifi",
+            "cloud connector",
+            "insights",
+            "automation",
+            "Ansible",
+            "patch"
+          ]
         },
         {
           "id": "tasks",
           "appId": "tasks",
           "title": "Tasks",
           "href": "/insights/tasks",
-          "product": "Red Hat Insights"
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL"
         }
       ]
     },
@@ -340,37 +590,16 @@
       "filterable": false,
       "href": "/insights/registration",
       "product": "Red Hat Insights",
+      "subtitle": "Red Hat Insights for RHEL",
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
     },
     {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",
-      "href": "/insights/learning-resources"
-    },
-    {
-      "title": "Product Materials",
-      "expandable": true,
-      "routes": [
-        {
-          "id": "productMaterialDocumentation",
-          "title": "Documentation",
-          "isExternal": true,
-          "href": "https://access.redhat.com/documentation/en-us/red_hat_insights/"
-        },
-        {
-          "id": "securityInformation",
-          "title": "Security Information",
-          "href": "https://www.redhat.com/en/technologies/management/insights/data-application-security",
-          "isExternal": true
-        },
-        {
-          "id": "apis",
-          "appId": "apiDocs",
-          "title": "APIs",
-          "href": "/docs/api"
-        }
-      ]
+      "filterable": false,
+      "href": "/insights/learning-resources",
+      "product": "Red Hat Insights"
     }
   ]
 }

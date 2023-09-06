@@ -144,7 +144,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/settings/connector"
+                        "pathname": "/insights/connector"
                     }
                 ]
             }
@@ -467,6 +467,9 @@
     },
     "ansibleDashboard": {
         "manifestLocation": "/apps/ansible-dashboard/fed-mods.json",
+        "analytics": {
+            "APIKey": "AGLlIXeY0q6tUZVRqmRwr9zAYS95u2QJ"
+        },
         "modules": [
             {
                 "id": "ansible-dashboard",
@@ -485,6 +488,9 @@
     },
     "automationHub": {
         "manifestLocation": "/apps/automation-hub/fed-mods.json",
+        "analytics": {
+            "APIKey": "AGLlIXeY0q6tUZVRqmRwr9zAYS95u2QJ"
+        },
         "modules": [
             {
                 "id": "ansible-automation-hub",
@@ -499,6 +505,9 @@
     },
     "automationAnalytics": {
         "manifestLocation": "/apps/automation-analytics/fed-mods.json",
+        "analytics": {
+            "APIKey": "AGLlIXeY0q6tUZVRqmRwr9zAYS95u2QJ"
+        },
         "modules": [
             {
                 "id": "ansible-automation-analytics",
@@ -635,11 +644,11 @@
             }
         ]
     },
-    "starter": {
-        "manifestLocation": "/apps/starter/fed-mods.json",
+    "frontend-starter-app": {
+        "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
         "modules": [
             {
-                "id": "starter",
+                "id": "frontend-starter-app",
                 "module": "./RootApp",
                 "routes": [
                     {
@@ -771,6 +780,11 @@
     },
     "hybridCommittedSpend": {
         "manifestLocation": "/apps/hybrid-committed-spend/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.billing.hcs_reports"
+            ]
+        },
         "modules": [
             {
                 "id": "hybrid-committed-spend",
@@ -857,10 +871,30 @@
                         "props": {
                             "bundle": "iam"
                         }
+                    },
+                    {
+                        "pathname": "/hac/learning-resources",
+                        "props": {
+                            "bundle": "hac"
+                        }
                     }
                 ]
             }
         ]
+    },
+    "serviceAccounts": {
+      "manifestLocation": "/apps/service-accounts/fed-mods.json",
+      "modules": [
+          {
+              "id": "service-accounts",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/iam/service-accounts"
+                  }
+              ]
+          }
+      ]
     },
     "quay-ui-plugin": {
         "manifestLocation": "/apps/quay/plugin-manifest.json",
@@ -871,6 +905,25 @@
                 "routes": [
                     {
                         "pathname": "/quay"
+                    }
+                ]
+            }
+        ]
+    },
+    "seatsAdminUi": {
+        "manifestLocation": "/apps/seats-admin-ui/fed-mods.json",
+        "config": {
+          "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
+        "modules": [
+            {
+                "id": "seats-admin",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/ansible/seats-administration"
                     }
                 ]
             }

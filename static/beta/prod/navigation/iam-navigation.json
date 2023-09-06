@@ -77,10 +77,37 @@
       ]
     },
     {
+      "id": "serviceAccounts",
+      "title": "Service Accounts",
+      "appId": "serviceAccounts",
+      "href": "/iam/service-accounts",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.iam.service-accounts", true]
+        }
+      ]
+    },
+    {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",
       "href": "/iam/learning-resources"
     }
+  ],
+  "alt_title": [
+    "Authentication Policy",
+    "2FA",
+    "Identity and Access Management",
+    "IAM",
+    "User Access",
+    "User Management",
+    "access management",
+    "rbac",
+    "2FA",
+    "two factor auth",
+    "two factor authentication",
+    "two-factor auth",
+    "two-factor authentication"
   ]
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/go-chi/cors"
 	"log"
 	"net/http"
 	"strconv"
@@ -56,7 +57,7 @@ func main() {
 		subrouter.Route("/emit-message", routes.BroadcastMessage)
 	})
 
-	// We might want to setup some event listeners at some point, but the pod will
+	// We might want to set up some event listeners at some point, but the pod will
 	// have to restart for these to take effect. We can't enable and disable websockets on the fly
 	if featureflags.IsEnabled("chrome-service.websockets.enabled") {
 		// start the connection hub
@@ -64,6 +65,12 @@ func main() {
 		logrus.Infoln("Enabling WebSockets")
 		kafka.InitializeConsumers()
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+			subrouter.Use(cors.Handler(cors.Options{
+				AllowedOrigins: []string{
+					"wss://stage.foo.redhat.com:1337",
+					"wss://prod.foo.redhat.com:1337",
+				},
+			}))
 			subrouter.Route("/ws", routes.MakeWsRoute)
 		})
 	} else {

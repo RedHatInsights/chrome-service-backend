@@ -199,19 +199,6 @@
                             "product": "Red Hat Cost Management"
                         },
                         {
-                            "id": "costModels",
-                            "appId": "costManagement",
-                            "title": "Cost Models",
-                            "href": "/openshift/cost-management/cost-models",
-                            "product": "Red Hat Cost Management",
-                            "permissions": [
-                                {
-                                    "method": "featureFlag",
-                                    "args": ["cost-management.ui.nav.settings", false]
-                                }
-                            ]
-                        },
-                        {
                             "id": "costExplorer",
                             "appId": "costManagement",
                             "title": "Cost Explorer",
@@ -223,13 +210,7 @@
                             "appId": "costManagement",
                             "title": "Settings",
                             "href": "/openshift/cost-management/settings",
-                            "product": "Red Hat Cost Management",
-                            "permissions": [
-                                {
-                                    "method": "featureFlag",
-                                    "args": ["cost-management.ui.nav.settings", true]
-                                }
-                            ]
+                            "product": "Red Hat Cost Management"
                         }
                     ]
                 }

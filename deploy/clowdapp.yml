@@ -122,8 +122,8 @@ objects:
               cpu: ${CPU_LIMIT}
               memory: ${MEMORY_LIMIT}
             requests:
-              cpu: 250m
-              memory: 256Mi
+              cpu: ${CPU_REQUESTS}
+              memory: ${MEMORY_REQUESTS}
 
   # This is a dummy secret to make ephemeral deploy correctly. It will not roll out to stage or prod
   # Unless we set "secret" in "managedResourceTypes" in the app-interface saas file.
@@ -153,6 +153,12 @@ parameters:
 - description: memory limit of service
   name: MEMORY_LIMIT
   value: 512Mi
+- description: Cpu requests of service
+  name: CPU_REQUESTS
+  value: 250m
+- description: Memory requests of service
+  name: MEMORY_REQUESTS
+  value: 256Mi
 - name: MIN_REPLICAS
   value: '3'
 - description: Image tag

@@ -107,11 +107,23 @@
             ]
         },
         {
-            "id": "seatsAdminUi",
-            "appId": "ansibleSeatsAdmin",
-            "title": "Seats Administration",
-            "filterable": false,
-            "href": "/ansible/seats-administration"
+            "title": "Ansible Lightspeed with IBM watsonx Code Assistant",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "seatsAdminUi",
+                    "appId": "ansibleSeatsAdmin",
+                    "title": "Seat Management",
+                    "filterable": false,
+                    "permissions": [
+                        {
+                        "method": "withEmail",
+                        "args": ["@redhat.com", "@sbb.ch"]
+                        }
+                    ],
+                    "href": "/ansible/seats-administration"
+                }
+            ]
         },
         {
             "id": "documentation",

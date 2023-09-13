@@ -770,7 +770,7 @@
         ]
     },
     "learningResources": {
-        "manifestLocation": "/apps/learningResources/fed-mods.json",
+        "manifestLocation": "/apps/learning-resources/fed-mods.json",
         "modules": [
             {
                 "id": "learningResources",

@@ -48,6 +48,9 @@
         "href": {
           "type": "string"
         },
+        "icon": {
+          "type": "string"
+        },
         "isExternal": {
           "type": "boolean"
         },
@@ -119,11 +122,24 @@
         },
         "icon": {
           "enum": [
-            "wrench",
-            "trend-up",
-            "shield",
+            "ACSIcon",
+            "AnsibleIcon",
+            "AppServicesIcon",
+            "cloud",
             "database",
-            "cloud"
+            "DataScienceIcon",
+            "EdgeIcon",
+            "InsightsIcon",
+            "OpenShiftIcon",
+            "PlaceholderIcon",
+            "QuayIoIcon",
+            "RHIcon",
+            "ServicesIcon",
+            "shield",
+            "SubscriptionsIcon",
+            "trend-up",
+            "TrustedContentIcon",
+            "wrench"
           ]
         },
         "navItems": {

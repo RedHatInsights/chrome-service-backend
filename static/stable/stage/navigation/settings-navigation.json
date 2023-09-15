@@ -6,6 +6,7 @@
             "id": "sources",
             "appId": "sources",
             "title": "Sources",
+            "icon": "PlaceholderIcon",
             "description": "Sources provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
             "href": "/settings/sources",
             "alt_title": [
@@ -37,6 +38,7 @@
             "id": "integrations",
             "appId": "notifications",
             "title": "Integrations",
+            "icon": "PlaceholderIcon",
             "description": "Route event-triggered notifications to your preferred third-party tools and platforms, such as Splunk and ServiceNow.",
             "href": "/settings/integrations",
             "alt_title":[
@@ -78,6 +80,7 @@
                     "id": "console",
                     "appId": "notifications",
                     "title": "Console",
+                    "icon": "PlaceholderIcon",
                     "description": "Configure which notifications users within your organization receive.",
                     "href": "/settings/notifications/console"
                 }

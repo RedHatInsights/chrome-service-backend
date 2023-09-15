@@ -7,6 +7,7 @@
             "appId": "openshift",
             "href": "/openshift",
             "title": "Clusters",
+            "icon": "OpenShiftIcon",
             "product": "Red Hat OpenShift Cluster Manager",
             "description": "View, Register, or Create an OpenShift Cluster."
         },
@@ -21,6 +22,7 @@
             "appId": "openshift",
             "href": "/openshift/overview",
             "title": "Overview",
+            "icon": "OpenShiftIcon",
             "filterable": false,
             "product": "Red Hat OpenShift Cluster Manager",
             "description": "Overview of your OpenShift Environment."
@@ -30,6 +32,7 @@
             "appId": "openshift",
             "href": "/openshift/releases",
             "title": "Releases",
+            "icon": "OpenShiftIcon",
             "filterable": false,
             "product": "Red Hat OpenShift Cluster Manager",
             "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
@@ -39,6 +42,7 @@
             "appId": "sandbox",
             "href": "/openshift/sandbox",
             "title": "Developer Sandbox",
+            "icon": "OpenShiftIcon",
             "filterable": false,
             "description": "Learn and try developing in a private, pre-configured OpenShift environment."
         },
@@ -62,6 +66,7 @@
                             "id": "recommendations",
                             "appId": "ocpAdvisor",
                             "title": "Recommendations",
+                            "icon": "OpenShiftIcon",
                             "href": "/openshift/insights/advisor/recommendations",
                             "product": "Red Hat OpenShift Cluster Manager",
                             "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
@@ -84,6 +89,7 @@
                             "appId": "ocpVulnerability",
                             "title": "CVEs",
                             "href": "/openshift/insights/vulnerability/cves",
+                            "icon": "OpenShiftIcon",
                             "product": "Red Hat OpenShift Cluster Manager",
                             "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
                         },
@@ -140,6 +146,7 @@
                             "title": "Overview",
                             "filterable": false,
                             "href": "/openshift/cost-management",
+                            "icon": "OpenShiftIcon",
                             "product": "Red Hat Cost Management",
                             "subtitle": "Red Hat Insights for OpenShift"
                         },

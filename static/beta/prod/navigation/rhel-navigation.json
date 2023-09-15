@@ -14,6 +14,7 @@
       "title": "Inventory",
       "expandable": true,
       "id": "inventory",
+      "icon": "InsightsIcon",
       "description": "View details about your Red Hat Enterprise Linux systems.",
       "subtitle": "Red Hat Insights for RHEL",
       "routes": [
@@ -44,6 +45,7 @@
           "appId": "imageBuilder",
           "title": "Images",
           "href": "/insights/image-builder",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Build and manage Red Hat Enterprise Linux images and environments.",
@@ -91,6 +93,7 @@
               "appId": "connector",
               "title": "Remote Host Configuration (RHC)",
               "href": "/insights/connector",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "subtitle": "Red Hat Insights for RHEL",
               "description": "Configure your systems to execute Ansible Playbooks.",
@@ -154,6 +157,7 @@
           "appId": "patch",
           "title": "Advisories",
           "href": "/insights/patch/advisories",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
@@ -168,6 +172,7 @@
           "appId": "patch",
           "title": "Packages",
           "href": "/insights/patch/packages",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL"
         },
@@ -176,6 +181,7 @@
           "appId": "contentSources",
           "title": "Repositories",
           "href": "/insights/content",
+          "icon": "SubscriptionsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "alt_title": [
@@ -238,6 +244,7 @@
               "appId": "advisor",
               "title": "Recommendations",
               "href": "/insights/advisor/recommendations",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "description": "View details about your Red Hat Enterprise Linux systems.",
               "alt_title": [
@@ -266,6 +273,7 @@
               "appId": "advisor",
               "title": "Systems",
               "href": "/insights/advisor/systems",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "description": "View details about your Red Hat Enterprise Linux systems."
             },
@@ -301,6 +309,7 @@
           "appId": "policies",
           "title": "Policies",
           "href": "/insights/policies",
+          "icon": "InsightsIcon",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Monitor your RHEL hosts against set parameters to detect deviation or misalignment."
         }
@@ -321,6 +330,7 @@
               "appId": "vulnerability",
               "title": "CVEs",
               "href": "/insights/vulnerability/cves",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "subtitle": "Red Hat Insights for RHEL",
               "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
@@ -379,6 +389,7 @@
               "appId": "compliance",
               "title": "Reports",
               "href": "/insights/compliance/reports",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
               "alt_title": [
@@ -428,6 +439,7 @@
               "appId": "malware",
               "title": "Signatures",
               "href": "/insights/malware/signatures",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
             },
@@ -469,6 +481,7 @@
               "appId": "subscriptionInventory",
               "title": "Subscription Inventory",
               "href": "/insights/subscriptions/inventory",
+              "icon": "SubscriptionsIcon",
               "product": "Subscription Watch",
               "subtitle": "Red Hat Insights for RHEL",
               "description": "List your purchased subscriptions and view more information about each one.",
@@ -500,6 +513,7 @@
               "appId": "manifests",
               "title": "Manifests",
               "href": "/insights/subscriptions/manifests",
+              "icon": "InsightsIcon",
               "product": "Subscription Watch",
               "subtitle": "Red Hat Insights for RHEL",
               "description": "Export subscription manifests for Red Hat Satellite.",
@@ -524,6 +538,7 @@
           "appId": "ros",
           "title": "Resource Optimization",
           "href": "/insights/ros",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
@@ -552,6 +567,7 @@
           "appId": "remediations",
           "title": "Remediations",
           "href": "/insights/remediations",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
@@ -574,6 +590,7 @@
           "appId": "tasks",
           "title": "Tasks",
           "href": "/insights/tasks",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL"
         }
@@ -585,6 +602,7 @@
       "title": "Register Systems",
       "filterable": false,
       "href": "/insights/registration",
+      "icon": "InsightsIcon",
       "product": "Red Hat Insights",
       "subtitle": "Red Hat Insights for RHEL",
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."

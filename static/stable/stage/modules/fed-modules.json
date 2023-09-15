@@ -720,7 +720,7 @@
           }
       ]
   },
-  "frontend-starter-app": {
+  "frontendStarterApp": {
       "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
       "modules": [
           {

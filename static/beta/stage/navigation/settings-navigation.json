@@ -31,6 +31,49 @@
                 "subscriptions",
                 "account",
                 "credentials"
+            ],
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.sources.integrations", false]
+                }
+            ]
+        },
+        {
+            "id": "integrations",
+            "appId": "integrations",
+            "title": "Integrations",
+            "description": "Integrations provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
+            "href": "/settings/integrations",
+            "alt_title": [
+                "providers",
+                "cloud providers",
+                "cloud sources",
+                "Red Hat sources",
+                "integrations",
+                "cloud integrations",
+                "cloud connection",
+                "aws",
+                "Amazon",
+                "Google",
+                "cloud",
+                "IBM",
+                "Microsoft",
+                "secrets",
+                "Azure",
+                "Oracle",
+                "Infrastructure",
+                "prediction",
+                "cost",
+                "subscriptions",
+                "account",
+                "credentials"
+            ],
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.sources.integrations", true]
+                }
             ]
         },
         {
@@ -75,6 +118,12 @@
                 "operational workflow",
                 "google spaces",
                 "ms teams"
+            ],
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.sources.integrations", false]
+                }
             ]
         },
         {

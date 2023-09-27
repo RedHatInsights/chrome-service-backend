@@ -113,6 +113,7 @@
                 {
                     "id": "seatsAdminUi",
                     "appId": "ansibleSeatsAdmin",
+                    "description": "Assign Ansible Lightspeed with IBM watsonx Code Assistant seats to users within your organization.",
                     "title": "Seat Management",
                     "filterable": false,
                     "permissions": [

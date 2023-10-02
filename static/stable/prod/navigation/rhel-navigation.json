@@ -132,12 +132,12 @@
               ]
             },
             {
-              "id": "stalenessAndCulling",
+              "id": "stalenessAndDeletion",
               "appId": "inventory",
-              "title": "Staleness and Culling",
-              "href": "/insights/inventory/staleness-and-culling",
+              "title": "Staleness and Deletion",
+              "href": "/insights/inventory/staleness-and-deletion",
               "product": "Red Hat Insights",
-              "description": "Inventory Host Staleness and Culling",
+              "description": "Inventory Host Staleness and Deletion",
               "permissions": [
                 {
                   "method": "featureFlag",

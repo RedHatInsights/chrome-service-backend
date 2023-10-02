@@ -107,18 +107,31 @@
             ]
         },
         {
+            "title": "Ansible Lightspeed with IBM watsonx Code Assistant",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "seatsAdminUi",
+                    "appId": "ansibleSeatsAdmin",
+                    "description": "Assign Ansible Lightspeed with IBM watsonx Code Assistant seats to users within your organization.",
+                    "title": "Seat Management",
+                    "filterable": false,
+                    "permissions": [
+                        {
+                        "method": "withEmail",
+                        "args": ["@redhat.com", "@sbb.ch"]
+                        }
+                    ],
+                    "href": "/ansible/seats-administration"
+                }
+            ]
+        },
+        {
             "id": "ansibleExternalDocumentation",
             "title": "Documentation",
             "isExternal": true,
             "filterable": false,
             "href": "https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/"
-        },
-        {
-            "id": "seatsAdminUi",
-            "appId": "ansibleSeatsAdmin",
-            "title": "Seats Administration",
-            "filterable": false,
-            "href": "/ansible/seats-administration"
         },
         {
             "groupId": "operations",

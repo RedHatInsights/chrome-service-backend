@@ -14,7 +14,8 @@
             "id": "overview",
             "appId": "hybridCommittedSpend",
             "title": "Overview",
-            "href": "/business-services/hybrid-committed-spend"
+            "href": "/business-services/hybrid-committed-spend",
+            "icon": "PlaceholderIcon"
           },
           {
             "id": "details",

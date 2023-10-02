@@ -17,6 +17,7 @@
           "appId": "rbac",
           "title": "Users",
           "href": "/iam/user-access/users",
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage your organization's role-based access control (RBAC) to services.",
           "alt_title": [
@@ -69,6 +70,7 @@
           "appId": "iam",
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage how your organization authenticates to Red Hat services."
         },
@@ -77,6 +79,7 @@
           "appId": "iam",
           "title": "Identity Provider Integration",
           "href": "/iam/authentication-policy/identity-provider-integration",
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage how your organization authenticates to Red Hat services."
         }

@@ -7,6 +7,7 @@
             "appId": "openshift",
             "href": "/openshift",
             "title": "Clusters",
+            "icon": "OpenShiftIcon",
             "product": "Red Hat OpenShift Cluster Manager",
             "description": "View, Register, or Create an OpenShift Cluster."
         },
@@ -15,6 +16,7 @@
             "appId": "openshift",
             "href": "/openshift/releases",
             "title": "Releases",
+            "icon": "OpenShiftIcon",
             "filterable": false,
             "product": "Red Hat OpenShift Cluster Manager",
             "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."

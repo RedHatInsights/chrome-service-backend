@@ -6,13 +6,15 @@
       "id": "overview",
       "appId": "subscriptionsDashboardUi",
       "title": "Overview",
-      "href": "/subscriptions/overview"
+      "href": "/subscriptions/overview",
+      "icon": "SubscriptionsIcon"
     },
     {
       "id": "subscriptionsInventory",
       "appId": "subscriptionInventory",
       "title": "Subscriptions Inventory",
-      "href": "/subscriptions/inventory"
+      "href": "/subscriptions/inventory",
+      "icon": "SubscriptionsIcon"
     },
     {
       "id": "subscriptionsUsage",
@@ -23,7 +25,8 @@
           "id": "rhel",
           "appId": "subscriptions",
           "title": "RHEL",
-          "href": "/subscriptions/usage/rhel"
+          "href": "/subscriptions/usage/rhel",
+          "icon": "SubscriptionsIcon"
         },
         {
           "id": "openshift",

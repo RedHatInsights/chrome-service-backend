@@ -10,7 +10,8 @@
           "title": "Groups",
           "id": "groups",
           "appId": "edge",
-          "href": "/edge/fleet-management"
+          "href": "/edge/fleet-management",
+          "icon": "EdgeIcon"
         },
         {
           "title": "Systems",

@@ -24,6 +24,7 @@
           "id": "apiManagement",
           "appId": "applicationServices",
           "title": "API Management",
+          "icon": "ServicesIcon",
           "description": "Manage API access, policy, and traffic controls for microservice-based applications.",
           "href": "/application-services/api-management"
         },
@@ -31,6 +32,7 @@
           "id": "serviceAccounts",
           "appId": "applicationServices",
           "title": "Service Accounts",
+          "icon": "ServicesIcon",
           "href": "/application-services/service-accounts",
           "description": "Authenticate and connect securely to APIs from multiple services."
         }
@@ -45,6 +47,7 @@
           "id": "dataScience",
           "appId": "applicationServices",
           "title": "Data Science",
+          "icon": "DataScienceIcon",
           "href": "/application-services/data-science",
           "description": "Develop, train, and test artificial intelligence and machine learning (AI/ML) models."
         }
@@ -60,6 +63,7 @@
           "appId": "trustedContent",
           "title": "Trusted Content",
           "href": "/application-services/trusted-content",
+          "icon": "TrustedContentIcon",
           "description": "Increase trust and integrity in source code and accelerate the application development process.",
           "alt_title": [
             "software supply chain",
@@ -90,6 +94,7 @@
           "appId": "acs",
           "title": "Overview",
           "href": "/application-services/acs/overview",
+          "icon": "ACSIcon",
           "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
         },
         {

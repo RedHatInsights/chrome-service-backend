@@ -8,6 +8,7 @@
             "title": "Sources",
             "description": "Sources provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
             "href": "/settings/sources",
+            "icon": "PlaceholderIcon",
             "alt_title": [
                 "providers",
                 "cloud providers",
@@ -93,12 +94,14 @@
             "appId": "idmsvc",
             "title": "Directory & Domain Services",
             "description": "Directory and Domain Services for console.redhat.com",
-            "href": "/settings/idmsvc"
+            "href": "/settings/idmsvc",
+            "icon": "PlaceholderIcon"
         },
         {
             "id": "integrations",
             "appId": "notifications",
             "title": "Integrations",
+            "icon": "PlaceholderIcon",
             "description": "Route event-triggered notifications to your preferred third-party tools and platforms, such as Splunk and ServiceNow.",
             "href": "/settings/integrations",
             "alt_title":[
@@ -158,6 +161,7 @@
                     "id": "console",
                     "appId": "notifications",
                     "title": "Console",
+                    "icon": "PlaceholderIcon",
                     "description": "Configure which notifications users within your organization receive.",
                     "href": "/settings/notifications/console",
                     "permissions": [

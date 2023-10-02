@@ -12,6 +12,7 @@
           "filterable": false,
           "id": "groups",
           "href": "/edge/fleet-management",
+          "icon": "EdgeIcon",
           "permissions": [
             {
               "method": "withEmail",

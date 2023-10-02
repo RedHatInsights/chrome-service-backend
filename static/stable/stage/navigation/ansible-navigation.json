@@ -25,6 +25,7 @@
                     "title": "Collections",
                     "href": "/ansible/automation-hub/",
                     "product": "Ansible Automation Hub",
+                    "icon": "AnsibleIcon",
                     "description": "Find and download Ansible Content Collections from Red Hat and partners."
                 },
                 {
@@ -143,6 +144,7 @@
                     "appId": "inventory",
                     "title": "Inventory",
                     "href": "/ansible/inventory",
+                    "icon": "AnsibleIcon",
                     "product": "Red Hat Insights",
                     "description": "Get recommendations to prevent and resolve potential issues on your Ansible-managed ecosystem."
                 },
@@ -155,6 +157,7 @@
                             "appId": "advisor",
                             "title": "Recommendations",
                             "href": "/ansible/advisor/recommendations",
+                            "icon": "AnsibleIcon",
                             "product": "Red Hat Insights",
                             "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
                             "alt_title": [
@@ -217,6 +220,7 @@
                     "appId": "policies",
                     "title": "Policies",
                     "href": "/ansible/policies",
+                    "icon": "AnsibleIcon",
                     "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment.",
                     "subtitle": "Red Hat Insights for Ansible",
                     "alt_title": [
@@ -246,6 +250,7 @@
             "appId": "remediations",
             "title": "Remediations",
             "href": "/ansible/remediations",
+            "icon": "AnsibleIcon",
             "product": "Red Hat Insights",
             "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
         },
@@ -254,6 +259,7 @@
             "appId": "tasks",
             "title": "Tasks",
             "href": "/ansible/tasks",
+            "icon": "AnsibleIcon",
             "product": "Red Hat Insights"
         }
     ]

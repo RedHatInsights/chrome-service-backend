@@ -12,6 +12,7 @@
           "appId": "rbac",
           "title": "Users",
           "href": "/iam/user-access/users",
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage your organization's role-based access control (RBAC) to services."
         },

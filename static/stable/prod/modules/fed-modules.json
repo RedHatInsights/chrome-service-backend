@@ -695,6 +695,25 @@
             }
         ]
     },
+    "hybridCommittedSpend": {
+        "manifestLocation": "/apps/hybrid-committed-spend/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.billing.hcs_reports"
+            ]
+        },
+        "modules": [
+            {
+                "id": "hybrid-committed-spend",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/business-services/hybrid-committed-spend"
+                    }
+                ]
+            }
+        ]
+    },
     "imageBuilder": {
         "manifestLocation": "/apps/image-builder/fed-mods.json",
         "modules": [

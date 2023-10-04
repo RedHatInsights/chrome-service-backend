@@ -257,7 +257,7 @@
         "isGroup": true,
         "title": "Advanced Cluster Security",
         "links": [
-          "application-services.clusterOverview"          
+          "application-services.clusterOverview"
         ]
       },
       {
@@ -400,6 +400,17 @@
     "links": [
       "openshift.costManagement",
       "rhel.ros"
+    ]
+  },
+  {
+    "id": "spendManagement",
+    "icon": "CreditCardIcon",
+    "title": "Spend Management",
+    "description": "Control costs and monitor committed spend.",
+    "links": [
+      "openshift.costManagement",
+      "rhel.ros",
+      "business-services.hybridCommittedSpend"
     ]
   },
   {

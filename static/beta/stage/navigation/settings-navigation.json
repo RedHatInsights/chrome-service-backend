@@ -192,6 +192,9 @@
                       {
                         "method": "featureFlag",
                         "args": ["platform.notifications.overhaul", true]
+                      },
+                      {
+                        "method": "isOrgAdmin"
                       }
                     ]
                 },
@@ -204,6 +207,9 @@
                       {
                         "method": "featureFlag",
                         "args": ["platform.notifications.overhaul", true]
+                      },
+                      {
+                        "method": "isOrgAdmin"
                       }
                     ]
                 },

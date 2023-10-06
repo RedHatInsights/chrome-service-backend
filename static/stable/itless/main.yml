@@ -1,0 +1,165 @@
+acs:
+  title: Advanced Cluster Security
+  api:
+    versions:
+      - v1
+
+advisor:
+  title: Advisor
+  api:
+    versions:
+      - v1
+    apiName: insights
+
+compliance:
+  title: Compliance
+  api:
+    versions:
+      - v1
+
+content-sources:
+  title: Repositories
+  api:
+    versions:
+      - v1
+
+cost-management:
+  title: Cost Management
+  api:
+    versions:
+      - v1
+
+drift:
+  title: Drift
+  api:
+    subItems:
+      drift:
+        versions:
+          - v1
+        title: Comparison reports
+      system-baseline:
+        versions:
+          - v1
+        title: Baselines
+      historical-system-profiles:
+        versions:
+          - v1
+        title: Historical system profiles
+
+edge:
+  title: RHEL for Edge
+  api:
+    versions:
+      - v1
+    isBeta: true
+
+ingress:
+  title: Ingress
+  api:
+    versions:
+      - v1
+
+integrations:
+  title: Integrations
+  api:
+    versions:
+      - v1
+
+inventory:
+  title: Managed Inventory
+  api:
+    versions:
+      - v1
+
+notifications:
+  title: Notifications
+  api:
+    versions:
+      - v1
+
+openshift:
+  title: OpenShift (OCM)
+  api:
+    versions:
+      - v1
+
+patch:
+  title: Patch
+  api:
+    versions:
+      - v3
+      - v2
+      - v1
+
+policies:
+  title: Policies
+  api:
+    versions:
+      - v1
+
+rbac:
+  title: Role-based Access Control
+  api:
+    versions:
+      - v1
+
+remediations:
+  title: Remediations
+  api:
+    versions:
+      - v1
+
+ros:
+  title: Resource Optimization
+  api:
+    versions:
+      - v1
+
+ruledev:
+  title: Rule Development
+  api:
+    versions:
+      - v1
+    isBeta: true
+    tags:
+      - value: "experimental"
+        title: "Experimental API"
+
+sources:
+  title: Sources
+  api:
+    versions:
+      - v3.1
+
+starter:
+  title: Starter
+  api:
+    versions:
+      - v1
+    apiName: insights
+
+subscriptions:
+  title: Subscriptions
+  api:
+    versions:
+      - v1
+    alias:
+      - rhsm-subscriptions
+
+tasks:
+  title: Tasks
+  api:
+    versions:
+      - v1
+
+vulnerability:
+  title: Vulnerability Management
+  api:
+    versions:
+      - v1
+
+app-studio-docs:
+  title: App Studio Docs
+  api:
+    versions:
+      - v1

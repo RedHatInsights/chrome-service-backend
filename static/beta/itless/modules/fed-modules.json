@@ -141,9 +141,6 @@
                     {
                         "pathname": "/insights/drift",
                         "isFedramp": true
-                    },
-                    {
-                        "pathname": "/ansible/drift"
                     }
                 ]
             }
@@ -268,6 +265,20 @@
                 "routes": [
                     {
                         "pathname": "/insights/malware"
+                    }
+                ]
+            }
+        ]
+    },
+    "openshift": {
+        "manifestLocation": "/apps/openshift/fed-mods.json",
+        "modules": [
+            {
+                "id": "openshift",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/openshift"
                     }
                 ]
             }

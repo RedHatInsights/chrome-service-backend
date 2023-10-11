@@ -23,6 +23,7 @@
           "appId": "inventory",
           "title": "Systems",
           "href": "/insights/inventory",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL"
         },
@@ -114,6 +115,7 @@
               "appId": "connector",
               "title": "Activation keys",
               "href": "/insights/connector/activation-keys",
+              "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "subtitle": "Red Hat Insights for RHEL",
               "description": "Create activation keys to register your systems and configure repositories without using a username and password.",

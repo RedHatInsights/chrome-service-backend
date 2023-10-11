@@ -18,6 +18,7 @@
           "appId": "rbac",
           "title": "Users",
           "href": "/iam/user-access/users",
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "alt_title": [
             "role based access management",
@@ -69,6 +70,7 @@
           "appId": "iam",
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
+          "icon": "PlaceholderiIcon",
           "product": "Identity & Access Management"
         }
       ]

@@ -27,6 +27,7 @@
       "id": "quayRepositories",
       "appId": "quay-ui-plugin",
       "title": "Repositories",
+      "icon": "QuayIoIcon",
       "description": "Provide a central location for storing a related set of container images.",
       "href": "/quay/repository",
       "permissions": [

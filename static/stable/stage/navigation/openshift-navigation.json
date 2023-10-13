@@ -3,11 +3,13 @@
     "title": "OpenShift",
     "navItems": [
         {
+            "id": "overview",
             "appId": "openshift",
             "href": "/openshift/overview",
             "title": "Overview",
             "filterable": false,
-            "product": "Red Hat OpenShift cluster product information"
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "Red Hat OpenShift cluster product information"
         },
         {
             "id": "dashboard",

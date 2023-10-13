@@ -17,7 +17,7 @@
       "icon": "OpenShiftIcon",
       "filterable": false,
       "product": "Red Hat OpenShift Cluster Manager",
-      "description": "Dashboard depicting the state of your OpenShift Environment."
+      "description": "Dashboard visualizing the state of your OpenShift Environment."
     },
     {
       "id": "clusters",

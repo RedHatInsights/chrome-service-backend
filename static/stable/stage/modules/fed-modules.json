@@ -29,6 +29,9 @@
                   },
                   {
                       "pathname": "/user-preferences/notifications"
+                  },
+                  {
+                      "pathname": "/settings/notifications/user-preferences"
                   }
               ]
           }

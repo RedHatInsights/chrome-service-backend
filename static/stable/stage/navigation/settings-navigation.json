@@ -58,6 +58,12 @@
                 "operational workflow",
                 "google spaces",
                 "ms teams"
+            ],
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.sources.integrations", false]
+                }
             ]
         },
         {

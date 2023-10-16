@@ -28,7 +28,7 @@
       {
         "id": "rhel",
         "isGroup": true,
-        "title": "RHEL",
+        "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.recommendations",
           "rhel.advisories",
@@ -48,7 +48,7 @@
     "links": [
       {
         "isGroup": true,
-        "title": "RHEL",
+        "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.recommendations",
           "rhel.advisories",

@@ -24,7 +24,7 @@
         {
           "id": "rhel",
           "appId": "subscriptions",
-          "title": "RHEL",
+          "title": "Red Hat Enterprise Linux",
           "href": "/subscriptions/usage/rhel",
           "icon": "SubscriptionsIcon"
         },

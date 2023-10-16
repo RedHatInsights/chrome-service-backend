@@ -359,6 +359,9 @@
                 "routes": [
                     {
                         "pathname": "/insights/subscriptions"
+                    },
+                    {
+                        "pathname": "/subscriptions/usage"
                     }
                 ]
             },
@@ -382,10 +385,30 @@
                 "routes": [
                     {
                         "pathname": "/insights/subscriptions/inventory"
+                    },
+                    {
+                        "pathname": "/subscriptions/inventory"
                     }
                 ]
             }
         ]
+    },
+    "subscriptionsDashboardUi": {
+      "manifestLocation": "/apps/subscriptions-dashboard-ui/fed-mods.json",
+      "modules": [
+          {
+              "id": "subscriptions-dashboard-ui",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/subscriptions"
+                  },
+                  {
+                      "pathname": "/subscriptions/overview"
+                  }
+              ]
+          }
+      ]
     },
     "manifests": {
         "manifestLocation": "/apps/manifests/fed-mods.json",
@@ -396,6 +419,9 @@
                 "routes": [
                     {
                         "pathname": "/insights/subscriptions/manifests"
+                    },
+                    {
+                        "pathname": "/subscriptions/manifests"
                     }
                 ]
             }
@@ -809,6 +835,9 @@
                 "routes": [
                     {
                         "pathname": "/business-services/hybrid-committed-spend"
+                    },
+                    {
+                        "pathname": "/subscriptions/hybrid-committed-spend"
                     }
                 ]
             }
@@ -893,6 +922,12 @@
                         "pathname": "/hac/learning-resources",
                         "props": {
                             "bundle": "hac"
+                        }
+                    },
+                    {
+                        "pathname": "/subscriptions/learning-resources",
+                        "props": {
+                            "bundle": "subscriptions"
                         }
                     }
                 ]

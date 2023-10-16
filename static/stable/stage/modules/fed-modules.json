@@ -410,6 +410,9 @@
               "routes": [
                   {
                       "pathname": "/insights/subscriptions"
+                  },
+                  {
+                      "pathname": "/subscriptions/usage"
                   }
               ]
           },
@@ -450,6 +453,9 @@
               "routes": [
                   {
                       "pathname": "/insights/subscriptions/inventory"
+                  },
+                  {
+                      "pathname": "/subscriptions/inventory"
                   }
               ]
           }
@@ -462,9 +468,8 @@
               "id": "manifests",
               "module": "./RootApp",
               "routes": [
-                  {
-                      "pathname": "/insights/subscriptions/manifests"
-                  }
+                  {"pathname": "/insights/subscriptions/manifests"},
+                  {"pathname": "/subscriptions/manifests" }
               ]
           }
       ]
@@ -897,6 +902,9 @@
               "routes": [
                   {
                       "pathname": "/business-services/hybrid-committed-spend"
+                  },
+                  {
+                      "pathname": "/subscriptions/hybrid-committed-spend"
                   }
               ]
           }
@@ -981,6 +989,12 @@
                       "pathname": "/hac/learning-resources",
                       "props": {
                           "bundle": "hac"
+                      }
+                  },
+                  {
+                      "pathname": "/subscriptions/learning-resources",
+                      "props": {
+                          "bundle": "subscriptions"
                       }
                   }
               ]

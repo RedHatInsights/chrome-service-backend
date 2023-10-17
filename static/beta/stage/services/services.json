@@ -120,9 +120,8 @@
     "title": "Integrations and Notifications",
     "description": "Alerts users to events, using email and integrations such as webhooks.",
     "links": [
-      "settings.integrations",
-      "settings.console",
-      "settings.sources"
+      "settings.sources",
+      "settings.notifications"
     ]
   },
   {

@@ -129,7 +129,7 @@
                       "pathname": "/settings"
                   },
                   {
-                      "pathname": "/settings/sources"
+                      "pathname": "/settings/integrations"
                   }
               ]
           }
@@ -146,15 +146,6 @@
               "routes": [
                   {
                       "pathname": "/settings/notifications"
-                  }
-              ]
-          },
-          {
-              "id": "integrations",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/settings/integrations"
                   }
               ]
           }

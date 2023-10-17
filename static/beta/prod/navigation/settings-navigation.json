@@ -62,7 +62,7 @@
             "permissions": [
                 {
                     "method": "featureFlag",
-                    "args": ["platform.sources.integrations", true]
+                    "args": ["platform.sources.integrations", false]
                 }
             ]
         },

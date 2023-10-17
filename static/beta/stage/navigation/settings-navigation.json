@@ -5,9 +5,9 @@
         {
             "id": "sources",
             "appId": "sources",
-            "title": "Sources",
-            "description": "Sources provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
-            "href": "/settings/sources",
+            "title": "Integrations",
+            "description": "Integrations provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
+            "href": "/settings/integrations",
             "icon": "PlaceholderIcon",
             "alt_title": [
                 "providers",
@@ -45,7 +45,7 @@
             "appId": "integrations",
             "title": "Integrations",
             "description": "Integrations provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
-            "href": "/settings/sources",
+            "href": "/settings/integrations",
             "alt_title": [
                 "providers",
                 "cloud providers",

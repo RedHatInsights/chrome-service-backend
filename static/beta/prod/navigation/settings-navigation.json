@@ -5,10 +5,10 @@
         {
             "id": "sources",
             "appId": "sources",
-            "title": "Sources",
+            "title": "Integrations",
             "icon": "PlaceholderIcon",
-            "description": "Sources provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
-            "href": "/settings/sources",
+            "description": "Integrations provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
+            "href": "/settings/integrations",
             "alt_title": [
                 "providers",
                 "cloud providers",
@@ -35,90 +35,17 @@
             ]
         },
         {
-            "id": "integrations",
-            "appId": "notifications",
-            "title": "Integrations",
-            "icon": "PlaceholderIcon",
-            "description": "Route event-triggered notifications to your preferred third-party tools and platforms, such as Splunk and ServiceNow.",
-            "href": "/settings/integrations",
-            "alt_title":[
-                "integrations",
-                "Splunk",
-                "Service Now",
-                "SNOW",
-                "integrate",
-                "webhook",
-                "Slack",
-                "Google Chat",
-                "Microsoft Teams",
-                "third party integration",
-                "event driven",
-                "alerting",
-                "automation",
-                "operational workflow",
-                "google spaces",
-                "ms teams"
-            ],
-            "permissions": [
-                {
-                    "method": "featureFlag",
-                    "args": ["platform.sources.integrations", false]
-                }
-            ]
-        },
-        {
           "title": "Notifications",
+          "id": "notifications",
+          "description": "A standardized way of notifying users of events for supported services on the Hybrid Cloud Console.",
           "expandable": true,
           "routes": [
               {
-                  "id": "openshift",
-                  "appId": "notifications",
-                  "title": "OpenShift",
-                  "href": "/settings/notifications/openshift",
-                  "permissions": [
-                      {
-                          "method": "featureFlag",
-                          "args": ["platform.notifications.overhaul", false]
-                      }
-                  ]
-              },
-              {
-                  "id": "redhatEntrpriseLinux",
-                  "appId": "notifications",
-                  "title": "Red Hat Enterprise Linux",
-                  "href": "/settings/notifications/rhel",
-                  "permissions": [
-                      {
-                          "method": "featureFlag",
-                          "args": ["platform.notifications.overhaul", false]
-                      }
-                  ]
-              },
-              {
-                  "id": "console",
-                  "appId": "notifications",
-                  "title": "Console",
-                  "icon": "PlaceholderIcon",
-                  "description": "Configure which notifications users within your organization receive.",
-                  "href": "/settings/notifications/console",
-                  "permissions": [
-                      {
-                          "method": "featureFlag",
-                          "args": ["platform.notifications.overhaul", false]
-                      }
-                  ]
-              },
-              {
                   "id": "notificationOverview",
                   "appId": "notifications",
+                  "icon": "PlaceholderIcon",
                   "title": "Overview",
-                  "href": "/settings/notifications",
-                  "permissions": [
-                    {
-                      "method": "featureFlag",
-                      "args": ["platform.notifications.overhaul", true]
-                    }
-                  ]
+                  "href": "/settings/notifications"
               },
               {
                   "id": "configureEvents",
@@ -126,10 +53,6 @@
                   "title": "Configure Events",
                   "href": "/settings/notifications/configure-events",
                   "permissions": [
-                    {
-                      "method": "featureFlag",
-                      "args": ["platform.notifications.overhaul", true]
-                    },
                     {
                       "method": "isOrgAdmin"
                     }
@@ -142,10 +65,6 @@
                   "href": "/settings/notifications/eventlog",
                   "permissions": [
                     {
-                      "method": "featureFlag",
-                      "args": ["platform.notifications.overhaul", true]
-                    },
-                    {
                       "method": "isOrgAdmin"
                     }
                   ]
@@ -154,13 +73,7 @@
                   "id": "myUserPreferences",
                   "appId": "notifications",
                   "title": "My User Preferences",
-                  "href": "/settings/notifications/user-preferences",
-                  "permissions": [
-                    {
-                      "method": "featureFlag",
-                      "args": ["platform.notifications.overhaul", true]
-                    }
-                  ]
+                  "href": "/settings/notifications/user-preferences"
               }
           ]
         },

@@ -7,7 +7,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "applicationServices",
         "title": "Application and Data Services",
         "links": [
           "application-services.apiManagement",
@@ -25,7 +24,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "rhel",
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.remediations",
@@ -34,7 +32,6 @@
       },     
       {
         "isGroup": true,
-        "id": "ansible",
         "title": "Ansible",
         "links": [
           "ansible.automationAnalytics",
@@ -48,13 +45,12 @@
   },
   {
     "id": "containers",
-    "icon": "CubeIcon",
     "title": "Containers",
+    "icon": "CubeIcon",
     "description": "Run your applications in a consistent and isolated environment.",
     "links": [
       {
         "isGroup": true,
-        "id": "openshift",
         "title": "OpenShift",
         "links": [
           {
@@ -79,7 +75,6 @@
       },
       {
         "isGroup": true,
-        "id": "quay",
         "title": "Quay.io",
         "links": [
           "quay.quay"
@@ -87,7 +82,6 @@
       },      
       {
         "isGroup": true,
-        "id": "application-services",
         "title": "Application and Data Services",
         "links": [
           "application-services.trustedContentOverview"
@@ -112,7 +106,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "rhel",
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.imageBuilder"
@@ -120,14 +113,12 @@
       },
       {
         "isGroup": true,
-        "id": "quay",
         "title": "Quay.io",
         "links": [
           "quay.quay"
         ]
       },
       {
-        "id": "edge",
         "isGroup": true,
         "title": "Edge",
         "links": [
@@ -141,7 +132,6 @@
       },
       {
         "isGroup": true,
-        "id": "application-services",
         "title": "Application and Data Services",
         "links": [
           "application-services.trustedContentOverview"
@@ -157,7 +147,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "iam",
         "title": "Identity and Access Management",
         "links": [
           "iam.authFactors",
@@ -175,7 +164,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "infrastructure",
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.inventory"
@@ -183,7 +171,6 @@
       },
       {
         "isGroup": true,
-        "id": "infrastructure",
         "title": "OpenShift",
         "links": [
           "openshift.clusters",
@@ -201,7 +188,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "integrations-notifications",
         "title": "Settings",
         "links": [
           "settings.integrations",
@@ -218,7 +204,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "rhel",
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.imageBuilder",
@@ -228,7 +213,6 @@
       },
       {
         "isGroup": true,
-        "id": "openshift",
         "title": "OpenShift",
         "links": [
           "openshift.clusters"
@@ -236,7 +220,6 @@
       },
       {
         "isGroup": true,
-        "id": "edge",
         "title": "Edge",
         "links": [
           "edge.groups"
@@ -252,7 +235,6 @@
     "description": "Monitor, troubleshoot, and improve application performance.",
     "links": [
       {
-        "id": "rhel",
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
@@ -286,7 +268,6 @@
         ]
       },
       {
-        "id": "openshift",
         "isGroup": true,
         "title": "OpenShift",
         "links": [
@@ -307,7 +288,6 @@
         ]
       },
       {
-        "id": "ansible",
         "isGroup": true,
         "title": "Ansible",
         "links": [
@@ -337,7 +317,6 @@
     "description": "Meet your policy and compliance objectives.",
     "links": [
       {
-        "id": "acsSecurity",
         "isGroup": true,
         "title": "Advanced Cluster Security",
         "links": [
@@ -345,7 +324,6 @@
         ]
       },
       {
-        "id": "ansibleSecurity",
         "isGroup": true,
         "title": "Ansible",
         "links": [
@@ -353,7 +331,6 @@
         ]
       },
       {
-        "id": "openshiftsecurity",
         "isGroup": true,
         "title": "OpenShift",
         "links": [
@@ -404,7 +381,7 @@
       },
       {
         "isGroup": true,
-        "title": "Containers",
+        "title": "Quay.io",
         "links": [
           "quay.quay"      
         ]
@@ -418,7 +395,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "rhel",
         "title": "Red Hat Enterprise Linux",
         "links": [
           {
@@ -440,7 +416,6 @@
       },
       {
         "isGroup": true,
-        "id": "openshift",
         "title": "OpenShift",
         "links": [
           {
@@ -453,7 +428,6 @@
         ]
       },
       {
-        "id": "ansible",
         "isGroup": true,
         "title": "Ansible",
         "links": [
@@ -484,7 +458,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "spendManagement",
         "title": "OpenShift",
         "links": [
           "openshift.costManagement"
@@ -492,7 +465,6 @@
       },
       {
         "isGroup": true,
-        "id": "spendManagement",
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.ros"
@@ -500,7 +472,6 @@
       },
       {
         "isGroup": true,
-        "id": "spendManagement",
         "title": "Other",
         "links": [
           "business-services.hybridCommittedSpend"
@@ -516,7 +487,6 @@
     "links": [
       {
         "isGroup": true,
-        "id": "systemConfiguration",
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.activationKeys",
@@ -534,7 +504,6 @@
       },
       {
         "isGroup": true,
-        "id": "systemConfiguration",
         "title": "Settings",
         "links": [
           "settings.idmsvc"

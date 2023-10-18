@@ -466,7 +466,7 @@
             {
               "id": "subs.rhel",
               "appId": "subscriptions",
-              "title": "Red Hat Enterprise Linux",
+              "title": "RHEL",
               "href": "/insights/subscriptions/rhel",
               "product": "Subscription Watch"
             },

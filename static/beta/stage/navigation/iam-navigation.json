@@ -49,6 +49,7 @@
           "id": "groups",
           "appId": "rbac",
           "title": "Groups",
+          "icon": "PlaceholderIcon",
           "href": "/iam/user-access/groups",
           "product": "Identity & Access Management"
         },

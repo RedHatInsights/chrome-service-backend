@@ -20,6 +20,7 @@
           "href": "/iam/user-access/users",
           "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
+          "description": "Manage your organization's role-based access control (RBAC) to services.",
           "alt_title": [
             "role based access management",
             "user management",
@@ -71,7 +72,8 @@
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
           "icon": "PlaceholderiIcon",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "description": "Manage how your organization authenticates to Red Hat services."
         }
       ]
     },

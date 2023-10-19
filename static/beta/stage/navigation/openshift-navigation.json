@@ -3,6 +3,26 @@
     "title": "OpenShift",
     "navItems": [
         {
+            "id": "overview",
+            "appId": "openshift",
+            "href": "/openshift/overview",
+            "title": "Overview",
+            "icon": "OpenShiftIcon",
+            "filterable": false,
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "Red Hat OpenShift cluster product information"
+        },
+        {
+            "id": "dashboard",
+            "appId": "openshift",
+            "href": "/openshift/dashboard",
+            "title": "Dashboard",
+            "icon": "OpenShiftIcon",
+            "filterable": false,
+            "product": "Red Hat OpenShift Cluster Manager",
+            "description": "Dashboard visualizing the state of your OpenShift Environment."
+        },
+        {
             "id": "clusters",
             "appId": "openshift",
             "href": "/openshift",
@@ -16,16 +36,6 @@
             "appId": "learningResources",
             "title": "Learning Resources",
             "href": "/openshift/learning-resources"
-        },
-        {
-            "id": "overview",
-            "appId": "openshift",
-            "href": "/openshift/overview",
-            "title": "Overview",
-            "icon": "OpenShiftIcon",
-            "filterable": false,
-            "product": "Red Hat OpenShift Cluster Manager",
-            "description": "Overview of your OpenShift Environment."
         },
         {
             "id": "releases",

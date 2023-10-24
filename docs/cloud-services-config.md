@@ -290,7 +290,7 @@ If your link does not fit into any existing section and you need a new one, foll
 {
   id: string; // unique section id
   title: string; // title of a section
-  icon: "CloudUploadAltIcon" | "AutomationIcon" | "BoxesIcon" | "DatabaseIcon" | "RocketIcon" | "UsersIcon" | "InfrastructureIcon" | "BellIcon" | "ChartLineIcon" | "CloudSecurityIcon" | "CreditCardIcon" | "CogIcon" | "ShoppingCartIcon"; // icon representing section
+  icon: "CloudUploadAltIcon" | "AutomationIcon" | "BoxesIcon" | "LightBulbIcon" | "RocketIcon" | "UsersIcon" | "InfrastructureIcon" | "BellIcon" | "ChartLineIcon" | "CloudSecurityIcon" | "CreditCardIcon" | "CogIcon" | "ShoppingCartIcon"; // icon representing section
   description: string; // short section description
   links: string[] // list of links
 }

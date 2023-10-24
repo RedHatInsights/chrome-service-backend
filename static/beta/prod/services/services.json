@@ -1,7 +1,7 @@
 [
   {
     "id": "dataset",
-    "icon": "DatabaseIcon",
+    "icon": "LightBulbIcon",
     "title": "AI/ML",
     "description": "Create, manage, and migrate relational and non-relational databases.",
     "links": [

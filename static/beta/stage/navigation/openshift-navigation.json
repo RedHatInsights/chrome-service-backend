@@ -77,6 +77,19 @@
                             "title": "Clusters",
                             "href": "/openshift/insights/advisor/clusters",
                             "product": "Red Hat OpenShift Cluster Manager"
+                        },
+                        {
+                            "id": "workloads",
+                            "appId": "ocpAdvisor",
+                            "title": "Workloads",
+                            "href": "/openshift/insights/advisor/workloads",
+                            "product": "Red Hat OpenShift Cluster Manager",
+                            "permissions": [
+                                {
+                                  "method": "featureFlag",
+                                  "args": ["ocp-advisor-ui-workloads", true]
+                                }
+                              ]
                         }
                     ]
                 },

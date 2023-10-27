@@ -16,31 +16,25 @@
         ]
     },
     "userPreferences": {
-        "manifestLocation": "/apps/user-preferences/fed-mods.json",
-        "defaultDocumentTitle": "User Preferences | User Preferences",
-        "modules": [
-            {
-                "id": "user-preferences-email",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/user-preferences"
-                    },
-                    {
-                        "pathname": "/user-preferences/email"
-                    }
-                ]
-            },
-            {
-                "id": "user-preferences-notifications",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/user-preferences/notifications"
-                    }
-                ]
-            }
-        ]
+      "manifestLocation": "/apps/user-preferences/fed-mods.json",
+      "defaultDocumentTitle": "User Preferences | User Preferences",
+      "modules": [
+          {
+              "id": "user-preferences-notifications",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/user-preferences"
+                  },
+                  {
+                      "pathname": "/user-preferences/notifications"
+                  },
+                  {
+                      "pathname": "/settings/notifications/user-preferences"
+                  }
+              ]
+          }
+      ]
     },
     "rbac": {
         "manifestLocation": "/apps/rbac/fed-mods.json",
@@ -103,46 +97,37 @@
         ]
     },
     "sources": {
-        "manifestLocation": "/apps/sources/fed-mods.json",
-        "defaultDocumentTitle": "Sources | Settings",
-        "modules": [
-            {
-                "id": "sources",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/settings"
-                    },
-                    {
-                        "pathname": "/settings/sources"
-                    }
-                ]
-            }
-        ]
+      "manifestLocation": "/apps/sources/fed-mods.json",
+      "defaultDocumentTitle": "Sources | Settings",
+      "modules": [
+          {
+              "id": "sources",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings"
+                  },
+                  {
+                      "pathname": "/settings/integrations"
+                  }
+              ]
+          }
+      ]
     },
     "notifications": {
-        "manifestLocation": "/apps/notifications/fed-mods.json",
-        "defaultDocumentTitle": "Notifications | Settings",
-        "modules": [
-            {
-                "id": "notifications",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/settings/notifications"
-                    }
-                ]
-            },
-            {
-                "id": "integrations",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/settings/integrations"
-                    }
-                ]
-            }
-        ]
+      "manifestLocation": "/apps/notifications/fed-mods.json",
+      "defaultDocumentTitle": "Notifications | Settings",
+      "modules": [
+          {
+              "id": "notifications",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/settings/notifications"
+                  }
+              ]
+          }
+      ]
     },
     "connector": {
         "manifestLocation": "/apps/connector/fed-mods.json",

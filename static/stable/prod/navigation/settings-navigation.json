@@ -1,96 +1,87 @@
 {
-    "id": "settings",
-    "title": "Settings",
-    "navItems": [
-        {
-            "id": "sources",
-            "appId": "sources",
-            "title": "Sources",
-            "icon": "PlaceholderIcon",
-            "description": "Sources provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
-            "href": "/settings/sources",
-            "alt_title": [
-                "providers",
-                "cloud providers",
-                "cloud sources",
-                "Red Hat sources",
-                "integrations",
-                "cloud integrations",
-                "cloud connection",
-                "aws",
-                "Amazon",
-                "Google",
-                "cloud",
-                "IBM",
-                "Microsoft",
-                "secrets",
-                "Azure",
-                "Oracle",
-                "Infrastructure",
-                "prediction",
-                "cost",
-                "subscriptions",
-                "account",
-                "credentials"
-            ]
-        },
-        {
-            "id": "integrations",
-            "appId": "notifications",
-            "title": "Integrations",
-            "icon": "PlaceholderIcon",
-            "description": "Route event-triggered notifications to your preferred third-party tools and platforms, such as Splunk and ServiceNow.",
-            "href": "/settings/integrations",
-            "alt_title":[
-                "integrations",
-                "Splunk",
-                "Service Now",
-                "SNOW",
-                "integrate",
-                "webhook",
-                "Slack",
-                "Google Chat",
-                "Microsoft Teams",
-                "third party integration",
-                "event driven",
-                "alerting",
-                "automation",
-                "operational workflow",
-                "google spaces",
-                "ms teams"
-            ]
-        },
-        {
-            "title": "Notifications",
-            "expandable": true,
-            "routes": [
-                {
-                    "id": "openshift",
-                    "appId": "notifications",
-                    "title": "OpenShift",
-                    "href": "/settings/notifications/openshift"
-                },
-                {
-                    "id": "redhatEntrpriseLinux",
-                    "appId": "notifications",
-                    "title": "Red Hat Enterprise Linux",
-                    "href": "/settings/notifications/rhel"
-                },
-                {
-                    "id": "console",
-                    "appId": "notifications",
-                    "title": "Console",
-                    "icon": "PlaceholderIcon",
-                    "description": "Configure which notifications users within your organization receive.",
-                    "href": "/settings/notifications/console"
-                }
-            ]
-        },
-        {
-            "id": "learningResources",
-            "appId": "learningResources",
-            "title": "Learning Resources",
-            "href": "/settings/learning-resources"
-        }
-    ]
+  "id": "settings",
+  "title": "Settings",
+  "navItems": [
+      {
+          "id": "sources",
+          "appId": "sources",
+          "title": "Integrations",
+          "icon": "PlaceholderIcon",
+          "description": "Integrations provide a way for applications to collect data outside of the Red Hat Hybrid Cloud Console through either a direct connection to the source or indirectly.",
+          "href": "/settings/integrations",
+          "alt_title": [
+              "providers",
+              "cloud providers",
+              "cloud sources",
+              "Red Hat sources",
+              "integrations",
+              "cloud integrations",
+              "cloud connection",
+              "aws",
+              "Amazon",
+              "Google",
+              "cloud",
+              "IBM",
+              "Microsoft",
+              "secrets",
+              "Azure",
+              "Oracle",
+              "Infrastructure",
+              "prediction",
+              "cost",
+              "subscriptions",
+              "account",
+              "credentials"
+          ]
+      },
+      {
+        "title": "Notifications",
+        "id": "notifications",
+        "description": "A standardized way of notifying users of events for supported services on the Hybrid Cloud Console.",
+        "expandable": true,
+        "routes": [
+            {
+                "id": "notificationOverview",
+                "appId": "notifications",
+                "icon": "PlaceholderIcon",
+                "title": "Overview",
+                "href": "/settings/notifications"
+            },
+            {
+                "id": "configureEvents",
+                "appId": "notifications",
+                "title": "Configure Events",
+                "href": "/settings/notifications/configure-events",
+                "permissions": [
+                  {
+                    "method": "isOrgAdmin"
+                  }
+                ]
+            },
+            {
+                "id": "eventLog",
+                "appId": "notifications",
+                "title": "Event Log",
+                "href": "/settings/notifications/eventlog",
+                "permissions": [
+                  {
+                    "method": "isOrgAdmin"
+                  }
+                ]
+            },
+            {
+                "id": "myUserPreferences",
+                "appId": "notifications",
+                "title": "My User Preferences",
+                "href": "/settings/notifications/user-preferences"
+            }
+        ]
+      },
+      {
+          "id": "learningResources",
+          "appId": "learningResources",
+          "title": "Learning Resources",
+          "href": "/settings/learning-resources"
+      }
+  ]
 }

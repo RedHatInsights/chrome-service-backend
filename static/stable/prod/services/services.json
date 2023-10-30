@@ -374,14 +374,54 @@
     ]
   },
   {
-    "id": "spendManagement",
+    "id": "subscriptions",
     "icon": "CreditCardIcon",
-    "title": "Spend Management",
-    "description": "Control costs and monitor committed spend.",
+    "title": "Subscriptions and Spend",
+    "description": "Subscription Services empower buying decisions. SaMS provides software usage reporting that is designed to make your subscription choices data-driven.",
     "links": [
-      "openshift.costManagement",
-      "rhel.ros",
-      "business-services.hybridCommittedSpend"
+      {
+        "isGroup": true,
+        "title": "Red Hat Enterprise Linux",
+        "links": [
+          {
+            "title": "Subscriptions",
+            "href": "/insights/subscriptions/rhel",
+            "icon": "OpenShiftIcon"
+          },
+          {
+            "title": "Resource Optimization",
+            "filterable": false,
+            "href": "/insights/ros",
+            "icon": "OpenShiftIcon"
+          }
+        ]
+      },
+      {
+        "isGroup": true,
+        "title": "OpenShift",
+        "links": [
+          {
+            "title": "Subscriptions",
+            "href": "/openshift/subscriptions/openshift",
+            "icon": "OpenShiftIcon"
+          },
+          {
+            "title": "Cost Management",
+            "filterable": false,
+            "href": "/openshift/cost-management",
+            "icon": "OpenShiftIcon"
+          }
+        ]
+      },
+      {
+        "isGroup": true,
+        "title": "Subscription Services",
+        "links": [ 
+          "subscriptions.subscriptionsInventory",
+          "subscriptions.subscriptionsUsage",
+          "hybridCommittedSpend.hybridCommittedSpend"
+        ]
+      }
     ]
   },
   {

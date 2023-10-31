@@ -444,7 +444,8 @@
           "settings.manageConfiguration",
           "rhel.activationKeys",
           "rhel.manifests",
-          "rhel.registerSystems"
+          "rhel.registerSystems",
+          "rhel.stalenessAndDeletion"
         ]
       },
       {

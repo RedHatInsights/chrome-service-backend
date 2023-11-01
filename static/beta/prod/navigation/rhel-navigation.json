@@ -138,7 +138,7 @@
               "title": "Staleness and Deletion",
               "href": "/insights/inventory/staleness-and-deletion",
               "product": "Red Hat Insights",
-              "description": "Inventory Host Staleness and Deletion",
+              "description": "Configure when your systems should be marked as stale, marked as stale warning, and be deleted.",
               "permissions": [
                 {
                   "method": "featureFlag",

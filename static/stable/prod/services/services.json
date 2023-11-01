@@ -182,7 +182,12 @@
         "links": [
           "rhel.imageBuilder",
           "rhel.subscriptionsInventory",
-          "rhel.inventory"
+          "rhel.inventory",
+          {
+            "title": "Inventory Groups",
+            "href": "/insights/inventory/groups",
+            "icon": "InsightsIcon"
+          }
         ]
       },
       {
@@ -205,11 +210,6 @@
         "links": [
           "subscriptions.subscriptionsInventory"
         ]
-      },
-      {
-        "title": "Inventory Groups",
-        "href": "/insights/inventory/groups",
-        "icon": "InsightsIcon"
       }
     ]
   },

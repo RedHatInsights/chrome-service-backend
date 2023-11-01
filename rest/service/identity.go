@@ -25,11 +25,13 @@ type IntercomPayload struct {
 const (
 	OpenShift IntercomApp = "openshift"
 	HacCore   IntercomApp = "hacCore"
+	Acs       IntercomApp = "acs"
+	Ansible   IntercomApp = "ansible"
 )
 
 func (ib IntercomApp) IsValidApp() error {
 	switch ib {
-	case OpenShift, HacCore:
+	case OpenShift, HacCore, Ansible, Acs:
 		return nil
 	}
 

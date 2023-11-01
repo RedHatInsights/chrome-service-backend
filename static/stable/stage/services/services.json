@@ -204,6 +204,11 @@
         "links": [
           "subscriptions.subscriptionsInventory"
         ]
+      },
+      {
+        "title": "Inventory Groups",
+        "href": "/insights/inventory/groups",
+        "icon": "InsightsIcon"
       }
     ]
   },
@@ -306,11 +311,6 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          {
-            "title": "Groups",
-            "href": "/insights/inventory/groups",
-            "icon": "InsightsIcon"
-          },
           "rhel.advisories",
           {
             "href": "/insights/advisor/recommendations",

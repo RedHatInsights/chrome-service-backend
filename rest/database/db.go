@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
@@ -26,6 +27,13 @@ func Init() {
 	dialector = postgres.Open(dbdns)
 
 	DB, err = gorm.Open(dialector, &gorm.Config{})
+	postgresDB, err := DB.DB()
+	if err != nil {
+		panic(err)
+	}
+	postgresDB.SetMaxIdleConns(10)
+	postgresDB.SetMaxOpenConns(100)
+	postgresDB.SetConnMaxLifetime(time.Minute * 5)
 
 	// Migration/Creation of data tables for DB
 	if !DB.Migrator().HasTable(&models.UserIdentity{}) {

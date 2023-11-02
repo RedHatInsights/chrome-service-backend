@@ -1,23 +1,23 @@
 package util
 
 import (
-	"fmt"
-	"github.com/RedHatInsights/chrome-service-backend/config"
+	"github.com/joho/godotenv"
+	"log"
+	"os"
+	"regexp"
 )
 
 const ProjectName = "chrome-service-backend"
 
-func SetupTestConfig() *config.ChromeServiceConfig {
-	cfg := &config.ChromeServiceConfig{}
-	cfg.DbHost = "localhost"
-	cfg.DbUser = "chrome"
-	cfg.DbPassword = "chrome"
-	cfg.DbPort = 5432
-	cfg.DbName = "chrome"
-	cfg.FeatureFlagConfig.ClientAccessToken = "default:development.unleash-insecure-api-token"
-	cfg.FeatureFlagConfig.Hostname = "localhost"
-	cfg.FeatureFlagConfig.Scheme = "http"
-	cfg.FeatureFlagConfig.Port = 4242
-	cfg.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", cfg.FeatureFlagConfig.Scheme, cfg.FeatureFlagConfig.Hostname, cfg.FeatureFlagConfig.Port)
-	return cfg
+func LoadEnv() error {
+	projectName := regexp.MustCompile(`^(.*` + ProjectName + `)`)
+	currentWorkDirectory, _ := os.Getwd()
+	rootPath := projectName.Find([]byte(currentWorkDirectory))
+
+	err := godotenv.Load(string(rootPath) + `/.env`)
+	if err != nil {
+		log.Println("Error loading custom .env file. Falling back to standard")
+		return err
+	}
+	return nil
 }

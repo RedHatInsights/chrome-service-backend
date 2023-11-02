@@ -11,7 +11,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func StoreLastVisistedPage(w http.ResponseWriter, r *http.Request) {
+// TODO: This needs a queue setup
+
+func StoreLastVisitedPage(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
 	userId := user.ID
 	var currentPage models.LastVisitedPage
@@ -22,7 +24,7 @@ func StoreLastVisistedPage(w http.ResponseWriter, r *http.Request) {
 		errString := "Invalid last visited pages request payload."
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(errString))
-		logrus.Errorf("unable to request body for last visisted pages, %s", err.Error())
+		logrus.Errorf("unable to request body for last visited pages, %s", err.Error())
 		return
 	}
 
@@ -31,7 +33,7 @@ func StoreLastVisistedPage(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	pages, err := service.GetUserslastVisistedPages(userId)
+	pages, err := service.GetUsersLastVisitedPages(userId)
 
 	if err != nil {
 		panic(err)
@@ -51,7 +53,7 @@ func GetLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
 	userId := user.ID
 
-	pages, err := service.GetUserslastVisistedPages(userId)
+	pages, err := service.GetUsersLastVisitedPages(userId)
 
 	if err != nil {
 		panic(err)
@@ -67,6 +69,6 @@ func GetLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 }
 
 func MakeLastVisitedRoutes(sub chi.Router) {
-	sub.Post("/", StoreLastVisistedPage)
+	sub.Post("/", StoreLastVisitedPage)
 	sub.Get("/", GetLastVisitedPages)
 }

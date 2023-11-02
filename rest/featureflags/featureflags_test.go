@@ -1,16 +1,35 @@
 package featureflags
 
 import (
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"testing"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
-	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/stretchr/testify/assert"
 )
 
+func TestPersistentFeatureFlagConnection(t *testing.T) {
+	util.LoadEnv()
+	cfg := config.Get()
+	Init(cfg)
+	t.Run("Setup basic connection", func(t *testing.T) {
+		assert.NotNil(t, GetClient())
+	})
+	t.Run("Ensure client object is persistent", func(t *testing.T) {
+		assert.NotNil(t, GetClient())
+		assert.False(t, IsEnabled("fake.flag"))
+		Close()
+	})
+	t.Run("Client is nil after close", func(t *testing.T) {
+		assert.Nil(t, GetClient())
+	})
+}
+
 func TestBasicFeatureFlagConnection(t *testing.T) {
 	t.Run("Test accessible unleash server", func(t *testing.T) {
-		Init(util.SetupTestConfig())
+		util.LoadEnv()
+		cfg := config.Get()
+		Init(cfg)
 		assert.NotNil(t, GetClient())
 	})
 	t.Run("Test disabled flag is disabled", func(t *testing.T) {
@@ -23,7 +42,8 @@ func TestBasicFeatureFlagConnection(t *testing.T) {
 }
 
 func TestBrokenFeatureFlagConnection(t *testing.T) {
-	cfg := util.SetupTestConfig()
+	util.LoadEnv()
+	cfg := config.Get()
 	cfg.FeatureFlagConfig.FullURL = "gohawaii.com"
 	t.Run("Connect to vacation URL", func(t *testing.T) {
 		Init(cfg)
@@ -33,7 +53,8 @@ func TestBrokenFeatureFlagConnection(t *testing.T) {
 }
 
 func TestEmptyFeatureFlagConfig(t *testing.T) {
-	cfg := util.SetupTestConfig()
+	util.LoadEnv()
+	cfg := config.Get()
 	cfg.FeatureFlagConfig = config.FeatureFlagsConfig{}
 	t.Run("Test missing FeatureFlag config", func(t *testing.T) {
 		Init(cfg)
@@ -41,20 +62,5 @@ func TestEmptyFeatureFlagConfig(t *testing.T) {
 		// True flags should be false if the server cannot be reached
 		assert.False(t, IsEnabled("unit-test.true"))
 		Close()
-	})
-}
-
-func TestPersistentFeatureFlagConnection(t *testing.T) {
-	t.Run("Setup basic connection", func(t *testing.T) {
-		Init(util.SetupTestConfig())
-		assert.NotNil(t, GetClient())
-	})
-	t.Run("Ensure client object is persistent", func(t *testing.T) {
-		assert.NotNil(t, GetClient())
-		assert.False(t, IsEnabled("fake.flag"))
-		Close()
-	})
-	t.Run("Client is nil after close", func(t *testing.T) {
-		assert.Nil(t, GetClient())
 	})
 }

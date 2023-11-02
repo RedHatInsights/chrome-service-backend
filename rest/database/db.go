@@ -32,8 +32,8 @@ func Init() {
 		panic(err)
 	}
 	postgresDB.SetMaxIdleConns(10)
-	postgresDB.SetMaxOpenConns(100)
-	postgresDB.SetConnMaxLifetime(time.Minute * 5)
+	postgresDB.SetMaxOpenConns(150)
+	postgresDB.SetConnMaxLifetime(time.Minute * 1)
 
 	// Migration/Creation of data tables for DB
 	if !DB.Migrator().HasTable(&models.UserIdentity{}) {

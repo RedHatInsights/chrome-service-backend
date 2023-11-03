@@ -24,14 +24,20 @@ type KafkaCfg struct {
 }
 
 type IntercomConfig struct {
-	fallback      string
-	acs           string
-	acs_dev       string
-	ansible       string
-	ansible_dev   string
-	openshift     string
-	openshift_dev string
-	hacCore       string
+	fallback                string
+	acs                     string
+	acs_dev                 string
+	ansible                 string
+	ansible_dev             string
+	openshift               string
+	openshift_dev           string
+	hacCore                 string
+	ansibleDashboard        string
+	ansibleDashboard_dev    string
+	automationHub           string
+	automationHub_dev       string
+	automationAnalytics     string
+	automationAnalytics_dev string
 }
 
 type FeatureFlagsConfig struct {
@@ -168,14 +174,20 @@ func init() {
 
 	// env variables from .env or pod env variables
 	options.IntercomConfig = IntercomConfig{
-		fallback:      os.Getenv("INTERCOM_DEFAULT"),
-		acs:           os.Getenv("INTERCOM_ACS"),
-		acs_dev:       os.Getenv("INTERCOM_ACS_DEV"),
-		ansible:       os.Getenv("INTERCOM_ANSIBLE"),
-		ansible_dev:   os.Getenv("INTERCOM_ANSIBLE_DEV"),
-		openshift:     os.Getenv("INTERCOM_OPENSHIFT"),
-		openshift_dev: os.Getenv("INTERCOM_OPENSHIFT_DEV"),
-		hacCore:       os.Getenv("INTERCOM_HAC_CORE"),
+		fallback:                os.Getenv("INTERCOM_DEFAULT"),
+		acs:                     os.Getenv("INTERCOM_ACS"),
+		acs_dev:                 os.Getenv("INTERCOM_ACS_DEV"),
+		ansible:                 os.Getenv("INTERCOM_ANSIBLE"),
+		ansible_dev:             os.Getenv("INTERCOM_ANSIBLE_DEV"),
+		ansibleDashboard:        os.Getenv("INTERCOM_ANSIBLE"),
+		ansibleDashboard_dev:    os.Getenv("INTERCOM_ANSIBLE_DEV"),
+		automationHub:           os.Getenv("INTERCOM_ANSIBLE"),
+		automationHub_dev:       os.Getenv("INTERCOM_ANSIBLE_DEV"),
+		automationAnalytics:     os.Getenv("INTERCOM_ANSIBLE"),
+		automationAnalytics_dev: os.Getenv("INTERCOM_ANSIBLE_DEV"),
+		openshift:               os.Getenv("INTERCOM_OPENSHIFT"),
+		openshift_dev:           os.Getenv("INTERCOM_OPENSHIFT_DEV"),
+		hacCore:                 os.Getenv("INTERCOM_HAC_CORE"),
 	}
 	config = options
 }

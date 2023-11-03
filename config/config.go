@@ -2,10 +2,11 @@ package config
 
 import (
 	"fmt"
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 
-	"github.com/joho/godotenv"
 	clowder "github.com/redhatinsights/app-common-go/pkg/api/v1"
 )
 
@@ -88,7 +89,10 @@ func (c *ChromeServiceConfig) getCert(cfg *clowder.AppConfig) string {
 var config *ChromeServiceConfig
 
 func init() {
-	godotenv.Load()
+	err := util.LoadEnv()
+	if err != nil {
+		godotenv.Load()
+	}
 	options := &ChromeServiceConfig{}
 
 	// Log level will default to "info". Level should be one of

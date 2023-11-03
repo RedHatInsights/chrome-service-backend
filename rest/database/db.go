@@ -52,5 +52,5 @@ func Init() {
 		panic(fmt.Sprintf("Database connection failed: %s", err.Error()))
 	}
 
-	fmt.Println("Database connection succesful")
+	fmt.Println("Database connection successful")
 }

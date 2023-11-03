@@ -84,6 +84,18 @@
                     ]
                 },
                 {
+                    "id": "notificationsLog",
+                    "appId": "notifications",
+                    "title": "Notifications Log",
+                    "href": "/settings/notifications/notificationslog",
+                    "permissions": [
+                      {
+                        "method": "featureFlag",
+                        "args": ["platform.chrome.notifications-drawer", true]
+                      }
+                    ]
+                },
+                {
                     "id": "myUserPreferences",
                     "appId": "notifications",
                     "title": "My User Preferences",

@@ -2,6 +2,8 @@ package kafka
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -37,6 +39,8 @@ const (
 )
 
 var SaslMechanism sasl.Mechanism
+var Dialer *kafka.Dialer
+var TlsConfig *tls.Config
 
 func CreateSaslMechanism(saslConfig *clowder.KafkaSASLConfig) (sasl.Mechanism, error) {
 	if SaslMechanism != nil {
@@ -80,6 +84,58 @@ func CreateSaslMechanism(saslConfig *clowder.KafkaSASLConfig) (sasl.Mechanism, e
 	return SaslMechanism, nil
 }
 
+func createTLSConfig(caContents *string) *tls.Config {
+	if TlsConfig != nil {
+		return TlsConfig
+	}
+
+	tlsConfig := &tls.Config{
+		MinVersion: tls.VersionTLS12,
+	}
+
+	// The managed Kafka instance may have a self-signed certificate, and in those cases we must be able to support the
+	// connection too.
+	if caContents != nil && *caContents != "" {
+		certPool := x509.NewCertPool()
+		certPool.AppendCertsFromPEM([]byte(*caContents))
+
+		tlsConfig.RootCAs = certPool
+	}
+
+	TlsConfig = tlsConfig
+	return TlsConfig
+}
+
+func createDialer(config *clowder.BrokerConfig) (*kafka.Dialer, error) {
+	if Dialer != nil {
+		return Dialer, nil
+	}
+
+	if config == nil {
+		return nil, errors.New(`could not create a dialer for Kafka: the passed configuration is empty`)
+	}
+
+	if config.Sasl == nil {
+		return nil, errors.New(`could not create a dialer for Kafka: the passed configuration is missing the Sasl settings`)
+	}
+
+	tlsConfig := createTLSConfig(config.Cacert)
+
+	mechanism, err := CreateSaslMechanism(config.Sasl)
+	if err != nil {
+		return nil, fmt.Errorf(`unable to create the Sasl mechanism for the dialer: %w`, err)
+	}
+
+	Dialer = &kafka.Dialer{
+		DualStack:     true,
+		SASLMechanism: mechanism,
+		Timeout:       10 * time.Second,
+		TLS:           tlsConfig,
+	}
+
+	return Dialer, nil
+}
+
 func createReader(topic string) *kafka.Reader {
 	cfg := config.Get()
 	hostname, err := os.Hostname()
@@ -93,6 +149,12 @@ func createReader(topic string) *kafka.Reader {
 		DualStack: true,
 	}
 	mechanism, err := CreateSaslMechanism(cfg.KafkaConfig.BrokerConfig.Sasl)
+	if cfg.KafkaConfig.BrokerConfig.Authtype != nil {
+		dialer, err = createDialer(&cfg.KafkaConfig.BrokerConfig)
+		if err != nil {
+			logrus.Errorln("Couldn't create dialer for Kafka: ", err)
+		}
+	}
 	if err == nil {
 		dialer.SASLMechanism = mechanism
 	} else {

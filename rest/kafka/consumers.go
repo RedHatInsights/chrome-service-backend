@@ -3,15 +3,23 @@ package kafka
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"log"
+	"os"
+	"strings"
+	"time"
+
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/google/uuid"
+	clowder "github.com/redhatinsights/app-common-go/pkg/api/v1"
 	"github.com/segmentio/kafka-go"
+	"github.com/segmentio/kafka-go/sasl"
+	"github.com/segmentio/kafka-go/sasl/plain"
+	"github.com/segmentio/kafka-go/sasl/scram"
 	"github.com/sirupsen/logrus"
-	"log"
-	"os"
 )
 
 type kafkaConsumer struct {
@@ -21,7 +29,56 @@ type kafkaConsumer struct {
 
 var Consumer = kafkaConsumer{}
 
-const TenMb = 10e7
+const (
+	TenMb       = 10e7
+	saslPlain   = "plain"
+	scramSha256 = "scram-sha-256"
+	scramSha512 = "scram-sha-512"
+)
+
+var SaslMechanism sasl.Mechanism
+
+func CreateSaslMechanism(saslConfig *clowder.KafkaSASLConfig) (sasl.Mechanism, error) {
+	if SaslMechanism != nil {
+		return SaslMechanism, nil
+	}
+
+	if saslConfig == nil {
+		return nil, errors.New("could not create a Sasl mechanism for Kafka: the Sasl configuration settings are empty")
+	}
+
+	if saslConfig.SaslMechanism == nil || *saslConfig.SaslMechanism == "" {
+		return nil, errors.New("could not create a Sasl mechanism for Kafka: the Sasl mechanism is empty")
+	}
+
+	if saslConfig.Username == nil {
+		return nil, errors.New("could not create a Sasl mechanism for Kafka: the Sasl username is nil")
+	}
+
+	if saslConfig.Password == nil {
+		return nil, errors.New("could not create a Sasl mechanism for Kafka: the Sasl password is nil")
+	}
+
+	var algorithm scram.Algorithm
+	switch strings.ToLower(*saslConfig.SaslMechanism) {
+	case saslPlain:
+		return plain.Mechanism{Username: *saslConfig.Username, Password: *saslConfig.Password}, nil
+	case scramSha256:
+		algorithm = scram.SHA256
+	case scramSha512:
+		algorithm = scram.SHA512
+	default:
+		return nil, fmt.Errorf(`unable to configure Sasl mechanism "%s" for Kafka`, *saslConfig.SaslMechanism)
+	}
+
+	mechanism, err := scram.Mechanism(algorithm, *saslConfig.Username, *saslConfig.Password)
+	if err != nil {
+		return nil, fmt.Errorf(`unable to generate "%s" mechanism with the "%v" algorithm: %s`, *saslConfig.SaslMechanism, algorithm, err)
+	}
+
+	SaslMechanism = mechanism
+	return SaslMechanism, nil
+}
 
 func createReader(topic string) *kafka.Reader {
 	cfg := config.Get()
@@ -30,6 +87,18 @@ func createReader(topic string) *kafka.Reader {
 		logrus.Errorln("Couldn't get hostname, using UUID")
 		hostname = uuid.NewString()
 	}
+
+	dialer := &kafka.Dialer{
+		Timeout:   10 * time.Second,
+		DualStack: true,
+	}
+	mechanism, err := CreateSaslMechanism(cfg.KafkaConfig.BrokerConfig.Sasl)
+	if err == nil {
+		dialer.SASLMechanism = mechanism
+	} else {
+		logrus.Errorln("Couldn't create SASL mechanism for Kafka: ", err)
+	}
+
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers: cfg.KafkaConfig.KafkaBrokers,
 		// The consumer group will match the pod name via hostname
@@ -40,6 +109,7 @@ func createReader(topic string) *kafka.Reader {
 		Logger:      kafka.LoggerFunc(logrus.Debugf),
 		ErrorLogger: kafka.LoggerFunc(logrus.Errorf),
 		MaxBytes:    TenMb,
+		Dialer:      dialer,
 	})
 	logrus.Infoln("Creating new kafka reader for topic:", topic)
 	return r

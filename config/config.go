@@ -22,6 +22,7 @@ type KafkaCfg struct {
 	KafkaBrokers   []string
 	KafkaTopics    []string
 	KafkaSSlConfig KafkaSSLCfg
+	BrokerConfig   clowder.BrokerConfig
 }
 
 type IntercomConfig struct {
@@ -125,12 +126,15 @@ func init() {
 
 		if cfg.Kafka != nil {
 			broker := cfg.Kafka.Brokers[0]
+
+			options.KafkaConfig.BrokerConfig = broker
 			// pass all required topics names
 			for _, topic := range cfg.Kafka.Topics {
 				options.KafkaConfig.KafkaTopics = append(options.KafkaConfig.KafkaTopics, topic.Name)
 			}
 
 			options.KafkaConfig.KafkaBrokers = clowder.KafkaServers
+
 			// Kafka SSL Config
 			if broker.Authtype != nil {
 				options.KafkaConfig.KafkaSSlConfig.KafkaUsername = *broker.Sasl.Username

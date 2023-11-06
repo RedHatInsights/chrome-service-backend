@@ -1,0 +1,271 @@
+---
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Chrome service backend
+  description: Chrome service backend API Documentation
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: "/api/chrome-service/v1/"
+paths:
+  "/last-visited":
+    post:
+      description: Store last visited page
+      requestBody:
+        description: Information about last visited page
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/LastVisitedPage"
+      responses:
+        '200':
+          description: List of user's up to ten last visited pages
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/LastVisitedPage"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    get:
+      description: Get last visited pages
+      responses:
+        '200':
+          description: List of user's up to ten last visited pages
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/LastVisitedPage"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/favorite-pages":
+    post:
+      description: Set favourite page
+      requestBody:
+        description: Information about favorited page
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/FavoritePage"
+      responses:
+        '200':
+          description: Returns a list of all favorite pages
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/FavoritePage"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    get:
+      description: Get favourite page
+      parameters:
+      - in: query
+        name: userId
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the user to get
+      responses:
+        '200':
+          description: Return all records of pages, by default returns only those
+            which are currently favorited
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/FavoritePage"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/user":
+    get:
+      description: Get user's UI configuration
+      responses:
+        '200':
+          description: Returns user's UI configuration
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserIdentity"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/user/intercom":
+    get:
+      description: Get intercom hash
+      responses:
+        '200':
+          description: Returns hashed string of user intercom integration key
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Intercom"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/user/visited-bundles":
+    get:
+      description: Get visited bundles
+      responses:
+        '200':
+          description: Returns a user with an updated list of all bundles they have
+            ever visited
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserIdentity"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+    post:
+      description: Add visited bundle
+      requestBody:
+        description: Information about visited bundle
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UserIdentity"
+      responses:
+        '200':
+          description: Returns a user with an updated list of all bundles they have
+            ever visited
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserIdentity"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '403':
+          "$ref": "#/components/responses/Unauthorized"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+components:
+  responses:
+    Unauthorized:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/Error403"
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/Error400"
+    InternalError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/Error500"
+  schemas:
+    Error403:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Error400:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+            statusText:
+              type: string
+            description:
+              type: string
+    Error500:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+            statusText:
+              type: string
+            description:
+              type: string
+    LastVisitedPage:
+      type: object
+      properties:
+        bundle:
+          type: string
+        pathname:
+          type: string
+        title:
+          type: string
+    FavoritePage:
+      type: object
+      properties:
+        pathname:
+          type: string
+        favorite:
+          type: boolean
+    UserSelfReport:
+      type: object
+      properties:
+        jobRole:
+          type: string
+    UserIdentity:
+      type: object
+      properties:
+        accountId:
+          type: string
+        firstLogin:
+          type: boolean
+        dayOne:
+          type: boolean
+        LastLogin:
+          type: string
+          format: date
+        lastVisitedPages:
+          type: array
+          items:
+            "$ref": "#/components/schemas/LastVisitedPage"
+        favoritePages:
+          type: array
+          items:
+            "$ref": "#/components/schemas/FavoritePage"
+        selfReport:
+          "$ref": "#/components/schemas/UserSelfReport"
+        visitedBundles:
+          type: object
+          additionalProperties:
+            type: boolean
+    Intercom:
+      type: object
+      properties:
+        prod:
+          type: string
+        dev:
+          type: string

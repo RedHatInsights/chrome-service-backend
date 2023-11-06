@@ -80,6 +80,31 @@
             "remediation",
             "software composition"
           ]
+        },
+        {
+          "id": "trustedArtifactSignerOverview",
+          "appId": "trustedArtifactSigner",
+          "title": "Trusted Artifact Signer",
+          "href": "/application-services/trusted-content/artifact-signer",
+          "icon": "PlaceholderIcon",
+          "description": "Enables cryptographic signing, verification and provenance of software.",
+          "alt_title": [
+            "software supply chain",
+            "artifact",
+            "security",
+            "risk management",
+            "oss",
+            "trusted",
+            "signer",
+            "source code",
+            "software composition",
+            "artifact signer",
+            "sigstore",
+            "cosign",
+            "rekor",
+            "transparency logs",
+            "software transparency"
+          ]
         }
       ]
     },

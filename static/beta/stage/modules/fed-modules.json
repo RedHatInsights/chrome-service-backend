@@ -102,6 +102,11 @@
         "manifestLocation": "/apps/rbac/fed-mods.json",
         "isFedramp": true,
         "defaultDocumentTitle": "User Access | Identity & Access Management",
+        "config": {
+          "ssoScopes": [
+              "api.console"
+          ]
+        },
         "modules": [
             {
                 "id": "my-user-access",

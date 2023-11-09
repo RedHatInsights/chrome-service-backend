@@ -194,6 +194,41 @@
     ]
   },
   {
+    "id": "rhel-patch",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch",
+        "href": "/insights/patch",
+        "title": "Red Hat Patch",
+        "description": "Patch Analyzes for Red Hat product advisory applicability to stay up to date.",
+        "alt_title": [
+          "rpm",
+          "dnf",
+          "yum",
+          "errata",
+          "patch",
+          "advisories",
+          "patching",
+          "templates",
+          "content management",
+          "content view",
+          "patch cycle",
+          "satellite",
+          "RHSA",
+          "RHBA",
+          "RHEA",
+          "patching",
+          "content",
+          "advisories",
+          "update",
+          "updates",
+          "content templates"
+        ]
+      }
+    ]
+  },
+  {
     "id": "patch-template",
     "links": [
       {

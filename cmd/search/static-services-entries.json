@@ -405,6 +405,7 @@
         "id": "RHEL.Inventory.systems",
         "href": "/insights/inventory",
         "title": "RHEL Inventory Systems",
+        "description": "View details about your Red Hat Enterprise Linux systems.",
         "alt_title":[
           "Inventory",
           "rhel systems",
@@ -567,6 +568,7 @@
         "href": "/insights/dashboard",
         "title": "Insights Dashboard",
         "subtitle": "Red Hat Insights for RHEL",
+        "description": "View details about your Red Hat Enterprise Linux systems.",
         "alt_title": [
           "Dashboard",
           "insights",

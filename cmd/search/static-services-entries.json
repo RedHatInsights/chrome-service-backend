@@ -144,28 +144,28 @@
       "id": "OPENSHIFT.cluster.create.aws",
       "href": "/openshift/create",
       "title": "Red Hat OpenShift Service on AWS",
-      "alt_title": ["ROSA", "AWS", "OpenShift on AWS"] 
+      "alt_title": ["ROSA", "AWS", "OpenShift on AWS"]
       },
       {
       "custom": true,
       "id": "OPENSHIFT.cluster.create.dedicated",
       "href": "/openshift/create",
       "title": "Red Hat OpenShift Dedicated",
-      "alt_title": ["OSD","Dedicated", "GCP", "AWS", "OpenShift on AWS", "OpenShift on GCP"] 
+      "alt_title": ["OSD","Dedicated", "GCP", "AWS", "OpenShift on AWS", "OpenShift on GCP"]
       },
       {
       "custom": true,
       "id": "OPENSHIFT.cluster.create.azure",
       "href": "/openshift/create",
       "title": "Azure Red Hat OpenShift",
-      "alt_title": ["ARO", "Azure", "OpenShift on Azure"] 
+      "alt_title": ["ARO", "Azure", "OpenShift on Azure"]
       },
       {
       "custom": true,
       "id": "OPENSHIFT.cluster.create.ibm",
       "href": "/openshift/create",
       "title": "Red Hat OpenShift on IBM Cloud",
-      "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"] 
+      "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"]
       }
     ]
   },
@@ -183,7 +183,7 @@
           "content",
           "advisories",
           "insights",
-          "Rhel", 
+          "Rhel",
           "patch",
           "updates",
           "update",
@@ -254,14 +254,25 @@
         "custom": true,
         "id": "RHEL.security.malware.signatures",
         "href": "/insights/malware/signatures",
+        "description": "Identify potential malware on your Red Hat Enterprise Linux systems.",
         "title": "Malware signatures",
         "alt_title": [
-          "Malware",
+          "Threat",
+          "yara",
           "security",
-          "X_Force",
-          "Yara",
+          "X-force",
           "scanner",
-          "risk"
+          "insights",
+          "virus",
+          "malicious",
+          "spyware",
+          "adware",
+          "trojan",
+          "worm",
+          "malware",
+          "security",
+          "risk",
+          "ransomware"
         ]
       },
       {
@@ -269,18 +280,29 @@
         "id": "RHEL.security.malware.malwareSystems",
         "href": "/insights/malware/systems",
         "title": "Malware systems",
+        "description": "Identify potential malware on your Red Hat Enterprise Linux systems.",
         "alt_title": [
-          "Malware",
+          "Threat",
+          "yara",
           "security",
-          "X_Force",
-          "Yara",
+          "X-force",
           "scanner",
-          "risk"
+          "insights",
+          "virus",
+          "malicious",
+          "spyware",
+          "adware",
+          "trojan",
+          "worm",
+          "malware",
+          "security",
+          "risk",
+          "ransomware"
         ]
       }
     ]
   },
-  {  
+  {
     "id": "openshift-vulnerability",
     "links": [
       {

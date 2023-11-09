@@ -654,5 +654,31 @@
         ]
       }
     ]
+  },
+  {
+    "id": "rhel-remediations",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.remediations",
+        "href": "/insights/remediations",
+        "title": "Insights Remediations",
+        "subtitle": "Red Hat Insights for RHEL",
+        "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
+        "alt_title": [
+          "remediate",
+          "playbook",
+          "fix",
+          "solve",
+          "find it fix it",
+          "fifi",
+          "cloud connector",
+          "insights",
+          "automation",
+          "ansible",
+          "patch"
+        ]
+      }
+    ]
   }
 ]

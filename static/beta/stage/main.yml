@@ -97,7 +97,7 @@ edge:
     isBeta: true
 
 idmsvc:
-  title: "Directory & Domain Services"
+  title: "Directory and Domain Services"
   api:
     versions:
       - v1

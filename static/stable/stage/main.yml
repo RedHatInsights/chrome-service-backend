@@ -289,3 +289,9 @@ app-studio-docs:
   api:
     versions:
       - v1
+
+malware-detection:
+  title: Malware Detection
+  api:
+    versions:
+      - v1

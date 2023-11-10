@@ -84,6 +84,13 @@ edge:
       - v1
     isBeta: true
 
+idmsvc:
+  title: "Directory and Domain Services"
+  api:
+    versions:
+      - v1
+    isBeta: true
+
 image-builder:
   title: Image Builder
   api:

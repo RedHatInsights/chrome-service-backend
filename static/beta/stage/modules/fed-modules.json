@@ -1020,7 +1020,7 @@
     },
     "idmsvc": {
         "manifestLocation": "/apps/idmsvc/fed-mods.json",
-        "defaultDocumentTitle": "Directory & Domain Services",
+        "defaultDocumentTitle": "Directory and Domain Services",
         "modules": [
             {
                 "id": "idmsvc",

@@ -82,7 +82,14 @@
             "appId": "learningResources",
             "title": "Learning Resources",
             "href": "/settings/learning-resources"
+        },
+        {
+            "id": "idmsvc",
+            "appId": "idmsvc",
+            "title": "Directory and Domain Services",
+            "description": "Directory and Domain Services for console.redhat.com",
+            "href": "/settings/idmsvc",
+            "icon": "PlaceholderIcon"
         }
-
     ]
 }

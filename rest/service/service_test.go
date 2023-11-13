@@ -6,12 +6,38 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"testing"
+	"time"
 )
 
+func SeedDatabase() {
+	util.LoadEnv()
+	database.Init()
+	pages := []models.LastVisitedPage{{
+		Title:          "Advisor",
+		Pathname:       "insights/first",
+		Bundle:         "insights",
+		UserIdentityID: 1,
+	}}
+	userBase := models.UserIdentity{
+		BaseModel:        models.BaseModel{},
+		AccountId:        "1",
+		FirstLogin:       false,
+		DayOne:           false,
+		LastLogin:        time.Time{},
+		LastVisitedPages: pages,
+		FavoritePages:    nil,
+		SelfReport:       models.SelfReport{},
+		VisitedBundles:   nil,
+	}
+	err := database.DB.Where("account_id = ?", "1").FirstOrCreate(&userBase).Error
+	if err != nil {
+		panic(err)
+	}
+
+}
 func TestDeadlock(t *testing.T) {
+	SeedDatabase()
 	t.Run("Assert No Deadlock", func(t *testing.T) {
-		util.LoadEnv()
-		database.Init()
 		// If a test is added, make sure to add to the channel
 		CHANS := 3
 		errs := make(chan error, CHANS)

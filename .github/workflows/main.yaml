@@ -65,5 +65,8 @@ jobs:
         run: |
           cat ./env.actions > .env
 
+      - name: 'Migrate DB'
+        run: make migrate
+
       - name: Test
         run: make test

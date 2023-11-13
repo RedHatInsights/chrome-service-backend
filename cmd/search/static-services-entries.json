@@ -144,28 +144,28 @@
       "id": "OPENSHIFT.cluster.create.aws",
       "href": "/openshift/create",
       "title": "Red Hat OpenShift Service on AWS",
-      "alt_title": ["ROSA", "AWS", "OpenShift on AWS"] 
+      "alt_title": ["ROSA", "AWS", "OpenShift on AWS"]
       },
       {
       "custom": true,
       "id": "OPENSHIFT.cluster.create.dedicated",
       "href": "/openshift/create",
       "title": "Red Hat OpenShift Dedicated",
-      "alt_title": ["OSD","Dedicated", "GCP", "AWS", "OpenShift on AWS", "OpenShift on GCP"] 
+      "alt_title": ["OSD","Dedicated", "GCP", "AWS", "OpenShift on AWS", "OpenShift on GCP"]
       },
       {
       "custom": true,
       "id": "OPENSHIFT.cluster.create.azure",
       "href": "/openshift/create",
       "title": "Azure Red Hat OpenShift",
-      "alt_title": ["ARO", "Azure", "OpenShift on Azure"] 
+      "alt_title": ["ARO", "Azure", "OpenShift on Azure"]
       },
       {
       "custom": true,
       "id": "OPENSHIFT.cluster.create.ibm",
       "href": "/openshift/create",
       "title": "Red Hat OpenShift on IBM Cloud",
-      "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"] 
+      "alt_title": ["ROKS", "IBM Cloud", "OpenShift on IBM Cloud"]
       }
     ]
   },
@@ -183,12 +183,47 @@
           "content",
           "advisories",
           "insights",
-          "Rhel", 
+          "Rhel",
           "patch",
           "updates",
           "update",
           "systems",
           "upgrade"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-patch",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch",
+        "href": "/insights/patch",
+        "title": "Red Hat Patch",
+        "description": "Patch Analyzes for Red Hat product advisory applicability to stay up to date.",
+        "alt_title": [
+          "rpm",
+          "dnf",
+          "yum",
+          "errata",
+          "patch",
+          "advisories",
+          "patching",
+          "templates",
+          "content management",
+          "content view",
+          "patch cycle",
+          "satellite",
+          "RHSA",
+          "RHBA",
+          "RHEA",
+          "patching",
+          "content",
+          "advisories",
+          "update",
+          "updates",
+          "content templates"
         ]
       }
     ]
@@ -254,14 +289,25 @@
         "custom": true,
         "id": "RHEL.security.malware.signatures",
         "href": "/insights/malware/signatures",
+        "description": "Identify potential malware on your Red Hat Enterprise Linux systems.",
         "title": "Malware signatures",
         "alt_title": [
-          "Malware",
+          "Threat",
+          "yara",
           "security",
-          "X_Force",
-          "Yara",
+          "X-force",
           "scanner",
-          "risk"
+          "insights",
+          "virus",
+          "malicious",
+          "spyware",
+          "adware",
+          "trojan",
+          "worm",
+          "malware",
+          "security",
+          "risk",
+          "ransomware"
         ]
       },
       {
@@ -269,18 +315,29 @@
         "id": "RHEL.security.malware.malwareSystems",
         "href": "/insights/malware/systems",
         "title": "Malware systems",
+        "description": "Identify potential malware on your Red Hat Enterprise Linux systems.",
         "alt_title": [
-          "Malware",
+          "Threat",
+          "yara",
           "security",
-          "X_Force",
-          "Yara",
+          "X-force",
           "scanner",
-          "risk"
+          "insights",
+          "virus",
+          "malicious",
+          "spyware",
+          "adware",
+          "trojan",
+          "worm",
+          "malware",
+          "security",
+          "risk",
+          "ransomware"
         ]
       }
     ]
   },
-  {  
+  {
     "id": "openshift-vulnerability",
     "links": [
       {
@@ -405,6 +462,7 @@
         "id": "RHEL.Inventory.systems",
         "href": "/insights/inventory",
         "title": "RHEL Inventory Systems",
+        "description": "View details about your Red Hat Enterprise Linux systems.",
         "alt_title":[
           "Inventory",
           "rhel systems",
@@ -567,10 +625,100 @@
         "href": "/insights/dashboard",
         "title": "Insights Dashboard",
         "subtitle": "Red Hat Insights for RHEL",
+        "description": "View details about your Red Hat Enterprise Linux systems.",
         "alt_title": [
           "Dashboard",
           "insights",
           "Rhel"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-advisor",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.advisor",
+        "href": "/insights/advisor/recommendations",
+        "title": "Insights Advisor",
+        "subtitle": "Red Hat Insights for RHEL",
+        "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems’ availability, performance, and security.",
+        "alt_title": [
+          "advisor",
+          "incidents",
+          "recommendations",
+          "configuration",
+          "pathways",
+          "critical"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-remediations",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.remediations",
+        "href": "/insights/remediations",
+        "title": "Insights Remediations",
+        "subtitle": "Red Hat Insights for RHEL",
+        "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
+        "alt_title": [
+          "remediate",
+          "playbook",
+          "fix",
+          "solve",
+          "find it fix it",
+          "fifi",
+          "cloud connector",
+          "insights",
+          "automation",
+          "ansible",
+          "patch"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rhel-vulnerability",
+    "links": [
+      {
+        "custom": true,
+        "id": "RHEL.vulnerability",
+        "href": "/insights/vulnerability",
+        "title": "Insights  Vulnerability",
+        "subtitle": "Red Hat Insights for RHEL",
+        "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency.",
+        "alt_title": [
+          "CVEs",
+          "CVE",
+          "security",
+          "Vulnerability",
+          "Vulnerability Management",
+          "insights",
+          "Vulnerable",
+          "exposure",
+          "Weakness",
+          "compliance",
+          "security gap",
+          "breach",
+          "Hearltbleed",
+          "Spectre",
+          "Patch",
+          "security",
+          "vulnerabilities",
+          "cve",
+          "common vulnerability exposure",
+          "cvss",
+          "risk",
+          "critical",
+          "security rule",
+          "errata",
+          "affected but not vulnerable",
+          "severity",
+          "CVE-"
         ]
       }
     ]

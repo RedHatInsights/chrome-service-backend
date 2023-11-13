@@ -43,7 +43,8 @@
       "isFedramp": true,
       "config": {
         "ssoScopes": [
-            "api.console"
+            "api.console",
+            "api.iam.service_accounts"
         ]
       },
       "modules": [
@@ -1047,6 +1048,11 @@
   },
   "serviceAccounts": {
     "manifestLocation": "/apps/service-accounts/fed-mods.json",
+    "config": {
+        "ssoScopes": [
+            "api.iam.service_accounts"
+        ]
+    },
     "modules": [
         {
             "id": "service-accounts",

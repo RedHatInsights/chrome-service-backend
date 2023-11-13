@@ -42,7 +42,8 @@
         "isFedramp": true,
         "config": {
           "ssoScopes": [
-              "api.console"
+              "api.console",
+              "api.iam.service_accounts"
           ]
         },
         "modules": [

@@ -12,7 +12,7 @@
     {
       "id": "subscriptionsInventory",
       "appId": "subscriptionInventory",
-      "title": "Subscriptions Inventory",
+      "title": "Subscription Inventory",
       "href": "/subscriptions/inventory",
       "icon": "SubscriptionsIcon"
     },

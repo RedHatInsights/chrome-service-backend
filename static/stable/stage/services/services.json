@@ -33,7 +33,7 @@
         "title": "Ansible",
         "links": [
           {
-            "title": "Ansible Hub",
+            "title": "Automation Hub",
             "href": "/ansible/automation-hub/",
             "icon": "AnsibleIcon"
           },

@@ -54,15 +54,13 @@
       ]
     },
     {
-      "groupId": "trusted-content",
       "title": "Source Code Security",
-      "icon": "shield",
       "navItems": [
         {
           "id": "trustedContentOverview",
           "appId": "trustedContent",
           "title": "Trusted Content",
-          "href": "/application-services/trusted-content",
+          "href": "/application-services/trusted-content/overview",
           "icon": "TrustedContentIcon",
           "description": "Increase trust and integrity in source code and accelerate the application development process.",
           "alt_title": [

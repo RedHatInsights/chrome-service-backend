@@ -72,7 +72,7 @@
           "appId": "iam",
           "title": "Authentication Factors",
           "href": "/iam/authentication-policy/authentication-factors",
-          "icon": "PlaceholderiIcon",
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage how your organization authenticates to Red Hat services."
         }

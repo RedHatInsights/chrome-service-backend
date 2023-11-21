@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/go-chi/cors"
 	"log"
 	"net/http"
 	"strconv"
@@ -17,6 +16,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
@@ -42,9 +42,14 @@ func main() {
 
 	router.Get("/health", HealthProbe)
 	fs := http.FileServer(http.Dir("./static/"))
+	http.Handle("/", fs)
+
+	fsApiSpec := http.FileServer(http.Dir("./spec/"))
+	http.Handle("/spec/", fsApiSpec)
 
 	// can't be in sub router as we don't enforce identity header
 	router.Handle("/api/chrome-service/v1/static/*", http.StripPrefix("/api/chrome-service/v1/static", fs))
+	router.Handle("/api/chrome-service/v1/spec/*", http.StripPrefix("/api/chrome-service/v1/spec", fsApiSpec))
 
 	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
 		subrouter.Use(m.ParseHeaders)

@@ -199,6 +199,10 @@
             }
         ]
     },
+    "costManagementMfe": {
+        "manifestLocation": "/apps/cost-management-mfe/fed-mods.json",
+        "modules": []
+    },
     "dashboard": {
         "manifestLocation": "/apps/dashboard/fed-mods.json",
         "isFedramp": true,

@@ -199,6 +199,20 @@
             }
         ]
     },
+    "costManagementMfe": {
+        "manifestLocation": "/apps/cost-management-mfe/fed-mods.json",
+        "modules": [
+            {
+                "id": "cost-management-mfe",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/staging/cost-management"
+                    }
+                ]
+            }
+        ]
+    },
     "dashboard": {
         "manifestLocation": "/apps/dashboard/fed-mods.json",
         "isFedramp": true,
@@ -652,7 +666,7 @@
         "manifestLocation": "/apps/hac-core/fed-mods.json",
         "config": {
             "ssoScopes": [
-               "profile_level.name_and_dev_terms" 
+               "profile_level.name_and_dev_terms"
             ]
           },
         "modules": [

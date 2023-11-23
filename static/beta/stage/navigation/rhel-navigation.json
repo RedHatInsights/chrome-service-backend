@@ -32,13 +32,7 @@
           "title": "Groups",
           "href": "/insights/inventory/groups",
           "product": "Red Hat Insights",
-          "description": "Inventory groups",
-          "permissions": [
-            {
-              "method": "featureFlag",
-              "args": ["hbi.ui.inventory-groups", true]
-            }
-          ]
+          "description": "Inventory groups"
         },
         {
           "id": "imageBuilder",

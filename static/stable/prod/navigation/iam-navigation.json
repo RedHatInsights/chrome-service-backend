@@ -79,6 +79,18 @@
       ]
     },
     {
+      "id": "serviceAccounts",
+      "title": "Service Accounts",
+      "appId": "serviceAccounts",
+      "href": "/iam/service-accounts",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.iam.service-accounts", true]
+        }
+      ]
+    },
+    {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",

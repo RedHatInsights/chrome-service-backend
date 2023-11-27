@@ -2,10 +2,12 @@ package config
 
 import (
 	"fmt"
-	"github.com/RedHatInsights/chrome-service-backend/rest/util"
-	"github.com/joho/godotenv"
 	"os"
 	"strconv"
+
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/joho/godotenv"
+	"github.com/sirupsen/logrus"
 
 	clowder "github.com/redhatinsights/app-common-go/pkg/api/v1"
 )
@@ -96,11 +98,11 @@ func init() {
 	}
 	options := &ChromeServiceConfig{}
 
-	// Log level will default to "info". Level should be one of
-	// info or debug
+	// Log level will default to "Error". Level should be one of
+	// info or debug or error
 	level, ok := os.LookupEnv("LOG_LEVEL")
 	if !ok {
-		level = "info"
+		level = logrus.ErrorLevel.String()
 	}
 	options.LogLevel = level
 

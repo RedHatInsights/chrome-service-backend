@@ -12,6 +12,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
+	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
 	"github.com/go-chi/chi/v5"
@@ -31,12 +32,13 @@ func init() {
 func main() {
 	cfg := config.Get()
 	featureflags.Init(cfg)
-	setupLogger(cfg)
+	setupGlobalLogger(cfg)
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
 
+	routerLogger := logrus.New()
 	router.Use(middleware.RequestID)
-	router.Use(middleware.Logger)
+	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, routerLogger)))
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.URLFormat)
 
@@ -105,10 +107,10 @@ func HealthProbe(response http.ResponseWriter, request *http.Request) {
 	response.Write([]byte("Why yes thank you, I am quite healthy :D"))
 }
 
-func setupLogger(opts *config.ChromeServiceConfig) {
+func setupGlobalLogger(opts *config.ChromeServiceConfig) {
 	logLevel, err := logrus.ParseLevel(opts.LogLevel)
 	if err != nil {
-		logLevel = logrus.InfoLevel
+		logLevel = logrus.ErrorLevel
 	}
 	logrus.SetLevel(logLevel)
 }

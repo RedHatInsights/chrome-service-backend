@@ -197,7 +197,7 @@ func (c Client) ReadPump() {
 	conn := c.Conn
 	// close connection after client is removed
 	defer func() {
-		logrus.Info(c)
+		logrus.Debugln(c)
 		ConnectionHub.Unregister <- c
 		conn.Ws.Close()
 	}()
@@ -213,14 +213,14 @@ func (c Client) ReadPump() {
 		_, msg, err := conn.Ws.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				logrus.Infoln("Websocket client going away", err)
+				logrus.Debugln("Websocket client going away", err)
 			}
 			break
 		}
 		var messagePayload WsMessage
 		err = json.Unmarshal(msg, &messagePayload)
 		if err != nil {
-			logrus.Errorln("Unable to unmarshall incoming WS message: ", err)
+			logrus.Warnln("Unable to unmarshall incoming WS message: ", err)
 			break
 		}
 

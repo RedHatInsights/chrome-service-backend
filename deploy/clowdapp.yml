@@ -146,7 +146,7 @@ objects:
 
 parameters:
 - name: LOG_LEVEL
-  value: Info
+  value: Warn  # Do not log debug/info messages by default
 - description: Cpu limit of service
   name: CPU_LIMIT
   value: 500m

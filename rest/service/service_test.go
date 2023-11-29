@@ -93,5 +93,10 @@ func TestDeadlock(t *testing.T) {
 				t.Fatal(err)
 			}
 		}
+		db, _ := database.DB.DB()
+		openConnections := db.Stats().OpenConnections
+		if openConnections != 0 {
+			t.Errorf("Leaked %d database connections", openConnections)
+		}
 	})
 }

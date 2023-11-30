@@ -46,7 +46,7 @@
         {
           "id": "dataScience",
           "appId": "applicationServices",
-          "title": "Data Science",
+          "title": "Red Hat OpenShift AI",
           "icon": "DataScienceIcon",
           "href": "/application-services/data-science",
           "description": "Create, train, and serve artificial intelligence and machine learning (AI/ML) models."

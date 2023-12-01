@@ -4,10 +4,14 @@
     "icon": "UsersIcon",
     "title": "Identity and Access Management",
     "description": "Ensure that the right users have the appropriate access to technology resources.",
-    "links": [
-      "iam.rbac",
-      "iam.users"
-    ]
+    "links": [{
+      "isGroup": true,
+      "title": "IAM",
+      "links": [
+        "iam.users",
+        "iam.groups"
+      ]
+    }]
   },
   {
     "id": "inventories",
@@ -15,8 +19,26 @@
     "title": "Inventories",
     "description": "View OpenShift clusters, Edge systems, RHEL hosts, and your organization's subscriptions.",
     "links": [
-      "rhel.subscriptionsInventory",
-      "rhel.inventory"
+      {
+        "isGroup": true,
+        "title": "Red Hat Enterprise Linux",
+        "links": [
+          "rhel.subscriptionsInventory",
+          "rhel.inventory",
+          {
+            "title": "Inventory Groups",
+            "href": "/insights/inventory/groups",
+            "icon": "InsightsIcon"
+          }
+        ]
+      },
+      {
+        "isGroup": true,
+        "title": "OpenShift",
+        "links": [
+          "openshift.clusters"
+        ]
+      } 
     ]
   },
   {
@@ -26,16 +48,31 @@
     "description": "Monitor, troubleshoot, and improve application performance.",
     "links": [
       {
-        "id": "rhel",
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.recommendations",
           "rhel.advisories",
-          "rhel.comparision",
-          "rhel.policies",
-          "rhel.remediations",
-          "rhel.resourceOptimization"
+          "rhel.repositories",
+          {
+            "href": "/insights/patch/systems",
+            "title": "Patch",
+            "icon": "InsightsIcon"
+          },
+          {
+            "href": "/insights/advisor/recommendations",
+            "title": "Advisor",
+            "icon": "InsightsIcon",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "View details about your Red Hat Enterprise Linux systems."
+          },
+          {
+            "href": "/insights/drift",
+            "title": "Drift",
+            "icon": "InsightsIcon",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
+          },
+          "rhel.policies"
         ]
       }
     ]
@@ -50,25 +87,86 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.recommendations",
           "rhel.advisories",
-          "rhel.complianceReports",
-          "edge.groups",
-          "rhel.signatures",
-          "rhel.remediations",
-          "rhel.cves"
+          {
+            "href": "/insights/advisor/recommendations",
+            "title": "Advisor",
+            "icon": "InsightsIcon",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "View details about your Red Hat Enterprise Linux systems."
+          },
+          {
+            "href": "/insights/vulnerability/cves",
+            "icon": "InsightsIcon",
+            "title": "Vulnerability",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
+          },
+          {
+            "href": "/insights/compliance/reports",
+            "icon": "InsightsIcon",
+            "title": "Compliance",
+            "subtitle":"Red Hat Insights for RHEL",
+            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+          },
+          {
+            "href": "/insights/malware/signatures",
+            "title": "Malware",
+            "icon": "InsightsIcon",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
+          },
+          "rhel.remediations"
         ]
       }
     ]
   },
   {
-    "id": "spendManagement",
+    "id": "subscriptions",
     "icon": "CreditCardIcon",
-    "title": "Spend Management",
-    "description": "Control costs and monitor committed spend.",
+    "title": "Subscriptions and Spend",
+    "description": "Subscription Services empower buying decisions. SaMS provides software usage reporting that is designed to make your subscription choices data-driven.",
     "links": [
-      "rhel.subscriptionsInventory",
-      "rhel.resourceOptimization"
+      {
+        "isGroup": true,
+        "title": "Red Hat Enterprise Linux",
+        "links": [
+          {
+            "title": "Subscriptions",
+            "href": "/insights/subscriptions/rhel",
+            "icon": "OpenShiftIcon"
+          },
+          {
+            "title": "Resource Optimization",
+            "filterable": false,
+            "href": "/insights/ros",
+            "icon": "OpenShiftIcon"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "systemConfiguration",
+    "icon": "CogIcon",
+    "title": "System Configuration",
+    "description": "Connect your RHEL systems to Hybrid Cloud Console services.",
+    "links": [
+      {
+        "isGroup": true,
+        "title": "Red Hat Enterprise Linux",
+        "links": [
+          "rhel.manifests",
+          "rhel.registerSystems"
+        ]
+      },
+      {
+        "isGroup": true,
+        "title": "Console Settings",
+        "links": [
+          "settings.notifications"
+        ]
+      }
     ]
   }
 ]

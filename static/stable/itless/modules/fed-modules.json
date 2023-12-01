@@ -28,6 +28,9 @@
                     },
                     {
                         "pathname": "/user-preferences/notifications"
+                    },
+                    {
+                        "pathname": "/settings/notifications/user-preferences"
                     }
                 ]
             }
@@ -82,15 +85,6 @@
                 "routes": [
                     {
                         "pathname": "/settings/notifications"
-                    }
-                ]
-            },
-            {
-                "id": "integrations",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/settings/integrations"
                     }
                 ]
             }

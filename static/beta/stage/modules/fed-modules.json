@@ -18,21 +18,21 @@
     },
     "userPreferences": {
         "manifestLocation": "/apps/user-preferences/fed-mods.json",
-        "defaultDocumentTitle": "User Preferences | User Preferences",
+        "defaultDocumentTitle": "My Notification Preferences | User Preferences",
         "isFedramp": true,
         "modules": [
             {
-                "id": "user-preferences-notifications",
+                "id": "my-notification-preferences-notifications",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/user-preferences"
+                        "pathname": "/my-notification-preferences"
                     },
                     {
-                        "pathname": "/user-preferences/notifications"
+                        "pathname": "/my-notification-preferences/notifications"
                     },
                     {
-                        "pathname": "/settings/notifications/user-preferences"
+                        "pathname": "/settings/notifications/my-notification-preferences"
                     }
                 ]
             }

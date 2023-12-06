@@ -61,7 +61,7 @@
         {
           "id": "trustedContentOverview",
           "appId": "trustedContent",
-          "title": "Trusted Content",
+          "title": "Trusted Profile Analyzer",
           "href": "/application-services/trusted-content",
           "icon": "TrustedContentIcon",
           "description": "Increase trust and integrity in source code and accelerate the application development process.",

@@ -3,28 +3,47 @@
     "title": "Settings",
     "navItems": [
         {
-            "id": "rbac",
-            "appId": "rbac",
-            "title": "My User Access",
-            "href": "/settings/my-user-access"
-        },
-        {
-            "title": "Notifications",
-            "expandable": true,
-            "routes": [
-                {
-                    "id": "redhatEntrpriseLinux",
-                    "appId": "notifications",
-                    "title": "Red Hat Enterprise Linux",
-                    "href": "/settings/notifications/rhel"
-                },
-                {
-                    "id": "console",
-                    "appId": "notifications",
-                    "title": "Console",
-                    "href": "/settings/notifications/console"
-                }
-            ]
+          "title": "Notifications",
+          "id": "notifications",
+          "description": "A standardized way of notifying users of events for supported services on the Hybrid Cloud Console.",
+          "expandable": true,
+          "routes": [
+              {
+                  "id": "notificationOverview",
+                  "appId": "notifications",
+                  "icon": "PlaceholderIcon",
+                  "title": "Overview",
+                  "href": "/settings/notifications"
+              },
+              {
+                  "id": "configureEvents",
+                  "appId": "notifications",
+                  "title": "Configure Events",
+                  "href": "/settings/notifications/configure-events",
+                  "permissions": [
+                    {
+                      "method": "isOrgAdmin"
+                    }
+                  ]
+              },
+              {
+                  "id": "eventLog",
+                  "appId": "notifications",
+                  "title": "Event Log",
+                  "href": "/settings/notifications/eventlog",
+                  "permissions": [
+                    {
+                      "method": "isOrgAdmin"
+                    }
+                  ]
+              },
+              {
+                  "id": "myUserPreferences",
+                  "appId": "notifications",
+                  "title": "My User Preferences",
+                  "href": "/settings/notifications/user-preferences"
+              }
+          ]
         }
     ]
 }

@@ -286,18 +286,6 @@
           },
           "ansible.policies"
         ]
-      },
-      {
-        "isGroup": true,
-        "title": "Subscription Services",
-        "links": [
-          {
-            "id": "openshift",
-            "title": "Subscriptions Usage",
-            "icon": "OpenShiftIcon",
-            "href": "/subscriptions/usage/openshift"
-          }
-        ]
       }
     ]
   },

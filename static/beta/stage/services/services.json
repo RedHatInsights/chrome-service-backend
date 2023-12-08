@@ -180,7 +180,6 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.imageBuilder",
-          "rhel.subscriptionsInventory",
           "rhel.inventory",
           {
             "title": "Inventory Groups",

@@ -286,6 +286,18 @@
           },
           "ansible.policies"
         ]
+      },
+      {
+        "isGroup": true,
+        "title": "Subscription Services",
+        "links": [
+          {
+            "id": "openshift",
+            "title": "Subscriptions Usage",
+            "icon": "OpenShiftIcon",
+            "href": "/subscriptions/usage/openshift"
+          }
+        ]
       }
     ]
   },
@@ -383,15 +395,10 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           {
-            "title": "Subscriptions",
-            "href": "/subscriptions/rhel",
-            "icon": "OpenShiftIcon"
-          },
-          {
-            "title": "Resource Optimization",
-            "filterable": false,
-            "href": "/insights/ros",
-            "icon": "OpenShiftIcon"
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/rhel",
+            "icon": "OpenShiftIcon",
+            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
           }
         ]
       },
@@ -400,9 +407,10 @@
         "title": "OpenShift",
         "links": [
           {
-            "title": "Subscriptions",
-            "href": "/openshift/subscriptions/openshift",
-            "icon": "OpenShiftIcon"
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/openshift",
+            "icon": "OpenShiftIcon",
+            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
           },
           {
             "title": "Cost Management",
@@ -415,10 +423,11 @@
       {
         "isGroup": true,
         "title": "Subscription Services",
-        "links": [ 
+        "links": [
+          "subscriptions.overview", 
           "subscriptions.subscriptionsInventory",
           "subscriptions.subscriptionsUsage",
-          "hybridCommittedSpend.hybridCommittedSpend"
+          "hybridCommittedSpend.overview"
         ]
       }
     ]

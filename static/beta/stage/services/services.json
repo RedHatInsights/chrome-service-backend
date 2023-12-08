@@ -396,7 +396,7 @@
         "links": [
           {
             "title": "Subscriptions",
-            "href": "/insights/subscriptions/rhel",
+            "href": "/subscriptions/rhel",
             "icon": "OpenShiftIcon"
           },
           {

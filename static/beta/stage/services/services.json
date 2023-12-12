@@ -426,7 +426,7 @@
           "subscriptions.overview", 
           "subscriptions.subscriptionsInventory",
           "subscriptions.subscriptionsUsage",
-          "hybridCommittedSpend.overview",
+          "hybridCommittedSpend.hybridCommittedSpendOverview",
           "manifests"
         ]
       }

@@ -59,6 +59,7 @@
           "id": "hybridCommittedSpendOverview",
           "appId": "hybridCommittedSpend",
           "title": "Overview",
+          "icon": "SubscriptionsIcon",
           "href": "/subscriptions/hybrid-committed-spend",
           "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
         },
@@ -74,6 +75,7 @@
       "id": "manifests",
       "appId": "manifests",
       "title": "Manifests",
+      "icon": "SubscriptionsIcon",
       "href": "/subscriptions/manifests",
       "description": "Create, manage, and export subscription manifests for Red Hat Satellite."
     },

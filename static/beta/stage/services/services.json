@@ -415,7 +415,8 @@
             "title": "Cost Management",
             "filterable": false,
             "href": "/openshift/cost-management",
-            "icon": "OpenShiftIcon"
+            "icon": "OpenShiftIcon",
+            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
           }
         ]
       },
@@ -425,8 +426,15 @@
         "links": [
           "subscriptions.overview", 
           "subscriptions.subscriptionsInventory",
-          "subscriptions.subscriptionsUsage",
-          "hybridCommittedSpend.overview"
+          {
+            "id": "hybridCommittedSpendOverview",
+            "appId": "hybridCommittedSpend",
+            "title": "Hybrid Committed Spend",
+            "icon": "SubscriptionsIcon",
+            "href": "/subscriptions/hybrid-committed-spend",
+            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
+          },
+          "subscriptions.manifests"
         ]
       }
     ]

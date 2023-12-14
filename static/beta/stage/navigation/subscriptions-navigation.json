@@ -14,7 +14,6 @@
       "id": "subscriptionsInventory",
       "appId": "subscriptionInventory",
       "title": "Subscriptions Inventory",
-      "description": "View your purchased subscriptions and explore more information about each one.",
       "href": "/subscriptions/inventory",
       "icon": "SubscriptionsIcon",
       "description": "View your purchased subscriptions and explore more information about each one."
@@ -57,9 +56,10 @@
       "expandable": true,
       "routes": [
         {
-          "id": "hybridCommittedSpend.overview",
+          "id": "hybridCommittedSpendOverview",
           "appId": "hybridCommittedSpend",
           "title": "Overview",
+          "icon": "SubscriptionsIcon",
           "href": "/subscriptions/hybrid-committed-spend",
           "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
         },
@@ -75,6 +75,7 @@
       "id": "manifests",
       "appId": "manifests",
       "title": "Manifests",
+      "icon": "SubscriptionsIcon",
       "href": "/subscriptions/manifests",
       "description": "Create, manage, and export subscription manifests for Red Hat Satellite."
     },

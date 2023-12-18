@@ -235,7 +235,7 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "View details about your Red Hat Enterprise Linux systems."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
           },
           {
             "href": "/insights/drift",
@@ -306,7 +306,7 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "View details about your Red Hat Enterprise Linux systems."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
           },
           {
             "href": "/insights/vulnerability/cves",

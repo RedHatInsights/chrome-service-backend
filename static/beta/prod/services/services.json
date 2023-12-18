@@ -350,7 +350,8 @@
             "href": "/openshift/insights/vulnerability/cves",
             "icon": "OpenShiftIcon",
             "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for OpenShift"
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
           }
         ]
       },

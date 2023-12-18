@@ -260,7 +260,8 @@
             "title": "Tasks",
             "href": "/ansible/tasks",
             "icon": "AnsibleIcon",
-            "product": "Red Hat Insights"
+            "product": "Red Hat Insights",
+            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness."
         }
     ]
 }

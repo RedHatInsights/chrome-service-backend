@@ -227,7 +227,8 @@
           {
             "href": "/insights/patch/systems",
             "title": "Patch",
-            "icon": "InsightsIcon"
+            "icon": "InsightsIcon",
+            "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
           },
           {
             "href": "/insights/advisor/recommendations",

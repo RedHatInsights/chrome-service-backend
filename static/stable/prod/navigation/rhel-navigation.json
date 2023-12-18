@@ -32,7 +32,7 @@
           "title": "Groups",
           "href": "/insights/inventory/groups",
           "product": "Red Hat Insights",
-          "description": "Inventory groups"
+          "description": "Group your Red Hat Enterprise Linux systems for more granular User Access."
         },
         {
           "id": "imageBuilder",

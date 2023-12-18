@@ -48,7 +48,8 @@
             "title": "Register Systems",
             "filterable": false,
             "href": "/ansible/registration",
-            "icon": "AnsibleIcon"
+            "icon": "AnsibleIcon",
+            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           },
           "ansible.tasks"
         ]
@@ -473,7 +474,8 @@
             "title": "Register Systems",
             "filterable": false,
             "href": "/ansible/registration",
-            "icon": "AnsibleIcon"
+            "icon": "AnsibleIcon",
+            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           }
         ]
       },

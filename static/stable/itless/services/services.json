@@ -135,7 +135,8 @@
           {
             "title": "Subscriptions",
             "href": "/insights/subscriptions/rhel",
-            "icon": "OpenShiftIcon"
+            "icon": "OpenShiftIcon",
+            "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
           },
           {
             "title": "Resource Optimization",

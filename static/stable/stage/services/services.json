@@ -424,7 +424,8 @@
             "title": "Cost Management",
             "filterable": false,
             "href": "/openshift/cost-management",
-            "icon": "OpenShiftIcon"
+            "icon": "OpenShiftIcon",
+            "description": "Understand and track costs for your OpenShift clusters and workloads."
           }
         ]
       },

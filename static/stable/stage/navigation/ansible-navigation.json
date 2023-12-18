@@ -146,7 +146,7 @@
                     "href": "/ansible/inventory",
                     "icon": "AnsibleIcon",
                     "product": "Red Hat Insights",
-                    "description": "Get recommendations to prevent and resolve potential issues on your Ansible-managed ecosystem."
+                    "description": "View details about your Ansible Automation Platform systems."
                 },
                 {
                     "title": "Advisor",

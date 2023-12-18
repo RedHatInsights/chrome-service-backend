@@ -206,7 +206,8 @@
             "content",
             "dnf",
             "yum"
-          ]
+          ],
+          "description": "Link your external repositories to build images."
         },
         {
           "title": "Patch",

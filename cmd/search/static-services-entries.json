@@ -38,6 +38,7 @@
         "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
         "href": "/openshift/insights/advisor/clusters",
         "title": "Red Hat OpenShift Cluster Manager Advisor",
+        "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
         "alt_title": [
           "Insights Advisor",
           "OpenShift Advisor",
@@ -92,7 +93,7 @@
         "id": "ANSIBLE.operations.Drift.drift",
         "href": "/ansible/drift/",
         "title": "Ansible Drift Comparison",
-        "description": "Compare systems in your Ansible inventory to one another or against a set baseline.",
+        "description": "Compare systems in your Ansible Automation Platform hosts to one another or against a set baseline.",
         "alt_title": [
           "Comparison",
           "system details",
@@ -113,6 +114,7 @@
         "id": "ANSIBLE.operations.Drift.drift.baseline",
         "href": "/ansible/drift/baselines",
         "title": "Ansible Drift Baselines",
+        "description": "Create your Ansible Automation Platform system baselines for Drift comparison.",
         "alt_title": [
           "Comparison",
           "system details",
@@ -176,8 +178,9 @@
         "custom": true,
         "id": "RHEL.Content.Patch.patch",
         "href": "/insights/patch/systems",
-        "title": "Patch Systems",
+        "title": "Systems",
         "subtitle": "Red Hat Insights for RHEL",
+        "description": "View details about your Red Hat Enterprise Linux systems and their applicable advisories.",
         "alt_title": [
           "Patch",
           "content",
@@ -236,6 +239,7 @@
         "id": "RHEL.Content.Patch.template",
         "href": "/insights/patch/templates",
         "title": "Red Hat Patch Templates",
+        "description": "Control the scope of package and advisory updates to be installed on Red Hat Enterprise Linux systems.",
         "alt_title": [
           "Template",
           "patch template",
@@ -257,7 +261,8 @@
         "custom": true,
         "id": "RHEL.patch",
         "href": "/insights/patch/packages",
-        "title": "RHEL Packages",
+        "description": "Review package applicability on your Red Hat Enterprise Linux systems.",
+        "title": "Packages",
         "alt_title": [
           "Packages",
           "updates",
@@ -315,7 +320,7 @@
         "id": "RHEL.security.malware.malwareSystems",
         "href": "/insights/malware/systems",
         "title": "Malware systems",
-        "description": "Identify potential malware on your Red Hat Enterprise Linux systems.",
+        "description": "View details about your Red Hat Enterprise Linux systems and their potentially detected malware.",
         "alt_title": [
           "Threat",
           "yara",
@@ -433,6 +438,7 @@
         "id": "RHEL.Operations.Drift.drift.baseline",
         "href": "/insights/drift/baselines",
         "title": "RHEL Drift Baselines",
+        "description": "Create your Red Hat Enterprise Linux baselines for Drift comparison.",
         "alt_title": [
           "Drift",
           "Comparison",
@@ -491,6 +497,7 @@
         "id": "RHEL.policies",
         "href": "/insights/policies",
         "title": "RHEL Policies",
+        "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
         "alt_title":[
           "policies",
           "facts",
@@ -562,6 +569,7 @@
         "id": "scapPolicies",
         "href": "/insights/compliance/scappolicies",
         "title": "SCAP Policies",
+        "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
         "alt_title": [
           "SCAP",
           "security content automation protocol",
@@ -598,6 +606,7 @@
         "id": "RHEL.tasks",
         "href": "/insights/tasks",
         "title": "RHEL Tasks",
+        "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
         "alt_title": [
           "Task",
           "upgrade",

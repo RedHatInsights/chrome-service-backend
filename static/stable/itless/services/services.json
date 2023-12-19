@@ -56,14 +56,15 @@
           {
             "href": "/insights/patch/systems",
             "title": "Patch",
-            "icon": "InsightsIcon"
+            "icon": "InsightsIcon",
+            "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
           },
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "View details about your Red Hat Enterprise Linux systems."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
           },
           {
             "href": "/insights/drift",
@@ -93,7 +94,7 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "View details about your Red Hat Enterprise Linux systems."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
           },
           {
             "href": "/insights/vulnerability/cves",
@@ -134,13 +135,15 @@
           {
             "title": "Subscriptions",
             "href": "/insights/subscriptions/rhel",
-            "icon": "OpenShiftIcon"
+            "icon": "OpenShiftIcon",
+            "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
           },
           {
             "title": "Resource Optimization",
             "filterable": false,
             "href": "/insights/ros",
-            "icon": "OpenShiftIcon"
+            "icon": "OpenShiftIcon",
+            "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
           }
         ]
       }

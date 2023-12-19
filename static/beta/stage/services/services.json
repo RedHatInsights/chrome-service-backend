@@ -48,7 +48,8 @@
             "title": "Register Systems",
             "filterable": false,
             "href": "/ansible/registration",
-            "icon": "AnsibleIcon"
+            "icon": "AnsibleIcon",
+            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           },
           "ansible.tasks"
         ]
@@ -226,14 +227,15 @@
           {
             "href": "/insights/patch/systems",
             "title": "Patch",
-            "icon": "InsightsIcon"
+            "icon": "InsightsIcon",
+            "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
           },
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "View details about your Red Hat Enterprise Linux systems."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
           },
           {
             "href": "/insights/drift",
@@ -316,7 +318,7 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "View details about your Red Hat Enterprise Linux systems."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
           },
           {
             "href": "/insights/vulnerability/cves",
@@ -350,7 +352,8 @@
             "href": "/openshift/insights/vulnerability/cves",
             "icon": "OpenShiftIcon",
             "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for OpenShift"
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
           }
         ]
       },
@@ -422,7 +425,7 @@
             "filterable": false,
             "href": "/openshift/cost-management",
             "icon": "OpenShiftIcon",
-            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
+            "description": "Understand and track costs for your OpenShift clusters and workloads."
           }
         ]
       },
@@ -477,7 +480,8 @@
             "title": "Register Systems",
             "filterable": false,
             "href": "/ansible/registration",
-            "icon": "AnsibleIcon"
+            "icon": "AnsibleIcon",
+            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           }
         ]
       },

@@ -90,7 +90,8 @@
             "content",
             "dnf",
             "yum"
-          ]
+          ],
+          "description": "Link your external repositories to build images."
         },
         {
           "title": "Patch",
@@ -401,7 +402,8 @@
           "href": "/insights/tasks",
           "icon": "InsightsIcon",
           "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL"
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness."
         }
       ]
     }

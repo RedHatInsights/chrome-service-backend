@@ -70,10 +70,10 @@
                 ]
             },
             {
-                "id": "myUserPreferences",
+                "id": "notificationPreferences",
                 "appId": "notifications",
-                "title": "My User Preferences",
-                "href": "/settings/notifications/user-preferences"
+                "title": "Notification Preferences",
+                "href": "/settings/notifications/my-notification-preferences"
             }
         ]
       },

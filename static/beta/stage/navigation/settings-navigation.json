@@ -99,7 +99,7 @@
                     "id": "notificationPreferences",
                     "appId": "notifications",
                     "title": "Notification Preferences",
-                    "href": "/settings/notifications/my-notification-preferences"
+                    "href": "/settings/notifications/user-preferences"
                 }
             ]
         }

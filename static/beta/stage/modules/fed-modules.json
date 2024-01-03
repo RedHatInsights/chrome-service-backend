@@ -893,6 +893,9 @@
     },
     "dbaas": {
         "manifestLocation": "/apps/dbaas/fed-mods.json",
+        "analytics": {
+            "APIKey": "jIaaFvH6oCngTdldm62acuiLimEoMWZz"
+        },
         "modules": [
             {
                 "id": "dbaas",

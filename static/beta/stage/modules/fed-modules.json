@@ -93,6 +93,12 @@
                         "props": {
                             "bundle": "subscriptions"
                         }
+                    },
+                    {
+                        "pathname": "/application-services/learning-resources",
+                        "props": {
+                            "bundle": "application-services"
+                        }
                     }
                 ]
             }

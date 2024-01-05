@@ -142,6 +142,8 @@ objects:
       INTERCOM_OPENSHIFT_DEV: dGVzdFZhbHVl
       SEARCH_CLIENT_SECRET_PROD: dGVzdFZhbHVl
       SEARCH_CLIENT_SECRET_STAGE: dGVzdFZhbHVl
+      INTERCOM_DBAAS: dGVzdFZhbHVl
+      INTERCOM_DBAAS_DEV: dGVzdFZhbHVl
     type: Opaque
 
 parameters:

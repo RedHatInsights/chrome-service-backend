@@ -42,6 +42,8 @@ type IntercomConfig struct {
 	automationHub_dev       string
 	automationAnalytics     string
 	automationAnalytics_dev string
+	dbaas                   string
+	dbaas_dev               string
 }
 
 type FeatureFlagsConfig struct {
@@ -198,6 +200,8 @@ func init() {
 		openshift:               os.Getenv("INTERCOM_OPENSHIFT"),
 		openshift_dev:           os.Getenv("INTERCOM_OPENSHIFT_DEV"),
 		hacCore:                 os.Getenv("INTERCOM_HAC_CORE"),
+		dbaas:                   os.Getenv("INTERCOM_DBAAS"),
+		dbaas_dev:               os.Getenv("INTERCOM_DBAAS_DEV"),
 	}
 	config = options
 }

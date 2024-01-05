@@ -39,7 +39,7 @@ func TestDeadlock(t *testing.T) {
 	SeedDatabase()
 	t.Run("Assert No Deadlock", func(t *testing.T) {
 		// If a test is added, make sure to add to the channel
-		CHANS := 3
+		CHANS := 4
 		errs := make(chan error, CHANS)
 		fmt.Println("Begin")
 
@@ -86,6 +86,20 @@ func TestDeadlock(t *testing.T) {
 			errs <- nil
 		}()
 
+		go func() {
+			fmt.Println("Four")
+			page := models.LastVisitedPage{
+				Title:          "Resources",
+				Pathname:       "insights/ros",
+				Bundle:         "insights",
+				UserIdentityID: 1,
+			}
+			if err := HandlePostLastVisitedPages(1, page); err != nil {
+				errs <- err
+			}
+			errs <- nil
+		}()
+
 		// Wait for the goroutines to finish
 		for i := 0; i < CHANS; i++ {
 			err := <-errs
@@ -94,9 +108,35 @@ func TestDeadlock(t *testing.T) {
 			}
 		}
 		db, _ := database.DB.DB()
-		openConnections := db.Stats().OpenConnections
+		openConnections := db.Stats().InUse
 		if openConnections != 0 {
+			fmt.Printf("%+v", db.Stats())
 			t.Errorf("Leaked %d database connections", openConnections)
 		}
 	})
+}
+
+func TestBatchLastVisited(t *testing.T) {
+	SeedDatabase()
+	// There is already an entry in the db when these 10 are added
+	batchPages := []models.LastVisitedPage{}
+	for i := 0; i < 10; i++ {
+		newPage := models.LastVisitedPage{
+			Title:          fmt.Sprintf("Resources-%v", i),
+			Pathname:       fmt.Sprintf("insights/ros=%v", i),
+			Bundle:         "insights",
+			UserIdentityID: 1,
+		}
+		batchPages = append(batchPages, newPage)
+	}
+	if err := HandlePostBatchLastVisitedPages(batchPages, 1); err != nil {
+		t.Fatal(err)
+	}
+	pages, err := GetUsersLastVisitedPages(1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(pages) != 10 {
+		t.Error("There should only be 10 pages in the database")
+	}
 }

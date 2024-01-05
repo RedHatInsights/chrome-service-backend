@@ -30,11 +30,12 @@ const (
 	AnsibleDashboard    IntercomApp = "ansibleDashboard"
 	AutomationHub       IntercomApp = "automationHub"
 	AutomationAnalytics IntercomApp = "automationAnalytics"
+	DBAAS               IntercomApp = "dbaas"
 )
 
 func (ib IntercomApp) IsValidApp() error {
 	switch ib {
-	case OpenShift, HacCore, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics:
+	case OpenShift, HacCore, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS:
 		return nil
 	}
 

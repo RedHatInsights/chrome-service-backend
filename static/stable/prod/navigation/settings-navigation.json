@@ -3,7 +3,7 @@
   "title": "Settings",
   "navItems": [
       {
-          "id": "sources",
+          "id": "integrations",
           "appId": "sources",
           "title": "Integrations",
           "icon": "PlaceholderIcon",

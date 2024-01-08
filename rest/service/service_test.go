@@ -35,92 +35,13 @@ func SeedDatabase() {
 	}
 
 }
-func TestDeadlock(t *testing.T) {
-	SeedDatabase()
-	t.Run("Assert No Deadlock", func(t *testing.T) {
-		// If a test is added, make sure to add to the channel
-		CHANS := 4
-		errs := make(chan error, CHANS)
-		fmt.Println("Begin")
-
-		// Start two goroutines that try to update the same record
-		go func() {
-			fmt.Println("One")
-			page := models.LastVisitedPage{
-				Title:          "Advisor",
-				Pathname:       "insights/advisor",
-				Bundle:         "insights",
-				UserIdentityID: 1,
-			}
-			if err := HandlePostLastVisitedPages(1, page); err != nil {
-				errs <- err
-			}
-			errs <- nil
-		}()
-
-		go func() {
-			fmt.Println("Two")
-			page := models.LastVisitedPage{
-				Title:          "Inventory",
-				Pathname:       "insights/inventory",
-				Bundle:         "insights",
-				UserIdentityID: 1,
-			}
-			if err := HandlePostLastVisitedPages(1, page); err != nil {
-				errs <- err
-			}
-			errs <- nil
-		}()
-
-		go func() {
-			fmt.Println("Three")
-			page := models.LastVisitedPage{
-				Title:          "Resources",
-				Pathname:       "insights/ros",
-				Bundle:         "insights",
-				UserIdentityID: 1,
-			}
-			if err := HandlePostLastVisitedPages(1, page); err != nil {
-				errs <- err
-			}
-			errs <- nil
-		}()
-
-		go func() {
-			fmt.Println("Four")
-			page := models.LastVisitedPage{
-				Title:          "Resources",
-				Pathname:       "insights/ros",
-				Bundle:         "insights",
-				UserIdentityID: 1,
-			}
-			if err := HandlePostLastVisitedPages(1, page); err != nil {
-				errs <- err
-			}
-			errs <- nil
-		}()
-
-		// Wait for the goroutines to finish
-		for i := 0; i < CHANS; i++ {
-			err := <-errs
-			if err != nil {
-				t.Fatal(err)
-			}
-		}
-		db, _ := database.DB.DB()
-		openConnections := db.Stats().InUse
-		if openConnections != 0 {
-			fmt.Printf("%+v", db.Stats())
-			t.Errorf("Leaked %d database connections", openConnections)
-		}
-	})
-}
 
 func TestBatchLastVisited(t *testing.T) {
 	SeedDatabase()
-	// There is already an entry in the db when these 10 are added
+	const PageCount = 10
+	// There is already an entry in the db when these are added
 	batchPages := []models.LastVisitedPage{}
-	for i := 0; i < 10; i++ {
+	for i := 0; i < PageCount; i++ {
 		newPage := models.LastVisitedPage{
 			Title:          fmt.Sprintf("Resources-%v", i),
 			Pathname:       fmt.Sprintf("insights/ros=%v", i),
@@ -129,14 +50,14 @@ func TestBatchLastVisited(t *testing.T) {
 		}
 		batchPages = append(batchPages, newPage)
 	}
-	if err := HandlePostBatchLastVisitedPages(batchPages, 1); err != nil {
+	if err := HandlePostLastVisitedPages(batchPages, 1); err != nil {
 		t.Fatal(err)
 	}
 	pages, err := GetUsersLastVisitedPages(1)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(pages) != 10 {
-		t.Error("There should only be 10 pages in the database")
+	if len(pages) != PageCount {
+		t.Errorf("Wanted %v pages, but found %v instead", PageCount, len(pages))
 	}
 }

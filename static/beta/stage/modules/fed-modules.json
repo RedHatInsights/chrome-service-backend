@@ -22,17 +22,17 @@
         "isFedramp": true,
         "modules": [
             {
-                "id": "my-notification-preferences-notifications",
+                "id": "user-preferences-notifications",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/my-notification-preferences"
+                        "pathname": "/user-preferences"
                     },
                     {
-                        "pathname": "/my-notification-preferences/notifications"
+                        "pathname": "/user-preferences/notifications"
                     },
                     {
-                        "pathname": "/settings/notifications/my-notification-preferences"
+                        "pathname": "/settings/notifications/user-preferences"
                     }
                 ]
             }

@@ -185,7 +185,8 @@
         {
           "title": "Inventory Groups",
           "href": "/insights/inventory/groups",
-          "icon": "InsightsIcon"
+          "icon": "InsightsIcon",
+          "description": "Group your Red Hat Enterprise Linux systems for more granular User Access."
         }
         ]
       },

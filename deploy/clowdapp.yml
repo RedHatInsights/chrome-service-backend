@@ -107,6 +107,16 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_OPENSHIFT_DEV
+          - name: INTERCOM_DBAAS
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_DBAAS
+          - name: INTERCOM_DBAAS_DEV
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_DBAAS_DEV
           - name: SEARCH_CLIENT_SECRET_PROD
             valueFrom:
               secretKeyRef:

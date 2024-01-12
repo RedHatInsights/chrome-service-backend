@@ -72,7 +72,7 @@
             {
                 "id": "myUserPreferences",
                 "appId": "notifications",
-                "title": "My User Preferences",
+                "title": "Notification Preferences",
                 "href": "/settings/notifications/user-preferences"
             }
         ]

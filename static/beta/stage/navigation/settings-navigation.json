@@ -96,7 +96,7 @@
                     ]
                 },
                 {
-                    "id": "notificationPreferences",
+                    "id": "myUserPreferences",
                     "appId": "notifications",
                     "title": "Notification Preferences",
                     "href": "/settings/notifications/user-preferences"

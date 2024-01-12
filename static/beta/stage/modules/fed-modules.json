@@ -18,7 +18,7 @@
     },
     "userPreferences": {
         "manifestLocation": "/apps/user-preferences/fed-mods.json",
-        "defaultDocumentTitle": "User Preferences | User Preferences",
+        "defaultDocumentTitle": "Notification Preferences | User Preferences",
         "isFedramp": true,
         "modules": [
             {

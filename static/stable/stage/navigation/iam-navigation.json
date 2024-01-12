@@ -82,7 +82,12 @@
       "id": "serviceAccounts",
       "title": "Service Accounts",
       "appId": "serviceAccounts",
-      "href": "/iam/service-accounts"
+      "href": "/iam/service-accounts",
+      "permissions": [
+        {
+          "method": "isOrgAdmin"
+        }
+      ]
     },
     {
       "id": "learningResources",

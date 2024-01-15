@@ -27,14 +27,6 @@
           "icon": "ServicesIcon",
           "description": "Manage API access, policy, and traffic controls for microservice-based applications.",
           "href": "/application-services/api-management"
-        },
-        {
-          "id": "serviceAccounts",
-          "appId": "applicationServices",
-          "title": "Service Accounts",
-          "icon": "ServicesIcon",
-          "href": "/application-services/service-accounts",
-          "description": "Authenticate and connect securely to APIs from multiple services."
         }
       ]
     },

@@ -33,6 +33,15 @@ const (
 	DBAAS               IntercomApp = "dbaas"
 )
 
+func debugFavoritesIdentity(userId string) {
+	c := config.Get()
+	for _, i := range c.DebugConfig.DebugFavoriteIds {
+		if i == userId {
+			logrus.Warningln("DEBUG_FAVORITES_ACCOUNT_ID", userId)
+		}
+	}
+}
+
 func (ib IntercomApp) IsValidApp() error {
 	switch ib {
 	case OpenShift, HacCore, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS:
@@ -62,6 +71,7 @@ func GetUserIdentityData(user models.UserIdentity) (models.UserIdentity, error) 
 		return user, err
 	}
 	err = database.DB.Model(&user).Association("FavoritePages").Find(&favoritePages)
+	debugFavoritesIdentity(user.AccountId)
 
 	user.LastVisitedPages = lastVisitedPages
 	user.FavoritePages = favoritePages

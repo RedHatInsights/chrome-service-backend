@@ -68,6 +68,12 @@
         "title": "OpenShift",
         "links": [
           {
+            "title": "Overview",
+            "href": "/openshift/overview",
+            "icon": "OpenShiftIcon",
+            "description": "Browse options for various OpenShift cluster types to find what fits your needs."
+          },
+          {
             "title": "Clusters",
             "href": "/openshift",
             "icon": "OpenShiftIcon",
@@ -483,6 +489,12 @@
     "title": "Try and Buy",
     "description": "Our no-cost trials help you gain hands-on experience, prepare for a certification, or assess if a product is right for your organization.",
     "links": [
+      {
+        "href": "/openshift/services/rosa/demo/",
+        "title": "ROSA Hands-on Experience",
+        "icon": "OpenShiftIcon",
+        "description": "Access a production-ready ROSA cluster for a limited time in a demo environment."
+      },
       "openshift.developerSandbox",
       {
         "isExternal": true,

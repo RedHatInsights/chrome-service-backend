@@ -156,7 +156,7 @@ The [Layout modification restrictions](#Layout-modification-restrictions) apply 
 Delete endpoint
 
 ```
-DELETE http://localhost:8000/api/chrome-service/v1/dashboard-templates/<template-id>
+DELETE /api/chrome-service/v1/dashboard-templates/<template-id>
 ```
 
 The entity is "soft removed". The record will remain in the BD but is not retrieved by the ORM.

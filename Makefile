@@ -57,7 +57,10 @@ clean-all:
 	podman-compose -f local/full-stack-compose.yaml down
 
 test: seed-unleash
-	go test -v  ./...
+	go test -v  ./... -coverprofile=c.out
+
+coverage:
+	go tool cover -html=c.out
 
 seed-unleash:
 	go run cmd/unleash/seed.go

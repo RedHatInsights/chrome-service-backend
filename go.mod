@@ -20,6 +20,7 @@ require (
 	github.com/xeipuuv/gojsonschema v1.2.0
 	gorm.io/datatypes v1.1.0
 	gorm.io/driver/postgres v1.4.5
+	gorm.io/driver/sqlite v1.4.3
 	gorm.io/gorm v1.24.2
 )
 
@@ -41,6 +42,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
+	github.com/mattn/go-sqlite3 v1.14.15 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/pierrec/lz4/v4 v4.1.15 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect

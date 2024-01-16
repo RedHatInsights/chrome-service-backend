@@ -7,6 +7,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -19,14 +20,23 @@ func Init() {
 	cfg := config.Get()
 	var dbdns string
 
-	dbdns = fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=%v", cfg.DbHost, cfg.DbUser, cfg.DbPassword, cfg.DbName, cfg.DbPort, cfg.DbSSLMode)
-	if cfg.DbSSLRootCert != "" {
-		dbdns = fmt.Sprintf("%s  sslrootcert=%s", dbdns, cfg.DbSSLRootCert)
+	if cfg.Test {
+		dialector = sqlite.Open(cfg.DbName)
+	} else {
+
+		dbdns = fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=%v", cfg.DbHost, cfg.DbUser, cfg.DbPassword, cfg.DbName, cfg.DbPort, cfg.DbSSLMode)
+		if cfg.DbSSLRootCert != "" {
+			dbdns = fmt.Sprintf("%s  sslrootcert=%s", dbdns, cfg.DbSSLRootCert)
+		}
+
+		dialector = postgres.Open(dbdns)
+
 	}
 
-	dialector = postgres.Open(dbdns)
-
 	DB, err = gorm.Open(dialector, &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
 	postgresDB, err := DB.DB()
 	if err != nil {
 		panic(err)

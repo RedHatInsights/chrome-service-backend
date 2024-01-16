@@ -26,7 +26,7 @@ func main() {
 		panic(err)
 	}
 
-	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.LastVisitedPage{}, &models.SelfReport{}, &models.UserIdentity{}, &models.ProductOfInterest{}); err != nil {
+	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.LastVisitedPage{}, &models.SelfReport{}, &models.UserIdentity{}, &models.ProductOfInterest{}, &models.DashboardTemplate{}); err != nil {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()
 		panic(err)

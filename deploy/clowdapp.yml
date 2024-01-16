@@ -127,6 +127,11 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: SEARCH_CLIENT_SECRET_STAGE
+          - name: DEBUG_FAVORITES_ACCOUNT_1
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: DEBUG_FAVORITES_ACCOUNT_1
           resources:
             limits:
               cpu: ${CPU_LIMIT}
@@ -154,6 +159,7 @@ objects:
       SEARCH_CLIENT_SECRET_STAGE: dGVzdFZhbHVl
       INTERCOM_DBAAS: dGVzdFZhbHVl
       INTERCOM_DBAAS_DEV: dGVzdFZhbHVl
+      DEBUG_FAVORITES_ACCOUNT_1: OTk5
     type: Opaque
 
 parameters:

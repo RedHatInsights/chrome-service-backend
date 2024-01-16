@@ -1,8 +1,12 @@
 package service
 
 import (
+	"fmt"
+
+	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/sirupsen/logrus"
 )
 
 func GetUserActiveFavoritePages(userID uint) ([]models.FavoritePage, error) {
@@ -49,6 +53,15 @@ func UpdateFavoritePage(favoritePage models.FavoritePage) error {
 	return database.DB.Model(&models.FavoritePage{}).Where("pathname = ?", favoritePage.Pathname).Update("favorite", favoritePage.Favorite).Error
 }
 
+func debugFavoritesEntry(accountId uint, payload models.FavoritePage) {
+	c := config.Get()
+	for _, i := range c.DebugConfig.DebugFavoriteIds {
+		if i == fmt.Sprint(accountId) {
+			logrus.Warningln(fmt.Sprintf("\n_____\nDEBUG_FAVORITES_ACCOUNT_ID: %d\nDEBUG_FAVORITES_PATH: %s\nDEBUG_FAVORITES_FLAG: %s\n_____", accountId, payload.Pathname, fmt.Sprint(payload.Favorite)))
+		}
+	}
+}
+
 func SaveUserFavoritePage(userID uint, newFavoritePage models.FavoritePage) error {
 	var userFavoritePages []models.FavoritePage
 
@@ -62,7 +75,9 @@ func SaveUserFavoritePage(userID uint, newFavoritePage models.FavoritePage) erro
 
 	if alreadyInDB {
 		err = UpdateFavoritePage(newFavoritePage)
+		debugFavoritesEntry(userID, newFavoritePage)
 	} else {
+		debugFavoritesEntry(userID, newFavoritePage)
 		err = database.DB.Create(&newFavoritePage).Error
 	}
 

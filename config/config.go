@@ -56,6 +56,10 @@ type FeatureFlagsConfig struct {
 	AdminToken string
 }
 
+type DebugConfig struct {
+	DebugFavoriteIds []string
+}
+
 type ChromeServiceConfig struct {
 	WebPort           int
 	OpenApiSpecPath   string
@@ -72,6 +76,7 @@ type ChromeServiceConfig struct {
 	KafkaConfig       KafkaCfg
 	IntercomConfig    IntercomConfig
 	FeatureFlagConfig FeatureFlagsConfig
+	DebugConfig       DebugConfig
 }
 
 const RdsCaLocation = "/app/rdsca.cert"
@@ -202,6 +207,10 @@ func init() {
 		hacCore:                 os.Getenv("INTERCOM_HAC_CORE"),
 		dbaas:                   os.Getenv("INTERCOM_DBAAS"),
 		dbaas_dev:               os.Getenv("INTERCOM_DBAAS_DEV"),
+	}
+
+	options.DebugConfig = DebugConfig{
+		DebugFavoriteIds: []string{"", os.Getenv("DEBUG_FAVORITES_ACCOUNT_1")},
 	}
 	config = options
 }

@@ -87,9 +87,6 @@
         {
           "method": "featureFlag",
           "args": ["platform.iam.service-accounts", true]
-        },
-        {
-          "method": "isOrgAdmin"
         }
       ]
     },

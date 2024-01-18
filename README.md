@@ -25,7 +25,7 @@ PGSQL_DATABASE=postgres
 3. To test the service, at the moment, you are able to hit the following endpoint:
 ```
 GET http://localhost:8000/health
-GET http://localhost:8000/api/chrome/v1/hello-world
+GET http://localhost:8000/api/chrome-service/v1/hello-world
 ```
 
 ### Headers

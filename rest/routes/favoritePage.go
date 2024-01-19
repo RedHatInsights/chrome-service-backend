@@ -64,7 +64,7 @@ func SetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Handling functions for updating of the user's favorite pages.
-	err = service.SaveUserFavoritePage(userID, currentNewFavoritePage)
+	err = service.SaveUserFavoritePage(userID, user.AccountId, currentNewFavoritePage)
 
 	if err != nil {
 		panic(err)

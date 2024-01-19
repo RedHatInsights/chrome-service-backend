@@ -21,6 +21,7 @@ func ParseHeaders(next http.Handler) http.Handler {
 		} else {
 			identity, err := util.ParseXRHIdentityHeader(header)
 			if err != nil {
+				logrus.Errorln("Error parsing X-RH-IDENTITY header: ", err)
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("Internal server error"))
 				return

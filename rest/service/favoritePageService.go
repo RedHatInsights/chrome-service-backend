@@ -53,16 +53,16 @@ func UpdateFavoritePage(favoritePage models.FavoritePage) error {
 	return database.DB.Model(&models.FavoritePage{}).Where("pathname = ?", favoritePage.Pathname).Update("favorite", favoritePage.Favorite).Error
 }
 
-func debugFavoritesEntry(accountId uint, payload models.FavoritePage) {
+func debugFavoritesEntry(accountId string, payload models.FavoritePage) {
 	c := config.Get()
 	for _, i := range c.DebugConfig.DebugFavoriteIds {
-		if i == fmt.Sprint(accountId) {
-			logrus.Warningln(fmt.Sprintf("\n_____\nDEBUG_FAVORITES_ACCOUNT_ID: %d\nDEBUG_FAVORITES_PATH: %s\nDEBUG_FAVORITES_FLAG: %s\n_____", accountId, payload.Pathname, fmt.Sprint(payload.Favorite)))
+		if i == accountId {
+			logrus.Warningln(fmt.Sprintf("\n_____\nDEBUG_FAVORITES_ACCOUNT_ID: %s\nDEBUG_FAVORITES_PATH: %s\nDEBUG_FAVORITES_FLAG: %s\n_____", accountId, payload.Pathname, fmt.Sprint(payload.Favorite)))
 		}
 	}
 }
 
-func SaveUserFavoritePage(userID uint, newFavoritePage models.FavoritePage) error {
+func SaveUserFavoritePage(userID uint, accountId string, newFavoritePage models.FavoritePage) error {
 	var userFavoritePages []models.FavoritePage
 
 	userFavoritePages, err := GetAllUserFavoritePages(userID)
@@ -75,9 +75,9 @@ func SaveUserFavoritePage(userID uint, newFavoritePage models.FavoritePage) erro
 
 	if alreadyInDB {
 		err = UpdateFavoritePage(newFavoritePage)
-		debugFavoritesEntry(userID, newFavoritePage)
+		debugFavoritesEntry(accountId, newFavoritePage)
 	} else {
-		debugFavoritesEntry(userID, newFavoritePage)
+		debugFavoritesEntry(accountId, newFavoritePage)
 		err = database.DB.Create(&newFavoritePage).Error
 	}
 

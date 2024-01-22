@@ -13,6 +13,19 @@
       "expandable": true,
       "routes": [
         {
+          "id": "overview",
+          "appId": "rbac",
+          "title": "Overview",
+          "href": "/iam/user-access/overview",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.overview", true]
+            }
+          ],
+          "product": "Identity & Access Management"
+        },
+        {
           "id": "users",
           "appId": "rbac",
           "title": "Users",

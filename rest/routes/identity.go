@@ -26,6 +26,7 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
 		Data: updatedUser,
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
 }
 

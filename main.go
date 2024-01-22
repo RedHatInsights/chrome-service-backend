@@ -62,6 +62,7 @@ func main() {
 		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
 		subrouter.Route("/emit-message", routes.BroadcastMessage)
+		subrouter.Route("/dashboard-templates", routes.MakeDashboardTemplateRoutes)
 	})
 
 	// We might want to set up some event listeners at some point, but the pod will

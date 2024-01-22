@@ -15,3 +15,7 @@ type ListResponse[T interface{}] struct {
 type EntityResponse[T interface{}] struct {
 	Data T `json:"data"`
 }
+
+type ErrorResponse struct {
+	Errors []string `json:"errors"`
+}

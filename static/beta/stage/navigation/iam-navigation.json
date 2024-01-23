@@ -101,6 +101,7 @@
     },
     {
       "title": "Service Accounts",
+      "id": "serviceAccounts",
       "appId": "serviceAccounts",
       "href": "/iam/service-accounts"
     },

@@ -142,19 +142,8 @@
         "links": [
           "iam.users",
           "iam.groups",
-          "iam.authFactors"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Application and Data Services",
-        "links": [
-          {
-            "title": "Service Accounts",
-            "href": "/application-services/service-accounts",
-            "icon": "ServicesIcon",
-            "description": "Authenticate and connect securely to APIs from multiple services."
-          }
+          "iam.authFactors",
+          "iam.serviceAccounts"
         ]
       }
     ]

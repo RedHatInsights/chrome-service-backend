@@ -393,17 +393,16 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           {
-            "title": "Subscriptions",
-            "href": "/insights/subscriptions/rhel",
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/rhel",
             "icon": "OpenShiftIcon",
-            "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
+            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
           },
           {
             "title": "Resource Optimization",
             "filterable": false,
             "href": "/insights/ros",
-            "icon": "OpenShiftIcon",
-            "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
+            "icon": "OpenShiftIcon"
           }
         ]
       },
@@ -412,10 +411,10 @@
         "title": "OpenShift",
         "links": [
           {
-            "title": "Subscriptions",
-            "href": "/openshift/subscriptions/openshift",
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/openshift",
             "icon": "OpenShiftIcon",
-            "description": "Monitor your OpenShift usage for both Annual and On-Demand subscriptions."
+            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
           },
           {
             "title": "Cost Management",
@@ -429,10 +428,18 @@
       {
         "isGroup": true,
         "title": "Subscription Services",
-        "links": [ 
+        "links": [
+          "subscriptions.overview", 
           "subscriptions.subscriptionsInventory",
-          "subscriptions.subscriptionsUsage",
-          "hybridCommittedSpend.hybridCommittedSpend"
+          {
+            "id": "hybridCommittedSpendOverview",
+            "appId": "hybridCommittedSpend",
+            "title": "Hybrid Committed Spend",
+            "icon": "SubscriptionsIcon",
+            "href": "/subscriptions/hybrid-committed-spend",
+            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
+          },
+          "subscriptions.manifests"
         ]
       }
     ]

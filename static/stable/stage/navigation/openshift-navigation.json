@@ -130,13 +130,6 @@
                     "expandable": true,
                     "routes": [
                         {
-                            "id": "containerPlatform",
-                            "appId": "subscriptions",
-                            "title": "Red Hat OpenShift",
-                            "href": "/openshift/subscriptions/openshift",
-                            "product": "Subscription Watch"
-                        },
-                        {
                             "id": "dedicatedAnnual",
                             "appId": "openshift",
                             "title": "Dedicated (Annual)",
@@ -147,13 +140,6 @@
                             "appId": "openshift",
                             "title": "Dedicated (On-Demand limits)",
                             "href": "/openshift/quota/resource-limits"
-                        },
-                        {
-                            "id": "rhelSubscriptions",
-                            "appId": "subscriptions",
-                            "title": "RHEL Subscriptions",
-                            "href": "/insights/subscriptions/rhel",
-                            "product": "Subscription Watch"
                         }
                     ]
                 },

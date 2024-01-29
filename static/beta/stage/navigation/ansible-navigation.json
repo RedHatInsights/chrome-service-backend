@@ -124,6 +124,20 @@
                         }
                     ],
                     "href": "/ansible/seats-administration"
+                },
+                {
+                    "id": "ansibleWisdomAdminDashboard",
+                    "appId": "ansibleWisdomAdminDashboard",
+                    "description": "Ansible Lightspeed administration dashboard.",
+                    "title": "Admin Dashboard",
+                    "filterable": false,
+                    "permissions": [
+                        {
+                            "method": "withEmail",
+                            "args": ["@redhat.com", "@sbb.ch"]
+                        }
+                    ],
+                    "href": "/ansible/lightspeed-admin-dashboard"
                 }
             ]
         },

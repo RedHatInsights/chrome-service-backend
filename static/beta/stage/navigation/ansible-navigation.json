@@ -130,7 +130,6 @@
                     "appId": "ansibleWisdomAdminDashboard",
                     "description": "Ansible Lightspeed administration dashboard.",
                     "title": "Admin Dashboard",
-                    "filterable": false,
                     "permissions": [
                         {
                             "method": "withEmail",

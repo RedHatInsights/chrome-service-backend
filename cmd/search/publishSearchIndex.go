@@ -228,10 +228,10 @@ func flattenLinks(data interface{}, locator string) ([]LinkEntry, error) {
 }
 
 type groupLinkTemplate struct {
-	Id      string   `json:"id"`
-	IsGroup bool     `json:"isGroup"`
-	Title   string   `json:"title"`
-	Links   []string `json:"links"`
+	Id      string        `json:"id"`
+	IsGroup bool          `json:"isGroup"`
+	Title   string        `json:"title"`
+	Links   []interface{} `json:"links"`
 }
 
 type servicesTemplate struct {
@@ -300,7 +300,17 @@ func injectLinks(templateData []byte, flatLinks []LinkEntry) ([]ServiceEntry, er
 				if err == nil {
 					if ok {
 						for _, stringLink := range group.Links {
-							entry, found := findLinkById(stringLink, flatLinks)
+							var castLink string
+							castLink, ok = stringLink.(string)
+							var found bool
+							var entry ServiceLink
+							if ok {
+								entry, found = findLinkById(castLink, flatLinks)
+							}
+							/**
+							* Else branch is not handled because the link is "artificial" and does not exist in navigation.
+							* If a link is not in the navigation, it is not indexed.
+							 */
 							if found {
 								finalLinks = append(finalLinks, entry)
 							}

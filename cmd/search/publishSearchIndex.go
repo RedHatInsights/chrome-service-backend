@@ -343,7 +343,7 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 		Stage: "https://console.stage.redhat.com",
 	}
 	bundleMapping := map[string]string{
-		"application-services": "Application and Data Services",
+		"application-services": "Application Services",
 		"openshift":            "OpenShift",
 		"ansible":              "Ansible Automation Platform",
 		"insights":             "Red Hat Insights",

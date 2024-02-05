@@ -58,6 +58,9 @@ func Init() {
 	if !DB.Migrator().HasTable(&models.SelfReport{}) {
 		DB.Migrator().CreateTable(&models.SelfReport{})
 	}
+	if !DB.Migrator().HasTable(&models.DashboardTemplate{}) {
+		DB.Migrator().CreateTable(&models.DashboardTemplate{})
+	}
 	if err != nil {
 		panic(fmt.Sprintf("Database connection failed: %s", err.Error()))
 	}

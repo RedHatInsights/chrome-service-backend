@@ -30,7 +30,7 @@ On first template requests, if a user does not have any custom template, new is 
 
 The newly generated template becomes the user default.
 
-Each template will contain 4 variants of the configurations bad on screen sizes.
+Each template will contain 4 variants of the configurations based on various screen sizes.
 - sm
 - md
 - lg
@@ -56,7 +56,7 @@ Each user can have multiple layout templates. They can create and remove layouts
 
 ## Layout storage
 
-We are dealing with a uniform JSON object. There are no queries made with regard to the actual layout. No significant data are the from the user POV that would make sens to look trough.
+We are dealing with a uniform JSON object. There are no queries made with regard to the actual layout. No significant data is stored from the user POV that would make sense to look through.
 
 The layout is stored as a JSON blob in the database. The entity itself will have name that can be used for filtering.
 
@@ -139,7 +139,7 @@ The [Layout modification restrictions](#Layout-modification-restrictions) apply 
 
 The only mutable attributes of a layout is the react-grid-layout config. Rest of attributes are immutable.
 
-If a request with changed immutable attributes is send, these changes are discarded and only the grid config is updated.
+If a request with changed immutable attributes is sent, these changes are discarded and only the grid config is updated.
 
 ![Layout updates](./img/layout-updates.png)
 
@@ -173,7 +173,7 @@ Potentially think about feature to restore removed (archived) layouts.
 
 Another way to create a layout is to duplicate existing layout.
 
-The user **does not have to own te layout** to copy it. 
+The user **does not have to own the layout** to copy it. 
 
 This may change in the future once the layout sharing feature will be added.
 

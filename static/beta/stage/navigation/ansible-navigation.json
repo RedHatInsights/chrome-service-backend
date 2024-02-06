@@ -153,7 +153,7 @@
                     "filterable": false,
                     "icon": "AnsibleIcon",
                     "product": "Ansible as a Service",
-                    "href": "/ansible/ansible-as-a-service/registration"
+                    "href": "/ansible/service/registration"
                 },
                 {
                     "id": "aaaMSSubscriptionView",
@@ -162,7 +162,7 @@
                     "title": "Subscriptions",
                     "icon": "AnsibleIcon",
                     "product": "Ansible as a Service",
-                    "href": "/ansible/ansible-as-a-service/subscriptions"
+                    "href": "/ansible/service/subscriptions"
                 }
             ]
         },

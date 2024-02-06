@@ -1111,7 +1111,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/ansible/ansible-as-a-service/registration"
+                        "pathname": "/ansible/service/registration"
                     }
                 ]
             }
@@ -1130,7 +1130,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/ansible/ansible-as-a-service/subscriptions"
+                        "pathname": "/ansible/service/subscriptions"
                     }
                 ]
             }

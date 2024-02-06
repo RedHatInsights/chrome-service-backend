@@ -142,6 +142,31 @@
             ]
         },
         {
+            "title": "Ansible as a Service",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "aaaMSRegistrationPage",
+                    "appId": "aaaMSRegistrationPage",
+                    "description": "Ansible as a managed service registration page",
+                    "title": "Customer Registration",
+                    "filterable": false,
+                    "icon": "AnsibleIcon",
+                    "product": "Ansible as a Service",
+                    "href": "/ansible/ansible-as-a-service/registration"
+                },
+                {
+                    "id": "aaaMSSubscriptionView",
+                    "appId": "aaaMSSubscriptionView",
+                    "description": "Ansible as a managed service subscriptions",
+                    "title": "Subscriptions",
+                    "icon": "AnsibleIcon",
+                    "product": "Ansible as a Service",
+                    "href": "/ansible/ansible-as-a-service/subscriptions"
+                }
+            ]
+        },
+        {
             "id": "documentation",
             "title": "Documentation",
             "isExternal": true,

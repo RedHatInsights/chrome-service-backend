@@ -1098,6 +1098,44 @@
             }
         ]
     },
+    "aaaMSRegistrationPage": {
+        "manifestLocation": "/apps/ansible-as-a-service-registration/fed-mods.json",
+        "config": {
+          "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
+        "modules": [
+            {
+                "id": "aaams-registration",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/ansible/ansible-as-a-service/registration"
+                    }
+                ]
+            }
+        ]
+    },
+    "aaaMSSubscriptionView": {
+        "manifestLocation": "/apps/ansible-as-a-service-subscription/fed-mods.json",
+        "config": {
+          "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
+        "modules": [
+            {
+                "id": "aaams-subscription",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/ansible/ansible-as-a-service/subscriptions"
+                    }
+                ]
+            }
+        ]
+    },
     "serviceAccounts": {
       "manifestLocation": "/apps/service-accounts/fed-mods.json",
       "config": {

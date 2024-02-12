@@ -5,6 +5,26 @@
   "servicesId": "quay",
   "navItems": [
     {
+      "id": "quayOverview",
+      "appId": "quay-ui-plugin",
+      "title": "Overview",
+      "icon": "QuayIoIcon",
+      "description": "Overview information about quay.io",
+      "href": "/quay/overview",
+      "permissions": [
+        {
+            "method": "apiRequest",
+            "args": [
+                {
+                    "url": "/apps/quay/plugin-manifest.json",
+                    "matcher": "isNotEmpty",
+                    "accessor": "version"
+                }
+            ]
+        }
+      ]
+    },
+    {
       "id": "quayOrganizations",
       "appId": "quay-ui-plugin",
       "title": "Organizations",

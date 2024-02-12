@@ -10,7 +10,7 @@
       "title": "Overview",
       "icon": "QuayIoIcon",
       "description": "Overview information about quay.io",
-      "href": "/quay/overview"
+      "href": "/quay/overview",
       "permissions": [
         {
             "method": "apiRequest",

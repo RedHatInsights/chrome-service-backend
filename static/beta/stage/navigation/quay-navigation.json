@@ -10,7 +10,7 @@
       "title": "Overview",
       "icon": "QuayIoIcon",
       "description": "Overview information about quay.io",
-      "href": "/quay/overview",
+      "href": "/quay/overview"
     },
     {
       "id": "quayOrganizations",
@@ -18,7 +18,7 @@
       "title": "Organizations",
       "icon": "QuayIoIcon",
       "description": "Group and manage repositories belonging to a particular team, group, or company.",
-      "href": "/quay/organization",
+      "href": "/quay/organization"
     },
     {
       "id": "quayRepositories",
@@ -26,7 +26,7 @@
       "title": "Repositories",
       "icon": "QuayIoIcon",
       "description": "Provide a central location for storing a related set of container images.",
-      "href": "/quay/repository",
+      "href": "/quay/repository"
     }
   ],
   "alt_title": [

@@ -941,6 +941,25 @@
             }
         ]
     },
+    "ansibleWisdomAdminDashboard": {
+        "manifestLocation": "/apps/ansible-wisdom-admin-dashboard/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
+        "modules": [
+            {
+                "id": "ansible-wisdom-admin-dashboard",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/ansible/lightspeed-admin-dashboard"
+                    }
+                ]
+            }
+        ]
+    },
     "acs": {
         "manifestLocation": "/apps/acs/fed-mods.json",
         "modules": [

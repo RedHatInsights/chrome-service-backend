@@ -6,12 +6,6 @@
         "id": "flatNav",
         "title": "Flat nav",
         "dynamicNav": "hacCore"
-      },
-      {
-        "id": "learningResources",
-        "appId": "applicationServices",
-        "title": "Learning Resources",
-        "href": "/hac/learning-resources"
       }
   ]
 }

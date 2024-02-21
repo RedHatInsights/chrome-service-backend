@@ -5,24 +5,20 @@
   "servicesId": "quay",
   "navItems": [
     {
+      "id": "quayOverview",
+      "appId": "quay-ui-plugin",
+      "title": "Overview",
+      "icon": "QuayIoIcon",
+      "description": "Overview information about quay.io",
+      "href": "/quay/overview"
+    },
+    {
       "id": "quayOrganizations",
       "appId": "quay-ui-plugin",
       "title": "Organizations",
       "icon": "QuayIoIcon",
       "description": "Group and manage repositories belonging to a particular team, group, or company.",
-      "href": "/quay/organization",
-      "permissions": [
-        {
-            "method": "apiRequest",
-            "args": [
-                {
-                    "url": "/beta/apps/quay/plugin-manifest.json",
-                    "matcher": "isNotEmpty",
-                    "accessor": "version"
-                }
-            ]
-        }
-      ]
+      "href": "/quay/organization"
     },
     {
       "id": "quayRepositories",
@@ -30,19 +26,7 @@
       "title": "Repositories",
       "icon": "QuayIoIcon",
       "description": "Provide a central location for storing a related set of container images.",
-      "href": "/quay/repository",
-      "permissions": [
-        {
-            "method": "apiRequest",
-            "args": [
-                {
-                    "url": "/beta/apps/quay/plugin-manifest.json",
-                    "matcher": "isNotEmpty",
-                    "accessor": "version"
-                }
-            ]
-        }
-      ]
+      "href": "/quay/repository"
     }
   ],
   "alt_title": [

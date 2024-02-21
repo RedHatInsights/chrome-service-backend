@@ -3,6 +3,7 @@ package util
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"gorm.io/datatypes"
@@ -26,16 +27,25 @@ func prepareInitialGridItems(jsonData string) []models.GridItem {
 }
 
 // TODO: replace these once we have actual base templates
-var landingPageBaseLayout = `[
-	{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "LargeWidget#lw1", "x": 0, "y": 0 },
-	{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "LargeWidget#lw2", "x": 0, "y": 1 },
-	{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "LargeWidget#lw3", "x": 0, "y": 2 },
-	{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "MediumWidget#mw1", "x": 4, "y": 2 },
-	{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "SmallWidget#sw1", "x": 4, "y": 0 },
-	{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "SmallWidget#sw2", "x": 4, "y": 1 }
-]`
+func getLandingPageBaseLayout(x string) string {
+	if x == "" {
+		x = "1"
+	}
+	const template = `[
+		{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "LargeWidget#lw1", "x": 0, "y": 0, "static": true},
+		{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "LargeWidget#lw2", "x": 0, "y": 1, "static": true },
+		{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "LargeWidget#lw3", "x": 0, "y": 2, "static": true},
+		{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "MediumWidget#mw1", "x": %[1]s, "y": 2, "static": true},
+		{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "SmallWidget#sw1", "x": %[1]s, "y": 0, "static": true},
+		{ "maxH": 4, "minH": 1, "w": 1, "h": 1, "title": "Widget 1", "i": "SmallWidget#sw2", "x": %[1]s, "y": 1, "static": true}
+	]`
+	return fmt.Sprintf(template, x)
+}
 
-var landingPage = prepareInitialGridItems(landingPageBaseLayout)
+var landingPageSm = prepareInitialGridItems(getLandingPageBaseLayout("1"))
+var landingPageMd = prepareInitialGridItems(getLandingPageBaseLayout("2"))
+var landingPageLg = prepareInitialGridItems(getLandingPageBaseLayout("3"))
+var landingPageXl = prepareInitialGridItems(getLandingPageBaseLayout("4"))
 
 func convertToJson(items []models.GridItem) datatypes.JSON {
 	json, err := json.Marshal(items)
@@ -53,10 +63,10 @@ var (
 			Name:        "landingPage",
 			DisplayName: "Landing Page",
 			TemplateConfig: models.TemplateConfig{
-				Sx: convertToJson(landingPage),
-				Md: convertToJson(landingPage),
-				Lg: convertToJson(landingPage),
-				Xl: convertToJson(landingPage),
+				Sm: convertToJson(landingPageSm),
+				Md: convertToJson(landingPageMd),
+				Lg: convertToJson(landingPageLg),
+				Xl: convertToJson(landingPageXl),
 			},
 		},
 	}

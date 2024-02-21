@@ -39,7 +39,7 @@ func (at AvailableTemplates) IsValid() error {
 }
 
 type TemplateConfig struct {
-	Sx datatypes.JSON `gorm:"not null;default null" json:"sx"`
+	Sm datatypes.JSON `gorm:"not null;default null" json:"sm"`
 	Md datatypes.JSON `gorm:"not null;default null" json:"md"`
 	Lg datatypes.JSON `gorm:"not null;default null" json:"lg"`
 	Xl datatypes.JSON `gorm:"not null;default null" json:"xl"`
@@ -54,12 +54,13 @@ type GridItem struct {
 	Height    int    `json:"h"`
 	MaxHeight int    `json:"maxH"`
 	MinHeight int    `json:"minH"`
+	Static    bool   `json:"static"`
 }
 
 type GridSizes string
 
 const (
-	Sx GridSizes = "sx"
+	Sm GridSizes = "sm"
 	Md GridSizes = "md"
 	Lg GridSizes = "lg"
 	Xl GridSizes = "xl"
@@ -67,10 +68,10 @@ const (
 
 func (gs GridSizes) IsValid() error {
 	switch gs {
-	case Sx, Md, Lg, Xl:
+	case Sm, Md, Lg, Xl:
 		return nil
 	default:
-		return errors.New(fmt.Errorf("invalid grid size, expected one of %s, %s, %s, %s", Sx, Md, Lg, Xl).Error())
+		return errors.New(fmt.Errorf("invalid grid size, expected one of %s, %s, %s, %s", Sm, Md, Lg, Xl).Error())
 	}
 }
 
@@ -80,7 +81,7 @@ func (gs GridSizes) GetMaxWidth() (int, error) {
 		return 0, err
 	}
 	switch gs {
-	case Sx:
+	case Sm:
 		return 1, nil
 	case Md:
 		return 2, nil

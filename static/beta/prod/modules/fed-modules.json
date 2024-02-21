@@ -1001,22 +1001,27 @@
             }
         ]
     },
-    "virtualAssistant": {
-      "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
-      "modules": []
-    },
-    "dashboardFrontend": {
-        "manifestLocation": "/apps/dashboard-frontend/fed-mods.json",
+    "ansibleWisdomAdminDashboard": {
+        "manifestLocation": "/apps/ansible-wisdom-admin-dashboard/fed-mods.json",
+        "config": {
+            "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
         "modules": [
             {
-                "id": "dashboardFrontend",
+                "id": "ansible-wisdom-admin-dashboard",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/staging/dashboard-frontend"
+                        "pathname": "/ansible/lightspeed-admin-dashboard"
                     }
                 ]
             }
         ]
+    },
+    "virtualAssistant": {
+      "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
+      "modules": []
     }
 }

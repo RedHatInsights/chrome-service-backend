@@ -1134,19 +1134,5 @@
     "virtualAssistant": {
         "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
         "modules": []
-    },
-    "dashboardFrontend": {
-        "manifestLocation": "/apps/dashboard-frontend/fed-mods.json",
-        "modules": [
-            {
-                "id": "dashboardFrontend",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/staging/dashboard-frontend"
-                    }
-                ]
-            }
-        ]
     }
 }

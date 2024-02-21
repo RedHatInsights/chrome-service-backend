@@ -2,22 +2,25 @@ package service
 
 import (
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
-	"testing"
-	"time"
+	"gorm.io/datatypes"
 )
+
+var user models.UserIdentity
 
 func SeedDatabase() {
 	util.LoadEnv()
 	database.Init()
-	pages := []models.LastVisitedPage{{
-		Title:          "Advisor",
-		Pathname:       "insights/first",
-		Bundle:         "insights",
-		UserIdentityID: 1,
-	}}
+	pages := datatypes.NewJSONType[[]models.VisitedPage]([]models.VisitedPage{{
+		Title:    "Advisor",
+		Pathname: "insights/first",
+		Bundle:   "insights",
+	}})
 	userBase := models.UserIdentity{
 		BaseModel:        models.BaseModel{},
 		AccountId:        "1",
@@ -34,29 +37,27 @@ func SeedDatabase() {
 		panic(err)
 	}
 
+	user = userBase
+
 }
 
 func TestBatchLastVisited(t *testing.T) {
 	SeedDatabase()
 	const PageCount = 10
 	// There is already an entry in the db when these are added
-	batchPages := []models.LastVisitedPage{}
+	batchPages := []models.VisitedPage{}
 	for i := 0; i < PageCount; i++ {
-		newPage := models.LastVisitedPage{
-			Title:          fmt.Sprintf("Resources-%v", i),
-			Pathname:       fmt.Sprintf("insights/ros=%v", i),
-			Bundle:         "insights",
-			UserIdentityID: 1,
+		newPage := models.VisitedPage{
+			Title:    fmt.Sprintf("Resources-%v", i),
+			Pathname: fmt.Sprintf("insights/ros=%v", i),
+			Bundle:   "insights",
 		}
 		batchPages = append(batchPages, newPage)
 	}
-	if err := HandlePostLastVisitedPages(batchPages, 1); err != nil {
+	if err := HandlePostLastVisitedPages(batchPages, user); err != nil {
 		t.Fatal(err)
 	}
-	pages, err := GetUsersLastVisitedPages(1)
-	if err != nil {
-		t.Fatal(err)
-	}
+	pages := user.LastVisitedPages.Data()
 	if len(pages) != PageCount {
 		t.Errorf("Wanted %v pages, but found %v instead", PageCount, len(pages))
 	}

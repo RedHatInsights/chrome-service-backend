@@ -2,18 +2,18 @@ package routes
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
-	"net/http"
 )
 
 func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
-	userId := user.ID
-	var recentPages models.LastVisitedPages
+	var recentPages models.LastVisitedRequest
 
 	err := json.NewDecoder(r.Body).Decode(&recentPages)
 
@@ -25,18 +25,18 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = service.HandlePostLastVisitedPages(recentPages.Pages, userId)
-	if err != nil {
-		panic(err)
-	}
-	pages, err := service.GetUsersLastVisitedPages(userId)
-
+	err = service.HandlePostLastVisitedPages(recentPages.Pages, user)
 	if err != nil {
 		panic(err)
 	}
 
-	resp := util.ListResponse[models.LastVisitedPageResponse]{
-		Data: models.CastLastVisitedResponse(pages),
+	if err != nil {
+		panic(err)
+	}
+
+	pages := user.LastVisitedPages.Data()
+	resp := util.ListResponse[models.VisitedPage]{
+		Data: pages,
 		Meta: util.ListMeta{
 			Count: len(pages),
 			Total: len(pages),
@@ -47,15 +47,11 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 
 func GetLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
-	userId := user.ID
 
-	pages, err := service.GetUsersLastVisitedPages(userId)
+	pages := user.LastVisitedPages.Data()
 
-	if err != nil {
-		panic(err)
-	}
-	resp := util.ListResponse[models.LastVisitedPageResponse]{
-		Data: models.CastLastVisitedResponse(pages),
+	resp := util.ListResponse[models.VisitedPage]{
+		Data: pages,
 		Meta: util.ListMeta{
 			Count: len(pages),
 			Total: len(pages),

@@ -52,9 +52,6 @@ func Init() {
 	if !DB.Migrator().HasTable(&models.FavoritePage{}) {
 		DB.Migrator().CreateTable(&models.FavoritePage{})
 	}
-	if !DB.Migrator().HasTable(&models.LastVisitedPage{}) {
-		DB.Migrator().CreateTable(&models.LastVisitedPage{})
-	}
 	if !DB.Migrator().HasTable(&models.SelfReport{}) {
 		DB.Migrator().CreateTable(&models.SelfReport{})
 	}

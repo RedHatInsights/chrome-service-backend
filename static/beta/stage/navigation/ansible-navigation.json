@@ -120,7 +120,11 @@
                     "permissions": [
                         {
                             "method": "withEmail",
-                            "args": ["@redhat.com", "@sbb.ch"]
+                            "args": ["@redhat.com"]
+                        },
+                        {
+                            "method": "hasPermissions",
+                            "args": ["ansible-wisdom-admin-dashboard:*:*"]
                         }
                     ],
                     "href": "/ansible/lightspeed-admin-dashboard"

@@ -10,6 +10,31 @@ import (
 	"gorm.io/gorm"
 )
 
+func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.DashboardTemplate, error) {
+	err := dashboard.IsValid()
+	if err != nil {
+		return models.DashboardTemplate{}, err
+	}
+
+	baseTemplate := util.BaseTemplates[dashboard]
+
+	templateBase := models.DashboardTemplateBase{
+		Name:        dashboard.String(),
+		DisplayName: util.BaseTemplates[dashboard].DisplayName,
+	}
+
+	dashboardTemplate := models.DashboardTemplate{
+		UserIdentityID: userId,
+		Default:        true,
+		TemplateBase:   templateBase,
+		TemplateConfig: baseTemplate.TemplateConfig,
+	}
+
+	result := database.DB.Create(&dashboardTemplate)
+
+	return dashboardTemplate, result.Error
+}
+
 func GetAllUserDashboardTemplates(userId uint) ([]models.DashboardTemplate, error) {
 	var userDashboardTemplates []models.DashboardTemplate
 
@@ -21,10 +46,6 @@ func GetAllUserDashboardTemplates(userId uint) ([]models.DashboardTemplate, erro
 func GetUserDashboardTemplate(userId uint, dashboard models.AvailableTemplates) ([]models.DashboardTemplate, error) {
 	var userDashboardTemplates []models.DashboardTemplate
 
-	templateBase := models.DashboardTemplateBase{
-		Name:        dashboard.String(),
-		DisplayName: util.BaseTemplates[dashboard].DisplayName,
-	}
 	result := database.DB.Where("user_identity_id = ? AND name = ?", userId, dashboard).Find(&userDashboardTemplates)
 
 	if result.RowsAffected == 0 {
@@ -32,16 +53,11 @@ func GetUserDashboardTemplate(userId uint, dashboard models.AvailableTemplates) 
 			return userDashboardTemplates, result.Error
 		}
 
-		baseTemplate := util.BaseTemplates[dashboard]
+		dashboardTemplate, err := ForkBaseTemplate(userId, dashboard)
 
-		dashboardTemplate := models.DashboardTemplate{
-			UserIdentityID: userId,
-			Default:        true,
-			TemplateBase:   templateBase,
-			TemplateConfig: baseTemplate.TemplateConfig,
+		if err != nil {
+			return nil, err
 		}
-
-		result = database.DB.Create(&dashboardTemplate)
 
 		userDashboardTemplates = append(userDashboardTemplates, dashboardTemplate)
 	}

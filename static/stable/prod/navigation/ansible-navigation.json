@@ -112,14 +112,6 @@
             "expandable": true,
             "routes": [
                 {
-                    "id": "seatsAdminUi",
-                    "appId": "ansibleSeatsAdmin",
-                    "description": "Assign Ansible Lightspeed seats to users within your organization.",
-                    "title": "Seat Management",
-                    "filterable": false,
-                    "href": "/ansible/seats-administration"
-                },
-                {
                     "id": "ansibleWisdomAdminDashboard",
                     "appId": "ansibleWisdomAdminDashboard",
                     "description": "Ansible Lightspeed administration dashboard.",

@@ -95,7 +95,6 @@
                             "title": "Workloads",
                             "href": "/openshift/insights/advisor/workloads",
                             "product": "Red Hat OpenShift Cluster Manager",
-                            "isBeta": true,
                             "permissions": [
                                 {
                                   "method": "featureFlag",

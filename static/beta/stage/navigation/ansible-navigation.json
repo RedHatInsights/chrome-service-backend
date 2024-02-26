@@ -123,8 +123,14 @@
                             "args": ["@redhat.com"]
                         },
                         {
-                            "method": "hasPermissions",
-                            "args": ["ansible-wisdom-admin-dashboard:*:*"]
+                            "method": "loosePermissions",
+                            "args": [
+                                [
+                                    "ansible-wisdom-admin-dashboard:chart-recommendations:read",
+                                    "ansible-wisdom-admin-dashboard:chart-user-sentiment:read",
+                                    "ansible-wisdom-admin-dashboard:chart-module-usage:read"
+                                ]
+                            ]
                         }
                     ],
                     "href": "/ansible/lightspeed-admin-dashboard"

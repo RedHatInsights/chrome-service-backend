@@ -121,6 +121,16 @@
                         {
                             "method": "withEmail",
                             "args": ["@redhat.com"]
+                        },
+                        {
+                            "method": "loosePermissions",
+                            "args": [
+                                [
+                                    "ansible-wisdom-admin-dashboard:chart-recommendations:read",
+                                    "ansible-wisdom-admin-dashboard:chart-user-sentiment:read",
+                                    "ansible-wisdom-admin-dashboard:chart-module-usage:read"
+                                ]
+                            ]
                         }
                     ],
                     "href": "/ansible/lightspeed-admin-dashboard"

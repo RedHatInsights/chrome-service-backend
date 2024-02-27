@@ -40,7 +40,7 @@ func mockDashboardTemplatesData() {
 			DisplayName: "Template 1",
 		},
 		TemplateConfig: models.TemplateConfig{
-			Sx: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+			Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 			Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 			Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 			Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
@@ -55,7 +55,7 @@ func mockDashboardTemplatesData() {
 			DisplayName: "Template 2",
 		},
 		TemplateConfig: models.TemplateConfig{
-			Sx: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+			Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 			Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 			Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 			Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
@@ -70,8 +70,8 @@ func mockDashboardTemplatesData() {
 			DisplayName: "Modified Template 1",
 		},
 		TemplateConfig: models.TemplateConfig{
-			Sx: []byte(`[{"title":"","i":"foo","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-			Md: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
+			Sm: []byte(`[{"title":"","i":"foo","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
+			Md: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":true}]`),
 			Lg: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
 			Xl: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
 		},
@@ -186,7 +186,7 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Template 1",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sx: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+				Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 				Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 				Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 				Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
@@ -206,7 +206,7 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Template 1",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sx: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+				Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 				Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 				Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
 				Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
@@ -226,10 +226,10 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Foo bar",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sx: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-				Md: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-				Lg: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-				Xl: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
+				Sm: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
+				Md: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
+				Lg: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
+				Xl: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
 			},
 		}
 		updatedTemplate, err := UpdateDashboardTemplate(templateId, userId, template)
@@ -251,7 +251,7 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Foo bar",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sx: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":0,"h":1,"maxH":4,"minH":1}]`),
+				Sm: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":0,"h":1,"maxH":4,"minH":1}]`),
 				Md: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
 				Lg: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
 				Xl: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),

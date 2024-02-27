@@ -14,13 +14,13 @@ func TestCreateBaseLayouts(t *testing.T) {
 		assert.NotNil(t, layouts)
 		assert.NotNil(t, layouts["landingPage"])
 		assert.NotNil(t, layouts["landingPage"].TemplateConfig)
-		assert.NotNil(t, layouts["landingPage"].TemplateConfig.Sx)
+		assert.NotNil(t, layouts["landingPage"].TemplateConfig.Sm)
 		assert.NotNil(t, layouts["landingPage"].TemplateConfig.Md)
 		assert.NotNil(t, layouts["landingPage"].TemplateConfig.Lg)
 		assert.NotNil(t, layouts["landingPage"].TemplateConfig.Xl)
 
 		var gridItems []map[string]interface{}
-		json.Unmarshal(layouts["landingPage"].TemplateConfig.Sx, &gridItems)
+		json.Unmarshal(layouts["landingPage"].TemplateConfig.Sm, &gridItems)
 
 		assert.Equal(t, 6, len(gridItems))
 	})

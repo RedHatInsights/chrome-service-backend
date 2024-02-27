@@ -14,6 +14,8 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/sirupsen/logrus"
+
+	"gorm.io/datatypes"
 )
 
 type IntercomApp string
@@ -63,17 +65,10 @@ func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {
 
 // Get user data complete with it's related tables.
 func GetUserIdentityData(user models.UserIdentity) (models.UserIdentity, error) {
-	var lastVisitedPages []models.LastVisitedPage
 	var favoritePages []models.FavoritePage
-
-	err := database.DB.Model(&user).Association("LastVisitedPages").Find(&lastVisitedPages)
-	if err != nil {
-		return user, err
-	}
-	err = database.DB.Model(&user).Association("FavoritePages").Find(&favoritePages)
+	err := database.DB.Model(&user).Association("FavoritePages").Find(&favoritePages)
 	debugFavoritesIdentity(user.AccountId)
 
-	user.LastVisitedPages = lastVisitedPages
 	user.FavoritePages = favoritePages
 	return user, err
 }
@@ -114,7 +109,7 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 		FirstLogin:       true,
 		DayOne:           true,
 		LastLogin:        time.Now(),
-		LastVisitedPages: []models.LastVisitedPage{},
+		LastVisitedPages: datatypes.NewJSONType([]models.VisitedPage{}),
 		FavoritePages:    []models.FavoritePage{},
 		SelfReport:       models.SelfReport{},
 		VisitedBundles:   nil,

@@ -13,6 +13,7 @@ func main() {
 	database.Init()
 
 	var bundleRes *gorm.DB
+	var visitedRes *gorm.DB
 	tx := database.DB.Begin()
 	defer func() {
 		if r := recover(); r != nil {
@@ -26,13 +27,28 @@ func main() {
 		panic(err)
 	}
 
-	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.LastVisitedPage{}, &models.SelfReport{}, &models.UserIdentity{}, &models.ProductOfInterest{}, &models.DashboardTemplate{}); err != nil {
+	// fk_user_identities_last_visited_pages
+	if tx.Migrator().HasConstraint(&models.UserIdentity{}, "fk_user_identities_last_visited_pages") {
+		if err := tx.Migrator().DropConstraint(&models.UserIdentity{}, "fk_user_identities_last_visited_pages"); err != nil {
+			logrus.Error("Unable to migrate database!")
+			tx.Rollback()
+			panic(err)
+		}
+	}
+
+	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.UserIdentity{}, &models.SelfReport{}, &models.ProductOfInterest{}, &models.DashboardTemplate{}); err != nil {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()
 		panic(err)
 	}
 
 	bundleRes = tx.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
+	if bundleRes.Error != nil {
+		logrus.Error("Unable to migrate database!")
+		tx.Rollback()
+		panic(bundleRes.Error)
+	}
+	visitedRes = tx.Model(&models.UserIdentity{}).Where("last_visited_pages IS NULL").Update("last_visited_pages", []byte(`[]`))
 	if bundleRes.Error != nil {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()
@@ -49,6 +65,10 @@ func main() {
 
 	if bundleRes.RowsAffected > 0 {
 		logrus.Infof("Migrated %d user identity bundles rows", bundleRes.RowsAffected)
+	}
+
+	if visitedRes.RowsAffected > 0 {
+		logrus.Infof("Migrated %d user identity visited rows", visitedRes.RowsAffected)
 	}
 	logrus.Info("Migration complete")
 }

@@ -2,11 +2,12 @@ package routes
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
-	"net/http"
 )
 
 type AddVisitedBundlePayload struct {
@@ -21,13 +22,12 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	responsePages := models.CastLastVisitedResponse(updatedUser.LastVisitedPages)
 	response := models.UserIdentityResponse{
 		AccountId:        updatedUser.AccountId,
 		FirstLogin:       updatedUser.FirstLogin,
 		DayOne:           updatedUser.DayOne,
 		LastLogin:        updatedUser.LastLogin,
-		LastVisitedPages: responsePages,
+		LastVisitedPages: updatedUser.LastVisitedPages.Data(),
 		FavoritePages:    updatedUser.FavoritePages,
 		SelfReport:       updatedUser.SelfReport,
 		VisitedBundles:   updatedUser.VisitedBundles,

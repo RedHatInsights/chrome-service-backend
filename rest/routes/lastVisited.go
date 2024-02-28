@@ -25,7 +25,7 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = service.HandlePostLastVisitedPages(recentPages.Pages, user)
+	err = service.HandlePostLastVisitedPages(recentPages.Pages, &user)
 	if err != nil {
 		panic(err)
 	}

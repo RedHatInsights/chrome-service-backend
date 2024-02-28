@@ -32,13 +32,12 @@ func SeedDatabase() {
 		SelfReport:       models.SelfReport{},
 		VisitedBundles:   nil,
 	}
-	err := database.DB.Where("account_id = ?", "1").FirstOrCreate(&userBase).Error
+	err := database.DB.Where("account_id = ?", "2").FirstOrCreate(&userBase).Error
 	if err != nil {
 		panic(err)
 	}
 
 	user = userBase
-
 }
 
 func TestBatchLastVisited(t *testing.T) {
@@ -54,11 +53,33 @@ func TestBatchLastVisited(t *testing.T) {
 		}
 		batchPages = append(batchPages, newPage)
 	}
-	if err := HandlePostLastVisitedPages(batchPages, user); err != nil {
+	if err := HandlePostLastVisitedPages(batchPages, &user); err != nil {
 		t.Fatal(err)
 	}
 	pages := user.LastVisitedPages.Data()
 	if len(pages) != PageCount {
 		t.Errorf("Wanted %v pages, but found %v instead", PageCount, len(pages))
+	}
+
+}
+
+func TestSmallBatchLastVisited(t *testing.T) {
+	const NewPages = 3
+	const PageCount = 3
+	newPages := []models.VisitedPage{}
+	for i := 0; i < NewPages; i++ {
+		newPage := models.VisitedPage{
+			Title:    fmt.Sprintf("Resources-small-%v", i),
+			Pathname: fmt.Sprintf("insights/ros-small-%v", i),
+			Bundle:   "insights",
+		}
+		newPages = append(newPages, newPage)
+	}
+	if err := HandlePostLastVisitedPages(newPages, &user); err != nil {
+		t.Fatal(err)
+	}
+	smallPages := user.LastVisitedPages.Data()
+	if len(smallPages) != PageCount {
+		t.Errorf("Wanted %v pages, but found %v instead", PageCount, len(smallPages))
 	}
 }

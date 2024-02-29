@@ -36,6 +36,15 @@ func main() {
 		}
 	}
 
+	// temporary - removes unused typo column in dashboard template tables
+	if tx.Migrator().HasColumn(&models.DashboardTemplate{}, "sx") {
+		if err := tx.Migrator().DropColumn(&models.DashboardTemplate{}, "sx"); err != nil {
+			logrus.Error("Unable to migrate database!")
+			tx.Rollback()
+			panic(err)
+		}
+	}
+
 	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.UserIdentity{}, &models.SelfReport{}, &models.ProductOfInterest{}, &models.DashboardTemplate{}); err != nil {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()

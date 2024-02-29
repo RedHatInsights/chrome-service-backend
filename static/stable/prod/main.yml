@@ -179,8 +179,6 @@ patch:
   api:
     versions:
       - v3
-      - v2
-      - v1
 
 playbook-dispatcher:
   title: Playbook Dispatcher

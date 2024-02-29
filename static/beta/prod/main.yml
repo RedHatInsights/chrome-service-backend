@@ -202,8 +202,6 @@ patch:
   api:
     versions:
       - v3
-      - v2
-      - v1
     isBeta: true
 
 playbook-dispatcher:

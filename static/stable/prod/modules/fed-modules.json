@@ -948,6 +948,9 @@
                 "api.iam.access"
             ]
         },
+        "analytics": {
+            "APIKey": "FC34YU5GDrtkVKX1yp2zC7l4Jr0M573g"
+        },
         "modules": [
             {
                 "id": "ansible-wisdom-admin-dashboard",

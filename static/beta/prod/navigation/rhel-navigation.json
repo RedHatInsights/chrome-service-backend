@@ -478,6 +478,14 @@
             "resource optimization",
             "resource optimisation"
           ]
+        },
+        {
+          "id": "subscriptions",
+          "appId": "subscriptions",
+          "title": "Subscriptions",
+          "filterable": false,
+          "href": "/subscriptions/usage/rhel",
+          "product": "Red Hat Insights"
         }
       ]
     },

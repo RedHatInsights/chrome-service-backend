@@ -119,10 +119,6 @@
                     "icon": "AnsibleIcon",
                     "permissions": [
                         {
-                            "method": "withEmail",
-                            "args": ["@redhat.com"]
-                        },
-                        {
                             "method": "loosePermissions",
                             "args": [
                                 [

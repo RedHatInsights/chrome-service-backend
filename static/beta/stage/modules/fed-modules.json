@@ -1134,5 +1134,9 @@
     "virtualAssistant": {
         "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
         "modules": []
+    },
+    "widgetLayout": {
+        "manifestLocation": "/apps/widget-layout/fed-mods.json",
+        "modules": []
     }
 }

@@ -1116,6 +1116,16 @@
   },
   "widgetLayout": {
       "manifestLocation": "/apps/widget-layout/fed-mods.json",
-      "modules": []
+      "modules": [
+        {
+            "id": "widgetLayout",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/staging/widget-layout"
+                }
+            ]
+        }
+      ]
   }
 }

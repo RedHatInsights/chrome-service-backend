@@ -9,6 +9,12 @@
             "href": "/staging/starter"
         },
         {
+            "id": "widget-layout",
+            "title": "Widget layour",
+            "appId": "widget-layout",
+            "href": "/staging/widget-layout"
+        },
+        {
             "title": "Cost Management MFE",
             "expandable": true,
             "filterable": false,

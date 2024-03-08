@@ -175,7 +175,7 @@
         },
         {
           "id": "repositories",
-          "appId": "content-sources",
+          "appId": "contentSources",
           "title": "Repositories",
           "href": "/insights/content/repositories",
           "icon": "InsightsIcon",

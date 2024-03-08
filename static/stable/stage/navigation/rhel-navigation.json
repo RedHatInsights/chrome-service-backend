@@ -175,10 +175,10 @@
         },
         {
           "id": "repositories",
-          "appId": "contentSources",
+          "appId": "content-sources",
           "title": "Repositories",
-          "href": "/insights/content",
-          "icon": "SubscriptionsIcon",
+          "href": "/insights/content/repositories",
+          "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "alt_title": [
@@ -208,6 +208,22 @@
             "yum"
           ],
           "description": "Link your external repositories to build images."
+        },
+        {
+          "id": "templates",
+          "appId": "content-sources",
+          "title": "Templates",
+          "href": "/insights/content/templates",
+          "icon": "InsightsIcon",
+          "product": "Red Hat Insights",
+          "subtitle": "Red Hat Insights for RHEL",
+          "alt_title": [
+            "template",
+            "add template",
+            "content",
+            "custom content"
+          ],
+          "description": "Create content templates for use with systems."
         },
         {
           "title": "Patch",

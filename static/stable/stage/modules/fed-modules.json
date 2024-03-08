@@ -938,7 +938,7 @@
           }
       ]
   },
-  "contentSources": {
+  "content-sources": {
       "manifestLocation": "/apps/content-sources/fed-mods.json",
       "defaultDocumentTitle": "Repositories",
       "modules": [
@@ -948,9 +948,6 @@
               "routes": [
                   {
                       "pathname": "/insights/content"
-                  },
-                  {
-                      "pathname": "/settings/content"
                   }
               ]
           }

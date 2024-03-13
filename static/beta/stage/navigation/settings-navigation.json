@@ -70,8 +70,10 @@
                       {
                         "method": "loosePermissions",
                           "args": [
-                            "integrations:*:*",
-                            "integrations:endpoints:write"
+                            [
+                              "integrations:*:*",
+                              "integrations:endpoints:write"
+                            ]
                         ]
                       }
                     ]

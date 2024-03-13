@@ -56,7 +56,6 @@
                     {
                         "method": "loosePermissions",
                         "args": [
-                            "isOrgAdmin",
                             "integrations:*:*",
                             "integrations:endpoints:write"
                         ]

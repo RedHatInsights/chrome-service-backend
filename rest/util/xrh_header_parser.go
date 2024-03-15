@@ -34,6 +34,7 @@ type DecodedToken struct {
 	UserId        string `json:"user_id"`
 	OrgId         string `json:"org_id"`
 	AccountNumber string `json:"account_number"`
+	Username      string `json:"username"`
 }
 
 // Adaptation of chrome UI token parsing as we can't yse the JWT decode, because we do not have the decode key

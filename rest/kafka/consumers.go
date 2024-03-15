@@ -223,6 +223,7 @@ func startKafkaReader(r *kafka.Reader) {
 							Users:         p.Data.Users,
 							Roles:         p.Data.Roles,
 							Organizations: p.Data.Organizations,
+							Usernames:     p.Data.Usernames,
 						},
 						Broadcast: p.Data.Broadcast,
 						Data:      data,

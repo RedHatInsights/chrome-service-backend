@@ -28,10 +28,12 @@ type Client struct {
 	User         string
 	Organization string
 	Roles        []string
+	Username     string
 	Conn         *Connection
 }
 
 type MessageDestinations struct {
+	Usernames     []string
 	Users         []string
 	Roles         []string
 	Organizations []string
@@ -49,6 +51,7 @@ type WsMessage struct {
 	Users         []string               `json:"users"`
 	Roles         []string               `json:"roles"`
 	Organizations []string               `json:"organizations"`
+	Usernames     []string               `json:"usernames"`
 	Payload       map[string]interface{} `json:"payload"`
 }
 
@@ -56,6 +59,7 @@ type ConnectionNamespaces struct {
 	// index rooms clients by connections to allow better access
 	Roles        map[string]map[*Connection]*Client
 	Organization map[string]map[*Connection]*Client
+	Usernames    map[string]map[*Connection]*Client
 }
 
 type connectionHub struct {
@@ -71,6 +75,7 @@ var ConnectionHub = connectionHub{
 	Rooms: ConnectionNamespaces{
 		Roles:        make(map[string]map[*Connection]*Client),
 		Organization: make(map[string]map[*Connection]*Client),
+		Usernames:    make(map[string]map[*Connection]*Client),
 	},
 	Emit:       make(chan Message),
 	Broadcast:  make(chan Message),
@@ -95,12 +100,21 @@ func registerClientOrg(c Client, h *connectionHub) {
 	h.Rooms.Organization[c.Organization][c.Conn] = &c
 }
 
+func registerClientUsername(c Client, h *connectionHub) {
+	if h.Rooms.Usernames[c.Username] == nil {
+		h.Rooms.Usernames[c.Username] = make(map[*Connection]*Client)
+	}
+
+	h.Rooms.Usernames[c.Username][c.Conn] = &c
+}
+
 func registerClient(c Client, h *connectionHub) {
 	if h.Clients[c.User] == nil {
 		h.Clients[c.User] = &c
 	}
 	registerClientRoles(c, h)
 	registerClientOrg(c, h)
+	registerClientUsername(c, h)
 	logrus.Debugln("new client connected", c)
 }
 
@@ -118,9 +132,16 @@ func unregisterClientRoles(c Client, h *connectionHub) {
 	}
 }
 
+func unregisterClientUsername(c Client, h *connectionHub) {
+	if h.Rooms.Usernames[c.Username] != nil {
+		delete(h.Rooms.Usernames[c.Username], c.Conn)
+	}
+}
+
 func unregisterClient(c Client, h *connectionHub) {
 	unregisterClientRoles(c, h)
 	unregisterClientOrg(c, h)
+	unregisterClientUsername(c, h)
 	if h.Clients[c.User] != nil {
 		delete(h.Clients, c.User)
 	}
@@ -162,6 +183,14 @@ func emitMessage(m Message, h *connectionHub) {
 	for _, oid := range m.Destinations.Organizations {
 		if h.Rooms.Organization[oid] != nil {
 			for conn, c := range h.Rooms.Organization[oid] {
+				connections[conn] = c
+			}
+		}
+	}
+
+	for _, username := range m.Destinations.Usernames {
+		if h.Rooms.Usernames[username] != nil {
+			for conn, c := range h.Rooms.Usernames[username] {
 				connections[conn] = c
 			}
 		}

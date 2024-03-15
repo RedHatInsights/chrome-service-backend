@@ -15,6 +15,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
@@ -27,6 +28,7 @@ func init() {
 	godotenv.Load()
 	flag.Parse()
 	database.Init()
+	util.InitUserIdentitiesCache()
 }
 
 func main() {

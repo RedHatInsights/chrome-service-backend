@@ -13,6 +13,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/sirupsen/logrus"
 
 	"gorm.io/datatypes"
@@ -119,8 +120,23 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 		return models.UserIdentity{}, err
 	}
 
+	/**
+	* Because we pass the object from the middleware to the rest of the application,
+	* we don't have to worry about invalidation the cache, as the object is passed by reference
+	* saves a lot DB queries.
+	 */
+	cachedIdentity, ok := util.UsersCache.Get(userId)
+	if ok {
+		return cachedIdentity, nil
+	}
+
 	res := database.DB.Where("account_id = ?", userId).FirstOrCreate(&identity)
 	err = res.Error
+
+	// set the cache after successful DB operation
+	if err == nil {
+		util.UsersCache.Set(userId, identity)
+	}
 
 	return identity, err
 }

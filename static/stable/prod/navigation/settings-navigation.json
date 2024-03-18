@@ -54,7 +54,13 @@
                 "href": "/settings/notifications/configure-events",
                 "permissions": [
                   {
-                    "method": "isOrgAdmin"
+                    "method": "loosePermissions",
+                    "args": [
+                      [
+                        "integrations:*:*",
+                        "integrations:endpoints:write"
+                      ]
+                    ]
                   }
                 ]
             },

@@ -56,6 +56,7 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	client := connectionhub.Client{
 		User:         identity.UserId,
 		Organization: identity.OrgId,
+		Username:     identity.Username,
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}

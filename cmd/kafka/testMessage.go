@@ -34,6 +34,7 @@ func main() {
 		"data":{
 			"broadcast": false,
 			"organizations": ["11789772"],
+			"usernames": ["insights-qa"],
 			"payload": {
 				"id": "%s",
 				"description": "string",

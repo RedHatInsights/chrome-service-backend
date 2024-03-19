@@ -54,13 +54,14 @@
                   "href": "/settings/notifications/configure-events",
                   "permissions": [
                     {
-                        "method": "loosePermissions",
-                        "args": [
-                            [
-                                "integrations:*:*",
-                                "integrations:endpoints:write"
-                            ]
+                      "method": "loosePermissions",
+                      "args": [
+                        [
+                          "notifications:*:*",
+                          "notifications:notifications:write",
+                          "notifications:notifications:read"
                         ]
+                      ]
                     }
                   ]
               },

@@ -1124,5 +1124,9 @@
             ]
         }
       ]
+  },
+  "runtimes": {
+      "manifestLocation": "/apps/runtimes/fed-mods.json",
+      "modules": []
   }
 }

@@ -133,31 +133,6 @@
           "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
         }
       ]
-    },
-    {
-      "groupId": "insights",
-      "icon": "trend-up",
-      "title": "Red Hat Insights",
-      "navItems": [
-        {
-          "title": "Subscriptions",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "openshiftDataScience",
-              "appId": "subscriptions",
-              "title": "OpenShift Data Science",
-              "href": "/application-services/subscriptions/rhods"
-            },
-            {
-              "id": "advancedClusterSecurityForKubernetes",
-              "appId": "subscriptions",
-              "title": "Advanced Cluster Security",
-              "href": "/application-services/subscriptions/rhacs"
-            }
-          ]
-        }
-      ]
     }
   ]
 }

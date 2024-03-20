@@ -220,6 +220,15 @@ func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, err, w)
 }
 
+func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
+	var err error
+	resp := util.EntityResponse[models.WidgetModuleFederationMapping]{
+		Data: service.WidgetMapping,
+	}
+
+	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)
+}
+
 func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Get("/", GetDashboardTemplates)
 	sub.Patch("/{templateId}", UpdateDashboardTemplate)
@@ -229,4 +238,6 @@ func MakeDashboardTemplateRoutes(sub chi.Router) {
 
 	sub.Get("/base-template", GetBaseDashboardTemplates)
 	sub.Get("/base-template/fork", ForkBaseTemplate)
+
+	sub.Get("/widget-mapping", GetWidgetMappings)
 }

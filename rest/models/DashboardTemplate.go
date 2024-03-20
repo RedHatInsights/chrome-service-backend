@@ -38,6 +38,22 @@ func (at AvailableTemplates) IsValid() error {
 	return fmt.Errorf("invalid dashboard template. Expected one of %s, got %s", LandingPage, at)
 }
 
+type AvailableWidgets string
+
+const (
+	FavoriteServices    AvailableWidgets = "favoriteServices"
+	NotificationsEvents AvailableWidgets = "notificationsEvents"
+)
+
+func (aw AvailableWidgets) IsValid() error {
+	switch aw {
+	case FavoriteServices, NotificationsEvents:
+		return nil
+	}
+
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s] got %s", FavoriteServices, NotificationsEvents, aw)
+}
+
 type TemplateConfig struct {
 	Sm datatypes.JSON `gorm:"not null;default null" json:"sm"`
 	Md datatypes.JSON `gorm:"not null;default null" json:"md"`
@@ -160,3 +176,10 @@ type BaseDashboardTemplate struct {
 }
 
 type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
+
+type ModuleFederationMetadata struct {
+	Scope      string `json:"scope"`
+	Module     string `json:"module"`
+	ImportName string `json:"importName,omitempty"`
+}
+type WidgetModuleFederationMapping map[AvailableWidgets]ModuleFederationMetadata

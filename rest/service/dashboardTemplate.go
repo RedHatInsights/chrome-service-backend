@@ -10,6 +10,19 @@ import (
 	"gorm.io/gorm"
 )
 
+var (
+	WidgetMapping models.WidgetModuleFederationMapping = models.WidgetModuleFederationMapping{
+		models.FavoriteServices: models.ModuleFederationMetadata{
+			Scope:  "chrome",
+			Module: "./DashboardFavorites",
+		},
+		models.NotificationsEvents: models.ModuleFederationMetadata{
+			Scope:  "notifications",
+			Module: "./DashboardWidget",
+		},
+	}
+)
+
 func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.DashboardTemplate, error) {
 	err := dashboard.IsValid()
 	if err != nil {

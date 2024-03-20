@@ -78,6 +78,9 @@ func GetDashboardTemplates(w http.ResponseWriter, r *http.Request) {
 
 	response := util.ListResponse[models.DashboardTemplate]{
 		Data: userDashboardTemplates,
+		Meta: util.ListMeta{
+			Count: len(userDashboardTemplates),
+		},
 	}
 
 	handleDashboardResponse[models.DashboardTemplate, util.ListResponse[models.DashboardTemplate]](response, err, w)
@@ -192,6 +195,31 @@ func ChangeDefaultTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, err, w)
 }
 
+func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {
+	var err error
+	dashboardParam := r.URL.Query().Get("dashboard")
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	userID := user.ID
+
+	if dashboardParam == "" {
+		handleDashboardError(errors.New("invalid base template ID"), w)
+		return
+	}
+
+	dashboardTemplate, err := service.ForkBaseTemplate(userID, models.AvailableTemplates(dashboardParam))
+
+	if err != nil {
+		handleDashboardError(err, w)
+		return
+	}
+
+	response := util.EntityResponse[models.DashboardTemplate]{
+		Data: dashboardTemplate,
+	}
+
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, err, w)
+}
+
 func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Get("/", GetDashboardTemplates)
 	sub.Patch("/{templateId}", UpdateDashboardTemplate)
@@ -200,4 +228,5 @@ func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Post("/{templateId}/default", ChangeDefaultTemplate)
 
 	sub.Get("/base-template", GetBaseDashboardTemplates)
+	sub.Get("/base-template/fork", ForkBaseTemplate)
 }

@@ -368,4 +368,19 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 			assert.Equal(t, shouldBeDefault, template.Default)
 		}
 	})
+
+	t.Run("ForkBaseTemplate should return not found error if template does not exist", func(t *testing.T) {
+		userId := uint(1)
+		_, err := ForkBaseTemplate(userId, "fakeTemplate")
+		assert.NotNil(t, err)
+		assert.Equal(t, "invalid dashboard template. Expected one of landingPage, got fakeTemplate", err.Error())
+	})
+
+	t.Run("ForkBaseTemplate should create a new template with the base template", func(t *testing.T) {
+		userId := uint(1)
+		template, err := ForkBaseTemplate(userId, "landingPage")
+		assert.Nil(t, err)
+		assert.NotNil(t, template)
+		assert.Equal(t, models.LandingPage.String(), template.TemplateBase.Name)
+	})
 }

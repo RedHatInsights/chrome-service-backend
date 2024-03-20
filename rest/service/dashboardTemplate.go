@@ -184,6 +184,10 @@ func UpdateDashboardTemplate(templateId uint, userId uint, dashboardTemplate mod
 			dashboardTemplate.TemplateConfig.SetLayoutSizeItems(typeOfS.Field(i).Name, items)
 		}
 	}
+	err = dashboardTemplate.TemplateConfig.IsValid()
+	if err != nil {
+		return userDashboardTemplate, err
+	}
 
 	// Update only the templates, no other fields are allowed to be updated
 	database.DB.Model(&userDashboardTemplate).Updates(models.DashboardTemplate{
@@ -337,4 +341,26 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 	}
 
 	return baseGridItems
+}
+func EncodeDashboardTemplate(accountId uint, templateId uint) (string, error) {
+	var dashboardTemplate models.DashboardTemplate
+
+	result := database.DB.Find(&dashboardTemplate, templateId)
+	if result.RowsAffected == 0 || result.Error != nil {
+		return "", gorm.ErrRecordNotFound
+	}
+
+	if dashboardTemplate.UserIdentityID != accountId {
+		return "", util.ErrNotAuthorized
+	}
+
+	encoded, err := dashboardTemplate.EncodeBase64()
+
+	return encoded, err
+}
+
+func DecodeDashboardTemplate(encoded string) (models.DashboardTemplate, error) {
+	dashboardTemplate, err := models.DecodeDashboardBase64(encoded)
+
+	return dashboardTemplate, err
 }

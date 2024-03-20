@@ -190,3 +190,28 @@ The [Layout modification restrictions](#Layout-modification-restrictions) apply 
 Only one layout per layout type can be marked as default.
 
 ![Default layout swap flow](./img/default-swap.png)
+
+### Widgets mapping
+
+To access the mapping of widgets to respective module federation metadata, use the mapping get endpoint.
+
+```
+GET /api/chrome-service/v1/dashboard-templates/widget-mapping
+
+```
+
+Response format
+
+```TS
+type AvailableWidgets = "FavoriteServices" | "NotificationsEvents"
+
+type WidgetMappingResponse = {
+  data: {
+    [key in AvailableWidgets]: {
+      scope: string,
+      module: string,
+      importName?: string // if undefined default export will be used
+    }
+  }
+}
+```

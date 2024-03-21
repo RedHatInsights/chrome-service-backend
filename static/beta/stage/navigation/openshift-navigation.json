@@ -57,6 +57,30 @@
             "description": "Learn and try developing in a private, pre-configured OpenShift environment."
         },
         {
+            "title": "OpenShift AI",
+            "appId": "openshift",
+            "expandable": true,
+            "filterable": false,
+            "routes": [
+                {
+                    "id": "developersandboxtrial",
+                    "appId": "openshift",
+                    "title": "On the Developer Sandbox",
+                    "href": "https://developers.redhat.com/learn/openshift/how-create-natural-language-processing-nlp-application-using-red-hat-openshift-ai",
+                    "isExternal": true,
+                    "filterable": false
+                },
+                {
+                    "id": "sixtydaytrial",
+                    "appId": "openshift",
+                    "title": "60-day product trial",
+                    "href": "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai/trial",
+                    "isExternal": true,
+                    "filterable": false
+                }
+            ]
+        },
+        {
             "id": "downloads",
             "appId": "openshift",
             "href": "/openshift/downloads",

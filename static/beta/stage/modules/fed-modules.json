@@ -1054,25 +1054,6 @@
             }
         ]
     },
-    "seatsAdminUi": {
-        "manifestLocation": "/apps/seats-admin-ui/fed-mods.json",
-        "config": {
-            "ssoScopes": [
-                "api.iam.access"
-            ]
-        },
-        "modules": [
-            {
-                "id": "seats-admin",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/ansible/seats-administration"
-                    }
-                ]
-            }
-        ]
-    },
     "ansibleWisdomAdminDashboard": {
         "manifestLocation": "/apps/ansible-wisdom-admin-dashboard/fed-mods.json",
         "config": {

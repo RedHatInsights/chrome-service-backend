@@ -16,21 +16,6 @@
       "href": "/application-services/learning-resources"
     },
     {
-      "groupId": "application-services",
-      "title": "Application Services",
-      "icon": "cloud",
-      "navItems": [
-        {
-          "id": "apiManagement",
-          "appId": "applicationServices",
-          "title": "API Management",
-          "icon": "ServicesIcon",
-          "description": "Manage API access, policy, and traffic controls for microservice-based applications.",
-          "href": "/application-services/api-management"
-        }
-      ]
-    },
-    {
       "groupId": "data-services",
       "title": "Data Services",
       "icon": "database",

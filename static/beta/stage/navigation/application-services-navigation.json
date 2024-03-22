@@ -31,21 +31,6 @@
       ]
     },
     {
-      "groupId": "data-services",
-      "title": "Data Services",
-      "icon": "database",
-      "navItems": [
-        {
-          "id": "dataScience",
-          "appId": "applicationServices",
-          "title": "Red Hat OpenShift AI",
-          "icon": "DataScienceIcon",
-          "href": "/application-services/data-science",
-          "description": "Create, train, and serve artificial intelligence and machine learning (AI/ML) models."
-        }
-      ]
-    },
-    {
       "groupId": "trusted-content",
       "title": "Source Code Security",
       "icon": "shield",

@@ -43,15 +43,17 @@ type AvailableWidgets string
 const (
 	FavoriteServices    AvailableWidgets = "favoriteServices"
 	NotificationsEvents AvailableWidgets = "notificationsEvents"
+	LearningResources   AvailableWidgets = "learningResources"
+	ExploreCapabilities AvailableWidgets = "exploreCapabilities"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s] got %s", FavoriteServices, NotificationsEvents, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, aw)
 }
 
 type TemplateConfig struct {

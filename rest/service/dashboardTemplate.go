@@ -20,6 +20,14 @@ var (
 			Scope:  "notifications",
 			Module: "./DashboardWidget",
 		},
+		models.LearningResources: models.ModuleFederationMetadata{
+			Scope:  "learningResources",
+			Module: "./BookmarkedLearningResourcesWidget",
+		},
+		models.ExploreCapabilities: models.ModuleFederationMetadata{
+			Scope:  "landing",
+			Module: "./ExploreCapabilities",
+		},
 	}
 )
 

@@ -11,6 +11,7 @@ help:
 	@echo "clean            - tear down database"
 	@echo "clean-all        - tear down all local infrastructure"
 	@echo "validate-schema  - validates chrome static JSON schemas"
+	@echo "parse-services 	 - creates services-generated.json that with filled link refs"
 	@echo "dev-static       - serve only the static direcory using simple go server"
 	@echo "dev-static-node  - serve only the static direcory using simple node server"
 	@echo "  arguments:"
@@ -67,3 +68,6 @@ seed-unleash:
 
 dev: seed-unleash
 	go run main.go
+
+parse-services:
+	go run cmd/services/parseServices.go

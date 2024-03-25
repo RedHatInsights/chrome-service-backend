@@ -20,6 +20,30 @@ var (
 			Scope:  "notifications",
 			Module: "./DashboardWidget",
 		},
+		models.LearningResources: models.ModuleFederationMetadata{
+			Scope:  "learningResources",
+			Module: "./BookmarkedLearningResourcesWidget",
+		},
+		models.ExploreCapabilities: models.ModuleFederationMetadata{
+			Scope:  "landing",
+			Module: "./ExploreCapabilities",
+		},
+		models.Edge: models.ModuleFederationMetadata{
+			Scope:  "landing",
+			Module: "./EdgeWidget",
+		},
+		models.Ansible: models.ModuleFederationMetadata{
+			Scope:  "landing",
+			Module: "./AnsibleWidget",
+		},
+		models.Rhel: models.ModuleFederationMetadata{
+			Scope:  "landing",
+			Module: "./RhelWidget",
+		},
+		models.Openshift: models.ModuleFederationMetadata{
+			Scope:  "landing",
+			Module: "./OpenShiftWidget",
+		},
 	}
 )
 

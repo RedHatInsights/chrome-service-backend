@@ -13,36 +13,44 @@ import (
 var (
 	WidgetMapping models.WidgetModuleFederationMapping = models.WidgetModuleFederationMapping{
 		models.FavoriteServices: models.ModuleFederationMetadata{
-			Scope:  "chrome",
-			Module: "./DashboardFavorites",
+			Scope:    "chrome",
+			Module:   "./DashboardFavorites",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 6, 1),
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
-			Scope:  "notifications",
-			Module: "./DashboardWidget",
+			Scope:    "notifications",
+			Module:   "./DashboardWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.LearningResources: models.ModuleFederationMetadata{
-			Scope:  "learningResources",
-			Module: "./BookmarkedLearningResourcesWidget",
+			Scope:    "learningResources",
+			Module:   "./BookmarkedLearningResourcesWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./ExploreCapabilities",
+			Scope:    "landing",
+			Module:   "./ExploreCapabilities",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Edge: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./EdgeWidget",
+			Scope:    "landing",
+			Module:   "./EdgeWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Ansible: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./AnsibleWidget",
+			Scope:    "landing",
+			Module:   "./AnsibleWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Rhel: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./RhelWidget",
+			Scope:    "landing",
+			Module:   "./RhelWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Openshift: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./OpenShiftWidget",
+			Scope:    "landing",
+			Module:   "./OpenShiftWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 	}
 )

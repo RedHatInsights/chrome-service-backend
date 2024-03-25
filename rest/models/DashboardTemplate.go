@@ -183,9 +183,29 @@ type BaseDashboardTemplate struct {
 
 type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
 
-type ModuleFederationMetadata struct {
-	Scope      string `json:"scope"`
-	Module     string `json:"module"`
-	ImportName string `json:"importName,omitempty"`
+type BaseWidgetDimensions struct {
+	W    int `json:"w"`
+	H    int `json:"h"`
+	MaxH int `json:"maxH"`
+	MinH int `json:"minH"`
 }
+
+func (bwd BaseWidgetDimensions) InitDimensions(w, h, maxH, minH int) BaseWidgetDimensions {
+	if w < 1 || h < 1 || maxH < 1 || minH < 1 {
+		panic("invalid widget dimensions, all values must be greater than 0")
+	}
+	bwd.W = w
+	bwd.H = h
+	bwd.MaxH = maxH
+	bwd.MinH = minH
+	return bwd
+}
+
+type ModuleFederationMetadata struct {
+	Scope      string               `json:"scope"`
+	Module     string               `json:"module"`
+	ImportName string               `json:"importName,omitempty"`
+	Defaults   BaseWidgetDimensions `json:"defaults"`
+}
+
 type WidgetModuleFederationMapping map[AvailableWidgets]ModuleFederationMetadata

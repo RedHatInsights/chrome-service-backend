@@ -60,23 +60,38 @@ func (aw AvailableWidgets) IsValid() error {
 	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, aw)
 }
 
-type TemplateConfig struct {
-	Sm datatypes.JSON `gorm:"not null;default null" json:"sm"`
-	Md datatypes.JSON `gorm:"not null;default null" json:"md"`
-	Lg datatypes.JSON `gorm:"not null;default null" json:"lg"`
-	Xl datatypes.JSON `gorm:"not null;default null" json:"xl"`
+type BaseWidgetDimensions struct {
+	Width     int `json:"w"`
+	Height    int `json:"h"`
+	MaxHeight int `json:"maxH"`
+	MinHeight int `json:"minH"`
+}
+
+func (bwd BaseWidgetDimensions) InitDimensions(w, h, maxH, minH int) BaseWidgetDimensions {
+	if w < 1 || h < 1 || maxH < 1 || minH < 1 {
+		panic("invalid widget dimensions, all values must be greater than 0")
+	}
+	bwd.Width = w
+	bwd.Height = h
+	bwd.MaxHeight = maxH
+	bwd.MinHeight = minH
+	return bwd
 }
 
 type GridItem struct {
-	Title     string `json:"title"`
-	ID        string `json:"i"`
-	X         int    `json:"x"`
-	Y         int    `json:"y"`
-	Width     int    `json:"w"`
-	Height    int    `json:"h"`
-	MaxHeight int    `json:"maxH"`
-	MinHeight int    `json:"minH"`
-	Static    bool   `json:"static"`
+	BaseWidgetDimensions
+	Title  string `json:"title"`
+	ID     string `json:"i"`
+	X      int    `json:"x"`
+	Y      int    `json:"y"`
+	Static bool   `json:"static"`
+}
+
+type TemplateConfig struct {
+	Sm datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"sm"`
+	Md datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"md"`
+	Lg datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"lg"`
+	Xl datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"xl"`
 }
 
 type GridSizes string
@@ -182,24 +197,6 @@ type BaseDashboardTemplate struct {
 }
 
 type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
-
-type BaseWidgetDimensions struct {
-	W    int `json:"w"`
-	H    int `json:"h"`
-	MaxH int `json:"maxH"`
-	MinH int `json:"minH"`
-}
-
-func (bwd BaseWidgetDimensions) InitDimensions(w, h, maxH, minH int) BaseWidgetDimensions {
-	if w < 1 || h < 1 || maxH < 1 || minH < 1 {
-		panic("invalid widget dimensions, all values must be greater than 0")
-	}
-	bwd.W = w
-	bwd.H = h
-	bwd.MaxH = maxH
-	bwd.MinH = minH
-	return bwd
-}
 
 type ModuleFederationMetadata struct {
 	Scope      string               `json:"scope"`

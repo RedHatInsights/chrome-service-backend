@@ -47,13 +47,9 @@ var landingPageMd = prepareInitialGridItems(getLandingPageBaseLayout("2"))
 var landingPageLg = prepareInitialGridItems(getLandingPageBaseLayout("3"))
 var landingPageXl = prepareInitialGridItems(getLandingPageBaseLayout("4"))
 
-func convertToJson(items []models.GridItem) datatypes.JSON {
-	json, err := json.Marshal(items)
-	if err != nil {
-		panic(err)
-	}
-
-	return json
+func convertToJson(items []models.GridItem) datatypes.JSONType[[]models.GridItem] {
+	gi := datatypes.NewJSONType(items)
+	return gi
 }
 
 var (

@@ -2,7 +2,6 @@ package models
 
 import (
 	"database/sql/driver"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
@@ -169,11 +168,8 @@ func (gi GridItem) IsValid(variant GridSizes) error {
 }
 
 func (tc *TemplateConfig) SetLayoutSizeItems(layoutSize string, items []GridItem) *TemplateConfig {
-	bytes, err := json.Marshal(items)
-	if err != nil {
-		panic(err)
-	}
-	reflect.ValueOf(tc).Elem().FieldByName(layoutSize).Set(reflect.ValueOf(bytes))
+	jsonItems := datatypes.NewJSONType[[]GridItem](items)
+	reflect.ValueOf(tc).Elem().FieldByName(layoutSize).Set(reflect.ValueOf(jsonItems))
 	return tc
 }
 

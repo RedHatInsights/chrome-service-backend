@@ -139,8 +139,8 @@ func UpdateDashboardTemplate(templateId uint, userId uint, dashboardTemplate mod
 	typeOfS := configs.Type()
 
 	for i := 0; i < configs.NumField(); i++ {
-		var items []models.GridItem
-		json.Unmarshal(configs.Field(i).Bytes(), &items)
+		dgi := configs.Field(i).Interface().(datatypes.JSONType[[]models.GridItem])
+		items := dgi.Data()
 		layoutSize := typeOfS.Field(i).Tag.Get("json")
 		for _, gi := range items {
 			// initialize coordinates if they do not exist

@@ -29,9 +29,9 @@ func getValidGridItems(items []models.GridItem) []models.GridItem {
 	return newGridItems
 }
 
-func migrateDashboardWidgets() *gorm.DB {
+func migrateDashboardWidgets(tx *gorm.DB) *gorm.DB {
 	var templates []models.DashboardTemplate
-	res := database.DB.Find(&templates)
+	res := tx.Find(&templates)
 	if res.Error != nil {
 		return res
 	}
@@ -41,7 +41,7 @@ func migrateDashboardWidgets() *gorm.DB {
 		t.TemplateConfig.Lg = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Lg.Data()))
 		t.TemplateConfig.Md = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Md.Data()))
 		t.TemplateConfig.Sm = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Sm.Data()))
-		res = database.DB.Save(&t)
+		res = tx.Save(&t)
 
 		if res.Error != nil {
 			return res
@@ -108,7 +108,7 @@ func main() {
 		panic(bundleRes.Error)
 	}
 
-	dashboardRes = migrateDashboardWidgets()
+	dashboardRes = migrateDashboardWidgets(tx)
 	if dashboardRes.Error != nil {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()

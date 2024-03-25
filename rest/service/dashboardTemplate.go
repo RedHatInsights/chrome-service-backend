@@ -1,48 +1,78 @@
 package service
 
 import (
-	"encoding/json"
 	"reflect"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
+var landingPageSm = getLandingPageBaseLayout(1)
+var landingPageMd = getLandingPageBaseLayout(2)
+var landingPageLg = getLandingPageBaseLayout(3)
+var landingPageXl = getLandingPageBaseLayout(4)
+
+func convertToJson(items []models.GridItem) datatypes.JSONType[[]models.GridItem] {
+	gi := datatypes.NewJSONType(items)
+	return gi
+}
+
 var (
+	BaseTemplates models.BaseTemplates = models.BaseTemplates{
+		"landingPage": models.BaseDashboardTemplate{
+			Name:        "landingPage",
+			DisplayName: "Landing Page",
+			TemplateConfig: models.TemplateConfig{
+				Sm: convertToJson(landingPageSm),
+				Md: convertToJson(landingPageMd),
+				Lg: convertToJson(landingPageLg),
+				Xl: convertToJson(landingPageXl),
+			},
+		},
+	}
 	WidgetMapping models.WidgetModuleFederationMapping = models.WidgetModuleFederationMapping{
 		models.FavoriteServices: models.ModuleFederationMetadata{
-			Scope:  "chrome",
-			Module: "./DashboardFavorites",
+			Scope:    "chrome",
+			Module:   "./DashboardFavorites",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 6, 1),
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
-			Scope:  "notifications",
-			Module: "./DashboardWidget",
+			Scope:    "notifications",
+			Module:   "./DashboardWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.LearningResources: models.ModuleFederationMetadata{
-			Scope:  "learningResources",
-			Module: "./BookmarkedLearningResourcesWidget",
+			Scope:    "learningResources",
+			Module:   "./BookmarkedLearningResourcesWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./ExploreCapabilities",
+			Scope:    "landing",
+			Module:   "./ExploreCapabilities",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Edge: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./EdgeWidget",
+			Scope:    "landing",
+			Module:   "./EdgeWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Ansible: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./AnsibleWidget",
+			Scope:    "landing",
+			Module:   "./AnsibleWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Rhel: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./RhelWidget",
+			Scope:    "landing",
+			Module:   "./RhelWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 		models.Openshift: models.ModuleFederationMetadata{
-			Scope:  "landing",
-			Module: "./OpenShiftWidget",
+			Scope:    "landing",
+			Module:   "./OpenShiftWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
 	}
 )
@@ -53,11 +83,11 @@ func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.
 		return models.DashboardTemplate{}, err
 	}
 
-	baseTemplate := util.BaseTemplates[dashboard]
+	baseTemplate := BaseTemplates[dashboard]
 
 	templateBase := models.DashboardTemplateBase{
 		Name:        dashboard.String(),
-		DisplayName: util.BaseTemplates[dashboard].DisplayName,
+		DisplayName: BaseTemplates[dashboard].DisplayName,
 	}
 
 	dashboardTemplate := models.DashboardTemplate{
@@ -131,8 +161,8 @@ func UpdateDashboardTemplate(templateId uint, userId uint, dashboardTemplate mod
 	typeOfS := configs.Type()
 
 	for i := 0; i < configs.NumField(); i++ {
-		var items []models.GridItem
-		json.Unmarshal(configs.Field(i).Bytes(), &items)
+		dgi := configs.Field(i).Interface().(datatypes.JSONType[[]models.GridItem])
+		items := dgi.Data()
 		layoutSize := typeOfS.Field(i).Tag.Get("json")
 		for _, gi := range items {
 			// initialize coordinates if they do not exist
@@ -165,7 +195,7 @@ func UpdateDashboardTemplate(templateId uint, userId uint, dashboardTemplate mod
 
 func GetAllBaseTemplates() []models.BaseDashboardTemplate {
 	var templates []models.BaseDashboardTemplate
-	for _, template := range util.BaseTemplates {
+	for _, template := range BaseTemplates {
 		templates = append(templates, template)
 	}
 
@@ -181,7 +211,7 @@ func GetDashboardTemplateBase(dashboard models.AvailableTemplates) (models.BaseD
 		return baseTemplate, err
 	}
 
-	baseTemplate = util.BaseTemplates[dashboard]
+	baseTemplate = BaseTemplates[dashboard]
 
 	return baseTemplate, err
 }
@@ -247,4 +277,64 @@ func ChangeDefaultTemplate(accountId uint, dashboardId uint) (models.DashboardTe
 	})
 
 	return dashboardTemplate, result.Error
+}
+
+// TODO: replace these once we have actual base templates
+func getLandingPageBaseLayout(x int) []models.GridItem {
+	if x == 0 {
+		x = 1
+	}
+
+	baseGridItems := []models.GridItem{
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.ExploreCapabilities].Defaults,
+			ID:                   "exploreCapabilities#exploreCapabilities",
+			X:                    0,
+			Y:                    0,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.Edge].Defaults,
+			ID:                   "edge#edge",
+			X:                    0,
+			Y:                    2,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.Ansible].Defaults,
+			ID:                   "ansible#ansible",
+			X:                    x,
+			Y:                    0,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.Rhel].Defaults,
+			ID:                   "rhel#rhel",
+			X:                    x,
+			Y:                    2,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.Openshift].Defaults,
+			ID:                   "openshift#openshift",
+			X:                    x,
+			Y:                    4,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.LearningResources].Defaults,
+			ID:                   "learningResources#learningResources",
+			X:                    0,
+			Y:                    4,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.NotificationsEvents].Defaults,
+			ID:                   "notificationsEvents#notificationsEvents",
+			X:                    x,
+			Y:                    6,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.FavoriteServices].Defaults,
+			ID:                   "favoriteServices#favoriteServices",
+			X:                    0,
+			Y:                    6,
+		},
+	}
+
+	return baseGridItems
 }

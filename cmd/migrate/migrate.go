@@ -1,12 +1,55 @@
 package main
 
 import (
+	"strings"
+
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
+
+func getValidGridItems(items []models.GridItem) []models.GridItem {
+	newGridItems := []models.GridItem{}
+	for _, item := range items {
+		widgetTypes := strings.Split(item.ID, "#")
+		if len(widgetTypes) > 0 {
+			widgetType := widgetTypes[0]
+			err := models.AvailableWidgets(widgetType).IsValid()
+			if err == nil {
+				newGridItems = append(newGridItems, item)
+			} else {
+				logrus.Infof("Removing invalid widget type: %s", widgetType)
+			}
+		}
+	}
+
+	return newGridItems
+}
+
+func migrateDashboardWidgets(tx *gorm.DB) *gorm.DB {
+	var templates []models.DashboardTemplate
+	res := tx.Find(&templates)
+	if res.Error != nil {
+		return res
+	}
+
+	for _, t := range templates {
+		t.TemplateConfig.Xl = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Xl.Data()))
+		t.TemplateConfig.Lg = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Lg.Data()))
+		t.TemplateConfig.Md = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Md.Data()))
+		t.TemplateConfig.Sm = datatypes.NewJSONType(getValidGridItems(t.TemplateConfig.Sm.Data()))
+		res = tx.Save(&t)
+
+		if res.Error != nil {
+			return res
+		}
+	}
+
+	return res
+}
 
 func main() {
 	godotenv.Load()
@@ -14,6 +57,7 @@ func main() {
 
 	var bundleRes *gorm.DB
 	var visitedRes *gorm.DB
+	var dashboardRes *gorm.DB
 	tx := database.DB.Begin()
 	defer func() {
 		if r := recover(); r != nil {
@@ -62,6 +106,13 @@ func main() {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()
 		panic(bundleRes.Error)
+	}
+
+	dashboardRes = migrateDashboardWidgets(tx)
+	if dashboardRes.Error != nil {
+		logrus.Error("Unable to migrate database!")
+		tx.Rollback()
+		panic(dashboardRes.Error)
 	}
 
 	err := tx.Commit().Error

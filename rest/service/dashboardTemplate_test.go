@@ -12,6 +12,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
@@ -19,6 +20,22 @@ var modifiedTemplate1 models.DashboardTemplate
 var removableTemplate models.DashboardTemplate
 var template1 models.DashboardTemplate
 var template2 models.DashboardTemplate
+
+func getMockItems() datatypes.JSONType[[]models.GridItem] {
+	return datatypes.NewJSONType([]models.GridItem{
+		{
+			ID: "1",
+			X:  0,
+			Y:  0,
+			BaseWidgetDimensions: models.BaseWidgetDimensions{
+				Width:     1,
+				Height:    1,
+				MaxHeight: 4,
+				MinHeight: 1,
+			},
+		},
+	})
+}
 
 func mockDashboardTemplatesData() {
 	identity := models.UserIdentity{
@@ -40,10 +57,10 @@ func mockDashboardTemplatesData() {
 			DisplayName: "Template 1",
 		},
 		TemplateConfig: models.TemplateConfig{
-			Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-			Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-			Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-			Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+			Sm: getMockItems(),
+			Md: getMockItems(),
+			Lg: getMockItems(),
+			Xl: getMockItems(),
 		},
 	}
 
@@ -55,10 +72,10 @@ func mockDashboardTemplatesData() {
 			DisplayName: "Template 2",
 		},
 		TemplateConfig: models.TemplateConfig{
-			Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-			Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-			Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-			Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+			Sm: getMockItems(),
+			Md: getMockItems(),
+			Lg: getMockItems(),
+			Xl: getMockItems(),
 		},
 	}
 
@@ -70,10 +87,32 @@ func mockDashboardTemplatesData() {
 			DisplayName: "Modified Template 1",
 		},
 		TemplateConfig: models.TemplateConfig{
-			Sm: []byte(`[{"title":"","i":"foo","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-			Md: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":true}]`),
-			Lg: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-			Xl: []byte(`[{"title":"","i":"1","x":0,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
+			Sm: datatypes.NewJSONType([]models.GridItem{{
+				ID: "foo",
+				X:  0,
+				Y:  0,
+				BaseWidgetDimensions: models.BaseWidgetDimensions{
+					Width:     1,
+					Height:    1,
+					MaxHeight: 4,
+					MinHeight: 1,
+				},
+			}}),
+			Md: datatypes.NewJSONType([]models.GridItem{
+				{
+					ID: "1",
+					X:  0,
+					Y:  0,
+					BaseWidgetDimensions: models.BaseWidgetDimensions{
+						Width:     1,
+						Height:    1,
+						MaxHeight: 4,
+						MinHeight: 1,
+					},
+				},
+			}),
+			Lg: getMockItems(),
+			Xl: getMockItems(),
 		},
 	}
 
@@ -186,10 +225,10 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Template 1",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-				Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-				Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-				Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+				Sm: getMockItems(),
+				Md: getMockItems(),
+				Lg: getMockItems(),
+				Xl: getMockItems(),
 			},
 		}
 		_, err := UpdateDashboardTemplate(templateId, userId, template)
@@ -206,10 +245,10 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Template 1",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sm: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-				Md: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-				Lg: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
-				Xl: []byte(`[{"i": "1", "x": 0, "y": 0, "w": 1, "h": 1, "maxH": 4, "minH": 1}]`),
+				Sm: getMockItems(),
+				Md: getMockItems(),
+				Lg: getMockItems(),
+				Xl: getMockItems(),
 			},
 		}
 		_, err := UpdateDashboardTemplate(templateId, userId, template)
@@ -226,10 +265,10 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Foo bar",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sm: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
-				Md: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
-				Lg: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
-				Xl: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1,"static":false}]`),
+				Sm: getMockItems(),
+				Md: getMockItems(),
+				Lg: getMockItems(),
+				Xl: getMockItems(),
 			},
 		}
 		updatedTemplate, err := UpdateDashboardTemplate(templateId, userId, template)
@@ -251,10 +290,22 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 				DisplayName: "Foo bar",
 			},
 			TemplateConfig: models.TemplateConfig{
-				Sm: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":0,"h":1,"maxH":4,"minH":1}]`),
-				Md: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-				Lg: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
-				Xl: []byte(`[{"title":"","i":"1","x":1,"y":0,"w":1,"h":1,"maxH":4,"minH":1}]`),
+				Sm: datatypes.NewJSONType([]models.GridItem{
+					{
+						ID: "1",
+						X:  1,
+						Y:  0,
+						BaseWidgetDimensions: models.BaseWidgetDimensions{
+							Width:     0,
+							Height:    1,
+							MaxHeight: 4,
+							MinHeight: 1,
+						},
+					},
+				}),
+				Md: getMockItems(),
+				Lg: getMockItems(),
+				Xl: getMockItems(),
 			},
 		}
 		_, err := UpdateDashboardTemplate(templateId, userId, template)
@@ -265,9 +316,9 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 	t.Run("GetAllBaseTemplates should return all base templates", func(t *testing.T) {
 		baseTemplates := GetAllBaseTemplates()
 		assert.Equal(t, 1, len(baseTemplates))
-		assert.Equal(t, util.BaseTemplates[models.LandingPage].Name, baseTemplates[0].Name)
-		assert.Equal(t, util.BaseTemplates[models.LandingPage].DisplayName, baseTemplates[0].DisplayName)
-		assert.Equal(t, util.BaseTemplates[models.LandingPage].TemplateConfig, baseTemplates[0].TemplateConfig)
+		assert.Equal(t, BaseTemplates[models.LandingPage].Name, baseTemplates[0].Name)
+		assert.Equal(t, BaseTemplates[models.LandingPage].DisplayName, baseTemplates[0].DisplayName)
+		assert.Equal(t, BaseTemplates[models.LandingPage].TemplateConfig, baseTemplates[0].TemplateConfig)
 	})
 
 	t.Run("GetDashboardTemplateBase should return error if template type does not exist", func(t *testing.T) {
@@ -283,8 +334,8 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 			assert.Nil(t, err)
 			assert.NotNil(t, templateBase)
 			assert.Equal(t, templateType.String(), templateBase.Name)
-			assert.Equal(t, util.BaseTemplates[templateType].DisplayName, templateBase.DisplayName)
-			assert.Equal(t, util.BaseTemplates[templateType].TemplateConfig, templateBase.TemplateConfig)
+			assert.Equal(t, BaseTemplates[templateType].DisplayName, templateBase.DisplayName)
+			assert.Equal(t, BaseTemplates[templateType].TemplateConfig, templateBase.TemplateConfig)
 		}
 	})
 

@@ -57,7 +57,6 @@
             "description": "Learn and try developing in a private, pre-configured OpenShift environment."
         },
         {
-            "groupId": "openshiftAI",
             "title": "OpenShift AI",
             "expandable": true,
             "routes": [

@@ -957,5 +957,9 @@
                 ]
             }
         ]
+    },
+    "virtualAssistant": {
+      "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
+      "modules": []
     }
 }

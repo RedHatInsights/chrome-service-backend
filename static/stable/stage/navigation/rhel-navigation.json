@@ -543,7 +543,17 @@
           "icon": "InsightsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
-          "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness."
+          "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
+          "alt_title": [
+              "Tasks",
+              "task",
+              "CentOS conversion",
+              "Pre Conversion analysis",
+              "Pre-Conversion analysis",
+              "Convert to RHEL",
+              "C2R",
+              "CentOS"
+          ]
         }
       ]
     },

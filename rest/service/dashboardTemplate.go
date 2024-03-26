@@ -38,11 +38,21 @@ var (
 			Scope:    "chrome",
 			Module:   "./DashboardFavorites",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 6, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View all services",
+					Href:  "/allservices",
+				},
+				Icon: models.StarIcon,
+			},
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
 			Scope:    "notifications",
 			Module:   "./DashboardWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Config: models.WidgetConfiguration{
+				Icon: models.BellIcon,
+			},
 		},
 		models.LearningResources: models.ModuleFederationMetadata{
 			Scope:    "learningResources",

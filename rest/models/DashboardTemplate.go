@@ -194,11 +194,38 @@ type BaseDashboardTemplate struct {
 
 type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
 
+type WidgetIcons string
+
+const (
+	BellIcon WidgetIcons = "BellIcon"
+	StarIcon WidgetIcons = "StarIcon"
+)
+
+func (wi WidgetIcons) IsValid() error {
+	switch wi {
+	case BellIcon, StarIcon:
+		return nil
+	}
+
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, got %s", BellIcon, StarIcon, wi)
+}
+
+type WidgetHeaderLink struct {
+	Title string `json:"title,omitempty"`
+	Href  string `json:"href,omitempty"`
+}
+
+type WidgetConfiguration struct {
+	Icon       WidgetIcons      `json:"icon,omitempty"`
+	HeaderLink WidgetHeaderLink `json:"headerLink,omitempty"`
+}
+
 type ModuleFederationMetadata struct {
 	Scope      string               `json:"scope"`
 	Module     string               `json:"module"`
 	ImportName string               `json:"importName,omitempty"`
 	Defaults   BaseWidgetDimensions `json:"defaults"`
+	Config     WidgetConfiguration  `json:"config"`
 }
 
 type WidgetModuleFederationMapping map[AvailableWidgets]ModuleFederationMetadata

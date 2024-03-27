@@ -51,6 +51,10 @@ var (
 			Module:   "./DashboardWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View event log",
+					Href:  "/settings/notifications/eventlog",
+				},
 				Icon: models.BellIcon,
 			},
 		},

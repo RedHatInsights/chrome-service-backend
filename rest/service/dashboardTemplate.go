@@ -62,6 +62,12 @@ var (
 			Scope:    "learningResources",
 			Module:   "./BookmarkedLearningResourcesWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View all learning resources",
+					Href:  "/settings/learning-resources#documentation",
+				},
+			},
 		},
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
 			Scope:    "landing",

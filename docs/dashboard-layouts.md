@@ -205,12 +205,24 @@ Response format
 ```TS
 type AvailableWidgets = "FavoriteServices" | "NotificationsEvents" | "LearningResources" | "ExploreCapabilities" | "Edge" | "Ansible" | "Rhel" | "Openshift"
 
+type WidgetHeaderLink = {
+  title?: string;
+  href?: string;
+}
+
+type WidgetConfig = {
+  title: string;
+  icon?: string;
+  headerLink: WidgetHeaderLink;
+}
+
 type WidgetMappingResponse = {
   data: {
     [key in AvailableWidgets]: {
-      scope: string,
-      module: string,
-      importName?: string // if undefined default export will be used
+      scope: string;
+      module: string;
+      importName?: string; // if undefined default export will be used
+      config: WidgetConfig;
     }
   }
 }

@@ -39,6 +39,7 @@ var (
 			Module:   "./DashboardFavorites",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 6, 1),
 			Config: models.WidgetConfiguration{
+				Title: "My favorite services",
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
 					Href:  "/allservices",
@@ -55,7 +56,8 @@ var (
 					Title: "View event log",
 					Href:  "/settings/notifications/eventlog",
 				},
-				Icon: models.BellIcon,
+				Icon:  models.BellIcon,
+				Title: "Events",
 			},
 		},
 		models.LearningResources: models.ModuleFederationMetadata{
@@ -67,32 +69,49 @@ var (
 					Title: "View all learning resources",
 					Href:  "/settings/learning-resources#documentation",
 				},
+				Title: "Bookmarked Learning Resources",
 			},
 		},
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./ExploreCapabilities",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 3, 3),
+
+			Config: models.WidgetConfiguration{
+				Title: "Explore capabilities",
+			},
 		},
 		models.Edge: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./EdgeWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Edge Management",
+			},
 		},
 		models.Ansible: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./AnsibleWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Ansible Automation Platform",
+			},
 		},
 		models.Rhel: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./RhelWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Red Hat Enterprise Linux",
+			},
 		},
 		models.Openshift: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Red Hat OpenShift",
+			},
 		},
 	}
 )

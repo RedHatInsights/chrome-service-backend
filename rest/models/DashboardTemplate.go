@@ -251,6 +251,7 @@ type WidgetHeaderLink struct {
 }
 
 type WidgetConfiguration struct {
+	Title      string           `json:"title"`
 	Icon       WidgetIcons      `json:"icon,omitempty"`
 	HeaderLink WidgetHeaderLink `json:"headerLink,omitempty"`
 }

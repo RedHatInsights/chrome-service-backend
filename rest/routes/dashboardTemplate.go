@@ -220,6 +220,48 @@ func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, err, w)
 }
 
+func EncodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
+	templateID := chi.URLParam(r, "templateId")
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	userID := user.ID
+
+	templateIdUint, err := strconv.ParseUint(templateID, 10, 64)
+
+	if err != nil {
+		handleDashboardError(errors.New("invalid template ID"), w)
+		return
+	}
+
+	encodedTemplate, err := service.EncodeDashboardTemplate(userID, uint(templateIdUint))
+
+	resp := util.EntityResponse[string]{
+		Data: encodedTemplate,
+	}
+
+	handleDashboardResponse[string](resp, err, w)
+}
+
+type decodeTemplateRequestBody struct {
+	EncodedTemplate string `json:"encodedTemplate"`
+}
+
+func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
+	var payload decodeTemplateRequestBody
+	err := json.NewDecoder(r.Body).Decode(&payload)
+	if err != nil {
+		handleDashboardError(err, w)
+		return
+	}
+
+	decodedTemplate, err := service.DecodeDashboardTemplate(payload.EncodedTemplate)
+
+	resp := util.EntityResponse[models.DashboardTemplate]{
+		Data: decodedTemplate,
+	}
+
+	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
+}
+
 func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var err error
 	resp := util.EntityResponse[models.WidgetModuleFederationMapping]{
@@ -235,6 +277,9 @@ func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Delete("/{templateId}", DeleteDashboardTemplate)
 	sub.Post("/{templateId}/copy", CopyDashboardTemplate)
 	sub.Post("/{templateId}/default", ChangeDefaultTemplate)
+
+	sub.Get("/{templateId}/encode", EncodeDashboardTemplate)
+	sub.Post("/decode", DecodeDashboardTemplate)
 
 	sub.Get("/base-template", GetBaseDashboardTemplates)
 	sub.Get("/base-template/fork", ForkBaseTemplate)

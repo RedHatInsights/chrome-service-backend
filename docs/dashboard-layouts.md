@@ -214,4 +214,31 @@ type WidgetMappingResponse = {
     }
   }
 }
+
+```
+
+### Dashboard layout encode/decode/sharing
+
+A layout can be shared via importing a base64 encoded layout
+
+#### Encoding layout
+
+Only layout owner can encode a layout. Call the encode get endpoint
+
+```
+GET /api/chrome-service/v1/dashboard-templates/<template-id>/encode
+```
+
+#### Decoding layout
+
+Any authenticated user can decode any shared string. Call the decode post endpoint.
+
+The payload is validates and verifies if the layout is valid. Nothing is persisted in DB during this operation.
+
+```
+POST /api/chrome-service/v1/dashboard-templates/decode
+
+{
+  "encodedTemplate": <base64 encoded layout>
+}
 ```

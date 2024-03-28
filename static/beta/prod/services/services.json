@@ -1,20 +1,5 @@
 [
   {
-    "id": "dataset",
-    "icon": "LightBulbIcon",
-    "title": "AI/ML",
-    "description": "Create, manage, and migrate relational and non-relational databases.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Application Services",
-        "links": [
-          "application-services.dataScience"
-        ]
-      }
-    ]
-  },
-  {
     "id": "automation",
     "title": "Automation",
     "icon": "AutomationIcon",
@@ -462,9 +447,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Configure your systems to execute Ansible Playbooks."
           },
-          "settings.manageConfiguration",
           "rhel.activationKeys",
-          "rhel.manifests",
           "rhel.registerSystems"
         ]
       },

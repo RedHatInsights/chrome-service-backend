@@ -48,15 +48,16 @@ const (
 	Ansible             AvailableWidgets = "ansible"
 	Rhel                AvailableWidgets = "rhel"
 	Openshift           AvailableWidgets = "openshift"
+	RecentlyVisited		AvailableWidgets = "recentlyVisited"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, RecentlyVisited:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, RecentlyVisited, aw)
 }
 
 type BaseWidgetDimensions struct {
@@ -199,15 +200,16 @@ type WidgetIcons string
 const (
 	BellIcon WidgetIcons = "BellIcon"
 	StarIcon WidgetIcons = "StarIcon"
+	HistoryIcon WidgetIcons = "HistoryIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
 	switch wi {
-	case BellIcon, StarIcon:
+	case BellIcon, StarIcon, HistoryIcon:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, got %s", BellIcon, StarIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, got %s", BellIcon, StarIcon, HistoryIcon, wi)
 }
 
 type WidgetHeaderLink struct {

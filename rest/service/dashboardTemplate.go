@@ -84,6 +84,14 @@ var (
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 		},
+		models.RecentlyVisited: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./RecentlyVisited",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Config: models.WidgetConfiguration {
+				Icon: models.HistoryIcon,
+			},
+		},
 	}
 )
 

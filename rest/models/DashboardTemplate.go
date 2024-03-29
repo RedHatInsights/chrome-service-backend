@@ -57,7 +57,7 @@ func (aw AvailableWidgets) IsValid() error {
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, RecentlyVisited, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, RecentlyVisited, aw)
 }
 
 type BaseWidgetDimensions struct {
@@ -209,7 +209,7 @@ func (wi WidgetIcons) IsValid() error {
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, got %s", BellIcon, StarIcon, HistoryIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, got %s", BellIcon, StarIcon, HistoryIcon, wi)
 }
 
 type WidgetHeaderLink struct {

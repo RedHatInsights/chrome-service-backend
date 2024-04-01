@@ -48,7 +48,7 @@ const (
 	Ansible             AvailableWidgets = "ansible"
 	Rhel                AvailableWidgets = "rhel"
 	Openshift           AvailableWidgets = "openshift"
-	RecentlyVisited	        AvailableWidgets = "recentlyVisited"
+	RecentlyVisited	    AvailableWidgets = "recentlyVisited"
 )
 
 func (aw AvailableWidgets) IsValid() error {

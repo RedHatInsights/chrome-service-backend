@@ -16,10 +16,15 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	encodedTemplateString = "eyJjcmVhdGVkQXQiOiIwMDAxLTAxLTAxVDAwOjAwOjAwWiIsInVwZGF0ZWRBdCI6IjAwMDEtMDEtMDFUMDA6MDA6MDBaIiwiZGVsZXRlZEF0IjpudWxsLCJ1c2VySWRlbnRpdHlJRCI6MCwiZGVmYXVsdCI6ZmFsc2UsIlRlbXBsYXRlQmFzZSI6eyJuYW1lIjoidGVzdCIsImRpc3BsYXlOYW1lIjoidGVzdCJ9LCJ0ZW1wbGF0ZUNvbmZpZyI6eyJzbSI6W3sidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJMYXJnZVdpZGdldCNsdzEiLCJ4IjowLCJ5IjowLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJMYXJnZVdpZGdldCNsdzIiLCJ4IjowLCJ5IjoxLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJMYXJnZVdpZGdldCNsdzMiLCJ4IjowLCJ5IjoyLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJNZWRpdW1XaWRnZXQjbXcxIiwieCI6MSwieSI6MiwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiU21hbGxXaWRnZXQjc3cxIiwieCI6MSwieSI6MCwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiU21hbGxXaWRnZXQjc3cyIiwieCI6MSwieSI6MSwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfV0sIm1kIjpbeyJ0aXRsZSI6IldpZGdldCAxIiwiaSI6IkxhcmdlV2lkZ2V0I2x3MSIsIngiOjAsInkiOjAsInciOjEsImgiOjEsIm1heEgiOjQsIm1pbkgiOjEsInN0YXRpYyI6dHJ1ZX0seyJ0aXRsZSI6IldpZGdldCAxIiwiaSI6IkxhcmdlV2lkZ2V0I2x3MiIsIngiOjAsInkiOjEsInciOjEsImgiOjEsIm1heEgiOjQsIm1pbkgiOjEsInN0YXRpYyI6dHJ1ZX0seyJ0aXRsZSI6IldpZGdldCAxIiwiaSI6IkxhcmdlV2lkZ2V0I2x3MyIsIngiOjAsInkiOjIsInciOjEsImgiOjEsIm1heEgiOjQsIm1pbkgiOjEsInN0YXRpYyI6dHJ1ZX0seyJ0aXRsZSI6IldpZGdldCAxIiwiaSI6Ik1lZGl1bVdpZGdldCNtdzEiLCJ4IjoyLCJ5IjoyLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJTbWFsbFdpZGdldCNzdzEiLCJ4IjoyLCJ5IjowLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJTbWFsbFdpZGdldCNzdzIiLCJ4IjoyLCJ5IjoxLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9XSwibGciOlt7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiTGFyZ2VXaWRnZXQjbHcxIiwieCI6MCwieSI6MCwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiTGFyZ2VXaWRnZXQjbHcyIiwieCI6MCwieSI6MSwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiTGFyZ2VXaWRnZXQjbHczIiwieCI6MCwieSI6MiwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiTWVkaXVtV2lkZ2V0I213MSIsIngiOjMsInkiOjIsInciOjEsImgiOjEsIm1heEgiOjQsIm1pbkgiOjEsInN0YXRpYyI6dHJ1ZX0seyJ0aXRsZSI6IldpZGdldCAxIiwiaSI6IlNtYWxsV2lkZ2V0I3N3MSIsIngiOjMsInkiOjAsInciOjEsImgiOjEsIm1heEgiOjQsIm1pbkgiOjEsInN0YXRpYyI6dHJ1ZX0seyJ0aXRsZSI6IldpZGdldCAxIiwiaSI6IlNtYWxsV2lkZ2V0I3N3MiIsIngiOjMsInkiOjEsInciOjEsImgiOjEsIm1heEgiOjQsIm1pbkgiOjEsInN0YXRpYyI6dHJ1ZX1dLCJ4bCI6W3sidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJMYXJnZVdpZGdldCNsdzEiLCJ4IjowLCJ5IjowLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJMYXJnZVdpZGdldCNsdzIiLCJ4IjowLCJ5IjoxLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJMYXJnZVdpZGdldCNsdzMiLCJ4IjowLCJ5IjoyLCJ3IjoxLCJoIjoxLCJtYXhIIjo0LCJtaW5IIjoxLCJzdGF0aWMiOnRydWV9LHsidGl0bGUiOiJXaWRnZXQgMSIsImkiOiJNZWRpdW1XaWRnZXQjbXcxIiwieCI6NCwieSI6MiwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiU21hbGxXaWRnZXQjc3cxIiwieCI6NCwieSI6MCwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfSx7InRpdGxlIjoiV2lkZ2V0IDEiLCJpIjoiU21hbGxXaWRnZXQjc3cyIiwieCI6NCwieSI6MSwidyI6MSwiaCI6MSwibWF4SCI6NCwibWluSCI6MSwic3RhdGljIjp0cnVlfV19fQo="
+)
+
 var modifiedTemplate1 models.DashboardTemplate
 var removableTemplate models.DashboardTemplate
 var template1 models.DashboardTemplate
 var template2 models.DashboardTemplate
+var encodingTemplate models.DashboardTemplate
 
 func getMockItems() datatypes.JSONType[[]models.GridItem] {
 	return datatypes.NewJSONType([]models.GridItem{
@@ -46,8 +51,13 @@ func mockDashboardTemplatesData() {
 		AccountId: "2",
 	}
 
+	encodeIdentity := models.UserIdentity{
+		AccountId: "3",
+	}
+
 	database.DB.Create(&identity)
 	database.DB.Create(&emptyIdentity)
+	database.DB.Create(&encodeIdentity)
 
 	template1 = models.DashboardTemplate{
 		UserIdentityID: identity.ID,
@@ -126,10 +136,21 @@ func mockDashboardTemplatesData() {
 		TemplateConfig: template1.TemplateConfig,
 	}
 
+	encodingTemplate = models.DashboardTemplate{
+		UserIdentityID: encodeIdentity.ID,
+		Default:        false,
+		TemplateBase: models.DashboardTemplateBase{
+			Name:        "test",
+			DisplayName: "test",
+		},
+		TemplateConfig: util.BaseTemplates["landingPage"].TemplateConfig,
+	}
+
 	database.DB.Create(&template1)
 	database.DB.Create(&template2)
 	database.DB.Create(&modifiedTemplate1)
 	database.DB.Create(&removableTemplate)
+	database.DB.Create(&encodingTemplate)
 }
 
 func TestMain(m *testing.M) {
@@ -433,5 +454,39 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 		assert.Nil(t, err)
 		assert.NotNil(t, template)
 		assert.Equal(t, models.LandingPage.String(), template.TemplateBase.Name)
+	})
+
+	t.Run("EncodeDashboardTemplate should return not found error if template does not exist", func(t *testing.T) {
+		userId := uint(1)
+		templateId := uint(99999)
+		_, err := EncodeDashboardTemplate(userId, templateId)
+		assert.NotNil(t, err)
+		assert.True(t, errors.Is(err, gorm.ErrRecordNotFound))
+	})
+
+	t.Run("EncodeDashboardTemplate should return ErrNotAuthorized if user does not own the template", func(t *testing.T) {
+		userId := uint(2)
+		templateId := uint(1)
+		_, err := EncodeDashboardTemplate(userId, templateId)
+		assert.NotNil(t, err)
+		assert.True(t, errors.Is(err, util.ErrNotAuthorized))
+	})
+
+	t.Run("EncodeDashboardTemplate should return the encoded template", func(t *testing.T) {
+		userId := uint(3)
+		templateId := encodingTemplate.ID
+		encoded, err := EncodeDashboardTemplate(userId, templateId)
+		assert.Nil(t, err)
+		assert.NotNil(t, encoded)
+		assert.Equal(t, encodedTemplateString, encoded)
+	})
+
+	t.Run("Should decode dashboard template", func(t *testing.T) {
+		decoded, err := DecodeDashboardTemplate(encodedTemplateString)
+		assert.Nil(t, err)
+		assert.NotNil(t, decoded)
+		assert.Equal(t, encodingTemplate.TemplateBase.Name, decoded.TemplateBase.Name)
+		assert.Equal(t, encodingTemplate.TemplateBase.DisplayName, decoded.TemplateBase.DisplayName)
+		assert.Equal(t, encodingTemplate.TemplateConfig, decoded.TemplateConfig)
 	})
 }

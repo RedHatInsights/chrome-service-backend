@@ -239,18 +239,18 @@ const (
 	RocketIcon           WidgetIcons = "RocketIcon"
 	StarIcon             WidgetIcons = "StarIcon"
 	RhelIcon             WidgetIcons = "RhelIcon"
-	OpenshiftIcon        WidgetIcons = "OpenshiftIcon"
+	OpenShiftIcon        WidgetIcons = "OpenShiftIcon"
 	EdgeIcon             WidgetIcons = "EdgeIcon"
 	AnsibleIcon          WidgetIcons = "AnsibleIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
 	switch wi {
-	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenshiftIcon, EdgeIcon, AnsibleIcon:
+	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenshiftIcon, EdgeIcon, AnsibleIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, wi)
 }
 
 type WidgetHeaderLink struct {

@@ -462,7 +462,8 @@
             "description": "Configure your systems to execute Ansible Playbooks."
           },
           "rhel.activationKeys",
-          "rhel.registerSystems"
+          "rhel.registerSystems",
+          "rhel.stalenessAndDeletion"
         ]
       },
       {

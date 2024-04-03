@@ -203,7 +203,7 @@ GET /api/chrome-service/v1/dashboard-templates/widget-mapping
 Response format
 
 ```TS
-type AvailableWidgets = "FavoriteServices" | "NotificationsEvents" | "LearningResources" | "ExploreCapabilities" | "Edge" | "Ansible" | "Rhel" | "Openshift"
+type AvailableWidgets = "FavoriteServices" | "NotificationsEvents" | "LearningResources" | "ExploreCapabilities" | "Edge" | "Ansible" | "Rhel" | "Openshift" | "RecentlyVisited"
 
 type WidgetHeaderLink = {
   title?: string;

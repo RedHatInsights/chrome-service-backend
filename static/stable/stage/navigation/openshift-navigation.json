@@ -126,6 +126,10 @@
                                 {
                                   "method": "featureFlag",
                                   "args": ["ocp-advisor-ui-workloads", true]
+                                },
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["ocp-advisor-workloads-release", true]
                                 }
                               ]
                         }

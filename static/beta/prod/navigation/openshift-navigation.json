@@ -123,10 +123,14 @@
                             "title": "Workloads",
                             "href": "/openshift/insights/advisor/workloads",
                             "product": "Red Hat OpenShift Cluster Manager",
-                            "permissions": [
+                            "loosePermissions": [
                                 {
                                   "method": "featureFlag",
                                   "args": ["ocp-advisor-ui-workloads", true]
+                                },
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["ocp-advisor-workloads-release", true]
                                 }
                               ]
                         }

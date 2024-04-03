@@ -51,7 +51,7 @@ const (
 	Ansible             AvailableWidgets = "ansible"
 	Rhel                AvailableWidgets = "rhel"
 	Openshift           AvailableWidgets = "openshift"
-	RecentlyVisited	    AvailableWidgets = "recentlyVisited"
+	RecentlyVisited     AvailableWidgets = "recentlyVisited"
 )
 
 func (aw AvailableWidgets) IsValid() error {
@@ -233,18 +233,24 @@ type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
 type WidgetIcons string
 
 const (
-	BellIcon WidgetIcons = "BellIcon"
-	StarIcon WidgetIcons = "StarIcon"
-	HistoryIcon WidgetIcons = "HistoryIcon"
+	BellIcon             WidgetIcons = "BellIcon"
+	HistoryIcon          WidgetIcons = "HistoryIcon"
+	OutlinedBookmarkIcon WidgetIcons = "OutlinedBookmarkIcon"
+	RocketIcon           WidgetIcons = "RocketIcon"
+	StarIcon             WidgetIcons = "StarIcon"
+	RhelIcon             WidgetIcons = "RhelIcon"
+	OpenshiftIcon        WidgetIcons = "OpenshiftIcon"
+	EdgeIcon             WidgetIcons = "EdgeIcon"
+	AnsibleIcon          WidgetIcons = "AnsibleIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
 	switch wi {
-	case BellIcon, StarIcon, HistoryIcon:
+	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenshiftIcon, EdgeIcon, AnsibleIcon:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, got %s", BellIcon, StarIcon, HistoryIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenshiftIcon, EdgeIcon, AnsibleIcon, wi)
 }
 
 type WidgetHeaderLink struct {

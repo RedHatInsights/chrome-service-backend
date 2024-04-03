@@ -39,12 +39,12 @@ var (
 			Module:   "./DashboardFavorites",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 6, 1),
 			Config: models.WidgetConfiguration{
-				Title: "My favorite services",
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
 					Href:  "/allservices",
 				},
-				Icon: models.StarIcon,
+				Icon:  models.StarIcon,
+				Title: "My favorite services",
 			},
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
@@ -69,6 +69,7 @@ var (
 					Title: "View all learning resources",
 					Href:  "/settings/learning-resources#documentation",
 				},
+				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked Learning Resources",
 			},
 		},
@@ -78,6 +79,7 @@ var (
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 3, 3),
 
 			Config: models.WidgetConfiguration{
+				Icon:  models.RocketIcon,
 				Title: "Explore capabilities",
 			},
 		},
@@ -86,6 +88,7 @@ var (
 			Module:   "./EdgeWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.EdgeIcon,
 				Title: "Edge Management",
 			},
 		},
@@ -94,6 +97,7 @@ var (
 			Module:   "./AnsibleWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.AnsibleIcon,
 				Title: "Ansible Automation Platform",
 			},
 		},
@@ -102,6 +106,7 @@ var (
 			Module:   "./RhelWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.RhelIcon,
 				Title: "Red Hat Enterprise Linux",
 			},
 		},
@@ -110,6 +115,7 @@ var (
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.OpenshiftIcon,
 				Title: "Red Hat OpenShift",
 			},
 		},
@@ -117,8 +123,9 @@ var (
 			Scope:    "landing",
 			Module:   "./RecentlyVisited",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
-			Config: models.WidgetConfiguration {
-				Icon: models.HistoryIcon,
+			Config: models.WidgetConfiguration{
+				Icon:  models.HistoryIcon,
+				Title: "Recently visited",
 			},
 		},
 	}

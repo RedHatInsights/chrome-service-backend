@@ -115,7 +115,7 @@ var (
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
-				Icon:  models.OpenshiftIcon,
+				Icon:  models.OpenShiftIcon,
 				Title: "Red Hat OpenShift",
 			},
 		},

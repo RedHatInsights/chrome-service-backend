@@ -133,6 +133,7 @@ var (
 			Module:   "./OpenShiftAiWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.OpenShiftAiIcon,
 				Title: "Red Hat OpenShift AI",
 			},
 		},
@@ -141,6 +142,7 @@ var (
 			Module:   "./QuayWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.QuayIcon,
 				Title: "Quay.io",
 			},
 		},
@@ -149,6 +151,7 @@ var (
 			Module:   "./AcsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				Icon:  models.ACSIcon,
 				Title: "Advanced Cluster Security",
 			},
 		},

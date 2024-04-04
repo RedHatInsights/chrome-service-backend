@@ -50,17 +50,21 @@ const (
 	Edge                AvailableWidgets = "edge"
 	Ansible             AvailableWidgets = "ansible"
 	Rhel                AvailableWidgets = "rhel"
-	Openshift           AvailableWidgets = "openshift"
+	OpenShift           AvailableWidgets = "openshift"
 	RecentlyVisited     AvailableWidgets = "recentlyVisited"
+	OpenShiftAi         AvailableWidgets = "openshiftAi"
+	Quay	            AvailableWidgets = "quay"
+	Acs           		AvailableWidgets = "acs"
+
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, RecentlyVisited:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, OpenShiftAi:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, RecentlyVisited, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, OpenShiftAi, RecentlyVisited, aw)
 }
 
 type BaseWidgetDimensions struct {

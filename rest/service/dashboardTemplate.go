@@ -128,6 +128,30 @@ var (
 				Title: "Recently visited",
 			},
 		},
+		models.Openshift: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./OpenShiftAiWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Red Hat OpenShift AI",
+			},
+		},
+		models.Openshift: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./QuayWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Quay.io",
+			},
+		},
+		models.Openshift: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./AcsWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Title: "Advanced Cluster Security",
+			},
+		},
 	}
 )
 

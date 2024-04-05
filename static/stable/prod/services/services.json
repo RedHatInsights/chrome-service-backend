@@ -14,21 +14,6 @@
     ]
   },
   {
-    "id": "dataset",
-    "icon": "LightBulbIcon",
-    "title": "AI/ML",
-    "description": "Create, manage, and migrate relational and non-relational databases.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Application Services",
-        "links": [
-          "application-services.dataScience"
-        ]
-      }
-    ]
-  },
-  {
     "id": "automation",
     "title": "Automation",
     "icon": "AutomationIcon",

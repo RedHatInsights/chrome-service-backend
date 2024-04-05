@@ -110,7 +110,7 @@ var (
 				Title: "Red Hat Enterprise Linux",
 			},
 		},
-		models.Openshift: models.ModuleFederationMetadata{
+		models.OpenShift: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
@@ -128,7 +128,7 @@ var (
 				Title: "Recently visited",
 			},
 		},
-		models.Openshift: models.ModuleFederationMetadata{
+		models.OpenShiftAi: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftAiWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
@@ -137,7 +137,7 @@ var (
 				Title: "Red Hat OpenShift AI",
 			},
 		},
-		models.Openshift: models.ModuleFederationMetadata{
+		models.Quay: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./QuayWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
@@ -146,7 +146,7 @@ var (
 				Title: "Quay.io",
 			},
 		},
-		models.Openshift: models.ModuleFederationMetadata{
+		models.Acs: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./AcsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),

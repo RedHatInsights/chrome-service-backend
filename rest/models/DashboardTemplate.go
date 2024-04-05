@@ -257,7 +257,7 @@ func (wi WidgetIcons) IsValid() error {
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, wi)
 }
 
 type WidgetHeaderLink struct {

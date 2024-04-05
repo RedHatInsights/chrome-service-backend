@@ -110,7 +110,7 @@ var (
 				Title: "Red Hat Enterprise Linux",
 			},
 		},
-		models.Openshift: models.ModuleFederationMetadata{
+		models.OpenShift: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
@@ -126,6 +126,33 @@ var (
 			Config: models.WidgetConfiguration{
 				Icon:  models.HistoryIcon,
 				Title: "Recently visited",
+			},
+		},
+		models.OpenShiftAi: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./OpenShiftAiWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.OpenShiftAiIcon,
+				Title: "Red Hat OpenShift AI",
+			},
+		},
+		models.Quay: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./QuayWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.QuayIcon,
+				Title: "Quay.io",
+			},
+		},
+		models.Acs: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./AcsWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.ACSIcon,
+				Title: "Advanced Cluster Security",
 			},
 		},
 	}
@@ -369,7 +396,7 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			Y:                    2,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Openshift].Defaults,
+			BaseWidgetDimensions: WidgetMapping[models.OpenShift].Defaults,
 			ID:                   "openshift#openshift",
 			X:                    x,
 			Y:                    4,

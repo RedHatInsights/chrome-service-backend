@@ -396,7 +396,7 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			Y:                    2,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Openshift].Defaults,
+			BaseWidgetDimensions: WidgetMapping[models.OpenShift].Defaults,
 			ID:                   "openshift#openshift",
 			X:                    x,
 			Y:                    4,

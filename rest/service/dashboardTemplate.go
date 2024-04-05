@@ -70,7 +70,7 @@ var (
 					Href:  "/settings/learning-resources#documentation",
 				},
 				Icon:  models.OutlinedBookmarkIcon,
-				Title: "Bookmarked Learning Resources",
+				Title: "Bookmarked learning resources",
 			},
 		},
 		models.ExploreCapabilities: models.ModuleFederationMetadata{

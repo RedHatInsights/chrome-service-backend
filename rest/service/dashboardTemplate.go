@@ -52,6 +52,11 @@ var (
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
 			Config: models.WidgetConfiguration{
 				Icon: models.BellIcon,
+				Permissions: []models.WidgetPermission{
+					models.WidgetPermission{
+						Method: models.OrgAdmin,
+					},
+				},
 			},
 		},
 		models.LearningResources: models.ModuleFederationMetadata{

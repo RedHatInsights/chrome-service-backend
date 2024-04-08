@@ -215,9 +215,22 @@ type WidgetHeaderLink struct {
 	Href  string `json:"href,omitempty"`
 }
 
+type WidgetPermissionMethods string
+
+const (
+	OrgAdmin WidgetPermissionMethods = "isOrgAdmin"
+)
+
+type WidgetPermission struct {
+	Method WidgetPermissionMethods `json:"method,omitempty"`
+	Apps   []string                `json:"apps,omitempty"`
+	Args   []any                   `json:"args,omitempty"`
+}
+
 type WidgetConfiguration struct {
-	Icon       WidgetIcons      `json:"icon,omitempty"`
-	HeaderLink WidgetHeaderLink `json:"headerLink,omitempty"`
+	Icon        WidgetIcons        `json:"icon,omitempty"`
+	HeaderLink  WidgetHeaderLink   `json:"headerLink,omitempty"`
+	Permissions []WidgetPermission `json:"permissions,omitempty"`
 }
 
 type ModuleFederationMetadata struct {

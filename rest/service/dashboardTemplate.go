@@ -50,7 +50,7 @@ var (
 		models.NotificationsEvents: models.ModuleFederationMetadata{
 			Scope:    "notifications",
 			Module:   "./DashboardWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 4, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View event log",
@@ -63,7 +63,7 @@ var (
 		models.LearningResources: models.ModuleFederationMetadata{
 			Scope:    "learningResources",
 			Module:   "./BookmarkedLearningResourcesWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 4, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all learning resources",
@@ -122,7 +122,7 @@ var (
 		models.RecentlyVisited: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./RecentlyVisited",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.HistoryIcon,
 				Title: "Recently visited",

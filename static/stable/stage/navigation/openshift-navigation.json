@@ -67,6 +67,8 @@
                     "appId": "openshift",
                     "title": "On the Developer Sandbox",
                     "href": "https://developers.redhat.com/learn/openshift/how-create-natural-language-processing-nlp-application-using-red-hat-openshift-ai",
+                    "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
+                    "icon": "AITechnologyIcon",
                     "isExternal": true,
                     "filterable": false
                 },
@@ -75,6 +77,8 @@
                     "appId": "openshift",
                     "title": "60-day product trial",
                     "href": "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai/trial",
+                    "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
+                    "icon": "AITechnologyIcon",
                     "isExternal": true,
                     "filterable": false
                 }
@@ -122,6 +126,10 @@
                                 {
                                   "method": "featureFlag",
                                   "args": ["ocp-advisor-ui-workloads", true]
+                                },
+                                {
+                                    "method": "featureFlag",
+                                    "args": ["ocp-advisor-workloads-release", true]
                                 }
                               ]
                         }

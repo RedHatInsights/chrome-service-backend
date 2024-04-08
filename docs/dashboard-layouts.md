@@ -203,15 +203,54 @@ GET /api/chrome-service/v1/dashboard-templates/widget-mapping
 Response format
 
 ```TS
-type AvailableWidgets = "FavoriteServices" | "NotificationsEvents" | "LearningResources" | "ExploreCapabilities" | "Edge" | "Ansible" | "Rhel" | "Openshift"
+type AvailableWidgets = "FavoriteServices" | "NotificationsEvents" | "LearningResources" | "RecentlyVisited" | "ExploreCapabilities" | "Edge" | "Ansible" | "Red Hat Enterprise Linux" | "OpenShift" | "Quay.io" | "OpenShift AI" | "Advanced Cluster Security"
+
+type WidgetHeaderLink = {
+  title?: string;
+  href?: string;
+}
+
+type WidgetConfig = {
+  title: string;
+  icon?: string;
+  headerLink: WidgetHeaderLink;
+}
 
 type WidgetMappingResponse = {
   data: {
     [key in AvailableWidgets]: {
-      scope: string,
-      module: string,
-      importName?: string // if undefined default export will be used
+      scope: string;
+      module: string;
+      importName?: string; // if undefined default export will be used
+      config: WidgetConfig;
     }
   }
+}
+
+```
+
+### Dashboard layout encode/decode/sharing
+
+A layout can be shared via importing a base64 encoded layout
+
+#### Encoding layout
+
+Only layout owner can encode a layout. Call the encode get endpoint
+
+```
+GET /api/chrome-service/v1/dashboard-templates/<template-id>/encode
+```
+
+#### Decoding layout
+
+Any authenticated user can decode any shared string. Call the decode post endpoint.
+
+The payload is validates and verifies if the layout is valid. Nothing is persisted in DB during this operation.
+
+```
+POST /api/chrome-service/v1/dashboard-templates/decode
+
+{
+  "encodedTemplate": <base64 encoded layout>
 }
 ```

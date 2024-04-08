@@ -43,15 +43,21 @@ var (
 					Title: "View all services",
 					Href:  "/allservices",
 				},
-				Icon: models.StarIcon,
+				Icon:  models.StarIcon,
+				Title: "My favorite services",
 			},
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
 			Scope:    "notifications",
 			Module:   "./DashboardWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 4, 1),
 			Config: models.WidgetConfiguration{
-				Icon: models.BellIcon,
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View event log",
+					Href:  "/settings/notifications/eventlog",
+				},
+				Icon:  models.BellIcon,
+				Title: "Events",
 				Permissions: []models.WidgetPermission{
 					models.WidgetPermission{
 						Method: models.OrgAdmin,
@@ -62,32 +68,97 @@ var (
 		models.LearningResources: models.ModuleFederationMetadata{
 			Scope:    "learningResources",
 			Module:   "./BookmarkedLearningResourcesWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 2, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 4, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View all learning resources",
+					Href:  "/settings/learning-resources#documentation",
+				},
+				Icon:  models.OutlinedBookmarkIcon,
+				Title: "Bookmarked learning resources",
+			},
 		},
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./ExploreCapabilities",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 3, 3),
+
+			Config: models.WidgetConfiguration{
+				Icon:  models.RocketIcon,
+				Title: "Explore capabilities",
+			},
 		},
 		models.Edge: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./EdgeWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.EdgeIcon,
+				Title: "Edge Management",
+			},
 		},
 		models.Ansible: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./AnsibleWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.AnsibleIcon,
+				Title: "Ansible Automation Platform",
+			},
 		},
 		models.Rhel: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./RhelWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.RhelIcon,
+				Title: "Red Hat Enterprise Linux",
+			},
 		},
-		models.Openshift: models.ModuleFederationMetadata{
+		models.OpenShift: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.OpenShiftIcon,
+				Title: "Red Hat OpenShift",
+			},
+		},
+		models.RecentlyVisited: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./RecentlyVisited",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.HistoryIcon,
+				Title: "Recently visited",
+			},
+		},
+		models.OpenShiftAi: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./OpenShiftAiWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.OpenShiftAiIcon,
+				Title: "Red Hat OpenShift AI",
+			},
+		},
+		models.Quay: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./QuayWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.QuayIcon,
+				Title: "Quay.io",
+			},
+		},
+		models.Acs: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./AcsWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.ACSIcon,
+				Title: "Advanced Cluster Security",
+			},
 		},
 	}
 )
@@ -198,6 +269,10 @@ func UpdateDashboardTemplate(templateId uint, userId uint, dashboardTemplate mod
 			// replace only non empty items, not the whole config
 			dashboardTemplate.TemplateConfig.SetLayoutSizeItems(typeOfS.Field(i).Name, items)
 		}
+	}
+	err = dashboardTemplate.TemplateConfig.IsValid()
+	if err != nil {
+		return userDashboardTemplate, err
 	}
 
 	// Update only the templates, no other fields are allowed to be updated
@@ -326,7 +401,7 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			Y:                    2,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Openshift].Defaults,
+			BaseWidgetDimensions: WidgetMapping[models.OpenShift].Defaults,
 			ID:                   "openshift#openshift",
 			X:                    x,
 			Y:                    4,
@@ -352,4 +427,26 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 	}
 
 	return baseGridItems
+}
+func EncodeDashboardTemplate(accountId uint, templateId uint) (string, error) {
+	var dashboardTemplate models.DashboardTemplate
+
+	result := database.DB.Find(&dashboardTemplate, templateId)
+	if result.RowsAffected == 0 || result.Error != nil {
+		return "", gorm.ErrRecordNotFound
+	}
+
+	if dashboardTemplate.UserIdentityID != accountId {
+		return "", util.ErrNotAuthorized
+	}
+
+	encoded, err := dashboardTemplate.EncodeBase64()
+
+	return encoded, err
+}
+
+func DecodeDashboardTemplate(encoded string) (models.DashboardTemplate, error) {
+	dashboardTemplate, err := models.DecodeDashboardBase64(encoded)
+
+	return dashboardTemplate, err
 }

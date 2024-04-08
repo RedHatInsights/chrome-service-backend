@@ -1,15 +1,14 @@
 [
   {
-    "id": "dataset",
-    "icon": "LightBulbIcon",
+    "id": "ai",
     "title": "AI/ML",
-    "description": "Create, manage, and migrate relational and non-relational databases.",
     "links": [
       {
         "isGroup": true,
-        "title": "Application Services",
+        "title": "OpenShift",
         "links": [
-          "application-services.dataScience"
+          "openshift.sixtydaytrial",
+          "openshift.developersandboxtrial"
         ]
       }
     ]
@@ -462,7 +461,8 @@
             "description": "Configure your systems to execute Ansible Playbooks."
           },
           "rhel.activationKeys",
-          "rhel.registerSystems"
+          "rhel.registerSystems",
+          "rhel.stalenessAndDeletion"
         ]
       },
       {
@@ -495,25 +495,38 @@
     "description": "Our no-cost trials help you gain hands-on experience, prepare for a certification, or assess if a product is right for your organization.",
     "links": [
       {
-        "href": "/openshift/services/rosa/demo/",
-        "title": "ROSA Hands-on Experience",
-        "icon": "OpenShiftIcon",
-        "description": "Access a production-ready ROSA cluster for a limited time in a demo environment."
+        "isGroup": true,
+        "title": "General Red Hat",
+        "links": [
+          {
+            "isExternal": true,
+            "href": "https://marketplace.redhat.com/en-us",
+            "title": "Red Hat Marketplace",
+            "icon": "RHIcon",
+            "description": "Find, try, purchase, and deploy your software across clouds."
+          },
+          {
+            "isExternal": true,
+            "href": "https://www.redhat.com/en/products/trials",
+            "title": "Red Hat Product Trials",
+            "icon": "RHIcon",
+            "description": "Gain hands-on experience and assess if a product is right for you in a no-cost trial."
+          }
+        ]
       },
-      "openshift.developerSandbox",
       {
-        "isExternal": true,
-        "href": "https://marketplace.redhat.com/en-us",
-        "title": "Red Hat Marketplace",
-        "icon": "RHIcon",
-        "description": "Find, try, purchase, and deploy your software across clouds."
-      },
-      {
-        "isExternal": true,
-        "href": "https://www.redhat.com/en/products/trials",
-        "title": "Red Hat Product Trials",
-        "icon": "RHIcon",
-        "description": "Gain hands-on experience and assess if a product is right for you in a no-cost trial."
+        "isGroup": true,
+        "title": "OpenShift",
+        "links": [
+          {
+            "href": "/openshift/services/rosa/demo/",
+            "title": "ROSA Hands-on Experience",
+            "icon": "OpenShiftIcon",
+            "description": "Access a production-ready ROSA cluster for a limited time in a demo environment."
+          },
+          "openshift.developerSandbox",
+          "openshift.sixtydaytrial"
+        ]
       }
     ]
   }

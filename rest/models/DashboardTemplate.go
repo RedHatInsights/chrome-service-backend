@@ -1,7 +1,10 @@
 package models
 
 import (
+	"bytes"
 	"database/sql/driver"
+	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
@@ -47,16 +50,20 @@ const (
 	Edge                AvailableWidgets = "edge"
 	Ansible             AvailableWidgets = "ansible"
 	Rhel                AvailableWidgets = "rhel"
-	Openshift           AvailableWidgets = "openshift"
+	OpenShift           AvailableWidgets = "openshift"
+	RecentlyVisited     AvailableWidgets = "recentlyVisited"
+	OpenShiftAi         AvailableWidgets = "openshiftAi"
+	Quay                AvailableWidgets = "quay"
+	Acs                 AvailableWidgets = "acs"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, OpenShiftAi:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, Openshift, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, OpenShiftAi, RecentlyVisited, aw)
 }
 
 type BaseWidgetDimensions struct {
@@ -173,6 +180,38 @@ func (tc *TemplateConfig) SetLayoutSizeItems(layoutSize string, items []GridItem
 	return tc
 }
 
+func (tc TemplateConfig) IsValid() error {
+	configs := reflect.ValueOf(tc)
+	typeOfS := configs.Type()
+
+	for i := 0; i < configs.NumField(); i++ {
+		dgi := configs.Field(i).Interface().(datatypes.JSONType[[]GridItem])
+		items := dgi.Data()
+		layoutSize := typeOfS.Field(i).Tag.Get("json")
+		for _, gi := range items {
+			// initialize coordinates if they do not exist
+			if gi.Y == 0 {
+				gi.Y = 0
+			}
+			if gi.X == 0 {
+				gi.X = 0
+			}
+
+			err := gi.IsValid(GridSizes(layoutSize))
+			if err != nil {
+				return err
+			}
+		}
+
+		if len(items) > 0 {
+			// replace only non empty items, not the whole config
+			tc.SetLayoutSizeItems(typeOfS.Field(i).Name, items)
+		}
+	}
+
+	return nil
+}
+
 type DashboardTemplateBase struct {
 	Name        string `json:"name"`
 	DisplayName string `json:"displayName"`
@@ -197,17 +236,27 @@ type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
 type WidgetIcons string
 
 const (
-	BellIcon WidgetIcons = "BellIcon"
-	StarIcon WidgetIcons = "StarIcon"
+	BellIcon             WidgetIcons = "BellIcon"
+	HistoryIcon          WidgetIcons = "HistoryIcon"
+	OutlinedBookmarkIcon WidgetIcons = "OutlinedBookmarkIcon"
+	RocketIcon           WidgetIcons = "RocketIcon"
+	StarIcon             WidgetIcons = "StarIcon"
+	RhelIcon             WidgetIcons = "RhelIcon"
+	OpenShiftIcon        WidgetIcons = "OpenShiftIcon"
+	EdgeIcon             WidgetIcons = "EdgeIcon"
+	AnsibleIcon          WidgetIcons = "AnsibleIcon"
+	QuayIcon             WidgetIcons = "QuayIcon"
+	ACSIcon              WidgetIcons = "ACSIcon"
+	OpenShiftAiIcon      WidgetIcons = "OpenShiftAiIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
 	switch wi {
-	case BellIcon, StarIcon:
+	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, got %s", BellIcon, StarIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, wi)
 }
 
 type WidgetHeaderLink struct {
@@ -228,6 +277,7 @@ type WidgetPermission struct {
 }
 
 type WidgetConfiguration struct {
+	Title       string             `json:"title"`
 	Icon        WidgetIcons        `json:"icon,omitempty"`
 	HeaderLink  WidgetHeaderLink   `json:"headerLink,omitempty"`
 	Permissions []WidgetPermission `json:"permissions,omitempty"`
@@ -242,3 +292,53 @@ type ModuleFederationMetadata struct {
 }
 
 type WidgetModuleFederationMapping map[AvailableWidgets]ModuleFederationMetadata
+
+func (dt DashboardTemplate) IsValid() error {
+	if dt.TemplateBase.Name == "" {
+		return errors.New("invalid template name")
+	}
+
+	if dt.TemplateBase.DisplayName == "" {
+		return errors.New("invalid template display name")
+	}
+
+	if err := dt.TemplateConfig.IsValid(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (dt *DashboardTemplate) EncodeBase64() (string, error) {
+	strippedDt := DashboardTemplate{
+		TemplateBase:   dt.TemplateBase,
+		TemplateConfig: dt.TemplateConfig,
+		Default:        false,
+	}
+	var buf bytes.Buffer
+	encoder := base64.NewEncoder(base64.StdEncoding, &buf)
+	err := json.NewEncoder(encoder).Encode(&strippedDt)
+	if err != nil {
+		return "", err
+	}
+	encoder.Close()
+	return buf.String(), nil
+}
+
+func DecodeDashboardBase64(encoded string) (DashboardTemplate, error) {
+	var dt DashboardTemplate
+	decoder := base64.NewDecoder(base64.StdEncoding, bytes.NewBufferString(encoded))
+	err := json.NewDecoder(decoder).Decode(&dt)
+	if err != nil {
+		return dt, err
+	}
+
+	err = dt.IsValid()
+
+	// strip out user specific data
+	return DashboardTemplate{
+		TemplateBase:   dt.TemplateBase,
+		TemplateConfig: dt.TemplateConfig,
+		Default:        false,
+	}, err
+}

@@ -58,6 +58,11 @@ var (
 				},
 				Icon:  models.BellIcon,
 				Title: "Events",
+				Permissions: []models.WidgetPermission{
+					models.WidgetPermission{
+						Method: models.OrgAdmin,
+					},
+				},
 			},
 		},
 		models.LearningResources: models.ModuleFederationMetadata{

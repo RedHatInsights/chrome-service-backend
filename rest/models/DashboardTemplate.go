@@ -53,9 +53,8 @@ const (
 	OpenShift           AvailableWidgets = "openshift"
 	RecentlyVisited     AvailableWidgets = "recentlyVisited"
 	OpenShiftAi         AvailableWidgets = "openshiftAi"
-	Quay	            AvailableWidgets = "quay"
-	Acs           		AvailableWidgets = "acs"
-
+	Quay                AvailableWidgets = "quay"
+	Acs                 AvailableWidgets = "acs"
 )
 
 func (aw AvailableWidgets) IsValid() error {
@@ -246,9 +245,9 @@ const (
 	OpenShiftIcon        WidgetIcons = "OpenShiftIcon"
 	EdgeIcon             WidgetIcons = "EdgeIcon"
 	AnsibleIcon          WidgetIcons = "AnsibleIcon"
-	QuayIcon			 WidgetIcons = "QuayIcon"
-	ACSIcon				 WidgetIcons = "ACSIcon"
-	OpenShiftAiIcon		 WidgetIcons = "OpenShiftAiIcon"
+	QuayIcon             WidgetIcons = "QuayIcon"
+	ACSIcon              WidgetIcons = "ACSIcon"
+	OpenShiftAiIcon      WidgetIcons = "OpenShiftAiIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
@@ -265,10 +264,23 @@ type WidgetHeaderLink struct {
 	Href  string `json:"href,omitempty"`
 }
 
+type WidgetPermissionMethods string
+
+const (
+	OrgAdmin WidgetPermissionMethods = "isOrgAdmin"
+)
+
+type WidgetPermission struct {
+	Method WidgetPermissionMethods `json:"method,omitempty"`
+	Apps   []string                `json:"apps,omitempty"`
+	Args   []any                   `json:"args,omitempty"`
+}
+
 type WidgetConfiguration struct {
-	Title      string           `json:"title"`
-	Icon       WidgetIcons      `json:"icon,omitempty"`
-	HeaderLink WidgetHeaderLink `json:"headerLink,omitempty"`
+	Title       string             `json:"title"`
+	Icon        WidgetIcons        `json:"icon,omitempty"`
+	HeaderLink  WidgetHeaderLink   `json:"headerLink,omitempty"`
+	Permissions []WidgetPermission `json:"permissions,omitempty"`
 }
 
 type ModuleFederationMetadata struct {

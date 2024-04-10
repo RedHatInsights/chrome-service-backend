@@ -185,6 +185,8 @@ func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.
 
 	result := database.DB.Create(&dashboardTemplate)
 
+	ChangeDefaultTemplate(userId, dashboardTemplate.ID)
+
 	return dashboardTemplate, result.Error
 }
 

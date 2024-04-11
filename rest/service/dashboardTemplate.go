@@ -37,7 +37,7 @@ var (
 		models.FavoriteServices: models.ModuleFederationMetadata{
 			Scope:    "chrome",
 			Module:   "./DashboardFavorites",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 6, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 6, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
@@ -50,10 +50,10 @@ var (
 		models.NotificationsEvents: models.ModuleFederationMetadata{
 			Scope:    "notifications",
 			Module:   "./DashboardWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
-					Title: "View event log",
+					// Title: "View event log",
 					Href:  "/settings/notifications/eventlog",
 				},
 				Icon:  models.BellIcon,
@@ -379,52 +379,46 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 
 	baseGridItems := []models.GridItem{
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.ExploreCapabilities].Defaults,
-			ID:                   "exploreCapabilities#exploreCapabilities",
-			X:                    0,
-			Y:                    0,
-		},
-		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Edge].Defaults,
-			ID:                   "edge#edge",
-			X:                    0,
-			Y:                    2,
-		},
-		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Ansible].Defaults,
-			ID:                   "ansible#ansible",
-			X:                    x,
-			Y:                    0,
-		},
-		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.Rhel].Defaults,
 			ID:                   "rhel#rhel",
-			X:                    x,
-			Y:                    2,
+			X:                    0,
+			Y:                    0,
 		},
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.OpenShift].Defaults,
 			ID:                   "openshift#openshift",
-			X:                    x,
-			Y:                    4,
+			X:                    1,
+			Y:                    0,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.LearningResources].Defaults,
-			ID:                   "learningResources#learningResources",
-			X:                    0,
-			Y:                    4,
+			BaseWidgetDimensions: WidgetMapping[models.Ansible].Defaults,
+			ID:                   "ansible#ansible",
+			X:                    2,
+			Y:                    0,
 		},
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.NotificationsEvents].Defaults,
 			ID:                   "notificationsEvents#notificationsEvents",
-			X:                    x,
-			Y:                    6,
+			X:                    3,
+			Y:                    0,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.ExploreCapabilities].Defaults,
+			ID:                   "exploreCapabilities#exploreCapabilities",
+			X:                    0,
+			Y:                    2,
 		},
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.FavoriteServices].Defaults,
 			ID:                   "favoriteServices#favoriteServices",
 			X:                    0,
-			Y:                    6,
+			Y:                    3,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.LearningResources].Defaults,
+			ID:                   "learningResources#learningResources",
+			X:                    3,
+			Y:                    3,
 		},
 	}
 

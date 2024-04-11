@@ -1004,6 +1004,20 @@
             }
         ]
     },
+    "widgetLayout": {
+        "manifestLocation": "/apps/widget-layout/fed-mods.json",
+        "modules": [
+          {
+              "id": "widgetLayout",
+              "module": "./RootApp",
+              "routes": [
+                  {
+                      "pathname": "/staging/widget-layout"
+                  }
+              ]
+          }
+        ]
+    },
     "virtualAssistant": {
       "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
       "modules": []

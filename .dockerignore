@@ -1,0 +1,4 @@
+#ignore config directories that might contain secrets
+.docker
+.kube
+.podman

@@ -397,8 +397,8 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			Y:                    0,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.NotificationsEvents].Defaults,
-			ID:                   "notificationsEvents#notificationsEvents",
+			BaseWidgetDimensions: WidgetMapping[models.RecentlyVisited].Defaults,
+			ID:                   "edge#edge",
 			X:                    3,
 			Y:                    0,
 		},

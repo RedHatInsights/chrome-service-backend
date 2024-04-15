@@ -55,15 +55,16 @@ const (
 	OpenShiftAi         AvailableWidgets = "openshiftAi"
 	Quay                AvailableWidgets = "quay"
 	Acs                 AvailableWidgets = "acs"
+	Subscriptions       AvailableWidgets = "subscriptions"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, OpenShiftAi:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, OpenShiftAi, RecentlyVisited, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, aw)
 }
 
 type BaseWidgetDimensions struct {
@@ -241,6 +242,7 @@ const (
 	OutlinedBookmarkIcon WidgetIcons = "OutlinedBookmarkIcon"
 	RocketIcon           WidgetIcons = "RocketIcon"
 	StarIcon             WidgetIcons = "StarIcon"
+	CreditCardIcon       WidgetIcons = "CreditCardIcon"
 	RhelIcon             WidgetIcons = "RhelIcon"
 	OpenShiftIcon        WidgetIcons = "OpenShiftIcon"
 	EdgeIcon             WidgetIcons = "EdgeIcon"
@@ -252,11 +254,11 @@ const (
 
 func (wi WidgetIcons) IsValid() error {
 	switch wi {
-	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon:
+	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, CreditCardIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, CreditCardIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, wi)
 }
 
 type WidgetHeaderLink struct {

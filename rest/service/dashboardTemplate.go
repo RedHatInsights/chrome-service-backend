@@ -54,7 +54,7 @@ var (
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					// Title: "View event log",
-					Href:  "/settings/notifications/eventlog",
+					Href: "/settings/notifications/eventlog",
 				},
 				Icon:  models.BellIcon,
 				Title: "Events",
@@ -158,6 +158,15 @@ var (
 			Config: models.WidgetConfiguration{
 				Icon:  models.ACSIcon,
 				Title: "Advanced Cluster Security",
+			},
+		},
+		models.Subscriptions: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./SubscriptionsWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.CreditCardIcon,
+				Title: "Subscriptions",
 			},
 		},
 	}

@@ -165,6 +165,10 @@ var (
 			Module:   "./SubscriptionsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "Manage subscriptions",
+					Href:  "/subscriptions/inventory",
+				},
 				Icon:  models.CreditCardIcon,
 				Title: "Subscriptions",
 			},

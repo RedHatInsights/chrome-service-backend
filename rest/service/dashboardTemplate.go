@@ -160,6 +160,19 @@ var (
 				Title: "Bookmarked learning resources",
 			},
 		},
+		models.SupportCases: models.ModuleFederationMetadata{
+			Scope:    "supportCases",
+			Module:   "./SupportCaseWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 4, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "Opened support cases",
+					Href:  "https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true",
+				},
+				Icon:  models.HeadsetIcon,
+				Title: "Open a support case",
+			},
+		},
 	}
 )
 

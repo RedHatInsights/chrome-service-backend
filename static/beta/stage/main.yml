@@ -234,7 +234,6 @@ connector:
   title: Red Hat Connector
   api:
     versions:
-      - v1
       - v2
     apiName: config-manager
 

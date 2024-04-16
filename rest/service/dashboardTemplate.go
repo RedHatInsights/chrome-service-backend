@@ -135,7 +135,7 @@ var (
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
-					// Title: "View event log",
+					Title: "View event log",
 					Href:  "/settings/notifications/eventlog",
 				},
 				Icon:  models.BellIcon,

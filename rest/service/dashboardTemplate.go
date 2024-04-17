@@ -440,6 +440,17 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 		},
 	}
 
+	// adjust for maximum x value
+	for i, item := range baseGridItems {
+		if item.X > x {
+			baseGridItems[i].X = x
+		}
+
+		if item.BaseWidgetDimensions.Width > x {
+			baseGridItems[i].BaseWidgetDimensions.Width = x
+		}
+	}
+
 	return baseGridItems
 }
 func EncodeDashboardTemplate(accountId uint, templateId uint) (string, error) {

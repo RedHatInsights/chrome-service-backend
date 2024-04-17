@@ -168,7 +168,7 @@ func (gi GridItem) IsValid(variant GridSizes) error {
 	}
 
 	if gi.X > maxGridSize {
-		return errors.New(fmt.Errorf("invalid grid item, layout variant %s, coordinate X must be less than or equal to %d", variant, maxGridSize).Error())
+		return errors.New(fmt.Errorf("invalid grid item, layout variant %s, coordinate X must be less than or equal to %d, current value is %d", variant, maxGridSize, gi.X).Error())
 	}
 
 	return nil
@@ -316,8 +316,13 @@ func (dt *DashboardTemplate) EncodeBase64() (string, error) {
 		Default:        false,
 	}
 	var buf bytes.Buffer
+	err := dt.IsValid()
+	if err != nil {
+		return "", err
+
+	}
 	encoder := base64.NewEncoder(base64.StdEncoding, &buf)
-	err := json.NewEncoder(encoder).Encode(&strippedDt)
+	err = json.NewEncoder(encoder).Encode(&strippedDt)
 	if err != nil {
 		return "", err
 	}

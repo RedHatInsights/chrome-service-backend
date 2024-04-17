@@ -161,7 +161,7 @@ var (
 			},
 		},
 		models.Subscriptions: models.ModuleFederationMetadata{
-			Scope:    "landing",
+			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
 			Config: models.WidgetConfiguration{

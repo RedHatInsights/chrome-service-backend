@@ -161,7 +161,7 @@ var (
 			},
 		},
 		models.SupportCases: models.ModuleFederationMetadata{
-			Scope:    "supportCases",
+			Scope:    "landing",
 			Module:   "./SupportCaseWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 4, 1),
 			Config: models.WidgetConfiguration{

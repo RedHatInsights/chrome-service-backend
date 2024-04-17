@@ -55,7 +55,7 @@ const (
 	OpenShiftAi         AvailableWidgets = "openshiftAi"
 	Quay                AvailableWidgets = "quay"
 	Acs                 AvailableWidgets = "acs"
-	SupportCases		AvailableWidgets = "supportCases"
+	SupportCases        AvailableWidgets = "supportCases"
 )
 
 func (aw AvailableWidgets) IsValid() error {
@@ -249,7 +249,7 @@ const (
 	QuayIcon             WidgetIcons = "QuayIcon"
 	ACSIcon              WidgetIcons = "ACSIcon"
 	OpenShiftAiIcon      WidgetIcons = "OpenShiftAiIcon"
-	SupportCases		 WidgetIcons = "HeadsetIcon"
+	HeadsetIcon          WidgetIcons = "HeadsetIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {

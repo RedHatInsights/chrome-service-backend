@@ -527,13 +527,22 @@
           "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
           "alt_title": [
             "Tasks",
+            "tasks",
             "task",
-            "CentOS conversion",
-            "Pre Conversion analysis",
-            "Pre-Conversion analysis",
+            "CentOS Conversion",
+            "centos conversion",
+            "Pre Conversion Analysis",
+            "pre conversion analysis",
+            "Pre-Conversion Analysis",
+            "pre-conversion analysis",
             "Convert to RHEL",
+            "convert to rhel",
             "C2R",
-            "CentOS"
+            "c2r",
+            "CentOS",
+            "centos",
+            "Centos",
+            "centOS"
           ]
         }
       ]

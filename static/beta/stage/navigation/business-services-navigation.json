@@ -15,7 +15,19 @@
             "appId": "hybridCommittedSpend",
             "title": "Overview",
             "href": "/business-services/hybrid-committed-spend",
-            "icon": "PlaceholderIcon"
+            "icon": "PlaceholderIcon",
+            "permissions": [
+              {
+                "method": "loosePermissions",
+                "args": [
+                  [
+                    "hybrid-committed-spend:reports:*:*",
+                    "hybrid-committed-spend:reports:read",
+                    "hybrid-committed-spend:reports:write"
+                  ]
+                ]
+              }
+            ]
           },
           {
             "id": "details",

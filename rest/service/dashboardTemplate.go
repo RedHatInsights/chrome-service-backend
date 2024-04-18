@@ -170,7 +170,7 @@ var (
 					Href:  "https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true",
 				},
 				Icon:  models.HeadsetIcon,
-				Title: "Open a support case",
+				Title: "My support cases",
 			},
 		},
 	}

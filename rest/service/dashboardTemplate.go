@@ -163,10 +163,10 @@ var (
 		models.SupportCases: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./SupportCaseWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 6, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
-					Title: "Opened support cases",
+					Title: "Open a support case",
 					Href:  "https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true",
 				},
 				Icon:  models.HeadsetIcon,

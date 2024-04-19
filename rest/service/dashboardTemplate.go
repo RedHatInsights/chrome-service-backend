@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"gorm.io/datatypes"
@@ -160,10 +161,15 @@ var (
 				Title: "Bookmarked learning resources",
 			},
 		},
-		models.Subscriptions: models.ModuleFederationMetadata{
+	}
+)
+
+func init() {
+	if featureflags.IsEnabled("chrome-service.subscriptions-widget.enabled") {
+		WidgetMapping[models.Subscriptions] = models.ModuleFederationMetadata{
 			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 3, 3),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Manage subscriptions",
@@ -172,9 +178,9 @@ var (
 				Icon:  models.CreditCardIcon,
 				Title: "Subscriptions",
 			},
-		},
+		}
 	}
-)
+}
 
 func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.DashboardTemplate, error) {
 	err := dashboard.IsValid()

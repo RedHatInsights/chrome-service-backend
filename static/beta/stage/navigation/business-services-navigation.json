@@ -21,9 +21,7 @@
                 "method": "loosePermissions",
                 "args": [
                   [
-                    "hybrid-committed-spend:reports:*:*",
-                    "hybrid-committed-spend:reports:read",
-                    "hybrid-committed-spend:reports:write"
+                    "hybrid-committed-spend:reports:read"
                   ]
                 ]
               }
@@ -33,7 +31,17 @@
             "id": "details",
             "appId": "hybridCommittedSpend",
             "title": "Details",
-            "href": "/business-services/hybrid-committed-spend/details"
+            "href": "/business-services/hybrid-committed-spend/details",
+            "permissions": [
+              {
+                "method": "loosePermissions",
+                "args": [
+                  [
+                    "hybrid-committed-spend:reports:read"
+                  ]
+                ]
+              }
+            ]
           }
         ]
       }

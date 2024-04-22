@@ -86,7 +86,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },      
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -162,7 +162,7 @@
           "settings.notifications"
         ]
       }
-    ] 
+    ]
   },
   {
     "id": "inventories",
@@ -204,7 +204,7 @@
         "links": [
           "subscriptions.subscriptionsInventory"
         ]
-      }  
+      }
     ]
   },
   {
@@ -365,7 +365,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },     
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -429,7 +429,7 @@
         "isGroup": true,
         "title": "Subscription Services",
         "links": [
-          "subscriptions.overview", 
+          "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
           {
             "id": "hybridCommittedSpendOverview",
@@ -437,7 +437,17 @@
             "title": "Hybrid Committed Spend",
             "icon": "SubscriptionsIcon",
             "href": "/subscriptions/hybrid-committed-spend",
-            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
+            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns.",
+            "permissions": [
+              {
+                "method": "loosePermissions",
+                "args": [
+                  [
+                    "hybrid-committed-spend:reports:read"
+                  ]
+                ]
+              }
+            ]
           },
           "subscriptions.manifests"
         ]

@@ -95,6 +95,15 @@ func main() {
 		panic(err)
 	}
 
+	// Drop old tables
+	if tx.Migrator().HasTable("last_visited_pages") {
+		if err := tx.Migrator().DropTable("last_visited_pages"); err != nil {
+			logrus.Error("Unable to migrate database!")
+			tx.Rollback()
+			panic(err)
+		}
+	}
+
 	bundleRes = tx.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
 	if bundleRes.Error != nil {
 		logrus.Error("Unable to migrate database!")

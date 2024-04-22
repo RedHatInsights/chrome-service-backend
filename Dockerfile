@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhel8/go-toolset:1.18.4-8 AS builder
+FROM registry.redhat.io/rhel8/go-toolset:1.20.12-5.1712568462 AS builder
 WORKDIR $GOPATH/src/chrome-service-backend/
 # TODO: Use --exclude when stable docker version available
 COPY api api

@@ -16,6 +16,7 @@ help:
 	@echo "dev-static-node  - serve only the static direcory using simple node server"
 	@echo "  arguments:"
 	@echo "  - port: http server port 'make dev-static-node port=8888'"
+	@echo "audit 		 - run grype audit on the docker image"
 
 port?=8000
 
@@ -71,3 +72,7 @@ dev: seed-unleash
 
 parse-services:
 	go run cmd/services/parseServices.go
+
+audit:
+	docker build . -t chrome:audit
+	grype chrome:audit --fail-on medium --only-fixed

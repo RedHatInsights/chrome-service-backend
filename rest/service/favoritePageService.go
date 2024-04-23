@@ -53,7 +53,7 @@ func CheckIfExistsInDB(allFavoritePages []models.FavoritePage, newFavoritePage m
 func DeleteOrUpdateFavoritePage(favoritePage models.FavoritePage) error {
 
 	if !favoritePage.Favorite {
-		result := database.DB.Delete(&favoritePage)
+		result := database.DB.Unscoped().Delete(&favoritePage)
 		if result.Error != nil {
 			return result.Error
 		}

@@ -82,7 +82,7 @@ func main() {
 
 	//removes unfavorited pages from all users in favorite pages tables
 	if tx.Migrator().HasTable(&models.FavoritePage{}) {
-		if err := tx.Where("favorite = ?", false).Delete(&models.FavoritePage{}); err != nil {
+		if err := tx.Where("favorite = ?", false).Unscoped().Delete(&models.FavoritePage{}); err != nil {
 			logrus.Error("Unable to migrate database!")
 			tx.Rollback()
 			panic(err)

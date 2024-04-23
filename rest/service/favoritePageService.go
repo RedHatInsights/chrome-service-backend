@@ -7,6 +7,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/sirupsen/logrus"
+	"gorm.io/gorm"
 )
 
 func GetUserActiveFavoritePages(userID uint) ([]models.FavoritePage, error) {
@@ -49,8 +50,26 @@ func CheckIfExistsInDB(allFavoritePages []models.FavoritePage, newFavoritePage m
 	return pageExists
 }
 
-func UpdateFavoritePage(favoritePage models.FavoritePage) error {
-	return database.DB.Model(&models.FavoritePage{}).Where("pathname = ?", favoritePage.Pathname).Update("favorite", favoritePage.Favorite).Error
+func DeleteOrUpdateFavoritePage(favoritePage models.FavoritePage) error {
+
+	if !favoritePage.Favorite {
+		result := database.DB.Delete(&favoritePage)
+		if result.Error != nil {
+			return result.Error
+		}
+		if result.RowsAffected == 0 {
+			return gorm.ErrRecordNotFound
+		}
+	} else {
+		result := database.DB.Model(&models.FavoritePage{}).Where("pathname = ?", favoritePage.Pathname).Update("favorite", favoritePage.Favorite)
+		if result.Error != nil {
+			return result.Error
+		}
+		if result.RowsAffected == 0 {
+			return gorm.ErrRecordNotFound
+		}
+	}
+	return nil
 }
 
 func debugFavoritesEntry(accountId string, payload models.FavoritePage) {
@@ -74,7 +93,7 @@ func SaveUserFavoritePage(userID uint, accountId string, newFavoritePage models.
 	alreadyInDB := CheckIfExistsInDB(userFavoritePages, newFavoritePage)
 
 	if alreadyInDB {
-		err = UpdateFavoritePage(newFavoritePage)
+		err = DeleteOrUpdateFavoritePage(newFavoritePage)
 		debugFavoritesEntry(accountId, newFavoritePage)
 	} else {
 		debugFavoritesEntry(accountId, newFavoritePage)

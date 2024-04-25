@@ -168,7 +168,7 @@ func init() {
 		WidgetMapping[models.Subscriptions] = models.ModuleFederationMetadata{
 			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 3, 4, 3),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 5, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Manage subscriptions",

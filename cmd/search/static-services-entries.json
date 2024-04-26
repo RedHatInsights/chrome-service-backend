@@ -210,6 +210,7 @@
           "dnf",
           "yum",
           "errata",
+          "Errata",
           "patch",
           "advisories",
           "patching",
@@ -272,6 +273,7 @@
           "dnf",
           "yum",
           "errata",
+          "Errata",
           "patch",
           "advisories",
           "patching",
@@ -372,7 +374,8 @@
           "cvss",
           "risk",
           "critical",
-          "errata"
+          "errata",
+          "Errata"
         ]
       },
       {
@@ -400,7 +403,8 @@
           "cvss",
           "risk",
           "critical",
-          "errata"
+          "errata",
+          "Errata"
         ]
       }
     ]
@@ -725,6 +729,7 @@
           "critical",
           "security rule",
           "errata",
+          "Errata",
           "affected but not vulnerable",
           "severity",
           "CVE-"

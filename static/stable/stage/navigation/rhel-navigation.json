@@ -159,6 +159,7 @@
           "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
           "alt_title": [
             "Errata",
+            "errata",
             "patch",
             "updates",
             "insights"
@@ -392,6 +393,7 @@
             "critical",
             "security rule",
             "errata",
+            "Errata",
             "affected but not vulnerable",
             "severity", 
             "CVE-"

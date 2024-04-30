@@ -564,7 +564,9 @@
         "alt_title": [
           "Compliance",
           "security",
-          "regulatory"
+          "regulatory",
+          "rules",
+          "rule"
         ],
         "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
       },
@@ -577,7 +579,9 @@
         "alt_title": [
           "SCAP",
           "security content automation protocol",
-          "policies"
+          "policies",
+          "rules",
+          "rule"
         ]
       }
     ]

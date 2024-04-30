@@ -570,7 +570,19 @@
             "CentOS",
             "centos",
             "Centos",
-            "centOS"
+            "centOS",
+            "upgrade",
+            "update",
+            "insights",
+            "automation",
+            "leapp",
+            "migrate",
+            "version",
+            "9.0",
+            "8.0",
+            "convert",
+            "conversion",
+            "migration"
           ]
         }
       ]

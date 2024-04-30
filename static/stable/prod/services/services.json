@@ -449,13 +449,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          {
-            "href": "/insights/connector",
-            "title": "Remote Host Configuration (RHC)",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Configure your systems to execute Ansible Playbooks."
-          },
+          "rhel.rhc",
           "rhel.activationKeys",
           "rhel.registerSystems",
           "rhel.stalenessAndDeletion"

@@ -100,6 +100,7 @@
               "description": "Configure your systems to execute Ansible Playbooks.",
               "alt_title": [
                 "Remote host configuration",
+                "remote host configuration",
                 "connect systems",
                 "connection options",
                 "connect settings",

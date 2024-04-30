@@ -176,12 +176,7 @@
         "links": [
           "rhel.imageBuilder",
           "rhel.inventory",
-        {
-          "title": "Inventory Groups",
-          "href": "/insights/inventory/groups",
-          "icon": "InsightsIcon",
-          "description": "Group your Red Hat Enterprise Linux systems for more granular User Access."
-        }
+          "rhel.groups"
         ]
       },
       {

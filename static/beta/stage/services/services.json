@@ -318,13 +318,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
           },
-          {
-            "href": "/insights/compliance/reports",
-            "icon": "InsightsIcon",
-            "title": "Compliance",
-            "subtitle":"Red Hat Insights for RHEL",
-            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
-          },
+          "rhel.complianceReports",
           {
             "href": "/insights/malware/signatures",
             "title": "Malware",

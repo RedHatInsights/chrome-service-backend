@@ -433,7 +433,6 @@
               "product": "Red Hat Insights",
               "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
               "alt_title": [
-                "Compliance",
                 "security",
                 "policies",
                 "SCAP",

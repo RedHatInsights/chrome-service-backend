@@ -541,40 +541,6 @@
     ]
   },
   {
-    "id": "rhel-advisor",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.advisor",
-        "href": "/insights/advisor/recommendations",
-        "title": "Insights Advisor",
-        "subtitle": "Red Hat Insights for RHEL",
-        "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems’ availability, performance, and security.",
-        "alt_title": [
-          "advisor",
-          "Rules",
-          "rules",
-          "rule",
-          "Rule",
-          "insights",
-          "security",
-          "stability",
-          "performance",
-          "incidents",
-          "recommendations",
-          "configuration",
-          "pathways",
-          "critical",
-          "upgrade",
-          "upgrade risk",
-          "incident",
-          "recommendation",
-          "pathway"
-        ]
-      }
-    ]
-  },
-  {
     "id": "rhel-remediations",
     "links": [
       {

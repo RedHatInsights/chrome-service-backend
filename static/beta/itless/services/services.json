@@ -54,7 +54,28 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
+            "alt_title": [
+              "advisor",
+              "Rules",
+              "rules",
+              "rule",
+              "Rule",
+              "insights",
+              "security",
+              "stability",
+              "performance",
+              "incidents",
+              "recommendations",
+              "configuration",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "href": "/insights/drift",
@@ -84,7 +105,28 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
+            "alt_title": [
+              "advisor",
+              "Rules",
+              "rules",
+              "rule",
+              "Rule",
+              "insights",
+              "security",
+              "stability",
+              "performance",
+              "incidents",
+              "recommendations",
+              "configuration",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "href": "/insights/vulnerability/cves",

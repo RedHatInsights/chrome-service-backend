@@ -110,7 +110,7 @@ var (
 		models.RecentlyVisited: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./RecentlyVisited",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.HistoryIcon,
 				Title: "Recently visited",
@@ -119,7 +119,7 @@ var (
 		models.FavoriteServices: models.ModuleFederationMetadata{
 			Scope:    "chrome",
 			Module:   "./DashboardFavorites",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
@@ -396,12 +396,7 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			X:                    2,
 			Y:                    0,
 		},
-		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Acs].Defaults,
-			ID:                   "acs#acs",
-			X:                    3,
-			Y:                    0,
-		},
+
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.ExploreCapabilities].Defaults,
 			ID:                   "exploreCapabilities#exploreCapabilities",
@@ -414,29 +409,30 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			X:                    3,
 			Y:                    0,
 		},
-		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Quay].Defaults,
-			ID:                   "quay#quay",
-			X:                    3,
-			Y:                    0,
-		},
+
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.FavoriteServices].Defaults,
 			ID:                   "favoriteServices#favoriteServices",
+			X:                    4,
+			Y:                    3,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.OpenShiftAi].Defaults,
+			ID:                   "openshiftAi#openshiftAi",
 			X:                    0,
 			Y:                    3,
 		},
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.Edge].Defaults,
 			ID:                   "edge#edge",
-			X:                    2,
+			X:                    1,
 			Y:                    3,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.OpenShiftAi].Defaults,
-			ID:                   "openshiftAi#openshiftAi",
-			X:                    4,
-			Y:                    2,
+			BaseWidgetDimensions: WidgetMapping[models.Acs].Defaults,
+			ID:                   "acs#acs",
+			X:                    2,
+			Y:                    3,
 		},
 	}
 

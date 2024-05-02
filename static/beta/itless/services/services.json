@@ -24,12 +24,7 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.inventory",
-          {
-            "title": "Inventory Groups",
-            "href": "/insights/inventory/groups",
-            "icon": "InsightsIcon",
-            "description": "Group your Red Hat Enterprise Linux systems for more granular User Access."
-          }
+          "rhel.groups"
         ]
       },
       {
@@ -53,18 +48,34 @@
         "links": [
           "rhel.advisories",
           "rhel.repositories",
-          {
-            "href": "/insights/patch/systems",
-            "title": "Patch",
-            "icon": "InsightsIcon",
-            "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
-          },
+          "rhel.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
+            "alt_title": [
+              "advisor",
+              "Rules",
+              "rules",
+              "rule",
+              "Rule",
+              "insights",
+              "security",
+              "stability",
+              "performance",
+              "incidents",
+              "recommendations",
+              "configuration",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "href": "/insights/drift",
@@ -94,7 +105,28 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
+            "alt_title": [
+              "advisor",
+              "Rules",
+              "rules",
+              "rule",
+              "Rule",
+              "insights",
+              "security",
+              "stability",
+              "performance",
+              "incidents",
+              "recommendations",
+              "configuration",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "href": "/insights/vulnerability/cves",
@@ -103,13 +135,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
           },
-          {
-            "href": "/insights/compliance/reports",
-            "icon": "InsightsIcon",
-            "title": "Compliance",
-            "subtitle":"Red Hat Insights for RHEL",
-            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
-          },
+          "rhel.complianceReports",
           {
             "href": "/insights/malware/signatures",
             "title": "Malware",

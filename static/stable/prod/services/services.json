@@ -319,7 +319,24 @@
             "title": "Advisor",
             "subtitle": "Red Hat Insights for Ansible",
             "icon": "AnsibleIcon",
-            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
+            "alt_title": [
+              "Rules",
+              "recommendations",
+              "Configuration",
+              "security",
+              "stability",
+              "performance",
+              "advisor",
+              "incidents",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "title": "Drift",

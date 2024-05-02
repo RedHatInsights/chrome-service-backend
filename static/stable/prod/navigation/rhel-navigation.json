@@ -179,7 +179,30 @@
           "href": "/insights/patch/packages",
           "icon": "InsightsIcon",
           "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL"
+          "subtitle": "Red Hat Insights for RHEL",
+          "description": "Review package applicability on your Red Hat Enterprise Linux systems.",
+          "alt_title": [
+            "Packages",
+            "updates",
+            "insights",
+            "repositories",
+            "rpm",
+            "dnf",
+            "yum",
+            "errata",
+            "Errata",
+            "patch",
+            "advisories",
+            "patching",
+            "templates",
+            "content management",
+            "content view",
+            "patch cycle",
+            "satellite",
+            "RHSA",
+            "RHBA",
+            "RHEA"
+          ]
         },
         {
           "id": "repositories",

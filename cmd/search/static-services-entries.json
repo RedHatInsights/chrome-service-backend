@@ -204,7 +204,8 @@
           "updates",
           "content templates"
         ]
-      }
+      },
+      "rhel.packages"
     ]
   },
   {
@@ -226,40 +227,6 @@
           "patching",
           "update",
           "content view"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "rhel-content-patch-packages",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.patch",
-        "href": "/insights/patch/packages",
-        "description": "Review package applicability on your Red Hat Enterprise Linux systems.",
-        "title": "Packages",
-        "alt_title": [
-          "Packages",
-          "updates",
-          "insights",
-          "repositories",
-          "rpm",
-          "dnf",
-          "yum",
-          "errata",
-          "Errata",
-          "patch",
-          "advisories",
-          "patching",
-          "templates",
-          "content management",
-          "content view",
-          "patch cycle",
-          "satellite",
-          "RHSA",
-          "RHBA",
-          "RHEA"
         ]
       }
     ]

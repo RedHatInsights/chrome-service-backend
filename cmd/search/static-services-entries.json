@@ -4,37 +4,6 @@
     "links": [
       {
         "custom": true,
-        "id": "OPENSHIFT.insights.Advisor.recommendations",
-        "href": "/openshift/insights/advisor/recommendations",
-        "title": "Red Hat OpenShift Cluster Manager Recommendations",
-        "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
-        "alt_title": [
-          "Insights Advisor",
-          "OpenShift Advisor",
-          "Advisor",
-          "Recommendations",
-          "Proactive support",
-          "Proactive support",
-          "risk",
-          "support",
-          "update",
-          "update risk",
-          "update",
-          "issues",
-          "remediation",
-          "cluster state",
-          "recommendation",
-          "cluster health",
-          "remote health",
-          "proactive",
-          "support",
-          "fix",
-          "problem",
-          "issue"
-        ]
-      },
-      {
-        "custom": true,
         "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
         "href": "/openshift/insights/advisor/clusters",
         "title": "Red Hat OpenShift Cluster Manager Advisor",

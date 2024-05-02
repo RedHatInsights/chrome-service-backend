@@ -274,7 +274,32 @@
             "icon": "OpenShiftIcon",
             "title": "Advisor",
             "subtitle": "Red Hat Insights for OpenShift",
-            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
+            "alt_title": [
+              "Insights Advisor",
+              "OpenShift Advisor",
+              "Advisor",
+              "advisor",
+              "Recommendations",
+              "Proactive support",
+              "Proactive support",
+              "risk",
+              "support",
+              "update",
+              "update risk",
+              "update",
+              "issues",
+              "remediation",
+              "cluster state",
+              "recommendation",
+              "cluster health",
+              "remote health",
+              "proactive",
+              "support",
+              "fix",
+              "problem",
+              "issue"
+            ]
           },
           {
             "href": "/openshift/insights/vulnerability/cves",

@@ -214,12 +214,7 @@
         "links": [
           "rhel.advisories",
           "rhel.repositories",
-          {
-            "href": "/insights/patch/systems",
-            "title": "Patch",
-            "icon": "InsightsIcon",
-            "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
-          },
+          "rhel.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",

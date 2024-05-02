@@ -222,10 +222,24 @@
           "expandable": true,
           "routes": [
             {
+              "id": "patchSystems",
               "appId": "patch",
               "title": "Systems",
               "href": "/insights/patch/systems",
-              "product": "Red Hat Insights"
+              "product": "Red Hat Insights",
+              "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+              "alt_title": [
+                "Patch",
+                "content",
+                "advisories",
+                "insights",
+                "Rhel",
+                "patch",
+                "updates",
+                "update",
+                "systems",
+                "upgrade"
+              ]
             },
             {
               "appId": "patch",

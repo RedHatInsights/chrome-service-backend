@@ -172,31 +172,6 @@
     ]
   },
   {
-    "id": "patch-system",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.Content.Patch.patch",
-        "href": "/insights/patch/systems",
-        "title": "Systems",
-        "subtitle": "Red Hat Insights for RHEL",
-        "description": "View details about your Red Hat Enterprise Linux systems and their applicable advisories.",
-        "alt_title": [
-          "Patch",
-          "content",
-          "advisories",
-          "insights",
-          "Rhel",
-          "patch",
-          "updates",
-          "update",
-          "systems",
-          "upgrade"
-        ]
-      }
-    ]
-  },
-  {
     "id": "rhel-patch",
     "links": [
       {

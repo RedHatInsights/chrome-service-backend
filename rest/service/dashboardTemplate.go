@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"gorm.io/datatypes"
@@ -164,7 +165,7 @@ var (
 )
 
 func init() {
-	if true {
+	if featureflags.IsEnabled("chrome-service.subscriptions-widget.enabled") {
 		WidgetMapping[models.Subscriptions] = models.ModuleFederationMetadata{
 			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",

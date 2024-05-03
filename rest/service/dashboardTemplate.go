@@ -163,7 +163,7 @@ var (
 		models.SupportCases: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./SupportCaseWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 6, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Open a support case",

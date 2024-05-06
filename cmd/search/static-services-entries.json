@@ -4,37 +4,6 @@
     "links": [
       {
         "custom": true,
-        "id": "OPENSHIFT.insights.Advisor.recommendations",
-        "href": "/openshift/insights/advisor/recommendations",
-        "title": "Red Hat OpenShift Cluster Manager Recommendations",
-        "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
-        "alt_title": [
-          "Insights Advisor",
-          "OpenShift Advisor",
-          "Advisor",
-          "Recommendations",
-          "Proactive support",
-          "Proactive support",
-          "risk",
-          "support",
-          "update",
-          "update risk",
-          "update",
-          "issues",
-          "remediation",
-          "cluster state",
-          "recommendation",
-          "cluster health",
-          "remote health",
-          "proactive",
-          "support",
-          "fix",
-          "problem",
-          "issue"
-        ]
-      },
-      {
-        "custom": true,
         "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
         "href": "/openshift/insights/advisor/clusters",
         "title": "Red Hat OpenShift Cluster Manager Advisor",
@@ -172,31 +141,6 @@
     ]
   },
   {
-    "id": "patch-system",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.Content.Patch.patch",
-        "href": "/insights/patch/systems",
-        "title": "Systems",
-        "subtitle": "Red Hat Insights for RHEL",
-        "description": "View details about your Red Hat Enterprise Linux systems and their applicable advisories.",
-        "alt_title": [
-          "Patch",
-          "content",
-          "advisories",
-          "insights",
-          "Rhel",
-          "patch",
-          "updates",
-          "update",
-          "systems",
-          "upgrade"
-        ]
-      }
-    ]
-  },
-  {
     "id": "rhel-patch",
     "links": [
       {
@@ -210,6 +154,7 @@
           "dnf",
           "yum",
           "errata",
+          "Errata",
           "patch",
           "advisories",
           "patching",
@@ -228,7 +173,8 @@
           "updates",
           "content templates"
         ]
-      }
+      },
+      "rhel.packages"
     ]
   },
   {
@@ -250,39 +196,6 @@
           "patching",
           "update",
           "content view"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "rhel-content-patch-packages",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.patch",
-        "href": "/insights/patch/packages",
-        "description": "Review package applicability on your Red Hat Enterprise Linux systems.",
-        "title": "Packages",
-        "alt_title": [
-          "Packages",
-          "updates",
-          "insights",
-          "repositories",
-          "rpm",
-          "dnf",
-          "yum",
-          "errata",
-          "patch",
-          "advisories",
-          "patching",
-          "templates",
-          "content management",
-          "content view",
-          "patch cycle",
-          "satellite",
-          "RHSA",
-          "RHBA",
-          "RHEA"
         ]
       }
     ]
@@ -372,7 +285,8 @@
           "cvss",
           "risk",
           "critical",
-          "errata"
+          "errata",
+          "Errata"
         ]
       },
       {
@@ -400,7 +314,8 @@
           "cvss",
           "risk",
           "critical",
-          "errata"
+          "errata",
+          "Errata"
         ]
       }
     ]
@@ -490,32 +405,6 @@
     ]
   },
   {
-    "id": "rhel-policies",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.policies",
-        "href": "/insights/policies",
-        "title": "RHEL Policies",
-        "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
-        "alt_title":[
-          "policies",
-          "facts",
-          "conditions",
-          "trigger", "notifications",
-          "alerts",
-          "insights",
-          "notify",
-          "integration",
-          "conditions",
-          "alerts",
-          "events",
-          "raise alerts on system configuration changes"
-        ]
-      }
-    ]
-  },
-  {
     "id": "costManagement",
     "links": [
       {
@@ -560,7 +449,9 @@
         "alt_title": [
           "Compliance",
           "security",
-          "regulatory"
+          "regulatory",
+          "rules",
+          "rule"
         ],
         "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
       },
@@ -573,7 +464,9 @@
         "alt_title": [
           "SCAP",
           "security content automation protocol",
-          "policies"
+          "policies",
+          "rules",
+          "rule"
         ]
       }
     ]
@@ -599,33 +492,6 @@
     ]
   },
   {
-    "id": "rhel-tasks",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.tasks",
-        "href": "/insights/tasks",
-        "title": "RHEL Tasks",
-        "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
-        "alt_title": [
-          "Task",
-          "upgrade",
-          "update",
-          "insights",
-          "automation",
-          "leapp",
-          "migrate",
-          "version",
-          "9.0",
-          "8.0",
-          "convert",
-          "conversion",
-          "migration"
-        ]
-      }
-    ]
-  },
-  {
     "id": "rhel-dashboard",
     "links": [
       {
@@ -639,27 +505,6 @@
           "Dashboard",
           "insights",
           "Rhel"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "rhel-advisor",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.advisor",
-        "href": "/insights/advisor/recommendations",
-        "title": "Insights Advisor",
-        "subtitle": "Red Hat Insights for RHEL",
-        "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems’ availability, performance, and security.",
-        "alt_title": [
-          "advisor",
-          "incidents",
-          "recommendations",
-          "configuration",
-          "pathways",
-          "critical"
         ]
       }
     ]
@@ -725,6 +570,7 @@
           "critical",
           "security rule",
           "errata",
+          "Errata",
           "affected but not vulnerable",
           "severity",
           "CVE-"

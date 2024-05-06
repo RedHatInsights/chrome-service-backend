@@ -1,6 +1,16 @@
-FROM registry.redhat.io/rhel8/go-toolset:1.18.4-8 AS builder
+FROM registry.redhat.io/rhel8/go-toolset:1.20.12-5.1712568462 AS builder
 WORKDIR $GOPATH/src/chrome-service-backend/
-COPY . .
+# TODO: Use --exclude when stable docker version available
+COPY api api
+COPY cmd cmd
+COPY config config
+COPY rest rest
+COPY static static
+COPY go.mod go.mod
+COPY go.sum go.sum
+COPY main.go main.go
+COPY spec spec
+COPY Makefile Makefile
 ENV GO111MODULE=on
 USER root
 RUN go get -d -v

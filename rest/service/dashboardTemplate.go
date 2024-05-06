@@ -38,7 +38,7 @@ var (
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./ExploreCapabilities",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 3, 5, 6, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 3, 5, 10, 1),
 
 			Config: models.WidgetConfiguration{
 				Icon:  models.RocketIcon,
@@ -48,7 +48,7 @@ var (
 		models.Edge: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./EdgeWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.EdgeIcon,
 				Title: "Edge Management",
@@ -57,7 +57,7 @@ var (
 		models.Ansible: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./AnsibleWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.AnsibleIcon,
 				Title: "Ansible Automation Platform",
@@ -66,7 +66,7 @@ var (
 		models.Rhel: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./RhelWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.RhelIcon,
 				Title: "Red Hat Enterprise Linux",
@@ -75,7 +75,7 @@ var (
 		models.OpenShift: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftIcon,
 				Title: "Red Hat OpenShift",
@@ -84,7 +84,7 @@ var (
 		models.Quay: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./QuayWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.QuayIcon,
 				Title: "Quay.io",
@@ -93,34 +93,34 @@ var (
 		models.Acs: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./AcsWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.ACSIcon,
 				Title: "Advanced Cluster Security",
 			},
 		},
-		models.RecentlyVisited: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./RecentlyVisited",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
-			Config: models.WidgetConfiguration{
-				Icon:  models.HistoryIcon,
-				Title: "Recently visited",
-			},
-		},
 		models.OpenShiftAi: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./OpenShiftAiWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 3, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftAiIcon,
 				Title: "Red Hat OpenShift AI",
 			},
 		},
+		models.RecentlyVisited: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./RecentlyVisited",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.HistoryIcon,
+				Title: "Recently visited",
+			},
+		},
 		models.FavoriteServices: models.ModuleFederationMetadata{
 			Scope:    "chrome",
 			Module:   "./DashboardFavorites",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 6, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
@@ -133,7 +133,7 @@ var (
 		models.NotificationsEvents: models.ModuleFederationMetadata{
 			Scope:    "notifications",
 			Module:   "./DashboardWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View event log",
@@ -151,7 +151,7 @@ var (
 		models.LearningResources: models.ModuleFederationMetadata{
 			Scope:    "learningResources",
 			Module:   "./BookmarkedLearningResourcesWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 4, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all learning resources",
@@ -159,6 +159,19 @@ var (
 				},
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
+			},
+		},
+		models.SupportCases: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./SupportCaseWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "Open a support case",
+					Href:  "https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true",
+				},
+				Icon:  models.HeadsetIcon,
+				Title: "My support cases",
 			},
 		},
 	}
@@ -415,12 +428,7 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			X:                    2,
 			Y:                    0,
 		},
-		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Acs].Defaults,
-			ID:                   "acs#acs",
-			X:                    3,
-			Y:                    0,
-		},
+
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.ExploreCapabilities].Defaults,
 			ID:                   "exploreCapabilities#exploreCapabilities",
@@ -433,29 +441,30 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			X:                    3,
 			Y:                    0,
 		},
-		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Quay].Defaults,
-			ID:                   "quay#quay",
-			X:                    3,
-			Y:                    0,
-		},
+
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.FavoriteServices].Defaults,
 			ID:                   "favoriteServices#favoriteServices",
+			X:                    4,
+			Y:                    3,
+		},
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.OpenShiftAi].Defaults,
+			ID:                   "openshiftAi#openshiftAi",
 			X:                    0,
 			Y:                    3,
 		},
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.Edge].Defaults,
 			ID:                   "edge#edge",
-			X:                    2,
+			X:                    1,
 			Y:                    3,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.OpenShiftAi].Defaults,
-			ID:                   "openshiftAi#openshiftAi",
-			X:                    4,
-			Y:                    2,
+			BaseWidgetDimensions: WidgetMapping[models.Acs].Defaults,
+			ID:                   "acs#acs",
+			X:                    2,
+			Y:                    3,
 		},
 	}
 

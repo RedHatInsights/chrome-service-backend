@@ -203,7 +203,7 @@
                             "permissions": [
                                 {
                                     "method": "featureFlag",
-                                    "args": ["cost-management.ui.ros-beta", true]
+                                    "args": ["cost-management.ui.ros-preview", true]
                                 }
                             ]
                         },
@@ -237,7 +237,7 @@
                             "permissions": [
                                 {
                                     "method": "featureFlag",
-                                    "args": ["cost-management.ui.ibm", true]
+                                    "args": ["cost-management.ui.ibm-nav", true]
                                 }
                             ]
                         },

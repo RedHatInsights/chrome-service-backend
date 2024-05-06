@@ -86,7 +86,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },      
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -162,7 +162,7 @@
           "settings.notifications"
         ]
       }
-    ] 
+    ]
   },
   {
     "id": "inventories",
@@ -176,12 +176,8 @@
         "links": [
           "rhel.imageBuilder",
           "rhel.inventory",
-          {
-            "title": "Inventory Groups",
-            "href": "/insights/inventory/groups",
-            "icon": "InsightsIcon",
-            "description": "Group your Red Hat Enterprise Linux systems for more granular User Access."
-          }
+          "rhel.groups"
+
         ]
       },
       {
@@ -204,7 +200,7 @@
         "links": [
           "subscriptions.subscriptionsInventory"
         ]
-      }  
+      }
     ]
   },
   {
@@ -219,18 +215,34 @@
         "links": [
           "rhel.advisories",
           "rhel.repositories",
-          {
-            "href": "/insights/patch/systems",
-            "title": "Patch",
-            "icon": "InsightsIcon",
-            "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems."
-          },
+          "rhel.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
+            "alt_title": [
+              "advisor",
+              "Rules",
+              "rules",
+              "rule",
+              "Rule",
+              "insights",
+              "security",
+              "stability",
+              "performance",
+              "incidents",
+              "recommendations",
+              "configuration",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "href": "/insights/drift",
@@ -251,7 +263,32 @@
             "icon": "OpenShiftIcon",
             "title": "Advisor",
             "subtitle": "Red Hat Insights for OpenShift",
-            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
+            "alt_title": [
+              "Insights Advisor",
+              "OpenShift Advisor",
+              "Advisor",
+              "advisor",
+              "Recommendations",
+              "Proactive support",
+              "Proactive support",
+              "risk",
+              "support",
+              "update",
+              "update risk",
+              "update",
+              "issues",
+              "remediation",
+              "cluster state",
+              "recommendation",
+              "cluster health",
+              "remote health",
+              "proactive",
+              "support",
+              "fix",
+              "problem",
+              "issue"
+            ]
           },
           {
             "href": "/openshift/insights/vulnerability/cves",
@@ -271,7 +308,24 @@
             "title": "Advisor",
             "subtitle": "Red Hat Insights for Ansible",
             "icon": "AnsibleIcon",
-            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
+            "alt_title": [
+              "Rules",
+              "recommendations",
+              "Configuration",
+              "security",
+              "stability",
+              "performance",
+              "advisor",
+              "incidents",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "title": "Drift",
@@ -313,7 +367,28 @@
             "title": "Advisor",
             "icon": "InsightsIcon",
             "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security."
+            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
+            "alt_title": [
+              "advisor",
+              "Rules",
+              "rules",
+              "rule",
+              "Rule",
+              "insights",
+              "security",
+              "stability",
+              "performance",
+              "incidents",
+              "recommendations",
+              "configuration",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
           },
           {
             "href": "/insights/vulnerability/cves",
@@ -322,13 +397,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
           },
-          {
-            "href": "/insights/compliance/reports",
-            "icon": "InsightsIcon",
-            "title": "Compliance",
-            "subtitle":"Red Hat Insights for RHEL",
-            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
-          },
+          "rhel.complianceReports",
           {
             "href": "/insights/malware/signatures",
             "title": "Malware",
@@ -365,7 +434,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },     
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -429,7 +498,7 @@
         "isGroup": true,
         "title": "Subscription Services",
         "links": [
-          "subscriptions.overview", 
+          "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
           {
             "id": "hybridCommittedSpendOverview",
@@ -437,7 +506,17 @@
             "title": "Hybrid Committed Spend",
             "icon": "SubscriptionsIcon",
             "href": "/subscriptions/hybrid-committed-spend",
-            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
+            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns.",
+            "permissions": [
+              {
+                "method": "loosePermissions",
+                "args": [
+                  [
+                    "hybrid-committed-spend:reports:read"
+                  ]
+                ]
+              }
+            ]
           },
           "subscriptions.manifests"
         ]
@@ -454,13 +533,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          {
-            "href": "/insights/connector",
-            "title": "Remote Host Configuration (RHC)",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Configure your systems to execute Ansible Playbooks."
-          },
+          "rhel.rhc",
           "rhel.activationKeys",
           "rhel.registerSystems",
           "rhel.stalenessAndDeletion"

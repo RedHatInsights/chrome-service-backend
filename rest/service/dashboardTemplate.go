@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"gorm.io/datatypes"
@@ -175,6 +176,24 @@ var (
 		},
 	}
 )
+
+func init() {
+	if featureflags.IsEnabled("chrome-service.subscriptions-widget.enabled") {
+		WidgetMapping[models.Subscriptions] = models.ModuleFederationMetadata{
+			Scope:    "subscriptionInventory",
+			Module:   "./SubscriptionsWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 5, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "Manage subscriptions",
+					Href:  "/subscriptions/inventory",
+				},
+				Icon:  models.CreditCardIcon,
+				Title: "Subscriptions",
+			},
+		}
+	}
+}
 
 func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.DashboardTemplate, error) {
 	err := dashboard.IsValid()

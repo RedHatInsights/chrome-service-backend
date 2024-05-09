@@ -399,7 +399,33 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
           },
-          "rhel.complianceReports",
+          {
+            "href": "/insights/compliance/reports",
+            "icon": "InsightsIcon",
+            "title": "Compliance",
+            "subtitle":"Red Hat Insights for RHEL",
+            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
+            "alt_title": [
+              "security",
+              "policies",
+              "SCAP",
+              "policy",
+              "insights",
+              "regulatory",
+              "regulations",
+              "OpenSCAP",
+              "PCI",
+              "HIPAA",
+              "DSS",
+              "CSI",
+              "C2S",
+              "rules",
+              "DISA STIG",
+              "PCI-DSS",
+              "NIST",
+              "OSPP"
+            ]
+          },
           {
             "href": "/insights/malware/signatures",
             "title": "Malware",

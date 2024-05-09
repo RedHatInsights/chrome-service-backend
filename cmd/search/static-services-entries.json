@@ -510,34 +510,8 @@
   {
     "id": "compliance",
     "links": [
-      {
-        "custom": true,
-        "id": "complianceReports",
-        "href": "/insights/compliance/reports",
-        "title": "Reports",
-        "alt_title": [
-          "Compliance",
-          "security",
-          "regulatory",
-          "rules",
-          "rule"
-        ],
-        "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
-      },
-      {
-        "custom": true,
-        "id": "scapPolicies",
-        "href": "/insights/compliance/scappolicies",
-        "title": "SCAP Policies",
-        "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
-        "alt_title": [
-          "SCAP",
-          "security content automation protocol",
-          "policies",
-          "rules",
-          "rule"
-        ]
-      }
+      "rhel.complianceReports",
+      "rhel.scapPolicies"
     ]
   },
   {

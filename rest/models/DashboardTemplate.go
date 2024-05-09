@@ -272,6 +272,8 @@ type WidgetPermissionMethods string
 
 const (
 	OrgAdmin WidgetPermissionMethods = "isOrgAdmin"
+	FeatureFlag WidgetPermissionMethods = "featureFlag"
+	HasPermissions WidgetPermissionMethods = "hasPermissions"
 )
 
 type WidgetPermission struct {

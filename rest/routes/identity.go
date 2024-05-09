@@ -10,6 +10,25 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+func handleIdentityError(err error, w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "application/json")
+	if err != nil {
+		resp := util.ErrorResponse{
+			Errors: []string{err.Error()},
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(resp)
+		return
+	}
+
+	resp := util.ErrorResponse{
+		Errors: []string{"internal server error"},
+	}
+
+	w.WriteHeader(http.StatusInternalServerError)
+	json.NewEncoder(w).Encode(resp)
+}
+
 type AddVisitedBundlePayload struct {
 	Bundle string `json:"bundle"`
 }
@@ -31,6 +50,7 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
 		FavoritePages:    updatedUser.FavoritePages,
 		SelfReport:       updatedUser.SelfReport,
 		VisitedBundles:   updatedUser.VisitedBundles,
+		UIPreview:        updatedUser.UIPreview,
 	}
 
 	resp := util.EntityResponse[models.UserIdentityResponse]{
@@ -95,9 +115,35 @@ func GetIntercomHash(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+type UpdateUserPreviewPayload struct {
+	UiPreview bool `json:"uiPreview"`
+}
+
+func UpdateUserPreview(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	var request UpdateUserPreviewPayload
+	err := json.NewDecoder(r.Body).Decode(&request)
+	if err != nil {
+		handleIdentityError(err, w)
+		return
+	}
+	err = service.UpdateUserPreview(&user, request.UiPreview)
+	if err != nil {
+		handleIdentityError(err, w)
+		return
+	}
+
+	resp := util.EntityResponse[models.UserIdentity]{
+		Data: user,
+	}
+
+	json.NewEncoder(w).Encode(resp)
+}
+
 func MakeUserIdentityRoutes(sub chi.Router) {
 	sub.Get("/", GetUserIdentity)
 	sub.Get("/intercom", GetIntercomHash)
+	sub.Post("/update-ui-preview", UpdateUserPreview)
 	sub.Route("/visited-bundles", func(r chi.Router) {
 		r.Post("/", AddVisitedBundle)
 		r.Get("/", GetVisitedBundles)

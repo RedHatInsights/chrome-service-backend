@@ -2,6 +2,8 @@
   {
     "id": "ai",
     "title": "AI/ML",
+    "icon": "AITechnologyIcon",
+    "description": "Create, train, and serve artificial intelligence and machine learning (AI/ML) models.",
     "links": [
       {
         "isGroup": true,

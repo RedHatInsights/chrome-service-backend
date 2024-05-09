@@ -195,7 +195,7 @@ var (
 					models.WidgetPermission{
 						Method: models.HasPermissions,
 						Args: []any{
-							"subscriptions:products:read",
+							[]string{"subscriptions:products:read"},
 						},
 					},
 				},

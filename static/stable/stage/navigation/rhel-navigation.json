@@ -467,7 +467,8 @@
               "href": "/insights/compliance/reports",
               "icon": "InsightsIcon",
               "product": "Red Hat Insights",
-              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards."
+              "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
+              "alt_title": ["rules", "rule"]
             },
             {
               "id": "scapPolicies",
@@ -489,7 +490,6 @@
                 "DSS",
                 "CSI",
                 "C2S",
-                "rules",
                 "DISA STIG",
                 "PCI-DSS",
                 "NIST",

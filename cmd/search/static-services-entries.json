@@ -36,6 +36,12 @@
     ]
   },
   {
+    "id": "rhel-advisor",
+    "links": [
+      "rhel.recommendations"
+    ]
+  },
+  {
     "id": "quay",
     "links": [
       "quay.quayOrganizations",
@@ -112,6 +118,7 @@
         "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
         "alt_title": [
           "Rules",
+          "rules",
           "recommendations",
           "Configuration",
           "security",

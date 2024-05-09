@@ -477,7 +477,8 @@
           "machine(s)",
           "server(s)"
         ]
-      }
+      },
+      "rhel.groups"
     ]
   },
   {

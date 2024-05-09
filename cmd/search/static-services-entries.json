@@ -174,7 +174,7 @@
         "custom": true,
         "id": "RHEL.Content.Patch",
         "href": "/insights/patch",
-        "title": "Red Hat Patch",
+        "title": "Patch",
         "description": "Patch Analyzes for Red Hat product advisory applicability to stay up to date.",
         "alt_title": [
           "rpm",
@@ -201,17 +201,11 @@
           "content templates"
         ]
       },
-      "rhel.packages"
-    ]
-  },
-  {
-    "id": "patch-template",
-    "links": [
       {
         "custom": true,
-        "id": "RHEL.Content.Patch.template",
+        "id": "RHEL.Content.Patch.templates",
         "href": "/insights/patch/templates",
-        "title": "Red Hat Patch Templates",
+        "title": "Templates - Patch",
         "description": "Control the scope of package and advisory updates to be installed on Red Hat Enterprise Linux systems.",
         "alt_title": [
           "Template",
@@ -223,6 +217,54 @@
           "patching",
           "update",
           "content view"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.systems",
+        "href": "/insights/patch/systems",
+        "title": "Systems - Patch",
+        "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+        "alt_title": [
+          "Patch",
+          "content",
+          "advisories",
+          "insights",
+          "Rhel",
+          "patch",
+          "updates",
+          "update",
+          "systems",
+          "upgrade"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.Content.Patch.packages",
+        "title": "Packages - Content",
+        "href": "/insights/patch/packages",
+        "description": "Review package applicability on your Red Hat Enterprise Linux systems.",
+        "alt_title": [
+          "Packages",
+          "updates",
+          "insights",
+          "repositories",
+          "rpm",
+          "dnf",
+          "yum",
+          "errata",
+          "Errata",
+          "patch",
+          "advisories",
+          "patching",
+          "templates",
+          "content management",
+          "content view",
+          "patch cycle",
+          "satellite",
+          "RHSA",
+          "RHBA",
+          "RHEA"
         ]
       }
     ]

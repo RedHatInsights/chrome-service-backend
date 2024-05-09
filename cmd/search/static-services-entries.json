@@ -102,6 +102,33 @@
     ]
   },
   {
+    "id": "ansible-advisor",
+    "links": [
+      {
+        "custom": true,
+        "id": "ANSIBLE.operations.advisor.recommendations",
+        "href": "/ansible/advisor/recommendations",
+        "title": "Advisor",
+        "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
+        "alt_title": [
+          "Rules",
+          "recommendations",
+          "Configuration",
+          "security",
+          "stability",
+          "performance",
+          "advisor",
+          "incidents",
+          "pathways",
+          "critical",
+          "incident",
+          "recommendation",
+          "pathway"
+        ]
+      }
+    ]
+  },
+  {
     "id": "ACS-custom",
     "links": [
       "application-services.acs-section"

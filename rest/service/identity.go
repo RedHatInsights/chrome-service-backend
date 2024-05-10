@@ -183,3 +183,8 @@ func GetUserIntercomHash(userId string, namespace IntercomApp) (IntercomPayload,
 	response.Dev = devKey
 	return response, nil
 }
+
+func UpdateUserPreview(identity *models.UserIdentity, preview bool) error {
+	identity.UIPreview = preview
+	return database.DB.Model(identity).Update("ui_preview", preview).Error
+}

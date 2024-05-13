@@ -446,6 +446,12 @@
             "title": "Vulnerability",
             "subtitle": "Red Hat Insights for OpenShift",
             "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
+          },
+          {
+            "title": "Advanced Cluster Security",
+            "href": "/openshift/acs/overview",
+            "icon": "ACSIcon",
+            "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
           }
         ]
       },
@@ -467,13 +473,7 @@
         "isGroup": true,
         "title": "Application Services",
         "links": [
-          "application-services.trustedContentOverview",
-         {
-           "title": "Advanced Cluster Security",
-           "href": "/application-services/acs/overview",
-           "icon": "ACSIcon",
-           "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
-         }
+          "application-services.trustedContentOverview"
         ]
       }
     ]

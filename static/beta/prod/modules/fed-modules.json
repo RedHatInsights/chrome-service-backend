@@ -810,7 +810,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/application-services/acs"
+                        "pathname": "/openshift/acs"
                     }
                 ]
             }

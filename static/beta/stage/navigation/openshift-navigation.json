@@ -85,6 +85,40 @@
             ]
         },
         {
+          "title": "Advanced Cluster Security",
+          "expandable": true,
+          "id": "acs-section",
+          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
+          "routes": [
+            {
+              "id": "clusterOverview",
+              "appId": "acs",
+              "title": "Overview",
+              "href": "/openshift/acs/overview",
+              "icon": "ACSIcon",
+              "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
+            },
+            {
+              "id": "acsGettingStarted",
+              "appId": "acs",
+              "title": "Getting Started",
+              "href": "/openshift/acs/getting-started"
+            },
+            {
+              "id": "acsInstances",
+              "appId": "acs",
+              "title": "ACS Instances",
+              "href": "/openshift/acs/instances"
+            },
+            {
+              "id": "clustersDocumentation",
+              "title": "Documentation",
+              "isExternal": true,
+              "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
+            }
+          ]
+        },
+        {
             "id": "downloads",
             "appId": "openshift",
             "href": "/openshift/downloads",

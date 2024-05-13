@@ -104,7 +104,7 @@ func GetVisitedBundles(user models.UserIdentity) (map[string]bool, error) {
 }
 
 // Create the user object and add the row if not already in DB
-func CreateIdentity(userId string) (models.UserIdentity, error) {
+func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) {
 	identity := models.UserIdentity{
 		AccountId:        userId,
 		FirstLogin:       true,
@@ -126,7 +126,7 @@ func CreateIdentity(userId string) (models.UserIdentity, error) {
 	* saves a lot DB queries.
 	 */
 	cachedIdentity, ok := util.UsersCache.Get(userId)
-	if ok {
+	if !skipCache && ok {
 		return cachedIdentity, nil
 	}
 

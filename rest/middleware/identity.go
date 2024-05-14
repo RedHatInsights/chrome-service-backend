@@ -13,7 +13,12 @@ func InjectUser(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		identity := r.Context().Value(util.IDENTITY_CTX_KEY).(*identity.XRHID)
 		userId := identity.Identity.User.UserID
-		userIdentity, err := service.CreateIdentity(userId)
+		skipCache := false
+		p := r.URL.Query().Get("skip-identity-cache")
+		if p == "true" {
+			skipCache = true
+		}
+		userIdentity, err := service.CreateIdentity(userId, skipCache)
 		if err != nil {
 			panic(err)
 		}

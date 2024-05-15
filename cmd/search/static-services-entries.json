@@ -556,8 +556,39 @@
   {
     "id": "compliance",
     "links": [
-      "rhel.complianceReports",
-      "rhel.scapPolicies"
+      {
+        "custom": true,
+        "id": "RHEL.compliance.reports",
+        "title": "Reports - Compliance",
+        "href": "/insights/compliance/reports",
+        "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
+        "alt_title": ["rules", "rule"]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.compliance.policies",
+        "title": "SCAP Policies - Compliance",
+        "href": "/insights/compliance/scappolicies",
+        "alt_title": [
+          "security",
+          "policies",
+          "SCAP",
+          "policy",
+          "insights",
+          "regulatory",
+          "regulations",
+          "OpenSCAP",
+          "PCI",
+          "HIPAA",
+          "DSS",
+          "CSI",
+          "C2S",
+          "DISA STIG",
+          "PCI-DSS",
+          "NIST",
+          "OSPP"
+        ]
+      }
     ]
   },
   {

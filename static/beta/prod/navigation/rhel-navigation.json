@@ -451,6 +451,14 @@
               "icon": "InsightsIcon",
               "product": "Red Hat Insights",
               "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
+              "alt_title": ["rules", "rule"]
+            },
+            {
+              "id": "scapPolicies",
+              "appId": "compliance",
+              "title": "SCAP Policies",
+              "href": "/insights/compliance/scappolicies",
+              "product": "Red Hat Insights",
               "alt_title": [
                 "security",
                 "policies",
@@ -465,19 +473,11 @@
                 "DSS",
                 "CSI",
                 "C2S",
-                "rules",
                 "DISA STIG",
                 "PCI-DSS",
                 "NIST",
                 "OSPP"
               ]
-            },
-            {
-              "id": "scapPolicies",
-              "appId": "compliance",
-              "title": "SCAP Policies",
-              "href": "/insights/compliance/scappolicies",
-              "product": "Red Hat Insights"
             },
             {
               "id": "complianceSystems",

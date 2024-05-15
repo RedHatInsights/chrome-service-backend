@@ -143,7 +143,7 @@ func mockDashboardTemplatesData() {
 			Name:        "test",
 			DisplayName: "test",
 		},
-		TemplateConfig: util.BaseTemplates["landingPage"].TemplateConfig,
+		TemplateConfig: BaseTemplates["landingPage"].TemplateConfig,
 	}
 
 	database.DB.Create(&template1)

@@ -15,24 +15,13 @@ var landingPageMd = getLandingPageBaseLayout(2)
 var landingPageLg = getLandingPageBaseLayout(3)
 var landingPageXl = getLandingPageBaseLayout(4)
 
-func convertToJson(items []models.GridItem) datatypes.JSONType[[]models.GridItem] {
+func ConvertToJson(items []models.GridItem) datatypes.JSONType[[]models.GridItem] {
 	gi := datatypes.NewJSONType(items)
 	return gi
 }
 
 var (
-	BaseTemplates models.BaseTemplates = models.BaseTemplates{
-		"landingPage": models.BaseDashboardTemplate{
-			Name:        "landingPage",
-			DisplayName: "Landing Page",
-			TemplateConfig: models.TemplateConfig{
-				Sm: convertToJson(landingPageSm),
-				Md: convertToJson(landingPageMd),
-				Lg: convertToJson(landingPageLg),
-				Xl: convertToJson(landingPageXl),
-			},
-		},
-	}
+	BaseTemplates models.BaseTemplates                 = models.BaseTemplates{}
 	WidgetMapping models.WidgetModuleFederationMapping = models.WidgetModuleFederationMapping{
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
 			Scope:    "landing",

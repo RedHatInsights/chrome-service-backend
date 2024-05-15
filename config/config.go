@@ -60,6 +60,10 @@ type DebugConfig struct {
 	DebugFavoriteIds []string
 }
 
+type WidgetDashboardConfig struct {
+	TemplatesWD string
+}
+
 type ChromeServiceConfig struct {
 	WebPort           int
 	OpenApiSpecPath   string
@@ -77,6 +81,7 @@ type ChromeServiceConfig struct {
 	IntercomConfig    IntercomConfig
 	FeatureFlagConfig FeatureFlagsConfig
 	DebugConfig       DebugConfig
+	DashboardConfig   WidgetDashboardConfig
 }
 
 const RdsCaLocation = "/app/rdsca.cert"
@@ -212,6 +217,15 @@ func init() {
 	options.DebugConfig = DebugConfig{
 		DebugFavoriteIds: []string{"", os.Getenv("DEBUG_FAVORITES_ACCOUNT_1")},
 	}
+
+	options.DashboardConfig = WidgetDashboardConfig{
+		TemplatesWD: os.Getenv("TEMPLATES_WD"),
+	}
+	if options.DashboardConfig.TemplatesWD == "" {
+		options.DashboardConfig.TemplatesWD = "/"
+	}
+	fmt.Println("DashboardConfig.TemplatesWD: ", options.DashboardConfig.TemplatesWD)
+
 	config = options
 }
 

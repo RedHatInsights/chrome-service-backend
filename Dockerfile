@@ -11,6 +11,7 @@ COPY go.sum go.sum
 COPY main.go main.go
 COPY spec spec
 COPY Makefile Makefile
+COPY widget-dashboard-defaults widget-dashboard-defaults
 ENV GO111MODULE=on
 USER root
 RUN go get -d -v
@@ -36,6 +37,8 @@ COPY --from=builder /go/bin/chrome-migrate /usr/bin
 COPY --from=builder /go/bin/chrome-search-index /usr/bin
 # Copy chrome static JSON assets to server binary entry point
 COPY --from=builder $GOPATH/src/chrome-service-backend/static /static
+# Copy widget dashboard defaults to server binary entry point
+COPY --from=builder $GOPATH/src/chrome-service-backend/widget-dashboard-defaults /widget-dashboard-defaults
 
 ENTRYPOINT ["/app/chrome-service-backend"]
 EXPOSE 8000

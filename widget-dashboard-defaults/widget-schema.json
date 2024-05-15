@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Widget dashboard",
+  "description": "A dashboard definition for widgets",
+  "type": "object",
+  "required": ["name", "displayName", "templateConfig"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the dashboard template"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the dashboard template"
+    },
+    "templateConfig": {
+      "$ref": "#/definitions/templateConfig",
+      "description": "The configuration of the dashboard template"
+    }
+  },
+  "definitions": {
+    "templateConfigItem": {
+      "type": "object",
+      "properties": {
+        "w": {
+          "type": "number",
+          "description": "The width of the widget in the grid",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "h": {
+          "type": "number",
+          "description": "The height of the widget in the grid",
+          "minimum": 1
+        },
+        "maxH": {
+          "type": "number",
+          "description": "The maximum height of the widget in the grid",
+          "minimum": 1
+        },
+        "minH": {
+          "type": "number",
+          "description": "The minimum height of the widget in the grid",
+          "minimum": 1
+        },
+        "x": {
+          "type": "number",
+          "description": "The x position of the widget in the grid",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "y": {
+          "type": "number",
+          "description": "The y position of the widget in the grid",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "i": {
+          "type": "string",
+          "description": "The unique identifier of the widget"
+        },
+        "static": {
+          "type": "boolean",
+          "description": "Whether the widget is locked in the grid"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the widget"
+        }
+      }
+    },
+    "templateConfig": {
+      "type": "object",
+      "required": ["sm", "md", "lg", "xl"],
+      "properties": {
+        "sm": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/templateConfigItem",
+            "required": ["w", "h", "x", "y", "i"],
+            "allOf": [
+              {
+                "properties": {
+                  "x": {
+                    "minimum": 0,
+                    "exclusiveMaximum": 1
+                  },
+                  "w": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "md": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/templateConfigItem",
+            "required": ["w", "h", "x", "y", "i"],
+            "allOf": [
+              {
+                "properties": {
+                  "x": {
+                    "minimum": 0,
+                    "exclusiveMaximum": 2                
+                  },
+                  "w": {
+                    "minimum": 0,
+                    "maximum": 2
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "lg": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/templateConfigItem",
+            "required": ["w", "h", "x", "y", "i"],
+            "allOf": [
+              {
+                "properties": {
+                  "x": {
+                    "minimum": 0,
+                    "exclusiveMaximum": 3                
+                  },
+                  "w": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "xl": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/templateConfigItem",
+            "required": ["w", "h", "x", "y", "i"]
+          }
+        }
+      }
+    }
+  }
+}

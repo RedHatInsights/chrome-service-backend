@@ -20,4 +20,6 @@ func main() {
 	validateNavigation(cwd)
 	fmt.Println("Validating section definitions")
 	validateServices(cwd)
+	fmt.Println("Validating widget definitions")
+	validateDashboardDefaults(cwd)
 }

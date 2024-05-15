@@ -6,7 +6,7 @@
         "custom": true,
         "id": "OPENSHIFT.insights.Advisor.advisor-clusters",
         "href": "/openshift/insights/advisor/clusters",
-        "title": "Red Hat OpenShift Cluster Manager Advisor",
+        "title": "Clusters - Advisor",
         "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
         "alt_title": [
           "Insights Advisor",
@@ -284,7 +284,7 @@
         "id": "RHEL.security.malware.signatures",
         "href": "/insights/malware/signatures",
         "description": "Identify potential malware on your Red Hat Enterprise Linux systems.",
-        "title": "Malware signatures",
+        "title": "Signatures - Malware",
         "alt_title": [
           "Threat",
           "yara",
@@ -308,7 +308,7 @@
         "custom": true,
         "id": "RHEL.security.malware.malwareSystems",
         "href": "/insights/malware/systems",
-        "title": "Malware systems",
+        "title": "Systems - Malware",
         "description": "View details about your Red Hat Enterprise Linux systems and their potentially detected malware.",
         "alt_title": [
           "Threat",
@@ -338,7 +338,7 @@
         "custom": true,
         "id": "OPENSHIFT.cves",
         "href": "/openshift/insights/vulnerability/cves",
-        "title": "Red Hat Openshift Vulnerability Dashboard",
+        "title": "CVEs - Vulnerability",
         "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency.",
         "alt_title": [
           "CVEs",
@@ -368,7 +368,7 @@
       {
         "id": "OPENSHIFT.vulnerabilityClusters",
         "href": "/openshift/insights/vulnerability/clusters",
-        "title": "Red Hat Openshift Vulnerability Clusters",
+        "title": "Clusters - Vulnerability",
         "alt_title": [
           "CVEs",
           "CVE",
@@ -403,7 +403,7 @@
         "custom": true,
         "id": "RHEL.Operations.Drift.drift",
         "href": "/insights/drift/",
-        "title": "RHEL Drift Comparison",
+        "title": "Comparison - Drift",
         "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
         "alt_title": [
           "Drift",
@@ -428,7 +428,7 @@
         "custom": true,
         "id": "RHEL.Operations.Drift.drift.baseline",
         "href": "/insights/drift/baselines",
-        "title": "RHEL Drift Baselines",
+        "title": "Baselines - Drift",
         "description": "Create your Red Hat Enterprise Linux baselines for Drift comparison.",
         "alt_title": [
           "Drift",
@@ -458,7 +458,7 @@
         "custom": true,
         "id": "RHEL.Inventory.systems",
         "href": "/insights/inventory",
-        "title": "RHEL Inventory Systems",
+        "title": "Systems - Inventory",
         "description": "View details about your Red Hat Enterprise Linux systems.",
         "alt_title":[
           "Inventory",
@@ -561,7 +561,7 @@
         "custom": true,
         "id": "RHEL.dashboard",
         "href": "/insights/dashboard",
-        "title": "Insights Dashboard",
+        "title": "Dashboard",
         "subtitle": "Red Hat Insights for RHEL",
         "description": "View details about your Red Hat Enterprise Linux systems.",
         "alt_title": [
@@ -579,7 +579,7 @@
         "custom": true,
         "id": "RHEL.remediations",
         "href": "/insights/remediations",
-        "title": "Insights Remediations",
+        "title": "Remediations - Automation",
         "subtitle": "Red Hat Insights for RHEL",
         "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
         "alt_title": [
@@ -605,7 +605,7 @@
         "custom": true,
         "id": "RHEL.vulnerability",
         "href": "/insights/vulnerability",
-        "title": "Insights  Vulnerability",
+        "title": "Vulnerability",
         "subtitle": "Red Hat Insights for RHEL",
         "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency.",
         "alt_title": [

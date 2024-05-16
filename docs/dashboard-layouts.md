@@ -254,3 +254,28 @@ POST /api/chrome-service/v1/dashboard-templates/decode
   "encodedTemplate": <base64 encoded layout>
 }
 ```
+
+## Base layout updates
+
+This sections describes how to create/update dashboard base layouts
+
+> NOTE
+>
+> Use IDE validation plugins such as `yaml` extension for VS Code to help with schema validation during development. 
+
+
+### Base layout JSON schema
+
+Base layout schema definitions can be found i the `widget-dashboard-defaults/widget-schema.json`.
+
+### Where are base layout defined
+
+All base layouts are stored in the `widget-dashboard-defaults/*` directory. Templates should use `yaml` or `yml` extension.
+
+### Defining dashboard layout
+
+1. Create new yaml file in `widget-dashboard-defaults/*` directory. Add `# yaml-language-server: $schema=./widget-schema.json` text to the top of the yaml file.
+2. Pick a unique name and update the `AvailableTemplates` type in `rest/models/DashboardTemplate.go` file.
+3. Start filling the content. Attributes and their restrictions/requirements are defined by the json schema.
+4. You can tun the `make validate-schema` script from your terminal to rnu the validation script.
+ 

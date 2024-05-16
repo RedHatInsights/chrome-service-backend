@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"path/filepath"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"path/filepath"
+
 	"github.com/xeipuuv/gojsonschema"
 )
 
@@ -18,7 +19,7 @@ func validateNavigation(cwd string) {
 	for _, file := range modulesFiles {
 		documentLoader := gojsonschema.NewReferenceLoader(fmt.Sprintf("file://%s", file))
 		result, err := gojsonschema.Validate(schemaLoader, documentLoader)
-		
+
 		if err != nil {
 			fmt.Println("File", file)
 			panic(err.Error())
@@ -36,14 +37,14 @@ func validateNavigation(cwd string) {
 }
 
 func unmarshalData(file string) {
-	var data map[string]interface {}
-		
-	var arrayData [] map[string]interface {};
+	var data map[string]interface{}
+
+	var arrayData []map[string]interface{}
 
 	fileContent, status := ioutil.ReadFile(file)
 	handleErr(status)
 
-	ok:= json.Unmarshal(fileContent, &data)
+	ok := json.Unmarshal(fileContent, &data)
 
 	if ok == nil {
 		duplicateCounter = make(map[string]int)
@@ -53,7 +54,7 @@ func unmarshalData(file string) {
 		if ok == nil {
 			duplicateCounter = make(map[string]int)
 			jsonArrayData := make([]interface{}, len(arrayData))
-			for k,v := range arrayData {
+			for k, v := range arrayData {
 				jsonArrayData[k] = v
 			}
 			loopOverFields(jsonArrayData, file)

@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
-	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -22,7 +22,7 @@ var invalidBaseNameTemplate = models.DashboardTemplate{
 		Name:        "",
 		DisplayName: "test",
 	},
-	TemplateConfig: util.BaseTemplates["landingPage"].TemplateConfig,
+	TemplateConfig: service.BaseTemplates["landingPage"].TemplateConfig,
 }
 
 var invalidBaseDisplayNameTemplate = models.DashboardTemplate{
@@ -31,7 +31,7 @@ var invalidBaseDisplayNameTemplate = models.DashboardTemplate{
 		Name:        "test",
 		DisplayName: "",
 	},
-	TemplateConfig: util.BaseTemplates["landingPage"].TemplateConfig,
+	TemplateConfig: service.BaseTemplates["landingPage"].TemplateConfig,
 }
 
 var validTemplate = models.DashboardTemplate{
@@ -40,12 +40,12 @@ var validTemplate = models.DashboardTemplate{
 		Name:        "test",
 		DisplayName: "test",
 	},
-	TemplateConfig: util.BaseTemplates["landingPage"].TemplateConfig,
+	TemplateConfig: service.BaseTemplates["landingPage"].TemplateConfig,
 }
 
 func TestDashboardTemplateValidation(t *testing.T) {
-	itct := util.BaseTemplates["landingPage"].TemplateConfig
-	itct.Sm = util.ConvertToJson(util.PrepareInitialGridItems(util.GetLandingPageBaseLayout("33")))
+	itct := service.BaseTemplates["landingPage"].TemplateConfig
+	itct.Sm = service.ConvertToJson(itct.Sm.Data())
 	invalidTemplateConfigTemplate := models.DashboardTemplate{
 		Default: false,
 		TemplateBase: models.DashboardTemplateBase{
@@ -104,19 +104,8 @@ func TestDashboardTemplateEncoding(t *testing.T) {
 			Name:        "test",
 			DisplayName: "test",
 		},
-		TemplateConfig: util.BaseTemplates["landingPage"].TemplateConfig,
+		TemplateConfig: service.BaseTemplates["landingPage"].TemplateConfig,
 	}
-
-	// itct := util.BaseTemplates["landingPage"].TemplateConfig
-	// itct.Sm = util.ConvertToJson(util.PrepareInitialGridItems(util.GetLandingPageBaseLayout("33")))
-	// invalidTemplateConfigTemplate := models.DashboardTemplate{
-	// 	Default: false,
-	// 	TemplateBase: models.DashboardTemplateBase{
-	// 		Name:        "test",
-	// 		DisplayName: "test",
-	// 	},
-	// 	TemplateConfig: itct,
-	// }
 
 	t.Run("Should encode template", func(t *testing.T) {
 		encoded, err := validTemplate.EncodeBase64()

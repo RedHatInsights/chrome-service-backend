@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"reflect"
 
+	"gopkg.in/yaml.v3"
 	"gorm.io/datatypes"
 )
 
@@ -69,10 +70,10 @@ func (aw AvailableWidgets) IsValid() error {
 }
 
 type BaseWidgetDimensions struct {
-	Width     int `json:"w"`
-	Height    int `json:"h"`
-	MaxHeight int `json:"maxH"`
-	MinHeight int `json:"minH"`
+	Width     int `json:"w" yaml:"w"`
+	Height    int `json:"h" yaml:"h"`
+	MaxHeight int `json:"maxH" yaml:"maxH"`
+	MinHeight int `json:"minH" yaml:"minH"`
 }
 
 func (bwd BaseWidgetDimensions) InitDimensions(w, h, maxH, minH int) BaseWidgetDimensions {
@@ -87,19 +88,76 @@ func (bwd BaseWidgetDimensions) InitDimensions(w, h, maxH, minH int) BaseWidgetD
 }
 
 type GridItem struct {
-	BaseWidgetDimensions
-	Title  string `json:"title"`
-	ID     string `json:"i"`
-	X      int    `json:"x"`
-	Y      int    `json:"y"`
-	Static bool   `json:"static"`
+	BaseWidgetDimensions `yaml:",inline"`
+	Title                string `json:"title" yaml:"title,omitempty"`
+	ID                   string `json:"i" yaml:"i"`
+	X                    int    `json:"x" yaml:"x"`
+	Y                    int    `json:"y" yaml:"y"`
+	Static               bool   `json:"static" yaml:"static,omitempty"`
 }
 
 type TemplateConfig struct {
-	Sm datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"sm"`
-	Md datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"md"`
-	Lg datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"lg"`
-	Xl datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"xl"`
+	Sm datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"sm" yaml:"sm"`
+	Md datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"md" yaml:"md"`
+	Lg datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"lg" yaml:"lg"`
+	Xl datatypes.JSONType[[]GridItem] `gorm:"not null;default null" json:"xl" yaml:"xl"`
+}
+
+func parseInterfaceItems(items []interface{}) ([]GridItem, error) {
+	gridItems := make([]GridItem, len(items))
+	for i, gi := range items {
+		itemMap := gi.(map[string]interface{})
+		item := GridItem{}
+		item.BaseWidgetDimensions.Height = int(itemMap["h"].(int))
+		item.BaseWidgetDimensions.Width = int(itemMap["w"].(int))
+		item.BaseWidgetDimensions.MaxHeight = int(itemMap["maxH"].(int))
+		item.BaseWidgetDimensions.MinHeight = int(itemMap["minH"].(int))
+		item.ID = itemMap["i"].(string)
+		item.X = int(itemMap["x"].(int))
+		item.Y = int(itemMap["y"].(int))
+		if itemMap["static"] != nil {
+			item.Static = itemMap["static"].(bool)
+		}
+		gridItems[i] = item
+	}
+	return gridItems, nil
+}
+
+func assignInterfaceItemsVariants(tc *TemplateConfig, tcMap map[GridSizes][]interface{}) (TemplateConfig, error) {
+	internalTc := TemplateConfig{}
+	gridItems, err := parseInterfaceItems(tcMap[Sm])
+	if err != nil {
+		return internalTc, err
+	}
+	internalTc.Sm = datatypes.NewJSONType(gridItems)
+	gridItems, err = parseInterfaceItems(tcMap[Md])
+	if err != nil {
+		return internalTc, err
+	}
+	internalTc.Md = datatypes.NewJSONType(gridItems)
+	gridItems, err = parseInterfaceItems(tcMap[Lg])
+	if err != nil {
+		return internalTc, err
+	}
+	internalTc.Lg = datatypes.NewJSONType(gridItems)
+	gridItems, err = parseInterfaceItems(tcMap[Xl])
+	if err != nil {
+		return internalTc, err
+	}
+	internalTc.Xl = datatypes.NewJSONType(gridItems)
+	return internalTc, nil
+}
+
+func (tc *TemplateConfig) UnmarshalYAML(value *yaml.Node) error {
+	var tcMap map[GridSizes][]interface{}
+	err := value.Decode(&tcMap)
+	if err != nil {
+		return err
+	}
+	newTc, err := assignInterfaceItemsVariants(tc, tcMap)
+	*tc = newTc
+
+	return err
 }
 
 type GridSizes string
@@ -170,7 +228,7 @@ func (gi GridItem) IsValid(variant GridSizes) error {
 	}
 
 	if gi.X > maxGridSize {
-		return errors.New(fmt.Errorf("invalid grid item, layout variant %s, coordinate X must be less than or equal to %d, current value is %d", variant, maxGridSize, gi.X).Error())
+		return errors.New(fmt.Errorf("invalid grid item, layout variant %s, coordinate X must be less than %d, current value is %d", variant, maxGridSize, gi.X).Error())
 	}
 
 	return nil
@@ -228,9 +286,9 @@ type DashboardTemplate struct {
 }
 
 type BaseDashboardTemplate struct {
-	Name           string         `json:"name"`
-	DisplayName    string         `json:"displayName"`
-	TemplateConfig TemplateConfig `json:"templateConfig"`
+	Name           string         `json:"name" yaml:"name"`
+	DisplayName    string         `json:"displayName" yaml:"displayName"`
+	TemplateConfig TemplateConfig `json:"templateConfig" yaml:"templateConfig"`
 }
 
 type BaseTemplates map[AvailableTemplates]BaseDashboardTemplate
@@ -271,8 +329,8 @@ type WidgetHeaderLink struct {
 type WidgetPermissionMethods string
 
 const (
-	OrgAdmin WidgetPermissionMethods = "isOrgAdmin"
-	FeatureFlag WidgetPermissionMethods = "featureFlag"
+	OrgAdmin       WidgetPermissionMethods = "isOrgAdmin"
+	FeatureFlag    WidgetPermissionMethods = "featureFlag"
 	HasPermissions WidgetPermissionMethods = "hasPermissions"
 )
 

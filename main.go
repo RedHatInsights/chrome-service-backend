@@ -15,6 +15,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
+	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -33,6 +34,7 @@ func init() {
 
 func main() {
 	cfg := config.Get()
+	service.LoadBaseLayout()
 	featureflags.Init(cfg)
 	setupGlobalLogger(cfg)
 	router := chi.NewRouter()

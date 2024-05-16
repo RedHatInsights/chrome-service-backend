@@ -30,3 +30,4 @@ deploy/debug.yml
 static/**/links-storage.json
 static/**/services-generated.json
 *-services.db
+static/**/search-index.json

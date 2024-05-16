@@ -16,10 +16,13 @@ import (
 )
 
 type SearchEnv string
+type Release string
 
 const (
 	Prod          SearchEnv = "prod"
 	Stage         SearchEnv = "stage"
+	Stale         Release   = "stable"
+	Beta          Release   = "beta"
 	ssoPathname   string    = "/auth/realms/redhat-external/protocol/openid-connect/token"
 	hydraPathname string    = "/hydra/rest/search/console/index"
 )
@@ -381,21 +384,22 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 }
 
 // create search index compatible documents array
-func constructIndex(env SearchEnv) ([]ModuleIndexEntry, error) {
+func constructIndex(env SearchEnv, release Release) ([]ModuleIndexEntry, error) {
 	// get services template file
-	stageContent, err := ioutil.ReadFile(fmt.Sprintf("static/stable/%s/services/services.json", env))
+	stageContent, err := ioutil.ReadFile(fmt.Sprintf("static/%s/%s/services/services.json", release, env))
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
 
 	// get static service template only for search index
+	// TODO: Add releases for static services
 	staticContent, err := ioutil.ReadFile("cmd/search/static-services-entries.json")
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
 
 	// get all environment navigation files paths request to fill in template file
-	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/stable/%s/navigation/*-navigation.json", env))
+	stageNavFiles, err := filepath.Glob(fmt.Sprintf("static/%s/%s/navigation/*-navigation.json", release, env))
 	if err != nil {
 		return []ModuleIndexEntry{}, err
 	}
@@ -549,7 +553,7 @@ func deployIndex(env SearchEnv, envSecret string, ssoHost string, hydraHost stri
 	if err != nil {
 		return err
 	}
-	index, err := constructIndex(env)
+	index, err := constructIndex(env, "stable")
 	if err != nil {
 		return err
 	}
@@ -560,6 +564,20 @@ func deployIndex(env SearchEnv, envSecret string, ssoHost string, hydraHost stri
 	}
 
 	return nil
+}
+
+func handleErrors(errors []error, dryRun bool) {
+	if len(errors) == 0 {
+		fmt.Println("Search index published successfully")
+	} else {
+		for _, e := range errors {
+			fmt.Println(e)
+		}
+		fmt.Println("Search index publishing failed. See above errors.")
+		if dryRun {
+			os.Exit(1)
+		}
+	}
 }
 
 func main() {
@@ -582,13 +600,60 @@ func main() {
 	}
 
 	dryRun, _ := strconv.ParseBool(os.Getenv("SEARCH_INDEX_DRY_RUN"))
+	writeIndex, _ := strconv.ParseBool(os.Getenv("SEARCH_INDEX_WRITE"))
 
+	fmt.Println("Write index:", writeIndex)
 	errors := []error{}
+
+	if writeIndex {
+		cwd, err := filepath.Abs(".")
+		if err != nil {
+			fmt.Println("Failed to get current working directory")
+			errors = append(errors, err)
+			handleErrors(errors, dryRun)
+			return
+		}
+		writeEnvs := []SearchEnv{Prod, Stage}
+		writeReleases := []Release{Stale, Beta}
+		for _, env := range writeEnvs {
+			for _, release := range writeReleases {
+				searchIndex, err := constructIndex(env, release)
+				if err != nil {
+					fmt.Println("Failed to construct search index for", env, release)
+					errors = append(errors, err)
+				} else {
+					dirname := fmt.Sprintf("%s/static/%s/%s/search", cwd, release, env)
+					fileName := fmt.Sprintf("%s/search-index.json", dirname)
+					err := os.MkdirAll(dirname, os.ModePerm)
+					if err != nil {
+						fmt.Println("Failed to create directory", dirname)
+						errors = append(errors, err)
+					} else {
+						j, err := json.Marshal(searchIndex)
+						if err != nil {
+							fmt.Println("Failed to marshal search index")
+							errors = append(errors, err)
+						}
+						err = os.WriteFile(fileName, j, 0644)
+						if err != nil {
+							fmt.Println("Failed to write search index to", fileName)
+							errors = append(errors, err)
+						}
+					}
+
+				}
+
+			}
+		}
+		handleErrors(errors, dryRun)
+		return
+	}
+
 	for _, env := range []SearchEnv{Stage, Prod} {
 		var err error
 		if dryRun {
 			fmt.Println("Attempt dry run search index for", env, "environment.")
-			_, err = constructIndex(env)
+			_, err = constructIndex(env, "stable")
 		} else {
 			fmt.Println("Attempt to publish search index for", env, "environment.")
 			err = deployIndex(env, secrets[env], ssoHosts[env], hydraHost[env])
@@ -600,12 +665,5 @@ func main() {
 		}
 	}
 
-	if len(errors) == 0 {
-		fmt.Println("Search index published successfully")
-	} else {
-		fmt.Println("Search index publishing failed. See above errors.")
-		if dryRun {
-			os.Exit(1)
-		}
-	}
+	handleErrors(errors, dryRun)
 }

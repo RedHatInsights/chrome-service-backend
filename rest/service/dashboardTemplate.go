@@ -141,10 +141,6 @@ var (
 			Module:   "./BookmarkedLearningResourcesWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			Config: models.WidgetConfiguration{
-				HeaderLink: models.WidgetHeaderLink{
-					Title: "View all learning resources",
-					Href:  "/settings/learning-resources#documentation",
-				},
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
 			},

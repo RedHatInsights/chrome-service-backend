@@ -55,6 +55,7 @@ jobs:
             INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
             # This is set up to seed in feature flags, production is entirely different
             INIT_ADMIN_API_TOKENS: "*:*.unleash-insecure-api-token"
+            AUTH_TYPE: "none"
 
     steps:
       - uses: actions/checkout@v3

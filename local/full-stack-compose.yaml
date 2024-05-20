@@ -61,6 +61,8 @@ services:
       INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
       # This is setup to seed in feature flags, production is entirely different
       INIT_ADMIN_API_TOKENS: "*:*.unleash-insecure-api-token"
+      # Do not require auth for the in local development
+      AUTH_TYPE: "none"
     depends_on:
       db:
         condition: service_healthy

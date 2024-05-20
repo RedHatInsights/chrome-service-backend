@@ -224,7 +224,6 @@ func init() {
 	if options.DashboardConfig.TemplatesWD == "" {
 		options.DashboardConfig.TemplatesWD = "/"
 	}
-	fmt.Println("DashboardConfig.TemplatesWD: ", options.DashboardConfig.TemplatesWD)
 
 	config = options
 }

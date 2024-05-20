@@ -1,8 +1,9 @@
 package featureflags
 
 import (
-	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"testing"
+
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/stretchr/testify/assert"

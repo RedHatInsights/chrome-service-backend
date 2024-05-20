@@ -57,6 +57,9 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	}
 	debugHeaders(r)
 
+	// REMOVE this, trying to figure out why the connection is being closed
+	r.Header.Add("Connection", "upgrade")
+
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		logrus.Errorln("Unable to upgrade WS connection", err)

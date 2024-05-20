@@ -466,13 +466,7 @@
         "isGroup": true,
         "title": "Application Services",
         "links": [
-          "application-services.trustedContentOverview",
-         {
-           "title": "Advanced Cluster Security",
-           "href": "/application-services/acs/overview",
-           "icon": "ACSIcon",
-           "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
-         }
+          "application-services.trustedContentOverview"
         ]
       }
     ]
@@ -511,6 +505,12 @@
             "href": "/subscriptions/usage/openshift",
             "icon": "OpenShiftIcon",
             "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
+          },
+          {
+            "title": "Advanced Cluster Security",
+            "href": "/openshift/acs/overview",
+            "icon": "ACSIcon",
+            "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
           },
           {
             "title": "Cost Management",

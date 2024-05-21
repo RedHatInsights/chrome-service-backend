@@ -17,6 +17,7 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"gorm.io/datatypes"
+	"gorm.io/gorm/clause"
 )
 
 type IntercomApp string
@@ -130,7 +131,7 @@ func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) 
 		return cachedIdentity, nil
 	}
 
-	res := database.DB.Where("account_id = ?", userId).FirstOrCreate(&identity)
+	res := database.DB.Clauses(clause.Locking{Strength: "UPDATE"}).Where("account_id = ?", userId).FirstOrCreate(&identity)
 	err = res.Error
 
 	// set the cache after successful DB operation

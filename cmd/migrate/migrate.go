@@ -98,7 +98,7 @@ func main() {
 		for _, dup := range duplicates {
 
 			var usersToDelete []models.UserIdentity
-			tx.Where("AccountId = ?", dup.AccountId).Find(&usersToDelete)
+			tx.Where("AccountId = ?", dup.AccountId).Order("UpdatedAt DESC").Find(&usersToDelete)
 			for i, user := range usersToDelete {
 				if i > 0 { // Skip the first entry, delete all others
 					if err := tx.Delete(&user).Error; err != nil {

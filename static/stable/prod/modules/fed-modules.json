@@ -962,6 +962,20 @@
       "manifestLocation": "/apps/virtual-assistant/fed-mods.json",
       "modules": []
     },
+    "widgetLayout": {
+      "manifestLocation": "/apps/widget-layout/fed-mods.json",
+      "modules": [
+        {
+            "id": "widgetLayout",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/staging/widget-layout"
+                }
+            ]
+        }
+      ]
+    },
     "runtimes": {
         "manifestLocation": "/apps/runtimes/fed-mods.json",
         "modules": []

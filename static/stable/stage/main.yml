@@ -84,6 +84,12 @@ edge:
       - v1
     isBeta: true
 
+export:
+  title: Export Service
+  api:
+    versions:
+      - v1
+
 idmsvc:
   title: "Directory and Domain Services"
   api:

@@ -95,6 +95,12 @@ drift:
           - v1
         title: Historical system profiles
 
+export:
+  title: Export Service
+  api:
+    versions:
+      - v1
+
 image-builder:
   title: Image Builder
   api:

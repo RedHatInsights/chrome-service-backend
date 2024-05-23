@@ -221,7 +221,7 @@ templateConfig:
       y: 2
       i: 'exploreCapabilities#exploreCapabilities'
       w: 3
-      h: 5
+      h: 6
       maxH: 10
       minH: 1
     - x: 3
@@ -235,7 +235,7 @@ templateConfig:
       y: 3
       i: 'favoriteServices#favoriteServices'
       w: 1
-      h: 6
+      h: 7
       maxH: 10
       minH: 1
     - x: 0

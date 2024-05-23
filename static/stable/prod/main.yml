@@ -131,6 +131,12 @@ edge:
     versions:
       - v1
 
+export:
+  title: Export Service
+  api:
+    versions:
+      - v1
+
 hooks:
   title: Web Hooks Service
   api:

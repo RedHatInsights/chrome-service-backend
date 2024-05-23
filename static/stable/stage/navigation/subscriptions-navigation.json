@@ -55,16 +55,38 @@
       "expandable": true,
       "routes": [
         {
-          "id": "hybridCommittedSpend.overview",
+          "id": "hybridCommittedSpendOverview",
           "appId": "hybridCommittedSpend",
           "title": "Overview",
-          "href": "/subscriptions/hybrid-committed-spend"
+          "icon": "SubscriptionsIcon",
+          "href": "/subscriptions/hybrid-committed-spend",
+          "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns.",
+          "permissions": [
+            {
+              "method": "loosePermissions",
+              "args": [
+                [
+                  "hybrid-committed-spend:reports:read"
+                ]
+              ]
+            }
+          ]
         },
         {
           "id": "details",
           "appId": "hybridCommittedSpend",
           "title": "Details",
-          "href": "/subscriptions/hybrid-committed-spend/details"
+          "href": "/subscriptions/hybrid-committed-spend/details",
+          "permissions": [
+            {
+              "method": "loosePermissions",
+              "args": [
+                [
+                  "hybrid-committed-spend:reports:read"
+                ]
+              ]
+            }
+          ]
         }
       ]
     },

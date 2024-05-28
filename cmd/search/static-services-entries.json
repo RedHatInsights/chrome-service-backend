@@ -187,7 +187,7 @@
   {
     "id": "ACS-custom",
     "links": [
-      "application-services.acs-section"
+      "openshift.acs-section"
     ]
   },
   {

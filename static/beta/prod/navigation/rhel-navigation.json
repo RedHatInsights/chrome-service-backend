@@ -266,6 +266,7 @@
               ]
             },
             {
+              "id": "patchTemplates",
               "appId": "patch",
               "title": "Templates",
               "href": "/insights/patch/templates",
@@ -335,12 +336,14 @@
           "expandable": true,
           "routes": [
             {
+              "id": "driftComparison",
               "appId": "drift",
               "title": "Comparison",
               "href": "/insights/drift/",
               "product": "Red Hat Insights"
             },
             {
+              "id": "driftBaselines",
               "appId": "drift",
               "title": "Baselines",
               "href": "/insights/drift/baselines",
@@ -378,7 +381,6 @@
       "expandable": true,
       "routes": [
         {
-          "id": "vulnerability",
           "title": "Vulnerability",
           "expandable": true,
           "subtitle": "Red Hat Insights for RHEL",

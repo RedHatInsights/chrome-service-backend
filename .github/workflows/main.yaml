@@ -74,3 +74,9 @@ jobs:
 
       - name: Test
         run: make test
+      
+      - name: Validate schemas
+        run: make validate-schema
+
+      - name: Generate search index
+        run: make generate-search-index

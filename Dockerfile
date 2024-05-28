@@ -18,6 +18,7 @@ RUN go get -d -v
 RUN make validate-schema
 RUN make publish-search-index-dry-run
 RUN make parse-services
+RUN make generate-search-index 
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-service-backend
 # Build the migration binary.
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go

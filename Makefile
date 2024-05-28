@@ -1,22 +1,23 @@
 help:
 	@echo "Availabe commands:"
 	@echo "------------------"
-	@echo "migrate          - run database migration"
-	@echo "dev              - run server"
-	@echo "test             - run all tests"
-	@echo "database         - start database with .env vars"
-	@echo "kafka            - start local kafka"
-	@echo "unleash          - start local unleash server"
-	@echo "infra            - start all infrastructure locally (kafka, unleash, and postgres db)"
-	@echo "clean            - tear down database"
-	@echo "clean-all        - tear down all local infrastructure"
-	@echo "validate-schema  - validates chrome static JSON schemas"
-	@echo "parse-services 	 - creates services-generated.json that with filled link refs"
-	@echo "dev-static       - serve only the static direcory using simple go server"
-	@echo "dev-static-node  - serve only the static direcory using simple node server"
+	@echo "migrate          	- run database migration"
+	@echo "dev              	- run server"
+	@echo "test             	- run all tests"
+	@echo "database         	- start database with .env vars"
+	@echo "kafka            	- start local kafka"
+	@echo "unleash          	- start local unleash server"
+	@echo "infra            	- start all infrastructure locally (kafka, unleash, and postgres db)"
+	@echo "clean            	- tear down database"
+	@echo "clean-all        	- tear down all local infrastructure"
+	@echo "validate-schema  	- validates chrome static JSON schemas"
+	@echo "parse-services 	 	- creates services-generated.json that with filled link refs"
+	@echo "dev-static       	- serve only the static direcory using simple go server"
+	@echo "dev-static-node  	- serve only the static direcory using simple node server"
 	@echo "  arguments:"
 	@echo "  - port: http server port 'make dev-static-node port=8888'"
-	@echo "audit 		 - run grype audit on the docker image"
+	@echo "audit 		 	- run grype audit on the docker image"
+	@echo "generate-search-index 	- generate search index"
 
 port?=8000
 
@@ -44,6 +45,11 @@ publish-search-index:
 publish-search-index-dry-run: export SEARCH_INDEX_DRY_RUN = true
 
 publish-search-index-dry-run:
+	go run cmd/search/*
+
+generate-search-index: export SEARCH_INDEX_WRITE = true
+
+generate-search-index:
 	go run cmd/search/*
 
 kafka:

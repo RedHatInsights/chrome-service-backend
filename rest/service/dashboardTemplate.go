@@ -397,6 +397,28 @@ func ChangeDefaultTemplate(accountId uint, dashboardId uint) (models.DashboardTe
 	return dashboardTemplate, result.Error
 }
 
+func ResetDashboardTemplate(accountId uint, dashboardId uint) (models.DashboardTemplate, error) {
+	var dashboardTemplate models.DashboardTemplate
+
+	result := database.DB.First(&dashboardTemplate, dashboardId)
+	if result.RowsAffected == 0 || result.Error != nil {
+		return dashboardTemplate, gorm.ErrRecordNotFound
+	}
+
+	if dashboardTemplate.UserIdentityID != accountId {
+		return dashboardTemplate, util.ErrNotAuthorized
+	}
+
+	baseTemplate := BaseTemplates[models.AvailableTemplates(dashboardTemplate.TemplateBase.Name)]
+
+	result = database.DB.Model(&dashboardTemplate).Updates(models.DashboardTemplate{
+		TemplateConfig: baseTemplate.TemplateConfig,
+	})
+
+	return dashboardTemplate, result.Error
+
+}
+
 // TODO: replace these once we have actual base templates
 func getLandingPageBaseLayout(x int) []models.GridItem {
 	if x == 0 {

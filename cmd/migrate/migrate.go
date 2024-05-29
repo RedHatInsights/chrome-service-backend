@@ -80,6 +80,15 @@ func main() {
 		}
 	}
 
+	//removes unfavorited pages from all users in favorite pages tables
+	if tx.Migrator().HasTable(&models.FavoritePage{}) {
+		if err := tx.Where("favorite = ?", false).Unscoped().Delete(&models.FavoritePage{}); err != nil {
+			logrus.Error("Unable to migrate database!")
+			tx.Rollback()
+			panic(err)
+		}
+	}
+
 	// temporary - removes unused typo column in dashboard template tables
 	if tx.Migrator().HasColumn(&models.DashboardTemplate{}, "sx") {
 		if err := tx.Migrator().DropColumn(&models.DashboardTemplate{}, "sx"); err != nil {

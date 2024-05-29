@@ -15,6 +15,7 @@ import (
 )
 
 func handleDashboardError(err error, w http.ResponseWriter) {
+	logrus.Errorln(err)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil && errors.Is(err, gorm.ErrRecordNotFound) {
 		resp := util.ErrorResponse{
@@ -28,6 +29,14 @@ func handleDashboardError(err error, w http.ResponseWriter) {
 			Errors: []string{"not authorized"},
 		}
 		w.WriteHeader(http.StatusForbidden)
+		json.NewEncoder(w).Encode(resp)
+
+		return
+	} else if err != nil && errors.Is(err, util.ErrBadRequest) {
+		resp := util.ErrorResponse{
+			Errors: []string{"bad request"},
+		}
+		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(resp)
 
 		return
@@ -271,12 +280,42 @@ func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)
 }
 
+func ResetDashboardTemplate(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	userID := user.ID
+
+	dashboardIdQuery := chi.URLParam(r, "templateId")
+	if dashboardIdQuery == "" {
+		handleDashboardError(util.ErrBadRequest, w)
+		return
+	}
+
+	dashboardId, err := strconv.ParseUint(dashboardIdQuery, 10, 64)
+	if err != nil {
+		handleDashboardError(util.ErrBadRequest, w)
+		return
+	}
+
+	dashboard, err := service.ResetDashboardTemplate(userID, uint(dashboardId))
+	if err != nil {
+		handleDashboardError(err, w)
+		return
+	}
+
+	resp := util.EntityResponse[models.DashboardTemplate]{
+		Data: dashboard,
+	}
+
+	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
+}
+
 func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Get("/", GetDashboardTemplates)
 	sub.Patch("/{templateId}", UpdateDashboardTemplate)
 	sub.Delete("/{templateId}", DeleteDashboardTemplate)
 	sub.Post("/{templateId}/copy", CopyDashboardTemplate)
 	sub.Post("/{templateId}/default", ChangeDefaultTemplate)
+	sub.Post("/{templateId}/reset", ResetDashboardTemplate)
 
 	sub.Get("/{templateId}/encode", EncodeDashboardTemplate)
 	sub.Post("/decode", DecodeDashboardTemplate)

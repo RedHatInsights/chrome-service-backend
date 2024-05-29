@@ -16,4 +16,5 @@ const (
 
 var (
 	ErrNotAuthorized = errors.New("not authorized")
+	ErrBadRequest    = errors.New("bad request")
 )

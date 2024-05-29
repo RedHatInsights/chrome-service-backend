@@ -48,6 +48,14 @@ func migrateDashboardWidgets(tx *gorm.DB) *gorm.DB {
 		}
 	}
 
+	templates = []models.DashboardTemplate{}
+
+	// remove all non default templates
+	res = tx.Unscoped().Where(`"default" is false`).Delete(&[]models.DashboardTemplate{})
+	if res.Error != nil {
+		return res
+	}
+
 	return res
 }
 

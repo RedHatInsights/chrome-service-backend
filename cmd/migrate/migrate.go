@@ -101,7 +101,7 @@ func main() {
 			tx.Where("AccountId = ?", dup.AccountId).Order("UpdatedAt DESC").Find(&usersToDelete)
 			for i, user := range usersToDelete {
 				if i > 0 { // Skip the first entry, delete all others
-					if err := tx.Delete(&user).Error; err != nil {
+					if err := tx.Unscoped().Delete(&user).Error; err != nil {
 						tx.Rollback()
 						logrus.Error("Unable to delete duplicate users!")
 						panic(err)

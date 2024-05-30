@@ -74,7 +74,7 @@ func main() {
 	}()
 
 	if err := tx.Error; err != nil {
-		logrus.Error("Unable to migrate database!")
+		logrus.Error("Unable to migrate database!", err.Error())
 		tx.Rollback()
 		panic(err)
 	}
@@ -82,7 +82,7 @@ func main() {
 	// fk_user_identities_last_visited_pages
 	if tx.Migrator().HasConstraint(&models.UserIdentity{}, "fk_user_identities_last_visited_pages") {
 		if err := tx.Migrator().DropConstraint(&models.UserIdentity{}, "fk_user_identities_last_visited_pages"); err != nil {
-			logrus.Error("Unable to migrate database!")
+			logrus.Error("Unable to migrate database!", err.Error())
 			tx.Rollback()
 			panic(err)
 		}
@@ -91,7 +91,7 @@ func main() {
 	//removes unfavorited pages from all users in favorite pages tables
 	if tx.Migrator().HasTable(&models.FavoritePage{}) {
 		if err := tx.Where("favorite = ?", false).Unscoped().Delete(&models.FavoritePage{}); err != nil {
-			logrus.Error("Unable to migrate database!")
+			logrus.Error("Unable to migrate database!", err.Error.Error())
 			tx.Rollback()
 			panic(err)
 		}
@@ -100,7 +100,7 @@ func main() {
 	// temporary - removes unused typo column in dashboard template tables
 	if tx.Migrator().HasColumn(&models.DashboardTemplate{}, "sx") {
 		if err := tx.Migrator().DropColumn(&models.DashboardTemplate{}, "sx"); err != nil {
-			logrus.Error("Unable to migrate database!")
+			logrus.Error("Unable to migrate database!", err.Error())
 			tx.Rollback()
 			panic(err)
 		}
@@ -120,7 +120,7 @@ func main() {
 				if i > 0 { // Skip the first entry, delete all others
 					if err := tx.Unscoped().Delete(&user).Error; err != nil {
 						tx.Rollback()
-						logrus.Error("Unable to delete duplicate users!")
+						logrus.Error("Unable to delete duplicate users!", err.Error())
 						panic(err)
 					}
 				}
@@ -129,7 +129,7 @@ func main() {
 	}
 
 	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.UserIdentity{}, &models.SelfReport{}, &models.ProductOfInterest{}, &models.DashboardTemplate{}); err != nil {
-		logrus.Error("Unable to migrate database!")
+		logrus.Error("Unable to migrate database!", err)
 		tx.Rollback()
 		panic(err)
 	}
@@ -137,7 +137,7 @@ func main() {
 	// Drop old tables
 	if tx.Migrator().HasTable("last_visited_pages") {
 		if err := tx.Migrator().DropTable("last_visited_pages"); err != nil {
-			logrus.Error("Unable to migrate database!")
+			logrus.Error("Unable to migrate database!", err.Error())
 			tx.Rollback()
 			panic(err)
 		}
@@ -145,20 +145,20 @@ func main() {
 
 	bundleRes = tx.Model(&models.UserIdentity{}).Where("visited_bundles IS NULL").Update("visited_bundles", []byte(`{}`))
 	if bundleRes.Error != nil {
-		logrus.Error("Unable to migrate database!")
+		logrus.Error("Unable to migrate database!", bundleRes.Error.Error())
 		tx.Rollback()
 		panic(bundleRes.Error)
 	}
 	visitedRes = tx.Model(&models.UserIdentity{}).Where("last_visited_pages IS NULL").Update("last_visited_pages", []byte(`[]`))
 	if bundleRes.Error != nil {
-		logrus.Error("Unable to migrate database!")
+		logrus.Error("Unable to migrate database!", bundleRes.Error.Error())
 		tx.Rollback()
 		panic(bundleRes.Error)
 	}
 
 	dashboardRes = migrateDashboardWidgets(tx)
 	if dashboardRes.Error != nil {
-		logrus.Error("Unable to migrate database!")
+		logrus.Error("Unable to migrate database!", dashboardRes.Error.Error())
 		tx.Rollback()
 		panic(dashboardRes.Error)
 	}
@@ -166,7 +166,7 @@ func main() {
 	err := tx.Commit().Error
 
 	if err != nil {
-		logrus.Error("Unable to migrate database!")
+		logrus.Error("Unable to migrate database!", err.Error())
 		tx.Rollback()
 		panic(err)
 	}

@@ -19,14 +19,6 @@ type WSRequestPayload struct {
 	Id   string `json:"id"`
 }
 
-func debugHeaders(r *http.Request) {
-	fmt.Println("Headers")
-	fmt.Println("Request method: ", r.Method)
-	for k, v := range r.Header {
-		fmt.Printf("%s: %s\n", k, v)
-	}
-}
-
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
@@ -55,7 +47,6 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 		logrus.Errorln("Unable to parse jwt token", err)
 		return
 	}
-	debugHeaders(r)
 
 	// REMOVE this, trying to figure out why the connection is being closed
 	r.Header.Add("Connection", "upgrade")

@@ -106,6 +106,28 @@ func main() {
 		}
 	}
 
+	//Deletes Duplicate users from users table
+	if tx.Migrator().HasTable(&models.UserIdentity{}) {
+
+		var duplicates []models.UserIdentity
+		tx.Model(&models.UserIdentity{}).Select("AccountId").Group("AccountId").Having("COUNT(*) > 1").Find(&duplicates)
+
+		for _, dup := range duplicates {
+
+			var usersToDelete []models.UserIdentity
+			tx.Where("AccountId = ?", dup.AccountId).Order("UpdatedAt DESC").Find(&usersToDelete)
+			for i, user := range usersToDelete {
+				if i > 0 { // Skip the first entry, delete all others
+					if err := tx.Unscoped().Delete(&user).Error; err != nil {
+						tx.Rollback()
+						logrus.Error("Unable to delete duplicate users!")
+						panic(err)
+					}
+				}
+			}
+		}
+	}
+
 	if err := tx.AutoMigrate(&models.FavoritePage{}, &models.UserIdentity{}, &models.SelfReport{}, &models.ProductOfInterest{}, &models.DashboardTemplate{}); err != nil {
 		logrus.Error("Unable to migrate database!")
 		tx.Rollback()

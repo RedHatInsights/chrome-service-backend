@@ -7,7 +7,7 @@
       "expandable": true,
       "routes": [
         {
-          "title": "Groups",
+          "title": "Workspaces",
           "appId": "edge",
           "filterable": false,
           "id": "groups",

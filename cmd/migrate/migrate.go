@@ -126,7 +126,7 @@ func main() {
 	//Deletes Duplicate users from users table
 	if tx.Migrator().HasTable(&models.UserIdentity{}) {
 		var duplicates []models.UserIdentity
-		err := tx.Model(&models.UserIdentity{}).Select("account_id").Group("account_id").Having("COUNT(*) > 1").Find(&duplicates)
+		err := tx.Model(&models.UserIdentity{}).Select("account_id").Group("account_id").Having("COUNT(*) > 1").Limit(500).Find(&duplicates)
 		if err.Error != nil {
 			fmt.Println("Unable to migrate database!", err.Error.Error())
 			tx.Rollback()

@@ -135,6 +135,21 @@
             ]
         },
         {
+            "title": "Ansible Service on AWS",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "aaaMSInstanceView",
+                    "appId": "aaaMSInstanceView",
+                    "description": "Ansible as a managed service instances",
+                    "title": "Instances",
+                    "icon": "AnsibleIcon",
+                    "product": "Ansible as a Service",
+                    "href": "/ansible/service/instances"
+                }
+            ]
+        },
+        {
             "id": "ansibleExternalDocumentation",
             "title": "Documentation",
             "isExternal": true,

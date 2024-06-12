@@ -1069,6 +1069,25 @@
           }
       ]
   },
+  "aaaMInstancesView": {
+    "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
+    "config": {
+      "ssoScopes": [
+            "api.iam.access"
+        ]
+    },
+    "modules": [
+        {
+            "id": "aaams-instances",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/ansible/service/instances"
+                }
+            ]
+        }
+    ]
+},
   "serviceAccounts": {
     "manifestLocation": "/apps/service-accounts/fed-mods.json",
     "config": {

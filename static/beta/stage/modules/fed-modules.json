@@ -1076,7 +1076,7 @@
             }
         ]
     },
-    "aaaMSInstanceView": {
+    "ansibleSaasAdminConsole": {
         "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
         "config": {
           "ssoScopes": [

@@ -139,8 +139,8 @@
             "expandable": true,
             "routes": [
                 {
-                    "id": "aaaMSInstanceView",
-                    "appId": "aaaMSInstanceView",
+                    "id": "ansibleSaasAdminConsole",
+                    "appId": "ansibleSaasAdminConsole",
                     "description": "Ansible as a managed service instances",
                     "title": "Instances",
                     "icon": "AnsibleIcon",

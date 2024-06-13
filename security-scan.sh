@@ -15,5 +15,8 @@ DOCKERFILE_LOCATION="."
 # (Severity Options: negligible, low, medium, high, critical)
 FAIL_ON_SEVERITY="high"
 
-curl -sSL https://raw.githubusercontent.com/RedHatInsights/platform-security-gh-workflow/master/jenkins/security-scan-docker.sh | \
-    sh -s "${IMAGE_NAME}" "${DOCKERFILE_LOCATION}" "${FAIL_ON_SEVERITY}"
+# Build on "podman" or "docker"
+PODMAN_OR_DOCKER="docker"
+
+curl -sSL https://raw.githubusercontent.com/RedHatInsights/platform-security-gh-workflow/master/jenkins/security-scan.sh | \
+    sh -s "${IMAGE_NAME}" "${DOCKERFILE_LOCATION}" "${FAIL_ON_SEVERITY}" "${PODMAN_OR_DOCKER}"

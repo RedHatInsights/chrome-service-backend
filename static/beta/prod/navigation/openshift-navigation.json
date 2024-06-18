@@ -237,7 +237,7 @@
                             "permissions": [
                                 {
                                     "method": "featureFlag",
-                                    "args": ["cost-management.ui.ros-preview", true]
+                                    "args": ["cost-management.ui.ros", true]
                                 }
                             ]
                         },

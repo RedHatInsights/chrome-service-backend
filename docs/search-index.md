@@ -69,6 +69,13 @@ The final custom section can look similar to this:
   }
 ```
 
+## Generating search index
+
+To generate the search index follow these steps:
+
+1. Make sure the correct files were changed. If you are changing navigation files, make sure to edit both stage and production files.
+2. Run the `make generate-search-index` command from the project root
+
 ## Publishing search index
 
 To publish the search index follow these steps:

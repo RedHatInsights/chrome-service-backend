@@ -14,19 +14,23 @@ Go 1.18
 ## Local Testing
 
 1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. This repo also supports `docker-compose up` for its postgres server and `make infra` to run all needed containers. An example `.env` for this would look like:
-```
-PGSQL_USER=chrome
-PGSQL_PASSWORD=chrome
-PGSQL_HOSTNAME=0.0.0.0
-PGSQL_PORT=5432
-PGSQL_DATABASE=postgres
-```
+
+    ```
+    PGSQL_USER=chrome
+    PGSQL_PASSWORD=chrome
+    PGSQL_HOSTNAME=0.0.0.0
+    PGSQL_PORT=5432
+    PGSQL_DATABASE=postgres
+    ```
+
 2. Run the server by using `go run .` or `go run main.go`
+
 3. To test the service, at the moment, you are able to hit the following endpoint:
-```
-GET http://localhost:8000/health
-GET http://localhost:8000/api/chrome-service/v1/hello-world
-```
+
+    ```
+    GET http://localhost:8000/health
+    GET http://localhost:8000/api/chrome-service/v1/hello-world
+    ```
 
 ### Headers
 
@@ -44,6 +48,8 @@ eyJpZGVudGl0eSI6eyJ1c2VyIjp7InVzZXJfaWQiOiIxMiJ9fX0=
 
 `make clean` will tear down the database.
 
-`make dev` run the service
+`make dev` will run the service
 
 `make infra` will create the db and kafka locally
+
+`make generate-search-index` will generate search index file

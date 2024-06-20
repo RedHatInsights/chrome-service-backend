@@ -8,20 +8,6 @@
       "expandable": true,
       "routes": [
         {
-          "title": "Groups",
-          "appId": "edge",
-          "filterable": false,
-          "id": "groups",
-          "href": "/edge/fleet-management",
-          "icon": "EdgeIcon",
-          "permissions": [
-            {
-              "method": "withEmail",
-              "args": ["@redhat.com", "@sbb.ch"]
-            }
-          ]
-        },
-        {
           "title": "Workspaces",
           "appId": "edge",
           "filterable": false,

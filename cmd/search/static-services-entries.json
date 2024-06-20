@@ -529,19 +529,6 @@
       },
       {
         "custom": true,
-        "id": "RHEL.Inventory.groups",
-        "href": "/insights/inventory/groups",
-        "title": "Groups - Inventory",
-        "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
-        "alt_title": [
-          "group",
-          "groups",
-          "Group",
-          "Groups"
-        ]
-      },
-      {
-        "custom": true,
         "id": "RHEL.Inventory.workspaces",
         "href": "/insights/inventory/workspaces",
         "title": "Workspaces - Inventory",

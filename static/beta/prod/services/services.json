@@ -129,7 +129,7 @@
         "links": [
           "application-services.trustedContentOverview"
         ]
-      }  
+      }
     ]
   },
   {
@@ -145,7 +145,8 @@
           "iam.users",
           "iam.groups",
           "iam.authFactors",
-          "iam.serviceAccounts"
+          "iam.serviceAccounts",
+          "iam.workspaces"
         ]
       }
     ]
@@ -164,7 +165,7 @@
           "settings.notifications"
         ]
       }
-    ] 
+    ]
   },
   {
     "id": "inventories",
@@ -468,7 +469,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },     
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -526,7 +527,7 @@
         "isGroup": true,
         "title": "Subscription Services",
         "links": [
-          "subscriptions.overview", 
+          "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
           {
             "id": "hybridCommittedSpendOverview",

@@ -27,20 +27,6 @@
           "subtitle": "Red Hat Insights for RHEL"
         },
         {
-          "id": "groups",
-          "appId": "inventory",
-          "title": "Groups",
-          "href": "/insights/inventory/groups",
-          "product": "Red Hat Insights",
-          "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
-          "alt_title": [
-            "group",
-            "groups",
-            "Group",
-            "Groups"
-          ]
-        },
-        {
           "id": "workspaces",
           "appId": "inventory",
           "title": "Workspaces",

@@ -143,9 +143,9 @@
         "title": "IAM",
         "links": [
           "iam.users",
-          "iam.groups",
           "iam.authFactors",
-          "iam.serviceAccounts"
+          "iam.serviceAccounts",
+          "iam.workspaces"
         ]
       }
     ]
@@ -178,8 +178,7 @@
         "links": [
           "rhel.imageBuilder",
           "rhel.inventory",
-          "rhel.groups"
-
+          "rhel.workspaces"
         ]
       },
       {

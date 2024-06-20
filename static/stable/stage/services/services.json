@@ -88,7 +88,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },      
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -143,9 +143,10 @@
         "title": "IAM",
         "links": [
           "iam.users",
-          "iam.groups",
+          "iam.workspaces",
           "iam.authFactors",
-          "iam.serviceAccounts"
+          "iam.serviceAccounts",
+          "iam.workspaces"
         ]
       }
     ]
@@ -178,7 +179,7 @@
         "links": [
           "rhel.imageBuilder",
           "rhel.inventory",
-          "rhel.groups"
+          "rhel.workspaces"
         ]
       },
       {
@@ -467,7 +468,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },     
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -524,7 +525,7 @@
       {
         "isGroup": true,
         "title": "Subscription Services",
-        "links": [ 
+        "links": [
           "subscriptions.subscriptionsInventory",
           "subscriptions.subscriptionsUsage"
         ]

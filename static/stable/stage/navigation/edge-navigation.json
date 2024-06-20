@@ -20,6 +20,24 @@
               "args": ["@redhat.com", "@sbb.ch"]
             }
           ]
+        },
+        {
+          "title": "Workspaces",
+          "appId": "edge",
+          "filterable": false,
+          "id": "workspaces",
+          "href": "/edge/fleet-management",
+          "icon": "EdgeIcon",
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", true]
+                },
+                {
+                  "method": "withEmail",
+                  "args": ["@redhat.com", "@sbb.ch"]
+                }
+              ]
         }, {
           "id": "systems",
           "title": "Systems",

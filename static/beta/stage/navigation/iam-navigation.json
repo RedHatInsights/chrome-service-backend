@@ -68,6 +68,20 @@
           "product": "Identity & Access Management"
         },
         {
+          "id": "workspaces",
+          "appId": "rbac",
+          "title": "Workspaces",
+          "icon": "PlaceholderIcon",
+          "href": "/iam/user-access/workspaces",
+          "product": "Identity & Access Management",
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", true]
+                }
+              ]
+        },
+        {
           "id": "accessRequests",
           "appId": "rbac",
           "title": "Red Hat Access Requests",

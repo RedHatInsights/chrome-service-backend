@@ -161,7 +161,7 @@ var (
 		models.Subscriptions: models.ModuleFederationMetadata{
 			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 3, 5, 1),
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Manage subscriptions",

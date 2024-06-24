@@ -41,6 +41,7 @@
             "identity management",
             "users",
             "roles",
+            "groups",
             "permissions",
             "access",
             "admin",
@@ -57,6 +58,20 @@
           "title": "Roles",
           "href": "/iam/user-access/roles",
           "product": "Identity & Access Management"
+        },
+        {
+          "id": "groups",
+          "appId": "rbac",
+          "title": "Groups",
+          "icon": "PlaceholderIcon",
+          "href": "/iam/user-access/groups",
+          "product": "Identity & Access Management",
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", false]
+                }
+              ]
         },
         {
           "id": "workspaces",

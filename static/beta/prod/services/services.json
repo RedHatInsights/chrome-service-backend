@@ -179,8 +179,8 @@
         "links": [
           "rhel.imageBuilder",
           "rhel.inventory",
-          "rhel.groups"
-
+          "rhel.groups",
+          "rhel.workspaces"
         ]
       },
       {

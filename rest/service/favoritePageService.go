@@ -37,21 +37,23 @@ func GetUserArchivedFavoritePages(userID uint) ([]models.FavoritePage, error) {
 	return archivedFavorites, err
 }
 
-func CheckIfExistsInDB(allFavoritePages []models.FavoritePage, newFavoritePage models.FavoritePage) bool {
+func CheckIfExistsInDB(allFavoritePages []models.FavoritePage, newFavoritePage models.FavoritePage) (bool, uint) {
 	pageExists := false
+	var globalId uint
 
+	// if the pathnames match, get the UUID to remove it from the DB
 	for _, page := range allFavoritePages {
 		if page.Pathname == newFavoritePage.Pathname {
 			pageExists = true
+			globalId = page.ID
 			break
 		}
 	}
 
-	return pageExists
+	return pageExists, globalId
 }
 
 func DeleteOrUpdateFavoritePage(favoritePage models.FavoritePage) error {
-
 	if !favoritePage.Favorite {
 		result := database.DB.Unscoped().Delete(&favoritePage)
 		if result.Error != nil {
@@ -82,18 +84,18 @@ func debugFavoritesEntry(accountId string, payload models.FavoritePage) {
 }
 
 func SaveUserFavoritePage(userID uint, accountId string, newFavoritePage models.FavoritePage) error {
-	var userFavoritePages []models.FavoritePage
-
-	userFavoritePages, err := GetAllUserFavoritePages(userID)
+	var userFavoritePages, err = GetAllUserFavoritePages(userID)
 
 	if err != nil {
 		panic(err)
 	}
 
-	alreadyInDB := CheckIfExistsInDB(userFavoritePages, newFavoritePage)
+	alreadyInDB, newFavoriteGlobalId := CheckIfExistsInDB(userFavoritePages, newFavoritePage)
 
 	if alreadyInDB {
+		newFavoritePage.ID = newFavoriteGlobalId
 		err = DeleteOrUpdateFavoritePage(newFavoritePage)
+		logrus.Debugf("Deleted %+v\n", newFavoritePage)
 		debugFavoritesEntry(accountId, newFavoritePage)
 	} else {
 		debugFavoritesEntry(accountId, newFavoritePage)

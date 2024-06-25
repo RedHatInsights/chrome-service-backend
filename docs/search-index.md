@@ -75,11 +75,3 @@ To generate the search index follow these steps:
 
 1. Make sure the correct files were changed. If you are changing navigation files, make sure to edit both stage and production files.
 2. Run the `make generate-search-index` command from the project root
-
-## Publishing search index
-
-To publish the search index follow these steps:
-
-1. Make sure the correct files were changed. If you are changing navigation files, make sure to edit both stage and production files.
-2. Make sure you are on RH wired network or on VPN
-3. Run the `make publish-search-index` command from the project root

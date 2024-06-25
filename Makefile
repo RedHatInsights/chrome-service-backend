@@ -38,15 +38,7 @@ clean:
 
 validate-schema:
 	go run cmd/validate/*
-
-publish-search-index:
-	go run cmd/search/*
-
-publish-search-index-dry-run: export SEARCH_INDEX_DRY_RUN = true
-
-publish-search-index-dry-run:
-	go run cmd/search/*
-
+	
 generate-search-index: export SEARCH_INDEX_WRITE = true
 
 generate-search-index:

@@ -144,7 +144,6 @@
         "links": [
           "iam.users",
           "iam.groups",
-          "iam.workspaces",
           "iam.authFactors",
           "iam.serviceAccounts"
         ]

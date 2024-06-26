@@ -129,7 +129,7 @@
         "links": [
           "application-services.trustedContentOverview"
         ]
-      }  
+      }
     ]
   },
   {
@@ -164,7 +164,7 @@
           "settings.notifications"
         ]
       }
-    ] 
+    ]
   },
   {
     "id": "inventories",
@@ -179,7 +179,6 @@
           "rhel.imageBuilder",
           "rhel.inventory",
           "rhel.groups"
-
         ]
       },
       {
@@ -468,7 +467,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },     
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -526,7 +525,7 @@
         "isGroup": true,
         "title": "Subscription Services",
         "links": [
-          "subscriptions.overview", 
+          "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
           {
             "id": "hybridCommittedSpendOverview",

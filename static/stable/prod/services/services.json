@@ -88,7 +88,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },      
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -467,7 +467,7 @@
         "links": [
           "quay.quayOrganizations"
         ]
-      },     
+      },
       {
         "isGroup": true,
         "title": "Application Services",
@@ -525,7 +525,7 @@
         "isGroup": true,
         "title": "Subscription Services",
         "links": [
-          "subscriptions.overview", 
+          "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
           {
             "id": "hybridCommittedSpendOverview",

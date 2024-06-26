@@ -9,7 +9,8 @@
       "title": "IAM",
       "links": [
         "iam.users",
-        "iam.groups"
+        "iam.groups",
+        "iam.workspaces"
       ]
     }]
   },
@@ -24,7 +25,8 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.inventory",
-          "rhel.groups"
+          "rhel.groups",
+          "rhel.workspaces"
         ]
       },
       {
@@ -33,7 +35,7 @@
         "links": [
           "openshift.clusters"
         ]
-      } 
+      }
     ]
   },
   {

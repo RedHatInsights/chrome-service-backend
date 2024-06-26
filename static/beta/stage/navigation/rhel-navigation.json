@@ -284,6 +284,7 @@
         },
         {
           "title": "Patch",
+          "id": "patch",
           "expandable": true,
           "routes": [
             {
@@ -323,6 +324,7 @@
       "routes": [
         {
           "title": "Advisor",
+          "id": "advisor",
           "expandable": true,
           "routes": [
             {
@@ -374,6 +376,7 @@
         },
         {
           "title": "Drift",
+          "id": "drift",
           "expandable": true,
           "routes": [
             {
@@ -423,6 +426,7 @@
       "routes": [
         {
           "title": "Vulnerability",
+          "id": "vulnerability",
           "expandable": true,
           "subtitle": "Red Hat Insights for RHEL",
           "routes": [
@@ -484,6 +488,7 @@
         },
         {
           "title": "Compliance",
+          "id": "compliance",
           "expandable": true,
           "routes": [
             {
@@ -533,6 +538,7 @@
         },
         {
           "title": "Malware",
+          "id": "malware",
           "expandable": true,
           "routes": [
             {

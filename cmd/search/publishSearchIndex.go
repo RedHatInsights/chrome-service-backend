@@ -111,6 +111,11 @@ func parseLinkEntry(item map[string]interface{}) (LinkEntry, bool) {
 		return LinkEntry{}, false
 	}
 
+	if item["expandable"] == true {
+		childLink := findFirstValidChildLink(item["routes"].([]interface{}))
+		item["href"] = childLink.Href
+	}
+
 	href, hrefOk := item["href"].(string)
 	if !hrefOk || len(href) == 0 {
 		return LinkEntry{}, false
@@ -175,7 +180,7 @@ func flattenLinks(data interface{}, locator string) ([]LinkEntry, error) {
 				// all of these are required and type assertion can't fail
 				link, linkOk := parseLinkEntry(i)
 				if !linkOk {
-					err := fmt.Errorf("[ERROR] parsing link for href entry at %s", locator)
+					err := fmt.Errorf("[ERROR] Expandable: parsing link for href entry at %s", locator)
 					return []LinkEntry{}, err
 				}
 

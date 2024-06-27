@@ -38,7 +38,33 @@
             "groups",
             "Group",
             "Groups"
-          ]          
+          ],
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", false]
+                }
+              ]
+        },
+        {
+          "id": "workspaces",
+          "appId": "inventory",
+          "title": "Workspaces",
+          "href": "/insights/inventory/workspaces",
+          "product": "Red Hat Insights",
+          "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
+          "alt_title": [
+            "workspace",
+            "workspaces",
+            "Workspace",
+            "Workspaces"
+          ],
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", true]
+                }
+              ]
         },
         {
           "id": "imageBuilder",
@@ -129,7 +155,7 @@
                 "repositories",
                 "system purpose",
                 "sla",
-                "content" 
+                "content"
               ]
             },
             {
@@ -219,10 +245,10 @@
             "my repos",
             "repos",
             "repo",
-            "repositories", 
+            "repositories",
             "repository",
             "insights",
-            "repository sets", 
+            "repository sets",
             "popular",
             "Red hat repositories",
             "Snapshots",
@@ -410,7 +436,7 @@
             }
           ],
           "alt_title": [
-            "CVEs", 
+            "CVEs",
             "CVE",
             "Security",
             "Vulnerability",
@@ -436,7 +462,7 @@
             "errata",
             "Errata",
             "affected but not vulnerable",
-            "severity", 
+            "severity",
             "CVE-"
           ]
         },
@@ -635,7 +661,7 @@
         "Register RHEL",
         "rhel",
         "RHEL"
-      ]    
+      ]
     },
     {
       "id": "learningResources",

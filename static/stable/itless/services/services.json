@@ -24,7 +24,8 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.inventory",
-          "rhel.groups"
+          "rhel.groups",
+          "rhel.workspaces"
         ]
       },
       {

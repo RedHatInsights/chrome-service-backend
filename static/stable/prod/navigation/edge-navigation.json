@@ -11,7 +11,26 @@
           "id": "groups",
           "appId": "edge",
           "href": "/edge/fleet-management",
-          "icon": "EdgeIcon"
+          "icon": "EdgeIcon",
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", false]
+                }
+              ]
+        },
+        {
+          "title": "Workspaces",
+          "id": "workspaces",
+          "appId": "edge",
+          "href": "/edge/fleet-management",
+          "icon": "EdgeIcon",
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", true]
+                }
+              ]
         },
         {
           "title": "Systems",

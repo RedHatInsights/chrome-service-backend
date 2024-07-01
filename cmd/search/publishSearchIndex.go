@@ -43,26 +43,28 @@ type TokenResponse struct {
 }
 
 type ModuleIndexEntry struct {
-	Icon            string   `json:"icon,omitempty"`
-	Title           []string `json:"title"`
-	Bundle          []string `json:"bundle"`
-	BundleTitle     []string `json:"bundleTitle"`
-	AltTitle        []string `json:"alt_title,omitempty"`
-	Id              string   `json:"id"`
-	Uri             string   `json:"uri"`
-	SolrCommand     string   `json:"solrCommand"`
-	ContentType     string   `json:"contentType"`
-	ViewUri         string   `json:"view_uri"`
-	RelativeUri     string   `json:"relative_uri"`
-	PocDescriptionT string   `json:"poc_description_t"`
+	Icon            string        `json:"icon,omitempty"`
+	Title           []string      `json:"title"`
+	Bundle          []string      `json:"bundle"`
+	BundleTitle     []string      `json:"bundleTitle"`
+	AltTitle        []string      `json:"alt_title,omitempty"`
+	Id              string        `json:"id"`
+	Uri             string        `json:"uri"`
+	SolrCommand     string        `json:"solrCommand"`
+	ContentType     string        `json:"contentType"`
+	ViewUri         string        `json:"view_uri"`
+	RelativeUri     string        `json:"relative_uri"`
+	PocDescriptionT string        `json:"poc_description_t"`
+	Permissions     []interface{} `json:"permissions,omitempty"`
 }
 
 type LinkEntry struct {
-	Id          string   `json:"id"`
-	Title       string   `json:"title"`
-	Href        string   `json:"href"`
-	Description string   `json:"description"`
-	AltTitle    []string `json:"alt_title,omitempty"`
+	Id          string        `json:"id"`
+	Title       string        `json:"title"`
+	Href        string        `json:"href"`
+	Description string        `json:"description"`
+	AltTitle    []string      `json:"alt_title,omitempty"`
+	Permissions []interface{} `json:"permissions,omitempty"`
 }
 
 func findFirstValidChildLink(routes []interface{}) LinkEntry {
@@ -121,10 +123,22 @@ func parseLinkEntry(item map[string]interface{}) (LinkEntry, bool) {
 		return LinkEntry{}, false
 	}
 
+	var permissions []interface{}
+	permissions = nil
+	if item["permissions"] != nil {
+		p, permissionsOk := item["permissions"].([]interface{})
+		if !permissionsOk {
+			fmt.Println("[Error]: permissions are not an array in link: ", id)
+			return LinkEntry{}, false
+		}
+		permissions = p
+	}
+
 	return LinkEntry{
-		Id:    id,
-		Title: title,
-		Href:  href,
+		Id:          id,
+		Title:       title,
+		Href:        href,
+		Permissions: permissions,
 	}, true
 }
 
@@ -381,6 +395,7 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 				ViewUri:         fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
 				RelativeUri:     e.Href,
 				AltTitle:        e.AltTitle,
+				Permissions:     e.Permissions,
 			}
 			flatLinks = append(flatLinks, newLink)
 		}

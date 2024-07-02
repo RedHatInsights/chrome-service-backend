@@ -13,6 +13,16 @@
       "title": "User Access",
       "expandable": true,
       "filterable": false,
+      "permissions": [
+        {
+          "method": "loosePermissions",
+          "args": [
+            [
+              "rbac:*:*"
+            ]
+          ]
+        }
+      ],
       "routes": [
         {
           "id": "overview",

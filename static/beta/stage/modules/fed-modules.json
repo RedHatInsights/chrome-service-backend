@@ -101,6 +101,15 @@
                         }
                     }
                 ]
+            },
+            {
+                "id": "learningResourcesGlobal",
+                "module": "./GlobalLearningResourcesPage",
+                "routes": [
+                    {
+                        "pathname": "/staging/global-learning-resources-page"
+                    }
+                ]
             }
         ]
     },

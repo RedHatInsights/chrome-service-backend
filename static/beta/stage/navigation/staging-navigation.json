@@ -15,6 +15,12 @@
             "href": "/staging/widget-layout"
         },
         {
+            "id": "global-learning-resources-page",
+            "title": "Global Learning Resources Page",
+            "appId": "global-learning-resources-page",
+            "href": "/staging/global-learning-resources-page"
+        },
+        {
             "title": "Cost Management MFE",
             "expandable": true,
             "filterable": false,

@@ -59,80 +59,6 @@
     ]
   },
   {
-    "id": "containers",
-    "title": "Containers",
-    "icon": "CubeIcon",
-    "description": "Run your applications in a consistent and isolated environment.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "OpenShift",
-        "links": [
-          {
-            "title": "Overview",
-            "href": "/openshift/overview",
-            "icon": "OpenShiftIcon",
-            "description": "Browse options for various OpenShift cluster types to find what fits your needs."
-          },
-          {
-            "title": "Clusters",
-            "href": "/openshift",
-            "icon": "OpenShiftIcon",
-            "description": "View, Register, or Create an OpenShift Cluster."
-          }
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Quay.io",
-        "links": [
-          "quay.quayOrganizations"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Application Services",
-        "links": [
-          "application-services.trustedContentOverview"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "deploy",
-    "icon": "RocketIcon",
-    "title": "Deploy",
-    "description": "Create RHEL images, systems at the Edge, and OpenShift clusters.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          "rhel.imageBuilder"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Quay.io",
-        "links": [
-          "quay.quayRepositories"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Edge",
-        "links": [
-          {
-            "title": "Images",
-            "href": "/edge/manage-images",
-            "icon": "EdgeIcon",
-            "description": "Manage the lifecycle and enhance security of your RHEL systems at the edge."
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "iam",
     "icon": "UsersIcon",
     "title": "Identity and Access Management",
@@ -208,8 +134,8 @@
   {
     "id": "observe",
     "icon": "ChartLineIcon",
-    "title": "Observability and Monitoring",
-    "description": "Monitor, troubleshoot, and improve application performance.",
+    "title": "Secure and Observe",
+    "description": "Meet your policy and compliance objectives.",
     "links": [
       {
         "isGroup": true,
@@ -218,152 +144,6 @@
           "rhel.advisories",
           "rhel.repositories",
           "rhel.patchSystems",
-          {
-            "href": "/insights/advisor/recommendations",
-            "title": "Advisor",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
-            "alt_title": [
-              "advisor",
-              "Rules",
-              "rules",
-              "rule",
-              "Rule",
-              "insights",
-              "security",
-              "stability",
-              "performance",
-              "incidents",
-              "recommendations",
-              "configuration",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          },
-          {
-            "href": "/insights/drift",
-            "title": "Drift",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
-          },
-          "rhel.policies"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "OpenShift",
-        "links": [
-          {
-            "href": "/openshift/insights/advisor/recommendations",
-            "icon": "OpenShiftIcon",
-            "title": "Advisor",
-            "subtitle": "Red Hat Insights for OpenShift",
-            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
-            "alt_title": [
-              "Insights Advisor",
-              "OpenShift Advisor",
-              "Advisor",
-              "advisor",
-              "Recommendations",
-              "Proactive support",
-              "Proactive support",
-              "risk",
-              "support",
-              "update",
-              "update risk",
-              "update",
-              "issues",
-              "remediation",
-              "cluster state",
-              "recommendation",
-              "cluster health",
-              "remote health",
-              "proactive",
-              "support",
-              "fix",
-              "problem",
-              "issue"
-            ]
-          },
-          {
-            "href": "/openshift/insights/vulnerability/cves",
-            "icon": "OpenShiftIcon",
-            "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for OpenShift",
-            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
-          }
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Ansible",
-        "links": [
-          {
-            "href": "/ansible/advisor/recommendations",
-            "title": "Advisor",
-            "subtitle": "Red Hat Insights for Ansible",
-            "icon": "AnsibleIcon",
-            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
-            "alt_title": [
-              "Rules",
-              "recommendations",
-              "Configuration",
-              "security",
-              "stability",
-              "performance",
-              "advisor",
-              "incidents",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          },
-          {
-            "title": "Drift",
-            "href": "/ansible/drift",
-            "icon": "AnsibleIcon",
-            "subtitle": "Red Hat Insights for Ansible",
-            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
-          },
-          "ansible.policies"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Subscription Services",
-        "links": [
-          {
-            "id": "openshift",
-            "title": "Subscriptions Usage",
-            "icon": "OpenShiftIcon",
-            "href": "/subscriptions/usage/openshift"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "security",
-    "icon": "CloudSecurityIcon",
-    "title": "Security",
-    "description": "Meet your policy and compliance objectives.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          "rhel.advisories",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -433,13 +213,53 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
-          "rhel.remediations"
+          "rhel.remediations",
+          {
+            "href": "/insights/drift",
+            "title": "Drift",
+            "icon": "InsightsIcon",
+            "subtitle": "Red Hat Insights for RHEL",
+            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
+          },
+          "rhel.policies"
         ]
       },
       {
         "isGroup": true,
         "title": "OpenShift",
         "links": [
+          {
+            "href": "/openshift/insights/advisor/recommendations",
+            "icon": "OpenShiftIcon",
+            "title": "Advisor",
+            "subtitle": "Red Hat Insights for OpenShift",
+            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
+            "alt_title": [
+              "Insights Advisor",
+              "OpenShift Advisor",
+              "Advisor",
+              "advisor",
+              "Recommendations",
+              "Proactive support",
+              "Proactive support",
+              "risk",
+              "support",
+              "update",
+              "update risk",
+              "update",
+              "issues",
+              "remediation",
+              "cluster state",
+              "recommendation",
+              "cluster health",
+              "remote health",
+              "proactive",
+              "support",
+              "fix",
+              "problem",
+              "issue"
+            ]
+          },
           {
             "href": "/openshift/insights/vulnerability/cves",
             "icon": "OpenShiftIcon",
@@ -459,10 +279,54 @@
         "isGroup": true,
         "title": "Ansible",
         "links": [
-          "ansible.remediations"
+          {
+            "href": "/ansible/advisor/recommendations",
+            "title": "Advisor",
+            "subtitle": "Red Hat Insights for Ansible",
+            "icon": "AnsibleIcon",
+            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
+            "alt_title": [
+              "Rules",
+              "recommendations",
+              "Configuration",
+              "security",
+              "stability",
+              "performance",
+              "advisor",
+              "incidents",
+              "pathways",
+              "critical",
+              "upgrade",
+              "upgrade risk",
+              "incident",
+              "recommendation",
+              "pathway"
+            ]
+          },
+          {
+            "title": "Drift",
+            "href": "/ansible/drift",
+            "icon": "AnsibleIcon",
+            "subtitle": "Red Hat Insights for Ansible",
+            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
+          },
+          "ansible.policies",
+          "ansible.remediations"     
         ]
       },
-       {
+      {
+        "isGroup": true,
+        "title": "Subscription Services",
+        "links": [
+          {
+            "id": "openshift",
+            "title": "Subscriptions Usage",
+            "icon": "OpenShiftIcon",
+            "href": "/subscriptions/usage/openshift"
+          }
+        ]
+      },
+      {
         "isGroup": true,
         "title": "Quay.io",
         "links": [
@@ -528,45 +392,6 @@
         "links": [
           "subscriptions.subscriptionsInventory",
           "subscriptions.subscriptionsUsage"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "systemConfiguration",
-    "icon": "CogIcon",
-    "title": "System Configuration",
-    "description": "Connect your RHEL systems to Hybrid Cloud Console services.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          "rhel.rhc",
-          "rhel.activationKeys",
-          "rhel.registerSystems",
-          "rhel.stalenessAndDeletion"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Ansible",
-        "links": [
-          {
-            "title": "Register Systems",
-            "filterable": false,
-            "href": "/ansible/registration",
-            "icon": "AnsibleIcon",
-            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
-          }
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Console Settings",
-        "links": [
-          "settings.integrations",
-          "settings.notifications"
         ]
       }
     ]

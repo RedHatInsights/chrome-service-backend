@@ -115,9 +115,92 @@ This command will start dev server on `http://localhost:9999`
 
 ### Making changes
 
-You can use the [CSC documentation](https://github.com/RedHatInsights/cloud-services-config#chromefed-modulesjson) for reference.
+These are how environments correlate with files
 
-## New feature outside of legacy cloud services config
+## Preview
+
+- stage-preview -> `/static/beta/stage`
+- prod-preview -> `/static/beta/prod`
+
+## Stable
+
+- stage-stable -> `/static/stable/stage`
+- prod-stable -> `/static/stable/prod`
+
+### Adding Config for New Apps
+
+To enable a new app in our environments, you need to create configuration for it in main.yml and in above mentioned environment directory. After that create a PR to merge it. Changes to stage are deployed automatically and for prod release tag @crc-platform-experience-services in #forum-consoledot-ui with the PR link on slack.
+
+Here is some example configuration that demonstrates the structure, using all required and optional properties:
+
+## main.yml
+
+```js
+
+{app_id}:
+    title: App Title
+    api:
+        versions:
+            - v1
+            - v2
+        isBeta: true
+        subItems:
+            oneApi:
+                title: Some title
+                versions:
+                    - v1
+
+```
+
+### `/modules/fed-modules.json` in respective environment folders from above
+
+Add new application metadata to chrome modules registry.
+
+```js
+
+{
+    /** app-id must be the same as in the main.yml file */
+    "<app-id>": {
+        "manifestLocation": "/apps/<app-id>/fed-mods.json",
+        "defaultDocumentTitle": "Title",
+        "modules": [
+            {
+                "id": "module identifier",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                      "pathname": "/example/path"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+```
+
+### `/navigation/<bundle>-navigation.json` in respective environment folders from above
+
+Add a new link to the navigation files. The navigation registry file is based on application location within the chrome application. For example, if the application should live under `/settings` route, modify the `settings-navigation.json` file.
+
+```js
+{
+    /** app-id must be the same as in the main.yml file */
+    "appId": "<app-id>",
+    /** Title of the link in browser */
+    "title": "App title",
+    /** Exact URL path to the application. Can be a nested route. */
+    "navItems": [
+      {
+        "id": "id",
+        "appId": "appId",
+        "title": "item title",
+        "filterable": true,
+        "href": "/settings/new-app"
+      }
+  ]
+}
+```
 
 ### Third navigation level
 

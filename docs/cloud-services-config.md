@@ -129,37 +129,15 @@ These are how environments correlate with files
 
 ### Adding Config for New Apps
 
-To enable a new app in our environments, you need to create configuration for it in main.yml and in above mentioned environment directory. After that create a PR to merge it. Changes to stage are deployed automatically and for prod release tag @crc-platform-experience-services in #forum-consoledot-ui with the PR link on slack.
-
-Here is some example configuration that demonstrates the structure, using all required and optional properties:
-
-## main.yml
-
-```js
-
-{app_id}:
-    title: App Title
-    api:
-        versions:
-            - v1
-            - v2
-        isBeta: true
-        subItems:
-            oneApi:
-                title: Some title
-                versions:
-                    - v1
-
-```
+To enable a new app in our environments, you need to add it to `/modules/fed-modules.json` in above mentioned environment directory. After that create a PR to merge it. Changes to stage are deployed automatically and for prod release tag @crc-platform-experience-services in #forum-consoledot-ui with the PR link on slack.
 
 ### `/modules/fed-modules.json` in respective environment folders from above
 
-Add new application metadata to chrome modules registry.
+Add new application metadata to modules registry.
 
 ```js
 
 {
-    /** app-id must be the same as in the main.yml file */
     "<app-id>": {
         "manifestLocation": "/apps/<app-id>/fed-mods.json",
         "defaultDocumentTitle": "Title",
@@ -185,7 +163,7 @@ Add a new link to the navigation files. The navigation registry file is based on
 
 ```js
 {
-    /** app-id must be the same as in the main.yml file */
+    /** app-id must be the same as in the fed-modules.json file */
     "appId": "<app-id>",
     /** Title of the link in browser */
     "title": "App title",

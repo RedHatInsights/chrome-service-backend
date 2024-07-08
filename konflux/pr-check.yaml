@@ -1,0 +1,14 @@
+kind: Pipeline
+apiVersion: tekton.dev/v1beta1
+metadata:
+  name: chrome-service-pr-check
+spec:
+  params:
+    - name: CICD_REPO_BRANCH
+      value: chrome-service-backend/main
+    - name: CICD_REPO_ORG
+      value: RedHatInsights
+  tasks:
+    - name: install bonfire and clowder
+      script: |
+        ./pr_check.sh

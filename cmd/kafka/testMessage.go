@@ -26,7 +26,7 @@ func main() {
 	id := uuid.New()
 	body := fmt.Sprintf(`{
 		"specversion": "1.0.2",
-		"type": "notifications.drawer",
+		"type": "com.redhat.console.notifications.drawer",
 		"source": "https://whatever.service.com",
 		"id": "test-message",
 		"time": "2023-05-23T11:54:03.879689005+02:00",
@@ -37,8 +37,8 @@ func main() {
 			"usernames": ["insights-qa"],
 			"payload": {
 				"id": "%s",
-				"description": "string",
-				"title": "string",
+				"description": "HOHOH",
+				"title": "string??!!",
 				"created": "2023-05-23T11:54:03.879689005+02:00",
 				"read": false,
 				"source": "string"

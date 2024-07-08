@@ -2,18 +2,19 @@
 version: "3.8"
 services:
   chrome-db:
-    image: postgres:14.1-alpine
+    image: quay.io/sclorg/postgresql-15-c9s:latest
     restart: always
     environment:
-    - POSTGRES_USER=chrome
-    - POSTGRES_PASSWORD=chrome
+    - POSTGRESQL_USER=chrome
+    - POSTGRESQL_PASSWORD=chrome
+    - POSTGRESQL_DATABASE=chrome
     ports:
     - "5432:5432"
     volumes:
     - chrome-db:/var/lib/postgresql/data
 
   zoo1:
-    image: confluentinc/cp-zookeeper:7.3.2
+    image: quay.io/cloudservices/cp-zookeeper:7.2.1
     hostname: zoo1
     container_name: zoo1
     ports:
@@ -24,7 +25,7 @@ services:
       ZOOKEEPER_SERVERS: zoo1:2888:3888
 
   kafka1:
-    image: confluentinc/cp-kafka:7.3.2
+    image: quay.io/cloudservices/cp-kafka:7.2.1
     hostname: kafka1
     container_name: kafka1
     ports:
@@ -49,7 +50,7 @@ services:
     - zoo1
 
   unleash_web:
-    image: unleashorg/unleash-server:latest
+    image: quay.io/cloudservices/unleash-server:latest
     ports:
     - "4242:4242"
     environment:
@@ -73,15 +74,17 @@ services:
       timeout: 1m
       retries: 5
       start_period: 15s
+  
   db:
     expose:
     - "5432"
-    image: postgres:15
+    image: quay.io/sclorg/postgresql-15-c9s:latest
     environment:
       # create a database called `db`
-      POSTGRES_DB: "db"
+      - POSTGRESQL_DATABASE=db
       # trust incoming connections blindly (DON'T DO THIS IN PRODUCTION!)
-      POSTGRES_HOST_AUTH_METHOD: "trust"
+      - POSTGRESQL_USER=chrome
+      - POSTGRESQL_PASSWORD=chrome
     healthcheck:
       test: ["CMD", "pg_isready", "--username=postgres", "--host=127.0.0.1", "--port=5432"]
       interval: 2s

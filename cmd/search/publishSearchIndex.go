@@ -21,7 +21,8 @@ type Release string
 const (
 	Prod          SearchEnv = "prod"
 	Stage         SearchEnv = "stage"
-	Stale         Release   = "stable"
+	Itless        SearchEnv = "itless"
+	Stable        Release   = "stable"
 	Beta          Release   = "beta"
 	ssoPathname   string    = "/auth/realms/redhat-external/protocol/openid-connect/token"
 	hydraPathname string    = "/hydra/rest/search/console/index"
@@ -361,8 +362,9 @@ func injectLinks(templateData []byte, flatLinks []LinkEntry) ([]ServiceEntry, er
 
 func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEntry, error) {
 	hccOrigins := EnvMap{
-		Prod:  "https://console.redhat.com",
-		Stage: "https://console.stage.redhat.com",
+		Prod:   "https://console.redhat.com",
+		Stage:  "https://console.stage.redhat.com",
+		Itless: "https://console.openshiftusgov.com",
 	}
 	bundleMapping := map[string]string{
 		"application-services": "Application Services",
@@ -633,8 +635,8 @@ func main() {
 			handleErrors(errors, dryRun)
 			return
 		}
-		writeEnvs := []SearchEnv{Prod, Stage}
-		writeReleases := []Release{Stale, Beta}
+		writeEnvs := []SearchEnv{Prod, Stage, Itless}
+		writeReleases := []Release{Stable, Beta}
 		for _, env := range writeEnvs {
 			for _, release := range writeReleases {
 				searchIndex, err := constructIndex(env, release)

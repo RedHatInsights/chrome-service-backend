@@ -13,124 +13,28 @@
             "description": "Red Hat OpenShift cluster product information"
         },
         {
-            "id": "dashboard",
-            "appId": "openshift",
-            "href": "/openshift/dashboard",
-            "title": "Dashboard",
-            "icon": "OpenShiftIcon",
-            "filterable": false,
-            "product": "Red Hat OpenShift Cluster Manager",
-            "description": "Dashboard visualizing the state of your OpenShift Environment."
-        },
-        {
-            "id": "clusters",
-            "appId": "openshift",
-            "href": "/openshift",
-            "title": "Clusters",
-            "icon": "OpenShiftIcon",
-            "product": "Red Hat OpenShift Cluster Manager",
-            "description": "View, Register, or Create an OpenShift Cluster."
-        },
-        {
-            "id": "learningResources",
-            "appId": "learningResources",
-            "title": "Learning Resources",
-            "href": "/openshift/learning-resources"
-        },
-        {
-            "id": "releases",
-            "appId": "openshift",
-            "href": "/openshift/releases",
-            "title": "Releases",
-            "icon": "OpenShiftIcon",
-            "filterable": false,
-            "product": "Red Hat OpenShift Cluster Manager",
-            "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
-        },
-        {
-            "id": "developerSandbox",
-            "appId": "sandbox",
-            "href": "/openshift/sandbox",
-            "title": "Developer Sandbox",
-            "icon": "OpenShiftIcon",
-            "filterable": false,
-            "description": "Learn and try developing in a private, pre-configured OpenShift environment."
-        },
-        {
-            "title": "OpenShift AI",
-            "appId": "openshift",
-            "expandable": true,
-            "filterable": false,
-            "routes": [
+            "groupId": "cluster_management",
+            "title": "Cluster Management",
+            "navItems": [
                 {
-                    "id": "developersandboxtrial",
+                    "id": "dashboard",
                     "appId": "openshift",
-                    "title": "On the Developer Sandbox",
-                    "href": "https://developers.redhat.com/learn/openshift/how-create-natural-language-processing-nlp-application-using-red-hat-openshift-ai",
-                    "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
-                    "icon": "AITechnologyIcon",
-                    "isExternal": true,
-                    "filterable": false
+                    "href": "/openshift/dashboard",
+                    "title": "Dashboard",
+                    "icon": "OpenShiftIcon",
+                    "filterable": false,
+                    "product": "Red Hat OpenShift Cluster Manager",
+                    "description": "Dashboard visualizing the state of your OpenShift Environment."
                 },
                 {
-                    "id": "sixtydaytrial",
+                    "id": "clusters",
                     "appId": "openshift",
-                    "title": "60-day product trial",
-                    "href": "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai/trial",
-                    "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
-                    "icon": "AITechnologyIcon",
-                    "isExternal": true,
-                    "filterable": false
-                }
-            ]
-        },
-        {
-          "title": "Advanced Cluster Security",
-          "expandable": true,
-          "id": "acs-section",
-          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
-          "routes": [
-            {
-              "id": "clusterOverview",
-              "appId": "acs",
-              "title": "Overview",
-              "href": "/openshift/acs/overview",
-              "icon": "ACSIcon",
-              "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
-            },
-            {
-              "id": "acsGettingStarted",
-              "appId": "acs",
-              "title": "Getting Started",
-              "href": "/openshift/acs/getting-started"
-            },
-            {
-              "id": "acsInstances",
-              "appId": "acs",
-              "title": "ACS Instances",
-              "href": "/openshift/acs/instances"
-            },
-            {
-              "id": "clustersDocumentation",
-              "title": "Documentation",
-              "isExternal": true,
-              "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
-            }
-          ]
-        },
-        {
-            "id": "downloads",
-            "appId": "openshift",
-            "href": "/openshift/downloads",
-            "title": "Downloads",
-            "filterable": false,
-            "product": "Red Hat OpenShift Cluster Manager"
-        },
-        {
-            "groupId": "insights",
-            "title": "Red Hat Insights",
-            "icon": "trend-up",
-            "navItems": [
+                    "href": "/openshift",
+                    "title": "Cluster List",
+                    "icon": "OpenShiftIcon",
+                    "product": "Red Hat OpenShift Cluster Manager",
+                    "description": "View, Register, or Create an OpenShift Cluster."
+                },
                 {
                     "title": "Advisor",
                     "expandable": true,
@@ -193,7 +97,7 @@
                     ]
                 },
                 {
-                    "title": "Subscriptions",
+                    "title": "Subscriptions Usage",
                     "expandable": true,
                     "filterable": true,
                     "routes": [
@@ -308,11 +212,111 @@
             ]
         },
         {
-            "id": "redhatMarketplace",
-            "title": "Red Hat Marketplace",
-            "href": "https://marketplace.redhat.com",
-            "filterable": false,
-            "isExternal": true
+            "groupId": "products",
+            "title": "Products",
+            "navItems": [
+                {
+                    "title": "Advanced Cluster Security",
+                    "expandable": true,
+                    "id": "acs-section",
+                    "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
+                    "routes": [
+                      {
+                        "id": "clusterOverview",
+                        "appId": "acs",
+                        "title": "Overview",
+                        "href": "/openshift/acs/overview",
+                        "icon": "ACSIcon",
+                        "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
+                      },
+                      {
+                        "id": "acsGettingStarted",
+                        "appId": "acs",
+                        "title": "Getting Started",
+                        "href": "/openshift/acs/getting-started"
+                      },
+                      {
+                        "id": "acsInstances",
+                        "appId": "acs",
+                        "title": "ACS Instances",
+                        "href": "/openshift/acs/instances"
+                      },
+                      {
+                        "id": "clustersDocumentation",
+                        "title": "Documentation",
+                        "isExternal": true,
+                        "href": "https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_security_for_kubernetes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "OpenShift AI",
+                    "appId": "openshift",
+                    "expandable": true,
+                    "filterable": false,
+                    "routes": [
+                        {
+                            "id": "developersandboxtrial",
+                            "appId": "openshift",
+                            "title": "On the Developer Sandbox",
+                            "href": "https://developers.redhat.com/learn/openshift/how-create-natural-language-processing-nlp-application-using-red-hat-openshift-ai",
+                            "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
+                            "icon": "AITechnologyIcon",
+                            "isExternal": true,
+                            "filterable": false
+                        },
+                        {
+                            "id": "sixtydaytrial",
+                            "appId": "openshift",
+                            "title": "60-day product trial",
+                            "href": "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai/trial",
+                            "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
+                            "icon": "AITechnologyIcon",
+                            "isExternal": true,
+                            "filterable": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "groupId": "resources",
+            "title": "Resources",
+            "navItems": [
+                {
+                    "id": "learningResources",
+                    "appId": "learningResources",
+                    "title": "Learning Resources",
+                    "href": "/openshift/learning-resources"
+                },
+                {
+                    "id": "downloads",
+                    "appId": "openshift",
+                    "href": "/openshift/downloads",
+                    "title": "Downloads",
+                    "filterable": false,
+                    "product": "Red Hat OpenShift Cluster Manager"
+                },
+                {
+                    "id": "releases",
+                    "appId": "openshift",
+                    "href": "/openshift/releases",
+                    "title": "Releases",
+                    "icon": "OpenShiftIcon",
+                    "filterable": false,
+                    "product": "Red Hat OpenShift Cluster Manager",
+                    "description": "View general information on the most recent OpenShift Container Platform release versions that you can install."
+                },
+                {
+                    "id": "developerSandbox",
+                    "appId": "sandbox",
+                    "href": "/openshift/sandbox",
+                    "title": "Developer Sandbox",
+                    "icon": "OpenShiftIcon",
+                    "filterable": false,
+                    "description": "Learn and try developing in a private, pre-configured OpenShift environment."
+                }
+            ]
         }
     ]
 }

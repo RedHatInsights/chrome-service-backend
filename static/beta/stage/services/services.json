@@ -11,6 +11,9 @@
         "links": [
           "openshift.sixtydaytrial",
           "openshift.developersandboxtrial"
+        ],
+        "alt_title": [
+          "operators"
         ]
       }
     ]
@@ -454,7 +457,8 @@
             "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
             "alt_title": [
               "acs",
-              "ACS"
+              "ACS",
+              "operators"
             ]
           }
         ]

@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
-	"github.com/joho/godotenv"
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 )
 
 type FeatureFlag struct {
@@ -22,7 +22,7 @@ const featureFlagPath = "cmd/unleash/featureflag.json"
 var baseUrl string
 
 func main() {
-	godotenv.Load()
+	util.LoadEnv()
 	cfg := config.Get()
 	baseUrl = fmt.Sprintf("%s%s", cfg.FeatureFlagConfig.FullURL, "admin/projects/default/features")
 	// Read JSON data from file

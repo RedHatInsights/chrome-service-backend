@@ -427,6 +427,36 @@ spec:
         - name: kind
           value: task
         resolver: bundles
+    - name: validate-schemas
+      description: Validates chrome configuration files
+      params:
+      - name: SNAPSHOT
+        value: $(params.SNAPSHOT)
+      - name: NAMESPACE
+        value: $(params.NAMESPACE)
+      - name: EXPECTED_OUTPUT
+        value: $(params.EXPECTED_OUTPUT)
+      runAfter:
+      - clone-repository
+      workspaces:
+      - name: output
+        workspace: workspace
+      - name: basic-auth
+        workspace: git-auth
+      taskSpec:
+        steps:
+        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1
+          script: |
+            #!/bin/bash
+            set -ex
+
+            CHROME_SERVICE_PATH="/workspace/output/source"
+            
+            cd ${CHROME_SERVICE_PATH}
+            make validate-schema
+            make publish-search-index-dry-run
+            make parse-services
+            make generate-search-index 
     workspaces:
     - name: workspace
     - name: git-auth

@@ -29,7 +29,7 @@
         {
           "id": "clusters",
           "appId": "openshift",
-          "href": "/openshift/list",
+          "href": "/openshift/cluster-list",
           "title": "Cluster List",
           "icon": "OpenShiftIcon",
           "product": "Red Hat OpenShift Cluster Manager",

@@ -110,6 +110,15 @@
                         "pathname": "/staging/global-learning-resources-page"
                     }
                 ]
+            },
+            {
+               "id": "learningResourcesCreator",
+               "module": "./Creator",
+               "routes": [
+                   {
+                       "pathname": "/staging/learning-resources-creator"
+                   }
+               ]
             }
         ]
     },

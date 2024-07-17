@@ -130,6 +130,9 @@
               "routes": [
                   {
                       "pathname": "/settings/notifications"
+                  },
+                  {
+                      "pathname": "/settings/integrations/splunk-setup"
                   }
               ]
           }

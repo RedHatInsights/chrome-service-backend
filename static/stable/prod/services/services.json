@@ -454,7 +454,7 @@
             "title": "Advanced Cluster Security",
             "href": "/openshift/acs/overview",
             "icon": "ACSIcon",
-            "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
+            "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture with ACS.",
             "alt_title": [
               "acs",
               "ACS",

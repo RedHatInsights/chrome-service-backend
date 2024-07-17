@@ -88,7 +88,7 @@
           "title": "Advanced Cluster Security",
           "expandable": true,
           "id": "acs-section",
-          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
+          "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture with ACS.",
           "routes": [
             {
               "id": "clusterOverview",
@@ -96,7 +96,7 @@
               "title": "Overview",
               "href": "/openshift/acs/overview",
               "icon": "ACSIcon",
-              "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture."
+              "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture with ACS."
             },
             {
               "id": "acsGettingStarted",

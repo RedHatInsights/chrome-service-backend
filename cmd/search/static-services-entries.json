@@ -187,7 +187,25 @@
   {
     "id": "ACS-custom",
     "links": [
-      "openshift.acs-section"
+      {
+        "id": "openshift.acs-section",
+        "alt_title": [
+          "acs",
+          "ACS",
+          "operators"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AI",
+    "links": [
+      {
+        "id": "openshift.developersandboxtrail",
+        "alt_title": [
+          "operators"
+        ]
+      }
     ]
   },
   {

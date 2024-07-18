@@ -93,7 +93,7 @@ func findFirstValidChildLink(routes []interface{}) LinkEntry {
 func convertAltTitles(jsonEntry interface{}) []string {
 	altTitlesInterface, ok := jsonEntry.([]interface{})
 	if !ok {
-		fmt.Println("Cannot convert all title to array")
+		// Cannot convert all title to array. Is probably empty.
 		return []string{}
 	}
 	var altTitles []string
@@ -331,11 +331,32 @@ func injectLinks(templateData []byte, flatLinks []LinkEntry) ([]ServiceEntry, er
 								entry, found = findLinkById(castLink, flatLinks)
 							}
 							/**
-							* Else branch is not handled because the link is "artificial" and does not exist in navigation.
-							* If a link is not in the navigation, it is not indexed.
+							* Else branch is now handled because the link is "artificial" and does not exist in navigation.
+							* If a link is not in the navigation, it is not from the link registry ad has to be added manually.
 							 */
 							if found {
 								finalLinks = append(finalLinks, entry)
+							} else if !found && !ok {
+								linkMap, ok := stringLink.(map[string]interface{})
+								if !ok {
+									continue
+								}
+
+								artificialLink := ServiceLink{
+									LinkEntry: LinkEntry{
+										Title: linkMap["title"].(string),
+										Href:  linkMap["href"].(string),
+									},
+								}
+
+								description, ok := linkMap["description"].(string)
+								artificialLink.AltTitle = convertAltTitles(linkMap["alt_title"])
+
+								if ok {
+									artificialLink.Description = description
+								}
+								finalLinks = append(finalLinks, artificialLink)
+
 							}
 						}
 					}

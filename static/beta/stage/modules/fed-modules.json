@@ -1101,7 +1101,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/ansible/service/instances"
+                        "pathname": "/ansible/service/"
                     }
                 ]
             }

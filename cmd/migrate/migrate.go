@@ -129,6 +129,14 @@ func main() {
 		panic(bundleRes.Error)
 	}
 
+	err := tx.Commit().Error
+
+	if err != nil {
+		fmt.Println("Unable to migrate database!", err.Error())
+		tx.Rollback()
+		panic(err)
+	}
+
 	if bundleRes.RowsAffected > 0 {
 		logrus.Infof("Migrated %d user identity bundles rows", bundleRes.RowsAffected)
 	}

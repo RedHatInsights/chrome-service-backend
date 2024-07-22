@@ -9,7 +9,7 @@ services:
     ports:
     - "4242:4242"
     environment:
-      DATABASE_URL: "postgres://postgres:unleash@db/postgres"
+      DATABASE_URL: "postgres://chrome:chrome@db/postgres"
       DATABASE_SSL: "false"
       LOG_LEVEL: "warn"
       INIT_FRONTEND_API_TOKENS: "default:development.unleash-insecure-frontend-api-token"
@@ -35,7 +35,7 @@ services:
       - POSTGRESQL_USER=chrome
       - POSTGRESQL_PASSWORD=chrome
     healthcheck:
-      test: ["CMD", "pg_isready", "--username=postgres", "--host=127.0.0.1", "--port=5432"]
+      test: ["CMD", "pg_isready", "--username=chrome", "--host=127.0.0.1", "--port=5432"]
       interval: 2s
       timeout: 1m
       retries: 5

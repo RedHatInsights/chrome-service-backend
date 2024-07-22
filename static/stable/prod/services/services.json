@@ -526,7 +526,34 @@
             "filterable": false,
             "href": "/openshift/cost-management",
             "icon": "OpenShiftIcon",
-            "description": "Understand and track costs for your OpenShift clusters and workloads."
+            "description": "View your data in cost management.",
+            "alt_title": [
+              "cost management",
+              "overview",
+              "cost management oerview",
+              "costmgmt",
+              "cost",
+              "finops",
+              "cost management for openshift",
+              "openshift cost",
+              "rhcm",
+              "finsights",
+              "finops",
+              "spend",
+              "distribute",
+              "cost model",
+              "money",
+              "bill",
+              "billing",
+              "financial",
+              "chargeback",
+              "showback",
+              "rate",
+              "save",
+              "savings",
+              "resource optimization",
+              "resources"
+            ]
           }
         ]
       },

@@ -568,40 +568,6 @@
     ]
   },
   {
-    "id": "costManagement",
-    "links": [
-      {
-        "custom": true,
-        "id": "SETTINGS.applications.costManagement",
-        "href": "/settings/applications/cost-management",
-        "title": "Cost Management",
-        "alt_title": [
-          "cost management",
-          "cost",
-          "finsights",
-          "finops",
-          "chargeback",
-          "showback",
-          "cost management for openshift",
-          "openshift cost",
-          "rhcm",
-          "spend",
-          "distribute",
-          "cost model",
-          "money",
-          "bill",
-          "billing",
-          "financial",
-          "chargeback",
-          "showback",
-          "rate",
-          "save",
-          "savings"
-        ]
-      }
-    ]
-  },
-  {
     "id": "compliance",
     "links": [
       {
@@ -760,6 +726,160 @@
           "repos",
           "repository",
           "repo"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cost-management",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.costManagementOptimizations",
+        "title": "Optimizations - Cost Management",
+        "description": "Optimize the size of your containers and pods with recommendations from resource optimization for OpenShift.",
+        "href": "/openshift/cost-management/optimizations",
+        "alt_title": [
+          "ros",
+          "ros for openshift",
+          "optimizations for openshift",
+          "optimizations",
+          "optimization",
+          "resource optimization",
+          "resource optimizations",
+          "optimize",
+          "openshift optimize",
+          "openshift containers",
+          "optimizable containers",
+          "containers",
+          "performance optimization",
+          "performance optimizations",
+          "cost optimization",
+          "cost optimizations"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.openshift",
+        "title": "OpenShift - Cost Management",
+        "description": "Manage your OpenShift Container Platform integration.",
+        "href": "/openshift/cost-management/ocp",
+        "alt_title": [
+          "openshift cost",
+          "cost of openshift",
+          "cost openshift"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.amazonWebServices",
+        "title": "Amazon Web Services - Cost Management",
+        "description": "Manage your Amazon Web Services (AWS) integrations.",
+        "href": "/openshift/cost-management/aws",
+        "alt_title": [
+          "aws",
+          "amazon",
+          "amazon cost",
+          "cost amazon",
+          "amazon web services",
+          "cost of aws",
+          "aws cost",
+          "cost aws",
+          "amazon web services cost",
+          "cost amazon web services",
+          "cost of amazon web services"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.googleCloudPlatform",
+        "title": "Google Cloud Platform - Cost Management",
+        "description": "Manage your Google Cloud Platform integration.",
+        "href": "/openshift/cost-management/gcp",
+        "alt_title": [
+          "google cost",
+          "cost google", 
+          "gcp", 
+          "gcp cost", 
+          "cost of gcp", 
+          "google cloud platform cost", 
+          "cost google cloud platform", 
+          "cost of google cloud platform"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.microsoftAzure",
+        "title": "Microsoft Azure - Cost Management",
+        "description": "Manage your Microsoft Azure integration.",
+        "href": "/openshift/cost-management/azure",
+        "alt_title": [
+          "microsoft cost",
+          "cost of microsoft",
+          "azure",
+          "microsoft azure",
+          "cost of azure",
+          "azure cost",
+          "cost azure",
+          "cost of microsoft azure",
+          "microsoft azure cost",
+          "cost micrsoft azure"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.oracleCloudInfrastructure",
+        "title": "Oracle Cloud Infrastructure - Cost Management",
+        "description": "Manage your Oracle Cloud Infrastructure integration.",
+        "href": "/openshift/cost-management/oci",
+        "alt_title": [
+          "oracle",
+          "oracle cost",
+          "cost of oracle",
+          "cost oracle",
+          "ori",
+          "ori cost",
+          "cost ori",
+          "cost of ori",
+          "cost of oracle cloud infrastructure",
+          "oracle cloud infrastructure cost",
+          "cost oracle cloud infrastructure"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.costExplorer",
+        "title": "Cost Explorer - Cost Management",
+        "description": "Visualize and interpret your costs with custom graphs.",
+        "href": "/openshift/cost-management/explorer",
+        "alt_title": [
+          "cost explorer",
+          "explorer",
+          "cost management explorer",
+          "analysis",
+          "cost analysis",
+          "analysis of my cost"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagement.settings",
+        "title": "Settings - Cost Management",
+        "description": "Manage your cost models, currency, tags, and other cost management settings.",
+        "href": "/openshift/cost-management/settings",
+        "alt_title": [
+          "cost management settings",
+          "settings",
+          "cost settings",
+          "settings cost",
+          "configurations",
+          "privacy access",
+          "limiting access",
+          "cost models",
+          "currency and calculations",
+          "tags and labels",
+          "cost categories",
+          "platform projects"
         ]
       }
     ]

@@ -446,7 +446,7 @@ spec:
         workspace: git-auth
       taskSpec:
         steps:
-        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1
+        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008
           script: |
             #!/bin/bash
             set -ex
@@ -525,7 +525,7 @@ spec:
             - name: AUTH_TYPE
               value: "none"
         steps:
-          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1
+          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008
             name: unit-tests
             script: |
               #!/bin/bash

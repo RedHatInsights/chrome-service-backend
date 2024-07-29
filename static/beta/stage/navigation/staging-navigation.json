@@ -21,6 +21,18 @@
             "href": "/staging/global-learning-resources-page"
         },
         {
+            "id": "learning-resources-creator",
+            "title": "Learning Resources Creator",
+            "appId": "learning-resources-creator",
+            "href": "/staging/learning-resources-creator",
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.learning-resources.creator", true]
+                }
+            ]
+        },
+        {
             "title": "Cost Management MFE",
             "expandable": true,
             "filterable": false,

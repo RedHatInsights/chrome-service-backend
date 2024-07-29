@@ -15,8 +15,6 @@ COPY widget-dashboard-defaults widget-dashboard-defaults
 ENV GO111MODULE=on
 USER root
 RUN go get -d -v
-RUN make validate-schema
-RUN make publish-search-index-dry-run
 RUN make parse-services
 RUN make generate-search-index 
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-service-backend

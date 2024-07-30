@@ -519,7 +519,7 @@
                 "id": "activation-keys",
                 "module": "./RootApp",
                 "routes": [
-                    {"pathname": "/insights/connector/activation-keys"},
+                    {"pathname": "/insights/connector/activation-keys"}
                 ]
             }
         ]

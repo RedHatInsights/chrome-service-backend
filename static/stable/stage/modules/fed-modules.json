@@ -469,7 +469,7 @@
               ]
           }
       ]
-  }
+  },
   "subscriptionInventory": {
       "manifestLocation": "/apps/subscription-inventory/fed-mods.json",
       "modules": [

@@ -14,7 +14,7 @@ metadata:
     appstudio.openshift.io/component: chrome-service-backend
     pipelines.appstudio.openshift.io/type: build
   name: chrome-service-backend-on-push
-  namespace: konflux-platform-exp-tenant
+  namespace: hcc-platex-services-tenant
 spec:
   params:
   - name: git-url
@@ -22,7 +22,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/konflux-platform-exp-tenant/chrome-service/chrome-service-backend:{{revision}}
+    value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/chrome-service/chrome-service-backend:{{revision}}
   - name: dockerfile
     value: Dockerfile
   pipelineSpec:
@@ -205,6 +205,8 @@ spec:
         workspace: workspace
       - name: git-basic-auth
         workspace: git-auth
+      - name: netrc
+        workspace: netrc
     - name: build-container
       params:
       - name: IMAGE
@@ -249,6 +251,8 @@ spec:
       params:
       - name: BINARY_IMAGE
         value: $(params.output-image)
+      - name: BASE_IMAGES
+        value: $(tasks.build-container.results.BASE_IMAGES_DIGESTS)
       runAfter:
       - build-container
       taskRef:
@@ -274,6 +278,8 @@ spec:
         workspace: workspace
     - name: deprecated-base-image-check
       params:
+      - name: BASE_IMAGES_DIGESTS
+        value: $(tasks.build-container.results.BASE_IMAGES_DIGESTS)
       - name: IMAGE_URL
         value: $(tasks.build-container.results.IMAGE_URL)
       - name: IMAGE_DIGEST
@@ -420,9 +426,35 @@ spec:
         - name: kind
           value: task
         resolver: bundles
+    - name: push-dockerfile
+      params:
+      - name: IMAGE
+        value: $(tasks.build-container.results.IMAGE_URL)
+      - name: IMAGE_DIGEST
+        value: $(tasks.build-container.results.IMAGE_DIGEST)
+      - name: DOCKERFILE
+        value: $(params.dockerfile)
+      - name: CONTEXT
+        value: $(params.path-context)
+      runAfter:
+      - build-container
+      taskRef:
+        params:
+        - name: name
+          value: push-dockerfile
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-push-dockerfile:0.1@sha256:e2c8fa67da036cef81e407e28c14b6a2034c6564009e084c368005a4640c554c
+        - name: kind
+          value: task
+        resolver: bundles
+      workspaces:
+      - name: workspace
+        workspace: workspace
     workspaces:
     - name: workspace
     - name: git-auth
+      optional: true
+    - name: netrc
       optional: true
   taskRunTemplate: {}
   workspaces:

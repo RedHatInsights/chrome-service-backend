@@ -453,6 +453,116 @@ spec:
       workspaces:
       - name: workspace
         workspace: workspace
+    - name: validate-schemas
+      description: Validates chrome configuration files
+      params:
+      - name: SNAPSHOT
+        value: $(params.SNAPSHOT)
+      - name: NAMESPACE
+        value: $(params.NAMESPACE)
+      - name: EXPECTED_OUTPUT
+        value: $(params.EXPECTED_OUTPUT)
+      runAfter:
+      - clone-repository
+      workspaces:
+      - name: output
+        workspace: workspace
+      - name: basic-auth
+        workspace: git-auth
+      taskSpec:
+        steps:
+        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008
+          script: |
+            #!/bin/bash
+            set -ex
+
+            CHROME_SERVICE_PATH="/workspace/output/source"
+            
+            cd ${CHROME_SERVICE_PATH}
+            make validate-schema
+            make publish-search-index-dry-run
+            make parse-services
+            make generate-search-index   
+    - name: run-unit-tests
+      description: Validates chrome configuration files
+      params:
+      - name: SNAPSHOT
+        value: $(params.SNAPSHOT)
+      - name: NAMESPACE
+        value: $(params.NAMESPACE)
+      - name: EXPECTED_OUTPUT
+        value: $(params.EXPECTED_OUTPUT)
+      - name: PGSQL_USER
+        value: "chrome"
+      - name: PGSQL_PASSWORD
+        value: "chrome"
+      - name: PGSQL_HOSTNAME
+        value: "0.0.0.0"
+      - name: PGSQL_PORT
+        value: "5432"
+      - name: PGSQL_DATABASE
+        value: "db"
+      - name: UNLEASH_API_TOKEN
+        value: "default:development.unleash-insecure-api-token"
+      - name: UNLEASH_ADMIN_TOKEN
+        value: "*:*.unleash-insecure-api-token"
+      runAfter:
+      - clone-repository
+      workspaces:
+      - name: output
+        workspace: workspace
+      - name: basic-auth
+        workspace: git-auth
+      taskSpec:
+        sidecars:
+        - image: quay.io/sclorg/postgresql-15-c9s:latest
+          name: chrome-db
+          env:
+            - name: POSTGRESQL_DATABASE
+              value: $(params.PGSQL_DATABASE)
+            - name: POSTGRESQL_USER
+              value: $(params.PGSQL_USER)
+            - name: POSTGRESQL_PASSWORD
+              value: $(params.PGSQL_PASSWORD)
+        - image: unleashorg/unleash-server:latest
+          name: run-feature-flags
+          timeout: 10s
+          options: >-
+            --health-cmd "wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1"
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+            --health-start-period 30s
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://$(params.PGSQL_USER):$(params.PGSQL_PASSWORD)@localhost:$(params.PGSQL_PORT)/$(params.PGSQL_DATABASE)"
+            - name: DATABASE_SSL
+              value: "false"
+            - name: LOG_LEVEL
+              value: "warn"
+            - name: INIT_FRONTEND_API_TOKENS
+              value: "default:development.unleash-insecure-frontend-api-token"
+            - name: INIT_CLIENT_API_TOKENS
+              value: "default:development.unleash-insecure-api-token"
+            - name: INIT_ADMIN_API_TOKENS
+              value: "*:*.unleash-insecure"
+            - name: AUTH_TYPE
+              value: "none"
+        steps:
+          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008
+            name: unit-tests
+            script: |
+              #!/bin/bash
+              set -ex
+
+              CHROME_SERVICE_PATH="/workspace/output/source"
+              
+              cd ${CHROME_SERVICE_PATH}
+              cp env.konflux .env
+              
+              make migrate
+              make test 
+   
     workspaces:
     - name: workspace
     - name: git-auth

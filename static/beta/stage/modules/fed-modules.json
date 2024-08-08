@@ -521,6 +521,18 @@
             }
         ]
     },
+    "activationKeys": {
+        "manifestLocation": "/apps/activation-keys/fed-mods.json",
+        "modules": [
+            {
+                "id": "activation-keys",
+                "module": "./RootApp",
+                "routes": [
+                    {"pathname": "/insights/connector/activation-keys"}
+                ]
+            }
+        ]
+    },
     "subscriptionInventory": {
         "manifestLocation": "/apps/subscription-inventory/fed-mods.json",
         "modules": [

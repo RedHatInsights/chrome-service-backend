@@ -10,16 +10,16 @@
       "description": "View your account permissions for Red Hat Hybrid Cloud Console services."
     },
     {
-      "title": "User Access",
+      "title": "User Accesss",
       "expandable": true,
       "permissions": [
         {
           "method": "loosePermissions",
-          "args": [
-            [
-              "rbac:*:*"
-            ]
-          ]
+          "args": [["rbac:*:*"]]
+        },
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces", false]
         }
       ],
       "routes": [
@@ -74,6 +74,83 @@
           "title": "Groups",
           "href": "/iam/user-access/groups",
           "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "accessRequests",
+          "appId": "rbac",
+          "title": "Red Hat Access Requests",
+          "href": "/iam/user-access/access-requests",
+          "notifier": "chrome.accessRequests.hasUnseen"
+        }
+      ]
+    },
+    {
+      "title": "Access Management",
+      "expandable": true,
+      "permissions": [
+        {
+          "method": "loosePermissions",
+          "args": [["rbac:*:*"]]
+        },
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces", true]
+        }
+      ],
+      "routes": [
+        {
+          "id": "overview",
+          "appId": "rbac",
+          "title": "Overview",
+          "href": "/iam/user-access/overview",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.overview", true]
+            }
+          ],
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "workspaces",
+          "appId": "rbac",
+          "title": "Workspaces",
+          "icon": "PlaceholderIcon",
+          "href": "/iam/user-access/workspaces",
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "usersAndUserGroups",
+          "appId": "rbac",
+          "title": "Users & User Groups",
+          "href": "/iam/user-access/users-and-user-groups",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "description": "Manage your organization's role-based access control (RBAC) to services.",
+          "alt_title": [
+            "role based access management",
+            "user management",
+            "user access",
+            "identity management",
+            "users",
+            "roles",
+            "groups",
+            "permissions",
+            "access",
+            "admin",
+            "administrator",
+            "editor",
+            "authorization",
+            "viewer",
+            "rbac"
+          ]
+        },
+        {
+          "id": "roles",
+          "appId": "rbac",
+          "title": "Roles",
+          "href": "/iam/user-access/roles",
           "product": "Identity & Access Management"
         },
         {

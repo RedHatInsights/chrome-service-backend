@@ -49,6 +49,7 @@ ccx:
         title: Insights Operator Gathering Conditions Service
         versions:
           - v1
+          - v2
       ocp-vulnerability:
         title: Vulnerability
         versions:

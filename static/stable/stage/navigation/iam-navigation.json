@@ -100,7 +100,7 @@
       ],
       "routes": [
         {
-          "id": "overview",
+          "id": "overview-new",
           "appId": "rbac",
           "title": "Overview",
           "href": "/iam/user-access/overview",

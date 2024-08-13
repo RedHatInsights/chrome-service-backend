@@ -2,9 +2,28 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "HCC federated modules json schema",
   "$defs": {
+    "supportCaseData": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        }
+      }
+    },
     "moduleConfig": {
       "type": "object",
       "properties": {
+        "supportCaseData": {
+          "type": "object",
+          "$ref": "#/$defs/supportCaseData",
+          "required": [
+            "version",
+            "product"
+          ]
+        },
         "ssoScopes": {
           "type": "array",
           "items": {
@@ -17,6 +36,14 @@
     "moduleRoute": {
       "type": "object",
       "properties": {
+        "supportCaseData": {
+          "type": "object",
+          "$ref": "#/$defs/supportCaseData",
+          "required": [
+            "version",
+            "product"
+          ]
+        },
         "pathname": {
           "type": "string"
         },
@@ -105,15 +132,19 @@
     }
   },
   "properties": {
-    "/": {}
+    "/": {},
+    "$schema": {
+      "type": "string"
+    }
   },
   "patternProperties": {
-    ".+": {
+    "^[a-zA-Z]+": {
       "$ref": "#/$defs/module",
       "required": [
         "manifestLocation"
       ]
     }
   },
+
   "additionalProperties": false
 }

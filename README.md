@@ -5,7 +5,7 @@ Follow [this link](./docs/cloud-services-config.md) for docs
 - [All services section](./docs/cloud-services-config.md#allservices)
 
 # chrome-service-backend
-Source code repository for chrome backend
+Source code repository for Chrome backend
 
 # Requirements
 Postgres 14

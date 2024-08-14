@@ -10,7 +10,7 @@
       "description": "View your account permissions for Red Hat Hybrid Cloud Console services."
     },
     {
-      "title": "User Accesss",
+      "title": "User Access",
       "expandable": true,
       "permissions": [
         {
@@ -147,14 +147,14 @@
           ]
         },
         {
-          "id": "roles",
+          "id": "roles-new",
           "appId": "rbac",
           "title": "Roles",
           "href": "/iam/user-access/roles",
           "product": "Identity & Access Management"
         },
         {
-          "id": "accessRequests",
+          "id": "accessRequests-new",
           "appId": "rbac",
           "title": "Red Hat Access Requests",
           "href": "/iam/user-access/access-requests",

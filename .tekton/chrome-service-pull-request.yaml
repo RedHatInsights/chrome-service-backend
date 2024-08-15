@@ -464,17 +464,16 @@ spec:
         workspace: git-auth
       taskSpec:
         steps:
-        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-8
+        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008
           script: |
             #!/bin/bash
             set -ex
             CHROME_SERVICE_PATH="/workspace/output/source"
-            
             cd ${CHROME_SERVICE_PATH}
             make validate-schema
             make publish-search-index-dry-run
             make parse-services
-            make generate-search-index   
+            make generate-search-index
     - name: run-unit-tests
       description: Validates chrome configuration files
       params:
@@ -541,19 +540,16 @@ spec:
             - name: AUTH_TYPE
               value: "none"
         steps:
-          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-8
+          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008
             name: unit-tests
             script: |
               #!/bin/bash
               set -ex
               CHROME_SERVICE_PATH="/workspace/output/source"
-              
               cd ${CHROME_SERVICE_PATH}
               cp env.konflux .env
-              
               make migrate
               make test 
-   
     workspaces:
     - name: workspace
     - name: git-auth

@@ -288,9 +288,6 @@
                 "routes": [
                     {
                         "pathname": "/insights/content"
-                    },
-                    {
-                        "pathname": "/settings/content"
                     }
                 ]
             }

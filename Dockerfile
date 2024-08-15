@@ -1,4 +1,5 @@
 FROM registry.access.redhat.com/ubi8/go-toolset:1.21.11-1.1720406008 AS builder
+
 WORKDIR $GOPATH/src/chrome-service-backend/
 # TODO: Use --exclude when stable docker version available
 COPY api api
@@ -26,6 +27,14 @@ RUN CGO_ENABLED=1 go build -o /go/bin/chrome-search-index cmd/search/publishSear
 
 FROM registry.access.redhat.com/ubi8-minimal:latest
 
+LABEL description="Chrome Service"
+LABEL io.k8s.description="Chrome Service"
+LABEL io.k8s.display-name="Chrome Service"
+LABEL io.openshift.tags="chrome-service"
+LABEL name="Chrome Service"
+LABEL summary="Chrome Service"
+LABEL com.redhat.component="chrome-service"
+
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir -p /app
@@ -38,6 +47,7 @@ COPY --from=builder /go/bin/chrome-search-index /usr/bin
 COPY --from=builder $GOPATH/src/chrome-service-backend/static /static
 # Copy widget dashboard defaults to server binary entry point
 COPY --from=builder $GOPATH/src/chrome-service-backend/widget-dashboard-defaults /widget-dashboard-defaults
+
 
 ENTRYPOINT ["/app/chrome-service-backend"]
 EXPOSE 8000

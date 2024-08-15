@@ -22,7 +22,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/chrome-service/chrome-service:{{revision}}
+    value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/hcc-platex-services/chrome-service:{{revision}}
   - name: dockerfile
     value: Dockerfile
   pipelineSpec:

@@ -43,6 +43,28 @@ spec:
         - name: kind
           value: task
         resolver: bundles
+    - name: show-summary
+      params:
+      - name: pipelinerun-name
+        value: $(context.pipelineRun.name)
+      - name: git-url
+        value: $(tasks.clone-repository.results.url)?rev=$(tasks.clone-repository.results.commit)
+      - name: image-url
+        value: $(params.output-image)
+      - name: build-task-status
+        value: $(tasks.build-container.status)
+      taskRef:
+        params:
+        - name: name
+          value: summary
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-summary:0.2@sha256:d97c04ab42f277b1103eb6f3a053b247849f4f5b3237ea302a8ecada3b24e15b
+        - name: kind
+          value: task
+        resolver: bundles
+      workspaces:
+      - name: workspace
+        workspace: workspace
     params:
     - description: Source Repository URL
       name: git-url
@@ -140,18 +162,14 @@ spec:
         value: $(params.git-url)
       - name: revision
         value: $(params.revision)
-      - name: ociStorage
-        value: $(params.output-image).git
-      - name: ociArtifactExpiresAfter
-        value: $(params.image-expires-after)
       runAfter:
       - init
       taskRef:
         params:
         - name: name
-          value: git-clone-oci-ta
+          value: git-clone
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-git-clone-oci-ta:0.1@sha256:0f4360ce144d46171ebd2e8f4d4575539a0600e02208ba5fc9beeb2c27ddfd4c
+          value: quay.io/konflux-ci/tekton-catalog/task-git-clone:0.1@sha256:0bb1be8363557e8e07ec34a3c5daaaaa23c9d533f0bb12f00dc604d00de50814
         - name: kind
           value: task
         resolver: bundles
@@ -161,30 +179,33 @@ spec:
         values:
         - "true"
       workspaces:
+      - name: output
+        workspace: workspace
       - name: basic-auth
         workspace: git-auth
     - name: prefetch-dependencies
       params:
       - name: input
         value: $(params.prefetch-input)
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
-      - name: ociStorage
-        value: $(params.output-image).prefetch
-      - name: ociArtifactExpiresAfter
-        value: $(params.image-expires-after)
       runAfter:
       - clone-repository
       taskRef:
         params:
         - name: name
-          value: prefetch-dependencies-oci-ta
+          value: prefetch-dependencies
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-prefetch-dependencies-oci-ta:0.1@sha256:f13f6783f73971e4d1fbe8fd7fde3ea6cc080943c3fe2a4338ce6373c43f26a7
+          value: quay.io/konflux-ci/tekton-catalog/task-prefetch-dependencies:0.1@sha256:2bbeb1fa9eaa1b02c56524ff5ccd137a28d59626b7eedc1d3e714b69e4e17ac7
         - name: kind
           value: task
         resolver: bundles
+      when:
+      - input: $(params.prefetch-input)
+        operator: notin
+        values:
+        - ""
       workspaces:
+      - name: source
+        workspace: workspace
       - name: git-basic-auth
         workspace: git-auth
       - name: netrc
@@ -210,18 +231,14 @@ spec:
         - $(params.build-args[*])
       - name: BUILD_ARGS_FILE
         value: $(params.build-args-file)
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
-      - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
       runAfter:
       - prefetch-dependencies
       taskRef:
         params:
         - name: name
-          value: buildah-oci-ta
+          value: buildah
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-buildah-oci-ta:0.2@sha256:563d58bde7e6209d754222666164ffba48dd05a096a5c63c144c79796359811b
+          value: quay.io/konflux-ci/tekton-catalog/task-buildah:0.2@sha256:1fd422189fcc2b01fea45e03f50a6477f94edb1d0242615dab867cf59872da27
         - name: kind
           value: task
         resolver: bundles
@@ -230,22 +247,21 @@ spec:
         operator: in
         values:
         - "true"
+      workspaces:
+      - name: source
+        workspace: workspace
     - name: build-source-image
       params:
       - name: BINARY_IMAGE
         value: $(params.output-image)
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
-      - name: CACHI2_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
       runAfter:
       - build-container
       taskRef:
         params:
         - name: name
-          value: source-build-oci-ta
+          value: source-build
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-source-build-oci-ta:0.1@sha256:99ee22c5e8e8a66da3d68ec5f3334e7cc59f8b8907e9d2a78f7338aa37d952eb
+          value: quay.io/konflux-ci/tekton-catalog/task-source-build:0.1@sha256:1cb3423593145e899b784000f6ae90e121763ce98c26f6fc049f5dee2310f805
         - name: kind
           value: task
         resolver: bundles
@@ -258,6 +274,9 @@ spec:
         operator: in
         values:
         - "true"
+      workspaces:
+      - name: workspace
+        workspace: workspace
     - name: deprecated-base-image-check
       params:
       - name: IMAGE_URL
@@ -271,7 +290,7 @@ spec:
         - name: name
           value: deprecated-image-check
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-deprecated-image-check:0.4@sha256:d98fa9daf5ee12dfbf00880b83d092d01ce9994d79836548d2f82748bb0c64a2
+          value: quay.io/konflux-ci/tekton-catalog/task-deprecated-image-check:0.4@sha256:4ec00cf88c55a64eebaac0fe661cdb8dc8d3586d3a288f54400fbf2b5f06b408
         - name: kind
           value: task
         resolver: bundles
@@ -293,7 +312,7 @@ spec:
         - name: name
           value: clair-scan
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-clair-scan:0.1@sha256:baea4be429cf8d91f7c758378cea42819fe324f25a7f957bf9805409cab6d123
+          value: quay.io/konflux-ci/tekton-catalog/task-clair-scan:0.1@sha256:00c428cedf22db5b750e78b2ead0d1795bbc2226a228fb996d1f4fc3f3b7adb7
         - name: kind
           value: task
         resolver: bundles
@@ -324,16 +343,18 @@ spec:
         - "false"
     - name: sast-snyk-check
       params:
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+      - name: image-digest
+        value: $(tasks.build-container.results.IMAGE_DIGEST)
+      - name: image-url
+        value: $(tasks.build-container.results.IMAGE_URL)
       runAfter:
       - build-container
       taskRef:
         params:
         - name: name
-          value: sast-snyk-check-oci-ta
+          value: sast-snyk-check
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-sast-snyk-check-oci-ta:0.1@sha256:a5b18d0949240e2fc919277970fc1a9c4a0b13c4dec2bdf3ef579bc502a6f3d6
+          value: quay.io/konflux-ci/tekton-catalog/task-sast-snyk-check:0.1@sha256:f15181d70187fe31489d474d790dfb09f8faedd93b88a36cb467a2c4c79159e0
         - name: kind
           value: task
         resolver: bundles
@@ -342,6 +363,9 @@ spec:
         operator: in
         values:
         - "false"
+      workspaces:
+      - name: workspace
+        workspace: workspace
     - name: clamav-scan
       params:
       - name: image-digest
@@ -377,7 +401,7 @@ spec:
         - name: name
           value: sbom-json-check
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-sbom-json-check:0.1@sha256:89b375e21613aa48a48bec8d61a166e07155e1282456c17dd794cd59933cdeaa
+          value: quay.io/konflux-ci/tekton-catalog/task-sbom-json-check:0.1@sha256:80a4d5df9d56b93a98fdca5d5fa6d7ecdb9731cdffd1c16bf51ee11e49984140
         - name: kind
           value: task
         resolver: bundles
@@ -411,26 +435,147 @@ spec:
         value: $(params.dockerfile)
       - name: CONTEXT
         value: $(params.path-context)
-      - name: SOURCE_ARTIFACT
-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
       runAfter:
       - build-container
       taskRef:
         params:
         - name: name
-          value: push-dockerfile-oci-ta
+          value: push-dockerfile
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-push-dockerfile-oci-ta:0.1@sha256:61c45e6134e49626a831fca663b1dd2126dd11001be5a7ff3c1f5d5eb7a7ebb3
+          value: quay.io/konflux-ci/tekton-catalog/task-push-dockerfile:0.1@sha256:e4abc7c7671e4455465e48f96831cfafdb4de368cbcb9f27a8e5b9b0553ac35e
         - name: kind
           value: task
         resolver: bundles
+      workspaces:
+      - name: workspace
+        workspace: workspace
+    - name: validate-schemas
+      description: Validates chrome configuration files
+      params:
+      - name: SNAPSHOT
+        value: $(params.SNAPSHOT)
+      - name: NAMESPACE
+        value: $(params.NAMESPACE)
+      - name: EXPECTED_OUTPUT
+        value: $(params.EXPECTED_OUTPUT)
+      runAfter:
+      - clone-repository
+      workspaces:
+      - name: output
+        workspace: workspace
+      - name: basic-auth
+        workspace: git-auth
+      taskSpec:
+        steps:
+        - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-8
+          script: |
+            #!/bin/bash
+            set -ex
+            CHROME_SERVICE_PATH="/workspace/output/source"
+            
+            cd ${CHROME_SERVICE_PATH}
+            make validate-schema
+            make publish-search-index-dry-run
+            make parse-services
+            make generate-search-index   
+    - name: run-unit-tests
+      description: Validates chrome configuration files
+      params:
+      - name: SNAPSHOT
+        value: $(params.SNAPSHOT)
+      - name: NAMESPACE
+        value: $(params.NAMESPACE)
+      - name: EXPECTED_OUTPUT
+        value: $(params.EXPECTED_OUTPUT)
+      - name: PGSQL_USER
+        value: "chrome"
+      - name: PGSQL_PASSWORD
+        value: "chrome"
+      - name: PGSQL_HOSTNAME
+        value: "0.0.0.0"
+      - name: PGSQL_PORT
+        value: "5432"
+      - name: PGSQL_DATABASE
+        value: "db"
+      - name: UNLEASH_API_TOKEN
+        value: "default:development.unleash-insecure-api-token"
+      - name: UNLEASH_ADMIN_TOKEN
+        value: "*:*.unleash-insecure-api-token"
+      runAfter:
+      - clone-repository
+      workspaces:
+      - name: output
+        workspace: workspace
+      - name: basic-auth
+        workspace: git-auth
+      taskSpec:
+        sidecars:
+        - image: quay.io/sclorg/postgresql-15-c9s:latest
+          name: chrome-db
+          env:
+            - name: POSTGRESQL_DATABASE
+              value: $(params.PGSQL_DATABASE)
+            - name: POSTGRESQL_USER
+              value: $(params.PGSQL_USER)
+            - name: POSTGRESQL_PASSWORD
+              value: $(params.PGSQL_PASSWORD)
+        - image: unleashorg/unleash-server:latest
+          name: run-feature-flags
+          timeout: 10s
+          options: >-
+            --health-cmd "wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1"
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+            --health-start-period 30s
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://$(params.PGSQL_USER):$(params.PGSQL_PASSWORD)@localhost:$(params.PGSQL_PORT)/$(params.PGSQL_DATABASE)"
+            - name: DATABASE_SSL
+              value: "false"
+            - name: LOG_LEVEL
+              value: "warn"
+            - name: INIT_FRONTEND_API_TOKENS
+              value: "default:development.unleash-insecure-frontend-api-token"
+            - name: INIT_CLIENT_API_TOKENS
+              value: "default:development.unleash-insecure-api-token"
+            - name: INIT_ADMIN_API_TOKENS
+              value: "*:*.unleash-insecure"
+            - name: AUTH_TYPE
+              value: "none"
+        steps:
+          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-8
+            name: unit-tests
+            script: |
+              #!/bin/bash
+              set -ex
+              CHROME_SERVICE_PATH="/workspace/output/source"
+              
+              cd ${CHROME_SERVICE_PATH}
+              cp env.konflux .env
+              
+              make migrate
+              make test 
+   
     workspaces:
+    - name: workspace
     - name: git-auth
       optional: true
     - name: netrc
       optional: true
   taskRunTemplate: {}
   workspaces:
+  - name: workspace
+    volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      status: {}
   - name: git-auth
     secret:
       secretName: '{{ git_auth_secret }}'

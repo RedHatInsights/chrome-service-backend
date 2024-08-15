@@ -450,6 +450,7 @@ spec:
       - name: workspace
         workspace: workspace
     - name: validate-schemas
+      name: "Validate schemas"
       description: Validates chrome configuration files
       params:
       - name: SNAPSHOT
@@ -479,6 +480,7 @@ spec:
             make parse-services
             make generate-search-index   
     - name: run-unit-tests
+      name: "Run unit tests"
       description: Validates chrome configuration files
       params:
       - name: SNAPSHOT

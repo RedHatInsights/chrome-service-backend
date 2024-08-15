@@ -39,6 +39,8 @@ COPY --from=builder $GOPATH/src/chrome-service-backend/static /static
 # Copy widget dashboard defaults to server binary entry point
 COPY --from=builder $GOPATH/src/chrome-service-backend/widget-dashboard-defaults /widget-dashboard-defaults
 
+COPY LICENSE /licenses/LICENSE
+
 ENTRYPOINT ["/app/chrome-service-backend"]
 EXPOSE 8000
 USER 1001

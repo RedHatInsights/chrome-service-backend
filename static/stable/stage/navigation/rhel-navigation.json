@@ -38,13 +38,7 @@
             "groups",
             "Group",
             "Groups"
-          ],
-          "permissions": [
-                {
-                  "method": "featureFlag",
-                  "args": ["platform.rbac.groups-to-workspaces-rename", false]
-                }
-              ]
+          ]
         },
         {
           "id": "workspaces",
@@ -58,13 +52,7 @@
             "workspaces",
             "Workspace",
             "Workspaces"
-          ],
-          "permissions": [
-                {
-                  "method": "featureFlag",
-                  "args": ["platform.rbac.groups-to-workspaces-rename", true]
-                }
-              ]
+          ]
         },
         {
           "id": "imageBuilder",

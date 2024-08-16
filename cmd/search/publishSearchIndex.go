@@ -390,9 +390,9 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 	bundleMapping := map[string]string{
 		"application-services": "Application Services",
 		"openshift":            "OpenShift",
-		"ansible":              "Ansible Automation Platform",
-		"insights":             "Red Hat Insights",
-		"edge":                 "Edge management",
+		"ansible":              "Ansible",
+		"insights":             "RHEL",
+		"edge":                 "Edge Management",
 		"settings":             "Settings",
 		"landing":              "Home",
 		"allservices":          "Home",

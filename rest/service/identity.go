@@ -189,3 +189,7 @@ func UpdateUserPreview(identity *models.UserIdentity, preview bool) error {
 	identity.UIPreview = preview
 	return database.DB.Model(identity).Update("ui_preview", preview).Error
 }
+
+func MarkPreviewSeen(identity *models.UserIdentity) error {
+	return database.DB.Model(identity).Updates(models.UserIdentity{UIPreviewSeen: true}).Error
+}

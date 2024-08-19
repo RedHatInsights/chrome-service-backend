@@ -458,13 +458,6 @@
               "routes": [
                   {
                       "pathname": "/insights/patch"
-                  },
-                  {
-                      "pathname": "/insights/patch/packages",
-                      "supportCaseData": {
-                          "product": "Red Hat Insights",
-                          "version": "Content Services"
-                      }
                   }
               ]
           }

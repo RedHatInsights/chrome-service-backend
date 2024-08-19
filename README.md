@@ -13,19 +13,16 @@ Go 1.18
 
 ## Local Testing
 
-1. There are environment variables that are necessary for the application to start. Please copy the contents within `env.example` and move them over to a new `.env` file at the root of your local app directory. There, set the values of the variables accordingly for your local db configuration. This repo also supports `docker-compose up` for its postgres server and `make infra` to run all needed containers. An example `.env` for this would look like:
+1. Run `make env`. There are environment variables that are necessary for the application to start.
+   An example of that can be found in `.env.example`, but a basic working env file can be created with `make env`
 
-    ```
-    PGSQL_USER=chrome
-    PGSQL_PASSWORD=chrome
-    PGSQL_HOSTNAME=0.0.0.0
-    PGSQL_PORT=5432
-    PGSQL_DATABASE=postgres
-    ```
+2. Run `make infra`. This repo also supports `docker-compose up` for its postgres server, but `make infra` 
+   is recommended to run all needed containers. 
 
-2. Run the server by using `go run .` or `go run main.go`
+3. Run the server by using `make dev`
+   If you only want to serve the static navigation files, `make dev-static` will serve the needed files from the api.
 
-3. To test the service, at the moment, you are able to hit the following endpoint:
+4. To test the service, at the moment, you are able to hit the following endpoint:
 
     ```
     GET http://localhost:8000/health
@@ -44,12 +41,14 @@ eyJpZGVudGl0eSI6eyJ1c2VyIjp7InVzZXJfaWQiOiIxMiJ9fX0=
 
 ### Helpful Make targets
 
-`make database` will start a podman database, you need to fill out the `.env` file first as detailed above. 
 
-`make clean` will tear down the database.
 
 `make dev` will run the service
 
 `make infra` will create the db and kafka locally
 
+`make clean` will tear down the database.
+
 `make generate-search-index` will generate search index file
+
+`make parse-services` will generate the `services-generated.json` file 

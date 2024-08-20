@@ -104,7 +104,7 @@
           "id": "overview-new",
           "appId": "rbac",
           "title": "Overview",
-          "href": "/iam/user-access/overview",
+          "href": "/iam/access-management/overview",
           "permissions": [
             {
               "method": "featureFlag",
@@ -118,14 +118,14 @@
           "appId": "rbac",
           "title": "Workspaces",
           "icon": "PlaceholderIcon",
-          "href": "/iam/user-access/workspaces",
+          "href": "/iam/access-management/workspaces",
           "product": "Identity & Access Management"
         },
         {
           "id": "usersAndUserGroups",
           "appId": "rbac",
           "title": "Users & User Groups",
-          "href": "/iam/user-access/users-and-user-groups",
+          "href": "/iam/access-management/users-and-user-groups",
           "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage your organization's role-based access control (RBAC) to services.",
@@ -151,14 +151,14 @@
           "id": "roles-new",
           "appId": "rbac",
           "title": "Roles",
-          "href": "/iam/user-access/roles",
+          "href": "/iam/access-management/roles",
           "product": "Identity & Access Management"
         },
         {
           "id": "accessRequests-new",
           "appId": "rbac",
           "title": "Red Hat Access Requests",
-          "href": "/iam/user-access/access-requests",
+          "href": "/iam/access-management/access-requests",
           "notifier": "chrome.accessRequests.hasUnseen"
         }
       ]

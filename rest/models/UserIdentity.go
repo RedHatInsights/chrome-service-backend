@@ -28,6 +28,7 @@ type UserIdentity struct {
 	VisitedBundles     datatypes.JSON                    `json:"visitedBundles,omitempty" gorm:"type: JSONB"`
 	DashboardTemplates []DashboardTemplate               `json:"dashboardTemplates,omitempty"`
 	UIPreview          bool                              `json:"uiPreview"`
+	UIPreviewSeen      bool                              `json:"uiPreviewSeen"`
 }
 
 type UserIdentityResponse struct {
@@ -41,4 +42,5 @@ type UserIdentityResponse struct {
 	SelfReport       SelfReport     `json:"selfReport"`
 	VisitedBundles   datatypes.JSON `json:"visitedBundles,omitempty" gorm:"type: JSONB"`
 	UIPreview        bool           `json:"uiPreview"`
+	UIPreviewSeen    bool           `json:"uiPreviewSeen"`
 }

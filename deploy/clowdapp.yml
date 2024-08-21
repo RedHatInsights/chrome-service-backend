@@ -137,8 +137,8 @@ objects:
               cpu: ${CPU_LIMIT_CHROME_SERVICE}
               memory: ${MEMORY_LIMIT_CHROME_SERVICE}
             requests:
-              cpu: ${CPU_LIMIT_CHROME_SERVICE}
-              memory: ${MEMORY_LIMIT_CHROME_SERVICE}
+              cpu: ${CPU_REQUEST_CHROME_SERVICE}
+              memory: ${MEMORY_REQUEST_CHROME_SERVICE}
 
   # This is a dummy secret to make ephemeral deploy correctly. It will not roll out to stage or prod
   # Unless we set "secret" in "managedResourceTypes" in the app-interface saas file.
@@ -172,10 +172,10 @@ parameters:
   name: MEMORY_LIMIT_CHROME_SERVICE
   value: 512Mi
 - description: Cpu requests of service
-  name: CPU_LIMIT_CHROME_SERVICE
+  name: CPU_REQUEST_CHROME_SERVICE
   value: 250m
 - description: Memory requests of service
-  name: MEMORY_LIMIT_CHROME_SERVICE
+  name: MEMORY_REQUEST_CHROME_SERVICE
   value: 256Mi
 - name: MIN_REPLICAS
   value: '3'

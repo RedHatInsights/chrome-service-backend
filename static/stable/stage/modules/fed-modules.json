@@ -503,7 +503,7 @@
       ]
   },
   "subscriptionsDashboardUi": {
-    "manifestLocation": "apps/subscriptions-dashboard-ui/fed-mods.json",
+    "manifestLocation": "/apps/subscriptions-dashboard-ui/fed-mods.json",
     "modules": [
         {
             "id": "subscriptions-dashboard-ui",

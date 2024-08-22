@@ -153,6 +153,33 @@ spec:
         - name: kind
           value: task
         resolver: bundles
+    - name: clone-repository-oci-ta
+      params:
+      - name: url
+        value: $(params.git-url)
+      - name: revision
+        value: $(params.revision)
+      - name: ociStorage
+        value: $(params.output-image).git
+      runAfter:
+      - init
+      taskRef:
+        params:
+        - name: name
+          value: git-clone-oci-ta
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-git-clone-oci-ta@sha256:0f4360ce144d46171ebd2e8f4d4575539a0600e02208ba5fc9beeb2c27ddfd4c
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(tasks.init.results.build)
+        operator: in
+        values:
+        - "true"
+      workspaces:
+      - name: basic-auth
+        workspace: git-auth      
     - name: clone-repository
       params:
       - name: url
@@ -446,6 +473,151 @@ spec:
       workspaces:
       - name: workspace
         workspace: workspace
+    - name: validate-schemas
+      params:
+        - name: SOURCE_ARTIFACT
+          value: $(tasks.clone-repository-oci-ta.results.SOURCE_ARTIFACT)
+      runAfter:
+        - clone-repository-oci-ta
+      taskSpec:
+        params:
+          - description: The Trusted Artifact URI pointing to the artifact with the application source code.
+            name: SOURCE_ARTIFACT
+            type: string
+        volumes:
+          # New volume to store a copy of the source code accessible only to this Task.
+          - name: workdir
+            emptyDir: {}
+        stepTemplate:
+          volumeMounts:
+            - mountPath: /var/workdir
+              name: workdir
+              readOnly: false
+        steps:
+        - name: use-trusted-artifact
+          image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
+          args:
+            - use
+            - $(params.SOURCE_ARTIFACT)=/var/workdir/source
+        - name: validate-schemas-files
+          workingDir: /var/workdir/source
+          image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-8
+          securityContext:
+          # ROOT access is critical to enable FS operations, which is required for the tests 
+            runAsUser: 0
+          script: |
+            #!/bin/bash
+            set -ex
+            make validate-schema
+            make publish-search-index-dry-run
+            make parse-services
+            make generate-search-index  
+    - name: run-unit-tests
+      description: Validates chrome configuration files
+      params:
+        - name: SOURCE_ARTIFACT
+          value: $(tasks.clone-repository-oci-ta.results.SOURCE_ARTIFACT)
+        - name: PGSQL_USER
+          value: "chrome"
+        - name: PGSQL_PASSWORD
+          value: "chrome"
+        - name: PGSQL_HOSTNAME
+          value: "0.0.0.0"
+        - name: PGSQL_PORT
+          value: "5432"
+        - name: PGSQL_DATABASE
+          value: "db"
+        - name: UNLEASH_API_TOKEN
+          value: "default:development.unleash-insecure-api-token"
+        - name: UNLEASH_ADMIN_TOKEN
+          value: "*:*.unleash-insecure-api-token"
+      runAfter:
+        - clone-repository-oci-ta
+      workspaces:
+      - name: basic-auth
+        workspace: git-auth
+      taskSpec:
+        params:
+          - description: The Trusted Artifact URI pointing to the artifact with the application source code.
+            name: SOURCE_ARTIFACT
+            type: string
+        volumes:
+          # New volume to store a copy of the source code accessible only to this Task.
+          - name: workdir
+            emptyDir: {}
+        stepTemplate:
+          volumeMounts:
+            - mountPath: /var/workdir
+              name: workdir
+              readOnly: false
+        sidecars:
+        - image: quay.io/sclorg/postgresql-15-c9s:latest
+          name: chrome-db
+          env:
+            - name: POSTGRESQL_DATABASE
+              value: $(params.PGSQL_DATABASE)
+            - name: POSTGRESQL_USER
+              value: $(params.PGSQL_USER)
+            - name: POSTGRESQL_PASSWORD
+              value: $(params.PGSQL_PASSWORD)
+        - image: unleashorg/unleash-server:latest
+          name: run-feature-flags
+          timeout: 10s
+          options: >-
+            --health-cmd "wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1"
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+            --health-start-period 30s
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://$(params.PGSQL_USER):$(params.PGSQL_PASSWORD)@localhost:$(params.PGSQL_PORT)/$(params.PGSQL_DATABASE)"
+            - name: DATABASE_SSL
+              value: "false"
+            - name: LOG_LEVEL
+              value: "warn"
+            - name: INIT_FRONTEND_API_TOKENS
+              value: "default:development.unleash-insecure-frontend-api-token"
+            - name: INIT_CLIENT_API_TOKENS
+              value: "default:development.unleash-insecure-api-token"
+            - name: INIT_ADMIN_API_TOKENS
+              value: "*:*.unleash-insecure"
+            - name: AUTH_TYPE
+              value: "none"
+        steps:
+          - name: use-trusted-artifact
+            image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
+            args:
+              - use
+              - $(params.SOURCE_ARTIFACT)=/var/workdir
+          - image: registry.access.redhat.com/ubi8/go-toolset:1.21.11-8
+            workingDir: /var/workdir
+            name: unit-tests
+            securityContext:
+              runAsUser: 0
+            env:
+              - name: PGSQL_USER
+                value: $(params.PGSQL_USER)
+              - name: PGSQL_PASSWORD
+                value: $(params.PGSQL_PASSWORD)
+              - name: PGSQL_HOSTNAME
+                value: $(params.PGSQL_HOSTNAME)
+              - name: PGSQL_PORT
+                value: $(params.PGSQL_PORT)
+              - name: PGSQL_DATABASE
+                value: $(params.PGSQL_DATABASE)
+              - name: UNLEASH_API_TOKEN
+                value: $(params.UNLEASH_API_TOKEN)
+              - name: UNLEASH_ADMIN_TOKEN
+                value: $(params.UNLEASH_ADMIN_TOKEN)
+            script: |
+              #!/bin/bash
+              set -ex
+              
+              make migrate
+              make test  
+       
+    
     workspaces:
     - name: workspace
     - name: git-auth

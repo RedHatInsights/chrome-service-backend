@@ -144,6 +144,13 @@
                     "description": "Ansible as a managed service instances",
                     "title": "Instances",
                     "icon": "AnsibleIcon",
+                    "permissions": [
+                        {
+                            "method": "withEmail",
+                            "args": ["@redhat.com"]
+                            
+                        }
+                    ],
                     "product": "Ansible as a Service",
                     "href": "/ansible/service/instances"
                 }

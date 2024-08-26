@@ -2,6 +2,25 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "HCC federated modules json schema",
   "$defs": {
+    "permission": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "apps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "additionalAttributes": false
+    },
     "supportCaseData": {
       "type": "object",
       "properties": {

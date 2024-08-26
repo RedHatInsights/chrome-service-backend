@@ -561,7 +561,25 @@
         "title": "Subscription Services",
         "links": [
           "subscriptions.subscriptionsInventory",
-          "subscriptions.subscriptionsUsage"
+          "subscriptions.subscriptionsUsage",
+          {
+            "id": "hybridCommittedSpendOverview",
+            "appId": "hybridCommittedSpend",
+            "title": "Hybrid Committed Spend",
+            "icon": "SubscriptionsIcon",
+            "href": "/subscriptions/hybrid-committed-spend",
+            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns.",
+            "permissions": [
+              {
+                "method": "loosePermissions",
+                "args": [
+                  [
+                    "hybrid-committed-spend:reports:read"
+                  ]
+                ]
+              }
+            ]
+          }
         ]
       }
     ]

@@ -139,7 +139,7 @@
             },
             {
               "id": "activationKeys",
-              "appId": "connector",
+              "appId": "activation-keys",
               "title": "Activation keys",
               "href": "/insights/connector/activation-keys",
               "icon": "InsightsIcon",

@@ -1039,10 +1039,10 @@
         ]
     },
     "ansibleSaasAdminConsole": {
-        "manifestLocation": "/apps/ansible-saas-admin-dashboard/fed-mods.json",
+        "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
         "modules": [
             {
-                "id": "ansible-saas-admin-dashboard",
+                "id": "ansible-saas-admin-console",
                 "module": "./RootApp",
                 "routes": [
                     {

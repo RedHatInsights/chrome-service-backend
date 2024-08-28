@@ -1038,6 +1038,27 @@
             }
         ]
     },
+    "ansibleSaasAdminConsole": {
+        "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
+        "modules": [
+            {
+                "id": "ansible-saas-admin-console",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "permissions": [
+                            {
+                                "method": "withEmail",
+                                "args": ["@redhat.com"]
+                                
+                            }
+                        ],
+                        "pathname": "/ansible/service/instances"
+                    }
+                ]
+            }
+        ]
+    },
     "acs": {
         "manifestLocation": "/apps/acs/fed-mods.json",
         "modules": [

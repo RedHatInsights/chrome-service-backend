@@ -63,6 +63,15 @@
             "product"
           ]
         },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/permission",
+            "required": [
+              "method"
+            ]
+          }
+        },
         "pathname": {
           "type": "string"
         },

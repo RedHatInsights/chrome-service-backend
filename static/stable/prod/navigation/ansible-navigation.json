@@ -135,6 +135,28 @@
             ]
         },
         {
+            "title": "Ansible Service on AWS",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "ansibleSaasAdminConsole",
+                    "appId": "ansibleSaasAdminConsole",
+                    "description": "Ansible as a managed service instances",
+                    "title": "Instances",
+                    "icon": "AnsibleIcon",
+                    "permissions": [
+                        {
+                            "method": "withEmail",
+                            "args": ["@redhat.com"]
+                            
+                        }
+                    ],
+                    "product": "Ansible as a Service",
+                    "href": "/ansible/service/instances"
+                }
+            ]
+        },
+        {
             "title": "Documentation",
             "id": "documentation",
             "isExternal": true,

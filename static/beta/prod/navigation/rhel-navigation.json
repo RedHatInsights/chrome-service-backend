@@ -235,7 +235,7 @@
           "id": "repositories",
           "appId": "contentSources",
           "title": "Repositories",
-          "href": "/insights/content",
+          "href": "/insights/content/repositories",
           "icon": "SubscriptionsIcon",
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",

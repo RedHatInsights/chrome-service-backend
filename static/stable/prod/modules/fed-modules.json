@@ -1040,6 +1040,11 @@
     },
     "ansibleSaasAdminConsole": {
         "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
+        "config": {
+        "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
         "modules": [
             {
                 "id": "ansible-saas-admin-console",
@@ -1053,7 +1058,7 @@
                                 
                             }
                         ],
-                        "pathname": "/ansible/service/instances"
+                        "pathname": "/ansible/service/"
                     }
                 ]
             }

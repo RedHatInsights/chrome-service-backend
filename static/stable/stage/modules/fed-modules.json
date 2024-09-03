@@ -76,6 +76,9 @@
               "routes": [
                   {
                       "pathname": "/iam/user-access"
+                  },
+                  {
+                    "pathname": "/iam/access-management"
                   }
               ]
           }

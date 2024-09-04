@@ -238,7 +238,7 @@
             {
               "id": "developersandboxtrial",
               "appId": "openshift",
-              "title": "On the Developer Sandbox",
+              "title": "Developer Sandbox | OpenShift AI",
               "href": "https://developers.redhat.com/learn/openshift/how-create-natural-language-processing-nlp-application-using-red-hat-openshift-ai",
               "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
               "icon": "AITechnologyIcon",
@@ -248,7 +248,7 @@
             {
               "id": "sixtydaytrial",
               "appId": "openshift",
-              "title": "60-day product trial",
+              "title": "60-day Product Trial | OpenShift AI",
               "href": "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai/trial",
               "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
               "icon": "AITechnologyIcon",

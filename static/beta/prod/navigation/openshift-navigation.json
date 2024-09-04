@@ -255,7 +255,7 @@
             {
               "id": "sixtydaytrial",
               "appId": "openshift",
-              "title": "60-day Product Trial | OpenShift AI",
+              "title": "60-Day Product Trial | OpenShift AI",
               "href": "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai/trial",
               "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
               "icon": "AITechnologyIcon",

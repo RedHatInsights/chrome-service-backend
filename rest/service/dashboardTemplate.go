@@ -186,6 +186,19 @@ var (
 				},
 			},
 		},
+		models.Integrations: models.ModuleFederationMetadata{
+		Scope:    "notifications",
+		Module:   "./IntegrationsWidget",
+		Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+		Config: models.WidgetConfiguration{
+			HeaderLink: models.WidgetHeaderLink{
+				Title: "Explore integrations",
+				Href:  "/settings/integrations",
+			},
+			Icon:  models.IntegrationsIcon,
+			Title: "Integrations",
+		},
+	},
 	}
 )
 

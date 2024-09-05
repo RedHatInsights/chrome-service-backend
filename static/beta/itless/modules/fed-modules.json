@@ -278,21 +278,6 @@
             }
         ]
     },
-    "contentSources": {
-        "manifestLocation": "/apps/content-sources/fed-mods.json",
-        "defaultDocumentTitle": "Repositories",
-        "modules": [
-            {
-                "id": "insights-content-sources",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/content"
-                    }
-                ]
-            }
-        ]
-    },
     "learningResources": {
         "manifestLocation": "/apps/learning-resources/fed-mods.json",
         "modules": [

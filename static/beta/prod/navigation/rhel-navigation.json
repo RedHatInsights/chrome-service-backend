@@ -166,13 +166,7 @@
               "href": "/insights/inventory/staleness-and-deletion",
               "icon": "InsightsIcon",
               "product": "Red Hat Insights",
-              "description": "Configure when your systems should be marked as stale, marked as stale warning, and be deleted.",
-              "permissions": [
-                {
-                  "method": "featureFlag",
-                  "args": ["hbi.custom-staleness", true]
-                }
-              ]
+              "description": "Configure when your systems should be marked as stale, marked as stale warning, and be deleted."
             }
           ]
         }

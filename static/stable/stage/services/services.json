@@ -150,6 +150,13 @@
           "iam.authFactors",
           "iam.serviceAccounts"
         ]
+      },
+      {
+        "isGroup": true,
+        "title": "Host Identity",
+        "links": [
+          "settings.idmsvc"
+        ]
       }
     ]
   },
@@ -164,6 +171,7 @@
         "title": "Console Settings",
         "links": [
           "settings.integrations",
+          "settings.idmsvc",
           "settings.notifications"
         ]
       }
@@ -435,7 +443,8 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
-          "rhel.remediations"
+          "rhel.remediations",
+          "settings.idmsvc"
         ]
       },
       {

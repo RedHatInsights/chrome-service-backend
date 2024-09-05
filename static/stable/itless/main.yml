@@ -17,12 +17,6 @@ compliance:
     versions:
       - v1
 
-content-sources:
-  title: Repositories
-  api:
-    versions:
-      - v1
-
 cost-management:
   title: Cost Management
   api:

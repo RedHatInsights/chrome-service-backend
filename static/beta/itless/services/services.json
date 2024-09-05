@@ -48,7 +48,6 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           "rhel.advisories",
-          "rhel.repositories",
           "rhel.patchSystems",
           {
             "href": "/insights/advisor/recommendations",

@@ -147,18 +147,6 @@ func unregisterClient(c Client, h *connectionHub) {
 	}
 }
 
-func broadcast(m Message, h *connectionHub) {
-	for _, c := range h.Clients {
-		select {
-		case c.Conn.Send <- m.Data:
-		default:
-			// if message fails to be sent, remove the client as it is no longer active
-			close(c.Conn.Send)
-			unregisterClient(*c, h)
-		}
-	}
-}
-
 func emitMessage(m Message, h *connectionHub) {
 	connections := make(map[*Connection]*Client)
 
@@ -215,7 +203,8 @@ func (h *connectionHub) Run() {
 		case c := <-h.Unregister:
 			unregisterClient(c, h)
 		case m := <-h.Broadcast:
-			broadcast(m, h)
+			logrus.Errorln("Broadcasting messages is not allowed! Source: ", m.Origin)
+			return
 		case m := <-h.Emit:
 			emitMessage(m, h)
 		}

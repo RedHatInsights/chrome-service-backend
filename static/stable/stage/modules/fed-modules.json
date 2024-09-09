@@ -636,10 +636,6 @@
               "module": "./RootApp",
               "routes": [
                   {
-                      "pathname": "/insights/tasks",
-                      "isFedramp": true
-                  },
-                  {
                       "pathname": "/ansible/tasks"
                   }
               ]

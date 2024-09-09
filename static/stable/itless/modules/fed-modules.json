@@ -250,26 +250,6 @@
             }
         ]
     },
-    "tasks": {
-      "manifestLocation": "/apps/tasks/fed-mods.json",
-      "config": {
-          "supportCaseData": {
-                "product": "Red Hat Insights",
-                "version": "Tasks"
-            }
-      },
-      "modules": [
-          {
-              "id": "tasks",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/ansible/tasks"
-                  }
-              ]
-          }
-      ]
-  },
     "malware": {
         "manifestLocation": "/apps/malware/fed-mods.json",
         "modules": [

@@ -495,7 +495,7 @@ spec:
               readOnly: false
         steps:
         - name: use-trusted-artifact
-          image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
+          image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:d6f57d97d19008437680190908fe5444cda380f9c77d0e9efde7153720412e05
           args:
             - use
             - $(params.SOURCE_ARTIFACT)=/var/workdir/source
@@ -586,7 +586,7 @@ spec:
               value: "none"
         steps:
           - name: use-trusted-artifact
-            image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:8391272c4e5011120e9e7fee2c1f339e9405366110bf239dadcbc21e953ce099
+            image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:d6f57d97d19008437680190908fe5444cda380f9c77d0e9efde7153720412e05
             args:
               - use
               - $(params.SOURCE_ARTIFACT)=/var/workdir

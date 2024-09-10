@@ -342,5 +342,19 @@
                 ]
             }
         ]
+    },
+    "chrome": {
+        "manifestLocation": "/apps/chrome/js/fed-mods.json",
+        "modules": [
+            {
+                "id": "satellite-token",
+                "module": "./SatelliteToken",
+                "routes": [
+                    {
+                        "pathname": "/insights/satellite"
+                    }
+                ]
+            }
+        ]
     }
 }

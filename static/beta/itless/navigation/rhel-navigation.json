@@ -449,47 +449,6 @@
             "Ansible",
             "patch"
           ]
-        },
-        {
-          "id": "tasks",
-          "appId": "tasks",
-          "title": "Tasks",
-          "href": "/insights/tasks",
-          "icon": "InsightsIcon",
-          "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL",
-          "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
-          "alt_title": [
-            "Tasks",
-            "tasks",
-            "task",
-            "CentOS Conversion",
-            "centos conversion",
-            "Pre Conversion Analysis",
-            "pre conversion analysis",
-            "Pre-Conversion Analysis",
-            "pre-conversion analysis",
-            "Convert to RHEL",
-            "convert to rhel",
-            "C2R",
-            "c2r",
-            "CentOS",
-            "centos",
-            "Centos",
-            "centOS",
-            "upgrade",
-            "update",
-            "insights",
-            "automation",
-            "leapp",
-            "migrate",
-            "version",
-            "9.0",
-            "8.0",
-            "convert",
-            "conversion",
-            "migration"
-          ]
         }
       ]
     },

@@ -138,12 +138,6 @@ subscriptions:
     alias:
       - rhsm-subscriptions
 
-tasks:
-  title: Tasks
-  api:
-    versions:
-      - v1
-
 vulnerability:
   title: Vulnerability Management
   api:

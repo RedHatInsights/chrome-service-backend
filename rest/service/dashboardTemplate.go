@@ -187,7 +187,7 @@ var (
 			},
 		},
 		models.Integrations: models.ModuleFederationMetadata{
-		Scope:    "notifications",
+		Scope:    "sources",
 		Module:   "./IntegrationsWidget",
 		Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 		Config: models.WidgetConfiguration{

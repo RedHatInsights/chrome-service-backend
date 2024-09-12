@@ -197,6 +197,15 @@ var (
 			},
 			Icon:  models.IntegrationsIcon,
 			Title: "Integrations",
+			Permissions: []models.WidgetPermission{
+				models.WidgetPermission{
+					Method: models.FeatureFlag,
+					Args: []any{
+						"chrome-service.integrations-widget.enabled",
+						true,
+					},
+				},
+			},
 		},
 	},
 	}

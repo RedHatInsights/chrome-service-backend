@@ -97,6 +97,11 @@
             "description": "Register identity and access systems to enable machines to automatically join a domain",
             "href": "/settings/idmsvc",
             "icon": "PlaceholderIcon",
+            "permissions": [
+              {
+                "method": "isBeta"
+              }
+            ],
             "alt_title": [
                 "directory",
                 "domain",

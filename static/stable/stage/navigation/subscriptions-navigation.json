@@ -46,6 +46,12 @@
           "appId": "subscriptions",
           "title": "Advanced cluster security",
           "href": "/subscriptions/usage/rhacs"
+        },
+        {
+          "id": "ansible",
+          "appId": "subscriptions",
+          "title": "Ansible",
+          "href": "/subscriptions/usage/ansible"
         }
       ]
     },

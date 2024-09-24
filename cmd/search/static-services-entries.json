@@ -87,53 +87,6 @@
     ]
   },
   {
-    "id": "ansible-drift",
-    "links": [
-      {
-        "custom": true,
-        "id": "ANSIBLE.operations.Drift.drift",
-        "href": "/ansible/drift/",
-        "title": "Comparison - Drift",
-        "description": "Compare systems in your Ansible Automation Platform hosts to one another or against a set baseline.",
-        "alt_title": [
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "drift"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "ANSIBLE.operations.Drift.drift.baseline",
-        "href": "/ansible/drift/baselines",
-        "title": "Baselines - Drift",
-        "description": "Create your Ansible Automation Platform system baselines for Drift comparison.",
-        "alt_title": [
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "drift"
-        ]
-      }
-    ]
-  },
-  {
     "id": "ansible-advisor",
     "links": [
       {
@@ -432,61 +385,6 @@
         "id": "OPENSHIFT.costManagementOverview",
         "title": "Overview - Cost Management",
         "href": "/openshift/cost-management"
-      }
-    ]
-  },
-  {
-    "id": "rhel-drift",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.Operations.Drift.drift",
-        "href": "/insights/drift/",
-        "title": "Comparison - Drift",
-        "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
-        "alt_title": [
-          "Drift",
-          "Comparison",
-          "Baseline",
-          "insights",
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "history"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.Operations.Drift.drift.baseline",
-        "href": "/insights/drift/baselines",
-        "title": "Baselines - Drift",
-        "description": "Create your Red Hat Enterprise Linux baselines for Drift comparison.",
-        "alt_title": [
-          "Drift",
-          "Comparison",
-          "Baseline",
-          "insights",
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "history"
-        ]
       }
     ]
   },

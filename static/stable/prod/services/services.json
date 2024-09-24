@@ -261,19 +261,6 @@
               "pathway"
             ]
           },
-          {
-            "href": "/insights/drift",
-            "title": "Drift",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline.",
-            "permissions": [
-              {
-                "method": "featureFlag",
-                "args": ["insights.drift.isSunset", false]
-              }
-            ]
-          },
           "rhel.policies"
         ]
       },
@@ -350,6 +337,7 @@
               "pathway"
             ]
           },
+<<<<<<< HEAD
           {
             "title": "Drift",
             "href": "/ansible/drift",
@@ -363,6 +351,8 @@
               }
             ]
           },
+=======
+>>>>>>> 40139f5 (chore: remove drift from all navigations and search results, fed-mods)
           "ansible.policies"
         ]
       }

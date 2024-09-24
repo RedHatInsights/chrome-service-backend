@@ -224,33 +224,6 @@
                     ]
                 },
                 {
-                    "title": "Drift",
-                    "expandable": true,
-                    "routes": [
-                        {
-                            "id": "comparision",
-                            "appId": "drift",
-                            "title": "Comparison",
-                            "href": "/ansible/drift/",
-                            "product": "Red Hat Insights",
-                            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
-                        },
-                        {
-                            "id": "baselines",
-                            "appId": "drift",
-                            "title": "Baselines",
-                            "href": "/ansible/drift/baselines",
-                            "product": "Red Hat Insights"
-                        }
-                    ],
-                    "permissions": [
-                        {
-                          "method": "featureFlag",
-                          "args": ["insights.drift.isSunset", false]
-                        }
-                    ]
-                },
-                {
                     "appId": "policies",
                     "id": "policies",
                     "title": "Policies",

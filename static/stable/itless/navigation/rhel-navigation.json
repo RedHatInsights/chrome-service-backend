@@ -122,42 +122,6 @@
           ]
         },
         {
-          "id": "repositories",
-          "appId": "contentSources",
-          "title": "Repositories",
-          "href": "/insights/content/repositories",
-          "icon": "SubscriptionsIcon",
-          "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL",
-          "alt_title": [
-            "Content",
-            "custom content",
-            "my content",
-            "my repos",
-            "repos",
-            "repo",
-            "repositories",
-            "repository",
-            "insights",
-            "repository sets",
-            "popular",
-            "Red hat repositories",
-            "Snapshots",
-            "compare",
-            "custom content",
-            "Red hat repositories",
-            "popular",
-            "nvidia",
-            "epel",
-            "add repositories",
-            "introspect",
-            "content",
-            "dnf",
-            "yum"
-          ],
-          "description": "Link your external repositories to build images."
-        },
-        {
           "title": "Patch",
           "expandable": true,
           "routes": [

@@ -528,14 +528,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "learningResources",
-      "appId": "learningResources",
-      "title": "Learning Resources",
-      "filterable": false,
-      "href": "/insights/learning-resources",
-      "product": "Red Hat Insights"
     }
   ]
 }

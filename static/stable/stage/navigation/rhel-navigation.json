@@ -359,6 +359,12 @@
               "href": "/insights/drift/baselines",
               "product": "Red Hat Insights"
             }
+          ],
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["insights.drift.isSunset", false]
+            }
           ]
         },
         {

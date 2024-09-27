@@ -916,6 +916,21 @@
             }
         ]
     },
+    "idmsvc": {
+        "manifestLocation": "/apps/idmsvc/fed-mods.json",
+        "defaultDocumentTitle": "Directory and Domain Services",
+        "modules": [
+            {
+                "id": "idmsvc",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/settings/idmsvc"
+                    }
+                ]
+            }
+        ]
+    },
     "learningResources": {
         "manifestLocation": "/apps/learning-resources/fed-mods.json",
         "modules": [

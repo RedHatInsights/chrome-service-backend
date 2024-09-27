@@ -103,6 +103,12 @@ content-sources:
     versions:
       - v1
 
+idmsvc:
+  title: Directory and Domain services
+  api:
+    versions:
+      - v1
+
 cost-management:
   title: Cost Management
   api:

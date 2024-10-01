@@ -330,31 +330,6 @@
           }
       ]
   },
-  "drift": {
-      "manifestLocation": "/apps/drift/fed-mods.json",
-      "isFedramp": true,
-      "config": {
-        "supportCaseData": {
-            "product": "Red Hat Insights",
-            "version": "Drift"
-        }
-      },
-      "modules": [
-          {
-              "id": "drift",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/insights/drift",
-                      "isFedramp": true
-                  },
-                  {
-                      "pathname": "/ansible/drift"
-                  }
-              ]
-          }
-      ]
-  },
   "inventory": {
       "manifestLocation": "/apps/inventory/fed-mods.json",
       "config": {

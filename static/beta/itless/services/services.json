@@ -77,13 +77,6 @@
               "pathway"
             ]
           },
-          {
-            "href": "/insights/drift",
-            "title": "Drift",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
-          },
           "rhel.policies"
         ]
       }

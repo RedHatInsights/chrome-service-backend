@@ -249,13 +249,6 @@
               "pathway"
             ]
           },
-          {
-            "href": "/insights/drift",
-            "title": "Drift",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Compare systems in your Red Hat Enterprise Linux inventory to one another or against a set baseline."
-          },
           "rhel.policies"
         ]
       },
@@ -331,13 +324,6 @@
               "recommendation",
               "pathway"
             ]
-          },
-          {
-            "title": "Drift",
-            "href": "/ansible/drift",
-            "icon": "AnsibleIcon",
-            "subtitle": "Red Hat Insights for Ansible",
-            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
           },
           "ansible.policies"
         ]

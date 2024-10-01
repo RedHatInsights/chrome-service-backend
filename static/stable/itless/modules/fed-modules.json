@@ -125,21 +125,6 @@
             }
         ]
     },
-    "drift": {
-        "manifestLocation": "/apps/drift/fed-mods.json",
-        "modules": [
-            {
-                "id": "drift",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/drift",
-                        "isFedramp": true
-                    }
-                ]
-            }
-        ]
-    },
     "inventory": {
         "manifestLocation": "/apps/inventory/fed-mods.json",
         "modules": [

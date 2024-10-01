@@ -353,33 +353,6 @@
           ]
         },
         {
-          "title": "Drift",
-          "id": "drift",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "driftComparison",
-              "appId": "drift",
-              "title": "Comparison",
-              "href": "/insights/drift/",
-              "product": "Red Hat Insights"
-            },
-            {
-              "id": "driftBaselines",
-              "appId": "drift",
-              "title": "Baselines",
-              "href": "/insights/drift/baselines",
-              "product": "Red Hat Insights"
-            }
-          ],
-          "permissions": [
-            {
-              "method": "featureFlag",
-              "args": ["insights.drift.isSunset", false]
-            }
-          ]
-        },
-        {
           "id": "policies",
           "appId": "policies",
           "title": "Policies",

@@ -29,6 +29,7 @@ type UserIdentity struct {
 	DashboardTemplates []DashboardTemplate               `json:"dashboardTemplates,omitempty"`
 	UIPreview          bool                              `json:"uiPreview"`
 	UIPreviewSeen      bool                              `json:"uiPreviewSeen"`
+	ActiveWorkspace    datatypes.JSONType[Workspace]     `json:"activeWorkspace"`
 }
 
 type UserIdentityResponse struct {
@@ -43,4 +44,5 @@ type UserIdentityResponse struct {
 	VisitedBundles   datatypes.JSON `json:"visitedBundles,omitempty" gorm:"type: JSONB"`
 	UIPreview        bool           `json:"uiPreview"`
 	UIPreviewSeen    bool           `json:"uiPreviewSeen"`
+	ActiveWorkspace  Workspace      `json:"activeWorkspace"`
 }

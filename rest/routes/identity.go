@@ -52,6 +52,7 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
 		VisitedBundles:   updatedUser.VisitedBundles,
 		UIPreview:        updatedUser.UIPreview,
 		UIPreviewSeen:    updatedUser.UIPreviewSeen,
+		ActiveWorkspace:  updatedUser.ActiveWorkspace.Data(),
 	}
 
 	resp := util.EntityResponse[models.UserIdentityResponse]{
@@ -155,11 +156,37 @@ func MarkPreviewSeen(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+type UpdateActiveWorkspacePayload struct {
+	ActiveWorkspace models.Workspace `json:"activeWorkspace"`
+}
+
+func UpdateActiveWorkspace(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
+	var request UpdateActiveWorkspacePayload
+	err := json.NewDecoder(r.Body).Decode(&request)
+	if err != nil {
+		handleIdentityError(err, w)
+		return
+	}
+	err = service.UpdateActiveWorkspace(&user, request.ActiveWorkspace)
+	if err != nil {
+		handleIdentityError(err, w)
+		return
+	}
+
+	resp := util.EntityResponse[models.UserIdentity]{
+		Data: user,
+	}
+
+	json.NewEncoder(w).Encode(resp)
+}
+
 func MakeUserIdentityRoutes(sub chi.Router) {
 	sub.Get("/", GetUserIdentity)
 	sub.Get("/intercom", GetIntercomHash)
 	sub.Post("/update-ui-preview", UpdateUserPreview)
 	sub.Post("/mark-preview-seen", MarkPreviewSeen)
+	sub.Post("/update-active-workspace", UpdateActiveWorkspace)
 	sub.Route("/visited-bundles", func(r chi.Router) {
 		r.Post("/", AddVisitedBundle)
 		r.Get("/", GetVisitedBundles)

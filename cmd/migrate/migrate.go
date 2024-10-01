@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/joho/godotenv"
@@ -16,6 +17,7 @@ func main() {
 
 	var bundleRes *gorm.DB
 	var visitedRes *gorm.DB
+	var activeWorkspaceRes *gorm.DB
 	tx := database.DB.Begin().Session(&gorm.Session{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
@@ -123,10 +125,18 @@ func main() {
 
 	fmt.Println("Seed default value to last visited pages")
 	visitedRes = tx.Model(&models.UserIdentity{}).Where("last_visited_pages IS NULL").Update("last_visited_pages", []byte(`[]`))
-	if bundleRes.Error != nil {
-		fmt.Println("Unable to migrate database!", bundleRes.Error.Error())
+	if visitedRes.Error != nil {
+		fmt.Println("Unable to migrate database!", visitedRes.Error.Error())
 		tx.Rollback()
-		panic(bundleRes.Error)
+		panic(visitedRes.Error)
+	}
+
+	fmt.Println("Seed default value to active workspace")
+	activeWorkspaceRes = tx.Model(&models.UserIdentity{}).Where("active_workspace IS NULL").Update("active_workspace", []byte(`{}`))
+	if activeWorkspaceRes.Error != nil {
+		fmt.Println("Unable to migrate database!", activeWorkspaceRes.Error.Error())
+		tx.Rollback()
+		panic(activeWorkspaceRes.Error)
 	}
 
 	err := tx.Commit().Error
@@ -144,5 +154,10 @@ func main() {
 	if visitedRes.RowsAffected > 0 {
 		logrus.Infof("Migrated %d user identity visited rows", visitedRes.RowsAffected)
 	}
+
+	if activeWorkspaceRes.RowsAffected > 0 {
+		logrus.Infof("Migrated %d user identity visited rows", activeWorkspaceRes.RowsAffected)
+	}
+
 	logrus.Info("Migration complete")
 }

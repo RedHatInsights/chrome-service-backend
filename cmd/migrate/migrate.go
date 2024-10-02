@@ -132,7 +132,7 @@ func main() {
 	}
 
 	fmt.Println("Seed default value to active workspace")
-	activeWorkspaceRes = tx.Model(&models.UserIdentity{}).Where("active_workspace IS NULL").Update("active_workspace", []byte(`{}`))
+	activeWorkspaceRes = tx.Model(&models.UserIdentity{}).Where("active_workspace IS NULL").Update("active_workspace", "default")
 	if activeWorkspaceRes.Error != nil {
 		fmt.Println("Unable to migrate database!", activeWorkspaceRes.Error.Error())
 		tx.Rollback()

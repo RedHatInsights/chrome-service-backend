@@ -115,7 +115,7 @@ func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) 
 		FavoritePages:    []models.FavoritePage{},
 		SelfReport:       models.SelfReport{},
 		VisitedBundles:   nil,
-		ActiveWorkspace:  datatypes.NewJSONType(getDefaultActiveWorkspace()),
+		ActiveWorkspace:  "default",
 	}
 	err := json.Unmarshal([]byte(`{}`), &identity.VisitedBundles)
 	if err != nil {
@@ -195,14 +195,8 @@ func MarkPreviewSeen(identity *models.UserIdentity) error {
 	return database.DB.Model(identity).Updates(models.UserIdentity{UIPreviewSeen: true}).Error
 }
 
-func getDefaultActiveWorkspace() models.Workspace {
-	return models.Workspace{
-		JobRole: "foobar",
-	}
-}
-
-func UpdateActiveWorkspace(identity *models.UserIdentity, workspace models.Workspace) error {
-	identity.ActiveWorkspace = datatypes.NewJSONType(workspace)
+func UpdateActiveWorkspace(identity *models.UserIdentity, workspace string) error {
+	identity.ActiveWorkspace = workspace
 	err := database.DB.Model(identity).Update("active_workspace", workspace).Error
 
 	// set the cache after successful DB operation

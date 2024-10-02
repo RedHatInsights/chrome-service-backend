@@ -52,7 +52,7 @@ func GetUserIdentity(w http.ResponseWriter, r *http.Request) {
 		VisitedBundles:   updatedUser.VisitedBundles,
 		UIPreview:        updatedUser.UIPreview,
 		UIPreviewSeen:    updatedUser.UIPreviewSeen,
-		ActiveWorkspace:  updatedUser.ActiveWorkspace.Data(),
+		ActiveWorkspace:  updatedUser.ActiveWorkspace,
 	}
 
 	resp := util.EntityResponse[models.UserIdentityResponse]{
@@ -157,7 +157,7 @@ func MarkPreviewSeen(w http.ResponseWriter, r *http.Request) {
 }
 
 type UpdateActiveWorkspacePayload struct {
-	ActiveWorkspace models.Workspace `json:"activeWorkspace"`
+	ActiveWorkspace string `json:"activeWorkspace"`
 }
 
 func UpdateActiveWorkspace(w http.ResponseWriter, r *http.Request) {

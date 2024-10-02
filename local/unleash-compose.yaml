@@ -9,9 +9,9 @@ services:
     ports:
     - "4242:4242"
     environment:
-      DATABASE_URL: "postgres://chrome:chrome@db/postgres"
+      DATABASE_URL: "postgres://unleash_user:password@db/unleash"
       DATABASE_SSL: "false"
-      LOG_LEVEL: "warn"
+      LOG_LEVEL: "debug"
       INIT_FRONTEND_API_TOKENS: "default:development.unleash-insecure-frontend-api-token"
       INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
       # This is setup to seed in feature flags, production is entirely different
@@ -19,24 +19,34 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: ["node", "index.js"]
+    # Healthchecks aren't honored by compose anymore in depends_on
     healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1
+      test: wget --no-verbose --tries=1 --spider http://db:4242/health || exit 1
       interval: 1s
       timeout: 1m
       retries: 5
       start_period: 15s
+    # Contains hard-coded sleep to wait for postgres to be ready
+    command: [ "sh", "-c", "echo sleeping; sleep 30; node index.js"]
+
+  # Note: Not all log data appears on the terminal output
+  # To view more detailed log data, shell into the container and view like this:
+  # cat var/lib/pgsql/data/userdata/log/postgresql-Tue.log
   db:
     expose:
     - "5432"
     image: quay.io/sclorg/postgresql-15-c9s:latest
     environment:
-      - POSTGRESQL_DATABASE=db
-      - POSTGRESQL_USER=chrome
-      - POSTGRESQL_PASSWORD=chrome
+      - POSTGRESQL_DATABASE=unleash
+      - POSTGRESQL_USER=unleash_user
+      - POSTGRESQL_PASSWORD=password
     healthcheck:
-      test: ["CMD", "pg_isready", "--username=chrome", "--host=127.0.0.1", "--port=5432"]
+      test: ["CMD", "pg_isready", "--username=unleash_user", "--host=db", "--port=5432"]
       interval: 2s
       timeout: 1m
       retries: 5
       start_period: 10s
+    # This sets up the permissions for chrome user explicitly
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

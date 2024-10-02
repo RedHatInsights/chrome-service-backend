@@ -46,7 +46,3 @@ services:
       timeout: 1m
       retries: 5
       start_period: 10s
-    # This sets up the permissions for chrome user explicitly
-    volumes:
-      - ./data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

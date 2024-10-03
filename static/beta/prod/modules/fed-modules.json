@@ -714,6 +714,9 @@
     },
     "imageBuilder": {
         "manifestLocation": "/apps/image-builder/fed-mods.json",
+        "analytics": {
+            "APIKey": "BUodNImBEk7R2M3evAYs0v7i8d86Nhkm"
+        },
         "modules": [
             {
                 "id": "image-builder",

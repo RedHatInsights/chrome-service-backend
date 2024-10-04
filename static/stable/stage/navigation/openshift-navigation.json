@@ -239,10 +239,9 @@
               "id": "developersandboxtrial",
               "appId": "openshift",
               "title": "Developer Sandbox | OpenShift AI",
-              "href": "https://developers.redhat.com/learn/openshift/how-create-natural-language-processing-nlp-application-using-red-hat-openshift-ai",
+              "href": "/openshift/sandbox",
               "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
               "icon": "AITechnologyIcon",
-              "isExternal": true,
               "filterable": false
             },
             {

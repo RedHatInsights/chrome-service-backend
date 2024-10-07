@@ -36,18 +36,6 @@
           "href": "/subscriptions/usage/openshift"
         },
         {
-          "id": "data-science",
-          "appId": "subscriptions",
-          "title": "Red Hat OpenShift AI",
-          "href": "/subscriptions/usage/rhods"
-        },
-        {
-          "id": "acs",
-          "appId": "subscriptions",
-          "title": "Advanced cluster security",
-          "href": "/subscriptions/usage/rhacs"
-        },
-        {
           "id": "ansible",
           "appId": "subscriptions",
           "title": "Ansible",

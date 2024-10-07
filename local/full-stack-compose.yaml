@@ -30,7 +30,7 @@ services:
     container_name: kafka1
     ports:
     - "${KAFKA_CLIENT_LISTEN_PORT}:9092"
-    - "29092:29092"
+    - "${KAFKA_CLIENT_LISTEN_PORT_2}:29092"
     - "${KAFKA_JMX_PORT}:9999"
     environment:
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092,DOCKER://host.docker.internal:29092

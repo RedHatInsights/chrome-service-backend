@@ -62,6 +62,7 @@ unleash:
 	podman-compose -f local/unleash-compose.yaml up
 
 infra:
+	podman-compose -f local/full-stack-compose.yaml down
 	podman-compose -f local/full-stack-compose.yaml up
 
 clean-all:

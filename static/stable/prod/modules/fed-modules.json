@@ -284,6 +284,20 @@
             }
         ]
     },
+    "digitalRoadmap": {
+        "manifestLocation": "/apps/digitalRoadmap/fed-mods.json",
+        "modules": [
+            {
+                "id": "digital-roadmap",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/insights/digital-roadmap"
+                    }
+                ]
+            }
+        ]
+    },
     "ocpAdvisor": {
         "manifestLocation": "/apps/ocp-advisor/fed-mods.json",
         "modules": [

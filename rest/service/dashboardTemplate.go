@@ -209,6 +209,66 @@ var (
 		},
 	},
 	}
+	WidgetMappingFR models.WidgetModuleFederationMapping = models.WidgetModuleFederationMapping{
+		models.Rhel: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./RhelWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.RhelIcon,
+				Title: "Red Hat Enterprise Linux",
+			},
+		},
+		models.OpenShift: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./OpenShiftWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.OpenShiftIcon,
+				Title: "Red Hat OpenShift",
+			},
+		},
+		models.RecentlyVisited: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./RecentlyVisited",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
+			Config: models.WidgetConfiguration{
+				Icon:  models.HistoryIcon,
+				Title: "Recently visited",
+			},
+		},
+		models.FavoriteServices: models.ModuleFederationMetadata{
+			Scope:    "chrome",
+			Module:   "./DashboardFavorites",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View all services",
+					Href:  "/allservices",
+				},
+				Icon:  models.StarIcon,
+				Title: "My favorite services",
+			},
+		},
+		models.NotificationsEvents: models.ModuleFederationMetadata{
+			Scope:    "notifications",
+			Module:   "./DashboardWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View event log",
+					Href:  "/settings/notifications/eventlog",
+				},
+				Icon:  models.BellIcon,
+				Title: "Events",
+				Permissions: []models.WidgetPermission{
+					models.WidgetPermission{
+						Method: models.OrgAdmin,
+					},
+				},
+			},
+		},
+	}
 )
 
 func ForkBaseTemplate(userId uint, dashboard models.AvailableTemplates) (models.DashboardTemplate, error) {

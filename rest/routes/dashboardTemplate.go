@@ -9,6 +9,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -280,6 +281,15 @@ func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)
 }
 
+func GetWidgetMappingsFR(w http.ResponseWriter, r *http.Request) {
+	var err error
+	resp := util.EntityResponse[models.WidgetModuleFederationMapping]{
+		Data: service.WidgetMappingFR,
+	}
+
+	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)
+}
+
 func ResetDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
 	userID := user.ID
@@ -323,5 +333,9 @@ func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Get("/base-template", GetBaseDashboardTemplates)
 	sub.Get("/base-template/fork", ForkBaseTemplate)
 
-	sub.Get("/widget-mapping", GetWidgetMappings)
+	if featureflags.IsEnabled("chrome-service.itless.enabled") {
+		sub.Get("/widget-mapping", GetWidgetMappingsFR)
+	} else {
+		sub.Get("/widget-mapping", GetWidgetMappings)
+	}
 }

@@ -333,7 +333,7 @@ func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Get("/base-template", GetBaseDashboardTemplates)
 	sub.Get("/base-template/fork", ForkBaseTemplate)
 
-	if featureflags.IsEnabled("chrome-service.itless.enabled") {
+	if featureflags.IsEnabled("platform.chrome.itless") {
 		sub.Get("/widget-mapping", GetWidgetMappingsFR)
 	} else {
 		sub.Get("/widget-mapping", GetWidgetMappings)

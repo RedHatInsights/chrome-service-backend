@@ -31,7 +31,7 @@ env:
 	cp .env.example .env
 
 migrate:
-	go run cmd/migrate/migrate.go 
+	go run cmd/migrate/migrate.go
 
 database:
 	podman-compose up

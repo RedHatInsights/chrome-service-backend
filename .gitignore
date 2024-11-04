@@ -31,6 +31,7 @@ static/**/links-storage.json
 static/**/services-generated.json
 *-services.db
 static/**/search-index.json
+static/*-generated.json
 
 .tekton/chrome-service-pull-request.bak.yaml
 .tekton/chrome-service-push.bak.yaml

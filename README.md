@@ -51,4 +51,4 @@ eyJpZGVudGl0eSI6eyJ1c2VyIjp7InVzZXJfaWQiOiIxMiJ9fX0=
 
 `make generate-search-index` will generate search index file
 
-`make parse-services` will generate the `services-generated.json` file 
+`make parse-services` will generate the `services-generated.json` file

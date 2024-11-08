@@ -272,19 +272,32 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
 }
 
-func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
-	var err error
-	resp := util.EntityResponse[models.WidgetModuleFederationMapping]{
-		Data: service.WidgetMapping,
+func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
+	filteredWidgets := make(map[models.AvailableWidgets]models.ModuleFederationMetadata)
+
+	for key, value := range widgetMapping {
+		if !featureflags.IsEnabled(value.FeatureFlag) {
+			filteredWidgets[key] = value	
+		}
 	}
 
-	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)
+	return filteredWidgets
 }
 
-func GetWidgetMappingsFR(w http.ResponseWriter, r *http.Request) {
+func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var err error
-	resp := util.EntityResponse[models.WidgetModuleFederationMapping]{
-		Data: service.WidgetMappingFR,
+	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
+
+	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
+		filteredWidgetMapping := FilterWidgetMapping(service.WidgetMapping)
+	
+		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
+			Data: filteredWidgetMapping,
+		}
+	} else {
+		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
+			Data: service.WidgetMapping,
+		}
 	}
 
 	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)
@@ -333,9 +346,5 @@ func MakeDashboardTemplateRoutes(sub chi.Router) {
 	sub.Get("/base-template", GetBaseDashboardTemplates)
 	sub.Get("/base-template/fork", ForkBaseTemplate)
 
-	if featureflags.IsEnabled("platform.chrome.itless") {
-		sub.Get("/widget-mapping", GetWidgetMappingsFR)
-	} else {
-		sub.Get("/widget-mapping", GetWidgetMappings)
-	}
+	sub.Get("/widget-mapping", GetWidgetMappings)
 }

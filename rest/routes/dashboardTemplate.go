@@ -272,16 +272,16 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
 }
 
-func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
-	filteredWidgets := make(map[models.AvailableWidgets]models.ModuleFederationMetadata)
 
+// FilterWidgetMapping removes hidden widgets from the mapping by using feature flags stored with the widget definition.
+func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
 	for key, value := range widgetMapping {
-		if !featureflags.IsEnabled(value.FeatureFlag) {
-			filteredWidgets[key] = value	
+		if featureflags.IsEnabled(value.FeatureFlag) {
+			delete(widgetMapping, key)	
 		}
 	}
 
-	return filteredWidgets
+	return widgetMapping
 }
 
 func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {

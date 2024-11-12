@@ -27,7 +27,7 @@ var (
 			Scope:    "landing",
 			Module:   "./ExploreCapabilities",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 3, 5, 10, 1),
-
+			FeatureFlag: "widget.exploreCapabilities.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RocketIcon,
 				Title: "Explore capabilities",
@@ -37,6 +37,7 @@ var (
 			Scope:    "landing",
 			Module:   "./EdgeWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.edge.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.EdgeIcon,
 				Title: "Edge Management",
@@ -46,6 +47,7 @@ var (
 			Scope:    "landing",
 			Module:   "./AnsibleWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.ansible.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.AnsibleIcon,
 				Title: "Ansible Automation Platform",
@@ -55,6 +57,7 @@ var (
 			Scope:    "landing",
 			Module:   "./RhelWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.rhel.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RhelIcon,
 				Title: "Red Hat Enterprise Linux",
@@ -64,6 +67,7 @@ var (
 			Scope:    "landing",
 			Module:   "./OpenShiftWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.openshift.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftIcon,
 				Title: "Red Hat OpenShift",
@@ -73,6 +77,7 @@ var (
 			Scope:    "landing",
 			Module:   "./QuayWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.quay.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.QuayIcon,
 				Title: "Quay.io",
@@ -82,6 +87,7 @@ var (
 			Scope:    "landing",
 			Module:   "./AcsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.acs.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.ACSIcon,
 				Title: "Advanced Cluster Security",
@@ -91,6 +97,7 @@ var (
 			Scope:    "landing",
 			Module:   "./OpenShiftAiWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.openshiftAI.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftAiIcon,
 				Title: "Red Hat OpenShift AI",
@@ -100,6 +107,7 @@ var (
 			Scope:    "landing",
 			Module:   "./RecentlyVisited",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
+			FeatureFlag: "widget.recentlyVisited.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.HistoryIcon,
 				Title: "Recently visited",
@@ -109,6 +117,7 @@ var (
 			Scope:    "chrome",
 			Module:   "./DashboardFavorites",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
+			FeatureFlag: "widget.favoriteServices.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
@@ -122,6 +131,7 @@ var (
 			Scope:    "notifications",
 			Module:   "./DashboardWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
+			FeatureFlag: "widget.notificationsEvents.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View event log",
@@ -140,6 +150,7 @@ var (
 			Scope:    "learningResources",
 			Module:   "./BookmarkedLearningResourcesWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			FeatureFlag: "widget.learningResources.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
@@ -149,6 +160,7 @@ var (
 			Scope:    "landing",
 			Module:   "./SupportCaseWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			FeatureFlag: "widget.supportCases.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Open a support case",
@@ -162,6 +174,7 @@ var (
 			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 4, 10, 1),
+			FeatureFlag: "widget.subscriptions.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Manage subscriptions",
@@ -190,6 +203,7 @@ var (
 		Scope:    "sources",
 		Module:   "./IntegrationsWidget",
 		Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+		FeatureFlag: "widget.integrations.hidden",
 		Config: models.WidgetConfiguration{
 			HeaderLink: models.WidgetHeaderLink{
 				Title: "Explore integrations",

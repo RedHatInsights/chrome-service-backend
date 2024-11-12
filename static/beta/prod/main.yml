@@ -115,6 +115,7 @@ notifications:
   api:
     versions:
       - v1
+      - v2
 
 openshift:
   title: OpenShift (OCM)

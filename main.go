@@ -30,6 +30,7 @@ func init() {
 	flag.Parse()
 	database.Init()
 	util.InitUserIdentitiesCache()
+	util.CreateChromeConfiguration()
 }
 
 func main() {

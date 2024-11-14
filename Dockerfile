@@ -31,6 +31,9 @@ FROM registry.access.redhat.com/ubi9-minimal:latest
 RUN mkdir -p /app
 RUN chgrp -R 0 /app && \
     chmod -R g=u /app
+RUN mkdir -p /static
+RUN chgrp -R 0 /static && \
+    chmod -R g=u /static
 COPY --from=builder   /go/bin/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /go/bin/chrome-migrate /usr/bin
 COPY --from=builder /go/bin/chrome-search-index /usr/bin

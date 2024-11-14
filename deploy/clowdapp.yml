@@ -41,7 +41,6 @@ objects:
                 - bash
                 - -c
                 - chrome-search-index
-              inheritEnv: true
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -63,6 +62,31 @@ objects:
             successThreshold: 1
             timeoutSeconds: 120
           env:
+          - name: FEO_SEARCH_INDEX
+            valueFrom:
+              configMapKeyRef:
+                key: search-index.json
+                name: ${CHROME_CONFIG_MAP}
+                # because keys in configmap can be empty
+                optional: true
+          - name: FEO_FED_MODULES
+            valueFrom:
+              configMapKeyRef:
+                key: fed-modules.json
+                name: ${CHROME_CONFIG_MAP}
+                optional: true
+          - name: FEO_SERVICE_TILES
+            valueFrom:
+              configMapKeyRef:
+                key: service-tiles.json
+                name: ${CHROME_CONFIG_MAP}
+                optional: true
+          - name: FEO_WIDGET_REGISTRY
+            valueFrom:
+              configMapKeyRef:
+                key: widget-registry.json
+                name: ${CHROME_CONFIG_MAP}
+                optional: true
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
           - name: LOG_LEVEL 
@@ -188,5 +212,12 @@ parameters:
 - description: ClowdEnv Name
   name: ENV_NAME
   required: true
+- description: Chrome config map name
+  name: CHROME_CONFIG_MAP
+  value: feo-context-cfg
 - name: LINT_ANNOTATION
   value: 'ignore-check.kube-linter.io/minimum-three-replicas'
+- description: Frontend environment
+  name: FRONTEND_ENVIRONMENT
+  # fallback to stage environment if not set
+  value: stage

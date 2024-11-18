@@ -9,7 +9,7 @@ Source code repository for chrome backend
 
 # Requirements
 Postgres 14
-Go 1.18
+Go 1.21
 
 ## Local Testing
 

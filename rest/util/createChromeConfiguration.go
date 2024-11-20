@@ -13,6 +13,7 @@ import (
 const (
 	fedModulesPath       = "static/fed-modules-generated.json"
 	staticFedModulesPath = "static/stable/%s/modules/fed-modules.json"
+	searchIndexPath      = "static/search-index-generated.json"
 )
 
 func getLegacyConfigFile(path string, env string) ([]byte, error) {
@@ -60,6 +61,22 @@ func parseFedModules(fedModulesConfig string, env string) ([]byte, error) {
 	return res, err
 }
 
+func parseSearchIndex(searchIndexConfig string, env string) ([]byte, error) {
+	si := []interface{}{}
+
+	if searchIndexConfig == "" {
+		logrus.Warn("FEO_SEARCH_INDEX is not set, using empty configuration")
+	} else {
+		err := json.Unmarshal([]byte(searchIndexConfig), &si)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	res, err := json.MarshalIndent(si, "", "  ")
+	return res, err
+}
+
 func writeConfigFile(config []byte, path string) error {
 	cwd, err := filepath.Abs(".")
 	if err != nil {
@@ -88,7 +105,7 @@ func CreateChromeConfiguration() {
 	}
 
 	fedModulesVar := os.Getenv("FEO_FED_MODULES")
-	// searchVar := os.Getenv("FEO_SEARCH_INDEX")
+	searchVar := os.Getenv("FEO_SEARCH_INDEX")
 	// serviceTilesVar := os.Getenv("FEO_SERVICE_TILES")
 	// widgetRegistryVar := os.Getenv("FEO_WIDGET_REGISTRY")
 
@@ -99,6 +116,16 @@ func CreateChromeConfiguration() {
 
 	fmt.Println("Writing fed-modules.json")
 	err = writeConfigFile(fedModules, fedModulesPath)
+	if err != nil {
+		panic(err)
+	}
+
+	searchIndex, err := parseSearchIndex(searchVar, env)
+	if err != nil {
+		panic(fmt.Sprintf("Error parsing FEO_SEARCH_INDEX: %v", err))
+	}
+
+	err = writeConfigFile(searchIndex, searchIndexPath)
 	if err != nil {
 		panic(err)
 	}

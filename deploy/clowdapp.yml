@@ -66,26 +66,26 @@ objects:
             valueFrom:
               configMapKeyRef:
                 key: search-index.json
-                name: ${CHROME_CONFIG_MAP}
+                name: ${FRONTEND_CONTEXT_NAME}
                 # because keys in configmap can be empty
                 optional: true
           - name: FEO_FED_MODULES
             valueFrom:
               configMapKeyRef:
                 key: fed-modules.json
-                name: ${CHROME_CONFIG_MAP}
+                name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
           - name: FEO_SERVICE_TILES
             valueFrom:
               configMapKeyRef:
                 key: service-tiles.json
-                name: ${CHROME_CONFIG_MAP}
+                name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
           - name: FEO_WIDGET_REGISTRY
             valueFrom:
               configMapKeyRef:
                 key: widget-registry.json
-                name: ${CHROME_CONFIG_MAP}
+                name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
@@ -213,7 +213,7 @@ parameters:
   name: ENV_NAME
   required: true
 - description: Chrome config map name
-  name: CHROME_CONFIG_MAP
+  name: FRONTEND_CONTEXT_NAME
   value: feo-context-cfg
 - name: LINT_ANNOTATION
   value: 'ignore-check.kube-linter.io/minimum-three-replicas'

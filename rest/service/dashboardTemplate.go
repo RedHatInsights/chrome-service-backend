@@ -219,6 +219,12 @@ var (
 						true,
 					},
 				},
+				models.WidgetPermission{
+					Method: models.LoosePermissions,
+					Args: []any{
+						[]string{"sources:*:read", "integrations:endpoints:read"},
+					},
+				},
 			},
 		},
 	},

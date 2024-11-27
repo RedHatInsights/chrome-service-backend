@@ -331,9 +331,10 @@ type WidgetHeaderLink struct {
 type WidgetPermissionMethods string
 
 const (
-	OrgAdmin       WidgetPermissionMethods = "isOrgAdmin"
-	FeatureFlag    WidgetPermissionMethods = "featureFlag"
-	HasPermissions WidgetPermissionMethods = "hasPermissions"
+	OrgAdmin         WidgetPermissionMethods = "isOrgAdmin"
+	FeatureFlag      WidgetPermissionMethods = "featureFlag"
+	HasPermissions   WidgetPermissionMethods = "hasPermissions"
+	LoosePermissions WidgetPermissionMethods = "loosePermissions"
 )
 
 type WidgetPermission struct {

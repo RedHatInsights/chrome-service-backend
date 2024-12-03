@@ -5,15 +5,18 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 )
 
 const (
-	fedModulesPath       = "static/fed-modules-generated.json"
-	staticFedModulesPath = "static/stable/%s/modules/fed-modules.json"
-	searchIndexPath      = "static/search-index-generated.json"
+	fedModulesPath        = "static/fed-modules-generated.json"
+	staticFedModulesPath  = "static/stable/%s/modules/fed-modules.json"
+	searchIndexPath       = "static/search-index-generated.json"
+	staticNavigationFiles = "static/stable/%s/navigation"
+	bundlesPath           = "static/bundles-generated.json"
 )
 
 func getLegacyConfigFile(path string, env string) ([]byte, error) {
@@ -88,6 +91,246 @@ func writeConfigFile(config []byte, path string) error {
 	return err
 }
 
+func getLegacyNavFiles(env string) ([]string, error) {
+	navigationFiles, err := filepath.Glob(fmt.Sprintf(staticNavigationFiles, env) + "/*-navigation.json")
+	return navigationFiles, err
+}
+
+func createLegacyBundles(navigationFiles []string) ([]interface{}, error) {
+	bundles := []interface{}{}
+	for _, fileName := range navigationFiles {
+		if strings.Contains(fileName, "landing-navigation.json") {
+			continue
+		}
+		file, err := os.ReadFile(fileName)
+		if err != nil {
+			return bundles, err
+		}
+		var bundleEntry interface{}
+		err = json.Unmarshal(file, &bundleEntry)
+		if err != nil {
+			return bundles, err
+		}
+		bundles = append(bundles, bundleEntry)
+	}
+
+	return bundles, nil
+}
+
+func replaceNavItem(navItem map[string]interface{}, availableReplacements map[string]map[string]interface{}) (map[string]interface{}, error) {
+	if navItem["feoReplacement"] == nil {
+		if navItem["routes"] != nil {
+			serializedRoutes, err := json.Marshal(navItem["routes"])
+			if err != nil {
+				return nil, err
+			}
+			nestedRoutes := []map[string]interface{}{}
+			err = json.Unmarshal(serializedRoutes, &nestedRoutes)
+			if err != nil {
+				return nil, err
+			}
+			for _, route := range nestedRoutes {
+				nestedRoute, err := replaceNavItem(route, availableReplacements)
+				if err != nil {
+					return nil, err
+				}
+				nestedRoutes = append(nestedRoutes, nestedRoute)
+			}
+			replacementRoutes := []map[string]interface{}{}
+			for _, route := range nestedRoutes {
+				replacementRoute, err := replaceNavItem(route, availableReplacements)
+				if err != nil {
+					return nil, err
+				}
+				replacementRoutes = append(replacementRoutes, replacementRoute)
+			}
+			navItem["routes"] = replacementRoutes
+		}
+
+		if navItem["navItems"] != nil {
+			serializedNavItems, err := json.Marshal(navItem["navItems"])
+			if err != nil {
+				return nil, err
+			}
+			nestedNavItems := []map[string]interface{}{}
+			err = json.Unmarshal(serializedNavItems, &nestedNavItems)
+			if err != nil {
+				return nil, err
+			}
+			for _, navItem := range nestedNavItems {
+				nestedNavItem, err := replaceNavItem(navItem, availableReplacements)
+				if err != nil {
+					return nil, err
+				}
+				nestedNavItems = append(nestedNavItems, nestedNavItem)
+			}
+			replacementNavItems := []map[string]interface{}{}
+			for _, navItem := range nestedNavItems {
+				replacementNavItem, err := replaceNavItem(navItem, availableReplacements)
+				if err != nil {
+					return nil, err
+				}
+				replacementNavItems = append(replacementNavItems, replacementNavItem)
+			}
+			navItem["navItems"] = replacementNavItems
+		}
+		return navItem, nil
+	}
+
+	replacementId, ok := navItem["feoReplacement"].(string)
+	if !ok {
+		return nil, fmt.Errorf("invalid feoReplacement id type")
+	}
+	replacement := availableReplacements[replacementId]
+	if replacement == nil {
+		logrus.Warnln("Replacement not found for: ", replacementId)
+		return navItem, nil
+	}
+
+	return replacement, nil
+}
+
+func createAvailableReplacements(generatedNavItems []map[string]interface{}) (map[string]map[string]interface{}, error) {
+	availableReplacements := map[string]map[string]interface{}{}
+	for _, navItem := range generatedNavItems {
+		replacementId, ok := navItem["id"].(string)
+		if !ok {
+			logrus.Warnln("Invalid navItem id type")
+			continue
+		}
+		availableReplacements[replacementId] = navItem
+		if navItem["navItems"] != nil {
+			serializedNavItems, err := json.Marshal(navItem["navItems"])
+			if err != nil {
+				return nil, err
+			}
+			nestedNavItems := []map[string]interface{}{}
+			err = json.Unmarshal(serializedNavItems, &nestedNavItems)
+			if err != nil {
+				return nil, err
+			}
+			for _, navItem := range nestedNavItems {
+				nestedNavItem, err := replaceNavItem(navItem, availableReplacements)
+				if err != nil {
+					return nil, err
+				}
+				nestedNavItems = append(nestedNavItems, nestedNavItem)
+			}
+			nestedReplacements, err := createAvailableReplacements(nestedNavItems)
+			if err != nil {
+				return nil, err
+			}
+			for key, value := range nestedReplacements {
+				availableReplacements[key] = value
+			}
+		}
+
+		if navItem["routes"] != nil {
+			serializedRoutes, err := json.Marshal(navItem["routes"])
+			if err != nil {
+				return nil, err
+			}
+			nestedRoutes := []map[string]interface{}{}
+			err = json.Unmarshal(serializedRoutes, &nestedRoutes)
+			if err != nil {
+				return nil, err
+			}
+			for _, route := range nestedRoutes {
+				nestedRoute, err := replaceNavItem(route, availableReplacements)
+				if err != nil {
+					return nil, err
+				}
+				nestedRoutes = append(nestedRoutes, nestedRoute)
+			}
+			nestedReplacements, err := createAvailableReplacements(nestedRoutes)
+			if err != nil {
+				return nil, err
+			}
+			for key, value := range nestedReplacements {
+				availableReplacements[key] = value
+			}
+		}
+	}
+	return availableReplacements, nil
+}
+
+func replaceBundleItems(bundle map[string]interface{}, generatedBundle map[string]interface{}) (map[string]interface{}, error) {
+	replacedBundle := map[string]interface{}{}
+	serializedGeneratedNavItems, err := json.Marshal(generatedBundle["navItems"])
+	if err != nil {
+		return nil, err
+	}
+	generatedNavItems := []map[string]interface{}{}
+	json.Unmarshal(serializedGeneratedNavItems, &generatedNavItems)
+	availableReplacements, err := createAvailableReplacements(generatedNavItems)
+	if err != nil {
+		return nil, err
+	}
+
+	serializedOriginalNavItems, err := json.Marshal(bundle["navItems"])
+	if err != nil {
+		return nil, err
+	}
+	convertedNavItems := []map[string]interface{}{}
+	json.Unmarshal(serializedOriginalNavItems, &convertedNavItems)
+
+	replacementNavItems := []map[string]interface{}{}
+	for _, navItem := range convertedNavItems {
+		replacementNavItem, err := replaceNavItem(navItem, availableReplacements)
+		if err != nil {
+			return nil, err
+		}
+		replacementNavItems = append(replacementNavItems, replacementNavItem)
+	}
+
+	replacedBundle["navItems"] = replacementNavItems
+	replacedBundle["id"] = bundle["id"]
+	replacedBundle["title"] = bundle["title"]
+
+	return replacedBundle, nil
+}
+
+func parseBundles(bundlesVar string, env string) ([]byte, error) {
+	navigationFiles, err := getLegacyNavFiles(env)
+	generatedBundles := []interface{}{}
+	if bundlesVar != "" {
+		err := json.Unmarshal([]byte(bundlesVar), &generatedBundles)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if err != nil {
+		return nil, err
+	}
+	bundles, err := createLegacyBundles(navigationFiles)
+	if err != nil {
+		return nil, err
+	}
+	parsedBundles := []map[string]interface{}{}
+	for _, bundle := range bundles {
+		mapBundle, ok := bundle.(map[string]interface{})
+		if !ok {
+			return nil, fmt.Errorf("invalid bundle type")
+		}
+		for _, generatedBundle := range generatedBundles {
+			generatedAlternative, ok := generatedBundle.(map[string]interface{})
+			if !ok {
+				return nil, fmt.Errorf("invalid generated bundle type")
+			}
+			if generatedAlternative["id"] == mapBundle["id"] {
+				mapBundle, err = replaceBundleItems(mapBundle, generatedAlternative)
+				if err != nil {
+					return nil, err
+				}
+				break
+			}
+		}
+		parsedBundles = append(parsedBundles, mapBundle)
+	}
+	bundleData, err := json.MarshalIndent(parsedBundles, "", "  ")
+	return bundleData, err
+}
+
 func CreateChromeConfiguration() {
 	err := LoadEnv()
 	if err != nil {
@@ -108,6 +351,7 @@ func CreateChromeConfiguration() {
 	searchVar := os.Getenv("FEO_SEARCH_INDEX")
 	// serviceTilesVar := os.Getenv("FEO_SERVICE_TILES")
 	// widgetRegistryVar := os.Getenv("FEO_WIDGET_REGISTRY")
+	bundlesVar := os.Getenv("FEO_BUNDLES")
 
 	fedModules, err := parseFedModules(fedModulesVar, env)
 	if err != nil {
@@ -126,6 +370,16 @@ func CreateChromeConfiguration() {
 	}
 
 	err = writeConfigFile(searchIndex, searchIndexPath)
+	if err != nil {
+		panic(err)
+	}
+
+	bundles, err := parseBundles(bundlesVar, env)
+	if err != nil {
+		panic(fmt.Sprintf("Error parsing FEO_BUNDLES: %v", err))
+	}
+
+	err = writeConfigFile(bundles, bundlesPath)
 	if err != nil {
 		panic(err)
 	}

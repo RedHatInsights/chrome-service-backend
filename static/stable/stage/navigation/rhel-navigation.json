@@ -33,10 +33,7 @@
           "href": "/insights/inventory/workspaces",
           "product": "Red Hat Insights",
           "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
-          "alt_title": [
-            "group",
-            "groups"
-          ]
+          "alt_title": ["group", "groups"]
         },
         {
           "id": "imageBuilder",
@@ -156,13 +153,7 @@
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
-          "alt_title": [
-            "Errata",
-            "errata",
-            "patch",
-            "updates",
-            "insights"
-          ]
+          "alt_title": ["Errata", "errata", "patch", "updates", "insights"]
         },
         {
           "id": "packages",
@@ -249,37 +240,23 @@
           "description": "Create content templates for use with systems."
         },
         {
-          "title": "Patch",
-          "id": "patch",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "patchSystems",
-              "appId": "patch",
-              "title": "Systems",
-              "href": "/insights/patch/systems",
-              "product": "Red Hat Insights",
-              "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
-              "alt_title": [
-                "Patch",
-                "content",
-                "advisories",
-                "insights",
-                "Rhel",
-                "patch",
-                "updates",
-                "update",
-                "systems",
-                "upgrade"
-              ]
-            },
-            {
-              "id": "patchTemplates",
-              "appId": "patch",
-              "title": "Templates",
-              "href": "/insights/patch/templates",
-              "product": "Red Hat Insights"
-            }
+          "id": "patchSystems",
+          "appId": "patch",
+          "title": "Systems",
+          "href": "/insights/patch/systems",
+          "product": "Red Hat Insights",
+          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+          "alt_title": [
+            "Patch",
+            "content",
+            "advisories",
+            "insights",
+            "Rhel",
+            "patch",
+            "updates",
+            "update",
+            "systems",
+            "upgrade"
           ]
         }
       ]
@@ -348,11 +325,12 @@
           "icon": "InsightsIcon",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
-          "alt_title":[
+          "alt_title": [
             "policies",
             "facts",
             "conditions",
-            "trigger", "notifications",
+            "trigger",
+            "notifications",
             "alerts",
             "insights",
             "notify",
@@ -623,12 +601,7 @@
       "product": "Red Hat Insights",
       "subtitle": "Red Hat Insights for RHEL",
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console.",
-      "alt_title": [
-        "register rhel",
-        "Register RHEL",
-        "rhel",
-        "RHEL"
-      ]
+      "alt_title": ["register rhel", "Register RHEL", "rhel", "RHEL"]
     },
     {
       "id": "learningResources",

@@ -144,6 +144,16 @@
             "authorization",
             "viewer",
             "rbac"
+          ],
+          "routes": [
+            {
+              "id": "usersAndUserGroupsEditGroup",
+              "appId": "rbac",
+              "title": "Edit User Group",
+              "href": "/iam/access-management/users-and-user-groups/edit-group/:id",
+              "icon": "PlaceholderIcon",
+              "product": "Identity & Access Management"
+            }
           ]
         },
         {

@@ -276,52 +276,42 @@
           ],
           "permissions": [
             {
-              "method": "isBeta"
-            },
-            {
-              "method": "withEmail",
-              "args": [
-                "adewar+rhn@redhat.com",
-                "bhouse+1@redhat.com",
-                "jsherril+eng@redhat.com",
-                "swadeley+eng@redhat.com",
-                "smcdowel@redhat.com"
-              ]
+              "method": "featureFlag",
+              "args": ["patchman-ui.template-update.enabled", true]
             }
           ],
           "description": "Create content templates for use with systems."
         },
         {
-          "title": "Patch",
-          "id": "patch",
-          "expandable": true,
-          "routes": [
+          "id": "patchSystems",
+          "appId": "patch",
+          "title": "Systems",
+          "href": "/insights/patch/systems",
+          "product": "Red Hat Insights",
+          "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+          "alt_title": [
+            "Patch",
+            "content",
+            "advisories",
+            "insights",
+            "Rhel",
+            "patch",
+            "updates",
+            "update",
+            "systems",
+            "upgrade"
+          ]
+        },
+        {
+          "id": "patchTemplates",
+          "appId": "patch",
+          "title": "Templates",
+          "href": "/insights/patch/templates",
+          "product": "Red Hat Insights",
+          "permissions": [
             {
-              "id": "patchSystems",
-              "appId": "patch",
-              "title": "Systems",
-              "href": "/insights/patch/systems",
-              "product": "Red Hat Insights",
-              "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
-              "alt_title": [
-                "Patch",
-                "content",
-                "advisories",
-                "insights",
-                "Rhel",
-                "patch",
-                "updates",
-                "update",
-                "systems",
-                "upgrade"
-              ]
-            },
-            {
-              "id": "patchTemplates",
-              "appId": "patch",
-              "title": "Templates",
-              "href": "/insights/patch/templates",
-              "product": "Red Hat Insights"
+              "method": "featureFlag",
+              "args": ["patchman-ui.template-update.enabled", false]
             }
           ]
         }

@@ -48,7 +48,7 @@ const (
 	NotificationsEvents AvailableWidgets = "notificationsEvents"
 	LearningResources   AvailableWidgets = "learningResources"
 	ExploreCapabilities AvailableWidgets = "exploreCapabilities"
-	Edge                AvailableWidgets = "edge"
+	Edge 				AvailableWidgets = "edge"
 	Ansible             AvailableWidgets = "ansible"
 	Rhel                AvailableWidgets = "rhel"
 	OpenShift           AvailableWidgets = "openshift"
@@ -58,16 +58,17 @@ const (
 	Acs                 AvailableWidgets = "acs"
 	Subscriptions       AvailableWidgets = "subscriptions"
 	SupportCases        AvailableWidgets = "supportCases"
-	Integrations		AvailableWidgets = "integrations"
+	Integrations        AvailableWidgets = "integrations"
+	ImageBuilder        AvailableWidgets = "imageBuilder"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi, SupportCases, Integrations:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi, SupportCases, Integrations, ImageBuilder:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, SupportCases, Integrations, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, SupportCases, Integrations, aw, ImageBuilder)
 }
 
 type BaseWidgetDimensions struct {
@@ -305,13 +306,13 @@ const (
 	CreditCardIcon       WidgetIcons = "CreditCardIcon"
 	RhelIcon             WidgetIcons = "RhelIcon"
 	OpenShiftIcon        WidgetIcons = "OpenShiftIcon"
-	EdgeIcon             WidgetIcons = "EdgeIcon"
+	EdgeIcon			 WidgetIcons = "EdgeIcon"
 	AnsibleIcon          WidgetIcons = "AnsibleIcon"
 	QuayIcon             WidgetIcons = "QuayIcon"
 	ACSIcon              WidgetIcons = "ACSIcon"
 	OpenShiftAiIcon      WidgetIcons = "OpenShiftAiIcon"
 	HeadsetIcon          WidgetIcons = "HeadsetIcon"
-	IntegrationsIcon	 WidgetIcons = "IntegrationsIcon"
+	IntegrationsIcon     WidgetIcons = "IntegrationsIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {

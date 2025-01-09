@@ -147,7 +147,8 @@
         "links": [
           "iam.users",
           "iam.groups",
-          "iam.authFactors"
+          "iam.authFactors",
+          "iam.idpIntegration"
         ]
       },
       {

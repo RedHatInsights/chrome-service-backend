@@ -554,6 +554,18 @@
       },
       {
         "isGroup": true,
+        "title": "Ansible",
+        "links": [
+          {
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/ansible",
+            "icon": "AnsibleIcon",
+            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting that highlights how and where your technology is being used."
+          }
+        ]
+      },
+      {
+        "isGroup": true,
         "title": "Subscription Services",
         "links": [
           "subscriptions.overview",

@@ -549,7 +549,7 @@
         "links": [
           {
             "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/openshift",
+            "href": "/subscriptions/usage/ansible",
             "icon": "AnsibleIcon",
             "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
           }

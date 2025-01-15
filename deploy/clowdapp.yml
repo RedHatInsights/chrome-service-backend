@@ -87,6 +87,12 @@ objects:
                 key: widget-registry.json
                 name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
+          - name: FEO_BUNDLES
+            valueFrom:
+              configMapKeyRef:
+                key: bundles.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                optional: true
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
           - name: LOG_LEVEL 

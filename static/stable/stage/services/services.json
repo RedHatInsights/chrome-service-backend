@@ -148,7 +148,8 @@
           "iam.users",
           "iam.groups",
           "iam.authFactors",
-          "iam.serviceAccounts"
+          "iam.serviceAccounts",
+          "iam.idpIntegration"
         ]
       },
       {

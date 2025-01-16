@@ -290,11 +290,18 @@ func replaceBundleItems(bundle map[string]interface{}, generatedBundle map[strin
 	return replacedBundle, nil
 }
 
-func parseBundles(bundlesVar string, env string) ([]byte, error) {
+func parseBundles(bundlesVar string, bundlesOnboardedIdsVar string, env string) ([]byte, error) {
 	navigationFiles, err := getLegacyNavFiles(env)
 	generatedBundles := []interface{}{}
+	onboardedBundleIds := []interface{}{}
 	if bundlesVar != "" {
 		err := json.Unmarshal([]byte(bundlesVar), &generatedBundles)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if bundlesOnboardedIdsVar != "" {
+		err := json.Unmarshal([]byte(bundlesOnboardedIdsVar), &onboardedBundleIds)
 		if err != nil {
 			return nil, err
 		}
@@ -312,12 +319,26 @@ func parseBundles(bundlesVar string, env string) ([]byte, error) {
 		if !ok {
 			return nil, fmt.Errorf("invalid bundle type")
 		}
+		skipMerge := false
+		for _, onboardedBundleId := range onboardedBundleIds {
+			bundleId, ok := onboardedBundleId.(string)
+			if !ok {
+				return nil, fmt.Errorf("invalid onboarded bundle ID type")
+			}
+			if bundleId == mapBundle["id"] {
+				skipMerge = true
+			}
+		}
 		for _, generatedBundle := range generatedBundles {
 			generatedAlternative, ok := generatedBundle.(map[string]interface{})
 			if !ok {
 				return nil, fmt.Errorf("invalid generated bundle type")
 			}
 			if generatedAlternative["id"] == mapBundle["id"] {
+				if skipMerge {
+					mapBundle = generatedAlternative
+					break
+				}
 				mapBundle, err = replaceBundleItems(mapBundle, generatedAlternative)
 				if err != nil {
 					return nil, err
@@ -352,6 +373,7 @@ func CreateChromeConfiguration() {
 	// serviceTilesVar := os.Getenv("FEO_SERVICE_TILES")
 	// widgetRegistryVar := os.Getenv("FEO_WIDGET_REGISTRY")
 	bundlesVar := os.Getenv("FEO_BUNDLES")
+	bundlesOnboardedIdsVar := os.Getenv("FEO_BUNDLES_ONBOARDED_IDS")
 
 	fedModules, err := parseFedModules(fedModulesVar, env)
 	if err != nil {
@@ -374,7 +396,7 @@ func CreateChromeConfiguration() {
 		panic(err)
 	}
 
-	bundles, err := parseBundles(bundlesVar, env)
+	bundles, err := parseBundles(bundlesVar, bundlesOnboardedIdsVar, env)
 	if err != nil {
 		panic(fmt.Sprintf("Error parsing FEO_BUNDLES: %v", err))
 	}

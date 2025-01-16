@@ -1,1 +1,12 @@
-application-pipeline-navigation.json
+{
+    "id": "hac",
+    "title": "Konflux",
+    "navItems": [
+        {
+          "id": "flatNav",
+          "title": "Flat nav",
+          "dynamicNav": "hacCore"
+        }
+    ]
+  }
+  

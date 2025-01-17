@@ -26,6 +26,9 @@
               {
                 "type": "object",
                 "properties": {
+                  "id": {
+                    "type": "string"
+                  },
                   "isExternal": {
                     "type": "boolean"
                   },

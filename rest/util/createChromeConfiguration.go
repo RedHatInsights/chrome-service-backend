@@ -327,6 +327,7 @@ func parseBundles(bundlesVar string, bundlesOnboardedIdsVar string, env string) 
 			}
 			if bundleId == mapBundle["id"] {
 				skipMerge = true
+				break
 			}
 		}
 		for _, generatedBundle := range generatedBundles {

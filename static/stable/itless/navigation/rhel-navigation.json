@@ -67,14 +67,14 @@
               ]
         },
         {
-          "id": "satellite-token",
-          "appId": "satellite",
+          "id": "satellite",
+          "appId": "satellite-token",
           "title": "Configure Satellites",
           "href": "/insights/satellite",
           "product": "Red Hat Insights",
           "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
           "alt_title": [
-            "satellite"
+            "satellites"
           ],
           "permissions": [
                 {

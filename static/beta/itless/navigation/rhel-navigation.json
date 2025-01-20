@@ -65,6 +65,23 @@
                   "args": ["platform.rbac.groups-to-workspaces-rename", true]
                 }
               ]
+        },
+        {
+          "id": "satellite-token",
+          "appId": "satellite",
+          "title": "Configure Satellites",
+          "href": "/insights/satellite",
+          "product": "Red Hat Insights",
+          "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
+          "alt_title": [
+            "satellite"
+          ],
+          "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["platform.rbac.groups-to-workspaces-rename", false]
+                }
+              ]
         }
       ]
     },

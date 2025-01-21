@@ -55,7 +55,7 @@ templateConfig:
       minH: 1
     - x: 0
       y: 3
-      i: 'edge#edge'
+      i: 'imageBuilder#imageBuilder'
       w: 1
       h: 4
       maxH: 10
@@ -112,7 +112,7 @@ templateConfig:
       minH: 1
     - x: 0
       y: 2
-      i: 'edge#edge'
+      i: 'imageBuilder#imageBuilder'
       w: 1
       h: 4
       maxH: 10
@@ -183,7 +183,7 @@ templateConfig:
       minH: 1
     - x: 1
       y: 4
-      i: 'edge#edge'
+      i: 'imageBuilder#imageBuilder'
       w: 1
       h: 4
       maxH: 10
@@ -247,7 +247,7 @@ templateConfig:
       minH: 1
     - x: 1
       y: 3
-      i: 'edge#edge'
+      i: 'imageBuilder#imageBuilder'
       w: 1
       h: 4
       maxH: 10

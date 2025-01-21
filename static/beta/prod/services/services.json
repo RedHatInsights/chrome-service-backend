@@ -28,8 +28,8 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.remediations",
-          "rhel.tasks"
+          "insights.remediations",
+          "insights.tasks"
         ]
       },
       {
@@ -104,7 +104,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.imageBuilder"
+          "insights.imageBuilder"
         ]
       },
       {
@@ -179,10 +179,10 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.imageBuilder",
-          "rhel.inventory",
-          "rhel.groups",
-          "rhel.workspaces"
+          "insights.imageBuilder",
+          "insights.inventory",
+          "insights.groups",
+          "insights.workspaces"
         ]
       },
       {
@@ -218,9 +218,9 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.advisories",
-          "rhel.repositories",
-          "rhel.patchSystems",
+          "insights.advisories",
+          "insights.repositories",
+          "insights.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -249,7 +249,7 @@
               "pathway"
             ]
           },
-          "rhel.policies"
+          "insights.policies"
         ]
       },
       {
@@ -352,7 +352,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.advisories",
+          "insights.advisories",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -422,7 +422,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
-          "rhel.remediations"
+          "insights.remediations"
         ]
       },
       {
@@ -582,10 +582,10 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.rhc",
-          "rhel.activationKeys",
-          "rhel.registerSystems",
-          "rhel.stalenessAndDeletion"
+          "insights.rhc",
+          "insights.activationKeys",
+          "insights.registerSystems",
+          "insights.stalenessAndDeletion"
         ]
       },
       {

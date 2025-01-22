@@ -23,9 +23,9 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.inventory",
-          "rhel.groups",
-          "rhel.workspaces"
+          "insights.inventory",
+          "insights.groups",
+          "insights.workspaces"
         ]
       },
       {
@@ -47,8 +47,8 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.advisories",
-          "rhel.patchSystems",
+          "insights.advisories",
+          "insights.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -77,7 +77,7 @@
               "pathway"
             ]
           },
-          "rhel.policies"
+          "insights.policies"
         ]
       }
     ]
@@ -92,7 +92,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.advisories",
+          "insights.advisories",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -162,7 +162,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
-          "rhel.remediations"
+          "insights.remediations"
         ]
       }
     ]

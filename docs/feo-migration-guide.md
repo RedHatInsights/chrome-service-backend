@@ -12,8 +12,8 @@ The Chrome service has a separate configuration file for each environment. Becau
 
 To have full development support for the latest FEO features, update the build and development dependencies in your project. The tools are validating the CRD during development/build time.
 
-- `@redhat-cloud-services/frontend-components-config@6.4.0` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
-- `@redhat-cloud-services/frontend-components-config-utilities@4.1.0` if you are using the webpack development proxy directly and not via the config package.
+- `@redhat-cloud-services/frontend-components-config@6.4.4` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
+- `@redhat-cloud-services/frontend-components-config-utilities@4.1.3` if you are using the webpack development proxy directly and not via the config package.
 
 If your IDE supports validating yaml files from a json schema, or you need the schema for additional validation, you can reference it on this link:
 

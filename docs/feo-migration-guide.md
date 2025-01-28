@@ -8,6 +8,24 @@ This documentation only describes the migration steps. If you are looking for de
 
 The Chrome service has a separate configuration file for each environment. Because the environment configuration is generated based on the existing Frontend resources in a cluster within the frontend namespace, this is no longer a requirement. The recommended approach is to have a single configuration defined by the Frontend resources. If, however, your project requires a separate configuration file for whatever reason, a new deployment file has to be created and referenced in the app interface configuration within the frontend repository.
 
+## Frontend CRD schema validation
+
+To have full development support for the latest FEO features, update the build and development dependencies in your project. The tools are validating the CRD during development/build time.
+
+- `@redhat-cloud-services/frontend-components-config@6.4.0` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
+- `@redhat-cloud-services/frontend-components-config-utilities@4.1.0` if you are using the webpack development proxy directly and not via the config package.
+
+If your IDE supports validating yaml files from a json schema, or you need the schema for additional validation, you can reference it on this link:
+
+```bash
+https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
+```
+For VSCode, you can add a following line to the top of the yaml
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
+```
+
 ## Enabling FEO for Configuration Generation
 
 In order to enable the new FEO features, the frontend has to "opt in". Only then will the Frontend Operator start using the Frontend resource to generate the Chrome UI configuration.

@@ -144,13 +144,6 @@
                 "systems",
                 "upgrade"
               ]
-            },
-            {
-              "id": "patchTemplates",
-              "appId": "patch",
-              "title": "Templates",
-              "href": "/insights/patch/templates",
-              "product": "Red Hat Insights"
             }
           ]
         }

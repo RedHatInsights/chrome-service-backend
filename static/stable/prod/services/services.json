@@ -144,6 +144,7 @@
       {
         "isGroup": true,
         "title": "IAM",
+        "id": "iam",
         "links": [
           "iam.users",
           "iam.groups",

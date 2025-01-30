@@ -190,6 +190,7 @@
       "id": "serviceAccounts",
       "title": "Service Accounts",
       "appId": "serviceAccounts",
+      "feoReplacement": "service-accounts",
       "href": "/iam/service-accounts"
     },
     {

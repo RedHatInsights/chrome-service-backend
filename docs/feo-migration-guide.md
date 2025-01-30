@@ -12,15 +12,25 @@ The Chrome service has a separate configuration file for each environment. Becau
 
 To have full development support for the latest FEO features, update the build and development dependencies in your project. The tools are validating the CRD during development/build time.
 
-- `@redhat-cloud-services/frontend-components-config@6.4.4` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
-- `@redhat-cloud-services/frontend-components-config-utilities@4.1.3` if you are using the webpack development proxy directly and not via the config package.
+Make sure to upgrade `@redhat-cloud-services/frontend-components-config@6.4.4` and `@redhat-cloud-services/frontend-components-config-utilities@4.1.3` dependencies. These should be listed in your project `package.json`. Your project may have one, or both dependencies listed. A package is installed if:
+  - `@redhat-cloud-services/frontend-components-config` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
+  - `@redhat-cloud-services/frontend-components-config-utilities` if you are using the webpack development proxy directly and not via the config package.
+
+Once you update the version numbers, please reinstall your dependencies
+
+```shell
+# if you are using npm
+npm i
+# if you are using yarn
+yarn
+```
 
 If your IDE supports validating yaml files from a json schema, or you need the schema for additional validation, you can reference it on this link:
 
 ```bash
 https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
 ```
-For VSCode, you can add a following line to the top of the yaml
+For VSCode, you can add a following line to the top of the Frontend resources yaml. By default the file should be located at `deploy/frontend.yaml` in your repository.
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
@@ -42,11 +52,13 @@ objects:
 
 ## fed-modules.json Replacement
 
-The basic configuration of a frontend module was defined in the `static/stable/<env>/modules/fed-modules.json`. This configuration needs to be split and moved over to the Frontend resource configuration. Usually, frontends have a `deploy/frontend.yaml` file in their repository ([starter app example](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/index.md/blob/master/deploy/frontend.yaml)).
+The basic configuration of a frontend module was defined in the `static/stable/<env>/modules/fed-modules.json` in the [chrome service backend repository](https://github.com/RedHatInsights/chrome-service-backend). This configuration needs to be split and moved over to the Frontend resource configuration. Usually, frontends have a `deploy/frontend.yaml` file in their repository ([starter app example](https://github.com/RedHatInsights/frontend-starter-app/blob/master/deploy/frontend.yaml)).
 
-Currently, your application may have already defined a "fed-modules.json replacement entry". **This configuration is likely out of date or refers to the starter app!**.
+Currently, your application may have already defined a "fed-modules.json replacement entry" in your `deploy/frontend.yaml`. **This configuration is likely out of date or refers to the starter app!**. The actual configuration used by Chrome UI prior to migration is located in the chrome service backend repository in the `static/stable/<env>/modules/fed-modules.json` file.
 
-The configuration should be added/updated at `objects[0].spec.module`. Configuration can be simply copied from the existing `fed-modules.json`. For example, the Frontend resource module config migration for the Learning Resources UI module should look like this:
+The configuration should be added/updated at `objects[0].spec.module` in your `deploy/frontend.yaml`. Configuration can be simply transferred from the existing `fed-modules.json` from the chrome service backend. You can use JSON -> YAML conversion tool (online or local) to get exact match. If the validation fails because of a attribute not being allowed, remove it from the Frontend resource yaml.
+
+For example, the Frontend resource module config migration for the **Learning Resources UI module** should look like this:
 
 ```js
 // existing learning resources configuration in static/stable/stage/modules/fed-modules.json
@@ -197,12 +209,17 @@ Currently, the Chrome left-hand navigation is defined in "bundles" in the `stati
 The Frontend Operator scans each Frontend resource for "bundle segments" or "navigation segments" and generates the bundles from them.
 
 To learn about the navigation and bundle segments and their options, please read [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/index.md).
+- [bundle segments](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/navigation.md#bundle-segments)
+- [navigation segments](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/navigation.md#navigation-segment)
 
 ### Migration Steps:
 
-1. Make sure that relevant navigation items in navigation files in this repository have **a unique ID**. The ID attribute is mandatory in the Frontend Operator.
+1. Locate valid navigation items that should be controlled by your UI module and your development team. Navigation files can be found in the chrome service backend repository under
+`static/stable/<env>/navigation/<bundle>-navigation.json`. Your navigation items might be included in multiple navigation files!
 
-2. Transfer the navigation metadata to the `deploy/frontend.yaml` or its equivalent in your project repository. Bundle segments and navigation segments have to be properly identified. A detailed description of both can be found in the [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/index.md).
+2. Make sure that relevant navigation items in the chrome service backend navigation files have **a unique ID**. The ID attribute is mandatory in the Frontend resource.
+
+3. Transfer the navigation metadata from the chrome service navigation files to the `deploy/frontend.yaml` or its equivalent in your project repository. Bundle segments and navigation segments have to be properly identified. A detailed description of both can be found in the [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/navigation.md#navigation). You can identify relevant navigation items byt the `id`, `href`, or `title` attributes.
 
 Example of a bundle segment from the Learning Resources app:
 
@@ -230,7 +247,32 @@ objects:
             product: Red Hat Insights
 ```
 
-Any navigation items structure is currently accepted as a valid bundle segment navigation item.
+Any navigation items structure is currently accepted as a valid bundle segment navigation item. Attributes related to search and services dropdown are no longer allowed in the Frontend resources navigation items spec. The validation during build time will point these attributes out.
+
+The **segmentId** attribute is custom attribute and does not reflect any existing attribute in navigation items.
+
+The **bundleId** attribute is an id of a bundle (set of UI modules) to which the link should be added. It is the `id` attribute on the top of the bundle navigation file. For example, for the settings bundle, [the bundleId is `settings`](https://github.com/RedHatInsights/chrome-service-backend/blob/main/static/stable/stage/navigation/settings-navigation.json#L2).
+
+```js
+// the https://github.com/RedHatInsights/chrome-service-backend/blob/main/static/stable/stage/navigation/settings-navigation.json#L2 file
+{
+    "id": "settings", // this is the "bundleId" for settings bundle navigation
+    "title": "Settings",
+    "navItems": [
+        {
+// ...
+```
+
+Make sure to leave enough room in between individual bundle segments. This can be done trough the **position** attribute which dictates the ordering of navigation items.
+
+We recommend leaving gaps of at least 100. This will ensure there is plenty of room for other bundle segments (navigation items) to be injected in between nav items.
+
+Follow a general rule.
+- if the navigation items from a bundle segment are located in the top third, use position numbers between 100 and 1000
+- if the items are somewhat in the middle use position in range from 1000 to 2000
+- if your items are towards the bottom, use position above 2000
+
+You will have to inspect the existing navigation files and decide the position value based on it. It might take a while for these values to settle during the migration window. A collaboration with the platform team might be required.
 
 In case there should be a "foreign" navigation item in your bundle segment with a **flat nav items structure** (not expandable or a group), it is highly recommended to split the navigation items into multiple bundle segments to remove any dependency between the UI modules!
 
@@ -250,7 +292,7 @@ objects:
       bundleSegments:
         segmentId: module-A-bundle-segment-A
         bundleId: foo
-        position: 444
+        position: 600
         navItems:
           - id: local-nav-item
             title: Local Nav Item
@@ -372,6 +414,128 @@ In the current approach, the services dropdown data is partially using navigatio
 The new approach no longer allows using navigation items references. This approach caused unexpected changes to the services dropdown and is discontinued. In the Frontend resource, services dropdown tiles have to be explicitly defined and placed into a section and a group.
 
 Current definition can be found at `static/stable/<env>/services/services.json`. This file is a template including the navigation items references and it outputs a `static/stable/<env>/services/services-generated.json` after the `make parse-services` CLI command is triggered.
+
+**Statically defined service tile entry**
+By statically defined entry, we mean that the tile is defined as an object.
+
+```js
+// example of a statically defined service tile entry
+[
+  {
+  // A service dropdown section
+  "id": "automation",
+  "title": "Automation",
+  "icon": "AutomationIcon",
+  "description": "Solve problems once, in one place, and scale up.",
+  "links": [
+      {
+        // A service dropdown group
+        "id": "ansible",
+        "isGroup": true,
+        "title": "Ansible",
+        "links": [
+          {
+            // A service tile entry, statically defined
+            "title": "Automation Hub",
+            "href": "/ansible/automation-hub/",
+            "icon": "AnsibleIcon"
+          },
+          // ...
+        ]
+      }
+    ]
+  }
+  // ....
+]
+```
+
+**A link reference service tile entry**
+By statically defined entry, we mean that the tile is defined as an object.
+
+```js
+// example of a link reference service tile entry
+[
+  {
+  // A service dropdown section
+  "id": "automation",
+  "title": "Automation",
+  "icon": "AutomationIcon",
+  "description": "Solve problems once, in one place, and scale up.",
+  "links": [
+       {
+        // A service dropdown group
+        "id": "rhel",
+        "isGroup": true,
+        "title": "Red Hat Enterprise Linux",
+        "links": [
+          // References to a link in the "insights" bundle navigation
+          // the "insights" substring references the bundle ID
+          // the "remediations" substring references the navItem "id" attribute. It can reference any nav item from a bundle. Even expandable nav items or nested nav items.
+          "insights.remediations",
+          "insights.tasks"
+        ]
+      },
+    ]
+  }
+  // ....
+]
+
+// The snippet of the insights bundle navigation with the link
+{
+  "id": "insights",
+  "title": "Red Hat Insights",
+  "navItems": [    
+    {
+      "title": "Automation Toolkit",
+      "expandable": true,
+      "routes": [
+        {
+          "id": "remediations", // this is the referenced nav item
+          "appId": "remediations",
+          "title": "Remediations",
+          "href": "/insights/remediations",
+          // ...
+        }
+      //...
+      ]
+    }
+    // ...
+  ]
+}
+```
+
+To find relevant service tiles you will have to consult with your team/managers/platform team. Usually a UI module "owns" those service tiles which links to the UI module.
+
+**To identify section and group you can do the following**
+
+![Section group description](./img/section-group.png)
+
+In the services.json there is a nested structure of links. Firs level is a section, second level is a group a the leafs of the `links` array are individual tiles.
+```js
+[
+  {
+  // A service dropdown section ID
+  "id": "containers",
+  "title": "Containers",
+  "icon": "CubeIcon",
+  "description": "Run your applications in a consistent and isolated environment.",
+  // definition of section groups
+  "links": [
+       {
+        // A service dropdown group ID
+        "id": "openshift",
+        "isGroup": true,
+        "title": "OpenShift",
+        "links": [
+          // items define individual tiles
+        ]
+      },
+      // ...
+    ]
+  }
+  // ....
+]
+```
 
 To migrate, follow these steps:
 

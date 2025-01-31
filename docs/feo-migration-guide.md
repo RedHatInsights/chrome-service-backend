@@ -8,11 +8,29 @@ This documentation only describes the migration steps. If you are looking for de
 
 The Chrome service has a separate configuration file for each environment. Because the environment configuration is generated based on the existing Frontend resources in a cluster within the frontend namespace, this is no longer a requirement. The recommended approach is to have a single configuration defined by the Frontend resources. If, however, your project requires a separate configuration file for whatever reason, a new deployment file has to be created and referenced in the app interface configuration within the frontend repository.
 
+## Frontend CRD location
+
+By default the frontend CRD is located at `deploy/frontend.yaml`. If your CRD is located on a different path **or has the .yml extension**, the build tooling has to be instructed where that file is.
+
+If your file location or name differs form the default configure it in your `fec.config.js`
+```js
+// fec.config.js
+const path = require('path')
+
+module.exports = {
+  // the rest of configuration
+  frontendCRDPath: path.resolve(__dirname, './path/to/crd/yaml')
+}
+
+```
+
+**Do not rename the file to match the default!** This can impact your build pipelines and break the deployment pipeline unless changed in app-interface as well. Configure the path tp the CRD instead. 
+
 ## Frontend CRD schema validation
 
 To have full development support for the latest FEO features, update the build and development dependencies in your project. The tools are validating the CRD during development/build time.
 
-Make sure to upgrade `@redhat-cloud-services/frontend-components-config@6.4.4` and `@redhat-cloud-services/frontend-components-config-utilities@4.1.3` dependencies. These should be listed in your project `package.json`. Your project may have one, or both dependencies listed. A package is installed if:
+Make sure to upgrade `@redhat-cloud-services/frontend-components-config@^6.4.5` and `@redhat-cloud-services/frontend-components-config-utilities@^4.1.4` dependencies. Do not pin the versions. Use the `^` version range to ensure you have the latest version when upgrading. These should be listed in your project `package.json`. Your project may have one, or both dependencies listed. A package is installed if:
   - `@redhat-cloud-services/frontend-components-config` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
   - `@redhat-cloud-services/frontend-components-config-utilities` if you are using the webpack development proxy directly and not via the config package.
 
@@ -31,6 +49,8 @@ If your IDE supports validating yaml files from a json schema, or you need the s
 https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
 ```
 For VSCode, you can add a following line to the top of the Frontend resources yaml. By default the file should be located at `deploy/frontend.yaml` in your repository.
+
+> Note: You will also the [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) extension for your VS code
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
@@ -214,12 +234,18 @@ To learn about the navigation and bundle segments and their options, please read
 
 ### Migration Steps:
 
-1. Locate valid navigation items that should be controlled by your UI module and your development team. Navigation files can be found in the chrome service backend repository under
+#### 1. Locate the existing navigation items
+
+Locate valid navigation items that should be controlled by your UI module and your development team. Navigation files can be found in the chrome service backend repository under
 `static/stable/<env>/navigation/<bundle>-navigation.json`. Your navigation items might be included in multiple navigation files!
 
-2. Make sure that relevant navigation items in the chrome service backend navigation files have **a unique ID**. The ID attribute is mandatory in the Frontend resource.
+#### 2. Ensure navigation items have ID  
 
-3. Transfer the navigation metadata from the chrome service navigation files to the `deploy/frontend.yaml` or its equivalent in your project repository. Bundle segments and navigation segments have to be properly identified. A detailed description of both can be found in the [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/navigation.md#navigation). You can identify relevant navigation items byt the `id`, `href`, or `title` attributes.
+Make sure that relevant navigation items in the chrome service backend navigation files have **a unique ID**. The ID attribute is mandatory in the Frontend resource.
+
+#### 3. Transfer the data to Frontend CRD 
+
+Transfer the navigation metadata from the chrome service navigation files to the `deploy/frontend.yaml` or its equivalent in your project repository. Bundle segments and navigation segments have to be properly identified. A detailed description of both can be found in the [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/navigation.md#navigation). You can identify relevant navigation items byt the `id`, `href`, or `title` attributes.
 
 Example of a bundle segment from the Learning Resources app:
 
@@ -230,21 +256,23 @@ Example of a bundle segment from the Learning Resources app:
 objects:
   - spec:
       bundleSegments:
+          # new identifier, does not reflect any existing attribute bundle navigation files
         - segmentId: learning-resources-settings
+          # ID of a bundle navigation files
           bundleId: settings
           position: 300
           navItems:
-            id: learningResources
-            title: Learning Resources
-            href: /settings/learning-resources
+            - id: learningResources
+              title: Learning Resources
+              href: /settings/learning-resources
         - segmentId: learning-resources-insights
           bundle: insights
           position: 900
           navItems:
-            id: learningResources
-            title: Learning Resources
-            href: /insights/learning-resources
-            product: Red Hat Insights
+            - id: learningResources
+              title: Learning Resources
+              href: /insights/learning-resources
+              product: Red Hat Insights
 ```
 
 Any navigation items structure is currently accepted as a valid bundle segment navigation item. Attributes related to search and services dropdown are no longer allowed in the Frontend resources navigation items spec. The validation during build time will point these attributes out.
@@ -364,7 +392,9 @@ objects:
                 href: /foo/nar/nested-two
 ```
 
-3. Mark navigation items for "replacement" inside the navigation files. Because of a long migration period during which both static and operator-generated configuration files have to be supported, navigation items in a bundle have to be "marked for replacement" within a bundle until the entire bundle navigation is migrated over.
+#### 4. Mark the navigation items for replacement 
+
+Mark navigation items for "replacement" inside the chrome service navigation files. Because of a long migration period during which both static and operator-generated configuration files have to be supported, navigation items in a bundle have to be "marked for replacement" within a bundle until the entire bundle navigation is migrated over.
 
 To an **existing top-level navigation item** in a bundle, add a `feoReplacement` attribute. The attribute value is an `id` of a navigation item from a corresponding bundle segment nav item.
 
@@ -405,7 +435,7 @@ objects:
               href: /staging/starter
 ```
 
-Once all top-level navigation items in a bundle have a "feoReplacement" reference, the navigation file can be removed and only the generated output will be used. During the migration window, it has to be ensured that all bundle segments have their equivalent top-level nav items in a corresponding static navigation file. 
+Once all top-level navigation items in a bundle have a "feoReplacement" reference, the navigation file will be ignored in chrome service and only the generated output will be used. During the migration window, it has to be ensured that all bundle segments have their equivalent top-level nav items in a corresponding static navigation file. 
 
 ## Services Dropdown Replacement
 
@@ -416,6 +446,7 @@ The new approach no longer allows using navigation items references. This approa
 Current definition can be found at `static/stable/<env>/services/services.json`. This file is a template including the navigation items references and it outputs a `static/stable/<env>/services/services-generated.json` after the `make parse-services` CLI command is triggered.
 
 **Statically defined service tile entry**
+
 By statically defined entry, we mean that the tile is defined as an object.
 
 ```js
@@ -450,6 +481,7 @@ By statically defined entry, we mean that the tile is defined as an object.
 ```
 
 **A link reference service tile entry**
+
 By statically defined entry, we mean that the tile is defined as an object.
 
 ```js
@@ -643,3 +675,53 @@ objects:
 ```
 
 For full documentation about available attributes, please read [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/index.md).
+
+## CRD Clean UP
+
+A few attributes in your updated CRD might be obsolete. The validation during build will pick them up. Or if your IDE is using the schema for validation, it should mark them as "additional properties", which are not allowed.
+
+The main extra attribute is the top level `navItems`. This attribute is no longer used and was replaced by the bundle segments and navigation segments.
+
+Additional obsolete top level attribute is the `isFedramp` attribute.
+
+If your CI build fails, please follow the error messages to clean up the CRD.
+
+## Validating CRD outside of the FEC build/development scripts
+
+If you do not use the `fec` binary to build your UI module, it is highly recommended to run the validation during your CI. During the migration window we cannot enforce the validation as it might break builds for UI modules that were not migrated.
+
+To run the validation there are a few options:
+
+### Using custom JSON schema validator
+
+You can feed the CRD yaml file to any JSON schema validator tool. The schema is available at https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
+
+The schema is using spec https://json-schema.org/draft/2020-12/schema make sure to configure the validator for this spec.
+
+### Triggering the validation function from @redhat-cloud-services/frontend-components-config-utilities package
+
+> NOTE: The validator is available from version ^4.1.4
+
+In a JS script, import the `validateFrontendCrd` function.
+
+```js
+// ESM environment
+import validateFrontendCrd from '@redhat-cloud-services/frontend-components-config-utilities/feo/validate-frontend-crd'
+// CJS environment
+const validateFrontendCrd = require('@redhat-cloud-services/frontend-components-config-utilities/feo/validate-frontend-crd')
+
+// get absolute path of the frontend CRD
+const CRDPath = path.resolve(__dirname, './path/relative/from/current/script/file.yaml')
+
+
+try {
+  // run the validation
+  validateFrontendCrd(CRDPath)
+} catch (e) {
+  console.error(e)
+  process.exit(1)
+}
+
+```
+
+The function will throw an error if the validation fails.

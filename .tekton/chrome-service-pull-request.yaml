@@ -348,7 +348,7 @@ spec:
               value: $(params.PGSQL_USER)
             - name: POSTGRESQL_PASSWORD
               value: $(params.PGSQL_PASSWORD)
-        - image: unleashorg/unleash-server:latest
+        - image: quay.io/cloudservices/unleash-server:latest
           name: run-feature-flags
           timeout: 10s
           options: >-

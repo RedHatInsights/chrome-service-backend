@@ -56,6 +56,10 @@ For VSCode, you can add a following line to the top of the Frontend resources ya
 # yaml-language-server: $schema=https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
 ```
 
+## Ephemeral environment deployments
+
+To ensure ephemeral deployments are ready foe the new features, please upgrade your bonfire version to `6.0.3`.
+
 ## Enabling FEO for Configuration Generation
 
 In order to enable the new FEO features, the frontend has to "opt in". Only then will the Frontend Operator start using the Frontend resource to generate the Chrome UI configuration.

@@ -24,7 +24,8 @@
           "id": "trustedContentOverview",
           "appId": "trustedContent",
           "title": "Trusted Profile Analyzer",
-          "href": "/application-services/trusted-content",
+          "href": "https://trust.rhcloud.com",
+          "isExternal": true,
           "icon": "TrustedContentIcon",
           "description": "Increase trust and integrity in source code and accelerate the application development process.",
           "alt_title": [
@@ -47,8 +48,9 @@
           "id": "trustedArtifactSignerOverview",
           "appId": "trustedArtifactSigner",
           "title": "Trusted Artifact Signer",
-          "icon": "PlaceholderIcon",
-          "href": "/application-services/trusted-content/artifact-signer",
+          "icon": "TrustedArtifactIcon",
+          "href": "https://developers.redhat.com/learn/install-sign-verify-using-red-hat-trusted-artifact-signer",
+          "isExternal": true,
           "description": "Enables cryptographic signing, verification and provenance of software.",
           "alt_title": [
             "software supply chain",

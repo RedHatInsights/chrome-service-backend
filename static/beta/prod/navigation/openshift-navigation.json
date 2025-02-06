@@ -256,6 +256,12 @@
               "filterable": false
             }
           ]
+        },
+        {
+          "id": "openshiftVirtualization",
+          "title": "OpenShift Virtualization",
+          "isExternal": true,
+          "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53f218b6f188e53644c4f"
         }
       ]
     },

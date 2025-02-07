@@ -16,7 +16,8 @@ import (
 type AvailableTemplates string
 
 const (
-	LandingPage AvailableTemplates = "landingPage"
+	LandingPage AvailableTemplates       = "landingPage"
+	LandingPageItless AvailableTemplates = "landingPageItless"
 )
 
 func (at *AvailableTemplates) Scan(value interface{}) error {
@@ -35,6 +36,8 @@ func (at AvailableTemplates) String() string {
 func (at AvailableTemplates) IsValid() error {
 	switch at {
 	case LandingPage:
+		return nil
+	case LandingPageItless:
 		return nil
 	}
 

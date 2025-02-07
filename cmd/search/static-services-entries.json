@@ -952,5 +952,27 @@
         ]
       }
     ]
-  }
+  },
+  {
+    "id":  "iam",
+    "links":  [
+      {
+        "custom": true,
+        "id": "idpIntegration",
+        "title": "Identity Provider Integration",
+        "href": "/iam/authentication-policy/identity-provider-integration",
+        "alt_title": [
+          "Identity Provider",
+          "identity provider",
+          "idp",
+          "IDP",
+          "SSO",
+          "sso",
+          "Login",
+          "login",
+          "third party",
+          "Third Party"
+        ]
+      }
+  ]}
 ]

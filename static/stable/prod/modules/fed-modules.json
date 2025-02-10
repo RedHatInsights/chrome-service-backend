@@ -10,7 +10,10 @@
                 "routes": [
                     {
                         "exact": true,
-                        "pathname": "/"
+                        "pathname": "/",
+                        "props": {
+                            "layoutType": "landingPage"
+                        }
                     }
                 ]
             }

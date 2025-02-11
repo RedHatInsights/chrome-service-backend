@@ -15,6 +15,22 @@
             }
         ]
     },
+    "globalLearningResourcesPage": {
+        "manifestLocation": "/apps/learning-resources/fed-mods.json",
+        "defaultDocumentTitle": "All Learning Resources",
+        "modules": [
+            {
+                "id": "globalLearningResourcesPage",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "exact": true,
+                        "pathname": "/learning-resources"
+                    }
+                ]
+            }
+        ]
+    },
     "userPreferences": {
       "manifestLocation": "/apps/user-preferences/fed-mods.json",
       "defaultDocumentTitle": "User Preferences | User Preferences",

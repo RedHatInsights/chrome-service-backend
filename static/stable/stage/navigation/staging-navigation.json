@@ -6,7 +6,8 @@
             "id": "frontend-starter-app",
             "title": "Starter App",
             "appId": "frontend-starter-app",
-            "href": "/staging/starter"
+            "href": "/staging/starter",
+            "feoReplacement": "frontend-starter-app"
         },
         {
             "id": "widget-layout",
@@ -19,6 +20,18 @@
             "title": "Global Learning Resources Page",
             "appId": "global-learning-resources-page",
             "href": "/staging/global-learning-resources-page"
+        },
+        {
+            "id": "learning-resources-creator",
+            "title": "Learning Resources Creator",
+            "appId": "learning-resources-creator",
+            "href": "/staging/learning-resources-creator",
+            "permissions": [
+                {
+                    "method": "featureFlag",
+                    "args": ["platform.learning-resources.creator", true]
+                }
+            ]
         },
         {
             "title": "Cost Management MFE",

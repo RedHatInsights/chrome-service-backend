@@ -43,6 +43,7 @@ ccx:
         title: Insights Operator Gathering Conditions Service
         versions:
           - v1
+          - v2
       ocp-vulnerability:
         title: Vulnerability
         versions:
@@ -65,6 +66,7 @@ compliance:
   api:
     versions:
       - v1
+      - v2
 
 content-sources:
   title: Repositories
@@ -77,23 +79,6 @@ cost-management:
   api:
     versions:
       - v1
-
-drift:
-  title: Drift
-  api:
-    subItems:
-      drift:
-        versions:
-          - v1
-        title: Comparison reports
-      system-baseline:
-        versions:
-          - v1
-        title: Baselines
-      historical-system-profiles:
-        versions:
-          - v1
-        title: Historical system profiles
 
 export:
   title: Export Service
@@ -131,6 +116,7 @@ notifications:
   api:
     versions:
       - v1
+      - v2
 
 openshift:
   title: OpenShift (OCM)

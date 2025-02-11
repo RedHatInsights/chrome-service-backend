@@ -18,7 +18,7 @@ services:
     hostname: zoo1
     container_name: zoo1
     ports:
-    - "2181:2181"
+    - "${ZOOKEEPER_CLIENT_PORT}:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
@@ -29,9 +29,9 @@ services:
     hostname: kafka1
     container_name: kafka1
     ports:
-    - "9092:9092"
-    - "29092:29092"
-    - "9999:9999"
+    - "${KAFKA_CLIENT_LISTEN_PORT}:9092"
+    - "${KAFKA_CLIENT_LISTEN_PORT_2}:29092"
+    - "${KAFKA_JMX_PORT}:9999"
     environment:
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092,DOCKER://host.docker.internal:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
@@ -49,43 +49,46 @@ services:
     depends_on:
     - zoo1
 
+  # The Unleash server contains the Unleash configuration and
+  # communicates with server-side SDKs and the Unleash Proxy
   unleash_web:
     image: quay.io/cloudservices/unleash-server:latest
     ports:
-    - "4242:4242"
+    - "${UNLEASH_WEB_PORT}:4242"
     environment:
-      # This points Unleash to its backing database (defined in the `db` section below)
-      DATABASE_URL: "postgres://chrome:chrome@db/db"
+      DATABASE_URL: "postgres://chrome:chrome@db/unleash"
       DATABASE_SSL: "false"
-      LOG_LEVEL: "warn"
+      LOG_LEVEL: "debug"
       INIT_FRONTEND_API_TOKENS: "default:development.unleash-insecure-frontend-api-token"
       INIT_CLIENT_API_TOKENS: "default:development.unleash-insecure-api-token"
       # This is setup to seed in feature flags, production is entirely different
       INIT_ADMIN_API_TOKENS: "*:*.unleash-insecure-api-token"
-      # Do not require auth for the in local development
-      AUTH_TYPE: "none"
     depends_on:
       db:
         condition: service_healthy
-    command: ["node", "index.js"]
+    # Healthchecks aren't honored by compose anymore in depends_on
     healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1
+      test: wget --no-verbose --tries=1 --spider http://db:4242/health || exit 1
       interval: 1s
       timeout: 1m
       retries: 5
       start_period: 15s
-  
+    # Contains hard-coded sleep to wait for postgres to be ready
+    command: [ "sh", "-c", "echo sleeping; sleep 30; node index.js"]
+
+  # Note: Not all log data appears on the terminal output
+  # To view more detailed log data, shell into the container and view like this:
+  # cat var/lib/pgsql/data/userdata/log/postgresql-Tue.log
   db:
     expose:
     - "5432"
     image: quay.io/sclorg/postgresql-15-c9s:latest
     environment:
-      # create a database called `db`
-      - POSTGRESQL_DATABASE=db
-      - POSTGRESQL_USER=chrome
+      - POSTGRESQL_DATABASE=unleash
+      - POSTGRESQL_USER=chrome  
       - POSTGRESQL_PASSWORD=chrome
     healthcheck:
-      test: ["CMD", "pg_isready", "--username=chrome", "--host=127.0.0.1", "--port=5432"]
+      test: ["CMD", "pg_isready", "--username=chrome", "--host=db", "--port=5432"]
       interval: 2s
       timeout: 1m
       retries: 5

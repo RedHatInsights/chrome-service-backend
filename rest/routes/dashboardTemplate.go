@@ -9,6 +9,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -271,10 +272,32 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
 }
 
+
+// FilterWidgetMapping removes hidden widgets from the mapping by using feature flags stored with the widget definition.
+func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
+	for key, value := range widgetMapping {
+		if featureflags.IsEnabled(value.FeatureFlag) {
+			delete(widgetMapping, key)	
+		}
+	}
+
+	return widgetMapping
+}
+
 func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var err error
-	resp := util.EntityResponse[models.WidgetModuleFederationMapping]{
-		Data: service.WidgetMapping,
+	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
+
+	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
+		filteredWidgetMapping := FilterWidgetMapping(service.WidgetMapping)
+	
+		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
+			Data: filteredWidgetMapping,
+		}
+	} else {
+		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
+			Data: service.WidgetMapping,
+		}
 	}
 
 	handleDashboardResponse[models.WidgetModuleFederationMapping](resp, err, w)

@@ -41,7 +41,6 @@ objects:
                 - bash
                 - -c
                 - chrome-search-index
-              inheritEnv: true
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -63,6 +62,37 @@ objects:
             successThreshold: 1
             timeoutSeconds: 120
           env:
+          - name: FEO_SEARCH_INDEX
+            valueFrom:
+              configMapKeyRef:
+                key: search-index.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                # because keys in configmap can be empty
+                optional: true
+          - name: FEO_FED_MODULES
+            valueFrom:
+              configMapKeyRef:
+                key: fed-modules.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                optional: true
+          - name: FEO_SERVICE_TILES
+            valueFrom:
+              configMapKeyRef:
+                key: service-tiles.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                optional: true
+          - name: FEO_WIDGET_REGISTRY
+            valueFrom:
+              configMapKeyRef:
+                key: widget-registry.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                optional: true
+          - name: FEO_BUNDLES
+            valueFrom:
+              configMapKeyRef:
+                key: bundles.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                optional: true
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
           - name: LOG_LEVEL 
@@ -134,11 +164,11 @@ objects:
                 key: DEBUG_FAVORITES_ACCOUNT_1
           resources:
             limits:
-              cpu: ${CPU_LIMIT}
-              memory: ${MEMORY_LIMIT}
+              cpu: ${CPU_LIMIT_CHROME_SERVICE}
+              memory: ${MEMORY_LIMIT_CHROME_SERVICE}
             requests:
-              cpu: ${CPU_REQUESTS}
-              memory: ${MEMORY_REQUESTS}
+              cpu: ${CPU_REQUEST_CHROME_SERVICE}
+              memory: ${MEMORY_REQUEST_CHROME_SERVICE}
 
   # This is a dummy secret to make ephemeral deploy correctly. It will not roll out to stage or prod
   # Unless we set "secret" in "managedResourceTypes" in the app-interface saas file.
@@ -166,16 +196,16 @@ parameters:
 - name: LOG_LEVEL
   value: Warn  # Do not log debug/info messages by default
 - description: Cpu limit of service
-  name: CPU_LIMIT
+  name: CPU_LIMIT_CHROME_SERVICE
   value: 500m
 - description: memory limit of service
-  name: MEMORY_LIMIT
+  name: MEMORY_LIMIT_CHROME_SERVICE
   value: 512Mi
 - description: Cpu requests of service
-  name: CPU_REQUESTS
+  name: CPU_REQUEST_CHROME_SERVICE
   value: 250m
 - description: Memory requests of service
-  name: MEMORY_REQUESTS
+  name: MEMORY_REQUEST_CHROME_SERVICE
   value: 256Mi
 - name: MIN_REPLICAS
   value: '3'
@@ -184,9 +214,16 @@ parameters:
   required: true
 - description: Image name
   name: IMAGE
-  value: quay.io/cloudservices/chrome-service
+  value: quay.io/redhat-services-prod/hcc-platex-services/chrome-service
 - description: ClowdEnv Name
   name: ENV_NAME
   required: true
+- description: Chrome config map name
+  name: FRONTEND_CONTEXT_NAME
+  value: feo-context-cfg
 - name: LINT_ANNOTATION
   value: 'ignore-check.kube-linter.io/minimum-three-replicas'
+- description: Frontend environment
+  name: FRONTEND_ENVIRONMENT
+  # fallback to stage environment if not set
+  value: stage

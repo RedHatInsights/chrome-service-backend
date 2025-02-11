@@ -99,60 +99,13 @@
     ]
   },
   {
-    "id": "ansible-drift",
-    "links": [
-      {
-        "custom": true,
-        "id": "ANSIBLE.operations.Drift.drift",
-        "href": "/ansible/drift/",
-        "title": "Ansible Drift Comparison",
-        "description": "Compare systems in your Ansible Automation Platform hosts to one another or against a set baseline.",
-        "alt_title": [
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "drift"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "ANSIBLE.operations.Drift.drift.baseline",
-        "href": "/ansible/drift/baselines",
-        "title": "Ansible Drift Baselines",
-        "description": "Create your Ansible Automation Platform system baselines for Drift comparison.",
-        "alt_title": [
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "drift"
-        ]
-      }
-    ]
-  },
-  {
     "id": "ansible-advisor",
     "links": [
       {
         "custom": true,
         "id": "ANSIBLE.operations.advisor.recommendations",
         "href": "/ansible/advisor/recommendations",
-        "title": "Advisor",
+        "title": "Recommendations - Advisor",
         "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
         "alt_title": [
           "Rules",
@@ -169,29 +122,6 @@
           "incident",
           "recommendation",
           "pathway"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ansible-policies",
-    "links": [
-      {
-        "custom": true,
-        "id": "ANSIBLE.policies",
-        "title": "Policies",
-        "href": "/ansible/policies",
-        "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment.",
-        "alt_title": [
-            "Policies",
-            "Policy",
-            "notifications",
-            "notify",
-            "integration",
-            "conditions",
-            "alerts",
-            "events",
-            "raise alerts on system configuration changes"
         ]
       }
     ]
@@ -454,61 +384,19 @@
           "errata",
           "Errata"
         ]
-      }
-    ]
-  },
-  {
-    "id": "rhel-drift",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.Operations.Drift.drift",
-        "href": "/insights/drift/",
-        "title": "Comparison - Drift",
-        "description": "Compare your Red Hat Enterprise Linux systems to one another or against a set baseline.",
-        "alt_title": [
-          "Drift",
-          "Comparison",
-          "Baseline",
-          "insights",
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "history"
-        ]
       },
       {
         "custom": true,
-        "id": "RHEL.Operations.Drift.drift.baseline",
-        "href": "/insights/drift/baselines",
-        "title": "Baselines - Drift",
-        "description": "Create your Red Hat Enterprise Linux baselines for Drift comparison.",
-        "alt_title": [
-          "Drift",
-          "Comparison",
-          "Baseline",
-          "insights",
-          "Comparison",
-          "system details",
-          "system facts",
-          "troubleshooting",
-          "configuration drift",
-          "configuration differences",
-          "baseline",
-          "configuration standard",
-          "drift from baseline",
-          "drift over time",
-          "configuration changes",
-          "history"
-        ]
+        "id": "OPENSHIFT.clusterManager",
+        "title": "Cluster Manager",
+        "href": "/openshift",
+        "description": "View, Register, or Create an OpenShift Cluster."
+      },
+      {
+        "custom": true,
+        "id": "OPENSHIFT.costManagementOverview",
+        "title": "Overview - Cost Management",
+        "href": "/openshift/cost-management"
       }
     ]
   },
@@ -541,41 +429,16 @@
       },
       {
         "custom": true,
-        "id": "RHEL.Inventory.groups",
-        "href": "/insights/inventory/groups",
-        "title": "Groups - Inventory",
-        "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
+        "id": "RHEL.Inventory.workspaces",
+        "href": "/insights/inventory/workspaces",
+        "title": "Workspaces - Inventory",
+        "description": "Organize your Red Hat Enterprise Linux systems with workspaces for more granular User Access.",
         "alt_title": [
           "group",
           "groups",
           "Group",
           "Groups"
-        ],
-        "permissions": [
-                {
-                  "method": "featureFlag",
-                  "args": ["platform.rbac.groups-to-workspaces-rename", false]
-                }
-              ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.Inventory.workspaces",
-        "href": "/insights/inventory/workspaces",
-        "title": "Workspaces - Inventory",
-        "description": "Group your Red Hat Enterprise Linux systems for more granular User Access.",
-        "alt_title": [
-          "workspace",
-          "workspaces",
-          "Workspace",
-          "Workspaces"
-        ],
-        "permissions": [
-                {
-                  "method": "featureFlag",
-                  "args": ["platform.rbac.groups-to-workspaces-rename", true]
-                }
-              ]
+        ]
       }
     ]
   },
@@ -720,6 +583,212 @@
           "affected but not vulnerable",
           "severity",
           "CVE-"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.imageBuilder",
+        "title": "Images - Inventory",
+        "href": "/insights/image-builder",
+        "description": "Build and manage Red Hat Enterprise Linux images and environments.",
+        "alt_title": [
+          "Images",
+          "image",
+          "image builder",
+          "my images",
+          "gold image",
+          "template image",
+          "vm template",
+          "image template",
+          "blueprint",
+          "image",
+          "builder",
+          "images",
+          "build",
+          "image-builder",
+          "insights",
+          "Build image",
+          "image builder",
+          "gold image",
+          "blueprint",
+          "template image",
+          "vm template",
+          "image template",
+          "vmware template",
+          "packer build",
+          "packer template",
+          "RHEL AMI",
+          "RHEL machine image",
+          "azure",
+          "aws",
+          "build",
+          "assemble",
+          "image-builder"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.rhc",
+        "title": "Remote Host Configuration - System Configuration",
+        "href": "/insights/connector",
+        "description": "Configure your systems to execute Ansible Playbooks.",
+        "alt_title": [
+          "Remote host configuration",
+          "remote host configuration",
+          "connect systems",
+          "connection options",
+          "connect settings",
+          "settings",
+          "Register",
+          "rhc",
+          "RHC",
+          "rhcd"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.activationKeys",
+        "title": "Activation Keys - System Configuration",
+        "href": "/insights/connector/activation-keys",
+        "description": "Create activation keys to register your systems and configure repositories without using a username and password.",
+        "alt_title": [
+          "Subscription key",
+          "sca",
+          "simple content access",
+          "activate",
+          "register",
+          "AK",
+          "repositories",
+          "system purpose",
+          "sla",
+          "content"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.advisories",
+        "title": "Advisories - Content",
+        "href": "/insights/patch/advisories",
+        "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
+        "alt_title": [
+          "Errata",
+          "errata",
+          "patch",
+          "updates",
+          "insights"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.repositories",
+        "title": "Repositories - Content",
+        "href": "/insights/content/repositories",
+        "alt_title": [
+          "Content",
+          "custom content",
+          "my content",
+          "my repos",
+          "repos",
+          "repo",
+          "repositories",
+          "repository",
+          "insights",
+          "repository sets",
+          "popular",
+          "Red hat repositories",
+          "Snapshots",
+          "compare",
+          "custom content",
+          "Red hat repositories",
+          "popular",
+          "nvidia",
+          "epel",
+          "add repositories",
+          "introspect",
+          "content",
+          "dnf",
+          "yum"
+        ],
+        "description": "Link your external repositories to build images."
+      },
+      {
+        "custom": true,
+        "id": "RHEL.policies",
+        "title": "Policies - Operations",
+        "href": "/insights/policies",
+        "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
+        "alt_title":[
+          "policies",
+          "facts",
+          "conditions",
+          "trigger", "notifications",
+          "alerts",
+          "insights",
+          "notify",
+          "integration",
+          "conditions",
+          "alerts",
+          "events",
+          "raise alerts on system configuration changes"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.ros",
+        "title": "Resource Optimization - Business",
+        "href": "/insights/ros",
+        "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
+        "alt_title": [
+          "optimization",
+          "optimisation",
+          "optimize",
+          "optimise",
+          "usage",
+          "utilization",
+          "utilisation",
+          "save",
+          "savings",
+          "resource optimization",
+          "resource optimisation"
+        ]
+      },
+      {
+        "custom": true,
+        "id": "RHEL.tasks",
+        "appId": "tasks",
+        "title": "Tasks - Automation",
+        "href": "/insights/tasks",
+        "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
+        "alt_title": [
+          "Tasks",
+          "tasks",
+          "task",
+          "CentOS Conversion",
+          "centos conversion",
+          "Pre Conversion Analysis",
+          "pre conversion analysis",
+          "Pre-Conversion Analysis",
+          "pre-conversion analysis",
+          "Convert to RHEL",
+          "convert to rhel",
+          "C2R",
+          "c2r",
+          "CentOS",
+          "centos",
+          "Centos",
+          "centOS",
+          "upgrade",
+          "update",
+          "insights",
+          "automation",
+          "leapp",
+          "migrate",
+          "version",
+          "9.0",
+          "8.0",
+          "convert",
+          "conversion",
+          "migration"
         ]
       }
     ]
@@ -895,5 +964,27 @@
         ]
       }
     ]
-  }
+  },
+  {
+    "id":  "iam",
+    "links":  [
+      {
+        "custom": true,
+        "id": "idpIntegration",
+        "title": "Identity Provider Integration",
+        "href": "/iam/authentication-policy/identity-provider-integration",
+        "alt_title": [
+          "Identity Provider",
+          "identity provider",
+          "idp",
+          "IDP",
+          "SSO",
+          "sso",
+          "Login",
+          "login",
+          "third party",
+          "Third Party"
+        ]
+      }
+  ]}
 ]

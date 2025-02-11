@@ -33,7 +33,13 @@
                   "href": "/settings/notifications/eventlog",
                   "permissions": [
                     {
-                      "method": "isOrgAdmin"
+                      "method": "loosePermissions",
+                      "args": [
+                        [
+                          "notifications:*:*",
+                          "notifications:notifications:write"
+                        ]
+                      ]
                     }
                   ]
               },
@@ -44,6 +50,12 @@
                   "href": "/settings/notifications/user-preferences"
               }
           ]
-        }
+        },
+        {
+          "id": "learningResources",
+          "appId": "learningResources",
+          "title": "Learning Resources",
+          "href": "/settings/learning-resources"
+      }
     ]
 }

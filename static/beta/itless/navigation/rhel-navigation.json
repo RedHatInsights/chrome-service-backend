@@ -122,42 +122,6 @@
           ]
         },
         {
-          "id": "repositories",
-          "appId": "contentSources",
-          "title": "Repositories",
-          "href": "/insights/content",
-          "icon": "SubscriptionsIcon",
-          "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL",
-          "alt_title": [
-            "Content",
-            "custom content",
-            "my content",
-            "my repos",
-            "repos",
-            "repo",
-            "repositories",
-            "repository",
-            "insights",
-            "repository sets",
-            "popular",
-            "Red hat repositories",
-            "Snapshots",
-            "compare",
-            "custom content",
-            "Red hat repositories",
-            "popular",
-            "nvidia",
-            "epel",
-            "add repositories",
-            "introspect",
-            "content",
-            "dnf",
-            "yum"
-          ],
-          "description": "Link your external repositories to build images."
-        },
-        {
           "title": "Patch",
           "expandable": true,
           "routes": [
@@ -180,13 +144,6 @@
                 "systems",
                 "upgrade"
               ]
-            },
-            {
-              "id": "patchTemplates",
-              "appId": "patch",
-              "title": "Templates",
-              "href": "/insights/patch/templates",
-              "product": "Red Hat Insights"
             }
           ]
         }
@@ -243,26 +200,6 @@
               "appId": "advisor",
               "title": "Topics",
               "href": "/insights/advisor/topics",
-              "product": "Red Hat Insights"
-            }
-          ]
-        },
-        {
-          "title": "Drift",
-          "expandable": true,
-          "routes": [
-            {
-              "id": "driftComparison",
-              "appId": "drift",
-              "title": "Comparison",
-              "href": "/insights/drift/",
-              "product": "Red Hat Insights"
-            },
-            {
-              "id": "driftBaselines",
-              "appId": "drift",
-              "title": "Baselines",
-              "href": "/insights/drift/baselines",
               "product": "Red Hat Insights"
             }
           ]
@@ -484,47 +421,6 @@
             "automation",
             "Ansible",
             "patch"
-          ]
-        },
-        {
-          "id": "tasks",
-          "appId": "tasks",
-          "title": "Tasks",
-          "href": "/insights/tasks",
-          "icon": "InsightsIcon",
-          "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL",
-          "description": "Perform Red Hat-recommended analysis across your Red Hat Enterprise Linux fleet, like upgrade and conversion readiness.",
-          "alt_title": [
-            "Tasks",
-            "tasks",
-            "task",
-            "CentOS Conversion",
-            "centos conversion",
-            "Pre Conversion Analysis",
-            "pre conversion analysis",
-            "Pre-Conversion Analysis",
-            "pre-conversion analysis",
-            "Convert to RHEL",
-            "convert to rhel",
-            "C2R",
-            "c2r",
-            "CentOS",
-            "centos",
-            "Centos",
-            "centOS",
-            "upgrade",
-            "update",
-            "insights",
-            "automation",
-            "leapp",
-            "migrate",
-            "version",
-            "9.0",
-            "8.0",
-            "convert",
-            "conversion",
-            "migration"
           ]
         }
       ]

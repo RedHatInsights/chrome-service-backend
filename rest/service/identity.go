@@ -17,7 +17,6 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"gorm.io/datatypes"
-	"gorm.io/gorm/clause"
 )
 
 type IntercomApp string
@@ -115,6 +114,7 @@ func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) 
 		FavoritePages:    []models.FavoritePage{},
 		SelfReport:       models.SelfReport{},
 		VisitedBundles:   nil,
+		ActiveWorkspace:  "default",
 	}
 	err := json.Unmarshal([]byte(`{}`), &identity.VisitedBundles)
 	if err != nil {
@@ -131,7 +131,7 @@ func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) 
 		return cachedIdentity, nil
 	}
 
-	res := database.DB.Clauses(clause.Locking{Strength: "UPDATE"}).Where("account_id = ?", userId).FirstOrCreate(&identity)
+	res := database.DB.Where("account_id = ?", userId).FirstOrCreate(&identity)
 	err = res.Error
 
 	// set the cache after successful DB operation
@@ -188,4 +188,20 @@ func GetUserIntercomHash(userId string, namespace IntercomApp) (IntercomPayload,
 func UpdateUserPreview(identity *models.UserIdentity, preview bool) error {
 	identity.UIPreview = preview
 	return database.DB.Model(identity).Update("ui_preview", preview).Error
+}
+
+func MarkPreviewSeen(identity *models.UserIdentity) error {
+	return database.DB.Model(identity).Updates(models.UserIdentity{UIPreviewSeen: true}).Error
+}
+
+func UpdateActiveWorkspace(identity *models.UserIdentity, workspace string) error {
+	identity.ActiveWorkspace = workspace
+	err := database.DB.Model(identity).Update("active_workspace", workspace).Error
+
+	// set the cache after successful DB operation
+	if err == nil {
+		util.UsersCache.Set(identity.AccountId, *identity)
+	}
+
+	return err
 }

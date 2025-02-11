@@ -16,7 +16,8 @@ import (
 type AvailableTemplates string
 
 const (
-	LandingPage AvailableTemplates = "landingPage"
+	LandingPage AvailableTemplates       = "landingPage"
+	LandingPageItless AvailableTemplates = "landingPageItless"
 )
 
 func (at *AvailableTemplates) Scan(value interface{}) error {
@@ -35,6 +36,8 @@ func (at AvailableTemplates) String() string {
 func (at AvailableTemplates) IsValid() error {
 	switch at {
 	case LandingPage:
+		return nil
+	case LandingPageItless:
 		return nil
 	}
 
@@ -58,15 +61,16 @@ const (
 	Acs                 AvailableWidgets = "acs"
 	Subscriptions       AvailableWidgets = "subscriptions"
 	SupportCases        AvailableWidgets = "supportCases"
+	Integrations		AvailableWidgets = "integrations"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi, SupportCases:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi, SupportCases, Integrations:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, SupportCases, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, SupportCases, Integrations, aw)
 }
 
 type BaseWidgetDimensions struct {
@@ -310,15 +314,16 @@ const (
 	ACSIcon              WidgetIcons = "ACSIcon"
 	OpenShiftAiIcon      WidgetIcons = "OpenShiftAiIcon"
 	HeadsetIcon          WidgetIcons = "HeadsetIcon"
+	IntegrationsIcon	 WidgetIcons = "IntegrationsIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
 	switch wi {
-	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, CreditCardIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, HeadsetIcon:
+	case BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, CreditCardIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, HeadsetIcon, IntegrationsIcon:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, CreditCardIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, HeadsetIcon, wi)
+	return fmt.Errorf("invalid widget icon. Expected one of %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s got %s", BellIcon, HistoryIcon, OutlinedBookmarkIcon, RocketIcon, StarIcon, CreditCardIcon, RhelIcon, OpenShiftIcon, EdgeIcon, AnsibleIcon, QuayIcon, ACSIcon, OpenShiftAiIcon, HeadsetIcon, IntegrationsIcon, wi)
 }
 
 type WidgetHeaderLink struct {
@@ -329,9 +334,10 @@ type WidgetHeaderLink struct {
 type WidgetPermissionMethods string
 
 const (
-	OrgAdmin       WidgetPermissionMethods = "isOrgAdmin"
-	FeatureFlag    WidgetPermissionMethods = "featureFlag"
-	HasPermissions WidgetPermissionMethods = "hasPermissions"
+	OrgAdmin         WidgetPermissionMethods = "isOrgAdmin"
+	FeatureFlag      WidgetPermissionMethods = "featureFlag"
+	HasPermissions   WidgetPermissionMethods = "hasPermissions"
+	LoosePermissions WidgetPermissionMethods = "loosePermissions"
 )
 
 type WidgetPermission struct {
@@ -351,6 +357,7 @@ type ModuleFederationMetadata struct {
 	Scope      string               `json:"scope"`
 	Module     string               `json:"module"`
 	ImportName string               `json:"importName,omitempty"`
+	FeatureFlag string              `json:"featureFlag,omitempty"`
 	Defaults   BaseWidgetDimensions `json:"defaults"`
 	Config     WidgetConfiguration  `json:"config"`
 }

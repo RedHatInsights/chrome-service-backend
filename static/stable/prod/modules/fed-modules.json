@@ -1,4 +1,5 @@
 {
+    "$schema": "../../../modulesSchema.json",
     "landing": {
         "manifestLocation": "/apps/landing/fed-mods.json",
         "defaultDocumentTitle": "Hybrid Cloud Console Home",
@@ -9,7 +10,10 @@
                 "routes": [
                     {
                         "exact": true,
-                        "pathname": "/"
+                        "pathname": "/",
+                        "props": {
+                            "layoutType": "landingPage"
+                        }
                     }
                 ]
             }
@@ -74,6 +78,9 @@
                 "routes": [
                     {
                         "pathname": "/iam/user-access"
+                    },
+                    {
+                      "pathname": "/iam/access-management"
                     }
                 ]
             }
@@ -123,6 +130,12 @@
     "notifications": {
       "manifestLocation": "/apps/notifications/fed-mods.json",
       "defaultDocumentTitle": "Notifications | Settings",
+      "config": {
+        "supportCaseData": {
+            "product": "Red Hat Insights",
+            "version": "Notifications"
+        }
+      },
       "modules": [
           {
               "id": "notifications",
@@ -141,6 +154,12 @@
     "connector": {
         "manifestLocation": "/apps/connector/fed-mods.json",
         "defaultDocumentTitle": "Remote Host Configuration | Settings",
+        "config": {
+          "supportCaseData": {
+              "product": "Red Hat Insights",
+              "version": "Remote Host Configuration (RHC)"
+          }
+        },
         "modules": [
             {
                 "id": "connector",
@@ -226,6 +245,12 @@
     },
     "advisor": {
         "manifestLocation": "/apps/advisor/fed-mods.json",
+        "config": {
+          "supportCaseData": {
+              "product": "Red Hat Insights",
+              "version": "Advisor"
+          }
+        },
         "modules": [
             {
                 "id": "advisor",
@@ -244,6 +269,12 @@
     },
     "malware": {
         "manifestLocation": "/apps/malware/fed-mods.json",
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Malware Detection"
+            }
+        },
         "modules": [
             {
                 "id": "malware",
@@ -272,6 +303,12 @@
     },
     "ocpVulnerability": {
         "manifestLocation": "/apps/ocp-vulnerability/fed-mods.json",
+        "config": {
+          "supportCaseData": {
+              "product": "Red Hat Insights",
+              "version": "Vulnerability for OCP"
+          }
+        },
         "modules": [
             {
                 "id": "ocp-vulnerability",
@@ -284,26 +321,14 @@
             }
         ]
     },
-    "drift": {
-        "manifestLocation": "/apps/drift/fed-mods.json",
-        "modules": [
-            {
-                "id": "drift",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/drift",
-                        "isFedramp": true
-                    },
-                    {
-                        "pathname": "/ansible/drift"
-                    }
-                ]
-            }
-        ]
-    },
     "inventory": {
         "manifestLocation": "/apps/inventory/fed-mods.json",
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Inventory"
+            }
+        },
         "modules": [
             {
                 "id": "inventory",
@@ -323,6 +348,12 @@
     "vulnerability": {
         "manifestLocation": "/apps/vulnerability/fed-mods.json",
         "isFedramp": true,
+        "config": {
+          "supportCaseData": {
+              "product": "Red Hat Insights",
+              "version": "Vulnerability"
+          }
+        },
         "modules": [
             {
                 "id": "vulnerability",
@@ -338,6 +369,12 @@
     "compliance": {
         "manifestLocation": "/apps/compliance/fed-mods.json",
         "isFedramp": true,
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Compliance"
+            }
+        },
         "modules": [
             {
                 "id": "compliance",
@@ -352,6 +389,12 @@
     },
     "policies": {
         "manifestLocation": "/apps/policies/fed-mods.json",
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Policies"
+            }
+        },
         "modules": [
             {
                 "id": "policies",
@@ -371,6 +414,12 @@
     "patch": {
         "manifestLocation": "/apps/patch/fed-mods.json",
         "isFedramp": true,
+        "config": {
+          "supportCaseData": {
+              "product": "Red Hat Insights",
+              "version": "Patch"
+          }
+        },
         "modules": [
             {
                 "id": "patch",
@@ -418,6 +467,18 @@
                     {
                         "pathname": "/openshift/subscriptions"
                     }
+                ]
+            }
+        ]
+    },
+    "activationKeys": {
+        "manifestLocation": "/apps/activation-keys/fed-mods.json",
+        "modules": [
+            {
+                "id": "activation-keys",
+                "module": "./RootApp",
+                "routes": [
+                    {"pathname": "/insights/connector/activation-keys"}
                 ]
             }
         ]
@@ -475,6 +536,12 @@
     },
     "ros": {
         "manifestLocation": "/apps/ros/fed-mods.json",
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Resource Optimizations"
+            }
+        },
         "modules": [
             {
                 "id": "ros",
@@ -506,6 +573,12 @@
     },
     "remediations": {
         "manifestLocation": "/apps/remediations/fed-mods.json",
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Remediations"
+            }
+        },
         "modules": [
             {
                 "id": "remediations",
@@ -524,14 +597,19 @@
     },
     "tasks": {
         "manifestLocation": "/apps/tasks/fed-mods.json",
+        "config": {
+            "supportCaseData": {
+                "product": "Red Hat Insights",
+                "version": "Tasks"
+            }
+        },
         "modules": [
             {
                 "id": "tasks",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/insights/tasks",
-                        "isFedramp": true
+                        "pathname": "/insights/tasks"
                     },
                     {
                         "pathname": "/ansible/tasks"
@@ -760,6 +838,15 @@
     },
     "imageBuilder": {
         "manifestLocation": "/apps/image-builder/fed-mods.json",
+        "analytics": {
+            "APIKey": "BUodNImBEk7R2M3evAYs0v7i8d86Nhkm"
+        },
+        "config": {
+          "supportCaseData": {
+              "product": "Red Hat Insights",
+              "version": "Image Builder"
+          }
+        },
         "modules": [
             {
                 "id": "image-builder",
@@ -827,6 +914,21 @@
                     },
                     {
                         "pathname": "/settings/content"
+                    }
+                ]
+            }
+        ]
+    },
+    "idmsvc": {
+        "manifestLocation": "/apps/idmsvc/fed-mods.json",
+        "defaultDocumentTitle": "Directory and Domain Services",
+        "modules": [
+            {
+                "id": "idmsvc",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/settings/idmsvc"
                     }
                 ]
             }
@@ -952,6 +1054,25 @@
                 "routes": [
                     {
                         "pathname": "/ansible/lightspeed-admin-dashboard"
+                    }
+                ]
+            }
+        ]
+    },
+    "ansibleSaasAdminConsole": {
+        "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
+        "config": {
+        "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
+        "modules": [
+            {
+                "id": "ansible-saas-admin-console",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/ansible/service/"
                     }
                 ]
             }

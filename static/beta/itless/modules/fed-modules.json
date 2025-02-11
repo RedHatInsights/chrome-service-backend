@@ -125,21 +125,6 @@
             }
         ]
     },
-    "drift": {
-        "manifestLocation": "/apps/drift/fed-mods.json",
-        "modules": [
-            {
-                "id": "drift",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/drift",
-                        "isFedramp": true
-                    }
-                ]
-            }
-        ]
-    },
     "inventory": {
         "manifestLocation": "/apps/inventory/fed-mods.json",
         "modules": [
@@ -273,6 +258,99 @@
                 "routes": [
                     {
                         "pathname": "/openshift"
+                    }
+                ]
+            }
+        ]
+    },
+    "widgetLayout": {
+      "manifestLocation": "/apps/widget-layout/fed-mods.json",
+      "modules": [
+        {
+            "id": "widgetLayout",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/staging/widget-layout"
+                }
+            ]
+        }
+      ]
+    },
+    "learningResources": {
+        "manifestLocation": "/apps/learning-resources/fed-mods.json",
+        "modules": [
+            {
+                "id": "learningResources",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/openshift/learning-resources",
+                        "props": {
+                            "bundle": "openshift"
+                        }
+                    },
+                    {
+                        "pathname": "/ansible/learning-resources",
+                        "props": {
+                            "bundle": "ansible"
+                        }
+                    },
+                    {
+                        "pathname": "/insights/learning-resources",
+                        "props": {
+                            "bundle": "insights"
+                        }
+                    },
+                    {
+                        "pathname": "/edge/learning-resources",
+                        "props": {
+                            "bundle": "edge"
+                        }
+                    },
+                    {
+                        "pathname": "/settings/learning-resources",
+                        "props": {
+                            "bundle": "settings"
+                        }
+                    },
+                    {
+                        "pathname": "/iam/learning-resources",
+                        "props": {
+                            "bundle": "iam"
+                        }
+                    },
+                    {
+                        "pathname": "/hac/learning-resources",
+                        "props": {
+                            "bundle": "hac"
+                        }
+                    },
+                    {
+                        "pathname": "/subscriptions/learning-resources",
+                        "props": {
+                            "bundle": "subscriptions"
+                        }
+                    },
+                    {
+                        "pathname": "/application-services/learning-resources",
+                        "props": {
+                            "bundle": "application-services"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "chrome": {
+        "manifestLocation": "/apps/chrome/js/fed-mods.json",
+        "modules": [
+            {
+                "id": "satellite-token",
+                "module": "./SatelliteToken",
+                "routes": [
+                    {
+                        "pathname": "/insights/satellite"
                     }
                 ]
             }

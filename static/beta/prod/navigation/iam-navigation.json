@@ -16,11 +16,11 @@
       "permissions": [
         {
           "method": "loosePermissions",
-          "args": [
-            [
-              "rbac:*:*"
-            ]
-          ]
+          "args": [["rbac:*:*"]]
+        },
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces", false]
         }
       ],
       "routes": [
@@ -88,6 +88,83 @@
       ]
     },
     {
+      "title": "Access Management",
+      "expandable": true,
+      "permissions": [
+        {
+          "method": "loosePermissions",
+          "args": [["rbac:*:*"]]
+        },
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces", true]
+        }
+      ],
+      "routes": [
+        {
+          "id": "overview-new",
+          "appId": "rbac",
+          "title": "Overview",
+          "href": "/iam/access-management/overview",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.overview", true]
+            }
+          ],
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "workspaces",
+          "appId": "rbac",
+          "title": "Workspaces",
+          "icon": "PlaceholderIcon",
+          "href": "/iam/access-management/workspaces",
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "usersAndUserGroups",
+          "appId": "rbac",
+          "title": "Users & User Groups",
+          "href": "/iam/access-management/users-and-user-groups",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "description": "Manage your organization's role-based access control (RBAC) to services.",
+          "alt_title": [
+            "role based access management",
+            "user management",
+            "user access",
+            "identity management",
+            "users",
+            "roles",
+            "groups",
+            "permissions",
+            "access",
+            "admin",
+            "administrator",
+            "editor",
+            "authorization",
+            "viewer",
+            "rbac"
+          ]
+        },
+        {
+          "id": "roles-new",
+          "appId": "rbac",
+          "title": "Roles",
+          "href": "/iam/access-management/roles",
+          "product": "Identity & Access Management"
+        },
+        {
+          "id": "accessRequests-new",
+          "appId": "rbac",
+          "title": "Red Hat Access Requests",
+          "href": "/iam/access-management/access-requests",
+          "notifier": "chrome.accessRequests.hasUnseen"
+        }
+      ]
+    },
+    {
       "title": "Authentication Policy",
       "expandable": true,
       "filterable": false,
@@ -100,6 +177,15 @@
           "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage how your organization authenticates to Red Hat services."
+        },
+        {
+          "id": "idpIntegration",
+          "appId": "iam",
+          "title": "Identity Provider Integration",
+          "href": "/iam/authentication-policy/identity-provider-integration",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "description": "Manage identity provider integration for your organization."
         }
       ]
     },

@@ -37,16 +37,10 @@
           "href": "/subscriptions/usage/openshift"
         },
         {
-          "id": "data-science",
+          "id": "ansible",
           "appId": "subscriptions",
-          "title": "Red Hat OpenShift AI",
-          "href": "/subscriptions/usage/rhods"
-        },
-        {
-          "id": "acs",
-          "appId": "subscriptions",
-          "title": "Advanced cluster security",
-          "href": "/subscriptions/usage/rhacs"
+          "title": "Ansible",
+          "href": "/subscriptions/usage/ansible"
         }
       ]
     },
@@ -54,6 +48,16 @@
       "id": "hybridCommittedSpend",
       "title": "Hybrid Committed Spend",
       "expandable": true,
+      "permissions": [
+        {
+          "method": "loosePermissions",
+          "args": [
+            [
+              "hybrid-committed-spend:reports:read"
+            ]
+          ]
+        }
+      ],
       "routes": [
         {
           "id": "hybridCommittedSpendOverview",
@@ -61,33 +65,13 @@
           "title": "Overview",
           "icon": "SubscriptionsIcon",
           "href": "/subscriptions/hybrid-committed-spend",
-          "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns.",
-          "permissions": [
-            {
-              "method": "loosePermissions",
-              "args": [
-                [
-                  "hybrid-committed-spend:reports:read"
-                ]
-              ]
-            }
-          ]
+          "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns."
         },
         {
           "id": "details",
           "appId": "hybridCommittedSpend",
           "title": "Details",
-          "href": "/subscriptions/hybrid-committed-spend/details",
-          "permissions": [
-            {
-              "method": "loosePermissions",
-              "args": [
-                [
-                  "hybrid-committed-spend:reports:read"
-                ]
-              ]
-            }
-          ]
+          "href": "/subscriptions/hybrid-committed-spend/details"
         }
       ]
     },

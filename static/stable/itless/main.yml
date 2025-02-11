@@ -16,35 +16,13 @@ compliance:
   api:
     versions:
       - v1
-
-content-sources:
-  title: Repositories
-  api:
-    versions:
-      - v1
+      - v2
 
 cost-management:
   title: Cost Management
   api:
     versions:
       - v1
-
-drift:
-  title: Drift
-  api:
-    subItems:
-      drift:
-        versions:
-          - v1
-        title: Comparison reports
-      system-baseline:
-        versions:
-          - v1
-        title: Baselines
-      historical-system-profiles:
-        versions:
-          - v1
-        title: Historical system profiles
 
 edge:
   title: RHEL for Edge
@@ -143,12 +121,6 @@ subscriptions:
       - v1
     alias:
       - rhsm-subscriptions
-
-tasks:
-  title: Tasks
-  api:
-    versions:
-      - v1
 
 vulnerability:
   title: Vulnerability Management

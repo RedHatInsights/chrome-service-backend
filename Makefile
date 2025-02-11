@@ -4,6 +4,7 @@ help:
 	@echo "migrate          	- run database migration"
 	@echo "dev              	- run server"
 	@echo "test             	- run all tests"
+	@echo "env                  - creates a basic .env file"
 	@echo "database         	- start database with .env vars"
 	@echo "kafka            	- start local kafka"
 	@echo "unleash          	- start local unleash server"
@@ -21,14 +22,16 @@ help:
 
 port?=8000
 
-dev-static:
-	go run cmd/static/static.go $(port)
-
-dev-static-node:
-	npx http-server . -a :: -p $(port)
+env:
+	@if [ -f .env ]; then \
+			echo "File .env already exists; Please copy from .env.example manually to avoid losing any data."; \
+			echo "If you don't care about losing any keys or entries, delete your .env file and run this again"; \
+			exit 1; \
+	fi
+	cp .env.example .env
 
 migrate:
-	go run cmd/migrate/migrate.go 
+	go run cmd/migrate/migrate.go
 
 database:
 	podman-compose up
@@ -59,6 +62,7 @@ unleash:
 	podman-compose -f local/unleash-compose.yaml up
 
 infra:
+	podman-compose -f local/full-stack-compose.yaml down
 	podman-compose -f local/full-stack-compose.yaml up
 
 clean-all:
@@ -73,12 +77,18 @@ coverage:
 seed-unleash:
 	go run cmd/unleash/seed.go
 
-dev: seed-unleash
-	go run main.go
-
 parse-services:
 	go run cmd/services/parseServices.go
 
 audit:
 	docker build . -t chrome:audit
 	grype chrome:audit --fail-on medium --only-fixed
+
+dev-static-node: generate-search-index parse-services
+	npx http-server . -a :: -p $(port)
+
+dev-static: generate-search-index parse-services
+	go run cmd/static/static.go $(port)
+
+dev: seed-unleash generate-search-index parse-services
+	go run main.go

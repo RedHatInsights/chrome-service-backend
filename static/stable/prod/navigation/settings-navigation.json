@@ -71,7 +71,13 @@
                 "href": "/settings/notifications/eventlog",
                 "permissions": [
                   {
-                    "method": "isOrgAdmin"
+                    "method": "loosePermissions",
+                    "args": [
+                      [
+                        "notifications:*:*",
+                        "notifications:notifications:write"
+                      ]
+                    ]
                   }
                 ]
             },
@@ -88,6 +94,35 @@
           "appId": "learningResources",
           "title": "Learning Resources",
           "href": "/settings/learning-resources"
-      }
+      },
+      {
+          "id": "idmsvc",
+          "appId": "idmsvc",
+          "title": "Directory and Domain Services",
+          "description": "Register identity and access systems to enable machines to automatically join a domain",
+          "href": "/settings/idmsvc",
+          "icon": "PlaceholderIcon",
+          "permissions": [
+            {
+              "method": "isBeta"
+            }
+          ],
+          "alt_title": [
+              "directory",
+              "domain",
+              "ipa",
+              "freeipa",
+              "idm",
+              "sssd",
+              "ldap",
+              "kerberos",
+              "join",
+              "enrol",
+              "enroll",
+              "authentication",
+              "authorisation",
+              "authorization"
+            ]
+        }
   ]
 }

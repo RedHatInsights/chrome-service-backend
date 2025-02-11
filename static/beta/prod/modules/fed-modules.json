@@ -74,6 +74,9 @@
                 "routes": [
                     {
                         "pathname": "/iam/user-access"
+                    },
+                    {
+                      "pathname": "/iam/access-management"
                     }
                 ]
             }
@@ -252,24 +255,6 @@
             }
         ]
     },
-    "drift": {
-        "manifestLocation": "/apps/drift/fed-mods.json",
-        "modules": [
-            {
-                "id": "drift",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/drift",
-                        "isFedramp": true
-                    },
-                    {
-                        "pathname": "/ansible/drift"
-                    }
-                ]
-            }
-        ]
-    },
     "inventory": {
         "manifestLocation": "/apps/inventory/fed-mods.json",
         "modules": [
@@ -390,6 +375,18 @@
             }
         ]
     },
+    "activationKeys": {
+        "manifestLocation": "/apps/activation-keys/fed-mods.json",
+        "modules": [
+            {
+                "id": "activation-keys",
+                "module": "./RootApp",
+                "routes": [
+                    {"pathname": "/insights/connector/activation-keys"}
+                ]
+            }
+        ]
+    },
     "subscriptionInventory": {
         "manifestLocation": "/apps/subscription-inventory/fed-mods.json",
         "modules": [
@@ -498,8 +495,7 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/insights/tasks",
-                        "isFedramp": true
+                        "pathname": "/insights/tasks"
                     },
                     {
                         "pathname": "/ansible/tasks"
@@ -717,6 +713,9 @@
     },
     "imageBuilder": {
         "manifestLocation": "/apps/image-builder/fed-mods.json",
+        "analytics": {
+            "APIKey": "BUodNImBEk7R2M3evAYs0v7i8d86Nhkm"
+        },
         "modules": [
             {
                 "id": "image-builder",
@@ -1012,6 +1011,32 @@
                 "routes": [
                     {
                         "pathname": "/ansible/lightspeed-admin-dashboard"
+                    }
+                ]
+            }
+        ]
+    },
+    "ansibleSaasAdminConsole": {
+        "manifestLocation": "/apps/ansible-saas-admin-console/fed-mods.json",
+        "config": {
+        "ssoScopes": [
+                "api.iam.access"
+            ]
+        },
+        "modules": [
+            {
+                "id": "ansible-saas-admin-console",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "permissions": [
+                            {
+                                "method": "withEmail",
+                                "args": ["@redhat.com"]
+                                
+                            }
+                        ],
+                        "pathname": "/ansible/service/"
                     }
                 ]
             }

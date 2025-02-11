@@ -135,11 +135,33 @@
             ]
         },
         {
+            "title": "Ansible Service on AWS",
+            "expandable": true,
+            "routes": [
+                {
+                    "id": "ansibleSaasAdminConsole",
+                    "appId": "ansibleSaasAdminConsole",
+                    "description": "Ansible as a managed service instances",
+                    "title": "Instances",
+                    "icon": "AnsibleIcon",
+                    "permissions": [
+                        {
+                            "method": "withEmail",
+                            "args": ["@redhat.com"]
+                            
+                        }
+                    ],
+                    "product": "Ansible as a Service",
+                    "href": "/ansible/service/instances"
+                }
+            ]
+        },
+        {
             "title": "Documentation",
             "id": "documentation",
             "isExternal": true,
             "filterable": false,
-            "href": "https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/"
+            "href": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/"
         },
         {
             "groupId": "operations",
@@ -197,28 +219,6 @@
                             "appId": "approval",
                             "title": "Topics",
                             "href": "/ansible/advisor/topics",
-                            "product": "Red Hat Insights"
-                        }
-                    ]
-                },
-                {
-                    "title": "Drift",
-                    "expandable": true,
-                    "routes": [
-                        {
-                            "id": "comparision",
-                            "appId": "drift",
-                            "title": "Comparison",
-                            "href": "/ansible/drift/",
-                            "icon": "InsightsIcon",
-                            "product": "Red Hat Insights",
-                            "description": "Compare systems in your Ansible inventory to one another or against a set baseline."
-                        },
-                        {
-                            "id": "baselines",
-                            "appId": "drift",
-                            "title": "Baselines",
-                            "href": "/ansible/drift/baselines",
                             "product": "Red Hat Insights"
                         }
                     ]

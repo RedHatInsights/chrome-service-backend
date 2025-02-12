@@ -584,6 +584,7 @@
       {
         "isGroup": true,
         "title": "Ansible",
+        "id": "ansible",
         "links": [
           {
             "title": "Subscriptions Usage",

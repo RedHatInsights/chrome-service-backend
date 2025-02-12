@@ -43,7 +43,13 @@
         "id": "globalLearningResourcesPage",
         "href": "/learning-resources",
         "title": "All Learning Resources",
-        "description": "Access product documentation, tutorials, and other learning materials to support your Red Hat product use."
+        "description": "Access product documentation, tutorials, and other learning materials to support your Red Hat product use.",
+        "permissions": [
+          {
+            "method": "featureFlag",
+            "args": ["platform.learning-resources.global-learning-resources", true]
+          }
+        ]
       }
     ]
   },

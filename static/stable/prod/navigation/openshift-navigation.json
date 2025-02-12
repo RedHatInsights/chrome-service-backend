@@ -259,7 +259,9 @@
         },
         {
           "id": "openshiftVirtualization",
+          "appId": "openshift",
           "title": "OpenShift Virtualization",
+          "description": "Run and manage virtual machine workloads alongside container workloads",
           "isExternal": true,
           "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53f218b6f188e53644c4f"
         }

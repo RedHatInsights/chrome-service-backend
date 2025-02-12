@@ -36,6 +36,18 @@
     ]
   },
   {
+    "id": "globalLearningResourcesPage",
+    "links": [
+      {
+        "custom": true,
+        "id": "globalLearningResourcesPage",
+        "href": "/learning-resources",
+        "title": "All Learning Resources",
+        "description": "Access product documentation, tutorials, and other learning materials to support your Red Hat product use."
+      }
+    ]
+  },
+  {
     "id": "rhel-advisor",
     "links": [
       {

@@ -1136,7 +1136,17 @@
                      "pathname": "/staging/learning-resources-creator"
                  }
              ]
-          }
+          },
+          {
+            "id": "globalLearningResourcesPage",
+            "module": "./GlobalLearningResourcesPage",
+            "routes": [
+                {
+                    "exact": true,
+                    "pathname": "/learning-resources"
+                }
+            ]
+        }
       ]
   },
   "quay-ui-plugin": {

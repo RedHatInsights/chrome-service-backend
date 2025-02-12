@@ -953,6 +953,16 @@
                         }
                     }
                 ]
+            },
+            {
+                "id": "globalLearningResourcesPage",
+                "module": "./GlobalLearningResourcesPage",
+                "routes": [
+                    {
+                        "exact": true,
+                        "pathname": "/learning-resources"
+                    }
+                ]
             }
         ]
     },

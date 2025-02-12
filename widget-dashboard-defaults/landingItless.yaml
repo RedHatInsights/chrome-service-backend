@@ -1,0 +1,122 @@
+# yaml-language-server: $schema=./widget-schema.json
+
+name: landingPageItless
+displayName: LandingPageItless
+templateConfig:
+  sm:
+    - x: 0
+      y: 0
+      i: 'rhel#rhel'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 0
+      y: 0
+      i: 'openshift#openshift'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 0
+      y: 0
+      i: 'recentlyVisited#recentlyVisited'
+      w: 1
+      h: 7
+      maxH: 10
+      minH: 1
+    - x: 0
+      y: 0 
+      i: 'favoriteServices#favoriteServices'
+      w: 1
+      h: 6
+      maxH: 10
+      minH: 1
+  md:
+    - x: 0
+      y: 0
+      i: 'rhel#rhel'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 0
+      y: 1
+      i: 'openshift#openshift'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 1
+      y: 0
+      i: 'recentlyVisited#recentlyVisited'
+      w: 1
+      h: 6
+      maxH: 10
+      minH: 1
+    - x: 1
+      y: 1
+      i: 'favoriteServices#favoriteServices'
+      w: 1
+      h: 6
+      maxH: 10
+      minH: 1
+  lg:
+    - x: 0
+      y: 0
+      i: 'rhel#rhel'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 1
+      y: 0
+      i: 'openshift#openshift'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 2
+      y: 0
+      i: 'recentlyVisited#recentlyVisited'
+      w: 1
+      h: 7
+      maxH: 10
+      minH: 1     
+    - x: 3 
+      y: 0
+      i: 'favoriteServices#favoriteServices'
+      w: 1
+      h: 7
+      maxH: 10
+      minH: 1
+  xl:
+    - x: 0
+      y: 0
+      i: 'rhel#rhel'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 1
+      y: 0
+      i: 'openshift#openshift'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 2 
+      y: 0
+      i: 'recentlyVisited#recentlyVisited'
+      w: 1
+      h: 7
+      maxH: 10
+      minH: 1
+    - x: 3 
+      y: 0
+      i: 'favoriteServices#favoriteServices'
+      w: 1
+      h: 7
+      maxH: 10
+      minH: 1
+

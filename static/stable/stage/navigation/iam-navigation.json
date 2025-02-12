@@ -191,7 +191,9 @@
       "title": "Service Accounts",
       "appId": "serviceAccounts",
       "feoReplacement": "service-accounts",
-      "href": "/iam/service-accounts"
+      "href": "/iam/service-accounts",
+      "icon": "ServicesIcon",            
+      "description": "Authenticate and connect securely to APIs from multiple services."
     },
     {
       "id": "learningResources",

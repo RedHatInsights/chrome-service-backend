@@ -43,6 +43,16 @@ var (
 				Title: "Edge Management",
 			},
 		},
+		models.ImageBuilder: models.ModuleFederationMetadata{
+			Scope:    "landing",
+			Module:   "./ImageBuilderWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			FeatureFlag: "widget.images.hidden",
+			Config: models.WidgetConfiguration{
+				Icon:  models.RhelIcon,
+				Title: "Image Builder",
+			},
+		},
 		models.Ansible: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./AnsibleWidget",
@@ -513,8 +523,8 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			Y:                    3,
 		},
 		models.GridItem{
-			BaseWidgetDimensions: WidgetMapping[models.Edge].Defaults,
-			ID:                   "edge#edge",
+			BaseWidgetDimensions: WidgetMapping[models.ImageBuilder].Defaults,
+			ID:                   "imageBuilder#imageBuilder",
 			X:                    1,
 			Y:                    3,
 		},

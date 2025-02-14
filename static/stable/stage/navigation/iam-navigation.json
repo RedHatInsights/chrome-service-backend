@@ -7,7 +7,8 @@
       "appId": "rbac",
       "title": "My User Access",
       "href": "/iam/my-user-access",
-      "description": "View your account permissions for Red Hat Hybrid Cloud Console services."
+      "description": "View your account permissions for Red Hat Hybrid Cloud Console services.",
+      "feoReplacement": "my-user-access"
     },
     {
       "title": "User Access",
@@ -22,6 +23,7 @@
           "args": ["platform.rbac.workspaces", false]
         }
       ],
+      "feoReplacement": "user-access",
       "routes": [
         {
           "id": "overview",

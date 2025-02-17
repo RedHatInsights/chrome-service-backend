@@ -131,13 +131,6 @@ func replaceNavItem(navItem map[string]interface{}, availableReplacements map[st
 			if err != nil {
 				return nil, err
 			}
-			for _, route := range nestedRoutes {
-				nestedRoute, err := replaceNavItem(route, availableReplacements)
-				if err != nil {
-					return nil, err
-				}
-				nestedRoutes = append(nestedRoutes, nestedRoute)
-			}
 			replacementRoutes := []map[string]interface{}{}
 			for _, route := range nestedRoutes {
 				replacementRoute, err := replaceNavItem(route, availableReplacements)
@@ -158,13 +151,6 @@ func replaceNavItem(navItem map[string]interface{}, availableReplacements map[st
 			err = json.Unmarshal(serializedNavItems, &nestedNavItems)
 			if err != nil {
 				return nil, err
-			}
-			for _, navItem := range nestedNavItems {
-				nestedNavItem, err := replaceNavItem(navItem, availableReplacements)
-				if err != nil {
-					return nil, err
-				}
-				nestedNavItems = append(nestedNavItems, nestedNavItem)
 			}
 			replacementNavItems := []map[string]interface{}{}
 			for _, navItem := range nestedNavItems {

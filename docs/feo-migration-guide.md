@@ -485,7 +485,7 @@ By statically defined entry, we mean that the tile is defined as an object.
 
 **A link reference service tile entry**
 
-By statically defined entry, we mean that the tile is defined as an object.
+By link references, we mean that the tile is defined as an string.
 
 ```js
 // example of a link reference service tile entry
@@ -545,7 +545,7 @@ To find relevant service tiles you will have to consult with your team/managers/
 
 ![Section group description](./img/section-group.png)
 
-In the services.json there is a nested structure of links. Firs level is a section, second level is a group a the leafs of the `links` array are individual tiles.
+In the services.json there is a nested structure of links. First level is a section, second level is a group a the leafs of the `links` array are individual tiles.
 ```js
 [
   {
@@ -588,16 +588,21 @@ Example migration:
   {
     "description": "Solve problems once, in one place, and scale up.",
     "icon": "AutomationIcon",
-    // This is a section attribute
+    // This is the "section" attribute
     "id": "automation",
     "links": [
       {
-        // this is a group attribute
-        "id": "rhel",
+        // this is the "group" attribute
+        "id": "ansible",
         "isGroup": true,
         "links": [
           {
-            // example of unnecessary attribute for the service tile
+            "id": "remediations",
+            "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
+            "href": "/insights/remediations",
+            "icon": "InsightsIcon",
+            "title": "Remediations",
+            // Rest of the attributes are obsolete and should not be copied
             "alt_title": [
               "Remediate",
               "playbook",
@@ -611,14 +616,9 @@ Example migration:
               "Ansible",
               "patch"
             ],
-            "appId": "remediations",
-            "description": "Use Ansible Playbooks to resolve configuration, security, and compliance issues identified on your Red Hat Enterprise Linux systems.",
-            "href": "/insights/remediations",
-            "icon": "InsightsIcon",
-            "id": "remediations",
+            "appId": "remediations"
             "product": "Red Hat Insights",
-            "subtitle": "Red Hat Insights for RHEL",
-            "title": "Remediations"
+            "subtitle": "Red Hat Insights for RHEL"
           },
           // ... other configuration
         ]
@@ -660,6 +660,8 @@ In the FEO approach, search entries have to be explicitly defined. The data is n
 1. Make sure the services dropdown tiles of the affected UI module were removed from the `services.json` template and from the static `static-services-entries.json` files.
 2. Define search entries in the `deploy/frontend.yaml` file or its equivalent.
 
+**This is a good time to revisit available search entries!** We recommended discussing with your team and BU, and create the search entries from scratch.
+
 Example of search entries config:
 
 ```yaml
@@ -679,7 +681,7 @@ objects:
 
 For full documentation about available attributes, please read [frontend starter app docs](https://github.com/RedHatInsights/frontend-starter-app/blob/master/docs/frontend-operator/index.md).
 
-## CRD Clean UP
+## Frontend.yaml CRD Clean UP
 
 A few attributes in your updated CRD might be obsolete. The validation during build will pick them up. Or if your IDE is using the schema for validation, it should mark them as "additional properties", which are not allowed.
 

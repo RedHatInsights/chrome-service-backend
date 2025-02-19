@@ -60,6 +60,7 @@ compliance:
   api:
     versions:
       - v1
+      - v2
 
 content-sources:
   title: Repositories

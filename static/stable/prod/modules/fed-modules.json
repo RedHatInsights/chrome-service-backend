@@ -10,7 +10,10 @@
                 "routes": [
                     {
                         "exact": true,
-                        "pathname": "/"
+                        "pathname": "/",
+                        "props": {
+                            "layoutType": "landingPage"
+                        }
                     }
                 ]
             }
@@ -991,6 +994,16 @@
                         "props": {
                             "bundle": "application-services"
                         }
+                    }
+                ]
+            },
+            {
+                "id": "globalLearningResourcesPage",
+                "module": "./GlobalLearningResourcesPage",
+                "routes": [
+                    {
+                        "exact": true,
+                        "pathname": "/learning-resources"
                     }
                 ]
             }

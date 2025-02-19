@@ -6,7 +6,8 @@
             "id": "frontend-starter-app",
             "title": "Starter App",
             "appId": "frontend-starter-app",
-            "href": "/staging/starter"
+            "href": "/staging/starter",
+            "feoReplacement": "frontend-starter-app"
         },
         {
             "id": "widget-layout",

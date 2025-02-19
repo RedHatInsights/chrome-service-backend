@@ -23,9 +23,9 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.inventory",
-          "rhel.groups",
-          "rhel.workspaces"
+          "insights.inventory",
+          "insights.groups",
+          "insights.workspaces"
         ]
       },
       {
@@ -47,8 +47,8 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.advisories",
-          "rhel.patchSystems",
+          "insights.advisories",
+          "insights.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -77,7 +77,7 @@
               "pathway"
             ]
           },
-          "rhel.policies"
+          "insights.policies"
         ]
       }
     ]
@@ -92,7 +92,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "rhel.advisories",
+          "insights.advisories",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",
@@ -162,34 +162,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
-          "rhel.remediations"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "subscriptions",
-    "icon": "CreditCardIcon",
-    "title": "Subscriptions and Spend",
-    "description": "Subscription Services empower buying decisions. SaMS provides software usage reporting that is designed to make your subscription choices data-driven.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          {
-            "title": "Subscriptions",
-            "href": "/insights/subscriptions/rhel",
-            "icon": "OpenShiftIcon",
-            "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
-          },
-          {
-            "title": "Resource Optimization",
-            "filterable": false,
-            "href": "/insights/ros",
-            "icon": "OpenShiftIcon",
-            "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
-          }
+          "insights.remediations"
         ]
       }
     ]

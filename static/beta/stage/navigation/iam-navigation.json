@@ -177,7 +177,7 @@
           "description": "Manage how your organization authenticates to Red Hat services."
         },
         {
-          "id": "idpintegration",
+          "id": "idpIntegration",
           "appId": "iam",
           "title": "Identity Provider Integration",
           "href": "/iam/authentication-policy/identity-provider-integration",

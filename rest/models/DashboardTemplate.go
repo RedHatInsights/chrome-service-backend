@@ -16,7 +16,8 @@ import (
 type AvailableTemplates string
 
 const (
-	LandingPage AvailableTemplates = "landingPage"
+	LandingPage AvailableTemplates       = "landingPage"
+	LandingPageItless AvailableTemplates = "landingPageItless"
 )
 
 func (at *AvailableTemplates) Scan(value interface{}) error {
@@ -35,6 +36,8 @@ func (at AvailableTemplates) String() string {
 func (at AvailableTemplates) IsValid() error {
 	switch at {
 	case LandingPage:
+		return nil
+	case LandingPageItless:
 		return nil
 	}
 
@@ -58,16 +61,17 @@ const (
 	Acs                 AvailableWidgets = "acs"
 	Subscriptions       AvailableWidgets = "subscriptions"
 	SupportCases        AvailableWidgets = "supportCases"
-	Integrations		AvailableWidgets = "integrations"
+	Integrations    	AvailableWidgets = "integrations"
+	ImageBuilder        AvailableWidgets = "imageBuilder"
 )
 
 func (aw AvailableWidgets) IsValid() error {
 	switch aw {
-	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi, SupportCases, Integrations:
+	case FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, RecentlyVisited, Quay, Acs, Subscriptions, OpenShiftAi, SupportCases, Integrations, ImageBuilder:
 		return nil
 	}
 
-	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, SupportCases, Integrations, aw)
+	return fmt.Errorf("invalid widget. Expected one of [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s] got %s", FavoriteServices, NotificationsEvents, LearningResources, ExploreCapabilities, Edge, Ansible, Rhel, OpenShift, Quay, Acs, Subscriptions, OpenShiftAi, RecentlyVisited, SupportCases, Integrations, aw, ImageBuilder)
 }
 
 type BaseWidgetDimensions struct {

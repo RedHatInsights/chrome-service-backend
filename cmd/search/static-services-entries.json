@@ -36,6 +36,24 @@
     ]
   },
   {
+    "id": "globalLearningResourcesPage",
+    "links": [
+      {
+        "custom": true,
+        "id": "globalLearningResourcesPage",
+        "href": "/learning-resources",
+        "title": "All Learning Resources",
+        "description": "Access product documentation, tutorials, and other learning materials to support your Red Hat product use.",
+        "permissions": [
+          {
+            "method": "featureFlag",
+            "args": ["platform.learning-resources.global-learning-resources", true]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "rhel-advisor",
     "links": [
       {
@@ -952,5 +970,27 @@
         ]
       }
     ]
-  }
+  },
+  {
+    "id":  "iam",
+    "links":  [
+      {
+        "custom": true,
+        "id": "idpIntegration",
+        "title": "Identity Provider Integration",
+        "href": "/iam/authentication-policy/identity-provider-integration",
+        "alt_title": [
+          "Identity Provider",
+          "identity provider",
+          "idp",
+          "IDP",
+          "SSO",
+          "sso",
+          "Login",
+          "login",
+          "third party",
+          "Third Party"
+        ]
+      }
+  ]}
 ]

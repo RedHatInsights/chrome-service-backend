@@ -86,7 +86,13 @@
                     "href": "/settings/notifications/eventlog",
                     "permissions": [
                       {
-                        "method": "isOrgAdmin"
+                        "method": "loosePermissions",
+                        "args": [
+                          [
+                            "notifications:*:*",
+                            "notifications:notifications:write"
+                          ]
+                        ]
                       }
                     ]
                 },

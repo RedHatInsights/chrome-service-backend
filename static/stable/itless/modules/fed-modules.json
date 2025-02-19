@@ -9,7 +9,10 @@
                 "routes": [
                     {
                         "exact": true,
-                        "pathname": "/"
+                        "pathname": "/",
+                        "props": {
+                          "layoutType": "landingPageItless"
+                        }
                     }
                 ]
             }
@@ -45,10 +48,10 @@
                 "module": "./MyUserAccess",
                 "routes": [
                     {
-                        "pathname": "/settings"
+                        "pathname": "/iam"
                     },
                     {
-                        "pathname": "/settings/my-user-access"
+                        "pathname": "/iam/my-user-access"
                     }
                 ]
             },

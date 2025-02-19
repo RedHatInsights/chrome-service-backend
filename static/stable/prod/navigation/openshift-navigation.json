@@ -97,10 +97,22 @@
           ]
         },
         {
-          "id": "subscriptions-usage",
-          "appId": "subscriptions",
-          "title": "Subscriptions Usage",
-          "href": "/subscriptions/usage/openshift"
+          "expandable": true,
+          "title": "Subscriptions",
+          "routes": [
+            {
+              "id": "subscriptions-usage",
+              "appId": "subscriptions",
+              "title": "OpenShift Usage",
+              "href": "/subscriptions/usage/openshift"
+            },
+            {
+              "id": "annual-subscriptions",
+              "appId": "openshift",
+              "title": "Annual Subscriptions",
+              "href": "/openshift/quota"
+            }
+          ]
         },
         {
           "title": "Cost Management",

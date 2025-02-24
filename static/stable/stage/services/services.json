@@ -520,8 +520,8 @@
         "id": "rhel",
         "links": [
           {
-            "title": "Subscriptions",
-            "href": "/insights/subscriptions/rhel",
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/rhel",
             "icon": "OpenShiftIcon",
             "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
           },
@@ -540,8 +540,8 @@
         "id": "openshift",
         "links": [
           {
-            "title": "Subscriptions",
-            "href": "/openshift/subscriptions/openshift",
+            "title": "Subscriptions Usage",
+            "href": "/subscriptions/usage/openshift",
             "icon": "OpenShiftIcon",
             "description": "Monitor your OpenShift usage for both Annual and On-Demand subscriptions."
           },

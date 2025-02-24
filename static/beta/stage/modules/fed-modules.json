@@ -866,6 +866,20 @@
             }
         ]
     },
+    "assistedMigrationApp": {
+        "manifestLocation": "/apps/migration-assessment/fed-mods.json",
+        "modules": [
+          {
+            "id": "assisted-migration-app",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/openshift/migration-assessment"
+                }
+            ]
+          }
+        ]
+    },
     "assistedInstallerApp": {
       "manifestLocation": "/apps/assisted-installer-app/fed-mods.json",
       "modules": [

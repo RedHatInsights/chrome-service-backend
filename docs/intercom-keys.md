@@ -14,7 +14,7 @@ typically with one for stage (denoted by the `_DEV` ending) and one for prod (wi
 
 ## Updating chrome-service
 
-In `config.go`, you need to update `options.IntercomConfig` with the environment variable names and their corresponding secret names in the vault. In `clowdapp.yml`, you need to update `env` with the secret names that point to our `chrome-service-backend` in the vault. Also in the file, dummy secrets need to be added to `data` for CI/CD purposes (you can just copy the ones that are already provided).
+In `config.go`, you need to update `options.IntercomConfig` with the environment variable names and their corresponding secret names in the vault. **The attribute name must match the UI module name!** This can be checked from the fed-modules.json config. In `clowdapp.yml`, you need to update `env` with the secret names that point to our `chrome-service-backend` in the vault. Also in the file, dummy secrets need to be added to `data` for CI/CD purposes (you can just copy the ones that are already provided).
 
 ## Bumping the secrets version in app-interface
 

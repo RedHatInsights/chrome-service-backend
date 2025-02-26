@@ -139,6 +139,14 @@ func main() {
 		panic(activeWorkspaceRes.Error)
 	}
 
+	fmt.Println("Set a default value to the recently used workspaces' column")
+	recentlyUsedWorkspacesMigrationRes := tx.Model(&models.UserIdentity{}).Where("recently_used_workspaces IS NULL").Update("recently_used_workspaces", []byte(`[]`))
+	if recentlyUsedWorkspacesMigrationRes.Error != nil {
+		fmt.Println("Unable to migrate database!", recentlyUsedWorkspacesMigrationRes.Error.Error())
+		tx.Rollback()
+		panic(recentlyUsedWorkspacesMigrationRes.Error)
+	}
+
 	err := tx.Commit().Error
 
 	if err != nil {
@@ -156,6 +164,10 @@ func main() {
 	}
 
 	if activeWorkspaceRes.RowsAffected > 0 {
+		logrus.Infof("Migrated %d user identity visited rows", activeWorkspaceRes.RowsAffected)
+	}
+
+	if recentlyUsedWorkspacesMigrationRes.RowsAffected > 0 {
 		logrus.Infof("Migrated %d user identity visited rows", activeWorkspaceRes.RowsAffected)
 	}
 

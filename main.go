@@ -63,6 +63,7 @@ func main() {
 		subrouter.Use(m.InjectUser)
 		subrouter.Get("/hello-world", HelloWorld)
 		subrouter.Route("/last-visited", routes.MakeLastVisitedRoutes)
+		subrouter.Route("/recently-used-workspaces", routes.MakeRecentlyUsedWorkspacesRoutes)
 		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
 		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)

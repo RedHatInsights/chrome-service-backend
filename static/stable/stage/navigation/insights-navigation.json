@@ -594,7 +594,7 @@
     {
       "id": "registerSystems",
       "appId": "registration",
-      "title": "Register Systems",
+      "title": "Registration Assistant",
       "filterable": false,
       "href": "/insights/registration",
       "icon": "InsightsIcon",

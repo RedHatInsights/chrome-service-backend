@@ -979,6 +979,11 @@
         "id": "idpIntegration",
         "title": "Identity Provider Integration",
         "href": "/iam/authentication-policy/identity-provider-integration",
+        "permissions": [
+          {
+            "method": "isOrgAdmin"
+          }
+        ],
         "alt_title": [
           "Identity Provider",
           "identity provider",

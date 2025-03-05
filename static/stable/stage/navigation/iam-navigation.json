@@ -182,6 +182,11 @@
           "appId": "iam",
           "title": "Identity Provider Integration",
           "href": "/iam/authentication-policy/identity-provider-integration",
+          "permissions": [
+            {
+              "method": "isOrgAdmin"
+            }
+          ],
           "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage identity provider integration for your organization."

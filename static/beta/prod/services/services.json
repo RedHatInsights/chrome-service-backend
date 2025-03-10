@@ -49,7 +49,7 @@
           },
           "ansible.inventory",
           {
-            "title": "Register Systems",
+            "title": "Registration Assistant",
             "filterable": false,
             "href": "/ansible/registration",
             "icon": "AnsibleIcon",
@@ -605,7 +605,7 @@
         "title": "Ansible",
         "links": [
           {
-            "title": "Register Systems",
+            "title": "Registration Assistant",
             "filterable": false,
             "href": "/ansible/registration",
             "icon": "AnsibleIcon",

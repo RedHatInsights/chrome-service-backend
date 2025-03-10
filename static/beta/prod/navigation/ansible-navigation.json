@@ -148,7 +148,7 @@
                         {
                             "method": "withEmail",
                             "args": ["@redhat.com"]
-                            
+
                         }
                     ],
                     "product": "Ansible as a Service",
@@ -248,7 +248,7 @@
         {
             "appId": "registration",
             "id": "registerSystems",
-            "title": "Register Systems",
+            "title": "Registration Assistant",
             "filterable": false,
             "href": "/ansible/registration",
             "product": "Red Hat Insights",

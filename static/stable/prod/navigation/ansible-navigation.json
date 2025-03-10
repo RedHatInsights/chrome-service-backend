@@ -241,7 +241,7 @@
         {
             "id": "registerSystems",
             "appId": "registration",
-            "title": "Register Systems",
+            "title": "Registration Assistant",
             "filterable": false,
             "href": "/ansible/registration",
             "product": "Red Hat Insights",

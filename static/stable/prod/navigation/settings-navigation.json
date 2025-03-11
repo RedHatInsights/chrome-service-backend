@@ -32,7 +32,8 @@
               "subscriptions",
               "account",
               "credentials"
-          ]
+          ],
+          "feoReplacement": "integrations"
       },
       {
         "title": "Notifications",

@@ -576,7 +576,7 @@ To migrate, follow these steps:
 
 1. Make sure the referenced link or the statically defined entry has the `id` attribute.
 
-2. Run the `parse-services` to generate the `services-generated.json` or look at the response payload of https://console.stage.redhat.com/api/chrome-service/v1/static/stable/stage/services/services-generated.json response.
+2. Run `make parse-services` to generate the `services-generated.json` or look at the response payload of https://console.stage.redhat.com/api/chrome-service/v1/static/stable/stage/services/services-generated.json response.
 
 3. Transfer the corresponding configuration from the `services-generated.json` to the Frontend resource. Only a subset of attributes is valid for the Frontend resources. There is no need for all navigation items attributes as most of them are not used.
 

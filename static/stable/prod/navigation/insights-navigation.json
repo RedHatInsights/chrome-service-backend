@@ -540,6 +540,32 @@
       ]
     },
     {
+      "id": "digitalRoadmap",
+      "expandable": true,
+      "title": "Planning",
+      "description": "Tailored forward-looking roadmap information for RHEL customers, as well as tailored information on how current RHEL minor and major releases will affect the customers environment.",
+      "routes": [
+        {
+          "id": "lifeCycle",
+          "appId": "digitalRoadmap",
+          "title": "Life cycle",
+          "href": "/insights/digital-roadmap/lifecycle",
+          "product": "Red Hat Insights",
+          "alt_title": ["life cycle"],
+          "description": "Support status of operating systems and applications."
+        },
+        {
+          "id": "upcoming",
+          "appId": "digitalRoadmap",
+          "title": "Roadmap",
+          "href": "/insights/digital-roadmap/roadmap",
+          "product": "Red Hat Insights",
+          "alt_title": ["upcoming"],
+          "description": "Upcoming changes in RHEL and applications."
+        }
+      ]
+    },
+    {
       "title": "Business",
       "expandable": true,
       "routes": [
@@ -670,17 +696,6 @@
       "filterable": false,
       "href": "/insights/learning-resources",
       "product": "Red Hat Insights"
-    },
-    {
-      "id": "digitalRoadmap",
-      "appId": "digitalRoadmap",
-      "title": "Digital Roadmap",
-      "href": "/insights/digital-roadmap",
-      "product": "Red Hat Insights",
-      "description": "Tailored forward-looking roadmap information for RHEL customers, as well as tailored information on how current RHEL minor and major releases will affect the customers environment.",
-      "alt_title": [
-        "digital-roadmap"
-      ]
     }
   ]
 }

@@ -509,7 +509,12 @@ func getLandingPageBaseLayout(x int) []models.GridItem {
 			X:                    3,
 			Y:                    0,
 		},
-
+		models.GridItem{
+			BaseWidgetDimensions: WidgetMapping[models.Subscriptions].Defaults,
+			ID:                   "subscriptions#subscriptions",
+			X:                    3,
+			Y:                    0,
+		},
 		models.GridItem{
 			BaseWidgetDimensions: WidgetMapping[models.FavoriteServices].Defaults,
 			ID:                   "favoriteServices#favoriteServices",

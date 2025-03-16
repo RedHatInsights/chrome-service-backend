@@ -3,7 +3,7 @@ module github.com/RedHatInsights/chrome-service-backend
 go 1.20
 
 require (
-	github.com/Unleash/unleash-client-go/v3 v3.7.4
+	github.com/Unleash/unleash-client-go/v4 v4.3.0
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/go-chi/cors v1.2.1
 	github.com/google/uuid v1.3.0
@@ -48,7 +48,7 @@ require (
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
-	github.com/twmb/murmur3 v1.1.5 // indirect
+	github.com/twmb/murmur3 v1.1.8 // indirect
 	github.com/xdg/scram v1.0.5 // indirect
 	github.com/xdg/stringprep v1.0.3 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect

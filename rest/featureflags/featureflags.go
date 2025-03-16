@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
-	"github.com/Unleash/unleash-client-go/v3"
+	"github.com/Unleash/unleash-client-go/v4"
 	"github.com/sirupsen/logrus"
 )
 

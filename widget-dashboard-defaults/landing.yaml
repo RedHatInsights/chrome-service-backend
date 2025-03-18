@@ -12,56 +12,63 @@ templateConfig:
       maxH: 10
       minH: 1
     - x: 0
-      y: 0
+      y: 1
       i: 'openshift#openshift'
       w: 1
       h: 4
       maxH: 10
       minH: 1
     - x: 0
-      y: 0
+      y: 2
       i: 'ansible#ansible'
       w: 1
       h: 4
       maxH: 10
       minH: 1
     - x: 0
-      y: 2
-      i: 'exploreCapabilities#exploreCapabilities'
-      w: 1
-      h: 6
-      maxH: 10
-      minH: 1
-    - x: 0
-      y: 0
+      y: 3
       i: 'recentlyVisited#recentlyVisited'
       w: 1
-      h: 7
+      h: 5
       maxH: 10
       minH: 1
     - x: 0
-      y: 3
+      y: 4
       i: 'favoriteServices#favoriteServices'
+      w: 1
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 0
+      y: 5
+      i: 'subscriptions#subscriptions'
       w: 1
       h: 6
       maxH: 10
       minH: 1
     - x: 0
-      y: 3
+      y: 6
+      i: 'exploreCapabilities#exploreCapabilities'
+      w: 1
+      h: 13
+      maxH: 13
+      minH: 1 
+    - x: 0
+      y: 7
       i: 'openshiftAi#openshiftAi'
       w: 1
       h: 4
       maxH: 10
       minH: 1
     - x: 0
-      y: 3
+      y: 8
       i: 'imageBuilder#imageBuilder'
       w: 1
       h: 4
       maxH: 10
       minH: 1
     - x: 0
-      y: 3
+      y: 9
       i: 'acs#acs'
       w: 1
       h: 4
@@ -93,32 +100,39 @@ templateConfig:
       y: 0
       i: 'recentlyVisited#recentlyVisited'
       w: 1
-      h: 6
+      h: 3
       maxH: 10
       minH: 1
     - x: 1
       y: 1
       i: 'favoriteServices#favoriteServices'
       w: 1
-      h: 6
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 1
+      y: 2
+      i: 'subscriptions#subscriptions'
+      w: 1
+      h: 5
       maxH: 10
       minH: 1
     - x: 0
-      y: 2
+      y: 3
       i: 'exploreCapabilities#exploreCapabilities'
       w: 2
       h: 6
       maxH: 10
       minH: 1
     - x: 0
-      y: 2
+      y: 4
       i: 'imageBuilder#imageBuilder'
       w: 1
       h: 4
       maxH: 10
       minH: 1
     - x: 1
-      y: 2
+      y: 4
       i: 'openshiftAi#openshiftAi'
       w: 1
       h: 4
@@ -164,14 +178,21 @@ templateConfig:
       y: 0
       i: 'recentlyVisited#recentlyVisited'
       w: 1
-      h: 7
+      h: 4
       maxH: 10
-      minH: 1     
+      minH: 1 
     - x: 2
       y: 2
       i: 'favoriteServices#favoriteServices'
       w: 1
-      h: 7
+      h: 4
+      maxH: 10
+      minH: 1
+    - x: 2
+      y: 3
+      i: 'subscriptions#subscriptions'
+      w: 1
+      h: 6
       maxH: 10
       minH: 1
     - x: 0
@@ -228,14 +249,21 @@ templateConfig:
       y: 0
       i: 'recentlyVisited#recentlyVisited'
       w: 1
-      h: 7
+      h: 3
       maxH: 10
       minH: 1
     - x: 3
-      y: 3
+      y: 1
       i: 'favoriteServices#favoriteServices'
       w: 1
-      h: 7
+      h: 5
+      maxH: 10
+      minH: 1
+    - x: 3
+      y: 2
+      i: 'subscriptions#subscriptions'
+      w: 1
+      h: 6
       maxH: 10
       minH: 1
     - x: 0

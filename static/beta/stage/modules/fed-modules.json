@@ -1178,5 +1178,22 @@
     "runtimes": {
         "manifestLocation": "/apps/runtimes/fed-mods.json",
         "modules": []
+    },
+    "roadmap": {
+        "manifestLocation": "/apps/roadmap/fed-mods.json",
+        "modules": [
+            {
+                "id": "roadmap",
+                "module": "./RootApp",
+                "routes": [
+                    {
+                        "pathname": "/digital-roadmap/lifecycle"
+                    },
+                    {
+                        "pathname": "/digital-roadmap/roadmap"
+                    }
+                ]
+            }
+        ]
     }
 }

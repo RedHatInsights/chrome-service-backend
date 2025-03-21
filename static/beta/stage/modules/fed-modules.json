@@ -1187,10 +1187,10 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/digital-roadmap/lifecycle"
+                        "pathname": "/roadmap/lifecycle"
                     },
                     {
-                        "pathname": "/digital-roadmap/roadmap"
+                        "pathname": "/roadmap/roadmap"
                     }
                 ]
             }

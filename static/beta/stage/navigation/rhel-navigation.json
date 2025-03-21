@@ -544,7 +544,7 @@
           "id": "lifeCycle",
           "appId": "roadmap",
           "title": "Life cycle",
-          "href": "/insights/digital-roadmap/lifecycle",
+          "href": "/insights/roadmap/lifecycle",
           "product": "Red Hat Insights",
           "alt_title": ["life cycle"],
           "description": "Support status of operating systems and applications."
@@ -553,7 +553,7 @@
           "id": "upcoming",
           "appId": "roadmap",
           "title": "Roadmap",
-          "href": "/insights/digital-roadmap/roadmap",
+          "href": "/insights/roadmap/roadmap",
           "product": "Red Hat Insights",
           "alt_title": ["upcoming"],
           "description": "Upcoming changes in RHEL and applications."

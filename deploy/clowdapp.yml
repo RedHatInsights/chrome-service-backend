@@ -229,3 +229,6 @@ parameters:
   name: FRONTEND_ENVIRONMENT
   # fallback to stage environment if not set
   value: stage
+- description: Maximum number of recently used workspaces that the Chrome back end will store in the database for each user.
+  name: RECENTLY_USED_WORKSPACES_MAX_SAVED
+  value: '10'

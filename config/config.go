@@ -12,6 +12,10 @@ import (
 	clowder "github.com/redhatinsights/app-common-go/pkg/api/v1"
 )
 
+// DefaultMaximumNumberRecentlyUsedWorkspaces sets a default number for the maximum amount of "recently used
+// workspaces" we want to store in Chrome's database.
+const DefaultMaximumNumberRecentlyUsedWorkspaces = 10
+
 type KafkaSSLCfg struct {
 	KafkaCA       string
 	KafkaUsername string
@@ -65,23 +69,24 @@ type WidgetDashboardConfig struct {
 }
 
 type ChromeServiceConfig struct {
-	WebPort           int
-	OpenApiSpecPath   string
-	DbHost            string
-	DbUser            string
-	DbPassword        string
-	DbPort            int
-	DbName            string
-	MetricsPort       int
-	Test              bool
-	LogLevel          string
-	DbSSLMode         string
-	DbSSLRootCert     string
-	KafkaConfig       KafkaCfg
-	IntercomConfig    IntercomConfig
-	FeatureFlagConfig FeatureFlagsConfig
-	DebugConfig       DebugConfig
-	DashboardConfig   WidgetDashboardConfig
+	WebPort                             int
+	OpenApiSpecPath                     string
+	DbHost                              string
+	DbUser                              string
+	DbPassword                          string
+	DbPort                              int
+	DbName                              string
+	MetricsPort                         int
+	Test                                bool
+	LogLevel                            string
+	DbSSLMode                           string
+	DbSSLRootCert                       string
+	KafkaConfig                         KafkaCfg
+	IntercomConfig                      IntercomConfig
+	FeatureFlagConfig                   FeatureFlagsConfig
+	DebugConfig                         DebugConfig
+	DashboardConfig                     WidgetDashboardConfig
+	MaximumNumberRecentlyUsedWorkspaces int
 }
 
 const RdsCaLocation = "/app/rdsca.cert"
@@ -192,6 +197,13 @@ func init() {
 		options.FeatureFlagConfig.Port = 4242
 		options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
 
+		// Attempt parsing the maximum number of recently used workspaces specified via the environment variable.
+		number, numConvErr := strconv.Atoi(os.Getenv("RECENTLY_USED_WORKSPACES_MAX_SAVED"))
+		if numConvErr != nil {
+			options.MaximumNumberRecentlyUsedWorkspaces = DefaultMaximumNumberRecentlyUsedWorkspaces
+		} else {
+			options.MaximumNumberRecentlyUsedWorkspaces = number
+		}
 	}
 
 	// env variables from .env or pod env variables

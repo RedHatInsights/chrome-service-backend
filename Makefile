@@ -20,7 +20,7 @@ help:
 	@echo "audit 		 	- run grype audit on the docker image"
 	@echo "generate-search-index 	- generate search index"
 
-port?=8000
+port?=8090
 
 env:
 	@if [ -f .env ]; then \

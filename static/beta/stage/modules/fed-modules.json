@@ -1187,10 +1187,10 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/roadmap/lifecycle"
+                        "pathname": "/insights/roadmap/lifecycle"
                     },
                     {
-                        "pathname": "/roadmap/roadmap"
+                        "pathname": "/insights/roadmap/roadmap"
                     }
                 ]
             }

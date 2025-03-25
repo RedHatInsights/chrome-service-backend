@@ -491,10 +491,10 @@
       "description": "Tailored forward-looking roadmap information for RHEL customers, as well as tailored information on how current RHEL minor and major releases will affect the customers environment.",
       "routes": [
         {
-          "id": "lifeCycle",
+          "id": "lifecycle",
           "appId": "roadmap",
           "title": "Lifecycle",
-          "href": "/insights/roadmap/lifecycle",
+          "href": "/insights/planning/lifecycle",
           "product": "Red Hat Insights",
           "alt_title": ["lifecycle"],
           "description": "Support status of operating systems and applications."
@@ -503,7 +503,7 @@
           "id": "upcoming",
           "appId": "roadmap",
           "title": "Roadmap",
-          "href": "/insights/roadmap/roadmap",
+          "href": "/insights/planning/roadmap",
           "product": "Red Hat Insights",
           "alt_title": ["upcoming"],
           "description": "Upcoming changes in RHEL and applications."

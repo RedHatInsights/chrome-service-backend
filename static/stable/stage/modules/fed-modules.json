@@ -1272,22 +1272,22 @@
   "runtimes": {
       "manifestLocation": "/apps/runtimes/fed-mods.json",
       "modules": []
-    },
-   "roadmap": {
-       "manifestLocation": "/apps/roadmap/fed-mods.json",
-       "modules": [
-           {
-               "id": "roadmap",
-               "module": "./RootApp",
-               "routes": [
-                   {
-                       "pathname": "/insights/roadmap/lifecycle"
-                   },
-                   {
-                       "pathname": "/insights/roadmap/roadmap"
-		   }
-	       ]
-	   }
-	]
+  },
+  "roadmap": {
+    "manifestLocation": "/apps/roadmap/fed-mods.json",
+    "modules": [
+      {
+        "id": "roadmap",
+        "module": "./RootApp",
+          "routes": [
+            {
+              "pathname": "/insights/roadmap/lifecycle"
+            },
+            {
+              "pathname": "/insights/roadmap/roadmap"
+            }
+        ]
+      }
+    ]
   }
 }

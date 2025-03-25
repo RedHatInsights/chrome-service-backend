@@ -728,20 +728,6 @@
             }
         ]
     },
-    "digitalRoadmap": {
-        "manifestLocation": "/apps/digital-roadmap/fed-mods.json",
-        "modules": [
-            {
-                "id": "digital-roadmap",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/digital-roadmap"
-                    }
-                ]
-            }
-        ]
-    },
     "malware": {
         "manifestLocation": "/apps/malware/fed-mods.json",
         "modules": [
@@ -1047,7 +1033,7 @@
                             {
                                 "method": "withEmail",
                                 "args": ["@redhat.com"]
-                                
+
                             }
                         ],
                         "pathname": "/ansible/service/"

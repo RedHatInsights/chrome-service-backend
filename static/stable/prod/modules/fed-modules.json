@@ -287,15 +287,15 @@
             }
         ]
     },
-    "digitalRoadmap": {
-        "manifestLocation": "/apps/digitalRoadmap/fed-mods.json",
-        "modules": [
+    "roadmap": {
+       "manifestLocation": "/apps/roadmap/fed-mods.json",
+       "modules": [
             {
-                "id": "digital-roadmap",
+                "id": "roadmap",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/insights/digital-roadmap"
+                        "pathname": "/insights/planning"
                     }
                 ]
             }

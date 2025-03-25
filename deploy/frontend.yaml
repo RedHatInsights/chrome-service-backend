@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: digital-roadmap
+objects:
+  - apiVersion: cloud.redhat.com/v1alpha1
+    kind: Frontend
+    metadata:
+      name: digital-roadmap
+    spec:
+      API:
+        versions:
+          - v1
+      envName: ${ENV_NAME}
+      feoConfigEnabled: true # flags a frontend to be ready for FEO features
+      title: Starter App
+      deploymentRepo: https://github.com/RedHatInsights/digital-roadmap
+      frontend:
+        paths:
+          - /apps/digital-roadmap
+      image: ${IMAGE}:${IMAGE_TAG}
+
+      module:
+        manifestLocation: '/apps/digital-roadmap/fed-mods.json'
+        modules:
+          - id: 'roadmap'
+            module: './RootApp'
+            routes:
+              - pathname: /insights/roadmap
+
+parameters:
+  - name: ENV_NAME
+    required: true
+  - name: IMAGE_TAG
+    required: true
+  - name: IMAGE
+    value: quay.io/cloudservices/digital-roadmap

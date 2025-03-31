@@ -143,6 +143,9 @@
         "fullProfile": {
           "type": "boolean"
         },
+        "cdnPath": {
+          "type": "string"
+        },
         "config": {
           "$ref": "#/$defs/moduleConfig"
         },

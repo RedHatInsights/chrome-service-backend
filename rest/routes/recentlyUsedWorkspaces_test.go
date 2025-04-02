@@ -320,8 +320,127 @@ func TestSaveWorkspacesSuccessfully(t *testing.T) {
 		t.Errorf(`more workspaces were received in the response body than the maximum number of workspaces to save in the database. Want "%d", got "%d"`, configuration.MaximumNumberRecentlyUsedWorkspaces, len(generatedWorkspaces))
 	}
 
-	// Assert that the
+	// Assert that the workspaces in the response are exactly the ones that we expect.
 	expectedWorkspaces := generatedWorkspaces[:configuration.MaximumNumberRecentlyUsedWorkspaces]
+	for _, wp := range responseBody.Data {
+		i := slices.IndexFunc(expectedWorkspaces, func(expectedWorkspace models.Workspace) bool {
+			return expectedWorkspace.Id == wp.Id
+		})
+
+		if i == -1 {
+			t.Errorf(`workspace "%v" was not found in the expected workspaces' slice: %v'`, wp, expectedWorkspaces)
+		}
+	}
+}
+
+// TestSaveWorkspacesWithRepeatedAndOverLimit tests that when repeated workspaces are specified, they're removed from
+// the list of workspaces to be saved and moved to the top. Also, it makes sure that no more than the allowed number
+// of workspaces are saved in the database.
+func TestSaveWorkspacesWithRepeatedAndOverLimit(t *testing.T) {
+	database.Init()
+
+	// Generate one workspace more than the maximum number of workspaces we store in the database.
+	generatedWorkspaces := generateWorkspace(t, configuration.MaximumNumberRecentlyUsedWorkspaces)
+
+	// Generate some repeated UUIDs.
+	var repeatedUuids []uuid.UUID
+	for i := 0; i < 3; i++ {
+		generatedUuid, err := uuid.NewUUID()
+		if err != nil {
+			t.Fatalf(`unable to generate UUID: %s`, err)
+		}
+
+		repeatedUuids = append(repeatedUuids, generatedUuid)
+	}
+
+	// Append six pairs of repeated workspaces at the end of the payload we are about to send.
+	for i := 0; i < 6; i++ {
+		generatedWorkspaces = append(generatedWorkspaces, models.Workspace{
+			Id:       repeatedUuids[i%3].String(),
+			ParentId: repeatedUuids[i%3].String(),
+			Type:     "standard",
+			Name:     repeatedUuids[i%3].String(),
+		})
+	}
+
+	// Serialize the body.
+	requestBody, err := json.Marshal(generatedWorkspaces)
+	if err != nil {
+		t.Fatalf(`unable to marshal the list of workspaces: %s`, err)
+	}
+
+	// Send the request.
+	request, err := http.NewRequest("POST", "/recently-used-workspaces", bytes.NewReader(requestBody))
+	if err != nil {
+		t.Fatalf("unable to create a request for the test: %s", err)
+	}
+
+	requestRecorder := httptest.NewRecorder()
+
+	// Create an identity object in the database and set it up in the request.
+	user := models.UserIdentity{AccountId: "12345"}
+
+	err = database.
+		DB.
+		Create(&user).
+		Error
+
+	if err != nil {
+		t.Errorf("unable to save the mock user identity in the database: %s", err)
+	}
+
+	ctx := context.WithValue(context.Background(), util.USER_CTX_KEY, user)
+	request = request.WithContext(ctx)
+
+	// Handle the request.
+	handlerUnderTest := http.HandlerFunc(SaveRecentlyUsedWorkspaces)
+	handlerUnderTest.ServeHTTP(requestRecorder, request)
+
+	// Asser that the status code is the expected one.
+	if requestRecorder.Code != http.StatusCreated {
+		t.Fatalf(`unexpected status code received when saving the workspaces in the database. Want "%d", got "%d"`, http.StatusCreated, requestRecorder.Code)
+	}
+
+	// Unmarshal the response body.
+	var responseBody util.ListResponse[models.Workspace]
+	if err := json.Unmarshal(requestRecorder.Body.Bytes(), &responseBody); err != nil {
+		t.Fatalf(`unable to unmarslah the response body: %s`, err)
+	}
+
+	// Assert that the response body contains exactly the maximum number of recently used workspaces.
+	if len(responseBody.Data) != (configuration.MaximumNumberRecentlyUsedWorkspaces) {
+		t.Errorf(`more workspaces were received in the response body than the maximum number of workspaces to save in the database. Want "%d", got "%d"`, configuration.MaximumNumberRecentlyUsedWorkspaces, len(generatedWorkspaces))
+	}
+
+	// Assert that the first three workspaces are the repeated ones and that are in the proper order.
+	if responseBody.Data[0].Id != repeatedUuids[0].String() {
+		t.Errorf(`unexpected response received. Want the first workspace to have the first repeated UUID, but did not get that.`)
+	}
+
+	if responseBody.Data[1].Id != repeatedUuids[1].String() {
+		t.Errorf(`unexpected response received. Want the second workspace to have the second repeated UUID, but did not get that.`)
+	}
+
+	if responseBody.Data[2].Id != repeatedUuids[2].String() {
+		t.Errorf(`unexpected response received. Want the second workspace to have the second repeated UUID, but did not get that.`)
+	}
+
+	// Since we created three pairs of duplicated workspaces, and since the duplications will be removed from the
+	// back end, we need to add one element of each pair to the expected workspaces.
+	var expectedWorkspaces []models.Workspace
+	expectedWorkspaces = append(expectedWorkspaces, generatedWorkspaces[configuration.MaximumNumberRecentlyUsedWorkspaces+1])
+	expectedWorkspaces = append(expectedWorkspaces, generatedWorkspaces[configuration.MaximumNumberRecentlyUsedWorkspaces+2])
+	expectedWorkspaces = append(expectedWorkspaces, generatedWorkspaces[configuration.MaximumNumberRecentlyUsedWorkspaces+3])
+
+	// As the duplicated workspaces were appended to the end of the "generatedWorkspaces" slice, we need to take the
+	// first non-duplicated workspaces from that very same slice, since those will also be present in the response. The
+	// last three will be discarded because we sent more workspaces than the maximum allowed of workspaces to save by
+	// the back end.
+	expectedWorkspaces = append(expectedWorkspaces, generatedWorkspaces[:configuration.MaximumNumberRecentlyUsedWorkspaces-3]...)
+
+	// However, we need to make sure to add the
+
+	// Assert that the workspaces in the response are exactly the ones that we expect.
 	for _, wp := range responseBody.Data {
 		i := slices.IndexFunc(expectedWorkspaces, func(expectedWorkspace models.Workspace) bool {
 			return expectedWorkspace.Id == wp.Id

@@ -11,6 +11,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 	"net/http"
+	"slices"
 	"strings"
 )
 
@@ -72,6 +73,51 @@ func validateWorkspace(workspace models.Workspace) []string {
 	}
 
 	return errors
+}
+
+// cleanIncomingWorkspaces puts the repeated workspaces in the top of the list and also trims the given slice to the
+// maximum number of recently used workspaces that we are allowed to save in the database.
+func cleanIncomingWorkspaces(workspaces []models.Workspace) []models.Workspace {
+	// Keep track of the repeated keys to be able to insert them first and in the order that they're present in the
+	// incoming array. The most recently used repeated workspace goes first:
+	//
+	// [1, 2, 2, 1] will turn into [1, 2].
+	// [5, 6, 2, 1, 4, 9, 1, 2] will turn into [2, 1, ... ]
+	var repeatedKeys []string
+	workspaceMap := make(map[string]models.Workspace)
+	for _, workspace := range workspaces {
+		if _, ok := workspaceMap[workspace.Id]; ok {
+			repeatedKeys = append(repeatedKeys, workspace.Id)
+		}
+
+		workspaceMap[workspace.Id] = workspace
+	}
+
+	// If there are any repeated keys, insert those workspaces first in the resulting list.
+	var resultingList []models.Workspace
+	for _, workspaceId := range repeatedKeys {
+		resultingList = append(resultingList, workspaceMap[workspaceId])
+	}
+
+	// Insert the rest of the incoming workspaces in our resulting list. Make sure to skip the repeated workspaces as
+	// we already inserted them in the previous step.
+	for _, workspace := range workspaces {
+		isDuplicated := slices.IndexFunc(repeatedKeys, func(repeatedKey string) bool {
+			return repeatedKey == workspace.Id
+		}) != -1
+
+		if !isDuplicated {
+			resultingList = append(resultingList, workspace)
+		}
+	}
+
+	// When the resulting list is greater than the maximum number of recently used workspaces we are allowed to store,
+	// we need to trim the last workspaces out of the list.
+	if len(resultingList) > configuration.MaximumNumberRecentlyUsedWorkspaces {
+		return resultingList[:configuration.MaximumNumberRecentlyUsedWorkspaces]
+	} else {
+		return resultingList
+	}
 }
 
 // sendJSONResponse is a helper function to be able to send JSON responses to the callers.
@@ -169,15 +215,11 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Try saving the most recently used workspaces in the database. Also, take into account the maximum number of
-	// recently used workspaces we want to save in the database.
-	var workspacesToSave []models.Workspace
-	if len(requestWorkspaces) > configuration.MaximumNumberRecentlyUsedWorkspaces {
-		workspacesToSave = requestWorkspaces[:configuration.MaximumNumberRecentlyUsedWorkspaces]
-	} else {
-		workspacesToSave = requestWorkspaces
-	}
+	// Put the duplicated workspaces in the top of the list and trim the workspaces that exceed the maximum number of
+	// recently used workspaces we are allowed to store in the database.
+	workspacesToSave := cleanIncomingWorkspaces(requestWorkspaces)
 
+	// Save the most recently used workspaces in the database.
 	if err := service.SaveRecentlyUsedWorkspaces(&user, workspacesToSave); err != nil {
 		logrus.Errorf(`unable to save the recently used workspaces in the database: %s`, err)
 

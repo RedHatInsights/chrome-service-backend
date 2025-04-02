@@ -867,7 +867,7 @@
         ]
     },
     "assistedMigrationApp": {
-        "manifestLocation": "/apps/migration-assessment/fed-mods.json",
+        "manifestLocation": "/apps/assisted-migration-app/fed-mods.json",
         "modules": [
           {
             "id": "assisted-migration-app",

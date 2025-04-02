@@ -139,7 +139,6 @@ func main() {
 		panic(activeWorkspaceRes.Error)
 	}
 
-	fmt.Println("Set a default value to the recently used workspaces' column")
 	recentlyUsedWorkspacesMigrationRes := tx.Model(&models.UserIdentity{}).Where("recently_used_workspaces IS NULL").Update("recently_used_workspaces", []byte(`[]`))
 	if recentlyUsedWorkspacesMigrationRes.Error != nil {
 		fmt.Println("Unable to migrate database!", recentlyUsedWorkspacesMigrationRes.Error.Error())

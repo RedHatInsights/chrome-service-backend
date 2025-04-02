@@ -288,8 +288,8 @@
         ]
     },
     "roadmap": {
-       "manifestLocation": "/apps/roadmap/fed-mods.json",
-       "modules": [
+        "manifestLocation": "/apps/roadmap/fed-mods.json",
+        "modules": [
             {
                 "id": "roadmap",
                 "module": "./RootApp",

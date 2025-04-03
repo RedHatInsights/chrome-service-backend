@@ -544,7 +544,6 @@
       "expandable": true,
       "title": "Planning",
       "description": "Tailored forward-looking roadmap information for RHEL customers, as well as tailored information on how current RHEL minor and major releases will affect the customers environment.",
-      "feoReplacement": "planning",
       "routes": [
         {
           "id": "lifeCycle",

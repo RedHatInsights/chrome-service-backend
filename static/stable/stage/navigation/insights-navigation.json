@@ -620,7 +620,8 @@
       "description": "Tailored forward-looking roadmap information for RHEL customers, as well as tailored information on how current RHEL minor and major releases will affect the customers environment.",
       "alt_title": [
         "digital-roadmap"
-      ]
+      ],
+      "feoReplacement": "planning"
     }
   ]
 }

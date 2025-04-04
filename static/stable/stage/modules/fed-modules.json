@@ -1147,7 +1147,12 @@
              "module": "./Creator",
              "routes": [
                  {
-                     "pathname": "/staging/learning-resources-creator"
+                     "pathname": "/learning-resources/creator",
+                     "exact": true,
+                     "permissions": [{
+                        "method": "featureFlag",
+                        "args": ["platform.chrome.quickstarts.creator", true]
+                     }]
                  }
              ]
           },

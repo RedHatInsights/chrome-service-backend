@@ -30,7 +30,7 @@ module.exports = {
 
 To have full development support for the latest FEO features, update the build and development dependencies in your project. The tools are validating the CRD during development/build time.
 
-Make sure to upgrade `@redhat-cloud-services/frontend-components-config@^6.4.5` and `@redhat-cloud-services/frontend-components-config-utilities@^4.1.4` dependencies. Do not pin the versions. Use the `^` version range to ensure you have the latest version when upgrading. These should be listed in your project `package.json`. Your project may have one, or both dependencies listed. A package is installed if:
+Make sure to upgrade `@redhat-cloud-services/frontend-components-config@^6.5.0` and `@redhat-cloud-services/frontend-components-config-utilities@^4.2.0` dependencies. Do not pin the versions. Use the `^` version range to ensure you have the latest version when upgrading. These should be listed in your project `package.json`. Your project may have one, or both dependencies listed. A package is installed if:
   - `@redhat-cloud-services/frontend-components-config` if you are using the FEC binary for your build and development, or if you are creating your webpack config using the presets from the package.
   - `@redhat-cloud-services/frontend-components-config-utilities` if you are using the webpack development proxy directly and not via the config package.
 

@@ -16,7 +16,7 @@ import (
 type AvailableTemplates string
 
 const (
-	LandingPage AvailableTemplates       = "landingPage"
+	LandingPage       AvailableTemplates = "landingPage"
 	LandingPageItless AvailableTemplates = "landingPageItless"
 )
 
@@ -61,7 +61,7 @@ const (
 	Acs                 AvailableWidgets = "acs"
 	Subscriptions       AvailableWidgets = "subscriptions"
 	SupportCases        AvailableWidgets = "supportCases"
-	Integrations    	AvailableWidgets = "integrations"
+	Integrations        AvailableWidgets = "integrations"
 	ImageBuilder        AvailableWidgets = "imageBuilder"
 )
 
@@ -315,7 +315,7 @@ const (
 	ACSIcon              WidgetIcons = "ACSIcon"
 	OpenShiftAiIcon      WidgetIcons = "OpenShiftAiIcon"
 	HeadsetIcon          WidgetIcons = "HeadsetIcon"
-	IntegrationsIcon	 WidgetIcons = "IntegrationsIcon"
+	IntegrationsIcon     WidgetIcons = "IntegrationsIcon"
 )
 
 func (wi WidgetIcons) IsValid() error {
@@ -328,8 +328,9 @@ func (wi WidgetIcons) IsValid() error {
 }
 
 type WidgetHeaderLink struct {
-	Title string `json:"title,omitempty"`
-	Href  string `json:"href,omitempty"`
+	Title       string `json:"title,omitempty"`
+	Href        string `json:"href,omitempty"`
+	FeatureFlag string `json:"featureFlag,omitempty"`
 }
 
 type WidgetPermissionMethods string
@@ -355,12 +356,12 @@ type WidgetConfiguration struct {
 }
 
 type ModuleFederationMetadata struct {
-	Scope      string               `json:"scope"`
-	Module     string               `json:"module"`
-	ImportName string               `json:"importName,omitempty"`
-	FeatureFlag string              `json:"featureFlag,omitempty"`
-	Defaults   BaseWidgetDimensions `json:"defaults"`
-	Config     WidgetConfiguration  `json:"config"`
+	Scope       string               `json:"scope"`
+	Module      string               `json:"module"`
+	ImportName  string               `json:"importName,omitempty"`
+	FeatureFlag string               `json:"featureFlag,omitempty"`
+	Defaults    BaseWidgetDimensions `json:"defaults"`
+	Config      WidgetConfiguration  `json:"config"`
 }
 
 type WidgetModuleFederationMapping map[AvailableWidgets]ModuleFederationMetadata

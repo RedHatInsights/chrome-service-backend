@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
@@ -272,57 +273,13 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
 }
 
-func deepCopyJSON(metadata models.ModuleFederationMetadata) (models.ModuleFederationMetadata, error) {
-	data, err := json.Marshal(metadata)
-	if err != nil {
-		return models.ModuleFederationMetadata{}, err
-	}
-	var newMetadata models.ModuleFederationMetadata
-	err = json.Unmarshal(data, &newMetadata)
-	if err != nil {
-		return models.ModuleFederationMetadata{}, err
-	}
-	return newMetadata, nil
-}
-
-func FilterWidgetMappingHeaderLink(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
-	for key, value := range widgetMapping {
-		if value.Config.HeaderLink.FeatureFlag != "" && !featureflags.IsEnabled(value.Config.HeaderLink.FeatureFlag) {
-			deepCopy, err := deepCopyJSON(widgetMapping[key])
-			if err != nil {
-				value.Config.HeaderLink = models.WidgetHeaderLink{}
-				widgetMapping[key] = value
-				continue
-			}
-			deepCopy.Config.HeaderLink = models.WidgetHeaderLink{}
-			delete(widgetMapping, key)
-			widgetMapping[key] = deepCopy
-		}
-	}
-	return widgetMapping
-}
-
-// FilterWidgetMapping removes hidden widgets from the mapping by using feature flags stored with the widget definition.
-func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
-	for key, value := range widgetMapping {
-		if featureflags.IsEnabled(value.FeatureFlag) {
-			delete(widgetMapping, key)
-		}
-	}
-
-	return widgetMapping
-}
-
 func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var err error
 	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
 
-	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
-		filteredWidgetMapping := FilterWidgetMapping(service.WidgetMapping)
-		filteredWidgetMapping = FilterWidgetMappingHeaderLink(filteredWidgetMapping)
-
+	if os.Getenv("FRONTEND_ENVIRONMENT") == "itless" {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
-			Data: filteredWidgetMapping,
+			Data: service.WidgetMappingItless,
 		}
 	} else {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{

@@ -82,7 +82,7 @@
           "appId": "rbac",
           "title": "Workspaces",
           "icon": "PlaceholderIcon",
-          "href": "/iam/access-management/workspaces",
+          "href": "/iam/user-access/workspaces",
           "permissions": [
             {
               "method": "featureFlag",

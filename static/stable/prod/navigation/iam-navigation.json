@@ -128,7 +128,7 @@
           "product": "Identity & Access Management"
         },
         {
-          "id": "workspaces",
+          "id": "workspaces-new",
           "appId": "rbac",
           "title": "Workspaces",
           "icon": "PlaceholderIcon",

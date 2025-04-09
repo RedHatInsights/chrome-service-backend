@@ -39,6 +39,7 @@
           "title": "Notifications",
           "id": "notifications",
           "description": "A standardized way of notifying users of events for supported services on the Hybrid Cloud Console.",
+          "feoReplacement": "notifications",
           "expandable": true,
           "routes": [
               {

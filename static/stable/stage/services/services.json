@@ -184,8 +184,7 @@
         "isGroup": true,
         "title": "Console Settings",
         "links": [
-          "settings.idmsvc",
-          "settings.notifications"
+          "settings.idmsvc"
         ]
       }
     ]
@@ -657,9 +656,7 @@
         "isGroup": true,
         "title": "Console Settings",
         "id": "settings",
-        "links": [
-          "settings.notifications"
-        ]
+        "links": []
       }
     ]
   },

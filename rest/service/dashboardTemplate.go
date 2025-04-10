@@ -162,6 +162,10 @@ var (
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			FeatureFlag: "widget.learningResources.hidden",
 			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "View all",
+					Href:  "/learning-resources?tab=all",
+				},
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
 			},

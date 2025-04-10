@@ -6,6 +6,7 @@
     "description": "Create, train, and serve artificial intelligence and machine learning (AI/ML) models.",
     "links": [
       {
+        "id": "openshift",
         "isGroup": true,
         "title": "OpenShift",
         "links": [
@@ -25,6 +26,7 @@
     "description": "Solve problems once, in one place, and scale up.",
     "links": [
       {
+        "id": "rhel",
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
@@ -33,6 +35,7 @@
         ]
       },
       {
+        "id": "ansible",
         "isGroup": true,
         "title": "Ansible",
         "links": [
@@ -69,6 +72,7 @@
     "links": [
       {
         "isGroup": true,
+        "id": "openshift",
         "title": "OpenShift",
         "links": [
           {
@@ -86,6 +90,7 @@
         ]
       },
       {
+        "id": "quay",
         "isGroup": true,
         "title": "Quay.io",
         "links": [
@@ -93,6 +98,7 @@
         ]
       },
       {
+        "id": "application-services",
         "isGroup": true,
         "title": "Application Services",
         "links": [
@@ -108,6 +114,7 @@
     "description": "Create RHEL images, systems at the Edge, and OpenShift clusters.",
     "links": [
       {
+        "id": "rhel",
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
@@ -115,6 +122,7 @@
         ]
       },
       {
+        "id": "quay",
         "isGroup": true,
         "title": "Quay.io",
         "links": [
@@ -122,6 +130,7 @@
         ]
       },
       {
+        "id": "edge",
         "isGroup": true,
         "title": "Edge",
         "links": [
@@ -154,6 +163,7 @@
         ]
       },
       {
+        "id": "host-inventory",
         "isGroup": true,
         "title": "Host Identity",
         "links": [
@@ -169,6 +179,7 @@
     "description": "Alerts users to events, using email and integrations such as webhooks.",
     "links": [
       {
+        "id": "settings",
         "isGroup": true,
         "title": "Console Settings",
         "links": [
@@ -184,6 +195,7 @@
     "description": "View OpenShift clusters, Edge systems, RHEL hosts, and your organization's subscriptions.",
     "links": [
       {
+        "id": "rhel",
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
@@ -195,6 +207,7 @@
         ]
       },
       {
+        "id": "openshift",
         "isGroup": true,
         "title": "OpenShift",
         "links": [
@@ -202,6 +215,7 @@
         ]
       },
       {
+        "id": "ansible",
         "isGroup": true,
         "title": "Ansible",
         "links": [
@@ -209,6 +223,7 @@
         ]
       },
       {
+        "id": "subscriptions",
         "isGroup": true,
         "title": "Subscription Services",
         "links": [
@@ -224,6 +239,7 @@
     "description": "Monitor, troubleshoot, and improve application performance.",
     "links": [
       {
+        "id": "rhel",
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
@@ -264,6 +280,7 @@
       {
         "isGroup": true,
         "title": "OpenShift",
+        "id": "openshift",
         "links": [
           {
             "href": "/openshift/insights/advisor/recommendations",
@@ -309,6 +326,7 @@
       {
         "isGroup": true,
         "title": "Ansible",
+        "id": "ansible",
         "links": [
           {
             "href": "/ansible/advisor/recommendations",
@@ -348,6 +366,7 @@
       {
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
+        "id": "rhel",
         "links": [
           "insights.advisories",
           {
@@ -426,6 +445,7 @@
       {
         "isGroup": true,
         "title": "OpenShift",
+        "id": "openshift",
         "links": [
           {
             "href": "/openshift/insights/vulnerability/cves",
@@ -450,6 +470,7 @@
       {
         "isGroup": true,
         "title": "Ansible",
+        "id": "ansible",
         "links": [
           "ansible.remediations"
         ]
@@ -457,6 +478,7 @@
        {
         "isGroup": true,
         "title": "Quay.io",
+        "id": "quay",
         "links": [
           "quay.quayOrganizations"
         ]
@@ -464,6 +486,7 @@
       {
         "isGroup": true,
         "title": "Application Services",
+        "id": "application-services",
         "links": [
           "application-services.trustedContentOverview"
         ]
@@ -479,6 +502,7 @@
       {
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
+        "id": "rhel",
         "links": [
           {
             "title": "Subscriptions Usage",
@@ -498,6 +522,7 @@
       {
         "isGroup": true,
         "title": "OpenShift",
+        "id": "openshift",
         "links": [
           {
             "title": "Subscriptions Usage",
@@ -544,6 +569,7 @@
       {
         "isGroup": true,
         "title": "Ansible",
+        "id": "ansible",
         "links": [
           {
             "title": "Subscriptions Usage",
@@ -556,6 +582,7 @@
       {
         "isGroup": true,
         "title": "Subscription Services",
+        "id": "subscriptions",
         "links": [
           "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
@@ -591,6 +618,7 @@
       {
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
+        "id": "rhel",
         "links": [
           "insights.rhc",
           "insights.activationKeys",
@@ -601,6 +629,7 @@
       {
         "isGroup": true,
         "title": "Ansible",
+        "id": "ansible",
         "links": [
           {
             "title": "Registration Assistant",
@@ -614,6 +643,7 @@
       {
         "isGroup": true,
         "title": "Console Settings",
+        "id": "settings",
         "links": []
       }
     ]
@@ -627,6 +657,7 @@
       {
         "isGroup": true,
         "title": "General Red Hat",
+        "id": "general",
         "links": [
           {
             "isExternal": true,
@@ -647,6 +678,7 @@
       {
         "isGroup": true,
         "title": "OpenShift",
+        "id": "openshift",
         "links": [
           {
             "href": "/openshift/services/rosa/demo/",

@@ -544,7 +544,7 @@ spec:
             - $(params.SOURCE_ARTIFACT)=/var/workdir/source
         - name: validate-schemas-files
           workingDir: /var/workdir/source
-          image: registry.access.redhat.com/ubi8/go-toolset:1.22.9-2
+          image: registry.access.redhat.com/ubi8/go-toolset:1.23.6-1
           securityContext:
           # ROOT access is critical to enable FS operations, which is required for the tests 
             runAsUser: 0
@@ -633,7 +633,7 @@ spec:
             args:
               - use
               - $(params.SOURCE_ARTIFACT)=/var/workdir
-          - image: registry.access.redhat.com/ubi8/go-toolset:1.22.9-2
+          - image: registry.access.redhat.com/ubi8/go-toolset:1.23.6-1
             workingDir: /var/workdir
             name: unit-tests
             securityContext:

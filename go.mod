@@ -1,6 +1,8 @@
 module github.com/RedHatInsights/chrome-service-backend
 
-go 1.21
+go 1.22
+
+toolchain go1.22.9
 
 require (
 	github.com/Unleash/unleash-client-go/v3 v3.7.4
@@ -40,7 +42,7 @@ require (
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/klauspost/compress v1.17.4 // indirect
+	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/mattn/go-sqlite3 v1.14.15 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/pierrec/lz4/v4 v4.1.15 // indirect

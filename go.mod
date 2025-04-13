@@ -1,6 +1,8 @@
 module github.com/RedHatInsights/chrome-service-backend
 
-go 1.21
+go 1.23
+
+toolchain go1.23.8
 
 require (
 	github.com/Unleash/unleash-client-go/v3 v3.7.4
@@ -48,7 +50,7 @@ require (
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
-	github.com/rogpeppe/go-internal v1.8.1 // indirect
+	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/twmb/murmur3 v1.1.5 // indirect
 	github.com/xdg/scram v1.0.5 // indirect

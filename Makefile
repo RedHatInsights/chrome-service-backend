@@ -55,11 +55,13 @@ generate-search-index: export SEARCH_INDEX_WRITE = true
 generate-search-index:
 	go run cmd/search/*
 
+# TODO: pwd required for podman-compose v1.3.0 path resolution bug
+# https://github.com/containers/podman-compose/issues/1167
 kafka:
-	podman-compose -f local/kafka-compose.yaml up
+	podman-compose -f $(PWD)/local/kafka-compose.yaml up
 
 unleash:
-	podman-compose -f local/unleash-compose.yaml up
+	podman-compose -f $(PWD)/local/unleash-compose.yaml up
 
 infra:
 	podman-compose -f $(PWD)/local/full-stack-compose.yaml down

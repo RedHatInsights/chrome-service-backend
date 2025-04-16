@@ -219,7 +219,8 @@
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",
-      "href": "/iam/learning-resources"
+      "href": "/iam/learning-resources",
+      "feoReplacement": "learningResourcesIAM"
     }
   ],
   "alt_title": [

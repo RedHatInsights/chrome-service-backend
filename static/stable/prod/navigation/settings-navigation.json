@@ -92,10 +92,11 @@
         ]
       },
       {
-          "id": "learningResources",
-          "appId": "learningResources",
-          "title": "Learning Resources",
-          "href": "/settings/learning-resources"
+        "id": "learningResources",
+        "appId": "learningResources",
+        "title": "Learning Resources",
+        "href": "/settings/learning-resources",
+        "feoReplacement": "learningResourcesSettings"
       },
       {
           "id": "idmsvc",

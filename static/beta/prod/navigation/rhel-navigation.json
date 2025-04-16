@@ -649,7 +649,8 @@
       "title": "Learning Resources",
       "filterable": false,
       "href": "/insights/learning-resources",
-      "product": "Red Hat Insights"
+      "product": "Red Hat Insights",
+      "feoReplacement": "learningResourcesInsights"
     }
   ]
 }

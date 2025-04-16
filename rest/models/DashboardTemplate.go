@@ -359,6 +359,7 @@ type ModuleFederationMetadata struct {
 	Scope      string               `json:"scope"`
 	Module     string               `json:"module"`
 	ImportName string               `json:"importName,omitempty"`
+	Itless     bool                 `json:"itless,omitempty"`
 	Defaults   BaseWidgetDimensions `json:"defaults"`
 	Config     WidgetConfiguration  `json:"config"`
 }

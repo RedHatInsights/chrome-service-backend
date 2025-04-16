@@ -273,13 +273,26 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
 }
 
+func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
+	for key, value := range widgetMapping {
+		if !value.Itless {
+			delete(widgetMapping, key)
+		}
+	}
+
+	return widgetMapping
+}
+
 func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var err error
 	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
+	logrus.Errorln(err)
+
+	logrus.Infoln("getting mappings")
 
 	if os.Getenv("FRONTEND_ENVIRONMENT") == "itless" {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
-			Data: service.WidgetMappingItless,
+			Data: FilterWidgetMapping(service.WidgetMapping),
 		}
 	} else {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{

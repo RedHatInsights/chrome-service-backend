@@ -288,7 +288,12 @@ func deepCopyJSON(metadata models.ModuleFederationMetadata) (models.ModuleFedera
 func FilterWidgetMappingHeaderLink(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
 	for key, value := range widgetMapping {
 		if value.Config.HeaderLink.FeatureFlag != "" && !featureflags.IsEnabled(value.Config.HeaderLink.FeatureFlag) {
-			deepCopy, _ := deepCopyJSON(widgetMapping[key])
+			deepCopy, err := deepCopyJSON(widgetMapping[key])
+			if err != nil {
+				value.Config.HeaderLink = models.WidgetHeaderLink{}
+				widgetMapping[key] = value
+				continue
+			}
 			deepCopy.Config.HeaderLink = models.WidgetHeaderLink{}
 			delete(widgetMapping, key)
 			widgetMapping[key] = deepCopy

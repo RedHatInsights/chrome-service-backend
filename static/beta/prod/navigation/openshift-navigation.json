@@ -275,8 +275,7 @@
           "id": "learningResources",
           "appId": "learningResources",
           "title": "Learning Resources",
-          "href": "/openshift/learning-resources",
-          "feoReplacement": "learningResourcesOpenShift"
+          "href": "/openshift/learning-resources"
         },
         {
           "id": "developerSandbox",

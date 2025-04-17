@@ -64,11 +64,10 @@
       ]
     },
     {
-      "id": "learningResources",
-      "appId": "learningResources",
-      "title": "Learning Resources",
-      "href": "/edge/learning-resources",
-      "feoReplacement": "learningResourcesEdge"
+        "id": "learningResources",
+        "appId": "learningResources",
+        "title": "Learning Resources",
+        "href": "/edge/learning-resources"
     },
     {
       "title": "Manage Images",

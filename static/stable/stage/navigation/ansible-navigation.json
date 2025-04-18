@@ -10,10 +10,11 @@
             "href": "/ansible/ansible-dashboard"
         },
         {
-            "id": "learningResources",
-            "appId": "learningResources",
-            "title": "Learning Resources",
-            "href": "/ansible/learning-resources"
+          "id": "learningResources",
+          "appId": "learningResources",
+          "title": "Learning Resources",
+          "href": "/ansible/learning-resources",
+          "feoReplacement": "learningResourcesAnsible"
         },
         {
             "title": "Automation Hub",

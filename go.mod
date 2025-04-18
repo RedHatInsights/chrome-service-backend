@@ -1,6 +1,6 @@
 module github.com/RedHatInsights/chrome-service-backend
 
-go 1.21
+go 1.22.11
 
 require (
 	github.com/Unleash/unleash-client-go/v3 v3.7.4

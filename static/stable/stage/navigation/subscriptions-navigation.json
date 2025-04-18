@@ -81,6 +81,13 @@
       "href": "/subscriptions/manifests"
     },
     {
+      "id": "cloud-inventory",
+      "appId": "cloud-inventory",
+      "title": "Cloud Inventory",
+      "href": "/subscriptions/cloud-inventory",
+      "feoReplacement": "cloud-inventory"
+    },
+    {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",

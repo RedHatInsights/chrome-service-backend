@@ -15,7 +15,7 @@ Source code repository for Chrome backend
 
 # Requirements
 Postgres 14
-Go 1.21
+Go 1.22
 
 ## Local Testing
 

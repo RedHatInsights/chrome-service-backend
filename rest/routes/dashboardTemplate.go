@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
-	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -272,12 +272,41 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	handleDashboardResponse[models.DashboardTemplate](resp, err, w)
 }
 
+func deepCopyJSON(metadata models.ModuleFederationMetadata) (models.ModuleFederationMetadata, error) {
+	data, err := json.Marshal(metadata)
+	if err != nil {
+		return models.ModuleFederationMetadata{}, err
+	}
+	var newMetadata models.ModuleFederationMetadata
+	err = json.Unmarshal(data, &newMetadata)
+	if err != nil {
+		return models.ModuleFederationMetadata{}, err
+	}
+	return newMetadata, nil
+}
+
+func FilterWidgetMappingHeaderLink(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
+	for key, value := range widgetMapping {
+		if value.Config.HeaderLink.FeatureFlag != "" && !featureflags.IsEnabled(value.Config.HeaderLink.FeatureFlag) {
+			deepCopy, err := deepCopyJSON(widgetMapping[key])
+			if err != nil {
+				value.Config.HeaderLink = models.WidgetHeaderLink{}
+				widgetMapping[key] = value
+				continue
+			}
+			deepCopy.Config.HeaderLink = models.WidgetHeaderLink{}
+			delete(widgetMapping, key)
+			widgetMapping[key] = deepCopy
+		}
+	}
+	return widgetMapping
+}
 
 // FilterWidgetMapping removes hidden widgets from the mapping by using feature flags stored with the widget definition.
 func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
 	for key, value := range widgetMapping {
 		if featureflags.IsEnabled(value.FeatureFlag) {
-			delete(widgetMapping, key)	
+			delete(widgetMapping, key)
 		}
 	}
 
@@ -290,7 +319,8 @@ func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 
 	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
 		filteredWidgetMapping := FilterWidgetMapping(service.WidgetMapping)
-	
+		filteredWidgetMapping = FilterWidgetMappingHeaderLink(filteredWidgetMapping)
+
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
 			Data: filteredWidgetMapping,
 		}

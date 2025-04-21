@@ -356,12 +356,12 @@ type WidgetConfiguration struct {
 }
 
 type ModuleFederationMetadata struct {
-	Scope      string               `json:"scope"`
-	Module     string               `json:"module"`
-	ImportName string               `json:"importName,omitempty"`
-	Itless     bool                 `json:"itless,omitempty"`
-	Defaults   BaseWidgetDimensions `json:"defaults"`
-	Config     WidgetConfiguration  `json:"config"`
+	Scope       string               `json:"scope"`
+	Module      string               `json:"module"`
+	ImportName  string               `json:"importName,omitempty"`
+	FeatureFlag string               `json:"featureFlag,omitempty"`
+	Defaults    BaseWidgetDimensions `json:"defaults"`
+	Config      WidgetConfiguration  `json:"config"`
 }
 
 type WidgetModuleFederationMapping map[AvailableWidgets]ModuleFederationMetadata

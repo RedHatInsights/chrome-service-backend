@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
@@ -274,7 +275,7 @@ func DecodeDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
 	for key, value := range widgetMapping {
-		if !value.Itless {
+		if !featureflags.IsEnabled(value.FeatureFlag) {
 			delete(widgetMapping, key)
 		}
 	}
@@ -287,9 +288,7 @@ func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
 	logrus.Errorln(err)
 
-	logrus.Infoln("getting mappings")
-
-	if os.Getenv("FRONTEND_ENVIRONMENT") == "itless" {
+	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
 			Data: FilterWidgetMapping(service.WidgetMapping),
 		}

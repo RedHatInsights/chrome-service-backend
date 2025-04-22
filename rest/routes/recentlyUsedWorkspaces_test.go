@@ -5,18 +5,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/RedHatInsights/chrome-service-backend/rest/database"
+	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/service"
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/google/uuid"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"slices"
 	"strings"
 	"testing"
-
-	"github.com/RedHatInsights/chrome-service-backend/rest/database"
-	"github.com/RedHatInsights/chrome-service-backend/rest/models"
-	"github.com/RedHatInsights/chrome-service-backend/rest/service"
-	"github.com/RedHatInsights/chrome-service-backend/rest/util"
-	"github.com/google/uuid"
 )
 
 // assertErrors checks if the response body contains the expected errors.

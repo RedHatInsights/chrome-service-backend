@@ -27,7 +27,6 @@ var (
 			Scope:    "landing",
 			Module:   "./ExploreCapabilities",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 3, 5, 10, 1),
-			FeatureFlag: "widget.exploreCapabilities.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RocketIcon,
 				Title: "Explore capabilities",
@@ -37,7 +36,6 @@ var (
 			Scope:    "landing",
 			Module:   "./EdgeWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.edge.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.EdgeIcon,
 				Title: "Edge Management",
@@ -47,7 +45,6 @@ var (
 			Scope:    "landing",
 			Module:   "./ImageBuilderWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.images.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RhelIcon,
 				Title: "Image Builder",
@@ -57,27 +54,26 @@ var (
 			Scope:    "landing",
 			Module:   "./AnsibleWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.ansible.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.AnsibleIcon,
 				Title: "Ansible Automation Platform",
 			},
 		},
 		models.Rhel: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./RhelWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.rhel.hidden",
+			Scope:       "landing",
+			Module:      "./RhelWidget",
+			FeatureFlag: "widget.rhel.enable",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.RhelIcon,
 				Title: "Red Hat Enterprise Linux",
 			},
 		},
 		models.OpenShift: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./OpenShiftWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.openshift.hidden",
+			Scope:       "landing",
+			Module:      "./OpenShiftWidget",
+			FeatureFlag: "widget.openshift.enable",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftIcon,
 				Title: "Red Hat OpenShift",
@@ -87,7 +83,6 @@ var (
 			Scope:    "landing",
 			Module:   "./QuayWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.quay.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.QuayIcon,
 				Title: "Quay.io",
@@ -97,7 +92,6 @@ var (
 			Scope:    "landing",
 			Module:   "./AcsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.acs.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.ACSIcon,
 				Title: "Advanced Cluster Security",
@@ -107,27 +101,26 @@ var (
 			Scope:    "landing",
 			Module:   "./OpenShiftAiWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			FeatureFlag: "widget.openshiftAI.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftAiIcon,
 				Title: "Red Hat OpenShift AI",
 			},
 		},
 		models.RecentlyVisited: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./RecentlyVisited",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
-			FeatureFlag: "widget.recentlyVisited.hidden",
+			Scope:       "landing",
+			Module:      "./RecentlyVisited",
+			FeatureFlag: "widget.recentlyVisited.enable",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.HistoryIcon,
 				Title: "Recently visited",
 			},
 		},
 		models.FavoriteServices: models.ModuleFederationMetadata{
-			Scope:    "chrome",
-			Module:   "./DashboardFavorites",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
-			FeatureFlag: "widget.favoriteServices.hidden",
+			Scope:       "chrome",
+			Module:      "./DashboardFavorites",
+			FeatureFlag: "widget.favoriteServices.enable",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View all services",
@@ -138,10 +131,10 @@ var (
 			},
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
-			Scope:    "notifications",
-			Module:   "./DashboardWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
-			FeatureFlag: "widget.notificationsEvents.hidden",
+			Scope:       "notifications",
+			Module:      "./DashboardWidget",
+			FeatureFlag: "widget.notifications.enabled",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "View event log",
@@ -157,10 +150,10 @@ var (
 			},
 		},
 		models.LearningResources: models.ModuleFederationMetadata{
-			Scope:    "learningResources",
-			Module:   "./BookmarkedLearningResourcesWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
-			FeatureFlag: "widget.learningResources.hidden",
+			Scope:       "learningResources",
+			Module:      "./BookmarkedLearningResourcesWidget",
+			FeatureFlag: "widget.learningResources.enable",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			Config: models.WidgetConfiguration{
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
@@ -170,7 +163,6 @@ var (
 			Scope:    "landing",
 			Module:   "./SupportCaseWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
-			FeatureFlag: "widget.supportCases.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Open a support case",
@@ -184,7 +176,6 @@ var (
 			Scope:    "subscriptionInventory",
 			Module:   "./SubscriptionsWidget",
 			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 4, 10, 1),
-			FeatureFlag: "widget.subscriptions.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
 					Title: "Manage subscriptions",
@@ -210,34 +201,33 @@ var (
 			},
 		},
 		models.Integrations: models.ModuleFederationMetadata{
-		Scope:    "sources",
-		Module:   "./IntegrationsWidget",
-		Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
-		FeatureFlag: "widget.integrations.hidden",
-		Config: models.WidgetConfiguration{
-			HeaderLink: models.WidgetHeaderLink{
-				Title: "Explore integrations",
-				Href:  "/settings/integrations",
-			},
-			Icon:  models.IntegrationsIcon,
-			Title: "Integrations",
-			Permissions: []models.WidgetPermission{
-				models.WidgetPermission{
-					Method: models.FeatureFlag,
-					Args: []any{
-						"chrome-service.integrations-widget.enabled",
-						true,
-					},
+			Scope:    "sources",
+			Module:   "./IntegrationsWidget",
+			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "Explore integrations",
+					Href:  "/settings/integrations",
 				},
-				models.WidgetPermission{
-					Method: models.LoosePermissions,
-					Args: []any{
-						[]string{"sources:*:read", "integrations:endpoints:read"},
+				Icon:  models.IntegrationsIcon,
+				Title: "Integrations",
+				Permissions: []models.WidgetPermission{
+					models.WidgetPermission{
+						Method: models.FeatureFlag,
+						Args: []any{
+							"chrome-service.integrations-widget.enabled",
+							true,
+						},
+					},
+					models.WidgetPermission{
+						Method: models.LoosePermissions,
+						Args: []any{
+							[]string{"sources:*:read", "integrations:endpoints:read"},
+						},
 					},
 				},
 			},
 		},
-	},
 	}
 )
 

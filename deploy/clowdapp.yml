@@ -232,3 +232,6 @@ parameters:
 - description: Maximum number of recently used workspaces that the Chrome back end will store in the database for each user.
   name: RECENTLY_USED_WORKSPACES_MAX_SAVED
   value: '10'
+- description: Bundles navigation fully onboarded to FEO
+  name: FEO_BUNDLES_ONBOARDED_IDS
+  value: '["user-preferences"]'

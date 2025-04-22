@@ -178,6 +178,7 @@ func setUp() {
 	if err != nil {
 		panic(err)
 	}
+        mockDashboardTemplatesData()
 }
 
 func tearDown() {
@@ -185,7 +186,6 @@ func tearDown() {
 }
 
 func TestGetAllUserDashboardTemplates(t *testing.T) {
-	mockDashboardTemplatesData()
 	t.Run("Test Get All User Dashboard Templates", func(t *testing.T) {
 		userId := uint(1)
 		userDashboardTemplates, err := GetAllUserDashboardTemplates(userId)

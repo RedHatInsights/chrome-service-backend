@@ -24,9 +24,9 @@ var (
 	BaseTemplates models.BaseTemplates                 = models.BaseTemplates{}
 	WidgetMapping models.WidgetModuleFederationMapping = models.WidgetModuleFederationMapping{
 		models.ExploreCapabilities: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./ExploreCapabilities",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 3, 5, 10, 1),
+			Scope:       "landing",
+			Module:      "./ExploreCapabilities",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 3, 5, 10, 1),
 			FeatureFlag: "widget.exploreCapabilities.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RocketIcon,
@@ -34,9 +34,9 @@ var (
 			},
 		},
 		models.Edge: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./EdgeWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./EdgeWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.edge.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.EdgeIcon,
@@ -44,9 +44,9 @@ var (
 			},
 		},
 		models.ImageBuilder: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./ImageBuilderWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./ImageBuilderWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.images.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RhelIcon,
@@ -54,9 +54,9 @@ var (
 			},
 		},
 		models.Ansible: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./AnsibleWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./AnsibleWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.ansible.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.AnsibleIcon,
@@ -64,9 +64,9 @@ var (
 			},
 		},
 		models.Rhel: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./RhelWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./RhelWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.rhel.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.RhelIcon,
@@ -74,9 +74,9 @@ var (
 			},
 		},
 		models.OpenShift: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./OpenShiftWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./OpenShiftWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.openshift.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftIcon,
@@ -84,9 +84,9 @@ var (
 			},
 		},
 		models.Quay: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./QuayWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./QuayWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.quay.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.QuayIcon,
@@ -94,9 +94,9 @@ var (
 			},
 		},
 		models.Acs: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./AcsWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./AcsWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.acs.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.ACSIcon,
@@ -104,9 +104,9 @@ var (
 			},
 		},
 		models.OpenShiftAi: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./OpenShiftAiWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./OpenShiftAiWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
 			FeatureFlag: "widget.openshiftAI.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.OpenShiftAiIcon,
@@ -114,9 +114,9 @@ var (
 			},
 		},
 		models.RecentlyVisited: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./RecentlyVisited",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
+			Scope:       "landing",
+			Module:      "./RecentlyVisited",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 7, 10, 1),
 			FeatureFlag: "widget.recentlyVisited.hidden",
 			Config: models.WidgetConfiguration{
 				Icon:  models.HistoryIcon,
@@ -124,9 +124,9 @@ var (
 			},
 		},
 		models.FavoriteServices: models.ModuleFederationMetadata{
-			Scope:    "chrome",
-			Module:   "./DashboardFavorites",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
+			Scope:       "chrome",
+			Module:      "./DashboardFavorites",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 6, 10, 1),
 			FeatureFlag: "widget.favoriteServices.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
@@ -138,9 +138,9 @@ var (
 			},
 		},
 		models.NotificationsEvents: models.ModuleFederationMetadata{
-			Scope:    "notifications",
-			Module:   "./DashboardWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
+			Scope:       "notifications",
+			Module:      "./DashboardWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
 			FeatureFlag: "widget.notificationsEvents.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
@@ -157,19 +157,24 @@ var (
 			},
 		},
 		models.LearningResources: models.ModuleFederationMetadata{
-			Scope:    "learningResources",
-			Module:   "./BookmarkedLearningResourcesWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			Scope:       "learningResources",
+			Module:      "./BookmarkedLearningResourcesWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			FeatureFlag: "widget.learningResources.hidden",
 			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title:       "View all",
+					Href:        "/learning-resources?tab=all",
+					FeatureFlag: "platform.learning-resources.global-learning-resources",
+				},
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
 			},
 		},
 		models.SupportCases: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./SupportCaseWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			Scope:       "landing",
+			Module:      "./SupportCaseWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			FeatureFlag: "widget.supportCases.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
@@ -181,9 +186,9 @@ var (
 			},
 		},
 		models.Subscriptions: models.ModuleFederationMetadata{
-			Scope:    "subscriptionInventory",
-			Module:   "./SubscriptionsWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 4, 10, 1),
+			Scope:       "subscriptionInventory",
+			Module:      "./SubscriptionsWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 4, 4, 10, 1),
 			FeatureFlag: "widget.subscriptions.hidden",
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{
@@ -210,34 +215,34 @@ var (
 			},
 		},
 		models.Integrations: models.ModuleFederationMetadata{
-		Scope:    "sources",
-		Module:   "./IntegrationsWidget",
-		Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
-		FeatureFlag: "widget.integrations.hidden",
-		Config: models.WidgetConfiguration{
-			HeaderLink: models.WidgetHeaderLink{
-				Title: "Explore integrations",
-				Href:  "/settings/integrations",
-			},
-			Icon:  models.IntegrationsIcon,
-			Title: "Integrations",
-			Permissions: []models.WidgetPermission{
-				models.WidgetPermission{
-					Method: models.FeatureFlag,
-					Args: []any{
-						"chrome-service.integrations-widget.enabled",
-						true,
-					},
+			Scope:       "sources",
+			Module:      "./IntegrationsWidget",
+			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
+			FeatureFlag: "widget.integrations.hidden",
+			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title: "Explore integrations",
+					Href:  "/settings/integrations",
 				},
-				models.WidgetPermission{
-					Method: models.LoosePermissions,
-					Args: []any{
-						[]string{"sources:*:read", "integrations:endpoints:read"},
+				Icon:  models.IntegrationsIcon,
+				Title: "Integrations",
+				Permissions: []models.WidgetPermission{
+					models.WidgetPermission{
+						Method: models.FeatureFlag,
+						Args: []any{
+							"chrome-service.integrations-widget.enabled",
+							true,
+						},
+					},
+					models.WidgetPermission{
+						Method: models.LoosePermissions,
+						Args: []any{
+							[]string{"sources:*:read", "integrations:endpoints:read"},
+						},
 					},
 				},
 			},
 		},
-	},
 	}
 )
 

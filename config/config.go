@@ -48,6 +48,38 @@ type IntercomConfig struct {
 	automationAnalytics_dev string
 	dbaas                   string
 	dbaas_dev               string
+	activationKeys          string
+	activationKeys_dev      string
+	advisor                 string
+	advisor_dev             string
+	compliance              string
+	compliance_dev          string
+	connector               string
+	connector_dev           string
+	contentSources          string
+	contentSources_dev      string
+	dashboard               string
+	dashboard_dev           string
+	imageBuilder            string
+	imageBuilder_dev        string
+	inventory               string
+	inventory_dev           string
+	malware                 string
+	malware_dev             string
+	patch                   string
+	patch_dev               string
+	policies                string
+	policies_dev            string
+	registration            string
+	registration_dev        string
+	remediations            string
+	remediations_dev        string
+	ros                     string
+	ros_dev                 string
+	tasks                   string
+	tasks_dev               string
+	vulnerability           string
+	vulnerability_dev       string
 }
 
 type FeatureFlagsConfig struct {
@@ -224,6 +256,38 @@ func init() {
 		hacCore:                 os.Getenv("INTERCOM_HAC_CORE"),
 		dbaas:                   os.Getenv("INTERCOM_DBAAS"),
 		dbaas_dev:               os.Getenv("INTERCOM_DBAAS_DEV"),
+		activationKeys:          os.Getenv("INTERCOM_INSIGHTS"),
+		activationKeys_dev:      os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		advisor:                 os.Getenv("INTERCOM_INSIGHTS"),
+		advisor_dev:             os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		compliance:              os.Getenv("INTERCOM_INSIGHTS"),
+		compliance_dev:          os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		connector:               os.Getenv("INTERCOM_INSIGHTS"),
+		connector_dev:           os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		contentSources:          os.Getenv("INTERCOM_INSIGHTS"),
+		contentSources_dev:      os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		dashboard:               os.Getenv("INTERCOM_INSIGHTS"),
+		dashboard_dev:           os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		imageBuilder:            os.Getenv("INTERCOM_INSIGHTS"),
+		imageBuilder_dev:        os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		inventory:               os.Getenv("INTERCOM_INSIGHTS"),
+		inventory_dev:           os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		malware:                 os.Getenv("INTERCOM_INSIGHTS"),
+		malware_dev:             os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		patch:                   os.Getenv("INTERCOM_INSIGHTS"),
+		patch_dev:               os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		policies:                os.Getenv("INTERCOM_INSIGHTS"),
+		policies_dev:            os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		registration:            os.Getenv("INTERCOM_INSIGHTS"),
+		registration_dev:        os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		remediations:            os.Getenv("INTERCOM_INSIGHTS"),
+		remediations_dev:        os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		ros:                     os.Getenv("INTERCOM_INSIGHTS"),
+		ros_dev:                 os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		tasks:                   os.Getenv("INTERCOM_INSIGHTS"),
+		tasks_dev:               os.Getenv("INTERCOM_INSIGHTS_DEV"),
+		vulnerability:           os.Getenv("INTERCOM_INSIGHTS"),
+		vulnerability_dev:       os.Getenv("INTERCOM_INSIGHTS_DEV"),
 	}
 
 	options.DebugConfig = DebugConfig{

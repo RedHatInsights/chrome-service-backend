@@ -151,6 +151,16 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_DBAAS_DEV
+          - name: INTERCOM_INSIGHTS
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_INSIGHTS
+          - name: INTERCOM_INSIGHTS_DEV
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_INSIGHTS_DEV
           - name: SEARCH_CLIENT_SECRET_PROD
             valueFrom:
               secretKeyRef:
@@ -193,6 +203,8 @@ objects:
       SEARCH_CLIENT_SECRET_STAGE: dGVzdFZhbHVl
       INTERCOM_DBAAS: dGVzdFZhbHVl
       INTERCOM_DBAAS_DEV: dGVzdFZhbHVl
+      INTERCOM_INSIGHTS: dGVzdFZhbHVl
+      INTERCOM_INSIGHTS_DEV: dGVzdFZhbHVl
       DEBUG_FAVORITES_ACCOUNT_1: OTk5
     type: Opaque
 

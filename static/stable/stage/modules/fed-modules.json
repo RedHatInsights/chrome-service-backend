@@ -175,6 +175,9 @@
       ]
   },
   "connector": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/connector/fed-mods.json",
       "defaultDocumentTitle": "Remote Host Configuration | Settings",
       "config": {
@@ -259,6 +262,9 @@
         ]
   },
   "dashboard": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/dashboard/fed-mods.json",
       "isFedramp": true,
       "modules": [
@@ -277,6 +283,9 @@
       ]
   },
   "advisor": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/advisor/fed-mods.json",
       "isFedramp": true,
       "config": {
@@ -335,6 +344,9 @@
       ]
   },
   "inventory": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/inventory/fed-mods.json",
       "config": {
         "supportCaseData": {
@@ -359,6 +371,9 @@
       ]
   },
   "vulnerability": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/vulnerability/fed-mods.json",
       "isFedramp": true,
       "config": {
@@ -380,6 +395,9 @@
       ]
   },
   "compliance": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/compliance/fed-mods.json",
       "isFedramp": true,
       "config": {
@@ -401,6 +419,9 @@
       ]
   },
   "policies": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/policies/fed-mods.json",
       "config": {
         "supportCaseData": {
@@ -425,6 +446,9 @@
       ]
   },
   "patch": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/patch/fed-mods.json",
       "isFedramp": true,
       "config": {
@@ -502,6 +526,9 @@
     ]
   },
   "activationKeys": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/activation-keys/fed-mods.json",
       "modules": [
           {
@@ -544,6 +571,9 @@
       ]
   },
   "ros": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/ros/fed-mods.json",
       "config": {
         "supportCaseData": {
@@ -564,6 +594,9 @@
       ]
   },
   "registration": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/registration/fed-mods.json",
       "modules": [
           {
@@ -581,6 +614,9 @@
       ]
   },
   "remediations": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/remediations/fed-mods.json",
       "config": {
         "supportCaseData": {
@@ -605,6 +641,9 @@
       ]
   },
   "tasks": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/tasks/fed-mods.json",
       "config": {
           "supportCaseData": {
@@ -893,6 +932,9 @@
       ]
   },
   "malware": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/malware/fed-mods.json",
       "isFedramp": true,
       "config": {
@@ -1042,6 +1084,9 @@
       ]
   },
   "contentSources": {
+    "analytics": {
+        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
+    },
       "manifestLocation": "/apps/content-sources/fed-mods.json",
       "defaultDocumentTitle": "Repositories",
       "modules": [

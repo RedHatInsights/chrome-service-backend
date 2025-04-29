@@ -59,6 +59,7 @@
             "identity management",
             "users",
             "roles",
+            "groups",
             "permissions",
             "access",
             "admin",

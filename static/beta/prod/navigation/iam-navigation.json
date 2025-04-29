@@ -33,6 +33,9 @@
             {
               "method": "featureFlag",
               "args": ["platform.rbac.overview", true]
+            },
+            {
+              "method": "isOrgAdmin"
             }
           ],
           "product": "Identity & Access Management"
@@ -42,6 +45,11 @@
           "appId": "rbac",
           "title": "Users",
           "href": "/iam/user-access/users",
+          "permissions": [
+            {
+              "method": "isOrgAdmin"
+            }
+          ],
           "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
           "description": "Manage your organization's role-based access control (RBAC) to services.",
@@ -68,14 +76,24 @@
           "appId": "rbac",
           "title": "Roles",
           "href": "/iam/user-access/roles",
+          "permissions": [
+            {
+              "method": "isOrgAdmin"
+            }
+          ],
           "product": "Identity & Access Management"
         },
         {
           "id": "groups",
           "appId": "rbac",
           "title": "Groups",
-          "icon": "PlaceholderIcon",
           "href": "/iam/user-access/groups",
+          "permissions": [
+            {
+              "method": "isOrgAdmin"
+            }
+          ],
+          "icon": "PlaceholderIcon",
           "product": "Identity & Access Management"
         },
         {
@@ -88,6 +106,9 @@
             {
               "method": "featureFlag",
               "args": ["platform.rbac.workspaces-list", true]
+            },
+            {
+              "method": "isOrgAdmin"
             }
           ],
           "product": "Identity & Access Management"

@@ -132,6 +132,19 @@
               "subtitle": "Red Hat Insights for OpenShift"
             },
             {
+              "id": "systems",
+              "appId": "costManagement",
+              "title": "Systems",
+              "href": "/openshift/cost-management/systems",
+              "product": "Red Hat Cost Management",
+              "permissions": [
+                {
+                  "method": "featureFlag",
+                  "args": ["cost-management.ui.systems", true]
+                }
+              ]
+            },
+            {
               "id": "costManagementOptimizations",
               "appId": "costManagement",
               "title": "Optimizations",
@@ -160,30 +173,10 @@
               "product": "Red Hat Cost Management"
             },
             {
-              "id": "ibmCloud",
-              "appId": "costManagement",
-              "title": "IBM Cloud",
-              "href": "/openshift/cost-management/ibm",
-              "product": "Red Hat Cost Management",
-              "permissions": [
-                {
-                  "method": "featureFlag",
-                  "args": ["cost-management.ui.ibm", true]
-                }
-              ]
-            },
-            {
               "id": "microsoftAzure",
               "appId": "costManagement",
               "title": "Microsoft Azure",
               "href": "/openshift/cost-management/azure",
-              "product": "Red Hat Cost Management"
-            },
-            {
-              "id": "oracleCloudInfrastructure",
-              "appId": "costManagement",
-              "title": "Oracle Cloud Infrastructure",
-              "href": "/openshift/cost-management/oci",
               "product": "Red Hat Cost Management"
             },
             {

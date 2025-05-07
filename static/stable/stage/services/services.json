@@ -366,7 +366,41 @@
             "href": "/subscriptions/usage/openshift"
           }
         ]
-      }
+      },
+      {
+        "isGroup": true,
+        "title": "Planning",
+        "links": [
+          {
+            "href": "/insights/roadmap/lifecycle",
+            "title": "Lifecycle",
+            "description": "View tailored life cycle data for Red Hat Enterprise Linux and RHEL application streams.",
+            "alt_title": [
+              "planning",
+              "RHEL versions",
+              "rhel versions",
+              "Life cycle",
+              "life cycle",
+              "app stream",
+              "app streams",
+              "application stream",
+              "application streams"
+            ]
+          },
+          {
+            "href": "/insights/roadmap/roadmap",
+            "title": "Roadmap",
+            "description": "View the latest updates on upcoming Red Hat Enterprise Linux features, tailored to your systems.",
+            "alt_title": [
+              "planning",
+              "RHEL versions",
+              "rhel versions",
+              "Roadmap",
+              "roadmap"
+            ]
+          }
+        ]
+      }      
     ]
   },
   {
@@ -502,6 +536,28 @@
         "links": [
           "application-services.trustedContentOverview",
           "application-services.trustedArtifactSignerOverview"
+        ]
+      },
+      {
+        "isGroup": true,
+        "title": "Planning",
+        "links": [
+          {
+            "href": "/insights/roadmap/lifecycle",
+            "title": "Lifecycle",
+            "description": "View tailored life cycle data for Red Hat Enterprise Linux and RHEL application streams.",
+            "alt_title": [
+              "planning",
+              "RHEL versions",
+              "rhel versions",
+              "Life cycle",
+              "life cycle",
+              "app stream",
+              "app streams",
+              "application stream",
+              "application streams"
+            ]
+          }
         ]
       }
     ]

@@ -109,7 +109,8 @@
               "args": ["platform.rbac.workspaces-list", true]
             },
             {
-              "method": "isOrgAdmin"
+              "method": "loosePermissions",
+              "args": [["inventory:groups:read"]]
             }
           ],
           "product": "Identity & Access Management"

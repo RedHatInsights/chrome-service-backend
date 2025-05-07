@@ -1005,7 +1005,7 @@
         "custom": true,
         "id": "roadmap.lifecycle",
         "href": "/insights/roadmap/lifecycle",
-        "title": "Lifecycle",
+        "title": "Life Cycle",
         "description": "View tailored life cycle data for Red Hat Enterprise Linux and RHEL application streams.",
         "alt_title": [
           "planning",
@@ -1016,7 +1016,11 @@
           "app stream",
           "app streams",
           "application stream",
-          "application streams"
+          "application streams",
+          "lifecycle",
+          "Lifecycle",
+          "appstream",
+          "appstreams"
         ]
       },
       {

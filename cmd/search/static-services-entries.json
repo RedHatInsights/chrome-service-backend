@@ -1004,8 +1004,8 @@
       {
         "custom": true,
         "id": "roadmap.lifecycle",
-        "href": "/insights/roadmap/lifecycle",
-        "title": "Lifecycle",
+        "href": "/insights/planning/lifecycle",
+        "title": "Life Cycle",
         "description": "View tailored life cycle data for Red Hat Enterprise Linux and RHEL application streams.",
         "alt_title": [
           "planning",
@@ -1016,13 +1016,17 @@
           "app stream",
           "app streams",
           "application stream",
-          "application streams"
+          "application streams",
+          "lifecycle",
+          "Lifecycle",
+          "appstream",
+          "appstreams"
         ]
       },
       {
         "custom": true,
         "id": "roadmap.roadmap",
-        "href": "/insights/roadmap/roadmap",
+        "href": "/insights/planning/roadmap",
         "title": "Roadmap",
         "description": "View the latest updates on upcoming Red Hat Enterprise Linux features, tailored to your systems.",
         "alt_title": [

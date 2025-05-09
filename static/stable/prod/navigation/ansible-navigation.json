@@ -17,6 +17,12 @@
           "feoReplacement": "learningResourcesAnsible"
         },
         {
+            "title": "Cluster List",
+            "id": "clusterList",
+            "appId": "automationAnalytics",
+            "href": "/ansible/automation-analytics/cluster-list"
+        },
+        {
             "title": "Automation Hub",
             "expandable": true,
             "routes": [

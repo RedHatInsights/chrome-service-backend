@@ -13,7 +13,8 @@
             "id": "widget-layout",
             "title": "Widget layour",
             "appId": "widget-layout",
-            "href": "/staging/widget-layout"
+            "href": "/staging/widget-layout",
+            "feoReplacement": "widgetLayout"
         },
         {
             "id": "global-learning-resources-page",

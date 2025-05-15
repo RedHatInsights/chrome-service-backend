@@ -7,7 +7,8 @@
       "appId": "subscriptionsDashboardUi",
       "title": "Overview",
       "href": "/subscriptions/overview",
-      "icon": "SubscriptionsIcon"
+      "icon": "SubscriptionsIcon",
+      "feoReplacement": "subscriptions-dashboard-ui"
     },
     {
       "id": "subscriptionsInventory",

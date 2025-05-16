@@ -202,6 +202,14 @@
       "title": "Products",
       "navItems": [
         {
+          "id": "acm",
+          "appId": "openshift",
+          "description": "Manage, govern, and secure multiple Kubernetes clusters across hybrid and multicloud environments.",
+          "title": "Advanced Cluster Management",
+          "isExternal": true,
+          "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54aa3535cb70ab8c02996"
+        },
+        {
           "title": "Advanced Cluster Security",
           "expandable": true,
           "id": "acs-section",
@@ -269,6 +277,13 @@
           "title": "OpenShift Virtualization",
           "isExternal": true,
           "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53f218b6f188e53644c4f"
+        },
+        {
+          "id": "operators",
+          "appId": "openshift",
+          "description": "Check out the latest recommended operators.",
+          "title": "Operators",
+          "href": "/openshift/overview#recommended-operators"
         }
       ]
     },

@@ -555,7 +555,7 @@
         {
           "id": "remediations",
           "appId": "remediations",
-          "title": "Remediations",
+          "title": "Remediation Plans",
           "href": "/insights/remediations",
           "icon": "InsightsIcon",
           "product": "Red Hat Insights",

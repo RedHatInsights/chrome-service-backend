@@ -972,6 +972,114 @@
     ]
   },
   {
+    "id": "openshift-ai",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.ai",
+        "href": "https://catalog.redhat.com/software/container-stacks/detail/63b85b573112fe5a95ee9a3a",
+        "title": "OpenShift AI",
+        "isExternal": true,
+        "alt_title": [
+          "ai",
+          "rhoai",
+          "rhai",
+          "artificial intelligence",
+          "machine learning"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openshift-virtualization",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.openshiftVirtualization",
+        "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53f218b6f188e53644c4f",
+        "title": "OpenShift Virtualization",
+        "isExternal": true,
+        "alt_title": [
+          "virtualization",
+          "virt"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "advanced-cluster-management",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.acm",
+        "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54aa3535cb70ab8c02996",
+        "title": "Advanced Cluster Management for Kubernetes",
+        "isExternal": true,
+        "alt_title": [
+          "acm",
+          "advanced cluster management",
+          "fleet management",
+          "cluster management",
+          "workload management",
+          "backup and restore",
+          "governance"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openshift-gitops",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.gitops",
+        "href": "https://catalog.redhat.com/software/container-stacks/detail/5fb288c70a12d20cbecc6056",
+        "title": "OpenShift GitOps",
+        "isExternal": true,
+        "alt_title": [
+          "gitops",
+          "git",
+          "ci/cd",
+          "builds"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openshift-pipelines",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.pipelines",
+        "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5",
+        "title": "Pipelines",
+        "isExternal": true,
+        "alt_title": [
+          "pipelines",
+          "app delivery",
+          "ci/cd"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openshift-service-mesh",
+    "links": [
+      {
+        "custom": true,
+        "id": "OPENSHIFT.serviceMesh",
+        "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4",
+        "title": "OpenShift Service Mesh",
+        "isExternal": true,
+        "alt_title": [
+          "service mesh",
+          "networking",
+          "microservices"
+        ]
+      }
+    ]
+  },
+  {
     "id":  "iam",
     "links":  [
       {

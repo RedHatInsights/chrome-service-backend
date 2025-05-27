@@ -16,7 +16,8 @@
       "title": "Subscriptions Inventory",
       "description": "View your purchased subscriptions and explore more information about each one.",
       "href": "/subscriptions/inventory",
-      "icon": "SubscriptionsIcon"
+      "icon": "SubscriptionsIcon",
+      "feoReplacement": "subscription-inventory"
     },
     {
       "id": "subscriptionsUsage",

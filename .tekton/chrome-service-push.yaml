@@ -314,7 +314,7 @@ spec:
         operator: in
         values:
         - "true"
-    - name: sast-shell-check
+    - name: sast-shell-check-oci-ta
       params:
       - name: image-digest
         value: $(tasks.build-image-index.results.IMAGE_DIGEST)

@@ -816,42 +816,6 @@
           }
       ]
   },
-  "hacCore": {
-      "manifestLocation": "/apps/hac-core/fed-mods.json",
-      "config": {
-        "ssoScopes": [
-           "profile_level.name_and_dev_terms"
-        ]
-      },
-      "modules": [
-          {
-              "id": "hacCore",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/application-pipeline"
-                  },
-                  {
-                      "pathname": "/hac"
-                  }
-              ]
-          }
-      ]
-  },
-  "hacDev": {
-      "manifestLocation": "/apps/hac-dev/fed-mods.json",
-      "modules": [
-          {
-              "id": "hacDev",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/hac/app-studio"
-                  }
-              ]
-          }
-      ]
-  },
   "frontendStarterApp": {
       "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
       "modules": [

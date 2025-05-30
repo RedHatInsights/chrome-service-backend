@@ -178,7 +178,7 @@ func setUp() {
 	if err != nil {
 		panic(err)
 	}
-        mockDashboardTemplatesData()
+	mockDashboardTemplatesData()
 }
 
 func tearDown() {
@@ -340,12 +340,8 @@ func TestGetAllUserDashboardTemplates(t *testing.T) {
 	t.Run("GetAllBaseTemplates should return all base templates", func(t *testing.T) {
 		baseTemplates := GetAllBaseTemplates()
 		assert.Equal(t, 2, len(baseTemplates))
-		assert.Equal(t, BaseTemplates[models.LandingPage].Name, baseTemplates[0].Name)
-		assert.Equal(t, BaseTemplates[models.LandingPage].DisplayName, baseTemplates[0].DisplayName)
-		assert.Equal(t, BaseTemplates[models.LandingPage].TemplateConfig, baseTemplates[0].TemplateConfig)
-		assert.Equal(t, BaseTemplates[models.LandingPageItless].Name, baseTemplates[1].Name)
-		assert.Equal(t, BaseTemplates[models.LandingPageItless].DisplayName, baseTemplates[1].DisplayName)
-		assert.Equal(t, BaseTemplates[models.LandingPageItless].TemplateConfig, baseTemplates[1].TemplateConfig)
+		assert.Contains(t, baseTemplates, BaseTemplates[models.LandingPage])
+		assert.Contains(t, baseTemplates, BaseTemplates[models.LandingPageItless])
 	})
 
 	t.Run("GetDashboardTemplateBase should return error if template type does not exist", func(t *testing.T) {

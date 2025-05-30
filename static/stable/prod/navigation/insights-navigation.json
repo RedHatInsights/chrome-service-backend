@@ -610,7 +610,7 @@
         {
           "id": "remediations",
           "appId": "remediations",
-          "title": "Remediations",
+          "title": "Remediation plans",
           "href": "/insights/remediations",
           "icon": "InsightsIcon",
           "product": "Red Hat Insights",
@@ -627,7 +627,8 @@
             "insights",
             "automation",
             "Ansible",
-            "patch"
+            "patch",
+            "Remediation plans"
           ]
         },
         {

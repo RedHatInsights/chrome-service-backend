@@ -358,6 +358,55 @@
     ]
   },
   {
+    "id": "operators",
+    "title": "Operators",
+    "links": [
+      {
+        "isGroup": true,
+        "id": "openshift",
+        "title": "OpenShift",
+        "links": [
+          {
+            "isExternal": true,
+            "href": "https://catalog.redhat.com/software/container-stacks/detail/63b85b573112fe5a95ee9a3a",
+            "title": "OpenShift AI",
+            "description": "Create, train, and serve AI/ML models with OpenShift."
+          },
+          {
+            "isExternal": true,
+            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53f218b6f188e53644c4f",
+            "title": "OpenShift Virtualization",
+            "description": "Run and manage virtual machines on OpenShift."
+          },
+          {
+            "isExternal": true,
+            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54aa3535cb70ab8c02996",
+            "title": "Advanced Cluster Management for Kubernetes",
+            "description": "Manage cluster lifecycles, deploy workloads, and enforce policies across your Kubernetes fleet."
+          },
+          {
+            "isExternal": true,
+            "href": "https://catalog.redhat.com/software/container-stacks/detail/5fb288c70a12d20cbecc6056",
+            "title": "OpenShift GitOps",
+            "description": "Build and integrate declarative, Git-driven CD workflows into your application platform."
+          },
+          {
+            "isExternal": true,
+            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5",
+            "title": "Pipelines",
+            "description": "Design custom CI/CD pipelines to build, test, and deploy applications."
+          },
+          {
+            "isExternal": true,
+            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4",
+            "title": "OpenShift Service Mesh",
+            "description": "Monitor and manage microservices with a unified service mesh."
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "security",
     "icon": "CloudSecurityIcon",
     "title": "Security",

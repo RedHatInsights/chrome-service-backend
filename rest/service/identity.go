@@ -66,7 +66,7 @@ func (ib IntercomApp) IsValidApp() error {
 		return nil
 	}
 
-	return fmt.Errorf("invalid bundle string. Expected one of %s, %s, got %s", OpenShift, ib)
+	return fmt.Errorf("invalid intercom bundle string. Expected one like %s, got %s", OpenShift, ib)
 }
 
 func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {

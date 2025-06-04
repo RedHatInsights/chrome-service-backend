@@ -39,7 +39,6 @@ type IntercomConfig struct {
 	ansible_dev             string
 	openshift               string
 	openshift_dev           string
-	hacCore                 string
 	ansibleDashboard        string
 	ansibleDashboard_dev    string
 	automationHub           string
@@ -253,7 +252,6 @@ func init() {
 		automationAnalytics_dev: os.Getenv("INTERCOM_ANSIBLE_DEV"),
 		openshift:               os.Getenv("INTERCOM_OPENSHIFT"),
 		openshift_dev:           os.Getenv("INTERCOM_OPENSHIFT_DEV"),
-		hacCore:                 os.Getenv("INTERCOM_HAC_CORE"),
 		dbaas:                   os.Getenv("INTERCOM_DBAAS"),
 		dbaas_dev:               os.Getenv("INTERCOM_DBAAS_DEV"),
 		activationKeys:          os.Getenv("INTERCOM_INSIGHTS"),

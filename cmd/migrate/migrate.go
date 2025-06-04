@@ -170,5 +170,14 @@ func main() {
 		logrus.Infof("Migrated %d user identity visited rows", activeWorkspaceRes.RowsAffected)
 	}
 
+	// must be outside of a transaction (to support concurrently creating the index)
+	fmt.Println("Concurrently create partial index for user_identities table")
+	if database.DB.Migrator().HasTable(&models.UserIdentity{}) {
+		createUserIdentitiesIndexRes := database.DB.Exec("CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_active_user ON user_identities (account_id) WHERE deleted_at IS NULL;")
+		if createUserIdentitiesIndexRes.Error != nil {
+			fmt.Println("Unable to concurrently create partial index for user_identities table!", createUserIdentitiesIndexRes.Error.Error())
+		}
+	}
+
 	logrus.Info("Migration complete")
 }

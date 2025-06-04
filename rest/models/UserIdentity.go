@@ -28,7 +28,7 @@ type LastVisitedRequest struct {
 
 type UserIdentity struct {
 	BaseModel
-	AccountId              string                            `json:"accountId,omitempty" gorm:"index:idx_active_user,where:deleted_at IS NULL"`
+	AccountId              string                            `json:"accountId,omitempty"`
 	FirstLogin             bool                              `json:"firstLogin"`
 	DayOne                 bool                              `json:"dayOne"`
 	LastLogin              time.Time                         `json:"lastLogin"`

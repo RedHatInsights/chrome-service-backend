@@ -126,11 +126,6 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_ANSIBLE_DEV
-          - name: INTERCOM_HAC_CORE
-            valueFrom:
-              secretKeyRef:
-                name: chrome-service-backend
-                key: INTERCOM_HAC_CORE
           - name: INTERCOM_OPENSHIFT
             valueFrom:
               secretKeyRef:
@@ -197,7 +192,6 @@ objects:
       INTERCOM_ANSIBLE: dGVzdFZhbHVl
       INTERCOM_ANSIBLE_DEV: dGVzdFZhbHVl
       INTERCOM_DEFAULT: dGVzdFZhbHVl
-      INTERCOM_HAC_CORE: dGVzdFZhbHVl
       INTERCOM_OPENSHIFT_DEV: dGVzdFZhbHVl
       SEARCH_CLIENT_SECRET_PROD: dGVzdFZhbHVl
       SEARCH_CLIENT_SECRET_STAGE: dGVzdFZhbHVl

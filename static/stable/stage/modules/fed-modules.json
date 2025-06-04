@@ -978,20 +978,6 @@
           }
       ]
   },
-  "appStudioDocs": {
-      "manifestLocation": "/apps/app-studio-docs/fed-mods.json",
-      "modules": [
-          {
-              "id": "app-studio-docs",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/hac/app-studio-docs"
-                  }
-              ]
-          }
-      ]
-  },
   "iam": {
       "manifestLocation": "/apps/iam/fed-mods.json",
       "config": {
@@ -1121,12 +1107,6 @@
                       "pathname": "/iam/learning-resources",
                       "props": {
                           "bundle": "iam"
-                      }
-                  },
-                  {
-                      "pathname": "/hac/learning-resources",
-                      "props": {
-                          "bundle": "hac"
                       }
                   },
                   {

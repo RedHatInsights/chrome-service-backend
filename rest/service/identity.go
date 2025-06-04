@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
@@ -13,7 +14,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
-	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	redis_client "github.com/RedHatInsights/chrome-service-backend/rest/redis"
 	"github.com/sirupsen/logrus"
 
 	"gorm.io/datatypes"
@@ -51,6 +52,38 @@ const (
 	Tasks               IntercomApp = "tasks"
 	Vulnerability       IntercomApp = "vulnerability"
 )
+
+func getIdentityFromCache(userId string) (models.UserIdentity, error) {
+	rc := redis_client.GetRedisClient()
+	ctx := context.Background()
+	var user models.UserIdentity
+
+	val, err := rc.Get(ctx, userId).Result()
+	if err != nil {
+		return models.UserIdentity{}, fmt.Errorf("error getting user identity from cache: %w", err)
+	}
+	err = json.Unmarshal([]byte(val), &user)
+	return user, err
+
+}
+
+func writeIdentityToCache(user models.UserIdentity) error {
+	rc := redis_client.GetRedisClient()
+	ctx := context.Background()
+	userB, err := json.Marshal(user)
+	if err != nil {
+		return fmt.Errorf("error serializing user identity: %w", err)
+	}
+	err = rc.Set(ctx, user.AccountId, string(userB), time.Minute*10).Err()
+
+	return err
+}
+
+func invalidateIdentityCache(userId string) error {
+	rc := redis_client.GetRedisClient()
+	ctx := context.Background()
+	return rc.Del(ctx, userId).Err()
+}
 
 func debugFavoritesIdentity(userId string) {
 	c := config.Get()
@@ -112,7 +145,16 @@ func AddVisitedBundle(user models.UserIdentity, bundle string) (models.UserIdent
 	// update the bundle reference for the function scope
 	user.VisitedBundles = b
 	err = database.DB.Model(&user).Update("visited_bundles", bundles).Error
-	return user, err
+
+	if err != nil {
+		logrus.Errorf("Error updating user preview: %v", err)
+		return user, err
+	}
+	err = invalidateIdentityCache(user.AccountId)
+	if err != nil {
+		logrus.Errorf("Error writing identity to cache after updating preview: %v", err)
+	}
+	return user, nil
 }
 
 func GetVisitedBundles(user models.UserIdentity) (map[string]bool, error) {
@@ -139,12 +181,13 @@ func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) 
 
 	/**
 	* Because we pass the object from the middleware to the rest of the application,
-	* we don't have to worry about invalidation the cache, as the object is passed by reference
 	* saves a lot DB queries.
 	 */
-	cachedIdentity, ok := util.UsersCache.Get(userId)
-	if !skipCache && ok {
+	cachedIdentity, err := getIdentityFromCache(userId)
+	if err == nil {
 		return cachedIdentity, nil
+	} else {
+		logrus.Errorf("Error getting user identity from cache: %v", err)
 	}
 
 	res := database.DB.Where("account_id = ?", userId).FirstOrCreate(&identity)
@@ -152,7 +195,10 @@ func CreateIdentity(userId string, skipCache bool) (models.UserIdentity, error) 
 
 	// set the cache after successful DB operation
 	if err == nil {
-		util.UsersCache.Set(userId, identity)
+		err = writeIdentityToCache(identity)
+		if err != nil {
+			logrus.Errorf("Error writing identity to cache: %v", err)
+		}
 	}
 
 	return identity, err
@@ -203,21 +249,43 @@ func GetUserIntercomHash(userId string, namespace IntercomApp) (IntercomPayload,
 
 func UpdateUserPreview(identity *models.UserIdentity, preview bool) error {
 	identity.UIPreview = preview
-	return database.DB.Model(identity).Update("ui_preview", preview).Error
+	err := database.DB.Model(identity).Update("ui_preview", preview).Error
+	if err != nil {
+		logrus.Errorf("Error updating user preview: %v", err)
+		return err
+	}
+
+	err = invalidateIdentityCache(identity.AccountId)
+	if err != nil {
+		logrus.Errorf("Error writing identity to cache after updating preview: %v", err)
+	}
+	return nil
 }
 
 func MarkPreviewSeen(identity *models.UserIdentity) error {
-	return database.DB.Model(identity).Updates(models.UserIdentity{UIPreviewSeen: true}).Error
+	err := database.DB.Model(identity).Updates(models.UserIdentity{UIPreviewSeen: true}).Error
+	if err != nil {
+		logrus.Errorf("Error updating user preview: %v", err)
+		return err
+	}
+	err = invalidateIdentityCache(identity.AccountId)
+	if err != nil {
+		logrus.Errorf("Error writing identity to cache after updating preview: %v", err)
+	}
+	return nil
 }
 
 func UpdateActiveWorkspace(identity *models.UserIdentity, workspace string) error {
 	identity.ActiveWorkspace = workspace
 	err := database.DB.Model(identity).Update("active_workspace", workspace).Error
 
-	// set the cache after successful DB operation
-	if err == nil {
-		util.UsersCache.Set(identity.AccountId, *identity)
+	if err != nil {
+		logrus.Errorf("Error updating user preview: %v", err)
+		return err
 	}
-
-	return err
+	err = invalidateIdentityCache(identity.AccountId)
+	if err != nil {
+		logrus.Errorf("Error writing identity to cache after updating preview: %v", err)
+	}
+	return nil
 }

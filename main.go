@@ -14,6 +14,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/kafka"
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
+	redis_client "github.com/RedHatInsights/chrome-service-backend/rest/redis"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
@@ -31,6 +32,7 @@ func init() {
 	database.Init()
 	util.InitUserIdentitiesCache()
 	util.CreateChromeConfiguration()
+	redis_client.InitRedisClient()
 }
 
 func main() {

@@ -93,6 +93,19 @@ services:
       timeout: 1m
       retries: 5
       start_period: 10s
+  redis:
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    command: ["redis-server"]
+    ports:
+    - "6379:6379"
+    image: quay.io/opstree/redis:latest
+    expose:
+    - "6379"
+
 volumes:
   chrome-db:
     driver: local

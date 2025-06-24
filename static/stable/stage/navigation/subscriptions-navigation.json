@@ -81,7 +81,8 @@
       "id": "manifests",
       "appId": "manifests",
       "title": "Manifests",
-      "href": "/subscriptions/manifests"
+      "href": "/subscriptions/manifests",
+      "feoReplacement": "manifests"
     },
     {
       "id": "cloud-inventory",

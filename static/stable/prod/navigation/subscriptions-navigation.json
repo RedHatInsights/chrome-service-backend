@@ -82,7 +82,8 @@
       "title": "Manifests",
       "icon": "SubscriptionsIcon",
       "href": "/subscriptions/manifests",
-      "description": "Create, manage, and export subscription manifests for Red Hat Satellite."
+      "description": "Create, manage, and export subscription manifests for Red Hat Satellite.",
+      "feoReplacement": "manifests"
     },
     {
       "id": "learningResources",

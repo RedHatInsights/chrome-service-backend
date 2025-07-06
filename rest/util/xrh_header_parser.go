@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/redhatinsights/platform-go-middlewares/identity"
+	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
 	"github.com/sirupsen/logrus"
 )
 

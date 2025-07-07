@@ -281,7 +281,7 @@ spec:
           image: quay.io/redhat-appstudio/build-trusted-artifacts:latest@sha256:ff35e09ff5c89e54538b50abae241a765b2b7868f05d62c4835bebf0978f3659
           name: use-trusted-artifact
         - computeResources: {}
-          image: registry.access.redhat.com/ubi8/go-toolset:1.23.6-1
+          image: registry.access.redhat.com/ubi8/go-toolset:1.23.9-2
           name: validate-schemas-files
           script: "#!/bin/bash\nset -ex\nmake validate-schema\nmake publish-search-index-dry-run\n make parse-services\nmake generate-search-index  \n"
           securityContext:
@@ -375,7 +375,7 @@ spec:
             value: $(params.UNLEASH_API_TOKEN)
           - name: UNLEASH_ADMIN_TOKEN
             value: $(params.UNLEASH_ADMIN_TOKEN)
-          image: registry.access.redhat.com/ubi8/go-toolset:1.23.6-1
+          image: registry.access.redhat.com/ubi8/go-toolset:1.23.9-2
           name: unit-tests
           script: |
             #!/bin/bash

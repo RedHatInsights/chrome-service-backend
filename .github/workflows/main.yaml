@@ -78,5 +78,11 @@ jobs:
       - name: Validate schemas
         run: make validate-schema
 
+      - name: Parse services
+        run: make parse-services
+
       - name: Generate search index
         run: make generate-search-index
+
+      - name: Publish search index (dry run)
+        run: make publish-search-index-dry-run

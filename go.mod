@@ -3,7 +3,7 @@ module github.com/RedHatInsights/chrome-service-backend
 go 1.23.6
 
 require (
-	github.com/Unleash/unleash-client-go/v3 v3.7.4
+	github.com/Unleash/unleash-client-go/v4 v4.5.0
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/go-chi/cors v1.2.1
 	github.com/google/uuid v1.6.0
@@ -17,7 +17,7 @@ require (
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
 	github.com/segmentio/kafka-go v0.4.38
 	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/xeipuuv/gojsonschema v1.2.0
 	gopkg.in/yaml.v3 v3.0.1
 	gorm.io/datatypes v1.2.0
@@ -27,7 +27,7 @@ require (
 )
 
 require (
-	github.com/Masterminds/semver/v3 v3.1.1 // indirect
+	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
@@ -50,7 +50,7 @@ require (
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
-	github.com/twmb/murmur3 v1.1.5 // indirect
+	github.com/twmb/murmur3 v1.1.8 // indirect
 	github.com/xdg/scram v1.0.5 // indirect
 	github.com/xdg/stringprep v1.0.3 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect

@@ -8,7 +8,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: '3'
     pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main"
-    pipelinesascode.tekton.dev/pipeline: https://github.com/RedHatInsights/konflux-pipelines/raw/main/pipelines/platform-ui/docker-build-run-unit-tests.yaml
+    pipelinesascode.tekton.dev/pipeline: https://github.com/RedHatInsights/konflux-pipelines/blob/main/pipelines/docker-build.yaml
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: chrome-service
@@ -30,6 +30,20 @@ spec:
     value: Dockerfile
   - name: path-context
     value: .
+  - name: PGSQL_USER
+    value: chrome
+  - name: PGSQL_PASSWORD
+    value: chrome
+  - name: PGSQL_HOSTNAME
+    value: localhost
+  - name: PGSQL_PORT
+    value: '5432'
+  - name: PGSQL_DATABASE
+    value: db
+  - name: UNLEASH_API_TOKEN
+    value: default:development.unleash-insecure-api-token
+  - name: UNLEASH_ADMIN_TOKEN
+    value: '*:*.unleash-insecure-api-token'
   - name: unit-tests-script
     value: |
       #!/bin/bash
@@ -38,9 +52,25 @@ spec:
       make migrate
       make test
   pipelineRef:
-    name: docker-build
+    name: docker-build-run-unit-tests-with-postgres
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
+    podTemplate:
+      env:
+      - name: PGSQL_USER
+        value: $(params.PGSQL_USER)
+      - name: PGSQL_PASSWORD
+        value: $(params.PGSQL_PASSWORD)
+      - name: PGSQL_HOSTNAME
+        value: $(params.PGSQL_HOSTNAME)
+      - name: PGSQL_PORT
+        value: $(params.PGSQL_PORT)
+      - name: PGSQL_DATABASE
+        value: $(params.PGSQL_DATABASE)
+      - name: UNLEASH_API_TOKEN
+        value: $(params.UNLEASH_API_TOKEN)
+      - name: UNLEASH_ADMIN_TOKEN
+        value: $(params.UNLEASH_ADMIN_TOKEN)
   workspaces:
   - name: workspace
     volumeClaimTemplate:

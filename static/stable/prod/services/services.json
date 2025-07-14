@@ -710,13 +710,6 @@
         "links": [
           {
             "isExternal": true,
-            "href": "https://marketplace.redhat.com/en-us",
-            "title": "Red Hat Marketplace",
-            "icon": "RHIcon",
-            "description": "Find, try, purchase, and deploy your software across clouds."
-          },
-          {
-            "isExternal": true,
             "href": "https://www.redhat.com/en/products/trials",
             "title": "Red Hat Product Trials",
             "icon": "RHIcon",

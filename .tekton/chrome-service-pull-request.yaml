@@ -8,6 +8,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: '3'
     pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main"
+    pipelinesascode.tekton.dev/pipeline: https://github.com/RedHatInsights/konflux-pipelines/raw/main/pipelines/platform-ui/docker-build-run-unit-tests.yaml
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: chrome-service
@@ -27,15 +28,17 @@ spec:
     value: 5d
   - name: dockerfile
     value: Dockerfile
+  - name: path-context
+    value: .
+  - name: unit-tests-script
+    value: |
+      #!/bin/bash
+      set -ex
+      
+      make migrate
+      make test
   pipelineRef:
-    params:
-    - name: url
-      value: https://github.com/RedHatInsights/konflux-pipelines
-    - name: revision
-      value: main
-    - name: pathInRepo
-      value: pipelines/docker-build-oci-ta.yaml
-    resolver: git
+    name: docker-build
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
   workspaces:

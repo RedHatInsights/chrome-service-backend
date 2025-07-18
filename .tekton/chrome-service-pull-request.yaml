@@ -8,7 +8,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: '3'
     pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main"
-    pipelinesascode.tekton.dev/pipeline: https://github.com/JetyAdam/konflux-pipelines/blob/platform_services_pipeline/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
+    pipelinesascode.tekton.dev/pipeline: https://raw.githubusercontent.com/JetyAdam/konflux-pipelines/refs/heads/platform_services_pipeline/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: chrome-service

@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"

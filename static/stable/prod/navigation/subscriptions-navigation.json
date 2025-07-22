@@ -16,7 +16,8 @@
       "title": "Subscriptions Inventory",
       "href": "/subscriptions/inventory",
       "icon": "SubscriptionsIcon",
-      "description": "View your purchased subscriptions and explore more information about each one."
+      "description": "View your purchased subscriptions and explore more information about each one.",
+      "feoReplacement": "subscription-inventory"
     },
     {
       "id": "subscriptionsUsage",
@@ -81,7 +82,8 @@
       "title": "Manifests",
       "icon": "SubscriptionsIcon",
       "href": "/subscriptions/manifests",
-      "description": "Create, manage, and export subscription manifests for Red Hat Satellite."
+      "description": "Create, manage, and export subscription manifests for Red Hat Satellite.",
+      "feoReplacement": "manifests"
     },
     {
       "id": "learningResources",

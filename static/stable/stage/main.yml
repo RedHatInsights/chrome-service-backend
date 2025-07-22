@@ -136,6 +136,12 @@ provisioning:
     versions:
       - v1
 
+roadmap:
+  title: Planning
+  api:
+    versions:
+      - v1
+
 streams:
   title: "Streams for Apache Kafka"
   api:

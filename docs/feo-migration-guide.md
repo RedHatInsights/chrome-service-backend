@@ -131,12 +131,6 @@ For example, the Frontend resource module config migration for the **Learning Re
                       }
                   },
                   {
-                      "pathname": "/hac/learning-resources",
-                      "props": {
-                          "bundle": "hac"
-                      }
-                  },
-                  {
                       "pathname": "/subscriptions/learning-resources",
                       "props": {
                           "bundle": "subscriptions"

@@ -196,6 +196,12 @@ provisioning:
     versions:
       - v1
 
+roadmap:
+  title: Planning
+  api:
+    versions:
+      - v1
+
 rbac:
   title: Role-based Access Control
   api:

@@ -95,6 +95,8 @@ objects:
                 key: bundles.json
                 name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
+          - name: FEO_BUNDLES_ONBOARDED_IDS
+            value: ${FEO_BUNDLES_ONBOARDED_IDS}
           - name: CLOWDER_ENABLED
             value: ${CLOWDER_ENABLED}
           - name: LOG_LEVEL 
@@ -124,11 +126,6 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_ANSIBLE_DEV
-          - name: INTERCOM_HAC_CORE
-            valueFrom:
-              secretKeyRef:
-                name: chrome-service-backend
-                key: INTERCOM_HAC_CORE
           - name: INTERCOM_OPENSHIFT
             valueFrom:
               secretKeyRef:
@@ -149,6 +146,16 @@ objects:
               secretKeyRef:
                 name: chrome-service-backend
                 key: INTERCOM_DBAAS_DEV
+          - name: INTERCOM_INSIGHTS
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_INSIGHTS
+          - name: INTERCOM_INSIGHTS_DEV
+            valueFrom:
+              secretKeyRef:
+                name: chrome-service-backend
+                key: INTERCOM_INSIGHTS_DEV
           - name: SEARCH_CLIENT_SECRET_PROD
             valueFrom:
               secretKeyRef:
@@ -185,12 +192,13 @@ objects:
       INTERCOM_ANSIBLE: dGVzdFZhbHVl
       INTERCOM_ANSIBLE_DEV: dGVzdFZhbHVl
       INTERCOM_DEFAULT: dGVzdFZhbHVl
-      INTERCOM_HAC_CORE: dGVzdFZhbHVl
       INTERCOM_OPENSHIFT_DEV: dGVzdFZhbHVl
       SEARCH_CLIENT_SECRET_PROD: dGVzdFZhbHVl
       SEARCH_CLIENT_SECRET_STAGE: dGVzdFZhbHVl
       INTERCOM_DBAAS: dGVzdFZhbHVl
       INTERCOM_DBAAS_DEV: dGVzdFZhbHVl
+      INTERCOM_INSIGHTS: dGVzdFZhbHVl
+      INTERCOM_INSIGHTS_DEV: dGVzdFZhbHVl
       DEBUG_FAVORITES_ACCOUNT_1: OTk5
     type: Opaque
 
@@ -232,3 +240,6 @@ parameters:
 - description: Maximum number of recently used workspaces that the Chrome back end will store in the database for each user.
   name: RECENTLY_USED_WORKSPACES_MAX_SAVED
   value: '10'
+- description: Bundles navigation fully onboarded to FEO
+  name: FEO_BUNDLES_ONBOARDED_IDS
+  value: '["user-preferences"]'

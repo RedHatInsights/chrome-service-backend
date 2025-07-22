@@ -661,28 +661,6 @@
             }
         ]
     },
-    "hacCore": {
-        "manifestLocation": "/apps/hac-core/fed-mods.json",
-        "config": {
-            "ssoScopes": [
-               "profile_level.name_and_dev_terms"
-            ]
-          },
-        "modules": [
-            {
-                "id": "hacCore",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/application-pipeline"
-                    },
-                    {
-                        "pathname": "/hac"
-                    }
-                ]
-            }
-        ]
-    },
     "frontendStarterApp": {
         "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
         "modules": [
@@ -932,12 +910,6 @@
                         "pathname": "/iam/learning-resources",
                         "props": {
                             "bundle": "iam"
-                        }
-                    },
-                    {
-                        "pathname": "/hac/learning-resources",
-                        "props": {
-                            "bundle": "hac"
                         }
                     },
                     {

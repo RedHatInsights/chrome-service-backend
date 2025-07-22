@@ -2,6 +2,7 @@
     "landing": {
         "manifestLocation": "/apps/landing/fed-mods.json",
         "defaultDocumentTitle": "Hybrid Cloud Console Home",
+        "cdnPath": "/apps/landing/",
         "modules": [
             {
                 "id": "landing",
@@ -318,12 +319,6 @@
                         "pathname": "/iam/learning-resources",
                         "props": {
                             "bundle": "iam"
-                        }
-                    },
-                    {
-                        "pathname": "/hac/learning-resources",
-                        "props": {
-                            "bundle": "hac"
                         }
                     },
                     {

@@ -3,6 +3,7 @@
     "landing": {
         "manifestLocation": "/apps/landing/fed-mods.json",
         "defaultDocumentTitle": "Hybrid Cloud Console Home",
+        "cdnPath": "/apps/landing/",
         "modules": [
             {
                 "id": "landing",
@@ -152,6 +153,9 @@
       ]
     },
     "connector": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/connector/fed-mods.json",
         "defaultDocumentTitle": "Remote Host Configuration | Settings",
         "config": {
@@ -226,6 +230,9 @@
         "modules": []
     },
     "dashboard": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/dashboard/fed-mods.json",
         "isFedramp": true,
         "modules": [
@@ -244,6 +251,9 @@
         ]
     },
     "advisor": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/advisor/fed-mods.json",
         "config": {
           "supportCaseData": {
@@ -268,6 +278,9 @@
         ]
     },
     "malware": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/malware/fed-mods.json",
         "config": {
             "supportCaseData": {
@@ -322,6 +335,9 @@
         ]
     },
     "inventory": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/inventory/fed-mods.json",
         "config": {
             "supportCaseData": {
@@ -346,6 +362,9 @@
         ]
     },
     "vulnerability": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/vulnerability/fed-mods.json",
         "isFedramp": true,
         "config": {
@@ -367,6 +386,9 @@
         ]
     },
     "compliance": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/compliance/fed-mods.json",
         "isFedramp": true,
         "config": {
@@ -388,6 +410,9 @@
         ]
     },
     "policies": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/policies/fed-mods.json",
         "config": {
             "supportCaseData": {
@@ -412,6 +437,9 @@
         ]
     },
     "patch": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/patch/fed-mods.json",
         "isFedramp": true,
         "config": {
@@ -472,6 +500,9 @@
         ]
     },
     "activationKeys": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/activation-keys/fed-mods.json",
         "modules": [
             {
@@ -535,6 +566,9 @@
         ]
     },
     "ros": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/ros/fed-mods.json",
         "config": {
             "supportCaseData": {
@@ -555,6 +589,9 @@
         ]
     },
     "registration": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/registration/fed-mods.json",
         "modules": [
             {
@@ -572,6 +609,9 @@
         ]
     },
     "remediations": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/remediations/fed-mods.json",
         "config": {
             "supportCaseData": {
@@ -596,6 +636,9 @@
         ]
     },
     "tasks": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/tasks/fed-mods.json",
         "config": {
             "supportCaseData": {
@@ -822,6 +865,20 @@
             }
         ]
     },
+    "assistedMigrationApp": {
+        "manifestLocation": "/apps/assisted-migration-app/fed-mods.json",
+        "modules": [
+          {
+            "id": "assisted-migration-app",
+            "module": "./RootApp",
+            "routes": [
+                {
+                    "pathname": "/openshift/migration-assessment"
+                }
+            ]
+          }
+        ]
+    },
     "assistedInstallerApp": {
         "manifestLocation": "/apps/assisted-installer-app/fed-mods.json",
         "modules": [
@@ -902,6 +959,9 @@
         ]
     },
     "contentSources": {
+        "analytics": {
+            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
+        },
         "manifestLocation": "/apps/content-sources/fed-mods.json",
         "defaultDocumentTitle": "Repositories",
         "modules": [
@@ -975,12 +1035,6 @@
                         "pathname": "/iam/learning-resources",
                         "props": {
                             "bundle": "iam"
-                        }
-                    },
-                    {
-                        "pathname": "/hac/learning-resources",
-                        "props": {
-                            "bundle": "hac"
                         }
                     },
                     {
@@ -1113,41 +1167,5 @@
     "runtimes": {
         "manifestLocation": "/apps/runtimes/fed-mods.json",
         "modules": []
-    },
-    "hacCore": {
-        "manifestLocation": "/apps/hac-core/fed-mods.json",
-        "config": {
-          "ssoScopes": [
-             "profile_level.name_and_dev_terms"
-          ]
-        },
-        "modules": [
-            {
-                "id": "hacCore",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/application-pipeline"
-                    },
-                    {
-                        "pathname": "/hac"
-                    }
-                ]
-            }
-        ]
-    },
-    "hacDev": {
-        "manifestLocation": "/apps/hac-dev/fed-mods.json",
-        "modules": [
-            {
-                "id": "hacDev",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/hac/app-studio"
-                    }
-                ]
-            }
-        ]
     }
 }

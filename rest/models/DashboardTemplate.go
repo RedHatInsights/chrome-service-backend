@@ -328,8 +328,9 @@ func (wi WidgetIcons) IsValid() error {
 }
 
 type WidgetHeaderLink struct {
-	Title string `json:"title,omitempty"`
-	Href  string `json:"href,omitempty"`
+	Title       string `json:"title,omitempty"`
+	Href        string `json:"href,omitempty"`
+	FeatureFlag string `json:"featureFlag,omitempty"`
 }
 
 type WidgetPermissionMethods string

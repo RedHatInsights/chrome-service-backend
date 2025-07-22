@@ -155,6 +155,11 @@ var (
 			FeatureFlag: "widget.learningResources.enable",
 			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 2, 4, 10, 1),
 			Config: models.WidgetConfiguration{
+				HeaderLink: models.WidgetHeaderLink{
+					Title:       "View all",
+					Href:        "/learning-resources?tab=all",
+					FeatureFlag: "platform.learning-resources.global-learning-resources",
+				},
 				Icon:  models.OutlinedBookmarkIcon,
 				Title: "Bookmarked learning resources",
 			},

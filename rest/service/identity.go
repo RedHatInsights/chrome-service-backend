@@ -27,13 +27,28 @@ type IntercomPayload struct {
 
 const (
 	OpenShift           IntercomApp = "openshift"
-	HacCore             IntercomApp = "hacCore"
 	Acs                 IntercomApp = "acs"
 	Ansible             IntercomApp = "ansible"
 	AnsibleDashboard    IntercomApp = "ansibleDashboard"
 	AutomationHub       IntercomApp = "automationHub"
 	AutomationAnalytics IntercomApp = "automationAnalytics"
 	DBAAS               IntercomApp = "dbaas"
+	ActivationKeys      IntercomApp = "activationKeys"
+	Advisor             IntercomApp = "advisor"
+	Compliance          IntercomApp = "compliance"
+	Connector           IntercomApp = "connector"
+	ContentSources      IntercomApp = "contentSources"
+	Dashboard           IntercomApp = "dashboard"
+	ImageBuilder        IntercomApp = "imageBuilder"
+	Inventory           IntercomApp = "inventory"
+	Malware             IntercomApp = "malware"
+	Patch               IntercomApp = "patch"
+	Policies            IntercomApp = "policies"
+	Registration        IntercomApp = "registration"
+	Remediations        IntercomApp = "remediations"
+	Ros                 IntercomApp = "ros"
+	Tasks               IntercomApp = "tasks"
+	Vulnerability       IntercomApp = "vulnerability"
 )
 
 func debugFavoritesIdentity(userId string) {
@@ -47,11 +62,11 @@ func debugFavoritesIdentity(userId string) {
 
 func (ib IntercomApp) IsValidApp() error {
 	switch ib {
-	case OpenShift, HacCore, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS:
+	case OpenShift, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS, ActivationKeys, Advisor, Compliance, Connector, ContentSources, Dashboard, ImageBuilder, Inventory, Malware, Patch, Policies, Registration, Remediations, Ros, Tasks, Vulnerability:
 		return nil
 	}
 
-	return fmt.Errorf("invalid bundle string. Expected one of %s, %s, got %s", OpenShift, HacCore, ib)
+	return fmt.Errorf("invalid intercom bundle string. Expected one like %s, got %s", OpenShift, ib)
 }
 
 func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {

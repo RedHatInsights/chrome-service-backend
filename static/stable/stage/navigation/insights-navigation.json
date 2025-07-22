@@ -555,7 +555,7 @@
         {
           "id": "remediations",
           "appId": "remediations",
-          "title": "Remediations",
+          "title": "Remediation Plans",
           "href": "/insights/remediations",
           "icon": "InsightsIcon",
           "product": "Red Hat Insights",
@@ -572,7 +572,8 @@
             "insights",
             "automation",
             "Ansible",
-            "patch"
+            "patch",
+            "Remediation plans"
           ]
         },
         {
@@ -636,7 +637,8 @@
       "title": "Learning Resources",
       "filterable": false,
       "href": "/insights/learning-resources",
-      "product": "Red Hat Insights"
+      "product": "Red Hat Insights",
+      "feoReplacement": "learningResourcesInsights"
     }
   ]
 }

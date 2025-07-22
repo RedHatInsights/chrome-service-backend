@@ -6,7 +6,8 @@
             "id": "apiDocumentation",
             "title": "API Documentation",
             "appId": "apiDocs",
-            "href": "/docs/api"
+            "href": "/docs/api",
+            "feoReplacement": "api-docs"
         },
         {
             "title": "Product Documentation",

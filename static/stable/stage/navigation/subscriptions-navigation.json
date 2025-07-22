@@ -7,7 +7,8 @@
       "appId": "subscriptionsDashboardUi",
       "title": "Overview",
       "href": "/subscriptions/overview",
-      "icon": "SubscriptionsIcon"
+      "icon": "SubscriptionsIcon",
+      "feoReplacement": "subscriptions-dashboard-ui"
     },
     {
       "id": "subscriptionsInventory",
@@ -15,12 +16,14 @@
       "title": "Subscriptions Inventory",
       "description": "View your purchased subscriptions and explore more information about each one.",
       "href": "/subscriptions/inventory",
-      "icon": "SubscriptionsIcon"
+      "icon": "SubscriptionsIcon",
+      "feoReplacement": "subscription-inventory"
     },
     {
       "id": "subscriptionsUsage",
       "title": "Subscriptions Usage",
       "expandable": true,
+      "feoReplacement": "subscriptionsUsage",
       "routes": [
         {
           "id": "rhel",
@@ -78,7 +81,15 @@
       "id": "manifests",
       "appId": "manifests",
       "title": "Manifests",
-      "href": "/subscriptions/manifests"
+      "href": "/subscriptions/manifests",
+      "feoReplacement": "manifests"
+    },
+    {
+      "id": "cloud-inventory",
+      "appId": "cloud-inventory",
+      "title": "Cloud Inventory",
+      "href": "/subscriptions/cloud-inventory",
+      "feoReplacement": "cloud-inventory"
     },
     {
       "id": "learningResources",

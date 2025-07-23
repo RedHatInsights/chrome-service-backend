@@ -51,15 +51,6 @@ spec:
       
       make migrate
       make test
-  pipelineRef:
-    params:
-    - name: url
-      value: https://github.com/JetyAdam/konflux-pipelines
-    - name: revision
-      value: platform_services_pipeline
-    - name: pathInRepo
-      value: pipelines/docker-build-run-unit-tests-dynamic-env.yaml
-    resolver: git
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
     podTemplate:

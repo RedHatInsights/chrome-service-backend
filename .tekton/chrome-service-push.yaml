@@ -7,7 +7,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: '3'
     pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "main"
-    pipelinesascode.tekton.dev/pipeline: https://github.com/RedHatInsights/konflux-pipelines/blob/main/pipelines/docker-build.yaml
+    pipelinesascode.tekton.dev/pipeline: https://raw.githubusercontent.com/JetyAdam/konflux-pipelines/refs/heads/platform_services_pipeline/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: chrome-service
@@ -25,15 +25,6 @@ spec:
     value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/hcc-platex-services/chrome-service:{{revision}}
   - name: dockerfile
     value: Dockerfile
-  pipelineRef:
-    params:
-    - name: url
-      value: https://github.com/RedHatInsights/konflux-pipelines
-    - name: revision
-      value: main
-    - name: pathInRepo
-      value: pipelines/docker-build.yaml
-    resolver: git
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
   workspaces:

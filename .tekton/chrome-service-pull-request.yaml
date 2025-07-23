@@ -52,7 +52,7 @@ spec:
       make migrate
       make test
   pipelineRef:
-    name: docker-build-run-unit-tests-dynamic-env
+    name: docker-build
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
     podTemplate:

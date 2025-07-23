@@ -25,6 +25,8 @@ spec:
     value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/hcc-platex-services/chrome-service:{{revision}}
   - name: dockerfile
     value: Dockerfile
+  pipelineRef:
+    name: docker-build
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
   workspaces:

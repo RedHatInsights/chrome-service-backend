@@ -7,7 +7,7 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: '3'
     pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "main"
-    pipelinesascode.tekton.dev/pipeline: https://raw.githubusercontent.com/JetyAdam/konflux-pipelines/refs/heads/platform_services_pipeline/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
+    pipelinesascode.tekton.dev/pipeline: https://raw.githubusercontent.com/JetyAdam/konflux-pipelines/platform_services_pipeline/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: chrome-service
@@ -25,10 +25,49 @@ spec:
     value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/hcc-platex-services/chrome-service:{{revision}}
   - name: dockerfile
     value: Dockerfile
+  - name: path-context
+    value: .
+  - name: PGSQL_USER
+    value: chrome
+  - name: PGSQL_PASSWORD
+    value: chrome
+  - name: PGSQL_HOSTNAME
+    value: localhost
+  - name: PGSQL_PORT
+    value: '5432'
+  - name: PGSQL_DATABASE
+    value: db
+  - name: UNLEASH_API_TOKEN
+    value: default:development.unleash-insecure-api-token
+  - name: UNLEASH_ADMIN_TOKEN
+    value: '*:*.unleash-insecure-api-token'
+  - name: unit-tests-script
+    value: |
+      #!/bin/bash
+      set -ex
+      
+      make migrate
+      make test
   pipelineRef:
     name: docker-build
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
+    podTemplate:
+      env:
+      - name: PGSQL_USER
+        value: $(params.PGSQL_USER)
+      - name: PGSQL_PASSWORD
+        value: $(params.PGSQL_PASSWORD)
+      - name: PGSQL_HOSTNAME
+        value: $(params.PGSQL_HOSTNAME)
+      - name: PGSQL_PORT
+        value: $(params.PGSQL_PORT)
+      - name: PGSQL_DATABASE
+        value: $(params.PGSQL_DATABASE)
+      - name: UNLEASH_API_TOKEN
+        value: $(params.UNLEASH_API_TOKEN)
+      - name: UNLEASH_ADMIN_TOKEN
+        value: $(params.UNLEASH_ADMIN_TOKEN)
   workspaces:
   - name: workspace
     volumeClaimTemplate:

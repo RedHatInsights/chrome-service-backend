@@ -145,6 +145,7 @@
               "product": "Red Hat Insights",
               "subtitle": "Red Hat Insights for RHEL",
               "description": "Create activation keys to register your systems and configure repositories without using a username and password.",
+              "feoReplacement": "activation-keys",
               "alt_title": [
                 "Subscription key",
                 "sca",

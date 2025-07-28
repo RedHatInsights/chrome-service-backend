@@ -285,7 +285,6 @@ func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) mod
 func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var err error
 	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
-	logrus.Errorln(err)
 
 	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{

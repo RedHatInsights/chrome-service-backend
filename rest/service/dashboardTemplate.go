@@ -133,7 +133,7 @@ var (
 		models.NotificationsEvents: models.ModuleFederationMetadata{
 			Scope:       "notifications",
 			Module:      "./DashboardWidget",
-			FeatureFlag: "widget.notifications.enabled",
+			FeatureFlag: "widget.notifications.enable",
 			Defaults:    models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 3, 10, 1),
 			Config: models.WidgetConfiguration{
 				HeaderLink: models.WidgetHeaderLink{

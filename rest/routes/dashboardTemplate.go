@@ -317,9 +317,11 @@ func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 	var resp util.EntityResponse[models.WidgetModuleFederationMapping]
 
 	if featureflags.IsEnabled("chrome-service.filterWidgets.enable") {
+		filteredWidgetMapping := FilterWidgetMapping(service.WidgetMapping)
+		filteredWidgetMapping = FilterWidgetMappingHeaderLink(filteredWidgetMapping)
+
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
-			Data: FilterWidgetMapping(service.WidgetMapping),
-		}
+			Data: filteredWidgetMapping,
 	} else {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
 			Data: service.WidgetMapping,

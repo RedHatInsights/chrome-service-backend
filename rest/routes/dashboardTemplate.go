@@ -322,6 +322,7 @@ func GetWidgetMappings(w http.ResponseWriter, r *http.Request) {
 
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
 			Data: filteredWidgetMapping,
+		}
 	} else {
 		resp = util.EntityResponse[models.WidgetModuleFederationMapping]{
 			Data: service.WidgetMapping,

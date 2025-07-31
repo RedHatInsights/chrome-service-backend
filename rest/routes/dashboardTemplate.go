@@ -302,10 +302,9 @@ func FilterWidgetMappingHeaderLink(widgetMapping models.WidgetModuleFederationMa
 	return widgetMapping
 }
 
-// FilterWidgetMapping removes hidden widgets from the mapping by using feature flags stored with the widget definition.
 func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
 	for key, value := range widgetMapping {
-		if featureflags.IsEnabled(value.FeatureFlag) {
+		if !featureflags.IsEnabled(value.FeatureFlag) {
 			delete(widgetMapping, key)
 		}
 	}

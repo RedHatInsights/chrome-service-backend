@@ -23,6 +23,7 @@
       "id": "subscriptionsUsage",
       "title": "Subscriptions Usage",
       "expandable": true,
+      "feoReplacement": "subscriptionsUsage",
       "routes": [
         {
           "id": "rhel",

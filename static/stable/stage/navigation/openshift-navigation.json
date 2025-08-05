@@ -3,6 +3,7 @@
   "title": "OpenShift",
   "navItems": [
     {
+      "feoReplacement": "overview",
       "id": "overview",
       "appId": "openshift",
       "href": "/openshift/overview",
@@ -13,6 +14,7 @@
       "description": "Red Hat OpenShift cluster product information"
     },
     {
+      "feoReplacement": "cluster-management",
       "groupId": "cluster_management",
       "title": "Cluster Management",
       "navItems": [
@@ -197,6 +199,7 @@
       ]
     },
     {
+      "feoReplacement": "products",
       "groupId": "products",
       "title": "Products",
       "navItems": [
@@ -287,6 +290,7 @@
       ]
     },
     {
+      "feoReplacement": "resources",
       "groupId": "resources",
       "title": "Resources",
       "navItems": [

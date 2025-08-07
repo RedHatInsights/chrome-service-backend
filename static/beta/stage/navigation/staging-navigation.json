@@ -38,6 +38,7 @@
             "filterable": false,
             "id": "costManagementMfe",
             "description": "Cost Management Microfrontend with Module Federation",
+            "feoReplacement": "cost-management-mfe.nav",
             "routes": [
                 {
                     "title": "ROS",

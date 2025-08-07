@@ -107,6 +107,7 @@
           "expandable": true,
           "description": "Understand and track costs for your OpenShift clusters and workloads.",
           "id": "costManagement",
+          "feoReplacement": "cost-management.nav",
           "routes": [
             {
               "id": "costManagementOverview",

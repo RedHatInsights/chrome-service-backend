@@ -50,6 +50,7 @@
       "id": "hybridCommittedSpend",
       "title": "Hybrid Committed Spend",
       "expandable": true,
+      "feoReplacement": "hybrid-committed-spend.nav",
       "permissions": [
         {
           "method": "loosePermissions",

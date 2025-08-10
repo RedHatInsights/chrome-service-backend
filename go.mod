@@ -3,7 +3,7 @@ module github.com/RedHatInsights/chrome-service-backend
 go 1.23.9
 
 require (
-	github.com/Unleash/unleash-client-go/v3 v3.7.4
+	github.com/Unleash/unleash-client-go/v5 v5.0.3
 	github.com/go-chi/chi/v5 v5.2.2
 	github.com/go-chi/cors v1.2.1
 	github.com/google/uuid v1.6.0

@@ -730,6 +730,6 @@ The function will throw an error if the validation fails.
 **Q: Why can I not preview my changes to the frontend.yaml CRD locally?**
 
 A: This can be for numerous reasons, but by far the most common reason for this issue during an apps initial migration is:
-1. You must deploy the initial `feoConfigEnabled: true`, nav, service tile, module, search, etc. changes in the frontend CRD to the envrionment you are proxying your local env to. This is only necessary for the initial config migration
+1. You must deploy the initial `feoConfigEnabled: true`, nav, service tile, module, search, etc. changes in the frontend CRD to the environment you are proxying your local env to. This is only necessary for the initial config migration
 2. You should be using the latest versions of our fec packages
 3. Check the console logs for any related CRD validation errors

@@ -4,20 +4,7 @@
     "title": "AI/ML",
     "icon": "BrainIcon",
     "description": "Create, train, and serve artificial intelligence and machine learning (AI/ML) models.",
-    "links": [
-      {
-        "id": "openshift",
-        "isGroup": true,
-        "title": "OpenShift",
-        "links": [
-          "openshift.sixtydaytrial",
-          "openshift.developersandboxtrial"
-        ],
-        "alt_title": [
-          "operators"
-        ]
-      }
-    ]
+    "links": []
   },
   {
     "id": "automation",
@@ -70,25 +57,6 @@
     "icon": "CubeIcon",
     "description": "Run your applications in a consistent and isolated environment.",
     "links": [
-      {
-        "isGroup": true,
-        "id": "openshift",
-        "title": "OpenShift",
-        "links": [
-          {
-            "title": "Overview",
-            "href": "/openshift/overview",
-            "icon": "OpenShiftIcon",
-            "description": "Browse options for various OpenShift cluster types to find what fits your needs."
-          },
-          {
-            "title": "Clusters",
-            "href": "/openshift",
-            "icon": "OpenShiftIcon",
-            "description": "View, Register, or Create an OpenShift Cluster."
-          }
-        ]
-      },
       {
         "id": "quay",
         "isGroup": true,
@@ -206,14 +174,6 @@
         ]
       },
       {
-        "id": "openshift",
-        "isGroup": true,
-        "title": "OpenShift",
-        "links": [
-          "openshift.clusters"
-        ]
-      },
-      {
         "id": "ansible",
         "isGroup": true,
         "title": "Ansible",
@@ -278,52 +238,6 @@
       },
       {
         "isGroup": true,
-        "title": "OpenShift",
-        "id": "openshift",
-        "links": [
-          {
-            "href": "/openshift/insights/advisor/recommendations",
-            "icon": "OpenShiftIcon",
-            "title": "Advisor",
-            "subtitle": "Red Hat Insights for OpenShift",
-            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
-            "alt_title": [
-              "Insights Advisor",
-              "OpenShift Advisor",
-              "Advisor",
-              "advisor",
-              "Recommendations",
-              "Proactive support",
-              "Proactive support",
-              "risk",
-              "support",
-              "update",
-              "update risk",
-              "update",
-              "issues",
-              "remediation",
-              "cluster state",
-              "recommendation",
-              "cluster health",
-              "remote health",
-              "proactive",
-              "support",
-              "fix",
-              "problem",
-              "issue"
-            ]
-          },
-          {
-            "href": "/openshift/insights/vulnerability/cves",
-            "icon": "OpenShiftIcon",
-            "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for OpenShift",
-            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
-          }
-        ]
-      },
-      {
-        "isGroup": true,
         "title": "Ansible",
         "id": "ansible",
         "links": [
@@ -372,51 +286,7 @@
   {
     "id": "operators",
     "title": "Operators",
-    "links": [
-      {
-        "isGroup": true,
-        "id": "openshift",
-        "title": "OpenShift",
-        "links": [
-          {
-            "isExternal": true,
-            "href": "https://catalog.redhat.com/software/container-stacks/detail/63b85b573112fe5a95ee9a3a",
-            "title": "OpenShift AI",
-            "description": "Create, train, and serve AI/ML models with OpenShift."
-          },
-          {
-            "isExternal": true,
-            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53f218b6f188e53644c4f",
-            "title": "OpenShift Virtualization",
-            "description": "Run and manage virtual machines on OpenShift."
-          },
-          {
-            "isExternal": true,
-            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54aa3535cb70ab8c02996",
-            "title": "Advanced Cluster Management for Kubernetes",
-            "description": "Manage cluster lifecycles, deploy workloads, and enforce policies across your Kubernetes fleet."
-          },
-          {
-            "isExternal": true,
-            "href": "https://catalog.redhat.com/software/container-stacks/detail/5fb288c70a12d20cbecc6056",
-            "title": "OpenShift GitOps",
-            "description": "Build and integrate declarative, Git-driven CD workflows into your application platform."
-          },
-          {
-            "isExternal": true,
-            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5",
-            "title": "Pipelines",
-            "description": "Design custom CI/CD pipelines to build, test, and deploy applications."
-          },
-          {
-            "isExternal": true,
-            "href": "https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4",
-            "title": "OpenShift Service Mesh",
-            "description": "Monitor and manage microservices with a unified service mesh."
-          }
-        ]
-      }
-    ]
+    "links": []
   },
   {
     "id": "security",
@@ -505,31 +375,6 @@
       },
       {
         "isGroup": true,
-        "title": "OpenShift",
-        "id": "openshift",
-        "links": [
-          {
-            "href": "/openshift/insights/vulnerability/cves",
-            "icon": "OpenShiftIcon",
-            "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for OpenShift",
-            "description": "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
-          },
-          {
-            "title": "Advanced Cluster Security",
-            "href": "/openshift/acs/overview",
-            "icon": "ACSIcon",
-            "description": "Securely build, deploy, and run your cloud applications using Kubernetes-native architecture.",
-            "alt_title": [
-              "acs",
-              "ACS",
-              "operators"
-            ]
-          }
-        ]
-      },
-      {
-        "isGroup": true,
         "title": "Ansible",
         "id": "ansible",
         "links": [
@@ -578,53 +423,6 @@
             "href": "/insights/ros",
             "icon": "OpenShiftIcon",
             "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
-          }
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "OpenShift",
-        "id": "openshift",
-        "links": [
-          {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/openshift",
-            "icon": "OpenShiftIcon",
-            "description": "Monitor your OpenShift usage for both Annual and On-Demand subscriptions."
-          },
-          {
-            "title": "Cost Management",
-            "filterable": false,
-            "href": "/openshift/cost-management",
-            "icon": "OpenShiftIcon",
-            "description": "View your data in cost management.",
-            "alt_title": [
-              "cost management",
-              "overview",
-              "cost management oerview",
-              "costmgmt",
-              "cost",
-              "finops",
-              "cost management for openshift",
-              "openshift cost",
-              "rhcm",
-              "finsights",
-              "finops",
-              "spend",
-              "distribute",
-              "cost model",
-              "money",
-              "bill",
-              "billing",
-              "financial",
-              "chargeback",
-              "showback",
-              "rate",
-              "save",
-              "savings",
-              "resource optimization",
-              "resources"
-            ]
           }
         ]
       },
@@ -727,21 +525,6 @@
             "icon": "RHIcon",
             "description": "Gain hands-on experience and assess if a product is right for you in a no-cost trial."
           }
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "OpenShift",
-        "id": "openshift",
-        "links": [
-          {
-            "href": "/openshift/services/rosa/demo/",
-            "title": "ROSA Hands-on Experience",
-            "icon": "OpenShiftIcon",
-            "description": "Access a production-ready ROSA cluster for a limited time in a demo environment."
-          },
-          "openshift.developerSandbox",
-          "openshift.sixtydaytrial"
         ]
       }
     ]

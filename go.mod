@@ -62,3 +62,7 @@ require (
 	google.golang.org/protobuf v1.36.6 // indirect
 	gorm.io/driver/mysql v1.6.0 // indirect
 )
+
+replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
+
+replace google.golang.org/protobuf => google.golang.org/protobuf v1.33.0

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -522,7 +523,7 @@ func getEnvToken(secret string, host string) (string, error) {
 	bodyString := string(body)
 	// handle non 200 response
 	if res.StatusCode >= 400 {
-		return bodyString, fmt.Errorf(bodyString)
+		return bodyString, errors.New(bodyString)
 	}
 	defer res.Body.Close()
 
@@ -580,7 +581,7 @@ func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
 	bodyString := string(body)
 	// handle non 200 response
 	if res.StatusCode >= 400 {
-		return fmt.Errorf(bodyString)
+		return errors.New(bodyString)
 	}
 	defer res.Body.Close()
 

@@ -454,6 +454,7 @@
             "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
           },
           {
+            "id": "compliance",
             "href": "/insights/compliance/reports",
             "icon": "InsightsIcon",
             "title": "Compliance",

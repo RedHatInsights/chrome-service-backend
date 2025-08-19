@@ -50,12 +50,6 @@
                   "href": "/settings/notifications/user-preferences"
               }
           ]
-        },
-        {
-          "id": "learningResources",
-          "appId": "learningResources",
-          "title": "Learning Resources",
-          "href": "/settings/learning-resources"
-      }
+        }
     ]
 }

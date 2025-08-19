@@ -313,24 +313,6 @@
                         }
                     },
                     {
-                        "pathname": "/settings/learning-resources",
-                        "props": {
-                            "bundle": "settings"
-                        }
-                    },
-                    {
-                        "pathname": "/iam/learning-resources",
-                        "props": {
-                            "bundle": "iam"
-                        }
-                    },
-                    {
-                        "pathname": "/subscriptions/learning-resources",
-                        "props": {
-                            "bundle": "subscriptions"
-                        }
-                    },
-                    {
                         "pathname": "/application-services/learning-resources",
                         "props": {
                             "bundle": "application-services"

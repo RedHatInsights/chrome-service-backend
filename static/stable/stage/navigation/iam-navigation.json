@@ -202,8 +202,10 @@
       ]
     },
     {
+      "id": "authentication-policy",
       "title": "Authentication Policy",
       "expandable": true,
+      "feoReplcement": "authentication-policy",
       "routes": [
         {
           "id": "authFactors",

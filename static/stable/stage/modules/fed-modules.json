@@ -852,7 +852,11 @@
         "module": "./RootApp",
         "routes": [
           {
-            "pathname": "/openshift/assisted-installer-app"
+            "permissions": [{
+                "method": "featureFlag",
+                "args": ["openshift.assisted-installer.route", true]
+            }],
+            "pathname": "/openshift/assisted-installer"
           }
         ]
       }

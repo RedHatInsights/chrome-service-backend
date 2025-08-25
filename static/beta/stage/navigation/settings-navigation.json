@@ -41,14 +41,6 @@
             "href": "/settings/learning-resources"
         },
         {
-            "id": "idmsvc",
-            "appId": "idmsvc",
-            "title": "Directory and Domain Services",
-            "description": "Directory and Domain Services for console.redhat.com",
-            "href": "/settings/idmsvc",
-            "icon": "PlaceholderIcon"
-        },
-        {
             "title": "Notifications",
             "id": "notifications",
             "description": "A standardized way of notifying users of events for supported services on the Hybrid Cloud Console.",

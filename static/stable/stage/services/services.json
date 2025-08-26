@@ -162,30 +162,6 @@
           "iam.serviceAccounts",
           "iam.idpIntegration"
         ]
-      },
-      {
-        "id": "host-inventory",
-        "isGroup": true,
-        "title": "Host Identity",
-        "links": [
-          "settings.idmsvc"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "integrations-notifications",
-    "icon": "BellIcon",
-    "title": "Integrations and Notifications",
-    "description": "Alerts users to events, using email and integrations such as webhooks.",
-    "links": [
-      {
-        "id": "settings",
-        "isGroup": true,
-        "title": "Console Settings",
-        "links": [
-          "settings.idmsvc"
-        ]
       }
     ]
   },
@@ -499,8 +475,7 @@
             "subtitle": "Red Hat Insights for RHEL",
             "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
           },
-          "insights.remediations",
-          "settings.idmsvc"
+          "insights.remediations"
         ]
       },
       {

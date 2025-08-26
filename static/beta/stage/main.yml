@@ -87,13 +87,6 @@ export:
     versions:
       - v1
 
-idmsvc:
-  title: "Directory and Domain Services"
-  api:
-    versions:
-      - v1
-    isBeta: true
-
 image-builder:
   title: Image Builder
   api:

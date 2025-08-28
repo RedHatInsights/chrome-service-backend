@@ -19,6 +19,7 @@ const (
 	bundlesPath           = "static/bundles-generated.json"
 	staticServicesPath    = "static/stable/%s/services/services-generated.json"
 	serviceTilesPath      = "static/service-tiles-generated.json"
+	apiSpecPath           = "static/api-spec.json"
 )
 
 func getLegacyConfigFile(path string, env string) ([]byte, error) {
@@ -498,6 +499,23 @@ func parseServiceTiles(serviceTilesVar string, env string) ([]byte, error) {
 	return servicesByte, nil
 }
 
+func parseApiSpec(apiSpecVar string, env string) ([]byte, error) {
+	var apiSpec interface{}
+
+	if apiSpecVar == "" {
+		logrus.Warn("FEO_API_SPEC is not set, using empty configuration")
+		apiSpec = map[string]interface{}{}
+	} else {
+		err := json.Unmarshal([]byte(apiSpecVar), &apiSpec)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	res, err := json.MarshalIndent(apiSpec, "", "  ")
+	return res, err
+}
+
 func CreateChromeConfiguration() {
 	// These parsing methods are temporary due to a longer migration window offered to UI tenants
 	// Once migrated, most of the parsing will be removed and the config files will be simply forwarded to the UI tenants
@@ -522,6 +540,7 @@ func CreateChromeConfiguration() {
 	// widgetRegistryVar := os.Getenv("FEO_WIDGET_REGISTRY")
 	bundlesVar := os.Getenv("FEO_BUNDLES")
 	bundlesOnboardedIdsVar := os.Getenv("FEO_BUNDLES_ONBOARDED_IDS")
+	apiSpecVar := os.Getenv("FEO_API_SPEC")
 
 	fedModules, err := parseFedModules(fedModulesVar, env)
 	if err != nil {
@@ -560,6 +579,16 @@ func CreateChromeConfiguration() {
 	}
 
 	err = writeConfigFile(services, serviceTilesPath)
+	if err != nil {
+		panic(err)
+	}
+
+	apiSpec, err := parseApiSpec(apiSpecVar, env)
+	if err != nil {
+		panic(fmt.Sprintf("Error parsing FEO_API_SPEC: %v", err))
+	}
+
+	err = writeConfigFile(apiSpec, apiSpecPath)
 	if err != nil {
 		panic(err)
 	}

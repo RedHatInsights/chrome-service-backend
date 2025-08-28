@@ -98,7 +98,7 @@ objects:
           - name: FEO_API_SPEC
             valueFrom:
               configMapKeyRef:
-                key: api-spec.json
+                key: api-specs.json
                 name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
           - name: FEO_BUNDLES_ONBOARDED_IDS

@@ -19,7 +19,7 @@ const (
 	bundlesPath           = "static/bundles-generated.json"
 	staticServicesPath    = "static/stable/%s/services/services-generated.json"
 	serviceTilesPath      = "static/service-tiles-generated.json"
-	apiSpecPath           = "static/api-spec.json"
+	apiSpecPath           = "static/api-specs-generated.json"
 )
 
 func getLegacyConfigFile(path string, env string) ([]byte, error) {
@@ -500,11 +500,11 @@ func parseServiceTiles(serviceTilesVar string, env string) ([]byte, error) {
 }
 
 func parseApiSpec(apiSpecVar string, env string) ([]byte, error) {
-	var apiSpec interface{}
+	var apiSpec []interface{}
 
 	if apiSpecVar == "" {
 		logrus.Warn("FEO_API_SPEC is not set, using empty configuration")
-		apiSpec = map[string]interface{}{}
+		apiSpec = []interface{}{}
 	} else {
 		err := json.Unmarshal([]byte(apiSpecVar), &apiSpec)
 		if err != nil {

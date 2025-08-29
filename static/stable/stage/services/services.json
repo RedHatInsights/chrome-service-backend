@@ -127,26 +127,6 @@
     ]
   },
   {
-    "id": "iam",
-    "icon": "UsersIcon",
-    "title": "Identity and Access Management",
-    "description": "Ensure that the right users have the appropriate access to technology resources.",
-    "links": [
-      {
-        "id": "iam",
-        "isGroup": true,
-        "title": "IAM",
-        "links": [
-          "iam.users",
-          "iam.groups",
-          "iam.authFactors",
-          "iam.serviceAccounts",
-          "iam.idpIntegration"
-        ]
-      }
-    ]
-  },
-  {
     "id": "inventories",
     "icon": "BoxesIcon",
     "title": "Inventories",

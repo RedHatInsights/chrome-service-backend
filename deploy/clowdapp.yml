@@ -95,6 +95,12 @@ objects:
                 key: bundles.json
                 name: ${FRONTEND_CONTEXT_NAME}
                 optional: true
+          - name: FEO_SSO_CONFIG
+            valueFrom:
+              configMapKeyRef:
+                key: sso-config.json
+                name: ${FRONTEND_CONTEXT_NAME}
+                optional: true
           - name: FEO_BUNDLES_ONBOARDED_IDS
             value: ${FEO_BUNDLES_ONBOARDED_IDS}
           - name: CLOWDER_ENABLED

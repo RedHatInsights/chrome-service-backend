@@ -19,6 +19,7 @@ const (
 	bundlesPath           = "static/bundles-generated.json"
 	staticServicesPath    = "static/stable/%s/services/services-generated.json"
 	serviceTilesPath      = "static/service-tiles-generated.json"
+	ssoConfigPath         = "static/sso-config-generated.json"
 )
 
 func getLegacyConfigFile(path string, env string) ([]byte, error) {
@@ -498,6 +499,33 @@ func parseServiceTiles(serviceTilesVar string, env string) ([]byte, error) {
 	return servicesByte, nil
 }
 
+func parseSSOConfig(ssoConfigVar string, env string) ([]byte, error) {
+	type SSOConfig struct {
+		SSO         string            `json:"ssoUrl"`
+		SSOMapping  map[string]string `json:"ssoMapping,omitempty"`
+		Environment string            `json:"environment"`
+	}
+
+	var ssoConfig SSOConfig
+
+	if ssoConfigVar == "" {
+		logrus.Warn("FEO_SSO_CONFIG is not set, using empty configuration")
+		ssoConfig = SSOConfig{Environment: env}
+	} else {
+		err := json.Unmarshal([]byte(ssoConfigVar), &ssoConfig)
+		if err != nil {
+			return nil, err
+		}
+		// Ensure environment is set
+		if ssoConfig.Environment == "" {
+			ssoConfig.Environment = env
+		}
+	}
+
+	res, err := json.MarshalIndent(ssoConfig, "", "  ")
+	return res, err
+}
+
 func CreateChromeConfiguration() {
 	// These parsing methods are temporary due to a longer migration window offered to UI tenants
 	// Once migrated, most of the parsing will be removed and the config files will be simply forwarded to the UI tenants
@@ -522,6 +550,7 @@ func CreateChromeConfiguration() {
 	// widgetRegistryVar := os.Getenv("FEO_WIDGET_REGISTRY")
 	bundlesVar := os.Getenv("FEO_BUNDLES")
 	bundlesOnboardedIdsVar := os.Getenv("FEO_BUNDLES_ONBOARDED_IDS")
+	ssoConfigVar := os.Getenv("FEO_SSO_CONFIG")
 
 	fedModules, err := parseFedModules(fedModulesVar, env)
 	if err != nil {
@@ -560,6 +589,16 @@ func CreateChromeConfiguration() {
 	}
 
 	err = writeConfigFile(services, serviceTilesPath)
+	if err != nil {
+		panic(err)
+	}
+
+	ssoConfig, err := parseSSOConfig(ssoConfigVar, env)
+	if err != nil {
+		panic(fmt.Sprintf("Error parsing FEO_SSO_CONFIG: %v", err))
+	}
+
+	err = writeConfigFile(ssoConfig, ssoConfigPath)
 	if err != nil {
 		panic(err)
 	}

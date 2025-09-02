@@ -49,13 +49,13 @@ spec:
       #!/bin/bash
       set -ex
       
-      export PGSQL_USER="$(params.PGSQL_USER)"
-      export PGSQL_PASSWORD="$(params.PGSQL_PASSWORD)"
-      export PGSQL_HOSTNAME="$(params.PGSQL_HOSTNAME)"
-      export PGSQL_PORT="$(params.PGSQL_PORT)"
-      export PGSQL_DATABASE="$(params.PGSQL_DATABASE)"
-      export UNLEASH_API_TOKEN="$(params.UNLEASH_API_TOKEN)"
-      export UNLEASH_ADMIN_TOKEN="$(params.UNLEASH_ADMIN_TOKEN)"
+      export PGSQL_USER="$(tt.params.PGSQL_USER)"
+      export PGSQL_PASSWORD="$(tt.params.PGSQL_PASSWORD)"
+      export PGSQL_HOSTNAME="$(tt.params.PGSQL_HOSTNAME)"
+      export PGSQL_PORT="$(tt.params.PGSQL_PORT)"
+      export PGSQL_DATABASE="$(tt.params.PGSQL_DATABASE)"
+      export UNLEASH_API_TOKEN="$(tt.params.UNLEASH_API_TOKEN)"
+      export UNLEASH_ADMIN_TOKEN="$(tt.params.UNLEASH_ADMIN_TOKEN)"
       
       make migrate
       make test

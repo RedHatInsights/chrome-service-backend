@@ -32,15 +32,6 @@ var (
 				Title: "Explore capabilities",
 			},
 		},
-		models.Edge: models.ModuleFederationMetadata{
-			Scope:    "landing",
-			Module:   "./EdgeWidget",
-			Defaults: models.BaseWidgetDimensions.InitDimensions(models.BaseWidgetDimensions{}, 1, 4, 10, 1),
-			Config: models.WidgetConfiguration{
-				Icon:  models.EdgeIcon,
-				Title: "Edge Management",
-			},
-		},
 		models.ImageBuilder: models.ModuleFederationMetadata{
 			Scope:    "landing",
 			Module:   "./ImageBuilderWidget",

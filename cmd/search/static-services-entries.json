@@ -748,24 +748,6 @@
     ]
   },
   {
-    "id": "edge-custom-repositories",
-    "links": [
-      {
-        "custom": true,
-        "id": "EDGE.customRepositories",
-        "title": "Custom Repositories - Manage Images",
-        "href": "/edge/repositories",
-        "alt_title": [
-          "content",
-          "repositories",
-          "repos",
-          "repository",
-          "repo"
-        ]
-      }
-    ]
-  },
-  {
     "id": "cost-management",
     "links": [
       {

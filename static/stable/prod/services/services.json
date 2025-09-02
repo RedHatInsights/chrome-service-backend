@@ -111,7 +111,7 @@
     "id": "deploy",
     "icon": "RocketIcon",
     "title": "Deploy",
-    "description": "Create RHEL images, systems at the Edge, and OpenShift clusters.",
+    "description": "Create RHEL images and OpenShift clusters.",
     "links": [
       {
         "id": "rhel",
@@ -127,19 +127,6 @@
         "title": "Quay.io",
         "links": [
           "quay.quayRepositories"
-        ]
-      },
-      {
-        "id": "edge",
-        "isGroup": true,
-        "title": "Edge",
-        "links": [
-          {
-            "title": "Images",
-            "href": "/edge/manage-images",
-            "icon": "EdgeIcon",
-            "description": "Manage the lifecycle and enhance security of your RHEL systems at the edge."
-          }
         ]
       }
     ]

@@ -580,6 +580,7 @@
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
+          "feoReplacement": "ros",
           "alt_title": [
             "optimization",
             "optimisation",

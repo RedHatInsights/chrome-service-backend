@@ -110,6 +110,7 @@
         },
         {
             "title": "Ansible Lightspeed",
+            "feoReplacement": "ansible-wisdom-admin-dashboard-navigation-id",
             "expandable": true,
             "routes": [
                 {

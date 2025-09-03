@@ -74,13 +74,6 @@ cost-management:
     versions:
       - v1
 
-edge:
-  title: RHEL for Edge
-  api:
-    versions:
-      - v1
-    isBeta: true
-
 export:
   title: Export Service
   api:

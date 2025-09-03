@@ -304,12 +304,6 @@
                         }
                     },
                     {
-                        "pathname": "/edge/learning-resources",
-                        "props": {
-                            "bundle": "edge"
-                        }
-                    },
-                    {
                         "pathname": "/application-services/learning-resources",
                         "props": {
                             "bundle": "application-services"

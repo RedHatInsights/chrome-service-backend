@@ -802,20 +802,6 @@
           }
       ]
   },
-  "edge": {
-      "manifestLocation": "/apps/edge/fed-mods.json",
-      "modules": [
-          {
-              "id": "edge",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/edge"
-                  }
-              ]
-          }
-      ]
-  },
   "frontendStarterApp": {
       "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
       "modules": [
@@ -1078,12 +1064,6 @@
                       "pathname": "/insights/learning-resources",
                       "props": {
                           "bundle": "insights"
-                      }
-                  },
-                  {
-                      "pathname": "/edge/learning-resources",
-                      "props": {
-                          "bundle": "edge"
                       }
                   },
                   {

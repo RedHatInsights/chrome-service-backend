@@ -65,12 +65,6 @@
                         }
                     },
                     {
-                        "pathname": "/edge/learning-resources",
-                        "props": {
-                            "bundle": "edge"
-                        }
-                    },
-                    {
                         "pathname": "/settings/learning-resources",
                         "props": {
                             "bundle": "settings"
@@ -791,20 +785,6 @@
                     },
                     {
                         "pathname": "/docs"
-                    }
-                ]
-            }
-        ]
-    },
-    "edge": {
-        "manifestLocation": "/apps/edge/fed-mods.json",
-        "modules": [
-            {
-                "id": "edge",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/edge"
                     }
                 ]
             }

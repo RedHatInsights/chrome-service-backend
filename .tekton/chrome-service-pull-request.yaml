@@ -48,7 +48,9 @@ spec:
     value: |
       #!/bin/bash
       set -ex
-      
+
+      dnf install -y --nodocs --nobest --setopt=install_weak_deps=0 shadow-utils
+
       # Install make with minimal dependencies
       dnf install -y --nodocs --nobest --setopt=install_weak_deps=0 make
       

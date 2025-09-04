@@ -47,7 +47,11 @@ spec:
   - name: unit-tests-script
     value: |
       #!/bin/bash
-      set -ex
+      set -euxo pipefail
+      id -u
+      whoami || true
+      test -w /var/lib/rpm && echo "rpmdb writable" || echo "rpmdb NOT writable"
+      test -w / && echo "/ writable" || echo "/ NOT writable"
       
       # Install make with minimal dependencies
       dnf install -y --nodocs --nobest --setopt=install_weak_deps=0 make

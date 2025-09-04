@@ -306,11 +306,6 @@
     ]
   },
   {
-    "id": "operators",
-    "title": "Operators",
-    "links": []
-  },
-  {
     "id": "security",
     "icon": "CloudSecurityIcon",
     "title": "Security",

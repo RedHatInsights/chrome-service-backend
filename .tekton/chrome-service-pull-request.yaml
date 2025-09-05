@@ -49,9 +49,6 @@ spec:
       #!/bin/bash
       set -ex
       
-      # Install make with minimal dependencies
-      dnf install -y --nodocs --nobest --setopt=install_weak_deps=0 make
-      
       # Export environment variables
       export PGSQL_USER="$(tt.params.PGSQL_USER)"
       export PGSQL_PASSWORD="$(tt.params.PGSQL_PASSWORD)"

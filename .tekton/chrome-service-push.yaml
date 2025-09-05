@@ -41,6 +41,7 @@ spec:
     value: default:development.unleash-insecure-api-token
   - name: UNLEASH_ADMIN_TOKEN
     value: '*:*.unleash-insecure-api-token'
+  # Environment variables specific to unit tests
   - name: env-vars
     value: |
       PGSQL_USER=chrome

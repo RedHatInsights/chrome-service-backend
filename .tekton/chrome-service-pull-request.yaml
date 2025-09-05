@@ -44,6 +44,7 @@ spec:
     value: default:development.unleash-insecure-api-token
   - name: UNLEASH_ADMIN_TOKEN
     value: '*:*.unleash-insecure-api-token'
+  # Environment variables specific to unit tests
   - name: env-vars
     value: |
       PGSQL_USER=chrome
@@ -72,22 +73,6 @@ spec:
     name: docker-build
   taskRunTemplate:
     serviceAccountName: build-pipeline-chrome-service
-    podTemplate:
-      env:
-      - name: PGSQL_USER
-        value: $(params.PGSQL_USER)
-      - name: PGSQL_PASSWORD
-        value: $(params.PGSQL_PASSWORD)
-      - name: PGSQL_HOSTNAME
-        value: $(params.PGSQL_HOSTNAME)
-      - name: PGSQL_PORT
-        value: $(params.PGSQL_PORT)
-      - name: PGSQL_DATABASE
-        value: $(params.PGSQL_DATABASE)
-      - name: UNLEASH_API_TOKEN
-        value: $(params.UNLEASH_API_TOKEN)
-      - name: UNLEASH_ADMIN_TOKEN
-        value: $(params.UNLEASH_ADMIN_TOKEN)
   workspaces:
   - name: workspace
     volumeClaimTemplate:

@@ -19,6 +19,7 @@ const (
 	bundlesPath           = "static/bundles-generated.json"
 	staticServicesPath    = "static/stable/%s/services/services-generated.json"
 	serviceTilesPath      = "static/service-tiles-generated.json"
+	ssoConfigPath         = "static/sso-config-generated.json"
 	apiSpecPath           = "static/api-specs-generated.json"
 )
 
@@ -499,6 +500,33 @@ func parseServiceTiles(serviceTilesVar string, env string) ([]byte, error) {
 	return servicesByte, nil
 }
 
+func parseSSOConfig(ssoConfigVar string, env string) ([]byte, error) {
+	type SSOConfig struct {
+		SSO         string            `json:"ssoUrl"`
+		SSOMapping  map[string]string `json:"ssoMapping,omitempty"`
+		Environment string            `json:"environment"`
+	}
+
+	var ssoConfig SSOConfig
+
+	if ssoConfigVar == "" {
+		logrus.Warn("FEO_SSO_CONFIG is not set, using empty configuration")
+		ssoConfig = SSOConfig{Environment: env}
+	} else {
+		err := json.Unmarshal([]byte(ssoConfigVar), &ssoConfig)
+		if err != nil {
+			return nil, err
+		}
+		// Ensure environment is set
+		if ssoConfig.Environment == "" {
+			ssoConfig.Environment = env
+		}
+	}
+
+	res, err := json.MarshalIndent(ssoConfig, "", "  ")
+	return res, err
+}
+
 func parseApiSpec(apiSpecVar string, env string) ([]byte, error) {
 	var apiSpec []interface{}
 
@@ -540,6 +568,7 @@ func CreateChromeConfiguration() {
 	// widgetRegistryVar := os.Getenv("FEO_WIDGET_REGISTRY")
 	bundlesVar := os.Getenv("FEO_BUNDLES")
 	bundlesOnboardedIdsVar := os.Getenv("FEO_BUNDLES_ONBOARDED_IDS")
+	ssoConfigVar := os.Getenv("FEO_SSO_CONFIG")
 	apiSpecVar := os.Getenv("FEO_API_SPEC")
 
 	fedModules, err := parseFedModules(fedModulesVar, env)
@@ -579,6 +608,16 @@ func CreateChromeConfiguration() {
 	}
 
 	err = writeConfigFile(services, serviceTilesPath)
+	if err != nil {
+		panic(err)
+	}
+
+	ssoConfig, err := parseSSOConfig(ssoConfigVar, env)
+	if err != nil {
+		panic(fmt.Sprintf("Error parsing FEO_SSO_CONFIG: %v", err))
+	}
+
+	err = writeConfigFile(ssoConfig, ssoConfigPath)
 	if err != nil {
 		panic(err)
 	}

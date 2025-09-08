@@ -58,8 +58,7 @@
             "icon": "AnsibleIcon",
             "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           },
-          "ansible.tasks",
-          "ansible.ansibleWisdomAdminDashboard"
+          "ansible.tasks"
         ]
       }
     ]
@@ -93,7 +92,7 @@
     "id": "deploy",
     "icon": "RocketIcon",
     "title": "Deploy",
-    "description": "Create RHEL images, systems at the Edge, and OpenShift clusters.",
+    "description": "Create RHEL images and OpenShift clusters.",
     "links": [
       {
         "id": "rhel",
@@ -109,19 +108,6 @@
         "title": "Quay.io",
         "links": [
           "quay.quayRepositories"
-        ]
-      },
-      {
-        "id": "edge",
-        "isGroup": true,
-        "title": "Edge",
-        "links": [
-          {
-            "title": "Images",
-            "href": "/edge/manage-images",
-            "icon": "EdgeIcon",
-            "description": "Manage the lifecycle and enhance security of your RHEL systems at the edge."
-          }
         ]
       }
     ]
@@ -319,11 +305,6 @@
     ]
   },
   {
-    "id": "operators",
-    "title": "Operators",
-    "links": []
-  },
-  {
     "id": "security",
     "icon": "CloudSecurityIcon",
     "title": "Security",
@@ -475,13 +456,6 @@
             "href": "/subscriptions/usage/rhel",
             "icon": "OpenShiftIcon",
             "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
-          },
-          {
-            "title": "Resource Optimization",
-            "filterable": false,
-            "href": "/insights/ros",
-            "icon": "OpenShiftIcon",
-            "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
           }
         ]
       },

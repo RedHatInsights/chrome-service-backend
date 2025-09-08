@@ -113,12 +113,6 @@ For example, the Frontend resource module config migration for the **Learning Re
                       }
                   },
                   {
-                      "pathname": "/edge/learning-resources",
-                      "props": {
-                          "bundle": "edge"
-                      }
-                  },
-                  {
                       "pathname": "/settings/learning-resources",
                       "props": {
                           "bundle": "settings"
@@ -189,9 +183,6 @@ objects:
           - pathname: "/insights/learning-resources"
             props:
               bundle: insights
-          - pathname: "/edge/learning-resources"
-            props:
-              bundle: edge
           - pathname: "/settings/learning-resources"
             props:
               bundle: settings

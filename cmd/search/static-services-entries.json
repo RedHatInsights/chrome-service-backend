@@ -688,26 +688,6 @@
       },
       {
         "custom": true,
-        "id": "RHEL.ros",
-        "title": "Resource Optimization - Business",
-        "href": "/insights/ros",
-        "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
-        "alt_title": [
-          "optimization",
-          "optimisation",
-          "optimize",
-          "optimise",
-          "usage",
-          "utilization",
-          "utilisation",
-          "save",
-          "savings",
-          "resource optimization",
-          "resource optimisation"
-        ]
-      },
-      {
-        "custom": true,
         "id": "RHEL.tasks",
         "appId": "tasks",
         "title": "Tasks - Automation",

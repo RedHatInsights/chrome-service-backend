@@ -475,13 +475,6 @@
             "href": "/subscriptions/usage/rhel",
             "icon": "OpenShiftIcon",
             "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
-          },
-          {
-            "title": "Resource Optimization",
-            "filterable": false,
-            "href": "/insights/ros",
-            "icon": "OpenShiftIcon",
-            "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
           }
         ]
       },

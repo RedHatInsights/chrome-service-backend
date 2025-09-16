@@ -108,7 +108,8 @@
             "build",
             "assemble",
             "image-builder"
-          ]
+          ],
+          "feoReplacement": "imageBuilder"
         },
         {
           "title": "System Configuration",

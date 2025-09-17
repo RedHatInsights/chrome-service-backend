@@ -496,12 +496,6 @@
         "id": "rhel",
         "links": [
           {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/rhel",
-            "icon": "OpenShiftIcon",
-            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
-          },
-          {
             "title": "Resource Optimization",
             "filterable": false,
             "href": "/insights/ros",
@@ -515,12 +509,6 @@
         "title": "OpenShift",
         "id": "openshift",
         "links": [
-          {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/openshift",
-            "icon": "OpenShiftIcon",
-            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
-          },
           {
             "title": "Cost Management",
             "filterable": false,
@@ -561,14 +549,7 @@
         "isGroup": true,
         "title": "Ansible",
         "id": "ansible",
-        "links": [
-          {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/ansible",
-            "icon": "AnsibleIcon",
-            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting that highlights how and where your technology is being used."
-          }
-        ]
+        "links": []
       },
       {
         "isGroup": true,

@@ -293,14 +293,7 @@
         "isGroup": true,
         "title": "Subscription Services",
         "id": "subscriptions",
-        "links": [
-          {
-            "id": "openshift",
-            "title": "Subscriptions Usage",
-            "icon": "OpenShiftIcon",
-            "href": "/subscriptions/usage/openshift"
-          }
-        ]
+        "links": []
       }
     ]
   },
@@ -450,26 +443,13 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "id": "rhel",
-        "links": [
-          {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/rhel",
-            "icon": "OpenShiftIcon",
-            "description": "Monitor your Red Hat Enterprise Linux usage for both Annual and On-Demand subscriptions."
-          }
-        ]
+        "links": []
       },
       {
         "isGroup": true,
         "title": "OpenShift",
         "id": "openshift",
         "links": [
-          {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/openshift",
-            "icon": "OpenShiftIcon",
-            "description": "Monitor your OpenShift usage for both Annual and On-Demand subscriptions."
-          },
           {
             "title": "Cost Management",
             "filterable": false,
@@ -510,14 +490,7 @@
         "isGroup": true,
         "title": "Ansible",
         "id": "ansible",
-        "links": [
-          {
-            "title": "Subscriptions Usage",
-            "href": "/subscriptions/usage/ansible",
-            "icon": "AnsibleIcon",
-            "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting that highlights how and where your technology is being used."
-          }
-        ]
+        "links": []
       },
       {
         "isGroup": true,

@@ -256,7 +256,8 @@
               "id": "developersandboxtrial",
               "appId": "openshift",
               "title": "Developer Sandbox | OpenShift AI",
-              "href": "/openshift/sandbox",
+              "href": "https://sandbox.redhat.com",
+              "isExternal": true,
               "description": "Create, train, and service artificial intelligence and machine learning (AI/ML) models.",
               "icon": "AITechnologyIcon",
               "filterable": false
@@ -305,7 +306,8 @@
         {
           "id": "developerSandbox",
           "appId": "sandbox",
-          "href": "/openshift/sandbox",
+          "href": "https://sandbox.redhat.com",
+          "isExternal": true,
           "title": "Developer Sandbox",
           "icon": "OpenShiftIcon",
           "filterable": false,

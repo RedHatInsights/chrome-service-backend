@@ -304,7 +304,7 @@ func FilterWidgetMappingHeaderLink(widgetMapping models.WidgetModuleFederationMa
 
 func FilterWidgetMapping(widgetMapping models.WidgetModuleFederationMapping) models.WidgetModuleFederationMapping {
 	for key, value := range widgetMapping {
-		if !featureflags.IsEnabled(value.FeatureFlag) {
+		if value.FeatureFlag == "" || !featureflags.IsEnabled(value.FeatureFlag) {
 			delete(widgetMapping, key)
 		}
 	}

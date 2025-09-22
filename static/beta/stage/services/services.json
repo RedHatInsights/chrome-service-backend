@@ -542,6 +542,40 @@
             "href": "/subscriptions/usage/openshift",
             "icon": "OpenShiftIcon",
             "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
+          },
+          {
+            "title": "Cost Management",
+            "filterable": false,
+            "href": "/openshift/cost-management",
+            "icon": "OpenShiftIcon",
+            "description": "View your data in cost management.",
+            "alt_title": [
+              "cost management",
+              "overview",
+              "cost management oerview",
+              "costmgmt",
+              "cost",
+              "finops",
+              "cost management for openshift",
+              "openshift cost",
+              "rhcm",
+              "finsights",
+              "finops",
+              "spend",
+              "distribute",
+              "cost model",
+              "money",
+              "bill",
+              "billing",
+              "financial",
+              "chargeback",
+              "showback",
+              "rate",
+              "save",
+              "savings",
+              "resource optimization",
+              "resources"
+            ]
           }
         ]
       },
@@ -563,6 +597,24 @@
         "links": [
           "subscriptions.overview",
           "subscriptions.subscriptionsInventory",
+          {
+            "id": "hybridCommittedSpendOverview",
+            "appId": "hybridCommittedSpend",
+            "title": "Hybrid Committed Spend",
+            "icon": "SubscriptionsIcon",
+            "href": "/subscriptions/hybrid-committed-spend",
+            "description": "Gain perspective on your hybrid committed spend profile with contract information, drawdown, and balance, as well as spend trends and breakdowns.",
+            "permissions": [
+              {
+                "method": "loosePermissions",
+                "args": [
+                  [
+                    "hybrid-committed-spend:reports:read"
+                  ]
+                ]
+              }
+            ]
+          },
           "subscriptions.manifests"
         ]
       }

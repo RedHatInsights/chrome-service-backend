@@ -70,6 +70,12 @@
     "description": "Run your applications in a consistent and isolated environment.",
     "links": [
       {
+        "isGroup": true,
+        "id": "openshift",
+        "title": "OpenShift",
+        "links": []
+      },
+      {
         "id": "quay",
         "isGroup": true,
         "title": "Quay.io",
@@ -147,6 +153,12 @@
           "insights.inventory",
           "insights.workspaces"
         ]
+      },
+      {
+        "id": "openshift",
+        "isGroup": true,
+        "title": "OpenShift",
+        "links": []
       },
       {
         "id": "ansible",
@@ -293,6 +305,19 @@
         "isGroup": true,
         "title": "Subscription Services",
         "id": "subscriptions",
+        "links": []
+      }
+    ]
+  },
+  {
+    "id": "operators",
+    "title": "Operators",
+    "description": "Check out the latest recommended operators.",
+    "links": [
+      {
+        "id": "openshift",
+        "isGroup": true,
+        "title": "OpenShift",
         "links": []
       }
     ]

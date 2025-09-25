@@ -443,15 +443,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "id": "rhel",
-        "links": [
-          {
-            "title": "Resource Optimization",
-            "filterable": false,
-            "href": "/insights/ros",
-            "icon": "OpenShiftIcon",
-	    "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
-          }
-        ]
+        "links": []
       },
       {
         "isGroup": true,

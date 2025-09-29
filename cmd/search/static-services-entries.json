@@ -159,72 +159,6 @@
           "updates",
           "content templates"
         ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.Content.Patch.templates",
-        "href": "/insights/patch/templates",
-        "title": "Templates - Patch",
-        "description": "Control the scope of package and advisory updates to be installed on Red Hat Enterprise Linux systems.",
-        "alt_title": [
-          "Template",
-          "patch template",
-          "content template",
-          "insights",
-          "Patch cycle",
-          "content management",
-          "patching",
-          "update",
-          "content view"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.Content.Patch.systems",
-        "href": "/insights/patch/systems",
-        "title": "Systems - Patch",
-        "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
-        "alt_title": [
-          "Patch",
-          "content",
-          "advisories",
-          "insights",
-          "Rhel",
-          "patch",
-          "updates",
-          "update",
-          "systems",
-          "upgrade"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.Content.Patch.packages",
-        "title": "Packages - Content",
-        "href": "/insights/patch/packages",
-        "description": "Review package applicability on your Red Hat Enterprise Linux systems.",
-        "alt_title": [
-          "Packages",
-          "updates",
-          "insights",
-          "repositories",
-          "rpm",
-          "dnf",
-          "yum",
-          "errata",
-          "Errata",
-          "patch",
-          "advisories",
-          "patching",
-          "templates",
-          "content management",
-          "content view",
-          "patch cycle",
-          "satellite",
-          "RHSA",
-          "RHBA",
-          "RHEA"
-        ]
       }
     ]
   },
@@ -617,53 +551,6 @@
           "sla",
           "content"
         ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.advisories",
-        "title": "Advisories - Content",
-        "href": "/insights/patch/advisories",
-        "description": "View applicable advisories and updates for your Red Hat Enterprise Linux systems.",
-        "alt_title": [
-          "Errata",
-          "errata",
-          "patch",
-          "updates",
-          "insights"
-        ]
-      },
-      {
-        "custom": true,
-        "id": "RHEL.repositories",
-        "title": "Repositories - Content",
-        "href": "/insights/content/repositories",
-        "alt_title": [
-          "Content",
-          "custom content",
-          "my content",
-          "my repos",
-          "repos",
-          "repo",
-          "repositories",
-          "repository",
-          "insights",
-          "repository sets",
-          "popular",
-          "Red hat repositories",
-          "Snapshots",
-          "compare",
-          "custom content",
-          "Red hat repositories",
-          "popular",
-          "nvidia",
-          "epel",
-          "add repositories",
-          "introspect",
-          "content",
-          "dnf",
-          "yum"
-        ],
-        "description": "Link your external repositories to build images."
       },
       {
         "custom": true,

@@ -146,6 +146,7 @@
       "id": "content",
       "title": "Content",
       "expandable": true,
+      "feoReplacement": "content",
       "routes": [
         {
           "id": "advisories",

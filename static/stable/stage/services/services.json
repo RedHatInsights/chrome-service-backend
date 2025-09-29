@@ -189,9 +189,6 @@
         "id": "rhel",
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "insights.advisories",
-          "insights.repositories",
-          "insights.patchSystems",
           {
             "href": "/insights/advisor/recommendations",
             "title": "Advisor",

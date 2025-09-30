@@ -1,0 +1,92 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  annotations:
+    build.appstudio.openshift.io/repo: https://github.com/RedHatInsights/chrome-service-backend?rev={{revision}}
+    build.appstudio.redhat.com/commit_sha: '{{revision}}'
+    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
+    build.appstudio.redhat.com/target_branch: '{{target_branch}}'
+    pipelinesascode.tekton.dev/max-keep-runs: "3"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch
+      == "security-compliance"
+    pipelinesascode.tekton.dev/pipeline: https://github.com/RedHatInsights/konflux-pipelines/blob/main/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
+  creationTimestamp: null
+  labels:
+    appstudio.openshift.io/application: chrome-service-sc
+    appstudio.openshift.io/component: chrome-service-sc
+    pipelines.appstudio.openshift.io/type: build
+  name: chrome-service-sc-on-pull-request
+  namespace: hcc-platex-services-tenant
+spec:
+  params:
+  - name: git-url
+    value: '{{source_url}}'
+  - name: revision
+    value: '{{revision}}'
+  - name: output-image
+    value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/chrome-service-sc/chrome-service-sc:on-pr-{{revision}}
+  - name: image-expires-after
+    value: 5d
+  - name: dockerfile
+    value: Dockerfile
+  - name: path-context
+    value: .
+  - name: PGSQL_USER
+    value: chrome
+  - name: PGSQL_PASSWORD
+    value: chrome
+  - name: PGSQL_HOSTNAME
+    value: localhost
+  - name: PGSQL_PORT
+    value: '5432'
+  - name: PGSQL_DATABASE
+    value: db
+  - name: UNLEASH_API_TOKEN
+    value: default:development.unleash-insecure-api-token
+  - name: UNLEASH_ADMIN_TOKEN
+    value: '*:*.unleash-insecure-api-token'
+  # Environment variables specific to unit tests
+  - name: env-vars
+    value: |
+      PGSQL_USER=chrome
+      PGSQL_PASSWORD=chrome
+      PGSQL_HOSTNAME=localhost
+      PGSQL_PORT=5432
+      PGSQL_DATABASE=db
+      UNLEASH_API_TOKEN=default:development.unleash-insecure-api-token
+      UNLEASH_ADMIN_TOKEN=*:*.unleash-insecure-api-token
+  - name: unit-tests-script
+    value: |
+      #!/bin/bash
+      set -ex
+      
+      export PGSQL_USER="$(params.PGSQL_USER)"
+      export PGSQL_PASSWORD="$(params.PGSQL_PASSWORD)"
+      export PGSQL_HOSTNAME="$(params.PGSQL_HOSTNAME)"
+      export PGSQL_PORT="$(params.PGSQL_PORT)"
+      export PGSQL_DATABASE="$(params.PGSQL_DATABASE)"
+      export UNLEASH_API_TOKEN="$(params.UNLEASH_API_TOKEN)"
+      export UNLEASH_ADMIN_TOKEN="$(params.UNLEASH_ADMIN_TOKEN)"
+
+      make migrate
+      make test
+  pipelineRef:
+    name: docker-build
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-chrome-service-sc
+  workspaces:
+  - name: workspace
+    volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+      status: {}
+  - name: git-auth
+    secret:
+      secretName: '{{ git_auth_secret }}'
+status: {}

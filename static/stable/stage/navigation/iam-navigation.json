@@ -8,12 +8,22 @@
       "title": "My User Access",
       "href": "/iam/my-user-access",
       "description": "View your account permissions for Red Hat Hybrid Cloud Console services.",
-      "feoReplacement": "my-user-access"
+      "feoReplacement": "my-user-access",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", false]
+        }
+      ]
     },
     {
       "title": "User Access",
       "expandable": true,
       "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", false]
+        },
         {
           "method": "loosePermissions",
           "args": [["rbac:*:*"]]
@@ -33,6 +43,10 @@
           "permissions": [
             {
               "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
+            {
+              "method": "featureFlag",
               "args": ["platform.rbac.overview", true]
             },
             {
@@ -47,6 +61,10 @@
           "title": "Users",
           "href": "/iam/user-access/users",
           "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
             {
               "method": "isOrgAdmin"
             }
@@ -79,6 +97,10 @@
           "href": "/iam/user-access/roles",
           "permissions": [
             {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
+            {
               "method": "isOrgAdmin"
             }
           ],
@@ -90,6 +112,10 @@
           "title": "Groups",
           "href": "/iam/user-access/groups",
           "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
             {
               "method": "isOrgAdmin"
             }
@@ -106,6 +132,10 @@
           "permissions": [
             {
               "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
+            {
+              "method": "featureFlag",
               "args": ["platform.rbac.workspaces-list", true]
             },
             {
@@ -120,7 +150,13 @@
           "appId": "rbac",
           "title": "Red Hat Access Requests",
           "href": "/iam/user-access/access-requests",
-          "notifier": "chrome.accessRequests.hasUnseen"
+          "notifier": "chrome.accessRequests.hasUnseen",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            }
+          ]
         }
       ]
     },
@@ -128,6 +164,10 @@
       "title": "Access Management",
       "expandable": true,
       "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", false]
+        },
         {
           "method": "loosePermissions",
           "args": [["rbac:*:*"]]
@@ -146,6 +186,10 @@
           "permissions": [
             {
               "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
+            {
+              "method": "featureFlag",
               "args": ["platform.rbac.overview", true]
             }
           ],
@@ -157,7 +201,13 @@
           "title": "Workspaces",
           "icon": "PlaceholderIcon",
           "href": "/iam/access-management/workspaces",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            }
+          ]
         },
         {
           "id": "usersAndUserGroups",
@@ -183,6 +233,12 @@
             "authorization",
             "viewer",
             "rbac"
+          ],
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            }
           ]
         },
         {
@@ -190,14 +246,26 @@
           "appId": "rbac",
           "title": "Roles",
           "href": "/iam/access-management/roles",
-          "product": "Identity & Access Management"
+          "product": "Identity & Access Management",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            }
+          ]
         },
         {
           "id": "accessRequests-new",
           "appId": "rbac",
           "title": "Red Hat Access Requests",
           "href": "/iam/access-management/access-requests",
-          "notifier": "chrome.accessRequests.hasUnseen"
+          "notifier": "chrome.accessRequests.hasUnseen",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            }
+          ]
         }
       ]
     },
@@ -206,6 +274,12 @@
       "title": "Authentication Policy",
       "expandable": true,
       "feoReplacement": "authentication-policy",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", false]
+        }
+      ],
       "routes": [
         {
           "id": "authFactors",
@@ -214,7 +288,13 @@
           "href": "/iam/authentication-policy/authentication-factors",
           "icon": "PlaceholderIcon",
           "product": "Identity & Access Management",
-          "description": "Manage how your organization authenticates to Red Hat services."
+          "description": "Manage how your organization authenticates to Red Hat services.",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            }
+          ]
         },
         {
           "id": "idpIntegration",
@@ -222,6 +302,10 @@
           "title": "Identity Provider Integration",
           "href": "/iam/authentication-policy/identity-provider-integration",
           "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", false]
+            },
             {
               "method": "isOrgAdmin"
             }
@@ -238,15 +322,254 @@
       "appId": "serviceAccounts",
       "feoReplacement": "service-accounts",
       "href": "/iam/service-accounts",
-      "icon": "ServicesIcon",            
-      "description": "Authenticate and connect securely to APIs from multiple services."
+      "icon": "ServicesIcon",
+      "description": "Authenticate and connect securely to APIs from multiple services.",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", false]
+        }
+      ]
     },
     {
       "id": "learningResources",
       "appId": "learningResources",
       "title": "Learning Resources",
       "href": "/iam/learning-resources",
-      "feoReplacement": "learningResourcesIAM"
+      "feoReplacement": "learningResourcesIAM",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", false]
+        }
+      ]
+    },
+    {
+      "id": "overview-v2",
+      "appId": "rbac",
+      "title": "Overview",
+      "href": "/iam/overview",
+      "product": "Identity & Access Management",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", true]
+        },
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.overview", true]
+        }
+      ]
+    },
+    {
+      "id": "my-access-v2",
+      "appId": "rbac",
+      "title": "My Access",
+      "href": "/iam/my-access",
+      "description": "View your account permissions for Red Hat Hybrid Cloud Console services.",
+      "feoReplacement": "my-user-access",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", true]
+        }
+      ]
+    },
+    {
+      "title": "Access Management",
+      "expandable": true,
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", true]
+        },
+        {
+          "method": "loosePermissions",
+          "args": [["rbac:*:*"]]
+        }
+      ],
+      "routes": [
+        {
+          "id": "usersAndGroups-v2",
+          "appId": "rbac",
+          "title": "Users and Groups",
+          "href": "/iam/access-management/users-and-groups",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "description": "Manage your organization's role-based access control (RBAC) to services.",
+          "alt_title": [
+            "role based access management",
+            "user management",
+            "user access",
+            "identity management",
+            "users",
+            "roles",
+            "groups",
+            "permissions",
+            "access",
+            "admin",
+            "administrator",
+            "editor",
+            "authorization",
+            "viewer",
+            "rbac"
+          ],
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            },
+            {
+              "method": "isOrgAdmin"
+            }
+          ]
+        },
+        {
+          "id": "roles-v2",
+          "appId": "rbac",
+          "title": "Roles",
+          "href": "/iam/access-management/roles",
+          "product": "Identity & Access Management",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            },
+            {
+              "method": "isOrgAdmin"
+            }
+          ]
+        },
+        {
+          "id": "serviceAccounts-v2",
+          "appId": "serviceAccounts",
+          "title": "Service Accounts",
+          "href": "/iam/access-management/service-accounts",
+          "icon": "ServicesIcon",
+          "description": "Authenticate and connect securely to APIs from multiple services.",
+          "feoReplacement": "service-accounts",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            }
+          ]
+        },
+        {
+          "id": "workspaces-v2",
+          "appId": "rbac",
+          "title": "Workspaces",
+          "icon": "PlaceholderIcon",
+          "href": "/iam/access-management/workspaces",
+          "product": "Identity & Access Management",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            },
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-list", true]
+            },
+            {
+              "method": "loosePermissions",
+              "args": [["inventory:groups:read"]]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Organization Management",
+      "expandable": true,
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", true]
+        }
+      ],
+      "routes": [
+        {
+          "id": "organizationWideAccess-v2",
+          "appId": "rbac",
+          "title": "Organization-Wide Access",
+          "href": "/iam/organization-management/organization-wide-access",
+          "product": "Identity & Access Management",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            },
+            {
+              "method": "isOrgAdmin"
+            }
+          ]
+        },
+        {
+          "id": "trustedOrganizations-v2",
+          "appId": "iam",
+          "title": "Trusted Organizations",
+          "href": "/iam/organization-management/trusted-organizations",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            },
+            {
+              "method": "isOrgAdmin"
+            }
+          ]
+        },
+        {
+          "id": "authFactors-v2",
+          "appId": "iam",
+          "title": "Authentication Factors",
+          "href": "/iam/organization-management/authentication-factors",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "description": "Manage how your organization authenticates to Red Hat services.",
+          "feoReplacement": "authentication-policy",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            }
+          ]
+        },
+        {
+          "id": "idpIntegration-v2",
+          "appId": "iam",
+          "title": "Identity Provider Integration",
+          "href": "/iam/organization-management/identity-provider-integration",
+          "icon": "PlaceholderIcon",
+          "product": "Identity & Access Management",
+          "description": "Manage identity provider integration for your organization.",
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": ["platform.rbac.workspaces-organization-management", true]
+            },
+            {
+              "method": "isOrgAdmin"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "learningResources-v2",
+      "appId": "learningResources",
+      "title": "Learning Resources",
+      "href": "/iam/learning-resources",
+      "feoReplacement": "learningResourcesIAM",
+      "permissions": [
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", true]
+        }
+      ]
     }
   ],
   "alt_title": [

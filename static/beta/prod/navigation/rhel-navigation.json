@@ -1,6 +1,6 @@
 {
   "id": "rhel",
-  "title": "Red Hat Insights",
+  "title": "Red Hat Enterprise Linux",
   "navItems": [
     {
       "id": "overview",

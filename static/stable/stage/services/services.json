@@ -51,6 +51,7 @@
             "description": "Plan, measure, and scale your automation using actionable data."
           },
           "ansible.inventory",
+          "ansible.inventory-lightspeed",
           {
             "title": "Registration Assistant",
             "filterable": false,
@@ -58,7 +59,8 @@
             "icon": "AnsibleIcon",
             "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           },
-          "ansible.tasks"
+          "ansible.tasks",
+          "ansible.tasks-lightspeed"
         ]
       }
     ]
@@ -165,7 +167,8 @@
         "isGroup": true,
         "title": "Ansible",
         "links": [
-          "ansible.inventory"
+          "ansible.inventory",
+          "ansible.inventory-lightspeed"
         ]
       },
       {
@@ -295,7 +298,8 @@
               "pathway"
             ]
           },
-          "ansible.policies"
+          "ansible.policies",
+          "ansible.policies-lightspeed"
         ]
       },
       {
@@ -422,7 +426,8 @@
         "title": "Ansible",
         "id": "ansible",
         "links": [
-          "ansible.remediations"
+          "ansible.remediations",
+          "ansible.remediations-lightspeed"
         ]
       },
        {

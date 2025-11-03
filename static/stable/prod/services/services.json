@@ -60,6 +60,7 @@
             "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
           },
           "ansible.tasks",
+          "ansible.ansibleWisdomAdminDashboard",
           "ansible.tasks-lightspeed"
         ]
       }

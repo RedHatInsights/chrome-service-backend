@@ -694,7 +694,8 @@
         "Register RHEL",
         "rhel",
         "RHEL"
-      ]
+      ],
+      "feoReplacement": "registration"
     },
     {
       "id": "learningResources",

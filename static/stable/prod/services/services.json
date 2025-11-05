@@ -30,8 +30,7 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          "insights.remediations",
-          "insights.tasks"
+          "insights.remediations"
         ]
       },
       {
@@ -50,18 +49,7 @@
             "icon": "AnsibleIcon",
             "description": "Plan, measure, and scale your automation using actionable data."
           },
-          "ansible.inventory",
-          "ansible.inventory-lightspeed",
-          {
-            "title": "Registration Assistant",
-            "filterable": false,
-            "href": "/ansible/registration",
-            "icon": "AnsibleIcon",
-            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
-          },
-          "ansible.tasks",
-          "ansible.ansibleWisdomAdminDashboard",
-          "ansible.tasks-lightspeed"
+          "ansible.ansibleWisdomAdminDashboard"
         ]
       }
     ]
@@ -132,9 +120,7 @@
         "title": "Red Hat Enterprise Linux",
         "links": [
           "insights.imageBuilder",
-          "insights.inventory",
-          "insights.groups",
-          "insights.workspaces"
+          "insights.groups"
 
         ]
       },
@@ -148,10 +134,7 @@
         "id": "ansible",
         "isGroup": true,
         "title": "Ansible",
-        "links": [
-          "ansible.inventory",
-          "ansible.inventory-lightspeed"
-        ]
+        "links": []
       },
       {
         "id": "subscriptions",
@@ -174,34 +157,9 @@
         "isGroup": true,
         "title": "Red Hat Enterprise Linux",
         "links": [
-          {
-            "href": "/insights/advisor/recommendations",
-            "title": "Advisor",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
-            "alt_title": [
-              "advisor",
-              "Rules",
-              "rules",
-              "rule",
-              "Rule",
-              "insights",
-              "security",
-              "stability",
-              "performance",
-              "incidents",
-              "recommendations",
-              "configuration",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          },
+          "insights.advisories",
+          "insights.repositories",
+          "insights.patchSystems",
           "insights.policies"
         ]
       },
@@ -210,38 +168,6 @@
         "title": "OpenShift",
         "id": "openshift",
         "links": [
-          {
-            "href": "/openshift/insights/advisor/recommendations",
-            "icon": "OpenShiftIcon",
-            "title": "Advisor",
-            "subtitle": "Red Hat Insights for OpenShift",
-            "description": "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security.",
-            "alt_title": [
-              "Insights Advisor",
-              "OpenShift Advisor",
-              "Advisor",
-              "advisor",
-              "Recommendations",
-              "Proactive support",
-              "Proactive support",
-              "risk",
-              "support",
-              "update",
-              "update risk",
-              "update",
-              "issues",
-              "remediation",
-              "cluster state",
-              "recommendation",
-              "cluster health",
-              "remote health",
-              "proactive",
-              "support",
-              "fix",
-              "problem",
-              "issue"
-            ]
-          },
           {
             "href": "/openshift/insights/vulnerability/cves",
             "icon": "OpenShiftIcon",
@@ -255,34 +181,7 @@
         "isGroup": true,
         "title": "Ansible",
         "id": "ansible",
-        "links": [
-          {
-            "href": "/ansible/advisor/recommendations",
-            "title": "Advisor",
-            "subtitle": "Red Hat Insights for Ansible",
-            "icon": "AnsibleIcon",
-            "description": "See targeted recommendations to optimize your Ansible hosts’ availability, performance, and security.",
-            "alt_title": [
-              "Rules",
-              "recommendations",
-              "Configuration",
-              "security",
-              "stability",
-              "performance",
-              "advisor",
-              "incidents",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          },
-          "ansible.policies",
-          "ansible.policies-lightspeed"
-        ]
+        "links": []
       }
     ]
   },
@@ -311,75 +210,6 @@
         "id": "rhel",
         "links": [
           "insights.advisories",
-          {
-            "href": "/insights/advisor/recommendations",
-            "title": "Advisor",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
-            "alt_title": [
-              "advisor",
-              "Rules",
-              "rules",
-              "rule",
-              "Rule",
-              "insights",
-              "security",
-              "stability",
-              "performance",
-              "incidents",
-              "recommendations",
-              "configuration",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          },
-          {
-            "href": "/insights/vulnerability/cves",
-            "icon": "InsightsIcon",
-            "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
-          },
-          {
-            "href": "/insights/compliance/reports",
-            "icon": "InsightsIcon",
-            "title": "Compliance",
-            "subtitle":"Red Hat Insights for RHEL",
-            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
-            "alt_title": [
-              "security",
-              "policies",
-              "SCAP",
-              "policy",
-              "insights",
-              "regulatory",
-              "regulations",
-              "OpenSCAP",
-              "PCI",
-              "HIPAA",
-              "DSS",
-              "CSI",
-              "C2S",
-              "rules",
-              "DISA STIG",
-              "PCI-DSS",
-              "NIST",
-              "OSPP"
-            ]
-          },
-          {
-            "href": "/insights/malware/signatures",
-            "title": "Malware",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
-          },
           "insights.remediations"
         ]
       },
@@ -472,23 +302,7 @@
         "id": "rhel",
         "links": [
           "insights.rhc",
-          "insights.activationKeys",
-          "insights.registerSystems",
-          "insights.stalenessAndDeletion"
-        ]
-      },
-      {
-        "isGroup": true,
-        "title": "Ansible",
-        "id": "ansible",
-        "links": [
-          {
-            "title": "Registration Assistant",
-            "filterable": false,
-            "href": "/ansible/registration",
-            "icon": "AnsibleIcon",
-            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
-          }
+          "insights.activationKeys"
         ]
       },
       {

@@ -634,7 +634,8 @@
       "product": "Red Hat Insights",
       "subtitle": "Red Hat Insights for RHEL",
       "description": "Register your systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console.",
-      "alt_title": ["register rhel", "Register RHEL", "rhel", "RHEL"]
+      "alt_title": ["register rhel", "Register RHEL", "rhel", "RHEL"],
+      "feoReplacement": "registration"
     },
     {
       "id": "learningResources",

@@ -52,7 +52,7 @@ services:
   # The Unleash server contains the Unleash configuration and
   # communicates with server-side SDKs and the Unleash Proxy
   unleash_web:
-    image: quay.io/cloudservices/unleash-server:latest
+    image: docker.io/unleashorg/unleash-server:latest
     ports:
     - "${UNLEASH_WEB_PORT}:4242"
     environment:
@@ -74,7 +74,7 @@ services:
       retries: 5
       start_period: 15s
     # Contains hard-coded sleep to wait for postgres to be ready
-    command: [ "sh", "-c", "echo sleeping; sleep 30; node index.js"]
+    command: [ "sh", "-c", "echo sleeping; sleep 30; node dist/server.js"]
 
   # Note: Not all log data appears on the terminal output
   # To view more detailed log data, shell into the container and view like this:

@@ -258,7 +258,8 @@
                 "method": "featureFlag",
                 "args": ["platform.lightspeed-rebrand", false]
               }
-            ]
+            ],
+            "feoReplacement": "registration"
         },
         {
             "id": "remediations",

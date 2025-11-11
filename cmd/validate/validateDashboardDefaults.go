@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
-	jsonschema "github.com/santhosh-tekuri/jsonschema/v5"
+	jsonschema "github.com/santhosh-tekuri/jsonschema/v6"
 	"gopkg.in/yaml.v3"
 )
 

@@ -225,8 +225,8 @@
             }
         ]
     },
-    "costManagementMfe": {
-        "manifestLocation": "/apps/cost-management-mfe/fed-mods.json",
+    "costManagementRos": {
+        "manifestLocation": "/apps/cost-management-ros/fed-mods.json",
         "modules": []
     },
     "dashboard": {

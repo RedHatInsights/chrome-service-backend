@@ -205,15 +205,15 @@
             }
         ]
     },
-    "costManagementMfe": {
-        "manifestLocation": "/apps/cost-management-mfe/fed-mods.json",
+    "costManagementRos": {
+        "manifestLocation": "/apps/cost-management-ros/fed-mods.json",
         "modules": [
             {
-                "id": "cost-management-mfe",
+                "id": "cost-management-ros",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/staging/cost-management"
+                        "pathname": "/staging/cost-management/ros"
                     }
                 ]
             }
@@ -985,7 +985,7 @@
                             {
                                 "method": "withEmail",
                                 "args": ["@redhat.com"]
-                                
+
                             }
                         ],
                         "pathname": "/ansible/service/"

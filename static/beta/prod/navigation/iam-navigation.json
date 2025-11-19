@@ -200,6 +200,30 @@
       ]
     },
     {
+      "id": "organization-management",
+      "title": "Organization Management",
+      "expandable": true,
+      "permissions": [
+        {
+          "method": "loosePermissions",
+          "args": [["rbac:*:*"]]
+        },
+        {
+          "method": "featureFlag",
+          "args": ["platform.rbac.workspaces-organization-management", true]
+        }
+      ],
+      "routes": [
+        {
+          "id": "organization-wide-access",
+          "appId": "rbac",
+          "title": "Organization-Wide Access",
+          "href": "/iam/organization-management/organization-wide-access",
+          "product": "Identity & Access Management"
+        }
+      ]
+    },
+    {
       "title": "Authentication Policy",
       "expandable": true,
       "filterable": false,

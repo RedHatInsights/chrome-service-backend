@@ -128,12 +128,6 @@ onboarding:
       - value: "experimental"
         title: "Experimental API"
 
-provisioning:
-  title: Launch
-  api:
-    versions:
-      - v1
-
 application-services:
   title: Application Services
   api:

@@ -7,6 +7,60 @@
             "title": "Starter App",
             "appId": "frontend-starter-app",
             "href": "/staging/starter"
+        },
+        {
+            "title": "Cost Management",
+            "expandable": true,
+            "filterable": false,
+            "id": "costManagementStaging",
+            "feoReplacement": "cost-management-staging.nav",
+            "routes": [
+                {
+                    "title": "ROS",
+                    "expandable": true,
+                    "routes": [
+                        {
+                            "id": "optimizationsBadge",
+                            "appId": "costManagementRos",
+                            "title": "Optimizations badge",
+                            "href": "/staging/cost-management/ros/optimizations/badge",
+                            "icon": "OpenShiftIcon"
+                        },
+                        {
+                            "id": "optimizationsLink",
+                            "appId": "costManagementRos",
+                            "title": "Optimizations link",
+                            "href": "/staging/cost-management/ros/optimizations/link",
+                            "icon": "OpenShiftIcon"
+                        },
+                        {
+                            "id": "optimizationsSummary",
+                            "appId": "costManagementRos",
+                            "title": "Optimizations summary",
+                            "href": "/staging/cost-management/ros/optimizations/summary",
+                            "icon": "OpenShiftIcon"
+                        },
+                        {
+                            "id": "optimizationsTable",
+                            "appId": "costManagementRos",
+                            "title": "Optimizations table",
+                            "href": "/staging/cost-management/ros/optimizations/table"
+                        },
+                        {
+                            "id": "optimizationsDetails",
+                            "appId": "costManagementRos",
+                            "title": "Optimizations details",
+                            "href": "/staging/cost-management/ros/optimizations/details"
+                        },
+                        {
+                            "id": "optimizationsBreakdown",
+                            "appId": "costManagementRos",
+                            "title": "Optimizations breakdown",
+                            "href": "/staging/cost-management/ros/optimizations/breakdown"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

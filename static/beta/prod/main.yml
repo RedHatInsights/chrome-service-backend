@@ -124,12 +124,6 @@ openshift:
     versions:
       - v1
 
-provisioning:
-  title: Launch
-  api:
-    versions:
-      - v1
-
 streams:
   title: "Streams for Apache Kafka"
   api:

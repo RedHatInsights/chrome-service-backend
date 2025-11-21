@@ -116,12 +116,6 @@ onboarding:
       - value: "experimental"
         title: "Experimental API"
 
-provisioning:
-  title: Launch
-  api:
-    versions:
-      - v1
-
 roadmap:
   title: Planning
   api:

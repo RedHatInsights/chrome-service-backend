@@ -41,8 +41,8 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.18.2 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-sqlite3 v1.14.32 // indirect
-	github.com/microsoft/go-mssqldb v1.9.4 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/onsi/gomega v1.38.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.22 // indirect
@@ -65,5 +65,4 @@ require (
 	golang.org/x/text v0.32.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 	gorm.io/driver/mysql v1.6.0 // indirect
-	gorm.io/driver/sqlserver v1.6.3 // indirect
 )

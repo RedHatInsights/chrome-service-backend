@@ -1,7 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "baseBranches": ["main"],
+  "extends": [
+    "config:base"
+  ],
   "tekton": {
     "schedule": ["at any time"]
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Group all updates into a single PR to reduce noise, as per Jira requirements",
+      "matchPackagePatterns": ["*"],
+      "groupName": "all dependencies",
+      "groupSlug": "all-deps"
+    }
+  ],
+  "labels": ["dependencies"]
 }

@@ -171,8 +171,7 @@
         "links": [
           "insights.advisories",
           "insights.repositories",
-          "insights.patchSystems",
-          "insights.policies"
+          "insights.patchSystems"
         ]
       },
       {
@@ -193,9 +192,7 @@
         "isGroup": true,
         "title": "Ansible",
         "id": "ansible",
-        "links": [
-          "ansible.policies-lightspeed"
-        ]
+        "links": []
       },
       {
         "isGroup": true,

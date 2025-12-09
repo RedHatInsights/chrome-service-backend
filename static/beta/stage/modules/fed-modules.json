@@ -436,24 +436,6 @@
             }
         ]
     },
-    "policies": {
-        "manifestLocation": "/apps/policies/fed-mods.json",
-        "modules": [
-            {
-                "id": "policies",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/policies",
-                        "isFedramp": true
-                    },
-                    {
-                        "pathname": "/ansible/policies"
-                    }
-                ]
-            }
-        ]
-    },
     "patch": {
         "manifestLocation": "/apps/patch/fed-mods.json",
         "isFedramp": true,

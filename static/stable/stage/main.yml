@@ -193,11 +193,6 @@ playbook-dispatcher:
     versions:
       - v1
 
-policies:
-  title: Policies
-  api:
-    versions:
-      - v1
 
 rbac:
   title: Role-based Access Control

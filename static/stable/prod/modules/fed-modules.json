@@ -409,33 +409,6 @@
             }
         ]
     },
-    "policies": {
-        "analytics": {
-            "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"
-        },
-        "manifestLocation": "/apps/policies/fed-mods.json",
-        "config": {
-            "supportCaseData": {
-                "product": "Red Hat Insights",
-                "version": "Policies"
-            }
-        },
-        "modules": [
-            {
-                "id": "policies",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/policies",
-                        "isFedramp": true
-                    },
-                    {
-                        "pathname": "/ansible/policies"
-                    }
-                ]
-            }
-        ]
-    },
     "patch": {
         "analytics": {
             "APIKey": "apRCg9V6oMXCcnTingqRYW6m1er4hkCW"

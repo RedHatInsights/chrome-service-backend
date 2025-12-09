@@ -238,8 +238,7 @@
               "recommendation",
               "pathway"
             ]
-          },
-          "insights.policies"
+          }
         ]
       },
       {
@@ -314,9 +313,7 @@
               "recommendation",
               "pathway"
             ]
-          },
-          "ansible.policies",
-          "ansible.policies-lightspeed"
+          }
         ]
       },
       {

@@ -159,8 +159,7 @@
         "links": [
           "insights.advisories",
           "insights.repositories",
-          "insights.patchSystems",
-          "insights.policies"
+          "insights.patchSystems"
         ]
       },
       {

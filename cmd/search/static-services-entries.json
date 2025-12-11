@@ -554,27 +554,6 @@
       },
       {
         "custom": true,
-        "id": "RHEL.policies",
-        "title": "Policies - Operations",
-        "href": "/insights/policies",
-        "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
-        "alt_title":[
-          "policies",
-          "facts",
-          "conditions",
-          "trigger", "notifications",
-          "alerts",
-          "insights",
-          "notify",
-          "integration",
-          "conditions",
-          "alerts",
-          "events",
-          "raise alerts on system configuration changes"
-        ]
-      },
-      {
-        "custom": true,
         "id": "RHEL.tasks",
         "appId": "tasks",
         "title": "Tasks - Automation",

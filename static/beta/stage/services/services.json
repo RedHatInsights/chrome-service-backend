@@ -235,8 +235,7 @@
               "recommendation",
               "pathway"
             ]
-          },
-          "insights.policies"
+          }
         ]
       },
       {
@@ -311,8 +310,7 @@
               "recommendation",
               "pathway"
             ]
-          },
-          "ansible.policies"
+          }
         ]
       },
       {

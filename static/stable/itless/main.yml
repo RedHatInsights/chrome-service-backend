@@ -60,11 +60,6 @@ patch:
     versions:
       - v3
 
-policies:
-  title: Policies
-  api:
-    versions:
-      - v1
 
 rbac:
   title: Role-based Access Control

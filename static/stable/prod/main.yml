@@ -223,10 +223,19 @@ sources:
 subscriptions:
   title: Subscriptions
   api:
-    versions:
-      - v1
-    alias:
-      - rhsm-subscriptions
+    subItems:
+      usage:
+        title: Usage
+        versions:
+          - v1
+        alias:
+          - rhsm-subscriptions
+      management:
+        title: Subscriptions Management
+        versions:
+          - v2
+        alias:
+          - rhsm
 
 tasks:
   title: Tasks

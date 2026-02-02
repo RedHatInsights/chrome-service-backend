@@ -1,6 +1,6 @@
 {
   "id": "rhel",
-  "title": "Red Hat Insights",
+  "title": "Red Hat Enterprise Linux",
   "navItems": [
     {
       "id": "overview",
@@ -351,29 +351,6 @@
               "href": "/insights/advisor/topics",
               "product": "Red Hat Insights"
             }
-          ]
-        },
-        {
-          "id": "policies",
-          "appId": "policies",
-          "title": "Policies",
-          "href": "/insights/policies",
-          "icon": "InsightsIcon",
-          "subtitle": "Red Hat Insights for RHEL",
-          "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
-          "alt_title":[
-            "policies",
-            "facts",
-            "conditions",
-            "trigger", "notifications",
-            "alerts",
-            "insights",
-            "notify",
-            "integration",
-            "conditions",
-            "alerts",
-            "events",
-            "raise alerts on system configuration changes"
           ]
         }
       ]

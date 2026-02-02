@@ -4,17 +4,17 @@ metadata:
   annotations:
     build.appstudio.openshift.io/repo: https://github.com/RedHatInsights/chrome-service-backend?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
-    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
-    pipelinesascode.tekton.dev/max-keep-runs: '3'
-    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main"
+    pipelinesascode.tekton.dev/max-keep-runs: "3"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
+      == "security-compliance"
     pipelinesascode.tekton.dev/pipeline: https://github.com/RedHatInsights/konflux-pipelines/blob/main/pipelines/docker-build-run-unit-tests-dynamic-env.yaml
-  creationTimestamp:
+  creationTimestamp: null
   labels:
-    appstudio.openshift.io/application: chrome-service
-    appstudio.openshift.io/component: chrome-service
+    appstudio.openshift.io/application: chrome-service-sc
+    appstudio.openshift.io/component: chrome-service-sc
     pipelines.appstudio.openshift.io/type: build
-  name: chrome-service-on-pull-request
+  name: chrome-service-sc-on-push
   namespace: hcc-platex-services-tenant
 spec:
   params:
@@ -23,9 +23,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/hcc-platex-services/chrome-service:on-pr-{{revision}}
-  - name: image-expires-after
-    value: 5d
+    value: quay.io/redhat-user-workloads/hcc-platex-services-tenant/chrome-service-sc/chrome-service-sc:{{revision}}
   - name: dockerfile
     value: Dockerfile
   - name: path-context
@@ -58,7 +56,7 @@ spec:
     value: |
       #!/bin/bash
       set -ex
-      
+
       export PGSQL_USER="$(params.PGSQL_USER)"
       export PGSQL_PASSWORD="$(params.PGSQL_PASSWORD)"
       export PGSQL_HOSTNAME="$(params.PGSQL_HOSTNAME)"
@@ -66,22 +64,25 @@ spec:
       export PGSQL_DATABASE="$(params.PGSQL_DATABASE)"
       export UNLEASH_API_TOKEN="$(params.UNLEASH_API_TOKEN)"
       export UNLEASH_ADMIN_TOKEN="$(params.UNLEASH_ADMIN_TOKEN)"
-
+      
       make migrate
       make test
   pipelineRef:
     name: docker-build
   taskRunTemplate:
-    serviceAccountName: build-pipeline-chrome-service
+    serviceAccountName: build-pipeline-chrome-service-sc
   workspaces:
   - name: workspace
     volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
       spec:
         accessModes:
         - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi
+      status: {}
   - name: git-auth
     secret:
       secretName: '{{ git_auth_secret }}'

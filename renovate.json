@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": ["main"],
+  "extends": [
+    "config:base"
+  ],
+  "tekton": {
+    "schedule": ["at any time"]
+  },
+  "packageRules": [
+    {
+      "description": "Disable major updates entirely",
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Group only minor and patch updates into a single PR",
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch"], 
+      "groupName": "all dependencies",
+      "groupSlug": "all-deps"
+    }
+  ],
+  "labels": ["dependencies"]
+}

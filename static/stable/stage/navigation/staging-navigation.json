@@ -35,12 +35,11 @@
             ]
         },
         {
-            "title": "Cost Management MFE",
+            "title": "Cost Management",
             "expandable": true,
             "filterable": false,
-            "id": "costManagementMfe",
-            "description": "Cost Management Microfrontend with Module Federation",
-            "feoReplacement": "cost-management-mfe.nav",
+            "id": "costManagementStaging",
+            "feoReplacement": "cost-management-staging.nav",
             "routes": [
                 {
                     "title": "ROS",
@@ -48,54 +47,42 @@
                     "routes": [
                         {
                             "id": "optimizationsBadge",
-                            "appId": "costManagementMfe",
+                            "appId": "costManagementRos",
                             "title": "Optimizations badge",
                             "href": "/staging/cost-management/ros/optimizations/badge",
                             "icon": "OpenShiftIcon"
                         },
                         {
                             "id": "optimizationsLink",
-                            "appId": "costManagementMfe",
+                            "appId": "costManagementRos",
                             "title": "Optimizations link",
                             "href": "/staging/cost-management/ros/optimizations/link",
                             "icon": "OpenShiftIcon"
                         },
                         {
                             "id": "optimizationsSummary",
-                            "appId": "costManagementMfe",
+                            "appId": "costManagementRos",
                             "title": "Optimizations summary",
                             "href": "/staging/cost-management/ros/optimizations/summary",
                             "icon": "OpenShiftIcon"
                         },
                         {
                             "id": "optimizationsTable",
-                            "appId": "costManagementMfe",
+                            "appId": "costManagementRos",
                             "title": "Optimizations table",
                             "href": "/staging/cost-management/ros/optimizations/table"
                         },
                         {
                             "id": "optimizationsDetails",
-                            "appId": "costManagementMfe",
+                            "appId": "costManagementRos",
                             "title": "Optimizations details",
                             "href": "/staging/cost-management/ros/optimizations/details"
                         },
                         {
                             "id": "optimizationsBreakdown",
-                            "appId": "costManagementMfe",
+                            "appId": "costManagementRos",
                             "title": "Optimizations breakdown",
                             "href": "/staging/cost-management/ros/optimizations/breakdown"
-                        }
-                    ]
-                },
-                {
-                    "title": "OCM",
-                    "expandable": true,
-                    "routes": [
-                        {
-                            "id": "ocmOverview",
-                            "appId": "costManagementMfe",
-                            "title": "Overview Card",
-                            "href": "/staging/cost-management/ocm/overview"
                         }
                     ]
                 }

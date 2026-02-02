@@ -205,15 +205,15 @@
             }
         ]
     },
-    "costManagementMfe": {
-        "manifestLocation": "/apps/cost-management-mfe/fed-mods.json",
+    "costManagementRos": {
+        "manifestLocation": "/apps/cost-management-ros/fed-mods.json",
         "modules": [
             {
-                "id": "cost-management-mfe",
+                "id": "cost-management-ros",
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/staging/cost-management"
+                        "pathname": "/staging/cost-management/ros"
                     }
                 ]
             }
@@ -303,24 +303,6 @@
             }
         ]
     },
-    "policies": {
-        "manifestLocation": "/apps/policies/fed-mods.json",
-        "modules": [
-            {
-                "id": "policies",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/policies",
-                        "isFedramp": true
-                    },
-                    {
-                        "pathname": "/ansible/policies"
-                    }
-                ]
-            }
-        ]
-    },
     "patch": {
         "manifestLocation": "/apps/patch/fed-mods.json",
         "isFedramp": true,
@@ -335,10 +317,6 @@
                 ]
             }
         ]
-    },
-    "provisioning": {
-        "manifestLocation": "/apps/provisioning/fed-mods.json",
-        "modules": []
     },
     "subscriptions": {
         "manifestLocation": "/apps/subscriptions/fed-mods.json",
@@ -647,20 +625,6 @@
             }
         ]
     },
-    "edge": {
-        "manifestLocation": "/apps/edge/fed-mods.json",
-        "modules": [
-            {
-                "id": "edge",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/edge"
-                    }
-                ]
-            }
-        ]
-    },
     "frontendStarterApp": {
         "manifestLocation": "/apps/frontend-starter-app/fed-mods.json",
         "modules": [
@@ -895,12 +859,6 @@
                         }
                     },
                     {
-                        "pathname": "/edge/learning-resources",
-                        "props": {
-                            "bundle": "edge"
-                        }
-                    },
-                    {
                         "pathname": "/settings/learning-resources",
                         "props": {
                             "bundle": "settings"
@@ -1005,7 +963,7 @@
                             {
                                 "method": "withEmail",
                                 "args": ["@redhat.com"]
-                                
+
                             }
                         ],
                         "pathname": "/ansible/service/"

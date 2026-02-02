@@ -167,6 +167,12 @@
             "groupId": "operations",
             "icon": "trend-up",
             "title": "Red Hat Insights",
+            "permissions": [
+              {
+                "method": "featureFlag",
+                "args": ["platform.lightspeed-rebrand", false]
+              }
+            ],
             "navItems": [
                 {
                     "id": "inventory",
@@ -222,26 +228,6 @@
                             "product": "Red Hat Insights"
                         }
                     ]
-                },
-                {
-                    "id": "policies",
-                    "appId": "policies",
-                    "title": "Policies",
-                    "href": "/ansible/policies",
-                    "icon": "AnsibleIcon",
-                    "description": "Monitor your Ansible hosts against set parameters to detect deviation or misalignment.",
-                    "subtitle": "Red Hat Insights for Ansible",
-                    "alt_title": [
-                        "Policies",
-                        "Policy",
-                        "notifications",
-                        "notify",
-                        "integration",
-                        "conditions",
-                        "alerts",
-                        "events",
-                        "raise alerts on system configuration changes"
-                    ]
                 }
             ]
         },
@@ -252,7 +238,13 @@
             "filterable": false,
             "href": "/ansible/registration",
             "product": "Red Hat Insights",
-            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
+            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console.",
+            "permissions": [
+              {
+                "method": "featureFlag",
+                "args": ["platform.lightspeed-rebrand", false]
+              }
+            ]
         },
         {
             "appId": "remediations",
@@ -261,7 +253,13 @@
             "href": "/ansible/remediations",
             "icon": "AnsibleIcon",
             "product": "Red Hat Insights",
-            "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
+            "description": "Resolve issues with security, configuration, compliance, and policy recommendations.",
+            "permissions": [
+              {
+                "method": "featureFlag",
+                "args": ["platform.lightspeed-rebrand", false]
+              }
+            ]
         },
         {
             "appId": "tasks",
@@ -270,7 +268,107 @@
             "href": "/ansible/tasks",
             "icon": "AnsibleIcon",
             "product": "Red Hat Insights",
-            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness."
+            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness.",
+            "permissions": [
+              {
+                "method": "featureFlag",
+                "args": ["platform.lightspeed-rebrand", false]
+              }
+            ]
+        },
+        {
+            "title": "Red Hat Lightspeed",
+            "expandable": true,
+            "permissions": [
+              {
+                "method": "featureFlag",
+                "args": ["platform.lightspeed-rebrand", true]
+              }
+            ],
+            "routes": [
+                {
+                    "id": "inventory-lightspeed",
+                    "appId": "inventory",
+                    "title": "Inventory",
+                    "href": "/ansible/inventory",
+                    "icon": "AnsibleIcon",
+                    "product": "Red Hat Insights",
+                    "description": "View details about your Ansible Automation Platform systems."
+                },
+                {
+                    "title": "Advisor",
+                    "expandable": true,
+                    "routes": [
+                        {
+                            "id": "recommendations-lightspeed",
+                            "appId": "advisor",
+                            "title": "Recommendations",
+                            "href": "/ansible/advisor/recommendations",
+                            "icon": "AnsibleIcon",
+                            "product": "Red Hat Insights",
+                            "description": "See targeted recommendations to optimize your Ansible hosts' availability, performance, and security.",
+                            "alt_title": [
+                                "Rules",
+                                "recommendations",
+                                "Configuration",
+                                "security",
+                                "stability",
+                                "performance",
+                                "advisor",
+                                "incidents",
+                                "pathways",
+                                "critical",
+                                "upgrade",
+                                "upgrade risk",
+                                "incident",
+                                "recommendation",
+                                "pathway"
+                            ]
+                        },
+                        {
+                            "id": "systems-lightspeed",
+                            "appId": "advisor",
+                            "title": "Systems",
+                            "href": "/ansible/advisor/systems",
+                            "product": "Red Hat Insights"
+                        },
+                        {
+                            "id": "topics-lightspeed",
+                            "appId": "approval",
+                            "title": "Topics",
+                            "href": "/ansible/advisor/topics",
+                            "product": "Red Hat Insights"
+                        }
+                    ]
+                },
+                {
+                    "appId": "registration",
+                    "id": "registerSystems-lightspeed",
+                    "title": "Registration Assistant",
+                    "filterable": false,
+                    "href": "/ansible/registration",
+                    "product": "Red Hat Insights",
+                    "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
+                },
+                {
+                    "appId": "remediations",
+                    "id": "remediations-lightspeed",
+                    "title": "Remediations",
+                    "href": "/ansible/remediations",
+                    "icon": "AnsibleIcon",
+                    "product": "Red Hat Insights",
+                    "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
+                },
+                {
+                    "appId": "tasks",
+                    "id": "tasks-lightspeed",
+                    "title": "Tasks",
+                    "href": "/ansible/tasks",
+                    "icon": "AnsibleIcon",
+                    "product": "Red Hat Insights",
+                    "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness."
+                }
+            ]
         }
     ]
 }

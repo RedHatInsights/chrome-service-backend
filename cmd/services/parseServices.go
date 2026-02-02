@@ -95,7 +95,7 @@ func parseServiceItem(tb templateBase, linkStorage *map[string]interface{}) serv
 	serviceItem["icon"] = tb.Icon
 	serviceItem["title"] = tb.Title
 	serviceItem["description"] = tb.Description
-	var serviceItemLinks []interface{}
+	serviceItemLinks := []interface{}{}
 	for _, l := range tb.Links {
 		link := parseServiceItemLink(l, linkStorage)
 		serviceItemLinks = append(serviceItemLinks, link)

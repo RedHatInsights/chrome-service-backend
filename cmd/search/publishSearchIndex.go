@@ -393,7 +393,6 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 		"openshift":            "OpenShift",
 		"ansible":              "Ansible",
 		"insights":             "RHEL",
-		"edge":                 "Edge Management",
 		"settings":             "Settings",
 		"landing":              "Home",
 		"allservices":          "Home",

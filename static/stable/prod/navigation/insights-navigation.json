@@ -1,6 +1,6 @@
 {
   "id": "insights",
-  "title": "Red Hat Insights",
+  "title": "Red Hat Enterprise Linux",
   "navItems": [
     {
       "id": "overview",
@@ -108,7 +108,8 @@
             "build",
             "assemble",
             "image-builder"
-          ]
+          ],
+          "feoReplacement": "imageBuilder"
         },
         {
           "title": "System Configuration",
@@ -173,8 +174,10 @@
       ]
     },
     {
+      "id": "content",
       "title": "Content",
       "expandable": true,
+      "feoReplacement": "content",
       "routes": [
         {
           "id": "advisories",
@@ -373,29 +376,6 @@
               "product": "Red Hat Insights"
             }
           ]
-        },
-        {
-          "id": "policies",
-          "appId": "policies",
-          "title": "Policies",
-          "href": "/insights/policies",
-          "icon": "InsightsIcon",
-          "subtitle": "Red Hat Insights for RHEL",
-          "description": "Monitor your Red Hat Enterprise Linux inventory systems against set parameters to detect deviation or misalignment.",
-          "alt_title":[
-            "policies",
-            "facts",
-            "conditions",
-            "trigger", "notifications",
-            "alerts",
-            "insights",
-            "notify",
-            "integration",
-            "conditions",
-            "alerts",
-            "events",
-            "raise alerts on system configuration changes"
-          ]
         }
       ]
     },
@@ -580,6 +560,7 @@
           "product": "Red Hat Insights",
           "subtitle": "Red Hat Insights for RHEL",
           "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
+          "feoReplacement": "ros",
           "alt_title": [
             "optimization",
             "optimisation",
@@ -690,7 +671,8 @@
         "Register RHEL",
         "rhel",
         "RHEL"
-      ]
+      ],
+      "feoReplacement": "registration"
     },
     {
       "id": "learningResources",

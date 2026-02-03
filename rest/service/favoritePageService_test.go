@@ -7,6 +7,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"gorm.io/gorm"
 )
 
@@ -18,6 +19,31 @@ const (
 	testPathname2    string = "/insights/advisor"
 	testPathname3    string = "/insights/policies"
 )
+
+// setupTestUser initializes the database and creates a test user with automatic cleanup
+func setupTestUser(t *testing.T) *models.UserIdentity {
+	t.Helper()
+
+	database.Init()
+
+	user := &models.UserIdentity{AccountId: testAccountID}
+	err := database.DB.Create(user).Error
+	require.NoError(t, err, "unable to create test user")
+
+	// Register cleanup to run after test completes
+	t.Cleanup(func() {
+		database.DB.Unscoped().Where("user_identity_id = ?", user.ID).Delete(&models.FavoritePage{})
+		database.DB.Unscoped().Where("id = ?", user.ID).Delete(&models.UserIdentity{})
+	})
+
+	return user
+}
+
+// cleanupFavoritePages removes all favorite pages for a user (for use between subtests)
+func cleanupFavoritePages(t *testing.T, userID uint) {
+	t.Helper()
+	database.DB.Unscoped().Where("user_identity_id = ?", userID).Delete(&models.FavoritePage{})
+}
 
 // Helper function to create test favorite page
 func createTestFavoritePage(t *testing.T, pathname string, favorite bool, userID uint) models.FavoritePage {
@@ -37,9 +63,7 @@ func seedFavoritePages(t *testing.T, userID uint, pages []models.FavoritePage) {
 	for i := range pages {
 		pages[i].UserIdentityID = userID
 		err := database.DB.Create(&pages[i]).Error
-		if err != nil {
-			t.Fatalf("unable to seed favorite page: %v", err)
-		}
+		require.NoError(t, err, "unable to seed favorite page")
 	}
 }
 
@@ -126,14 +150,7 @@ func TestCheckIfExistsInDB(t *testing.T) {
 
 // TestGetUserActiveFavoritePages tests retrieving active favorite pages
 func TestGetUserActiveFavoritePages(t *testing.T) {
-	database.Init()
-
-	// Create test user
-	user := models.UserIdentity{AccountId: testAccountID}
-	err := database.DB.Create(&user).Error
-	if err != nil {
-		t.Fatalf("unable to create test user: %v", err)
-	}
+	user := setupTestUser(t)
 
 	// Seed test data - mix of active and archived
 	testPages := []models.FavoritePage{
@@ -147,7 +164,7 @@ func TestGetUserActiveFavoritePages(t *testing.T) {
 	activePages, err := GetUserActiveFavoritePages(user.ID)
 
 	// Assertions
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Len(t, activePages, 2, "should return only active favorites")
 
 	// Verify all returned pages are favorites
@@ -159,19 +176,13 @@ func TestGetUserActiveFavoritePages(t *testing.T) {
 
 // TestGetAllUserFavoritePages tests retrieving all favorite pages for a user
 func TestGetAllUserFavoritePages(t *testing.T) {
-	database.Init()
-
-	// Create test user
-	user := models.UserIdentity{AccountId: testAccountID}
-	err := database.DB.Create(&user).Error
-	if err != nil {
-		t.Fatalf("unable to create test user: %v", err)
-	}
+	user := setupTestUser(t)
 
 	tests := []struct {
 		name          string
 		seedPages     []models.FavoritePage
 		expectedCount int
+		validateFunc  func(*testing.T, []models.FavoritePage)
 	}{
 		{
 			name: "returns all pages for user with mixed favorites",
@@ -181,6 +192,21 @@ func TestGetAllUserFavoritePages(t *testing.T) {
 				createTestFavoritePage(t, testPathname3, true, user.ID),
 			},
 			expectedCount: 3,
+			validateFunc: func(t *testing.T, pages []models.FavoritePage) {
+				t.Helper()
+				// Verify it returns BOTH active and archived pages
+				activeCount := 0
+				archivedCount := 0
+				for _, page := range pages {
+					if page.Favorite {
+						activeCount++
+					} else {
+						archivedCount++
+					}
+				}
+				assert.Equal(t, 2, activeCount, "should have 2 active favorites")
+				assert.Equal(t, 1, archivedCount, "should have 1 archived favorite")
+			},
 		},
 		{
 			name:          "returns empty array when user has no pages",
@@ -188,19 +214,34 @@ func TestGetAllUserFavoritePages(t *testing.T) {
 			expectedCount: 0,
 		},
 		{
-			name: "returns only active favorites",
+			name: "returns both active and archived pages",
 			seedPages: []models.FavoritePage{
 				createTestFavoritePage(t, testPathname1, true, user.ID),
-				createTestFavoritePage(t, testPathname2, true, user.ID),
+				createTestFavoritePage(t, testPathname2, false, user.ID),
 			},
 			expectedCount: 2,
+			validateFunc: func(t *testing.T, pages []models.FavoritePage) {
+				t.Helper()
+				// Explicitly verify function returns BOTH types
+				hasActive := false
+				hasArchived := false
+				for _, page := range pages {
+					if page.Favorite {
+						hasActive = true
+					} else {
+						hasArchived = true
+					}
+				}
+				assert.True(t, hasActive, "should include active favorites")
+				assert.True(t, hasArchived, "should include archived pages")
+			},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Clean database before each test
-			database.DB.Where("user_identity_id = ?", user.ID).Delete(&models.FavoritePage{})
+			// Clean database before each subtest
+			cleanupFavoritePages(t, user.ID)
 
 			// Seed data
 			seedFavoritePages(t, user.ID, tt.seedPages)
@@ -209,12 +250,17 @@ func TestGetAllUserFavoritePages(t *testing.T) {
 			pages, err := GetAllUserFavoritePages(user.ID)
 
 			// Assertions
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.Len(t, pages, tt.expectedCount)
 
 			// Verify all pages belong to the user
 			for _, page := range pages {
 				assert.Equal(t, user.ID, page.UserIdentityID)
+			}
+
+			// Run additional validation if provided
+			if tt.validateFunc != nil {
+				tt.validateFunc(t, pages)
 			}
 		})
 	}
@@ -222,14 +268,7 @@ func TestGetAllUserFavoritePages(t *testing.T) {
 
 // TestGetUserArchivedFavoritePages tests retrieving archived (favorite=false) pages
 func TestGetUserArchivedFavoritePages(t *testing.T) {
-	database.Init()
-
-	// Create test user
-	user := models.UserIdentity{AccountId: testAccountID}
-	err := database.DB.Create(&user).Error
-	if err != nil {
-		t.Fatalf("unable to create test user: %v", err)
-	}
+	user := setupTestUser(t)
 
 	// Seed test data
 	testPages := []models.FavoritePage{
@@ -243,7 +282,7 @@ func TestGetUserArchivedFavoritePages(t *testing.T) {
 	archivedPages, err := GetUserArchivedFavoritePages(user.ID)
 
 	// Assertions
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Len(t, archivedPages, 2, "should return only archived pages")
 
 	// Verify all returned pages are archived
@@ -255,14 +294,7 @@ func TestGetUserArchivedFavoritePages(t *testing.T) {
 
 // TestDeleteOrUpdateFavoritePage tests the delete and update logic
 func TestDeleteOrUpdateFavoritePage(t *testing.T) {
-	database.Init()
-
-	// Create test user
-	user := models.UserIdentity{AccountId: testAccountID}
-	err := database.DB.Create(&user).Error
-	if err != nil {
-		t.Fatalf("unable to create test user: %v", err)
-	}
+	user := setupTestUser(t)
 
 	tests := []struct {
 		name        string
@@ -316,15 +348,13 @@ func TestDeleteOrUpdateFavoritePage(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Clean database
-			database.DB.Unscoped().Where("user_identity_id = ?", user.ID).Delete(&models.FavoritePage{})
+			// Clean database before each subtest
+			cleanupFavoritePages(t, user.ID)
 
 			// Setup: create page if needed
 			if tt.setupPage.Pathname != "" {
 				err := database.DB.Create(&tt.setupPage).Error
-				if err != nil {
-					t.Fatalf("unable to create setup page: %v", err)
-				}
+				require.NoError(t, err, "unable to create setup page")
 				// Set ID for delete operation
 				tt.updatePage.ID = tt.setupPage.ID
 			}
@@ -340,7 +370,7 @@ func TestDeleteOrUpdateFavoritePage(t *testing.T) {
 					t.Errorf("expected error %v, got %v", tt.expectError, err)
 				}
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			}
 
 			// Check if page was deleted
@@ -357,7 +387,7 @@ func TestDeleteOrUpdateFavoritePage(t *testing.T) {
 				var updatedPage models.FavoritePage
 				err := database.DB.Where("pathname = ?", tt.updatePage.Pathname).
 					First(&updatedPage).Error
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.True(t, updatedPage.Favorite, "page should be marked as favorite")
 			}
 		})
@@ -366,14 +396,7 @@ func TestDeleteOrUpdateFavoritePage(t *testing.T) {
 
 // TestSaveUserFavoritePage tests the main save function
 func TestSaveUserFavoritePage(t *testing.T) {
-	database.Init()
-
-	// Create test user
-	user := models.UserIdentity{AccountId: testAccountID}
-	err := database.DB.Create(&user).Error
-	if err != nil {
-		t.Fatalf("unable to create test user: %v", err)
-	}
+	user := setupTestUser(t)
 
 	tests := []struct {
 		name            string
@@ -392,7 +415,7 @@ func TestSaveUserFavoritePage(t *testing.T) {
 				var page models.FavoritePage
 				err := database.DB.Where("pathname = ? AND user_identity_id = ?",
 					testPathname1, userID).First(&page).Error
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.True(t, page.Favorite)
 			},
 		},
@@ -408,7 +431,7 @@ func TestSaveUserFavoritePage(t *testing.T) {
 				var page models.FavoritePage
 				err := database.DB.Where("pathname = ? AND user_identity_id = ?",
 					testPathname1, userID).First(&page).Error
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.True(t, page.Favorite)
 			},
 		},
@@ -432,8 +455,8 @@ func TestSaveUserFavoritePage(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Clean database
-			database.DB.Unscoped().Where("user_identity_id = ?", user.ID).Delete(&models.FavoritePage{})
+			// Clean database before each subtest
+			cleanupFavoritePages(t, user.ID)
 
 			// Seed existing pages
 			if len(tt.existingPages) > 0 {
@@ -445,9 +468,9 @@ func TestSaveUserFavoritePage(t *testing.T) {
 
 			// Assertions
 			if tt.expectError {
-				assert.Error(t, err)
+				require.Error(t, err)
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				if tt.validateFunc != nil {
 					tt.validateFunc(t, user.ID)
 				}

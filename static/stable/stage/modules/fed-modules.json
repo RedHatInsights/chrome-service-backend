@@ -793,7 +793,7 @@
             "module": "./RootApp",
             "routes": [
                 {
-                    "pathname": "/openshift/migration-assessment"
+                    "pathname": "/openshift/migration-advisor"
                 }
             ]
           }

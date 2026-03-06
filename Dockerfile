@@ -25,7 +25,7 @@ RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
 
 # Pin to a specific version rather than :latest for reproducible builds and to prevent unintended changes
-FROM registry.access.redhat.com/ubi9-minimal:9.7
+FROM registry.access.redhat.com/ubi9-minimal:9.7@sha256:c7d44146f826037f6873d99da479299b889473492d3c1ab8af86f08af04ec8a0
 
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images

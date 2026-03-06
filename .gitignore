@@ -35,3 +35,6 @@ static/*-generated.json
 
 .tekton/chrome-service-pull-request.bak.yaml
 .tekton/chrome-service-push.bak.yaml
+
+# Project level tmp folder 
+tmp

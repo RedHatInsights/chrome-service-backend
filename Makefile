@@ -21,6 +21,7 @@ help:
 	@echo "generate-search-index 	- generate search index"
 
 port?=8000
+ENV_FILE?=.env
 
 env:
 	@if [ -f .env ]; then \
@@ -55,20 +56,18 @@ generate-search-index: export SEARCH_INDEX_WRITE = true
 generate-search-index:
 	go run cmd/search/*
 
-# TODO: pwd required for podman-compose v1.3.0 path resolution bug
-# https://github.com/containers/podman-compose/issues/1167
 kafka:
-	podman-compose -f $(PWD)/local/kafka-compose.yaml up
+	podman-compose --env-file $(PWD)/$(ENV_FILE) -f $(PWD)/local/kafka-compose.yaml up
 
 unleash:
-	podman-compose -f $(PWD)/local/unleash-compose.yaml up
+	podman-compose --env-file $(PWD)/$(ENV_FILE) -f $(PWD)/local/unleash-compose.yaml up
 
 infra:
-	podman-compose -f $(PWD)/local/full-stack-compose.yaml down
-	podman-compose -f $(PWD)/local/full-stack-compose.yaml up
+	podman-compose --env-file $(PWD)/$(ENV_FILE) -f $(PWD)/local/full-stack-compose.yaml down
+	podman-compose --env-file $(PWD)/$(ENV_FILE) -f $(PWD)/local/full-stack-compose.yaml up
 
 clean-all:
-	podman-compose -f $(PWD)/local/full-stack-compose.yaml down
+	podman-compose --env-file $(PWD)/$(ENV_FILE) -f $(PWD)/local/full-stack-compose.yaml down
 
 test: seed-unleash
 	go test -v  ./... -coverprofile=c.out

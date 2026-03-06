@@ -16,9 +16,18 @@
     {
       "description": "Group only minor and patch updates into a single PR",
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"], 
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
       "groupSlug": "all-deps"
+    },
+    {
+      "description": "Track ubi9-minimal minor releases independently so base image security updates are visible",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["registry.access.redhat.com/ubi9-minimal"],
+      "allowedVersions": "/^9\\.\\d+$/",
+      "pinDigests": true,
+      "groupName": "ubi9-minimal base image",
+      "groupSlug": "ubi9-minimal"
     }
   ],
   "labels": ["dependencies"]

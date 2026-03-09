@@ -14,20 +14,22 @@
       "enabled": false
     },
     {
-      "description": "Group only minor and patch updates into a single PR",
-      "matchPackagePatterns": ["*"],
+      "description": "Group Go module minor and patch updates into a single PR",
+      "matchManagers": ["gomod"],
       "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all dependencies",
-      "groupSlug": "all-deps"
+      "groupName": "go dependencies",
+      "groupSlug": "go-deps"
     },
     {
-      "description": "Track ubi9-minimal minor releases independently so base image security updates are visible",
+      "description": "Track UBI9 base image security updates as a group",
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["registry.access.redhat.com/ubi9-minimal"],
-      "allowedVersions": "/^9\\.\\d+$/",
+      "matchPackageNames": [
+        "registry.access.redhat.com/ubi9-minimal",
+        "registry.access.redhat.com/ubi9/go-toolset"
+      ],
       "pinDigests": true,
-      "groupName": "ubi9-minimal base image",
-      "groupSlug": "ubi9-minimal"
+      "groupName": "ubi9 base images",
+      "groupSlug": "ubi9-base-images"
     }
   ],
   "labels": ["dependencies"]

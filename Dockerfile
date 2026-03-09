@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:1.25.7-1771417345 AS builder
+FROM registry.access.redhat.com/ubi9/go-toolset:1.25.7-1773016755 AS builder
 WORKDIR $GOPATH/src/chrome-service-backend/
 # TODO: Use --exclude when stable docker version available
 COPY api api

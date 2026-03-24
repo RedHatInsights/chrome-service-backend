@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:1.25.7-1773851748@sha256:8b211cc8793d8013140844e8070aa584a8eb3e4e6e842ea4b03dd9914b1a5dc6 AS builder
+FROM registry.access.redhat.com/ubi9/go-toolset:1.25.7-1774309344@sha256:f8315b365526773d010668c0532d8b431ff505ec2720cdcd1e484c01d012f099 AS builder
 WORKDIR $GOPATH/src/chrome-service-backend/
 # TODO: Use --exclude when stable docker version available
 COPY api api
@@ -25,7 +25,7 @@ RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
 
 # Pin to a specific version rather than :latest for reproducible builds and to prevent unintended changes
-FROM registry.access.redhat.com/ubi9-minimal:9.7-1773204619@sha256:69f5c9886ecb19b23e88275a5cd904c47dd982dfa370fbbd0c356d7b1047ef68
+FROM registry.access.redhat.com/ubi9-minimal:9.7-1773939694@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
 
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images

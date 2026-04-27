@@ -11,6 +11,14 @@ import (
 	"gorm.io/gorm/logger"
 )
 
+// main runs database migrations as an init container before the service starts.
+//
+// IMPORTANT — Idempotency requirement:
+// This migration runs on every pod startup. All operations MUST be safe to execute
+// repeatedly without side effects. DDL statements (CREATE INDEX, ALTER TABLE, CREATE TABLE,
+// DROP INDEX, etc.) can break PostgreSQL logical replication used in RDS blue/green
+// deployments. Always guard DDL with an explicit existence check (HasTable, HasConstraint,
+// pg_indexes query, etc.) so the DDL is never issued when the object already exists.
 func main() {
 	godotenv.Load()
 	database.Init()
@@ -170,12 +178,28 @@ func main() {
 		logrus.Infof("Migrated %d user identity visited rows", activeWorkspaceRes.RowsAffected)
 	}
 
-	// must be outside of a transaction (to support concurrently creating the index)
-	fmt.Println("Concurrently create partial index for user_identities table")
+	// Must be outside of a transaction (CREATE INDEX CONCURRENTLY cannot run inside one).
+	// Guard with explicit pg_indexes check to avoid issuing DDL when the index already
+	// exists. DDL statements — even no-op ones like CREATE INDEX IF NOT EXISTS — can break
+	// PostgreSQL logical replication used in RDS blue/green deployments.
+	fmt.Println("Checking partial index for user_identities table")
 	if database.DB.Migrator().HasTable(&models.UserIdentity{}) {
-		createUserIdentitiesIndexRes := database.DB.Exec("CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_active_user ON user_identities (account_id) WHERE deleted_at IS NULL;")
-		if createUserIdentitiesIndexRes.Error != nil {
-			fmt.Println("Unable to concurrently create partial index for user_identities table!", createUserIdentitiesIndexRes.Error.Error())
+		var indexExists bool
+		if err := database.DB.Raw(
+			"SELECT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = ?)",
+			"idx_active_user",
+		).Scan(&indexExists).Error; err != nil {
+			fmt.Println("Unable to check for existing index, attempting creation:", err.Error())
+			indexExists = false
+		}
+		if !indexExists {
+			fmt.Println("Creating partial index idx_active_user concurrently")
+			createUserIdentitiesIndexRes := database.DB.Exec("CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_active_user ON user_identities (account_id) WHERE deleted_at IS NULL;")
+			if createUserIdentitiesIndexRes.Error != nil {
+				fmt.Println("Unable to concurrently create partial index for user_identities table!", createUserIdentitiesIndexRes.Error.Error())
+			}
+		} else {
+			fmt.Println("Partial index idx_active_user already exists, skipping DDL")
 		}
 	}
 

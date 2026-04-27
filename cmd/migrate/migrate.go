@@ -186,8 +186,8 @@ func main() {
 	if database.DB.Migrator().HasTable(&models.UserIdentity{}) {
 		var indexExists bool
 		if err := database.DB.Raw(
-			"SELECT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = ?)",
-			"idx_active_user",
+			"SELECT EXISTS (SELECT 1 FROM pg_indexes WHERE schemaname = current_schema() AND tablename = ? AND indexname = ?)",
+			"user_identities", "idx_active_user",
 		).Scan(&indexExists).Error; err != nil {
 			fmt.Println("Unable to check for existing index, attempting creation:", err.Error())
 			indexExists = false
@@ -196,7 +196,7 @@ func main() {
 			fmt.Println("Creating partial index idx_active_user concurrently")
 			createUserIdentitiesIndexRes := database.DB.Exec("CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_active_user ON user_identities (account_id) WHERE deleted_at IS NULL;")
 			if createUserIdentitiesIndexRes.Error != nil {
-				fmt.Println("Unable to concurrently create partial index for user_identities table!", createUserIdentitiesIndexRes.Error.Error())
+				logrus.Errorf("Failed to create partial index idx_active_user: %v", createUserIdentitiesIndexRes.Error)
 			}
 		} else {
 			fmt.Println("Partial index idx_active_user already exists, skipping DDL")

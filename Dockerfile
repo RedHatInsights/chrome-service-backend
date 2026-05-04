@@ -28,7 +28,7 @@ RUN CGO_ENABLED=1 go build -o /go/bin/chrome-search-index cmd/search/publishSear
 RUN CGO_ENABLED=1 go build -o /go/bin/chrome-fetch-specs cmd/fetchSpecs/fetchSpecs.go
 
 # Pin to a specific version rather than :latest for reproducible builds and to prevent unintended changes
-FROM registry.access.redhat.com/ubi9-minimal:9.7-1776833838@sha256:7d4e47500f28ac3a2bff06c25eff9127ff21048538ae03ce240d57cf756acd00
+FROM registry.access.redhat.com/ubi9-minimal:9.7-1777857961@sha256:8d0a8fb39ec907e8ca62cdd24b62a63ca49a30fe465798a360741fde58437a23
 
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images

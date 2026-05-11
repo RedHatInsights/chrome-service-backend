@@ -13,6 +13,7 @@ COPY spec spec
 COPY Makefile Makefile
 COPY widget-dashboard-defaults widget-dashboard-defaults
 ENV GO111MODULE=on
+ENV GOTOOLCHAIN=auto
 USER root
 RUN go get -d -v
 RUN make parse-services

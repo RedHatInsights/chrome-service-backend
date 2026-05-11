@@ -56,6 +56,7 @@ spec:
       #!/bin/bash
       set -ex
 
+      export GOTOOLCHAIN=auto
       export PGSQL_USER="$(params.PGSQL_USER)"
       export PGSQL_PASSWORD="$(params.PGSQL_PASSWORD)"
       export PGSQL_HOSTNAME="$(params.PGSQL_HOSTNAME)"

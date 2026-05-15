@@ -38,12 +38,13 @@ func main() {
 	service.LoadBaseLayout()
 	featureflags.Init(cfg)
 	setupGlobalLogger(cfg)
+	defer logger.FlushCloudWatch()
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
 
-	routerLogger := logrus.New()
 	router.Use(middleware.RequestID)
-	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, routerLogger)))
+	router.Use(logger.InjectLogger)
+	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, logrus.StandardLogger())))
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.URLFormat)
 
@@ -60,6 +61,7 @@ func main() {
 
 	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
 		subrouter.Use(m.ParseHeaders)
+		subrouter.Use(logger.EnrichLoggerWithIdentity)
 		subrouter.Use(m.InjectUser)
 		subrouter.Get("/hello-world", HelloWorld)
 		subrouter.Route("/last-visited", routes.MakeLastVisitedRoutes)
@@ -120,4 +122,5 @@ func setupGlobalLogger(opts *config.ChromeServiceConfig) {
 		logLevel = logrus.ErrorLevel
 	}
 	logrus.SetLevel(logLevel)
+	logger.SetupCloudWatch(opts)
 }

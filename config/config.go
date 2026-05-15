@@ -91,6 +91,13 @@ type FeatureFlagsConfig struct {
 	AdminToken string
 }
 
+type CloudWatchCfg struct {
+	AccessKeyId    string
+	SecretAccessKey string
+	Region         string
+	LogGroup       string
+}
+
 type DebugConfig struct {
 	DebugFavoriteIds []string
 }
@@ -110,6 +117,7 @@ type ChromeServiceConfig struct {
 	MetricsPort                         int
 	Test                                bool
 	LogLevel                            string
+	CloudWatch                          CloudWatchCfg
 	DbSSLMode                           string
 	DbSSLRootCert                       string
 	KafkaConfig                         KafkaCfg
@@ -172,6 +180,15 @@ func init() {
 			options.FeatureFlagConfig.Scheme = string(cfg.FeatureFlags.Scheme)
 			options.FeatureFlagConfig.Port = cfg.FeatureFlags.Port
 			options.FeatureFlagConfig.FullURL = fmt.Sprintf("%s://%s:%d/api/", options.FeatureFlagConfig.Scheme, options.FeatureFlagConfig.Hostname, options.FeatureFlagConfig.Port)
+		}
+
+		if cfg.Logging.Cloudwatch != nil {
+			options.CloudWatch = CloudWatchCfg{
+				AccessKeyId:    cfg.Logging.Cloudwatch.AccessKeyId,
+				SecretAccessKey: cfg.Logging.Cloudwatch.SecretAccessKey,
+				Region:         cfg.Logging.Cloudwatch.Region,
+				LogGroup:       cfg.Logging.Cloudwatch.LogGroup,
+			}
 		}
 
 		if cfg.Kafka != nil {

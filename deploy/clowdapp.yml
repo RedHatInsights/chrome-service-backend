@@ -13,6 +13,8 @@ objects:
       database:
         name: chrome-service
       featureFlags: true
+      logging:
+        type: cloudwatch
       kafkaTopics:
       # one replica for now; most of this will change
       - replicas: 1
@@ -264,7 +266,7 @@ objects:
 
 parameters:
 - name: LOG_LEVEL
-  value: Warn  # Do not log debug/info messages by default
+  value: Info
 - description: Cpu limit of service
   name: CPU_LIMIT_CHROME_SERVICE
   value: 500m

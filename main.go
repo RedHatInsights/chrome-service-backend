@@ -98,12 +98,14 @@ func main() {
 	go func() {
 		metricsStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.MetricsPort))
 		if err := http.ListenAndServe(metricsStringAddr, metricsRouter); err != nil {
+			logger.FlushCloudWatch()
 			log.Fatalf("Metrics server stopped %v", err)
 		}
 	}()
 
 	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
 	if err := http.ListenAndServe(serverStringAddr, router); err != nil {
+		logger.FlushCloudWatch()
 		log.Fatalf("Chrome-service-api has stopped due to %v", err)
 	}
 }

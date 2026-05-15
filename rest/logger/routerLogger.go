@@ -33,7 +33,7 @@ func (l *LogEntry) Write(status, bytes int, header http.Header, elapsed time.Dur
 
 	LogFor(l.request.Context()).WithFields(logrus.Fields{
 		"method":      l.request.Method,
-		"path":        l.request.RequestURI,
+		"path":        l.request.URL.Path,
 		"status":      status,
 		"bytes":       bytes,
 		"elapsed_ms":  elapsed.Milliseconds(),

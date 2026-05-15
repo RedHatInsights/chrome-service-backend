@@ -22,7 +22,7 @@ func SetupCloudWatch(cfg *config.ChromeServiceConfig) {
 	})
 
 	cwCfg := cfg.CloudWatch
-	if cwCfg.AccessKeyId == "" {
+	if cwCfg.AccessKeyId == "" || cwCfg.SecretAccessKey == "" || cwCfg.Region == "" || cwCfg.LogGroup == "" {
 		logrus.Info("CloudWatch credentials not configured, logging to stdout only")
 		return
 	}

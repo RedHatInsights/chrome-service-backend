@@ -15,7 +15,10 @@ type loggerKeyType int
 const loggerKey loggerKeyType = iota
 
 func LogFor(ctx context.Context) *logrus.Entry {
-	if entry, ok := ctx.Value(loggerKey).(*logrus.Entry); ok {
+	if ctx == nil {
+		return logrus.NewEntry(logrus.StandardLogger())
+	}
+	if entry, ok := ctx.Value(loggerKey).(*logrus.Entry); ok && entry != nil {
 		return entry
 	}
 	return logrus.NewEntry(logrus.StandardLogger())

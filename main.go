@@ -38,12 +38,13 @@ func main() {
 	service.LoadBaseLayout()
 	featureflags.Init(cfg)
 	setupGlobalLogger(cfg)
+	defer logger.FlushCloudWatch()
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
 
-	routerLogger := logrus.New()
 	router.Use(middleware.RequestID)
-	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, routerLogger)))
+	router.Use(logger.InjectLogger)
+	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, logrus.StandardLogger())))
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.URLFormat)
 
@@ -60,6 +61,7 @@ func main() {
 
 	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
 		subrouter.Use(m.ParseHeaders)
+		subrouter.Use(logger.EnrichLoggerWithIdentity)
 		subrouter.Use(m.InjectUser)
 		subrouter.Get("/hello-world", HelloWorld)
 		subrouter.Route("/last-visited", routes.MakeLastVisitedRoutes)
@@ -96,12 +98,14 @@ func main() {
 	go func() {
 		metricsStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.MetricsPort))
 		if err := http.ListenAndServe(metricsStringAddr, metricsRouter); err != nil {
+			logger.FlushCloudWatch()
 			log.Fatalf("Metrics server stopped %v", err)
 		}
 	}()
 
 	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
 	if err := http.ListenAndServe(serverStringAddr, router); err != nil {
+		logger.FlushCloudWatch()
 		log.Fatalf("Chrome-service-api has stopped due to %v", err)
 	}
 }
@@ -120,4 +124,5 @@ func setupGlobalLogger(opts *config.ChromeServiceConfig) {
 		logLevel = logrus.ErrorLevel
 	}
 	logrus.SetLevel(logLevel)
+	logger.SetupCloudWatch(opts)
 }

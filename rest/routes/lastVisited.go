@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
-	"github.com/sirupsen/logrus"
 )
 
 func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +21,7 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 		errString := "Invalid last visited pages request payload."
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(errString))
-		logrus.Errorf("unable to request body for last visited pages, %s", err.Error())
+		logger.LogFor(r.Context()).Errorf("unable to request body for last visited pages, %s", err.Error())
 		return
 	}
 

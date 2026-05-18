@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
-	"github.com/sirupsen/logrus"
 )
 
 func ParseHeaders(next http.Handler) http.Handler {
@@ -16,12 +16,12 @@ func ParseHeaders(next http.Handler) http.Handler {
 			errString := "Missing authentication"
 			w.WriteHeader(http.StatusForbidden)
 			w.Write([]byte(errString))
-			logrus.Errorf("missing the %s header", util.XRHIDENTITY)
+			logger.LogFor(r.Context()).Errorf("missing the %s header", util.XRHIDENTITY)
 			return
 		} else {
 			identity, err := util.ParseXRHIdentityHeader(header)
 			if err != nil {
-				logrus.Errorln("Error parsing X-RH-IDENTITY header: ", err)
+				logger.LogFor(r.Context()).Errorln("Error parsing X-RH-IDENTITY header: ", err)
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("Internal server error"))
 				return

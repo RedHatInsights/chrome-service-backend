@@ -1,36 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranches": ["main"],
-  "extends": [
-    "config:base"
-  ],
-  "tekton": {
-    "schedule": ["at any time"]
-  },
-  "packageRules": [
-    {
-      "description": "Disable major updates entirely",
-      "matchUpdateTypes": ["major"],
-      "enabled": false
-    },
-    {
-      "description": "Group Go module minor and patch updates into a single PR",
-      "matchManagers": ["gomod"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "go dependencies",
-      "groupSlug": "go-deps"
-    },
-    {
-      "description": "Track UBI9 base image security updates as a group",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": [
-        "registry.access.redhat.com/ubi9-minimal",
-        "registry.access.redhat.com/ubi9/go-toolset"
-      ],
-      "pinDigests": true,
-      "groupName": "ubi9 base images",
-      "groupSlug": "ubi9-base-images"
-    }
-  ],
-  "labels": ["dependencies"]
+  "extends": ["github>RedHatInsights/shared-workflows//renovate/backend"]
 }

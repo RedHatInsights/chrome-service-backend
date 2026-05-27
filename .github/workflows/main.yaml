@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
         unleash-db:
-          image: postgres:15
+          image: postgres:18
           options: >-
             --health-cmd pg_isready
             --health-interval 10s
@@ -25,7 +25,7 @@ jobs:
             # trust incoming connections blindly (DON'T DO THIS IN PRODUCTION!)
             POSTGRES_HOST_AUTH_METHOD: "trust"
         chrome-db:
-          image: postgres:14.23-alpine
+          image: postgres:18.4-alpine
           options: >-
             --health-cmd pg_isready
             --health-interval 10s

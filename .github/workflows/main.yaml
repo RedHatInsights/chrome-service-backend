@@ -58,7 +58,7 @@ jobs:
             AUTH_TYPE: "none"
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Set up Go
         uses: actions/setup-go@v4

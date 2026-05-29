@@ -389,24 +389,6 @@
     ]
   },
   {
-    "id": "rhel-dashboard",
-    "links": [
-      {
-        "custom": true,
-        "id": "RHEL.dashboard",
-        "href": "/insights/dashboard",
-        "title": "Dashboard",
-        "subtitle": "Red Hat Insights for RHEL",
-        "description": "View details about your Red Hat Enterprise Linux systems.",
-        "alt_title": [
-          "Dashboard",
-          "insights",
-          "Rhel"
-        ]
-      }
-    ]
-  },
-  {
     "id": "rhel-remediations",
     "links": [
       {

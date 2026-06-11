@@ -1,10 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	jsonschema "github.com/santhosh-tekuri/jsonschema/v6"
@@ -24,7 +24,11 @@ func validateDashboardDefaults(cwd string) {
 	if err != nil {
 		panic(err)
 	}
-	err = compiler.AddResource("schema.json", strings.NewReader(string(schemaFile)))
+	schemaDoc, err := jsonschema.UnmarshalJSON(bytes.NewReader(schemaFile))
+	if err != nil {
+		panic(err)
+	}
+	err = compiler.AddResource("schema.json", schemaDoc)
 
 	if err != nil {
 		panic(err)

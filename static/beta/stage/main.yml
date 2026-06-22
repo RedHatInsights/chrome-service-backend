@@ -242,6 +242,7 @@ subscriptions:
   title: Subscriptions
   api:
     versions:
+      - v2
       - v1
     alias:
       - rhsm-subscriptions

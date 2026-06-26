@@ -339,6 +339,24 @@ func parseBundles(bundlesVar string, bundlesOnboardedIdsVar string, env string) 
 		}
 		parsedBundles = append(parsedBundles, mapBundle)
 	}
+
+	for _, generatedBundle := range generatedBundles {
+		generatedMap, ok := generatedBundle.(map[string]interface{})
+		if !ok {
+			return nil, fmt.Errorf("invalid generated bundle type")
+		}
+		found := false
+		for _, parsed := range parsedBundles {
+			if parsed["id"] == generatedMap["id"] {
+				found = true
+				break
+			}
+		}
+		if !found {
+			parsedBundles = append(parsedBundles, generatedMap)
+		}
+	}
+
 	bundleData, err := json.MarshalIndent(parsedBundles, "", "  ")
 	return bundleData, err
 }

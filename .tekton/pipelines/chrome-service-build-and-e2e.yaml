@@ -1,0 +1,95 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: chrome-service-build-and-e2e
+  annotations:
+    description: Build chrome-service image and run E2E tests
+spec:
+  params:
+    - name: git-url
+      description: Git repository URL
+    - name: revision
+      description: Git revision to build
+    - name: output-image
+      description: Output image URL
+    - name: dockerfile
+      description: Path to Dockerfile
+      default: Dockerfile
+    - name: path-context
+      description: Build context path
+      default: .
+    - name: image-expires-after
+      description: Image expiration time
+      default: ""
+    - name: e2e-base-url
+      description: Base URL for E2E tests (can use deployed service or localhost)
+      default: "http://localhost:8000"
+    - name: e2e-test-user-id
+      description: Test user ID for E2E tests
+      default: "e2e-test-user"
+    - name: e2e-test-account-id
+      description: Test account ID for E2E tests
+      default: "e2e-test-account"
+    - name: e2e-test-org-id
+      description: Test org ID for E2E tests
+      default: "e2e-test-org"
+    - name: e2e-test-username
+      description: Test username for E2E tests
+      default: "e2e-bot"
+
+  workspaces:
+    - name: workspace
+    - name: git-auth
+
+  tasks:
+    # Use the existing docker-build pipeline as a task
+    # This includes build, unit tests, security scans, etc.
+    - name: build-and-test
+      taskRef:
+        resolver: git
+        params:
+          - name: url
+            value: https://github.com/RedHatInsights/konflux-pipelines
+          - name: revision
+            value: main
+          - name: pathInRepo
+            value: pipelines/docker-build-run-unit-tests-dynamic-env.yaml
+      params:
+        - name: git-url
+          value: $(params.git-url)
+        - name: revision
+          value: $(params.revision)
+        - name: output-image
+          value: $(params.output-image)
+        - name: dockerfile
+          value: $(params.dockerfile)
+        - name: path-context
+          value: $(params.path-context)
+        - name: image-expires-after
+          value: $(params.image-expires-after)
+      workspaces:
+        - name: workspace
+          workspace: workspace
+        - name: git-auth
+          workspace: git-auth
+
+    # Run E2E tests against the built image
+    - name: e2e-tests
+      runAfter:
+        - build-and-test
+      taskRef:
+        name: chrome-service-e2e-tests
+      params:
+        - name: APP_URL
+          value: $(params.e2e-base-url)
+        - name: TEST_USER_ID
+          value: $(params.e2e-test-user-id)
+        - name: TEST_ACCOUNT_ID
+          value: $(params.e2e-test-account-id)
+        - name: TEST_ORG_ID
+          value: $(params.e2e-test-org-id)
+        - name: TEST_USERNAME
+          value: $(params.e2e-test-username)
+      workspaces:
+        - name: source
+          workspace: workspace

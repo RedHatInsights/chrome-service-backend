@@ -39,14 +39,14 @@ RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-fetch-specs cmd/fetchSpecs
 ############################
 FROM registry.access.redhat.com/hi/go:latest-fips
 
+WORKDIR /
+
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir -p /app && \
-    chgrp -R 0 /app && \
-    chmod -R g=u /app
+    chown 1001:0 /app
 RUN mkdir -p /static && \
-    chgrp -R 0 /static && \
-    chmod -R g=u /static
+    chown 1001:0 /static
 
 COPY --from=builder /workspace/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /workspace/chrome-migrate /usr/bin/
@@ -57,6 +57,7 @@ COPY --from=builder /workspace/static /static
 # Copy widget dashboard defaults to server binary entry point
 COPY --from=builder /workspace/widget-dashboard-defaults /widget-dashboard-defaults
 
-ENTRYPOINT ["/app/chrome-service-backend"]
-EXPOSE 8000
 USER 1001
+
+EXPOSE 8000
+CMD ["/app/chrome-service-backend"]

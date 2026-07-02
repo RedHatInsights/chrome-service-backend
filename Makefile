@@ -4,6 +4,7 @@ help:
 	@echo "migrate          	- run database migration"
 	@echo "dev              	- run server"
 	@echo "test             	- run all tests"
+	@echo "test-e2e         	- run E2E tests (set E2E_BASE_URL and other E2E_* env vars)"
 	@echo "env                  - creates a basic .env file"
 	@echo "database         	- start database with .env vars"
 	@echo "kafka            	- start local kafka"
@@ -75,6 +76,10 @@ clean-all:
 
 test: seed-unleash
 	go test -v  ./... -coverprofile=c.out
+
+test-e2e:
+	@echo "Running E2E tests against $(E2E_BASE_URL)"
+	cd e2e && go test -v ./...
 
 coverage:
 	go tool cover -html=c.out

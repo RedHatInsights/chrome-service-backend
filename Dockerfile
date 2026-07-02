@@ -44,9 +44,11 @@ WORKDIR /
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir -p /app && \
-    chown 1001:0 /app
+    chgrp -R 0 /app && \
+    chmod -R g=u /app
 RUN mkdir -p /static && \
-    chown 1001:0 /static
+    chgrp -R 0 /static && \
+    chmod -R g=u /static
 
 COPY --from=builder /workspace/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /workspace/chrome-migrate /usr/bin/

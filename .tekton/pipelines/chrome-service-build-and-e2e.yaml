@@ -77,8 +77,6 @@ spec:
     - name: e2e-tests
       runAfter:
         - build-and-test
-      taskRef:
-        name: chrome-service-e2e-tests
       params:
         - name: APP_URL
           value: $(params.e2e-base-url)
@@ -93,3 +91,120 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
+      taskSpec:
+        params:
+          - name: APP_URL
+            type: string
+          - name: TEST_USER_ID
+            type: string
+          - name: TEST_ACCOUNT_ID
+            type: string
+          - name: TEST_ORG_ID
+            type: string
+          - name: TEST_USERNAME
+            type: string
+        workspaces:
+          - name: source
+        results:
+          - name: test-status
+          - name: tests-run
+        steps:
+          - name: verify-connectivity
+            image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+            workingDir: $(workspaces.source.path)
+            script: |
+              #!/bin/bash
+              set -e
+              echo "Verifying connectivity to $(params.APP_URL)..."
+              HOSTNAME=$(echo "$(params.APP_URL)" | sed 's|https\?://||' | cut -d'/' -f1)
+              if ! ping -c 1 -W 5 "${HOSTNAME}" > /dev/null 2>&1; then
+                echo "WARNING: Unable to ping ${HOSTNAME}, but continuing..."
+              else
+                echo "✓ Host ${HOSTNAME} is reachable"
+              fi
+              if command -v curl &> /dev/null; then
+                if curl -sSf -m 10 "$(params.APP_URL)/health" > /dev/null 2>&1; then
+                  echo "✓ Health endpoint is accessible"
+                else
+                  echo "WARNING: Health endpoint not accessible yet, tests may need to retry..."
+                fi
+              fi
+              echo "Connectivity check complete"
+
+          - name: run-e2e-tests
+            image: golang:1.26
+            workingDir: $(workspaces.source.path)
+            timeout: 600s
+            env:
+              - name: E2E_BASE_URL
+                value: $(params.APP_URL)
+              - name: E2E_USER_ID
+                value: $(params.TEST_USER_ID)
+              - name: E2E_ACCOUNT_ID
+                value: $(params.TEST_ACCOUNT_ID)
+              - name: E2E_ORG_ID
+                value: $(params.TEST_ORG_ID)
+              - name: E2E_USERNAME
+                value: $(params.TEST_USERNAME)
+            script: |
+              #!/bin/bash
+              set -e
+              echo "========================================="
+              echo "Chrome Service E2E Tests"
+              echo "========================================="
+              echo "Target URL: ${E2E_BASE_URL}"
+              echo "Test User: ${E2E_USERNAME}"
+              echo "========================================="
+              cd e2e
+              echo "Installing Go dependencies..."
+              go mod download
+              ATTEMPT=1
+              MAX_RETRIES=3
+              RETRY_DELAY=30
+              while [ $ATTEMPT -le $MAX_RETRIES ]; do
+                echo ""
+                echo "Test attempt $ATTEMPT of $MAX_RETRIES"
+                echo "-------------------------------------"
+                if go test -v ./... 2>&1 | tee /tmp/test-output.log; then
+                  echo ""
+                  echo "========================================="
+                  echo "✓ E2E Tests PASSED"
+                  echo "========================================="
+                  TEST_COUNT=$(grep -c "^=== RUN" /tmp/test-output.log || echo "0")
+                  echo "Tests run: ${TEST_COUNT}"
+                  echo "passed" > $(results.test-status.path)
+                  echo "${TEST_COUNT}" > $(results.tests-run.path)
+                  exit 0
+                else
+                  echo ""
+                  echo "Test attempt $ATTEMPT failed"
+                  if [ $ATTEMPT -lt $MAX_RETRIES ]; then
+                    echo "Retrying in ${RETRY_DELAY} seconds..."
+                    sleep $RETRY_DELAY
+                  fi
+                fi
+                ATTEMPT=$((ATTEMPT + 1))
+              done
+              echo ""
+              echo "========================================="
+              echo "✗ E2E Tests FAILED after $MAX_RETRIES attempts"
+              echo "========================================="
+              TEST_COUNT=$(grep -c "^=== RUN" /tmp/test-output.log || echo "0")
+              echo "failed" > $(results.test-status.path)
+              echo "${TEST_COUNT}" > $(results.tests-run.path)
+              exit 1
+
+          - name: summary
+            image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+            script: |
+              #!/bin/bash
+              STATUS=$(cat $(results.test-status.path))
+              COUNT=$(cat $(results.tests-run.path))
+              echo ""
+              echo "========================================="
+              echo "E2E Test Summary"
+              echo "========================================="
+              echo "Status: ${STATUS}"
+              echo "Tests run: ${COUNT}"
+              echo "Target: $(params.APP_URL)"
+              echo "========================================="

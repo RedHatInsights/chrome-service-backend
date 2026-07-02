@@ -83,6 +83,15 @@ Go backend service for the Red Hat Hybrid Cloud Console (HCC) Chrome UI framewor
 ├── spec/                    # OpenAPI spec
 ├── local/                   # Docker/Podman compose files for local infra
 ├── docs/                    # Documentation (see below)
+├── e2e/                     # End-to-end API tests
+│   ├── config.go            # E2E test configuration
+│   ├── utils.go             # Test client and helper utilities
+│   ├── identity_test.go     # User identity endpoint tests
+│   ├── favoritePage_test.go # Favorite pages endpoint tests
+│   ├── lastVisited_test.go  # Last visited pages endpoint tests
+│   ├── recentlyUsedWorkspaces_test.go # Workspaces endpoint tests
+│   ├── selfReport_test.go   # Self report endpoint tests
+│   └── README.md            # E2E test documentation
 └── Makefile                 # Build, test, run targets
 ```
 
@@ -120,6 +129,10 @@ make dev
 make test
 # Equivalent to: go test -v ./... -coverprofile=c.out
 
+# Run E2E tests against remote environment
+make test-e2e
+# Requires E2E_BASE_URL and other E2E_* env vars to be set
+
 # Run database migration
 make migrate
 
@@ -144,6 +157,8 @@ make audit
 
 ## Testing Conventions
 
+### Unit Tests
+
 - **Framework**: stdlib `testing` + `testify/assert`
 - **Database**: Tests use SQLite (set via `config.Get().Test = true` and `config.Get().DbName`)
 - **TestMain pattern**: Each test package that needs DB access implements `TestMain(m *testing.M)`:
@@ -159,6 +174,17 @@ make audit
 - **Mock data**: Created directly via `database.DB.Create(...)` — no external mock frameworks
 - **Test file locations**: Co-located with source files (`*_test.go` in same package)
 - **Run specific test**: `go test -v -run TestFunctionName ./rest/service/`
+
+### E2E Tests
+
+- **Location**: `/e2e` directory
+- **Purpose**: Happy path API testing against running service instances
+- **Configuration**: Environment variables (`E2E_BASE_URL`, `E2E_USER_ID`, etc.)
+- **Environments**: Can test against local, stage, or production
+- **Authentication**: Uses `x-rh-identity` header generated from test user credentials
+- **Run command**: `make test-e2e` or `cd e2e && go test -v ./...`
+- **Documentation**: See `e2e/README.md` and `e2e/KONFLUX.md`
+- **Coverage**: Identity, favorite pages, last-visited, workspaces, self-report endpoints
 
 ## Configuration
 
@@ -208,6 +234,8 @@ All authenticated endpoints require `x-rh-identity` header (base64-encoded JSON 
 | `docs/user-identity.md` | User identity model details |
 | `docs/websocket.md` | WebSocket implementation details |
 | `docs/intercom-keys.md` | Intercom integration keys |
+| `e2e/README.md` | E2E test suite documentation |
+| `e2e/KONFLUX.md` | Konflux CI integration guide for E2E tests |
 
 ## Common Pitfalls
 

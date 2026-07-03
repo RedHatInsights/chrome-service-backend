@@ -1,53 +1,65 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:9.8-1780373831@sha256:49f5929f6674d75377902ddcc2f46baf7a5cfcaada2497ee43f66e090943afd6 AS builder
-WORKDIR $GOPATH/src/chrome-service-backend/
-# TODO: Use --exclude when stable docker version available
+################################
+# STEP 1 build executable binary
+################################
+FROM registry.access.redhat.com/hi/go:latest-fips-builder AS builder
+
+USER 0
+
+WORKDIR /workspace
+
+# Cache deps before copying source so that we do not need to re-download for every build
+COPY go.mod go.sum ./
+
+# Fetch dependencies
+RUN go mod download
+
+# Copy source files
 COPY api api
 COPY cmd cmd
 COPY config config
 COPY rest rest
 COPY static static
-COPY go.mod go.mod
-COPY go.sum go.sum
 COPY main.go main.go
 COPY spec spec
 COPY Makefile Makefile
 COPY widget-dashboard-defaults widget-dashboard-defaults
-ENV GO111MODULE=on
-ENV GOTOOLCHAIN=auto
-USER root
-RUN go get -d -v
+
+# Generate static assets
 RUN make parse-services
-RUN make generate-search-index 
-RUN CGO_ENABLED=1 go build -o /go/bin/chrome-service-backend
-# Build the migration binary.
-RUN CGO_ENABLED=1 go build -o /go/bin/chrome-migrate cmd/migrate/migrate.go
+RUN make generate-search-index
 
-# Build the search index binary.
-RUN CGO_ENABLED=1 go build -o /go/bin/chrome-search-index cmd/search/publishSearchIndex.go
+# Build all binaries
+RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-service-backend
+RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-migrate cmd/migrate/migrate.go
+RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-search-index cmd/search/publishSearchIndex.go
+RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-fetch-specs cmd/fetchSpecs/fetchSpecs.go
 
-# Build the fetch specs binary.
-RUN CGO_ENABLED=1 go build -o /go/bin/chrome-fetch-specs cmd/fetchSpecs/fetchSpecs.go
+############################
+# STEP 2 build a small image
+############################
+FROM registry.access.redhat.com/hi/go:latest-fips
 
-# Pin to a specific version rather than :latest for reproducible builds and to prevent unintended changes
-FROM registry.access.redhat.com/ubi9-minimal:9.8-1780378819@sha256:ae09ecc3d754bc1726cbda3e2599cc7839e09fe1cc547ce173cf669b645be3cc
+WORKDIR /
 
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images
-RUN mkdir -p /app
-RUN chgrp -R 0 /app && \
+RUN mkdir -p /app && \
+    chgrp -R 0 /app && \
     chmod -R g=u /app
-RUN mkdir -p /static
-RUN chgrp -R 0 /static && \
+RUN mkdir -p /static && \
+    chgrp -R 0 /static && \
     chmod -R g=u /static
-COPY --from=builder   /go/bin/chrome-service-backend /app/chrome-service-backend
-COPY --from=builder /go/bin/chrome-migrate /usr/bin
-COPY --from=builder /go/bin/chrome-search-index /usr/bin
-COPY --from=builder /go/bin/chrome-fetch-specs /usr/bin
-# Copy chrome static JSON assets to server binary entry point
-COPY --from=builder $GOPATH/src/chrome-service-backend/static /static
-# Copy widget dashboard defaults to server binary entry point
-COPY --from=builder $GOPATH/src/chrome-service-backend/widget-dashboard-defaults /widget-dashboard-defaults
 
-ENTRYPOINT ["/app/chrome-service-backend"]
-EXPOSE 8000
+COPY --from=builder /workspace/chrome-service-backend /app/chrome-service-backend
+COPY --from=builder /workspace/chrome-migrate /usr/bin/
+COPY --from=builder /workspace/chrome-search-index /usr/bin/
+COPY --from=builder /workspace/chrome-fetch-specs /usr/bin/
+# Copy chrome static JSON assets to server binary entry point
+COPY --from=builder /workspace/static /static
+# Copy widget dashboard defaults to server binary entry point
+COPY --from=builder /workspace/widget-dashboard-defaults /widget-dashboard-defaults
+
 USER 1001
+
+EXPOSE 8000
+CMD ["/app/chrome-service-backend"]

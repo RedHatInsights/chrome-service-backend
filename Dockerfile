@@ -41,6 +41,9 @@ FROM registry.access.redhat.com/hi/go:latest-fips
 
 WORKDIR /
 
+# Update system packages to pick up latest security fixes (e.g. openssl-libs CVEs)
+RUN dnf update -y && dnf clean all
+
 # Setup permissions to allow RDSCA to be written from clowder to container
 # https://docs.openshift.com/container-platform/4.11/openshift_images/create-images.html#images-create-guide-openshift_create-images
 RUN mkdir -p /app && \

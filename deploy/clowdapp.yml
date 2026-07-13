@@ -304,7 +304,7 @@ parameters:
   value: '10'
 - description: Bundles navigation fully onboarded to FEO
   name: FEO_BUNDLES_ONBOARDED_IDS
-  value: '["user-preferences"]'
+  value: '["ansible", "docs", "iam", "openshift", "iam", "internal", "insights", "application-services", "mosaic", "openshift", "quay", "settings", "staging", "subscriptions", "user-preferences"]'
 - description: Enable or disable clowder
   name: CLOWDER_ENABLED
   value: 'true'

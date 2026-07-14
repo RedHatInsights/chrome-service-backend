@@ -134,9 +134,46 @@ go test -v -run TestRecentlyUsedWorkspaces
 
 ## CI/CD Integration
 
-### GitHub Actions
+### Konflux CI (Primary)
 
-The tests can be integrated into GitHub Actions workflows:
+**⚠️ This is the first chrome-service repository with in-pipeline E2E API tests!**
+
+E2E tests run automatically in Konflux after every successful build via an `IntegrationTestScenario`. This is chrome-service's primary CI/CD integration.
+
+#### How it Works
+
+1. **Trigger**: Every PR and push to `main` that builds successfully
+2. **Deploy**: Bonfire deploys chrome-service to an ephemeral namespace with all dependencies (PostgreSQL, Kafka, Unleash)
+3. **Test**: E2E tests run against the deployed instance
+4. **Report**: Results appear in PR checks and Konflux dashboard
+5. **Cleanup**: Ephemeral namespace is automatically removed
+
+#### Current Status
+
+Tests are marked as **optional** during the validation phase:
+- ✅ Tests run on every build
+- ⚠️ Failures don't block merges (yet)
+- 🎯 Will become required once proven stable
+
+#### Manual Test Execution
+
+To re-run tests on a PR without pushing new code:
+```bash
+# Comment on the PR
+/retest
+```
+
+#### Viewing Results
+
+- **Konflux Dashboard**: Full pipeline execution and logs
+- **GitHub PR Checks**: Pass/fail status
+- **Tekton Logs**: Detailed task execution logs
+
+For detailed troubleshooting, deployment architecture, and how to modify the integration, see [KONFLUX_INTEGRATION.md](./KONFLUX_INTEGRATION.md).
+
+### GitHub Actions (Not Currently Used)
+
+The tests can be integrated into GitHub Actions workflows if needed in the future:
 
 ```yaml
 - name: Run E2E Tests
@@ -147,23 +184,6 @@ The tests can be integrated into GitHub Actions workflows:
     E2E_ORG_ID: ${{ secrets.E2E_ORG_ID }}
     E2E_USERNAME: ${{ secrets.E2E_USERNAME }}
   run: make test-e2e
-```
-
-### Konflux/Tekton
-
-For Konflux CI, create a task that runs the E2E tests:
-
-```yaml
-- name: e2e-tests
-  image: golang:1.26
-  script: |
-    #!/bin/bash
-    export E2E_BASE_URL=https://console.stage.redhat.com
-    export E2E_USER_ID=$(cat /secrets/e2e-user-id)
-    export E2E_ACCOUNT_ID=$(cat /secrets/e2e-account-id)
-    export E2E_ORG_ID=$(cat /secrets/e2e-org-id)
-    export E2E_USERNAME=$(cat /secrets/e2e-username)
-    make test-e2e
 ```
 
 ## Test Design

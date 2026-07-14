@@ -21,21 +21,7 @@ import (
 // SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation, EOI-2 system_object_manipulation,
 // EOI-3 admin_action)
 func Log(ctx context.Context, action, resourceType, resourceID, outcome string) {
-	fields := logrus.Fields{
-		"event":         "security",
-		"action":        action,
-		"resource_type": resourceType,
-		"resource_id":   resourceID,
-		"outcome":       outcome,
-	}
-
-	addPrincipal(ctx, fields)
-
-	if outcome == "failure" {
-		logrus.WithFields(fields).Warn("security_event")
-	} else {
-		logrus.WithFields(fields).Info("security_event")
-	}
+	LogWithReason(ctx, action, resourceType, resourceID, outcome, "")
 }
 
 // LogWithReason emits a security event with an additional reason field.
@@ -48,7 +34,10 @@ func LogWithReason(ctx context.Context, action, resourceType, resourceID, outcom
 		"resource_type": resourceType,
 		"resource_id":   resourceID,
 		"outcome":       outcome,
-		"reason":        reason,
+	}
+
+	if reason != "" {
+		fields["reason"] = reason
 	}
 
 	addPrincipal(ctx, fields)
@@ -94,7 +83,9 @@ func addPrincipal(ctx context.Context, fields logrus.Fields) {
 		return
 	}
 	if id, ok := ctx.Value(util.IDENTITY_CTX_KEY).(*identity.XRHID); ok && id != nil {
-		fields["user_id"] = id.Identity.User.UserID
+		if id.Identity.User != nil {
+			fields["user_id"] = id.Identity.User.UserID
+		}
 		fields["org_id"] = id.Identity.OrgID
 	}
 }

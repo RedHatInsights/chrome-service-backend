@@ -43,8 +43,10 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 	updatedSelfReport.UserIdentityID = userID
 
 	err = database.DB.Model(user).Preload("SelfReport").Find(&user).Error
-	user.SelfReport = updatedSelfReport
-	database.DB.Save(&updatedSelfReport)
+	if err == nil {
+		user.SelfReport = updatedSelfReport
+		err = database.DB.Save(&updatedSelfReport).Error
+	}
 
 	if err != nil {
 		errString := "Invalid self report request payload, please refer to documentation."

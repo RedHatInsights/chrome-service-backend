@@ -14,11 +14,19 @@ import (
 
 // captureOutput captures logrus output during fn execution.
 func captureOutput(fn func()) string {
+	origOutput := logrus.StandardLogger().Out
+	origLevel := logrus.GetLevel()
+	origFormatter := logrus.StandardLogger().Formatter
+
 	var buf bytes.Buffer
 	logrus.SetOutput(&buf)
 	logrus.SetLevel(logrus.DebugLevel)
 	logrus.SetFormatter(&logrus.TextFormatter{DisableTimestamp: true})
-	defer logrus.SetOutput(nil)
+	defer func() {
+		logrus.SetOutput(origOutput)
+		logrus.SetLevel(origLevel)
+		logrus.SetFormatter(origFormatter)
+	}()
 	fn()
 	return buf.String()
 }
@@ -102,6 +110,34 @@ func TestLogWithPrincipal(t *testing.T) {
 
 	assert.Contains(t, output, "user-456")
 	assert.Contains(t, output, "org-123")
+}
+
+func TestLogServiceAccountIdentity(t *testing.T) {
+	// Service accounts have nil User — must not panic
+	ctx := context.WithValue(context.Background(), util.IDENTITY_CTX_KEY, &identity.XRHID{
+		Identity: identity.Identity{
+			OrgID: "org-789",
+			User:  nil,
+		},
+	})
+
+	output := captureOutput(func() {
+		Log(ctx, "CREATE", "dashboard_template", "1", "success")
+	})
+
+	assert.Contains(t, output, "security_event")
+	assert.Contains(t, output, "org-789")
+	assert.False(t, strings.Contains(output, "user_id"))
+}
+
+func TestLogWithoutReasonOmitsField(t *testing.T) {
+	output := captureOutput(func() {
+		Log(context.Background(), "CREATE", "test", "1", "success")
+	})
+
+	assert.Contains(t, output, "security_event")
+	// Log() calls LogWithReason with empty reason — reason field should be omitted
+	assert.False(t, strings.Contains(output, "reason"))
 }
 
 func TestLogNilContext(t *testing.T) {

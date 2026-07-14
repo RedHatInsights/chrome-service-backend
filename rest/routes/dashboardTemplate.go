@@ -118,16 +118,19 @@ func UpdateDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	updatedTemplate, err := service.UpdateDashboardTemplate(uint(templateIdUint), userID, dashboardTemplate)
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
+		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", templateID, "failure", "update failed")
-	} else {
-		securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
+		handleDashboardError(err, w)
+		return
 	}
+
+	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
+	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: updatedTemplate,
 	}
-	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, err, w)
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, nil, w)
 }
 
 func GetBaseDashboardTemplates(w http.ResponseWriter, r *http.Request) {
@@ -165,18 +168,19 @@ func CopyDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dashboardTemplate, err := service.CopyDashboardTemplate(userID, uint(templateIdUint))
-	// CREATE operation (copy) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
+		// CREATE operation failure (copy) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "CREATE", "dashboard_template", templateID, "failure", "copy failed")
-	} else {
-		securitylog.Log(r.Context(), "CREATE", "dashboard_template", strconv.FormatUint(uint64(dashboardTemplate.ID), 10), "success")
+		handleDashboardError(err, w)
+		return
 	}
 
+	// CREATE operation (copy) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
+	securitylog.Log(r.Context(), "CREATE", "dashboard_template", strconv.FormatUint(uint64(dashboardTemplate.ID), 10), "success")
 	response := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
 	}
-
-	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, err, w)
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, nil, w)
 }
 
 func DeleteDashboardTemplate(w http.ResponseWriter, r *http.Request) {
@@ -216,16 +220,19 @@ func ChangeDefaultTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dashboardTemplate, err := service.ChangeDefaultTemplate(userID, uint(templateIdUint))
-	// UPDATE operation (change default) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
+		// UPDATE operation failure (change default) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", templateID, "failure", "change default failed")
-	} else {
-		securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
+		handleDashboardError(err, w)
+		return
 	}
+
+	// UPDATE operation (change default) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
+	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
 	}
-	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, err, w)
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, nil, w)
 }
 
 func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {

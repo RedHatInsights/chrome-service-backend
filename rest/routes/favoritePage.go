@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 )
@@ -66,9 +67,12 @@ func SetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	// Handling functions for updating of the user's favorite pages.
 	err = service.SaveUserFavoritePage(userID, user.AccountId, currentNewFavoritePage)
 
+	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
+		securitylog.LogWithReason(r.Context(), "UPDATE", "favorite_page", currentNewFavoritePage.Pathname, "failure", "save failed")
 		panic(err)
 	}
+	securitylog.Log(r.Context(), "UPDATE", "favorite_page", currentNewFavoritePage.Pathname, "success")
 
 	pages, err := service.GetUserActiveFavoritePages(userID)
 	if err != nil {

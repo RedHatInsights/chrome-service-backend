@@ -6,6 +6,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -50,14 +51,15 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(errString))
 		logrus.Errorf("unable to request updating self report, %s", err.Error())
+		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
+		securitylog.LogWithReason(r.Context(), "UPDATE", "self_report", user.AccountId, "failure", "update failed")
 		panic(err)
 	}
+
+	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
+	securitylog.Log(r.Context(), "UPDATE", "self_report", user.AccountId, "success")
 
 	resp := user.SelfReport
-
-	if err != nil {
-		panic(err)
-	}
 
 	json.NewEncoder(w).Encode(resp)
 }

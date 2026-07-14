@@ -6,6 +6,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -26,13 +27,12 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = service.HandlePostLastVisitedPages(recentPages.Pages, &user)
+	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
+		securitylog.LogWithReason(r.Context(), "UPDATE", "last_visited_pages", user.AccountId, "failure", "store failed")
 		panic(err)
 	}
-
-	if err != nil {
-		panic(err)
-	}
+	securitylog.Log(r.Context(), "UPDATE", "last_visited_pages", user.AccountId, "success")
 
 	pages := user.LastVisitedPages.Data()
 	resp := util.ListResponse[models.VisitedPage]{

@@ -15,6 +15,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -104,8 +105,13 @@ func main() {
 		}
 	}()
 
+	// Process startup - SEC-MON-REQ-1 compliance (EOI-5 process_status)
+	securitylog.LogStartup("chrome-service-backend", cfg.WebPort)
+
 	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
 	if err := http.ListenAndServe(serverStringAddr, router); err != nil {
+		// Process shutdown - SEC-MON-REQ-1 compliance (EOI-5 process_status)
+		securitylog.LogShutdown("chrome-service-backend", "server stopped")
 		logger.FlushCloudWatch()
 		log.Fatalf("Chrome-service-api has stopped due to %v", err)
 	}

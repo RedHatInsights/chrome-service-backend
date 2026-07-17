@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 )
@@ -67,12 +68,18 @@ func SetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	err = service.SaveUserFavoritePage(userID, user.AccountId, currentNewFavoritePage)
 
 	if err != nil {
-		panic(err)
+		securitylog.LogWithReason(r.Context(), "UPDATE", "favorite_page", currentNewFavoritePage.Pathname, "failure", "save failed")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unable to save favorite page."))
+		return
 	}
+	securitylog.Log(r.Context(), "UPDATE", "favorite_page", currentNewFavoritePage.Pathname, "success")
 
 	pages, err := service.GetUserActiveFavoritePages(userID)
 	if err != nil {
-		panic(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unable to retrieve favorite pages."))
+		return
 	}
 
 	response := util.ListResponse[models.FavoritePage]{

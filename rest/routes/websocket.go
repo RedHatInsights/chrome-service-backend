@@ -7,6 +7,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
@@ -40,11 +41,13 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	jwtCookie, err := r.Cookie("cs_jwt")
 	if err != nil {
 		logrus.Errorln("Unable to find cs_jwt cookie", err)
+		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "missing JWT cookie")
 		return
 	}
 	identity, err := util.ParseJWTToken(jwtCookie.Value)
 	if err != nil {
 		logrus.Errorln("Unable to parse jwt token", err)
+		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "invalid JWT token")
 		return
 	}
 
@@ -147,5 +150,6 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 	} else {
 		connectionhub.ConnectionHub.Emit <- newMessage
 	}
+	securitylog.Log(r.Context(), "BROADCAST", "message", p.Id, "success")
 	w.WriteHeader(http.StatusOK)
 }

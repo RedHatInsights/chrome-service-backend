@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 )
 
@@ -17,11 +18,13 @@ func ParseHeaders(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusForbidden)
 			w.Write([]byte(errString))
 			logger.LogFor(r.Context()).Errorf("missing the %s header", util.XRHIDENTITY)
+			securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "api_request", r.URL.Path, "failure", "missing identity header")
 			return
 		} else {
 			identity, err := util.ParseXRHIdentityHeader(header)
 			if err != nil {
 				logger.LogFor(r.Context()).Errorln("Error parsing X-RH-IDENTITY header: ", err)
+				securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "api_request", r.URL.Path, "failure", "invalid identity header")
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("Internal server error"))
 				return

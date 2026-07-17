@@ -8,6 +8,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/featureflags"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -117,10 +118,17 @@ func UpdateDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	updatedTemplate, err := service.UpdateDashboardTemplate(uint(templateIdUint), userID, dashboardTemplate)
+	if err != nil {
+		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", templateID, "failure", "update failed")
+		handleDashboardError(err, w)
+		return
+	}
+
+	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: updatedTemplate,
 	}
-	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, err, w)
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, nil, w)
 }
 
 func GetBaseDashboardTemplates(w http.ResponseWriter, r *http.Request) {
@@ -158,12 +166,17 @@ func CopyDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dashboardTemplate, err := service.CopyDashboardTemplate(userID, uint(templateIdUint))
+	if err != nil {
+		securitylog.LogWithReason(r.Context(), "CREATE", "dashboard_template", templateID, "failure", "copy failed")
+		handleDashboardError(err, w)
+		return
+	}
 
+	securitylog.Log(r.Context(), "CREATE", "dashboard_template", strconv.FormatUint(uint64(dashboardTemplate.ID), 10), "success")
 	response := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
 	}
-
-	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, err, w)
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](response, nil, w)
 }
 
 func DeleteDashboardTemplate(w http.ResponseWriter, r *http.Request) {
@@ -179,10 +192,12 @@ func DeleteDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 	err = service.DeleteTemplate(userID, uint(templateIdUint))
 	if err != nil {
+		securitylog.LogWithReason(r.Context(), "DELETE", "dashboard_template", templateID, "failure", "delete failed")
 		handleDashboardError(err, w)
 		return
 	}
 
+	securitylog.Log(r.Context(), "DELETE", "dashboard_template", templateID, "success")
 	w.WriteHeader(http.StatusNoContent)
 }
 
@@ -199,10 +214,17 @@ func ChangeDefaultTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dashboardTemplate, err := service.ChangeDefaultTemplate(userID, uint(templateIdUint))
+	if err != nil {
+		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", templateID, "failure", "change default failed")
+		handleDashboardError(err, w)
+		return
+	}
+
+	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
 	}
-	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, err, w)
+	handleDashboardResponse[models.DashboardTemplate, util.EntityResponse[models.DashboardTemplate]](resp, nil, w)
 }
 
 func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {
@@ -219,9 +241,12 @@ func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {
 	dashboardTemplate, err := service.ForkBaseTemplate(userID, models.AvailableTemplates(dashboardParam))
 
 	if err != nil {
+		securitylog.LogWithReason(r.Context(), "CREATE", "dashboard_template", dashboardParam, "failure", "fork failed")
 		handleDashboardError(err, w)
 		return
 	}
+
+	securitylog.Log(r.Context(), "CREATE", "dashboard_template", strconv.FormatUint(uint64(dashboardTemplate.ID), 10), "success")
 
 	response := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
@@ -350,9 +375,12 @@ func ResetDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 	dashboard, err := service.ResetDashboardTemplate(userID, uint(dashboardId))
 	if err != nil {
+		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", dashboardIdQuery, "failure", "reset failed")
 		handleDashboardError(err, w)
 		return
 	}
+
+	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", dashboardIdQuery, "success")
 
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboard,

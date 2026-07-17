@@ -27,10 +27,11 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = service.HandlePostLastVisitedPages(recentPages.Pages, &user)
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
 		securitylog.LogWithReason(r.Context(), "UPDATE", "last_visited_pages", user.AccountId, "failure", "store failed")
-		panic(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unable to store last visited pages."))
+		return
 	}
 	securitylog.Log(r.Context(), "UPDATE", "last_visited_pages", user.AccountId, "success")
 

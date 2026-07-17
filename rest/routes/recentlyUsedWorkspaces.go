@@ -223,7 +223,6 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 	// Save the most recently used workspaces in the database.
 	if err := service.SaveRecentlyUsedWorkspaces(&user, workspacesToSave); err != nil {
 		logrus.Errorf(`unable to save the recently used workspaces in the database: %s`, err)
-		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "recently_used_workspaces", user.AccountId, "failure", "save failed")
 
 		sendJSONResponse(w, http.StatusInternalServerError, util.ErrorResponse{
@@ -233,7 +232,6 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "recently_used_workspaces", user.AccountId, "success")
 
 	responseBody := util.ListResponse[models.Workspace]{

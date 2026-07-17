@@ -119,13 +119,11 @@ func UpdateDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 	updatedTemplate, err := service.UpdateDashboardTemplate(uint(templateIdUint), userID, dashboardTemplate)
 	if err != nil {
-		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", templateID, "failure", "update failed")
 		handleDashboardError(err, w)
 		return
 	}
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: updatedTemplate,
@@ -169,13 +167,11 @@ func CopyDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 	dashboardTemplate, err := service.CopyDashboardTemplate(userID, uint(templateIdUint))
 	if err != nil {
-		// CREATE operation failure (copy) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "CREATE", "dashboard_template", templateID, "failure", "copy failed")
 		handleDashboardError(err, w)
 		return
 	}
 
-	// CREATE operation (copy) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "CREATE", "dashboard_template", strconv.FormatUint(uint64(dashboardTemplate.ID), 10), "success")
 	response := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
@@ -196,13 +192,11 @@ func DeleteDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 	err = service.DeleteTemplate(userID, uint(templateIdUint))
 	if err != nil {
-		// DELETE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation, EOI-8 authorization_failure)
 		securitylog.LogWithReason(r.Context(), "DELETE", "dashboard_template", templateID, "failure", "delete failed")
 		handleDashboardError(err, w)
 		return
 	}
 
-	// DELETE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "DELETE", "dashboard_template", templateID, "success")
 	w.WriteHeader(http.StatusNoContent)
 }
@@ -221,13 +215,11 @@ func ChangeDefaultTemplate(w http.ResponseWriter, r *http.Request) {
 
 	dashboardTemplate, err := service.ChangeDefaultTemplate(userID, uint(templateIdUint))
 	if err != nil {
-		// UPDATE operation failure (change default) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", templateID, "failure", "change default failed")
 		handleDashboardError(err, w)
 		return
 	}
 
-	// UPDATE operation (change default) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", templateID, "success")
 	resp := util.EntityResponse[models.DashboardTemplate]{
 		Data: dashboardTemplate,
@@ -249,13 +241,11 @@ func ForkBaseTemplate(w http.ResponseWriter, r *http.Request) {
 	dashboardTemplate, err := service.ForkBaseTemplate(userID, models.AvailableTemplates(dashboardParam))
 
 	if err != nil {
-		// CREATE operation failure (fork) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "CREATE", "dashboard_template", dashboardParam, "failure", "fork failed")
 		handleDashboardError(err, w)
 		return
 	}
 
-	// CREATE operation (fork) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "CREATE", "dashboard_template", strconv.FormatUint(uint64(dashboardTemplate.ID), 10), "success")
 
 	response := util.EntityResponse[models.DashboardTemplate]{
@@ -385,13 +375,11 @@ func ResetDashboardTemplate(w http.ResponseWriter, r *http.Request) {
 
 	dashboard, err := service.ResetDashboardTemplate(userID, uint(dashboardId))
 	if err != nil {
-		// UPDATE operation failure (reset) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "dashboard_template", dashboardIdQuery, "failure", "reset failed")
 		handleDashboardError(err, w)
 		return
 	}
 
-	// UPDATE operation (reset) - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "dashboard_template", dashboardIdQuery, "success")
 
 	resp := util.EntityResponse[models.DashboardTemplate]{

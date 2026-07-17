@@ -68,13 +68,14 @@ func AddVisitedBundle(w http.ResponseWriter, r *http.Request) {
 	var request AddVisitedBundlePayload
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		panic(err)
+		handleIdentityError(err, w)
+		return
 	}
 	updatedUser, err := service.AddVisitedBundle(user, request.Bundle)
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
 		securitylog.LogWithReason(r.Context(), "UPDATE", "visited_bundles", user.AccountId, "failure", "add bundle failed")
-		panic(err)
+		handleIdentityError(err, w)
+		return
 	}
 	securitylog.Log(r.Context(), "UPDATE", "visited_bundles", user.AccountId, "success")
 
@@ -135,13 +136,11 @@ func UpdateUserPreview(w http.ResponseWriter, r *http.Request) {
 	}
 	err = service.UpdateUserPreview(&user, request.UiPreview)
 	if err != nil {
-		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "user_identity", user.AccountId, "failure", "update preview failed")
 		handleIdentityError(err, w)
 		return
 	}
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "user_identity", user.AccountId, "success")
 
 	resp := util.EntityResponse[models.UserIdentity]{
@@ -155,13 +154,11 @@ func MarkPreviewSeen(w http.ResponseWriter, r *http.Request) {
 	user := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
 	err := service.MarkPreviewSeen(&user)
 	if err != nil {
-		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "user_identity", user.AccountId, "failure", "mark preview seen failed")
 		handleIdentityError(err, w)
 		return
 	}
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "user_identity", user.AccountId, "success")
 
 	resp := util.EntityResponse[models.UserIdentity]{
@@ -184,13 +181,11 @@ func UpdateActiveWorkspace(w http.ResponseWriter, r *http.Request) {
 	}
 	err = service.UpdateActiveWorkspace(&user, request.ActiveWorkspace)
 	if err != nil {
-		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "user_identity", user.AccountId, "failure", "update active workspace failed")
 		handleIdentityError(err, w)
 		return
 	}
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "user_identity", user.AccountId, "success")
 
 	resp := util.EntityResponse[models.UserIdentity]{

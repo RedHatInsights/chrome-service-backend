@@ -18,14 +18,12 @@ func ParseHeaders(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusForbidden)
 			w.Write([]byte(errString))
 			logger.LogFor(r.Context()).Errorf("missing the %s header", util.XRHIDENTITY)
-			// Auth failure - SEC-MON-REQ-1 compliance (EOI-7 invalid_login, EOI-8 authorization_failure)
 			securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "api_request", r.URL.Path, "failure", "missing identity header")
 			return
 		} else {
 			identity, err := util.ParseXRHIdentityHeader(header)
 			if err != nil {
 				logger.LogFor(r.Context()).Errorln("Error parsing X-RH-IDENTITY header: ", err)
-				// Auth failure - SEC-MON-REQ-1 compliance (EOI-7 invalid_login)
 				securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "api_request", r.URL.Path, "failure", "invalid identity header")
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("Internal server error"))

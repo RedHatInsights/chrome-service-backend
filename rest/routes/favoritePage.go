@@ -67,16 +67,19 @@ func SetFavoritePage(w http.ResponseWriter, r *http.Request) {
 	// Handling functions for updating of the user's favorite pages.
 	err = service.SaveUserFavoritePage(userID, user.AccountId, currentNewFavoritePage)
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	if err != nil {
 		securitylog.LogWithReason(r.Context(), "UPDATE", "favorite_page", currentNewFavoritePage.Pathname, "failure", "save failed")
-		panic(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unable to save favorite page."))
+		return
 	}
 	securitylog.Log(r.Context(), "UPDATE", "favorite_page", currentNewFavoritePage.Pathname, "success")
 
 	pages, err := service.GetUserActiveFavoritePages(userID)
 	if err != nil {
-		panic(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unable to retrieve favorite pages."))
+		return
 	}
 
 	response := util.ListResponse[models.FavoritePage]{

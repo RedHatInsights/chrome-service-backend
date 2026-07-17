@@ -41,14 +41,12 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	jwtCookie, err := r.Cookie("cs_jwt")
 	if err != nil {
 		logrus.Errorln("Unable to find cs_jwt cookie", err)
-		// Auth failure - SEC-MON-REQ-1 compliance (EOI-7 invalid_login)
 		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "missing JWT cookie")
 		return
 	}
 	identity, err := util.ParseJWTToken(jwtCookie.Value)
 	if err != nil {
 		logrus.Errorln("Unable to parse jwt token", err)
-		// Auth failure - SEC-MON-REQ-1 compliance (EOI-7 invalid_login)
 		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "invalid JWT token")
 		return
 	}
@@ -152,7 +150,6 @@ func EmitMessage(w http.ResponseWriter, r *http.Request) {
 	} else {
 		connectionhub.ConnectionHub.Emit <- newMessage
 	}
-	// Admin action (broadcast/emit message) - SEC-MON-REQ-1 compliance (EOI-3 admin_action)
 	securitylog.Log(r.Context(), "BROADCAST", "message", p.Id, "success")
 	w.WriteHeader(http.StatusOK)
 }

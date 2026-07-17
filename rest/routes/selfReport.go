@@ -53,12 +53,10 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(errString))
 		logrus.Errorf("unable to request updating self report, %s", err.Error())
-		// UPDATE operation failure - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "self_report", user.AccountId, "failure", "update failed")
-		panic(err)
+		return
 	}
 
-	// UPDATE operation - SEC-MON-REQ-1 compliance (EOI-1 pii_manipulation)
 	securitylog.Log(r.Context(), "UPDATE", "self_report", user.AccountId, "success")
 
 	resp := user.SelfReport

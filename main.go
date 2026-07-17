@@ -1,11 +1,15 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
@@ -105,13 +109,23 @@ func main() {
 		}
 	}()
 
-	// Process startup - SEC-MON-REQ-1 compliance (EOI-5 process_status)
 	securitylog.LogStartup("chrome-service-backend", cfg.WebPort)
 
 	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
-	if err := http.ListenAndServe(serverStringAddr, router); err != nil {
-		// Process shutdown - SEC-MON-REQ-1 compliance (EOI-5 process_status)
-		securitylog.LogShutdown("chrome-service-backend", "server stopped")
+	server := &http.Server{Addr: serverStringAddr, Handler: router}
+
+	// Handle SIGTERM/SIGINT for graceful shutdown with security logging.
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGTERM, syscall.SIGINT)
+	go func() {
+		sig := <-sigChan
+		securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("received %s", sig))
+		logger.FlushCloudWatch()
+		server.Shutdown(context.Background())
+	}()
+
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("server error: %v", err))
 		logger.FlushCloudWatch()
 		log.Fatalf("Chrome-service-api has stopped due to %v", err)
 	}

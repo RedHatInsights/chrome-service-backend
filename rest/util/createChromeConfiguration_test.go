@@ -271,3 +271,114 @@ func TestApiSpecIntegration(t *testing.T) {
 		assert.Equal(t, "insights", bundleLabels[0])
 	})
 }
+
+func TestParseBundles(t *testing.T) {
+	originalWd, err := os.Getwd()
+	assert.NoError(t, err)
+	defer os.Chdir(originalWd)
+
+	setupBundleTestDir := func(t *testing.T, legacyBundles []map[string]interface{}) string {
+		t.Helper()
+		tempDir := t.TempDir()
+		err := os.Chdir(tempDir)
+		assert.NoError(t, err)
+		navDir := filepath.Join(tempDir, "static", "stable", "stage", "navigation")
+		err = os.MkdirAll(navDir, 0755)
+		assert.NoError(t, err)
+		for _, bundle := range legacyBundles {
+			id := bundle["id"].(string)
+			data, err := json.Marshal(bundle)
+			assert.NoError(t, err)
+			err = os.WriteFile(filepath.Join(navDir, id+"-navigation.json"), data, 0644)
+			assert.NoError(t, err)
+		}
+		return tempDir
+	}
+
+	t.Run("FEO-only bundle is included in output", func(t *testing.T) {
+		legacyBundle := map[string]interface{}{
+			"id":       "insights",
+			"title":    "Insights",
+			"navItems": []interface{}{},
+		}
+		setupBundleTestDir(t, []map[string]interface{}{legacyBundle})
+		defer os.Chdir(originalWd)
+
+		feoBundle := `[{"id":"pcm","title":"PCM","navItems":[{"id":"pcm-home","title":"Home"}]}]`
+		result, err := parseBundles(feoBundle, "", "stage")
+		assert.NoError(t, err)
+
+		var parsed []map[string]interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err)
+
+		assert.Len(t, parsed, 2, "Expected legacy bundle + FEO-only bundle")
+
+		ids := make([]string, len(parsed))
+		for i, b := range parsed {
+			ids[i] = b["id"].(string)
+		}
+		assert.Contains(t, ids, "insights")
+		assert.Contains(t, ids, "pcm")
+	})
+
+	t.Run("FEO bundle matching legacy ID is not duplicated", func(t *testing.T) {
+		legacyBundle := map[string]interface{}{
+			"id":       "insights",
+			"title":    "Insights",
+			"navItems": []interface{}{},
+		}
+		setupBundleTestDir(t, []map[string]interface{}{legacyBundle})
+		defer os.Chdir(originalWd)
+
+		feoBundle := `[{"id":"insights","title":"Insights FEO","navItems":[]}]`
+		result, err := parseBundles(feoBundle, "", "stage")
+		assert.NoError(t, err)
+
+		var parsed []map[string]interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err)
+
+		assert.Len(t, parsed, 1, "Matching FEO bundle should not create a duplicate")
+	})
+
+	t.Run("Multiple FEO-only bundles are all included", func(t *testing.T) {
+		legacyBundle := map[string]interface{}{
+			"id":       "insights",
+			"title":    "Insights",
+			"navItems": []interface{}{},
+		}
+		setupBundleTestDir(t, []map[string]interface{}{legacyBundle})
+		defer os.Chdir(originalWd)
+
+		feoBundle := `[{"id":"pcm","title":"PCM","navItems":[]},{"id":"foo","title":"Foo","navItems":[]}]`
+		result, err := parseBundles(feoBundle, "", "stage")
+		assert.NoError(t, err)
+
+		var parsed []map[string]interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err)
+
+		assert.Len(t, parsed, 3, "Expected legacy + 2 FEO-only bundles")
+	})
+
+	t.Run("Empty FEO_BUNDLES returns only legacy bundles", func(t *testing.T) {
+		legacyBundle := map[string]interface{}{
+			"id":       "insights",
+			"title":    "Insights",
+			"navItems": []interface{}{},
+		}
+		setupBundleTestDir(t, []map[string]interface{}{legacyBundle})
+		defer os.Chdir(originalWd)
+
+		result, err := parseBundles("", "", "stage")
+		assert.NoError(t, err)
+
+		var parsed []map[string]interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err)
+
+		assert.Len(t, parsed, 1)
+		assert.Equal(t, "insights", parsed[0]["id"])
+	})
+}

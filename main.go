@@ -10,6 +10,7 @@ import (
 	"os/signal"
 	"strconv"
 	"syscall"
+	"time"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
@@ -115,20 +116,29 @@ func main() {
 	server := &http.Server{Addr: serverStringAddr, Handler: router}
 
 	// Handle SIGTERM/SIGINT for graceful shutdown with security logging.
+	// Signal wait is synchronous in main so shutdown completes before exit.
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGTERM, syscall.SIGINT)
+
 	go func() {
-		sig := <-sigChan
-		securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("received %s", sig))
-		logger.FlushCloudWatch()
-		server.Shutdown(context.Background())
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("server error: %v", err))
+			logger.FlushCloudWatch()
+			log.Fatalf("Chrome-service-api has stopped due to %v", err)
+		}
 	}()
 
-	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("server error: %v", err))
-		logger.FlushCloudWatch()
-		log.Fatalf("Chrome-service-api has stopped due to %v", err)
+	// Block until shutdown signal received.
+	sig := <-sigChan
+	securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("received %s", sig))
+
+	// Graceful shutdown with bounded timeout to drain active connections.
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	if err := server.Shutdown(ctx); err != nil {
+		log.Printf("Graceful shutdown error: %v", err)
 	}
+	logger.FlushCloudWatch()
 }
 
 func HelloWorld(response http.ResponseWriter, request *http.Request) {

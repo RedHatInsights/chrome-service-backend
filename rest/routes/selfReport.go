@@ -49,10 +49,10 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err != nil {
-		errString := "Invalid self report request payload, please refer to documentation."
-		w.WriteHeader(http.StatusBadRequest)
+		errString := "Unable to update self report."
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(errString))
-		logrus.Errorf("unable to request updating self report, %s", err.Error())
+		logrus.Errorf("unable to update self report, %s", err.Error())
 		securitylog.LogWithReason(r.Context(), "UPDATE", "self_report", user.AccountId, "failure", "update failed")
 		return
 	}

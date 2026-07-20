@@ -101,7 +101,6 @@ spec:
                 --set-image-tag ${IMAGE##*:} \
                 --namespace $NAMESPACE \
                 --timeout 600 \
-                --no-remove-resources \
                 || {
                   echo "ERROR: Bonfire deploy failed"
                   exit 1

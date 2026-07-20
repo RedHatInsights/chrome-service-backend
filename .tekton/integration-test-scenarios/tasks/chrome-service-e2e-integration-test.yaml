@@ -81,6 +81,14 @@ spec:
 
               IMAGE=$(cat /workspace/chrome-service-image.txt)
 
+              # Extract image URI and tag for bonfire
+              # IMAGE format: quay.io/org/repo/component:tag
+              IMAGE_URI="${IMAGE%:*}"  # Remove :tag to get URI
+              IMAGE_TAG="${IMAGE##*:}"  # Extract tag
+
+              echo "Image URI: $IMAGE_URI"
+              echo "Image tag: $IMAGE_TAG"
+
               # Generate unique namespace name
               NAMESPACE="ephemeral-$(openssl rand -hex 4)"
               echo "Deploying to namespace: $NAMESPACE"
@@ -98,7 +106,7 @@ spec:
               bonfire deploy chrome-service \
                 --source=appsre \
                 --ref-env insights-stage \
-                --set-image-tag ${IMAGE##*:} \
+                --set-image-tag ${IMAGE_URI}=${IMAGE_TAG} \
                 --namespace $NAMESPACE \
                 --timeout 600 \
                 --no-remove-resources chrome-service \

@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
         unleash-db:
-          image: postgres:15
+          image: postgres:17
           options: >-
             --health-cmd pg_isready
             --health-interval 10s

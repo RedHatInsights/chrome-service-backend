@@ -1,0 +1,7 @@
+# Environment configuration
+.env
+
+# Test outputs
+*.test
+*.out
+coverage.txt

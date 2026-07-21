@@ -1,0 +1,293 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: chrome-service-e2e-pipeline
+  labels:
+    test.appstudio.openshift.io/optional: "false"
+  annotations:
+    description: Deploy chrome-service to ephemeral environment and run E2E tests
+spec:
+  description: >-
+    This pipeline deploys chrome-service using Bonfire to an ephemeral namespace,
+    waits for the deployment to be ready, runs E2E tests against it, and reports results.
+
+  params:
+    - name: SNAPSHOT
+      description: |
+        Spec section of an ApplicationSnapshot resource. Not all fields of the
+        resource are required. A minimal example:
+          {
+            "components": [
+              {
+                "name": "chrome-service",
+                "containerImage": "quay.io/..."
+              }
+            ]
+          }
+      type: string
+
+  results:
+    - name: TEST_OUTPUT
+      description: Test results summary
+      value: $(tasks.e2e-test.results.TEST_OUTPUT)
+
+  tasks:
+    - name: e2e-test
+      params:
+        - name: SNAPSHOT
+          value: $(params.SNAPSHOT)
+      taskSpec:
+        params:
+          - name: SNAPSHOT
+            type: string
+        results:
+          - name: TEST_OUTPUT
+            description: Test results summary
+        steps:
+          - name: parse-snapshot
+            image: quay.io/redhat-appstudio/hacbs-test:latest
+            workingDir: /workspace
+            script: |
+              #!/bin/bash
+              set -e
+
+              echo "Parsing snapshot to get image..."
+              echo '$(params.SNAPSHOT)' > /workspace/snapshot.json
+
+              # Extract chrome-service image from snapshot
+              IMAGE=$(jq -r '.components[] | select(.name == "chrome-service") | .containerImage' /workspace/snapshot.json)
+
+              if [ -z "$IMAGE" ] || [ "$IMAGE" == "null" ]; then
+                echo "ERROR: Could not find chrome-service image in snapshot"
+                exit 1
+              fi
+
+              echo "Chrome service image: $IMAGE"
+              echo "$IMAGE" > /workspace/chrome-service-image.txt
+
+          - name: deploy-with-bonfire
+            image: quay.io/redhat-appstudio/hacbs-test:latest
+            workingDir: /workspace
+            env:
+              - name: BONFIRE_BOT_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: bonfire-token
+                    key: token
+                    optional: true
+            script: |
+              #!/bin/bash
+              set -e
+
+              IMAGE=$(cat /workspace/chrome-service-image.txt)
+
+              # Generate unique namespace name
+              NAMESPACE="ephemeral-$(openssl rand -hex 4)"
+              echo "Deploying to namespace: $NAMESPACE"
+              echo "$NAMESPACE" > /workspace/namespace.txt
+
+              # Install bonfire if needed
+              if ! command -v bonfire &> /dev/null; then
+                echo "Installing bonfire..."
+                pip3 install --user crc-bonfire
+                export PATH="$HOME/.local/bin:$PATH"
+              fi
+
+              # Deploy using bonfire
+              echo "Deploying chrome-service with Bonfire..."
+              bonfire deploy chrome-service \
+                --source=appsre \
+                --ref-env insights-stage \
+                --set-image-tag ${IMAGE##*:} \
+                --namespace $NAMESPACE \
+                --timeout 600 \
+                --no-remove-resources \
+                || {
+                  echo "ERROR: Bonfire deploy failed"
+                  exit 1
+                }
+
+              echo "Deployment initiated to namespace: $NAMESPACE"
+
+          - name: wait-for-deployment
+            image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+            workingDir: /workspace
+            script: |
+              #!/bin/bash
+              set -e
+
+              NAMESPACE=$(cat /workspace/namespace.txt)
+              echo "Waiting for chrome-service deployment in namespace: $NAMESPACE"
+
+              # Wait for ClowdApp to be reconciled
+              echo "Waiting for ClowdApp reconciliation..."
+              oc wait --for=condition=ReconciliationSuccessful \
+                clowdapp/chrome-service \
+                -n $NAMESPACE \
+                --timeout=600s || {
+                  echo "ClowdApp reconciliation failed or timed out"
+                  oc get clowdapp chrome-service -n $NAMESPACE -o yaml
+                  exit 1
+                }
+
+              # Wait for deployment to be available
+              echo "Waiting for deployment to be available..."
+              oc wait --for=condition=Available \
+                deployment/chrome-service-api \
+                -n $NAMESPACE \
+                --timeout=300s || {
+                  echo "Deployment failed to become available"
+                  oc get deployment chrome-service-api -n $NAMESPACE
+                  oc get pods -n $NAMESPACE
+                  oc logs -l app=chrome-service -n $NAMESPACE --tail=50
+                  exit 1
+                }
+
+              # Get the route
+              echo "Getting service route..."
+              ROUTE=$(oc get route chrome-service-api -n $NAMESPACE -o jsonpath='{.spec.host}')
+
+              if [ -z "$ROUTE" ]; then
+                echo "ERROR: Could not get route for chrome-service"
+                oc get routes -n $NAMESPACE
+                exit 1
+              fi
+
+              APP_URL="https://${ROUTE}"
+              echo "Service URL: $APP_URL"
+              echo "$APP_URL" > /workspace/app-url.txt
+
+              # Verify health endpoint
+              echo "Verifying health endpoint..."
+              MAX_ATTEMPTS=30
+              ATTEMPT=1
+              while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+                if curl -sSf "$APP_URL/health" > /dev/null 2>&1; then
+                  echo "✓ Health check passed"
+                  break
+                fi
+                echo "Health check attempt $ATTEMPT/$MAX_ATTEMPTS failed, retrying..."
+                sleep 5
+                ATTEMPT=$((ATTEMPT + 1))
+              done
+
+              if [ $ATTEMPT -gt $MAX_ATTEMPTS ]; then
+                echo "ERROR: Health check failed after $MAX_ATTEMPTS attempts"
+                exit 1
+              fi
+
+              echo "Deployment ready at: $APP_URL"
+
+          - name: clone-repository
+            image: registry.access.redhat.com/ubi9/ubi:latest
+            workingDir: /workspace
+            script: |
+              #!/bin/bash
+              set -e
+
+              echo "Installing git..."
+              dnf install -y git
+
+              echo "Cloning chrome-service-backend repository..."
+              git clone https://github.com/RedHatInsights/chrome-service-backend.git /workspace/source
+
+              echo "Repository cloned successfully"
+              ls -la /workspace/source/e2e/
+
+          - name: run-e2e-tests
+            image: golang:1.26
+            workingDir: /workspace/source
+            timeout: 600s
+            env:
+              - name: E2E_BASE_URL
+                value: ""
+              - name: E2E_USER_ID
+                value: "e2e-integration-test-user"
+              - name: E2E_ACCOUNT_ID
+                value: "e2e-integration-account"
+              - name: E2E_ORG_ID
+                value: "e2e-integration-org"
+              - name: E2E_USERNAME
+                value: "e2e-integration-bot"
+            script: |
+              #!/bin/bash
+              set -e
+
+              # Get the deployed service URL
+              export E2E_BASE_URL=$(cat /workspace/app-url.txt)
+
+              echo "========================================="
+              echo "Chrome Service E2E Integration Tests"
+              echo "========================================="
+              echo "Target URL: $E2E_BASE_URL"
+              echo "Namespace: $(cat /workspace/namespace.txt)"
+              echo "========================================="
+
+              cd e2e
+
+              echo "Installing Go dependencies..."
+              go mod download
+
+              echo "Running E2E tests..."
+              if go test -v ./... 2>&1 | tee /workspace/test-output.log; then
+                echo ""
+                echo "========================================="
+                echo "✓ E2E Integration Tests PASSED"
+                echo "========================================="
+                TEST_RESULT="PASSED"
+              else
+                echo ""
+                echo "========================================="
+                echo "✗ E2E Integration Tests FAILED"
+                echo "========================================="
+                TEST_RESULT="FAILED"
+              fi
+
+              # Generate summary
+              TEST_COUNT=$(grep -c "^=== RUN" /workspace/test-output.log || echo "0")
+              PASSED_COUNT=$(grep -c "^--- PASS:" /workspace/test-output.log || echo "0")
+              FAILED_COUNT=$(grep -c "^--- FAIL:" /workspace/test-output.log || echo "0")
+
+              cat > $(results.TEST_OUTPUT.path) <<EOF
+              E2E Integration Test Results
+              ============================
+              Status: $TEST_RESULT
+              Tests Run: $TEST_COUNT
+              Passed: $PASSED_COUNT
+              Failed: $FAILED_COUNT
+              Target: $E2E_BASE_URL
+              Namespace: $(cat /workspace/namespace.txt)
+              EOF
+
+              if [ "$TEST_RESULT" == "FAILED" ]; then
+                exit 1
+              fi
+
+          - name: cleanup
+            image: quay.io/redhat-appstudio/hacbs-test:latest
+            workingDir: /workspace
+            env:
+              - name: BONFIRE_BOT_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: bonfire-token
+                    key: token
+                    optional: true
+            script: |
+              #!/bin/bash
+
+              NAMESPACE=$(cat /workspace/namespace.txt)
+              echo "Cleaning up ephemeral namespace: $NAMESPACE"
+
+              # Install bonfire if needed
+              if ! command -v bonfire &> /dev/null; then
+                pip3 install --user crc-bonfire
+                export PATH="$HOME/.local/bin:$PATH"
+              fi
+
+              # Remove bonfire deployment
+              bonfire namespace release $NAMESPACE || {
+                echo "WARNING: Bonfire cleanup failed, namespace may need manual cleanup"
+              }
+
+              echo "Cleanup complete"

@@ -1,0 +1,290 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: chrome-service-bonfire-e2e
+  labels:
+    test.appstudio.openshift.io/optional: "false"
+  annotations:
+    description: Deploy chrome-service with bonfire-tekton and run E2E tests
+spec:
+  description: >-
+    This pipeline uses bonfire-tekton tasks to deploy chrome-service to an ephemeral namespace,
+    then runs E2E tests against the deployed instance.
+
+  params:
+    - name: SNAPSHOT
+      description: |
+        Spec section of an ApplicationSnapshot resource. Not all fields of the
+        resource are required. A minimal example:
+          {
+            "components": [
+              {
+                "name": "chrome-service",
+                "containerImage": "quay.io/..."
+              }
+            ]
+          }
+      type: string
+    - name: BONFIRE_IMAGE
+      description: Bonfire container image for tekton tasks
+      type: string
+      default: quay.io/redhat-services-prod/hcm-eng-prod-tenant/cicd-tools:410ab11
+    - name: APP_NAME
+      description: App-sre application folder name
+      type: string
+      default: chrome-service
+    - name: COMPONENTS
+      description: Space-separated list of components to deploy
+      type: string
+      default: chrome-service
+    - name: RESERVE_DURATION
+      description: How long to reserve the namespace
+      type: string
+      default: 1h
+
+  results:
+    - name: TEST_OUTPUT
+      description: Test results summary
+      value: $(tasks.run-e2e-tests.results.TEST_OUTPUT)
+    - name: ARTIFACTS_URL
+      description: URL for test artifacts
+      value: $(finally.teardown.results.ARTIFACTS_URL)
+
+  tasks:
+    - name: reserve-namespace
+      taskRef:
+        resolver: git
+        params:
+          - name: url
+            value: https://github.com/RedHatInsights/bonfire-tekton
+          - name: revision
+            value: main
+          - name: pathInRepo
+            value: tasks/reserve-namespace.yaml
+      params:
+        - name: BONFIRE_IMAGE
+          value: $(params.BONFIRE_IMAGE)
+        - name: NS_REQUESTER
+          value: chrome-service-e2e-tests
+        - name: RESERVE_DURATION
+          value: $(params.RESERVE_DURATION)
+
+    - name: deploy-application
+      runAfter:
+        - reserve-namespace
+      taskRef:
+        resolver: git
+        params:
+          - name: url
+            value: https://github.com/RedHatInsights/bonfire-tekton
+          - name: revision
+            value: main
+          - name: pathInRepo
+            value: tasks/deploy.yaml
+      params:
+        - name: BONFIRE_IMAGE
+          value: $(params.BONFIRE_IMAGE)
+        - name: SNAPSHOT
+          value: $(params.SNAPSHOT)
+        - name: NS
+          value: $(tasks.reserve-namespace.results.NS)
+        - name: NS_REQUESTER
+          value: chrome-service-e2e-tests
+        - name: APP_NAME
+          value: $(params.APP_NAME)
+        - name: COMPONENTS
+          value: $(params.COMPONENTS)
+
+    - name: wait-for-deployment
+      runAfter:
+        - deploy-application
+      taskSpec:
+        params:
+          - name: NAMESPACE
+            type: string
+        params:
+          - name: NAMESPACE
+            value: $(tasks.reserve-namespace.results.NS)
+        results:
+          - name: APP_URL
+            description: URL of the deployed application
+        steps:
+          - name: wait
+            image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+            script: |
+              #!/bin/bash
+              set -e
+
+              NAMESPACE="$(params.NAMESPACE)"
+              echo "Waiting for chrome-service deployment in namespace: $NAMESPACE"
+
+              # Wait for ClowdApp to be reconciled
+              echo "Waiting for ClowdApp reconciliation..."
+              oc wait --for=condition=ReconciliationSuccessful \
+                clowdapp/chrome-service \
+                -n $NAMESPACE \
+                --timeout=600s || {
+                  echo "ClowdApp reconciliation failed or timed out"
+                  oc get clowdapp chrome-service -n $NAMESPACE -o yaml
+                  exit 1
+                }
+
+              # Wait for deployment to be available
+              echo "Waiting for deployment to be available..."
+              oc wait --for=condition=Available \
+                deployment/chrome-service-api \
+                -n $NAMESPACE \
+                --timeout=300s || {
+                  echo "Deployment failed to become available"
+                  oc get deployment chrome-service-api -n $NAMESPACE
+                  oc get pods -n $NAMESPACE
+                  oc logs -l app=chrome-service -n $NAMESPACE --tail=50
+                  exit 1
+                }
+
+              # Get the route
+              echo "Getting service route..."
+              ROUTE=$(oc get route chrome-service-api -n $NAMESPACE -o jsonpath='{.spec.host}')
+
+              if [ -z "$ROUTE" ]; then
+                echo "ERROR: Could not get route for chrome-service"
+                oc get routes -n $NAMESPACE
+                exit 1
+              fi
+
+              APP_URL="https://${ROUTE}"
+              echo "Service URL: $APP_URL"
+              echo -n "$APP_URL" > $(results.APP_URL.path)
+
+              # Verify health endpoint
+              echo "Verifying health endpoint..."
+              MAX_ATTEMPTS=30
+              ATTEMPT=1
+              while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+                if curl -sSf "$APP_URL/health" > /dev/null 2>&1; then
+                  echo "Health check passed"
+                  break
+                fi
+                echo "Health check attempt $ATTEMPT/$MAX_ATTEMPTS failed, retrying..."
+                sleep 5
+                ATTEMPT=$((ATTEMPT + 1))
+              done
+
+              if [ $ATTEMPT -gt $MAX_ATTEMPTS ]; then
+                echo "ERROR: Health check failed after $MAX_ATTEMPTS attempts"
+                exit 1
+              fi
+
+              echo "Deployment ready at: $APP_URL"
+
+    - name: run-e2e-tests
+      runAfter:
+        - wait-for-deployment
+      taskSpec:
+        params:
+          - name: APP_URL
+            type: string
+        params:
+          - name: APP_URL
+            value: $(tasks.wait-for-deployment.results.APP_URL)
+        results:
+          - name: TEST_OUTPUT
+            description: Test results summary
+        steps:
+          - name: clone-repository
+            image: registry.access.redhat.com/ubi9/ubi:latest
+            workingDir: /workspace
+            script: |
+              #!/bin/bash
+              set -e
+
+              echo "Installing git..."
+              dnf install -y git
+
+              echo "Cloning chrome-service-backend repository..."
+              git clone https://github.com/RedHatInsights/chrome-service-backend.git /workspace/source
+
+              echo "Repository cloned successfully"
+
+          - name: run-tests
+            image: golang:1.26
+            workingDir: /workspace/source
+            timeout: 600s
+            env:
+              - name: E2E_BASE_URL
+                value: $(params.APP_URL)
+              - name: E2E_USER_ID
+                value: "e2e-integration-test-user"
+              - name: E2E_ACCOUNT_ID
+                value: "e2e-integration-account"
+              - name: E2E_ORG_ID
+                value: "e2e-integration-org"
+              - name: E2E_USERNAME
+                value: "e2e-integration-bot"
+            script: |
+              #!/bin/bash
+              set -e
+
+              echo "========================================="
+              echo "Chrome Service E2E Integration Tests"
+              echo "========================================="
+              echo "Target URL: $E2E_BASE_URL"
+              echo "========================================="
+
+              cd e2e
+
+              echo "Installing Go dependencies..."
+              go mod download
+
+              echo "Running E2E tests..."
+              if go test -v ./... 2>&1 | tee /tmp/test-output.log; then
+                echo ""
+                echo "========================================="
+                echo "E2E Integration Tests PASSED"
+                echo "========================================="
+                TEST_RESULT="PASSED"
+              else
+                echo ""
+                echo "========================================="
+                echo "E2E Integration Tests FAILED"
+                echo "========================================="
+                TEST_RESULT="FAILED"
+              fi
+
+              # Generate summary
+              TEST_COUNT=$(grep -c "^=== RUN" /tmp/test-output.log || echo "0")
+              PASSED_COUNT=$(grep -c "^--- PASS:" /tmp/test-output.log || echo "0")
+              FAILED_COUNT=$(grep -c "^--- FAIL:" /tmp/test-output.log || echo "0")
+
+              cat > $(results.TEST_OUTPUT.path) <<EOF
+              E2E Integration Test Results
+              ============================
+              Status: $TEST_RESULT
+              Tests Run: $TEST_COUNT
+              Passed: $PASSED_COUNT
+              Failed: $FAILED_COUNT
+              Target: $E2E_BASE_URL
+              EOF
+
+              if [ "$TEST_RESULT" == "FAILED" ]; then
+                exit 1
+              fi
+
+  finally:
+    - name: teardown
+      taskRef:
+        resolver: git
+        params:
+          - name: url
+            value: https://github.com/RedHatInsights/bonfire-tekton
+          - name: revision
+            value: main
+          - name: pathInRepo
+            value: tasks/teardown.yaml
+      params:
+        - name: BONFIRE_IMAGE
+          value: $(params.BONFIRE_IMAGE)
+        - name: NS
+          value: $(tasks.reserve-namespace.results.NS)
+        - name: NS_REQUESTER
+          value: chrome-service-e2e-tests

@@ -1,7 +1,7 @@
 # WebSockets in Chrome
 
 WebSockets in chrome are implemented using Kafka as the underlying messaging service. You can use WebSockets 
-in chrome to pull realtime data from the kafka stack, as well as send messages. 
+in chrome to pull realtime data from the kafka stack. Messages are injected exclusively through the Kafka consumer path.
 
 This document is a work in progress and will be updated as we add support for other environments.
 
@@ -20,27 +20,9 @@ Open the console, and add the following connection snippet.
 
 Once connected, you can log out any new wss messages with `x.onmessage = console.log`
 
-You can send a test message with the following fetch request. Please note the 
-header is only a test value and will not work in any other environment.
+To send test messages, use the Kafka consumer path. Run `go run cmd/kafka/testMessage.go` in a separate terminal (see "Reading Kafka Data" below).
 
-**When testing in chrome environment, make sure to allow the endpoint in the CSP headers in index.html!**
-
-``` javascript
-fetch("/api/chrome-service/v1/emit-message", {
-  method: "POST",
-  body: JSON.stringify({
-    id: "message-id", // id of message
-    type: "notifications.drawer", // type of the event
-    broadcast: true, // should be send to every client
-    users: [], // list of user ids that should receive the message
-    roles: [], // list of roles that should receive the message, should be used with organizations only
-    organizations: [], // list of org ids to receive the message
-    payload: { title: "New notification", description: "Some longer body" },
-  }),
-});
-```
-
-**Make sure your chrome has ws proxy setup fot the endpoint! This is required to have proper WS registration.**
+**Make sure your chrome has ws proxy setup for the endpoint! This is required to have proper WS registration.**
 
 Sample proxy config:
 ```jsx

@@ -189,7 +189,7 @@ All authenticated endpoints require `x-rh-identity` header (base64-encoded JSON 
 | GET/POST | `/api/chrome-service/v1/favorite-pages` | Favorite pages |
 | GET/POST | `/api/chrome-service/v1/self-report` | Self-report data |
 | GET/PATCH | `/api/chrome-service/v1/user` | User identity & preferences |
-| POST | `/api/chrome-service/v1/emit-message` | Broadcast message via WebSocket |
+
 | GET/POST/PATCH/DELETE | `/api/chrome-service/v1/dashboard-templates` | Dashboard template CRUD |
 | WS | `/wss/chrome-service/v1/ws` | WebSocket connection (feature-flagged) |
 

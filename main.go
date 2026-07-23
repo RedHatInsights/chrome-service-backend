@@ -75,7 +75,6 @@ func main() {
 		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
 		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
-		subrouter.Route("/emit-message", routes.BroadcastMessage)
 		subrouter.Route("/dashboard-templates", routes.MakeDashboardTemplateRoutes)
 		subrouter.Route("/api-docs", routes.MakeApiDocsRoutes)
 	})

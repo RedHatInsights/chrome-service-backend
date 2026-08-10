@@ -1,6 +1,7 @@
 package e2e
 
 import (
+	"fmt"
 	"net/http"
 	"testing"
 
@@ -171,6 +172,88 @@ func TestSaveRecentlyUsedWorkspacesValidation(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestRecentlyUsedWorkspacesLifecycle(t *testing.T) {
+	config := GetConfig()
+	client := NewTestClient(t, config)
+
+	// Step 1: Save initial workspaces with parent-child relationship
+	rootId := uuid.New().String()
+	childId := uuid.New().String()
+	description := "Root workspace"
+
+	initialPayload := []Workspace{
+		{Id: rootId, Type: "root", Name: "Root", Description: &description},
+		{Id: childId, ParentId: rootId, Type: "standard", Name: "Child of Root"},
+	}
+
+	resp, body, err := client.POST(APIBasePath+"/recently-used-workspaces", initialPayload)
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusCreated)
+
+	var initialResp ListResponse[Workspace]
+	client.AssertJSONResponse(body, &initialResp)
+	assert.Equal(t, 2, len(initialResp.Data), "Should have 2 workspaces")
+
+	// Verify parent-child relationship persists
+	var child Workspace
+	for _, ws := range initialResp.Data {
+		if ws.Id == childId {
+			child = ws
+		}
+	}
+	assert.Equal(t, rootId, child.ParentId, "Child should reference parent")
+
+	// Step 2: Save a new set - replaces previous workspaces
+	newId := uuid.New().String()
+	replacePayload := []Workspace{
+		{Id: newId, Type: "root", Name: "Replacement"},
+	}
+
+	resp, body, err = client.POST(APIBasePath+"/recently-used-workspaces", replacePayload)
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusCreated)
+
+	var replaceResp ListResponse[Workspace]
+	client.AssertJSONResponse(body, &replaceResp)
+	assert.Equal(t, 1, len(replaceResp.Data), "Should have 1 workspace after replacement")
+	assert.Equal(t, newId, replaceResp.Data[0].Id)
+
+	// Step 3: Duplicates are deduplicated (most recent first)
+	dupId1 := uuid.New().String()
+	dupId2 := uuid.New().String()
+	dupPayload := []Workspace{
+		{Id: dupId1, Type: "root", Name: "First"},
+		{Id: dupId2, Type: "root", Name: "Second"},
+		{Id: dupId1, Type: "root", Name: "First Again"},
+	}
+
+	resp, body, err = client.POST(APIBasePath+"/recently-used-workspaces", dupPayload)
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusCreated)
+
+	var dedupResp ListResponse[Workspace]
+	client.AssertJSONResponse(body, &dedupResp)
+	assert.Equal(t, 2, len(dedupResp.Data), "Duplicates should be deduplicated to 2 workspaces")
+
+	// Step 4: Exceeding max limit (default 10) trims the list
+	var overflowPayload []Workspace
+	for i := 0; i < 12; i++ {
+		overflowPayload = append(overflowPayload, Workspace{
+			Id:   uuid.New().String(),
+			Type: "root",
+			Name: fmt.Sprintf("Workspace %d", i),
+		})
+	}
+
+	resp, body, err = client.POST(APIBasePath+"/recently-used-workspaces", overflowPayload)
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusCreated)
+
+	var overflowResp ListResponse[Workspace]
+	client.AssertJSONResponse(body, &overflowResp)
+	assert.LessOrEqual(t, len(overflowResp.Data), 10, "Should be trimmed to max limit")
 }
 
 func TestSaveRecentlyUsedWorkspacesEmptyBody(t *testing.T) {

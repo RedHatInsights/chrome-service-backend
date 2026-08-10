@@ -88,6 +88,107 @@ func TestSetFavoritePage(t *testing.T) {
 	assert.NotNil(t, response.Data, "Data should not be nil")
 }
 
+func TestFavoritePageLifecycle(t *testing.T) {
+	config := GetConfig()
+	client := NewTestClient(t, config)
+
+	pagePath1 := "/settings/notifications"
+	pagePath2 := "/openshift/clusters"
+
+	// Step 1: Add two favorite pages, verify each via POST response
+	resp, body, err := client.POST(APIBasePath+"/favorite-pages", map[string]interface{}{
+		"pathname": pagePath1,
+		"favorite": true,
+	})
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusOK)
+
+	var addResp1 ListResponse[FavoritePage]
+	client.AssertJSONResponse(body, &addResp1)
+	foundPage1 := false
+	for _, page := range addResp1.Data {
+		if page.Pathname == pagePath1 && page.Favorite {
+			foundPage1 = true
+		}
+	}
+	assert.True(t, foundPage1, "First page should be in POST response")
+
+	resp, body, err = client.POST(APIBasePath+"/favorite-pages", map[string]interface{}{
+		"pathname": pagePath2,
+		"favorite": true,
+	})
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusOK)
+
+	// Step 3: Second POST response should contain both active favorites
+	var addResp2 ListResponse[FavoritePage]
+	client.AssertJSONResponse(body, &addResp2)
+
+	foundPage1 = false
+	foundPage2 := false
+	for _, page := range addResp2.Data {
+		if page.Pathname == pagePath1 {
+			foundPage1 = true
+		}
+		if page.Pathname == pagePath2 {
+			foundPage2 = true
+		}
+	}
+	assert.True(t, foundPage1, "First page should be in active favorites")
+	assert.True(t, foundPage2, "Second page should be in active favorites")
+
+	// Step 4: Archive one page (set favorite=false)
+	resp, body, err = client.POST(APIBasePath+"/favorite-pages", map[string]interface{}{
+		"pathname": pagePath1,
+		"favorite": false,
+	})
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusOK)
+
+	// Step 5: Verify archived page is gone from active list but second page remains
+	var afterArchiveResp ListResponse[FavoritePage]
+	client.AssertJSONResponse(body, &afterArchiveResp)
+
+	for _, page := range afterArchiveResp.Data {
+		assert.NotEqual(t, pagePath1, page.Pathname, "Archived page should not be in active list")
+	}
+
+	stillActive := false
+	for _, page := range afterArchiveResp.Data {
+		if page.Pathname == pagePath2 {
+			stillActive = true
+		}
+	}
+	assert.True(t, stillActive, "Second page should still be active")
+
+	// Step 6: Re-favorite the archived page
+	resp, body, err = client.POST(APIBasePath+"/favorite-pages", map[string]interface{}{
+		"pathname": pagePath1,
+		"favorite": true,
+	})
+	assert.NoError(t, err)
+	client.AssertStatusCode(resp, http.StatusOK)
+
+	var reFavResp ListResponse[FavoritePage]
+	client.AssertJSONResponse(body, &reFavResp)
+
+	reAdded := false
+	for _, page := range reFavResp.Data {
+		if page.Pathname == pagePath1 && page.Favorite {
+			reAdded = true
+		}
+	}
+	assert.True(t, reAdded, "Re-favorited page should appear as active")
+
+	// Cleanup: remove both test pages
+	for _, path := range []string{pagePath1, pagePath2} {
+		client.POST(APIBasePath+"/favorite-pages", map[string]interface{}{
+			"pathname": path,
+			"favorite": false,
+		})
+	}
+}
+
 func TestSetFavoritePageInvalidRequest(t *testing.T) {
 	config := GetConfig()
 	client := NewTestClient(t, config)

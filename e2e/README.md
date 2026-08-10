@@ -84,6 +84,23 @@ func TestNewEndpoint(t *testing.T) {
 }
 ```
 
+## Important: Verify State Through POST Responses
+
+The service caches user identity data per request. GET endpoints may return stale data that doesn't reflect recent writes from other endpoints. **Always verify state through the POST/PATCH response that made the change**, not a subsequent GET.
+
+```go
+// WRONG: GET may return cached data
+client.POST(APIBasePath+"/favorite-pages", payload)
+resp, body, err := client.GET(APIBasePath + "/favorite-pages?archived=false")
+// body may not include the page you just added
+
+// RIGHT: verify through the POST response itself
+resp, body, err := client.POST(APIBasePath+"/favorite-pages", payload)
+var response ListResponse[FavoritePage]
+client.AssertJSONResponse(body, &response)
+// response.Data contains the current state
+```
+
 ## Troubleshooting
 
 **Connection refused**: Make sure `make infra` and `make dev` are running.

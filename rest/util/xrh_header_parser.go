@@ -22,8 +22,9 @@ func ParseXRHIdentityHeader(identityHeader string) (*identity.XRHID, error) {
 	err = json.Unmarshal(decodedIdentity, &XRHIdentity)
 
 	if err != nil {
-		logrus.Errorf("x-rh-identity header is not a valid json: %s. Identity: %s", err.Error(), identityHeader)
-		return nil, fmt.Errorf("x-rh-identity header is not a valid json: %s", err.Error())
+		err = fmt.Errorf("x-rh-identity header is not a valid json: %w", err)
+		logrus.Error(err)
+		return nil, err
 	}
 
 	// XRHIdentity.Identity.User.UserID
@@ -72,7 +73,6 @@ func ParseJWTToken(tokenString string) (DecodedToken, error) {
 
 	var res DecodedToken
 	err = json.Unmarshal([]byte(str), &res)
-	fmt.Println(res)
 	if err != nil {
 		return DecodedToken{}, err
 	}

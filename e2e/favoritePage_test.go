@@ -193,7 +193,8 @@ func TestSetFavoritePageInvalidRequest(t *testing.T) {
 	config := GetConfig()
 	client := NewTestClient(t, config)
 
-	resp, _, err := client.MakeRequest(http.MethodPost, APIBasePath + "/favorite-pages", strings.NewReader("not valid json"))
+	resp, body, err := client.MakeRequest(http.MethodPost, APIBasePath+"/favorite-pages", strings.NewReader("not valid json"))
 	assert.NoError(t, err, "POST /favorite-pages should not error")
 	client.AssertStatusCode(resp, http.StatusBadRequest)
+	assert.Contains(t, string(body), "Invalid favorite page request")
 }

@@ -1,6 +1,6 @@
 module github.com/RedHatInsights/chrome-service-backend/e2e
 
-go 1.26.2
+go 1.25.10
 
 require (
 	github.com/google/uuid v1.6.0

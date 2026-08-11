@@ -79,7 +79,8 @@ func TestStoreLastVisitedPagesInvalidRequest(t *testing.T) {
 	config := GetConfig()
 	client := NewTestClient(t, config)
 
-	resp, _, err := client.MakeRequest(http.MethodPost, APIBasePath + "/last-visited", strings.NewReader("not valid json"))
+	resp, body, err := client.MakeRequest(http.MethodPost, APIBasePath+"/last-visited", strings.NewReader("not valid json"))
 	assert.NoError(t, err, "POST /last-visited should not error")
 	client.AssertStatusCode(resp, http.StatusBadRequest)
+	assert.Contains(t, string(body), "Invalid last visited pages request payload")
 }

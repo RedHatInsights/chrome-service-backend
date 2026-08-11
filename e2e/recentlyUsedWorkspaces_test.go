@@ -267,5 +267,7 @@ func TestSaveRecentlyUsedWorkspacesEmptyBody(t *testing.T) {
 	var response ErrorResponse
 	client.AssertJSONResponse(body, &response)
 
-	assert.Contains(t, response.Errors[0], "Request body is empty", "Should have empty body error")
+	if assert.NotEmpty(t, response.Errors, "Should have error messages") {
+		assert.Contains(t, response.Errors[0], "Request body is empty", "Should have empty body error")
+	}
 }

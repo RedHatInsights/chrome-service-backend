@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -21,7 +22,7 @@ type TestClient struct {
 
 func NewTestClient(t *testing.T, config *Config) *TestClient {
 	return &TestClient{
-		HTTPClient: &http.Client{},
+		HTTPClient: &http.Client{Timeout: 30 * time.Second},
 		Config:     config,
 		t:          t,
 	}

@@ -3,6 +3,7 @@ package e2e
 import (
 	"fmt"
 	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/google/uuid"
@@ -163,7 +164,7 @@ func TestSaveRecentlyUsedWorkspacesValidation(t *testing.T) {
 			for _, expectedError := range tt.expectedErrors {
 				found := false
 				for _, actualError := range response.Errors {
-					if assert.Contains(t, actualError, expectedError) {
+					if strings.Contains(actualError, expectedError) {
 						found = true
 						break
 					}

@@ -129,9 +129,8 @@ make dev
 make test
 # Equivalent to: go test -v ./... -coverprofile=c.out
 
-# Run E2E tests against remote environment
+# Run E2E tests (defaults to http://localhost:8000, set E2E_BASE_URL to target a remote environment)
 make test-e2e
-# Requires E2E_BASE_URL and other E2E_* env vars to be set
 
 # Run database migration
 make migrate

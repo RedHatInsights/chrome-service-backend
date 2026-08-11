@@ -78,7 +78,7 @@ test: seed-unleash
 	go test -v  ./... -coverprofile=c.out
 
 test-e2e:
-	@echo "Running E2E tests against $(E2E_BASE_URL)"
+	@echo "Running E2E tests against $${E2E_BASE_URL:-http://localhost:8000}"
 	cd e2e && go test -v ./...
 
 coverage:

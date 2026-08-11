@@ -127,8 +127,8 @@ func (c *TestClient) PATCH(path string, body interface{}) (*http.Response, []byt
 	return c.MakeRequest(http.MethodPatch, path, body)
 }
 
-// AssertStatusCode asserts that the response has the expected status code
 func (c *TestClient) AssertStatusCode(resp *http.Response, expectedStatus int) {
+	require.NotNil(c.t, resp, "HTTP response is nil - request likely failed")
 	assert.Equal(c.t, expectedStatus, resp.StatusCode,
 		"Expected status code %d but got %d", expectedStatus, resp.StatusCode)
 }

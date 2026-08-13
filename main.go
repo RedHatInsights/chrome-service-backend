@@ -89,10 +89,16 @@ func main() {
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
 			subrouter.Use(cors.Handler(cors.Options{
 				AllowedOrigins: []string{
-					"wss://stage.foo.redhat.com:1337",
-					"wss://prod.foo.redhat.com:1337",
+					"https://console.redhat.com",
+					"https://*.console.redhat.com",
+					"https://console.stage.redhat.com",
+					"https://*.console.stage.redhat.com",
+					"https://*.foo.redhat.com",
+					"https://stage.foo.redhat.com:1337",
+					"https://prod.foo.redhat.com:1337",
 				},
 			}))
+			subrouter.Use(m.ParseHeaders)
 			subrouter.Route("/ws", routes.MakeWsRoute)
 		})
 	} else {

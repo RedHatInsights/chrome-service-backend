@@ -27,13 +27,15 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin:     checkOrigin,
 }
 
+// checkOrigin validates the WebSocket upgrade Origin header.
+// Must stay in sync with CORS AllowedOrigins in main.go.
 func checkOrigin(r *http.Request) bool {
 	origin := r.Header.Get("Origin")
 	if origin == "" {
 		return false
 	}
 	parsed, err := url.Parse(origin)
-	if err != nil {
+	if err != nil || parsed.Scheme != "https" {
 		return false
 	}
 	host := parsed.Hostname()

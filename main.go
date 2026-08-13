@@ -87,6 +87,7 @@ func main() {
 		logrus.Infoln("Enabling WebSockets")
 		kafka.InitializeConsumers()
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+			// AllowedOrigins must stay in sync with checkOrigin in rest/routes/websocket.go.
 			subrouter.Use(cors.Handler(cors.Options{
 				AllowedOrigins: []string{
 					"https://console.redhat.com",

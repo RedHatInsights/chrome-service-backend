@@ -1,9 +1,13 @@
 package routes
 
 import (
+	"context"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -39,6 +43,45 @@ func TestCheckOrigin(t *testing.T) {
 				r.Header.Set("Origin", tt.origin)
 			}
 			assert.Equal(t, tt.want, checkOrigin(r))
+		})
+	}
+}
+
+func TestHandleWsConnectionRejectsMissingOrInvalidIdentity(t *testing.T) {
+	tests := []struct {
+		name string
+		ctx  func() context.Context
+	}{
+		{
+			name: "no identity in context",
+			ctx: func() context.Context {
+				return context.Background()
+			},
+		},
+		{
+			name: "nil identity pointer in context",
+			ctx: func() context.Context {
+				return context.WithValue(context.Background(), util.IDENTITY_CTX_KEY, (*identity.XRHID)(nil))
+			},
+		},
+		{
+			name: "identity with nil user",
+			ctx: func() context.Context {
+				xrhid := &identity.XRHID{Identity: identity.Identity{User: nil}}
+				return context.WithValue(context.Background(), util.IDENTITY_CTX_KEY, xrhid)
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			r, _ := http.NewRequest("GET", "/ws", nil)
+			r = r.WithContext(tt.ctx())
+			w := httptest.NewRecorder()
+
+			HandleWsConnection(w, r)
+
+			assert.Equal(t, http.StatusUnauthorized, w.Code)
 		})
 	}
 }

@@ -2,22 +2,49 @@ package routes
 
 import (
 	"net/http"
+	"net/url"
+	"strings"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
+	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
 	"github.com/sirupsen/logrus"
 )
+
+var allowedOriginSuffixes = []string{
+	".console.redhat.com",
+	".console.stage.redhat.com",
+	".foo.redhat.com",
+}
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
 	Subprotocols:    []string{"cloudevents.json"},
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
+	CheckOrigin:     checkOrigin,
+}
+
+// checkOrigin validates the WebSocket upgrade Origin header.
+// Must stay in sync with CORS AllowedOrigins in main.go.
+func checkOrigin(r *http.Request) bool {
+	origin := r.Header.Get("Origin")
+	if origin == "" {
+		return false
+	}
+	parsed, err := url.Parse(origin)
+	if err != nil || parsed.Scheme != "https" {
+		return false
+	}
+	host := parsed.Hostname()
+	for _, suffix := range allowedOriginSuffixes {
+		if strings.HasSuffix(host, suffix) {
+			return true
+		}
+	}
+	return host == "console.redhat.com" || host == "console.stage.redhat.com"
 }
 
 func MakeWsRoute(sub chi.Router) {
@@ -25,21 +52,13 @@ func MakeWsRoute(sub chi.Router) {
 }
 
 func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
-	jwtCookie, err := r.Cookie("cs_jwt")
-	if err != nil {
-		logrus.Errorln("Unable to find cs_jwt cookie", err)
-		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "missing JWT cookie")
+	xrhid, ok := r.Context().Value(util.IDENTITY_CTX_KEY).(*identity.XRHID)
+	if !ok || xrhid == nil || xrhid.Identity.User == nil {
+		logrus.Errorln("WebSocket connection rejected: missing or invalid X-RH-Identity")
+		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "missing verified identity")
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
-	identity, err := util.ParseJWTToken(jwtCookie.Value)
-	if err != nil {
-		logrus.Errorln("Unable to parse jwt token", err)
-		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "invalid JWT token")
-		return
-	}
-
-	// REMOVE this, trying to figure out why the connection is being closed
-	r.Header.Add("Connection", "upgrade")
 
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -48,9 +67,9 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	}
 
 	client := connectionhub.Client{
-		User:         identity.UserId,
-		Organization: identity.OrgId,
-		Username:     identity.Username,
+		User:         xrhid.Identity.User.UserID,
+		Organization: xrhid.Identity.OrgID,
+		Username:     xrhid.Identity.User.Username,
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}

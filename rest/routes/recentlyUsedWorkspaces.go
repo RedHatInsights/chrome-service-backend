@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -222,6 +223,7 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 	// Save the most recently used workspaces in the database.
 	if err := service.SaveRecentlyUsedWorkspaces(&user, workspacesToSave); err != nil {
 		logrus.Errorf(`unable to save the recently used workspaces in the database: %s`, err)
+		securitylog.LogWithReason(r.Context(), "UPDATE", "recently_used_workspaces", user.AccountId, "failure", "save failed")
 
 		sendJSONResponse(w, http.StatusInternalServerError, util.ErrorResponse{
 			Errors: []string{"Unable to save recently used workspaces"},
@@ -229,6 +231,8 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+
+	securitylog.Log(r.Context(), "UPDATE", "recently_used_workspaces", user.AccountId, "success")
 
 	responseBody := util.ListResponse[models.Workspace]{
 		Data: workspacesToSave,

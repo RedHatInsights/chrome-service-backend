@@ -6,6 +6,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -27,12 +28,12 @@ func StoreLastVisitedPages(w http.ResponseWriter, r *http.Request) {
 
 	err = service.HandlePostLastVisitedPages(recentPages.Pages, &user)
 	if err != nil {
-		panic(err)
+		securitylog.LogWithReason(r.Context(), "UPDATE", "last_visited_pages", user.AccountId, "failure", "store failed")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Unable to store last visited pages."))
+		return
 	}
-
-	if err != nil {
-		panic(err)
-	}
+	securitylog.Log(r.Context(), "UPDATE", "last_visited_pages", user.AccountId, "success")
 
 	pages := user.LastVisitedPages.Data()
 	resp := util.ListResponse[models.VisitedPage]{

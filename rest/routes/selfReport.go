@@ -6,6 +6,7 @@ import (
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -42,22 +43,23 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 	updatedSelfReport.UserIdentityID = userID
 
 	err = database.DB.Model(user).Preload("SelfReport").Find(&user).Error
-	user.SelfReport = updatedSelfReport
-	database.DB.Save(&updatedSelfReport)
+	if err == nil {
+		user.SelfReport = updatedSelfReport
+		err = database.DB.Save(&updatedSelfReport).Error
+	}
 
 	if err != nil {
-		errString := "Invalid self report request payload, please refer to documentation."
-		w.WriteHeader(http.StatusBadRequest)
+		errString := "Unable to update self report."
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(errString))
-		logrus.Errorf("unable to request updating self report, %s", err.Error())
-		panic(err)
+		logrus.Errorf("unable to update self report, %s", err.Error())
+		securitylog.LogWithReason(r.Context(), "UPDATE", "self_report", user.AccountId, "failure", "update failed")
+		return
 	}
+
+	securitylog.Log(r.Context(), "UPDATE", "self_report", user.AccountId, "success")
 
 	resp := user.SelfReport
-
-	if err != nil {
-		panic(err)
-	}
 
 	json.NewEncoder(w).Encode(resp)
 }

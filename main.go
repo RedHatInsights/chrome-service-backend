@@ -1,11 +1,16 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
+	"time"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
@@ -15,6 +20,7 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	m "github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
+	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -69,7 +75,6 @@ func main() {
 		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
 		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
 		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
-		subrouter.Route("/emit-message", routes.BroadcastMessage)
 		subrouter.Route("/dashboard-templates", routes.MakeDashboardTemplateRoutes)
 		subrouter.Route("/api-docs", routes.MakeApiDocsRoutes)
 	})
@@ -82,12 +87,19 @@ func main() {
 		logrus.Infoln("Enabling WebSockets")
 		kafka.InitializeConsumers()
 		router.Route("/wss/chrome-service/v1/", func(subrouter chi.Router) {
+			// AllowedOrigins must stay in sync with checkOrigin in rest/routes/websocket.go.
 			subrouter.Use(cors.Handler(cors.Options{
 				AllowedOrigins: []string{
-					"wss://stage.foo.redhat.com:1337",
-					"wss://prod.foo.redhat.com:1337",
+					"https://console.redhat.com",
+					"https://*.console.redhat.com",
+					"https://console.stage.redhat.com",
+					"https://*.console.stage.redhat.com",
+					"https://*.foo.redhat.com",
+					"https://stage.foo.redhat.com:1337",
+					"https://prod.foo.redhat.com:1337",
 				},
 			}))
+			subrouter.Use(m.ParseHeaders)
 			subrouter.Route("/ws", routes.MakeWsRoute)
 		})
 	} else {
@@ -104,11 +116,35 @@ func main() {
 		}
 	}()
 
+	securitylog.LogStartup("chrome-service-backend", cfg.WebPort)
+
 	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
-	if err := http.ListenAndServe(serverStringAddr, router); err != nil {
-		logger.FlushCloudWatch()
-		log.Fatalf("Chrome-service-api has stopped due to %v", err)
+	server := &http.Server{Addr: serverStringAddr, Handler: router}
+
+	// Handle SIGTERM/SIGINT for graceful shutdown with security logging.
+	// Signal wait is synchronous in main so shutdown completes before exit.
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGTERM, syscall.SIGINT)
+
+	go func() {
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("server error: %v", err))
+			logger.FlushCloudWatch()
+			log.Fatalf("Chrome-service-api has stopped due to %v", err)
+		}
+	}()
+
+	// Block until shutdown signal received.
+	sig := <-sigChan
+	securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("received %s", sig))
+
+	// Graceful shutdown with bounded timeout to drain active connections.
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	if err := server.Shutdown(ctx); err != nil {
+		log.Printf("Graceful shutdown error: %v", err)
 	}
+	logger.FlushCloudWatch()
 }
 
 func HelloWorld(response http.ResponseWriter, request *http.Request) {

@@ -1,7 +1,6 @@
 package connectionhub
 
 import (
-	"encoding/json"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -228,32 +227,15 @@ func (c Client) ReadPump() {
 	})
 
 	for {
-		_, msg, err := conn.Ws.ReadMessage()
+		// Read and discard inbound data — WS is server-push only.
+		// The read loop must stay active for gorilla/websocket to process
+		// pong frames and detect connection close.
+		_, _, err := conn.Ws.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
 				logrus.Debugln("Websocket client going away", err)
 			}
 			break
-		}
-		var messagePayload WsMessage
-		err = json.Unmarshal(msg, &messagePayload)
-		if err != nil {
-			logrus.Warnln("Unable to unmarshall incoming WS message: ", err)
-			break
-		}
-
-		var message Message
-		message.Data = msg
-		if messagePayload.Broadcast {
-			message.Broadcast = true
-			ConnectionHub.Broadcast <- message
-		} else {
-			message.Destinations = MessageDestinations{
-				Users:         messagePayload.Users,
-				Roles:         messagePayload.Roles,
-				Organizations: messagePayload.Organizations,
-			}
-			ConnectionHub.Emit <- message
 		}
 	}
 }

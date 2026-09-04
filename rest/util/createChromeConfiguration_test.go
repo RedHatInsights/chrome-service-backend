@@ -382,3 +382,100 @@ func TestParseBundles(t *testing.T) {
 		assert.Equal(t, "insights", parsed[0]["id"])
 	})
 }
+
+func TestParseExports(t *testing.T) {
+	t.Run("ValidJSON", func(t *testing.T) {
+		exportsJSON := `[
+			{
+				"id": "urn:redhat:application:export-a",
+				"application": "export-a",
+				"resources": [
+					{
+						"id": "urn:redhat:application:export-a:export:systems",
+						"resource": "systems",
+						"format": ["csv", "json"]
+					}
+				]
+			},
+			{
+				"id": "urn:redhat:application:export-b",
+				"application": "export-b",
+				"resources": [
+					{
+						"id": "urn:redhat:application:export-b:export:subscriptions",
+						"resource": "subscriptions",
+						"format": ["csv"]
+					}
+				]
+			}
+		]`
+
+		result, err := parseExports(exportsJSON)
+		assert.NoError(t, err)
+
+		var parsed []interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err, "Result should be valid JSON")
+		assert.Len(t, parsed, 2, "Expected 2 export apps")
+
+		firstExport, ok := parsed[0].(map[string]interface{})
+		assert.True(t, ok, "First export should be a JSON object")
+		assert.Equal(t, "urn:redhat:application:export-a", firstExport["id"])
+		assert.Equal(t, "export-a", firstExport["application"])
+
+		resources, ok := firstExport["resources"].([]interface{})
+		assert.True(t, ok, "resources should be an array")
+		assert.Len(t, resources, 1)
+
+		resource, ok := resources[0].(map[string]interface{})
+		assert.True(t, ok, "resource should be a JSON object")
+		assert.Equal(t, "systems", resource["resource"])
+
+		formats, ok := resource["format"].([]interface{})
+		assert.True(t, ok, "format should be an array")
+		assert.Len(t, formats, 2)
+		assert.Equal(t, "csv", formats[0])
+		assert.Equal(t, "json", formats[1])
+	})
+
+	t.Run("EmptyString", func(t *testing.T) {
+		result, err := parseExports("")
+		assert.NoError(t, err)
+
+		var parsed []interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err, "Result should be valid JSON")
+		assert.Empty(t, parsed, "Expected empty array")
+	})
+
+	t.Run("InvalidJSON", func(t *testing.T) {
+		_, err := parseExports(`[{"id": "broken"`)
+		assert.Error(t, err, "Expected error for invalid JSON")
+	})
+
+	t.Run("SingleExport", func(t *testing.T) {
+		exportsJSON := `[{
+			"id": "urn:redhat:application:export-a",
+			"application": "export-a",
+			"resources": [
+				{
+					"id": "urn:redhat:application:export-a:export:systems",
+					"resource": "systems",
+					"format": ["csv"]
+				}
+			]
+		}]`
+
+		result, err := parseExports(exportsJSON)
+		assert.NoError(t, err)
+
+		var parsed []interface{}
+		err = json.Unmarshal(result, &parsed)
+		assert.NoError(t, err, "Result should be valid JSON")
+		assert.Len(t, parsed, 1, "Expected 1 export app")
+
+		export, ok := parsed[0].(map[string]interface{})
+		assert.True(t, ok, "Export should be a JSON object")
+		assert.Equal(t, "export-a", export["application"])
+	})
+}

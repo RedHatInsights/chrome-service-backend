@@ -55,6 +55,18 @@ make clean-all
 - Clean up SQLite DB files in teardown
 - Set `cfg.DashboardConfig.TemplatesWD` relative to test file location
 
+### E2E Tests
+
+E2E tests in `e2e/` validate API endpoints against a running service instance. **Any change to API endpoints requires corresponding E2E test updates:**
+
+- **New endpoint**: Add test coverage in the appropriate `e2e/*_test.go` file or create a new one
+- **Modified endpoint**: Update existing tests to reflect changed request/response contracts
+- **Deleted endpoint**: Remove the corresponding tests
+
+The current tests are **per-endpoint functionality tests** that verify individual request/response contracts. More comprehensive tests that exercise full API flows (e.g., creating a user profile, setting preferences, verifying state across endpoints) are encouraged as the suite matures.
+
+Run E2E tests locally: `make infra`, `make dev`, `make test-e2e`. See `e2e/README.md` for details.
+
 ## Dependencies
 
 - Do not add dependencies without justification

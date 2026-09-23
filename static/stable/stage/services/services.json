@@ -298,7 +298,6 @@
         "title": "Red Hat Enterprise Linux",
         "id": "rhel",
         "links": [
-          "insights.rhc",
           "insights.activationKeys"
         ]
       },

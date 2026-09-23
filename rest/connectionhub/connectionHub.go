@@ -114,7 +114,7 @@ func registerClient(c Client, h *connectionHub) {
 	registerClientRoles(c, h)
 	registerClientOrg(c, h)
 	registerClientUsername(c, h)
-	logrus.Infoln("Client registered with connection hub: user=", c.User, "org=", c.Organization, "username=", c.Username)
+	logrus.Infoln("Client registered with connection hub: user=", c.User, "org=", c.Organization)
 }
 
 func unregisterClientOrg(c Client, h *connectionHub) {
@@ -144,7 +144,7 @@ func unregisterClient(c Client, h *connectionHub) {
 	if h.Clients[c.User] != nil {
 		delete(h.Clients, c.User)
 	}
-	logrus.Infoln("Client unregistered from connection hub: user=", c.User, "org=", c.Organization, "username=", c.Username)
+	logrus.Infoln("Client unregistered from connection hub: user=", c.User, "org=", c.Organization)
 }
 
 func emitMessage(m Message, h *connectionHub) {

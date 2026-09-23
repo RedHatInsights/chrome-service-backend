@@ -114,7 +114,7 @@ func registerClient(c Client, h *connectionHub) {
 	registerClientRoles(c, h)
 	registerClientOrg(c, h)
 	registerClientUsername(c, h)
-	logrus.Debugln("new client connected", c)
+	logrus.Infoln("Client registered with connection hub: user=", c.User, "org=", c.Organization, "username=", c.Username)
 }
 
 func unregisterClientOrg(c Client, h *connectionHub) {
@@ -144,6 +144,7 @@ func unregisterClient(c Client, h *connectionHub) {
 	if h.Clients[c.User] != nil {
 		delete(h.Clients, c.User)
 	}
+	logrus.Infoln("Client unregistered from connection hub: user=", c.User, "org=", c.Organization, "username=", c.Username)
 }
 
 func emitMessage(m Message, h *connectionHub) {
@@ -202,8 +203,12 @@ func (h *connectionHub) Run() {
 		case c := <-h.Unregister:
 			unregisterClient(c, h)
 		case m := <-h.Broadcast:
-			logrus.Errorln("Broadcasting messages is not allowed! Source: ", m.Origin)
-			return
+			// Broadcast is intentionally unsupported: log and drop the message,
+			// but keep the loop running. A bare `return` here previously exited
+			// this goroutine permanently on the first broadcast message, which
+			// silently deadlocked all future Register/Unregister/Emit sends
+			// (unbuffered channels, no receiver) for every user on the pod.
+			logrus.Errorln("Broadcast messages are not supported; dropping message. Source: ", m.Origin)
 		case m := <-h.Emit:
 			emitMessage(m, h)
 		}

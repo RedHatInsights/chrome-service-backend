@@ -231,9 +231,11 @@ func startKafkaReader(r *kafka.Reader) {
 					if p.Data.Broadcast {
 						logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
 						connectionhub.ConnectionHub.Broadcast <- newMessage
+						logrus.Infoln("Broadcast message accepted by connection hub, offset: ", m.Offset)
 					} else {
 						logrus.Infoln("Emitting new message from kafka reader: ", string(newMessage.Data))
 						connectionhub.ConnectionHub.Emit <- newMessage
+						logrus.Infoln("Message accepted by connection hub, offset: ", m.Offset)
 					}
 				} else {
 					logrus.Errorln(validateErr)

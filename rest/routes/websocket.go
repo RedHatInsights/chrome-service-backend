@@ -73,8 +73,9 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}
-	logrus.Infoln("New client added to the connection hub: ", client.User)
+	logrus.Infoln("Registering new client with the connection hub: ", client.User)
 	connectionhub.ConnectionHub.Register <- client
+	logrus.Infoln("Client registration accepted by the connection hub: ", client.User)
 	go client.WritePump()
 	client.ReadPump()
 }

@@ -141,21 +141,6 @@
             }
         ]
     },
-    "connector": {
-        "manifestLocation": "/apps/connector/fed-mods.json",
-        "defaultDocumentTitle": "Remote Host Configuration | Settings",
-        "modules": [
-            {
-                "id": "connector",
-                "module": "./RootApp",
-                "routes": [
-                    {
-                        "pathname": "/insights/connector"
-                    }
-                ]
-            }
-        ]
-    },
     "applications": {
         "manifestLocation": "/apps/applications/fed-mods.json",
         "modules": [

@@ -174,30 +174,6 @@
           }
       ]
   },
-  "connector": {
-    "analytics": {
-        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
-    },
-      "manifestLocation": "/apps/connector/fed-mods.json",
-      "defaultDocumentTitle": "Remote Host Configuration | Settings",
-      "config": {
-        "supportCaseData": {
-            "product": "Red Hat Insights",
-            "version": "Remote Host Configuration (RHC)"
-        }
-      },
-      "modules": [
-          {
-              "id": "connector",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/insights/connector"
-                  }
-              ]
-          }
-      ]
-  },
   "applications": {
       "manifestLocation": "/apps/applications/fed-mods.json",
       "modules": [

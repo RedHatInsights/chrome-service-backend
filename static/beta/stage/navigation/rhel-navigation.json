@@ -115,28 +115,6 @@
           "expandable": true,
           "routes": [
             {
-              "id": "rhc",
-              "appId": "connector",
-              "title": "Remote Host Configuration (RHC)",
-              "href": "/insights/connector",
-              "icon": "InsightsIcon",
-              "product": "Red Hat Insights",
-              "subtitle": "Red Hat Insights for RHEL",
-              "description": "Configure your systems to execute Ansible Playbooks.",
-              "alt_title": [
-                "Remote host configuration",
-                "remote host configuration",
-                "connect systems",
-                "connection options",
-                "connect settings",
-                "settings",
-                "Register",
-                "rhc",
-                "RHC",
-                "rhcd"
-              ]
-            },
-            {
               "id": "activationKeys",
               "appId": "activation-keys",
               "title": "Activation Keys",

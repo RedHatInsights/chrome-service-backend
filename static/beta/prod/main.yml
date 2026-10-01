@@ -111,6 +111,12 @@ inventory:
     versions:
       - v1
 
+lightwell:
+  title: Lightwell
+  api:
+    versions:
+      - v0.1
+
 notifications:
   title: Notifications
   api:

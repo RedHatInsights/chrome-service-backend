@@ -197,6 +197,12 @@ image-builder-worker:
   api:
     url: https://api.openshift.com/api/image-builder-worker/v1/openapi
 
+lightwell:
+  title: Lightwell
+  api:
+    versions:
+      - v0.1
+
 notifications:
   title: Notifications
   api:

@@ -244,7 +244,13 @@
             "href": "/ansible/tasks",
             "icon": "AnsibleIcon",
             "product": "Red Hat Insights",
-            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness."
+            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness.",
+            "permissions": [
+              {
+                "method": "featureFlag",
+                "args": ["platform.tasks.enabled", true]
+              }
+            ]
         }
     ]
 }

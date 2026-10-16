@@ -94,6 +94,8 @@ func main() {
 					"https://*.console.redhat.com",
 					"https://console.stage.redhat.com",
 					"https://*.console.stage.redhat.com",
+					"https://console.dev.redhat.com",
+					"https://*.console.dev.redhat.com",
 					"https://*.foo.redhat.com",
 					"https://stage.foo.redhat.com:1337",
 					"https://prod.foo.redhat.com:1337",

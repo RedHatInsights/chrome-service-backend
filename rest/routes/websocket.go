@@ -17,6 +17,7 @@ import (
 var allowedOriginSuffixes = []string{
 	".console.redhat.com",
 	".console.stage.redhat.com",
+	".console.dev.redhat.com",
 	".foo.redhat.com",
 }
 
@@ -44,7 +45,7 @@ func checkOrigin(r *http.Request) bool {
 			return true
 		}
 	}
-	return host == "console.redhat.com" || host == "console.stage.redhat.com"
+	return host == "console.redhat.com" || host == "console.stage.redhat.com" || host == "console.dev.redhat.com"
 }
 
 func MakeWsRoute(sub chi.Router) {

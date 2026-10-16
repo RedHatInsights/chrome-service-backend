@@ -19,8 +19,10 @@ func TestCheckOrigin(t *testing.T) {
 	}{
 		{"console.redhat.com", "https://console.redhat.com", true},
 		{"console.stage.redhat.com", "https://console.stage.redhat.com", true},
+		{"console.dev.redhat.com", "https://console.dev.redhat.com", true},
 		{"subdomain of console.redhat.com", "https://beta.console.redhat.com", true},
 		{"subdomain of console.stage.redhat.com", "https://beta.console.stage.redhat.com", true},
+		{"subdomain of console.dev.redhat.com", "https://beta.console.dev.redhat.com", true},
 		{"local dev proxy stage", "https://stage.foo.redhat.com:1337", true},
 		{"local dev proxy prod", "https://prod.foo.redhat.com:1337", true},
 		{"foo.redhat.com subdomain no port", "https://stage.foo.redhat.com", true},

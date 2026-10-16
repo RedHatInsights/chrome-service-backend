@@ -5,13 +5,20 @@ FROM registry.access.redhat.com/hi/go:latest-fips-builder AS builder
 
 USER 0
 
+# Disable automatic Go toolchain downloads — hermetic builds must use the
+# toolchain shipped in the builder image.  If the image no longer satisfies
+# the go.mod `go` directive, the build will fail with an actionable error
+# instead of silently attempting a network fetch.
+ENV GOTOOLCHAIN=local
+
 WORKDIR /workspace
 
 # Cache deps before copying source so that we do not need to re-download for every build
 COPY go.mod go.sum ./
 
-# Fetch dependencies
-RUN go mod download
+# Fetch dependencies hermetically by sourcing the local prefetch cache
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    go mod download
 
 # Copy source files
 COPY api api
@@ -24,15 +31,21 @@ COPY spec spec
 COPY Makefile Makefile
 COPY widget-dashboard-defaults widget-dashboard-defaults
 
-# Generate static assets
-RUN make parse-services
-RUN make generate-search-index
+# Generate static assets using the local prefetch cache when available
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    make parse-services
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    make generate-search-index
 
-# Build all binaries
-RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-service-backend
-RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-migrate cmd/migrate/migrate.go
-RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-search-index cmd/search/publishSearchIndex.go
-RUN CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-fetch-specs cmd/fetchSpecs/fetchSpecs.go
+# Build all binaries using the local prefetch cache when available
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-service-backend
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-migrate cmd/migrate/migrate.go
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-search-index cmd/search/publishSearchIndex.go
+RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
+    CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-fetch-specs cmd/fetchSpecs/fetchSpecs.go
 
 ############################
 # STEP 2 build a small image

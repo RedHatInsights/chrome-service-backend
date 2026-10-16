@@ -630,6 +630,15 @@
             "convert",
             "conversion",
             "migration"
+          ],
+          "permissions": [
+            {
+              "method": "featureFlag",
+              "args": [
+                "platform.tasks.enabled",
+                true
+              ]
+            }
           ]
         }
       ]

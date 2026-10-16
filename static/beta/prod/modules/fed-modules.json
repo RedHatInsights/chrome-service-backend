@@ -458,10 +458,22 @@
                 "module": "./RootApp",
                 "routes": [
                     {
-                        "pathname": "/insights/tasks"
+                        "pathname": "/insights/tasks",
+                        "permissions": [
+                          {
+                            "method": "featureFlag",
+                            "args": ["platform.tasks.enabled", true]
+                          }
+                        ]
                     },
                     {
-                        "pathname": "/ansible/tasks"
+                        "pathname": "/ansible/tasks",
+                        "permissions": [
+                          {
+                            "method": "featureFlag",
+                            "args": ["platform.tasks.enabled", true]
+                          }
+                        ]
                     }
                 ]
             }

@@ -5,6 +5,12 @@ FROM registry.access.redhat.com/hi/go:latest-fips-builder AS builder
 
 USER 0
 
+# Disable automatic Go toolchain downloads — hermetic builds must use the
+# toolchain shipped in the builder image.  If the image no longer satisfies
+# the go.mod `go` directive, the build will fail with an actionable error
+# instead of silently attempting a network fetch.
+ENV GOTOOLCHAIN=local
+
 WORKDIR /workspace
 
 # Cache deps before copying source so that we do not need to re-download for every build

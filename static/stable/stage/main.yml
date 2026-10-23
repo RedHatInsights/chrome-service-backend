@@ -264,13 +264,6 @@ rbac:
     versions:
       - v1
 
-connector:
-  title: Red Hat Connector
-  api:
-    versions:
-      - v2
-    apiName: config-manager
-
 remediations:
   title: Remediations
   api:

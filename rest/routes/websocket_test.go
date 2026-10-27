@@ -174,13 +174,31 @@ func TestRejectedOriginDiagnosticsBoundAndRedactFields(t *testing.T) {
 	assert.LessOrEqual(t, len(userAgent), maxDiagnosticFieldLength)
 	assert.NotContains(t, userAgent, "\n")
 	assert.Contains(t, userAgent, `\n`)
-	assert.Equal(t, "<redacted-ip>", event["host"])
+	assert.Equal(t, "<redacted-ip>:8443", event["host"])
 	for _, secret := range []string{"origin-secret", "query-secret", "fragment-secret", "ua-secret", "cookie-secret", "auth-secret", "path-secret"} {
 		assert.NotContains(t, output.String(), secret)
 	}
 	assert.NotContains(t, output.String(), "Cookie")
 	assert.NotContains(t, output.String(), "Authorization")
 	assert.NotContains(t, output.String(), "192.0.2.10")
+}
+
+func TestRejectedOriginDiagnosticsRedactCredentialMarkerInRequestHost(t *testing.T) {
+	entry, output := newTestRequestLogger("request-correlation-host")
+	r := websocketUpgradeRequest()
+	r.Header.Set("Origin", "https://evil.example")
+	r.Host = "secret.example:8080"
+	r = r.WithContext(context.WithValue(r.Context(), util.IDENTITY_CTX_KEY, &identity.XRHID{Identity: identity.Identity{User: &identity.User{}}}))
+	r = r.WithContext(requestlogger.WithLogger(context.WithValue(r.Context(), middleware.RequestIDKey, "request-correlation-host"), entry))
+	w := httptest.NewRecorder()
+
+	HandleWsConnection(w, r)
+
+	assert.Equal(t, http.StatusForbidden, w.Code)
+	var event map[string]interface{}
+	assert.NoError(t, json.Unmarshal([]byte(output.String()), &event))
+	assert.Equal(t, "<redacted-host>:8080", event["host"])
+	assert.NotContains(t, output.String(), "secret.example")
 }
 
 func websocketUpgradeRequest() *http.Request {

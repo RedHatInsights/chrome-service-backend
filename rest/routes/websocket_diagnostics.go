@@ -161,14 +161,7 @@ func safeRequestHost(host string) string {
 	} else if strings.Contains(host, ":") {
 		return "<redacted-host>"
 	}
-	if net.ParseIP(hostname) != nil {
-		return "<redacted-ip>"
-	}
-	for _, char := range hostname {
-		if !(char >= 'a' && char <= 'z' || char >= 'A' && char <= 'Z' || char >= '0' && char <= '9' || char == '.' || char == '-') {
-			return "<redacted-host>"
-		}
-	}
+	hostname = safeOriginHost(hostname)
 	if port != "" {
 		hostname += ":" + port
 	}

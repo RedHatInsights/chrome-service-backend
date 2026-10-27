@@ -49,7 +49,7 @@ You should see data come into the console logs on the chrome-service terminal wi
 
 ## Diagnosing rejected origins
 
-An origin rejection emits one JSON `websocket_origin_rejected` event (rather than a second generic upgrade-error event). It includes `request_id`, `origin_header_state` (`missing`, `null`, `empty`, or `present`), a redacted `origin_representation`, `origin_rejection_reason` (`missing`, `malformed`, `disallowed_scheme`, or `disallowed_host`), request method/host/path, bounded User-Agent, HTTP status, and `upgrade_error_category`. Origin userinfo, path, query, fragment, and unlisted hostname are not logged; credentials, cookies, identity headers, and IP addresses are excluded. Other WebSocket handshake failures remain logged as `upgrade_failed`.
+An origin rejection emits one JSON `websocket_origin_rejected` event (rather than a second generic upgrade-error event). It includes `request_id`, `origin_header_state` (`missing`, `null`, `empty`, or `present`), a safe `origin_representation`, `origin_rejection_reason` (`missing`, `malformed`, `disallowed_scheme`, or `disallowed_host`), request method/host/path, bounded User-Agent, HTTP status, and `upgrade_error_category`. Origin userinfo, path, query, and fragment are never logged. Valid DNS hostnames may appear; IP literals, unsafe hostnames, and hosts matching credential markers are redacted. Credentials, cookies, identity headers, and IP addresses are excluded. Other WebSocket handshake failures remain logged as `upgrade_failed`.
 
 Example CloudWatch Logs Insights query:
 

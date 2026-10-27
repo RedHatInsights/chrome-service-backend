@@ -47,6 +47,21 @@ Sample proxy config:
 
 You should see data come into the console logs on the chrome-service terminal window.
 
+## Diagnosing rejected origins
+
+An origin rejection emits one JSON `websocket_origin_rejected` event (rather than a second generic upgrade-error event). It includes `request_id`, `origin_header_state` (`missing`, `null`, `empty`, or `present`), a redacted `origin_representation`, `origin_rejection_reason` (`missing`, `malformed`, `disallowed_scheme`, or `disallowed_host`), request method/host/path, bounded User-Agent, HTTP status, and `upgrade_error_category`. Origin userinfo, path, query, fragment, and unlisted hostname are not logged; credentials, cookies, identity headers, and IP addresses are excluded. Other WebSocket handshake failures remain logged as `upgrade_failed`.
+
+Example CloudWatch Logs Insights query:
+
+```text
+fields @timestamp, request_id, origin_rejection_reason, origin_header_state,
+       origin_representation, method, host, path, status, upgrade_error_category
+| filter event = "websocket_origin_rejected"
+| sort @timestamp desc
+```
+
+Use `request_id` to correlate the rejection with adjacent request or gateway logs. To identify the running environment and build, use the log group/stream and deployment-platform metadata already attached to the selected log record or workload: environment/namespace, pod, image/tag or digest, and commit label (Konflux build metadata uses `build.appstudio.redhat.com/commit_sha`). Metadata availability varies by environment; do not infer a deployment or commit when those fields are absent. This event alone does not prove which image is deployed.
+
 ## Reading Kafka Data
 
 Ensure you have run `make infra` and that `docker ps` shows a running kafka.
@@ -54,4 +69,3 @@ Ensure you have run `make infra` and that `docker ps` shows a running kafka.
 Ensure that you have run `go run .` and that chrome-service has come up.
 
 Run `go run cmd/kafka/testMessage.go` in a separate window. Once complete, you should see a new kafka message in chrome-service's logs. Feel free to adjust the script to change the test values as you wish. 
-

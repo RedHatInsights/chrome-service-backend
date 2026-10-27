@@ -2,8 +2,6 @@ package routes
 
 import (
 	"net/http"
-	"net/url"
-	"strings"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
 	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
@@ -12,6 +10,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
 	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
+	"github.com/sirupsen/logrus"
 )
 
 var allowedOriginSuffixes = []string{
@@ -31,21 +30,7 @@ var upgrader = websocket.Upgrader{
 // checkOrigin validates the WebSocket upgrade Origin header.
 // Must stay in sync with CORS AllowedOrigins in main.go.
 func checkOrigin(r *http.Request) bool {
-	origin := r.Header.Get("Origin")
-	if origin == "" {
-		return false
-	}
-	parsed, err := url.Parse(origin)
-	if err != nil || parsed.Scheme != "https" {
-		return false
-	}
-	host := parsed.Hostname()
-	for _, suffix := range allowedOriginSuffixes {
-		if strings.HasSuffix(host, suffix) {
-			return true
-		}
-	}
-	return host == "console.redhat.com" || host == "console.stage.redhat.com" || host == "console.dev.redhat.com"
+	return originRejectionReason(r) == ""
 }
 
 func MakeWsRoute(sub chi.Router) {
@@ -60,8 +45,23 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ws, err := upgrader.Upgrade(w, r, nil)
+	// Copy the upgrader so the request-local callback can record why this
+	// specific upgrade was rejected without sharing mutable state across requests.
+	requestUpgrader := upgrader
+	originReason := ""
+	requestUpgrader.CheckOrigin = func(req *http.Request) bool {
+		originReason = originRejectionReason(req)
+		return originReason == ""
+	}
+	ws, err := requestUpgrader.Upgrade(w, r, nil)
 	if err != nil {
+		if originReason != "" {
+			logRejectedWebSocketOrigin(r, originReason)
+		} else {
+			logger.LogFor(r.Context()).WithFields(logrus.Fields{
+				"upgrade_error_category": "upgrade_failed",
+			}).WithError(err).Error("Unable to upgrade WS connection")
+		}
 		return
 	}
 

@@ -62,12 +62,29 @@ func Init() error {
 	postgresDB.SetConnMaxLifetime(time.Minute * 1)
 
 	for _, model := range []any{&models.UserIdentity{}, &models.FavoritePage{}, &models.SelfReport{}} {
-		exists := DB.Migrator().HasTable(model)
-		if !exists {
-			if err := DB.Migrator().CreateTable(model); err != nil {
-				return &InitError{Stage: "schema", Err: err}
-			}
+		if err := ensureTable(DB.Migrator(), model); err != nil {
+			return &InitError{Stage: "schema", Err: err}
 		}
+	}
+	return nil
+}
+
+type schemaMigrator interface {
+	HasTable(interface{}) bool
+	CreateTable(...interface{}) error
+}
+
+func ensureTable(migrator schemaMigrator, model interface{}) error {
+	if migrator.HasTable(model) {
+		return nil
+	}
+	if err := migrator.CreateTable(model); err != nil {
+		// Another initializer may have created this table after our HasTable check.
+		// Recheck only this table before treating the create error as a benign race.
+		if migrator.HasTable(model) {
+			return nil
+		}
+		return err
 	}
 	return nil
 }

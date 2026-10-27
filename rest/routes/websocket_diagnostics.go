@@ -21,6 +21,7 @@ var (
 	jwtCredential       = regexp.MustCompile(`\b[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b`)
 	ipv4Address         = regexp.MustCompile(`\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b`)
 	ipv6Address         = regexp.MustCompile(`(?i)(?:[0-9a-f]{0,4}:){2,7}[0-9a-f]{0,4}`)
+	sensitiveHost       = regexp.MustCompile(`(?i)(token|secret|password|credential|cookie|identity|api[_-]?key|access[_-]?key|private[_-]?key|session|jwt)`)
 )
 
 type originHeaderInfo struct {
@@ -66,6 +67,11 @@ func inspectOriginHeader(r *http.Request) originHeaderInfo {
 		info.rejectionReason = "missing"
 		info.representation = "<empty>"
 		return info
+	case value == "null":
+		info.state = "null"
+		info.rejectionReason = "missing"
+		info.representation = "<null>"
+		return info
 	}
 
 	parsed, err := url.Parse(value)
@@ -77,17 +83,40 @@ func inspectOriginHeader(r *http.Request) originHeaderInfo {
 	}
 
 	info.state = "present"
-	hostKind := "<unlisted-host>"
-	if isAllowedOriginHost(parsed.Hostname()) {
-		hostKind = "<allowed-host>"
-	}
-	info.representation = safeDiagnosticString(strings.ToLower(parsed.Scheme)+"://"+hostKind, 64)
+	info.representation = safeDiagnosticString(strings.ToLower(parsed.Scheme)+"://"+safeOriginHost(parsed.Hostname()), 320)
 	if parsed.Scheme != "https" {
 		info.rejectionReason = "disallowed_scheme"
 	} else if !isAllowedOriginHost(parsed.Hostname()) {
 		info.rejectionReason = "disallowed_host"
 	}
 	return info
+}
+
+func safeOriginHost(host string) string {
+	if len(host) == 0 || len(host) > 253 {
+		return "<redacted-host>"
+	}
+	if net.ParseIP(host) != nil {
+		return "<redacted-ip>"
+	}
+	if sensitiveHost.MatchString(host) {
+		return "<redacted-host>"
+	}
+	host = strings.TrimSuffix(host, ".")
+	if host == "" {
+		return "<redacted-host>"
+	}
+	for _, label := range strings.Split(host, ".") {
+		if len(label) == 0 || len(label) > 63 || label[0] == '-' || label[len(label)-1] == '-' {
+			return "<redacted-host>"
+		}
+		for _, char := range label {
+			if !(char >= 'a' && char <= 'z' || char >= 'A' && char <= 'Z' || char >= '0' && char <= '9' || char == '-') {
+				return "<redacted-host>"
+			}
+		}
+	}
+	return host
 }
 
 func isAllowedOriginHost(host string) bool {

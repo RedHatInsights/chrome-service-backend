@@ -63,13 +63,17 @@ func TestInspectOriginHeaderDiagnostics(t *testing.T) {
 		wantRepr   string
 	}{
 		{"missing", func(http.Header) {}, "missing", "missing", "<missing>"},
-		{"null", func(h http.Header) { h["Origin"] = nil }, "null", "missing", "<null>"},
+		{"null header slice", func(h http.Header) { h["Origin"] = nil }, "null", "missing", "<null>"},
+		{"literal null", func(h http.Header) { h.Set("Origin", "null") }, "null", "missing", "<null>"},
 		{"empty", func(h http.Header) { h["Origin"] = []string{""} }, "empty", "missing", "<empty>"},
 		{"malformed", func(h http.Header) { h.Set("Origin", "://bad") }, "present", "malformed", "<malformed>"},
-		{"non HTTPS", func(h http.Header) { h.Set("Origin", "http://console.redhat.com") }, "present", "disallowed_scheme", "http://<allowed-host>"},
-		{"unlisted", func(h http.Header) { h.Set("Origin", "https://evil.example/path?token=private#fragment") }, "present", "disallowed_host", "https://<unlisted-host>"},
-		{"userinfo removed", func(h http.Header) { h.Set("Origin", "https://private:secret@evil.example/?password=secret#private") }, "present", "disallowed_host", "https://<unlisted-host>"},
-		{"valid accepted", func(h http.Header) { h.Set("Origin", "https://console.redhat.com") }, "present", "", "https://<allowed-host>"},
+		{"non HTTPS", func(h http.Header) { h.Set("Origin", "http://console.redhat.com") }, "present", "disallowed_scheme", "http://console.redhat.com"},
+		{"unlisted host visible", func(h http.Header) { h.Set("Origin", "https://evil.example/path?token=private#fragment") }, "present", "disallowed_host", "https://evil.example"},
+		{"userinfo and URL parts removed", func(h http.Header) { h.Set("Origin", "https://private:secret@evil.example/?password=secret#private") }, "present", "disallowed_host", "https://evil.example"},
+		{"IP host redacted", func(h http.Header) { h.Set("Origin", "https://192.0.2.10") }, "present", "disallowed_host", "https://<redacted-ip>"},
+		{"unsafe host redacted", func(h http.Header) { h.Set("Origin", "https://bad_host.example") }, "present", "disallowed_host", "https://<redacted-host>"},
+		{"secret-like host redacted", func(h http.Header) { h.Set("Origin", "https://secret.evil.example") }, "present", "disallowed_host", "https://<redacted-host>"},
+		{"valid accepted", func(h http.Header) { h.Set("Origin", "https://console.redhat.com") }, "present", "", "https://console.redhat.com"},
 	}
 
 	for _, tt := range tests {
@@ -91,12 +95,14 @@ func TestHandleWsConnectionLogsStructuredOriginRejection(t *testing.T) {
 		setOrigin  func(http.Header)
 		wantReason string
 		wantState  string
+		wantOrigin string
 	}{
-		{"missing", func(http.Header) {}, "missing", "missing"},
-		{"null", func(h http.Header) { h["Origin"] = nil }, "missing", "null"},
-		{"malformed", func(h http.Header) { h.Set("Origin", "://bad") }, "malformed", "present"},
-		{"non HTTPS", func(h http.Header) { h.Set("Origin", "http://console.redhat.com") }, "disallowed_scheme", "present"},
-		{"unlisted", func(h http.Header) { h.Set("Origin", "https://evil.example") }, "disallowed_host", "present"},
+		{"missing", func(http.Header) {}, "missing", "missing", "<missing>"},
+		{"null header slice", func(h http.Header) { h["Origin"] = nil }, "missing", "null", "<null>"},
+		{"literal null", func(h http.Header) { h.Set("Origin", "null") }, "missing", "null", "<null>"},
+		{"malformed", func(h http.Header) { h.Set("Origin", "://bad") }, "malformed", "present", "<malformed>"},
+		{"non HTTPS", func(h http.Header) { h.Set("Origin", "http://console.redhat.com") }, "disallowed_scheme", "present", "http://console.redhat.com"},
+		{"unlisted", func(h http.Header) { h.Set("Origin", "https://evil.example") }, "disallowed_host", "present", "https://evil.example"},
 	}
 
 	for _, tt := range tests {
@@ -117,6 +123,7 @@ func TestHandleWsConnectionLogsStructuredOriginRejection(t *testing.T) {
 			assert.Equal(t, "websocket_origin_rejected", event["event"])
 			assert.Equal(t, tt.wantReason, event["origin_rejection_reason"])
 			assert.Equal(t, tt.wantState, event["origin_header_state"])
+			assert.Equal(t, tt.wantOrigin, event["origin_representation"])
 			assert.Equal(t, "request-correlation-123", event["request_id"])
 			assert.Equal(t, float64(http.StatusForbidden), event["status"])
 			assert.Equal(t, "origin_rejected", event["upgrade_error_category"])

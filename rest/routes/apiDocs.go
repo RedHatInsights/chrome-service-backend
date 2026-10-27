@@ -3,14 +3,15 @@ package routes
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
 	"slices"
 
+	requestlogger "github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
-	"github.com/sirupsen/logrus"
 )
 
 const specsFilePath = "static/specs-generated.json"
@@ -28,36 +29,36 @@ func GetApiDocs(w http.ResponseWriter, r *http.Request) {
 	bundleFilter := r.URL.Query().Get("bundle")
 
 	if bundleFilter == "" {
-		serveSpecsFile(w)
+		serveSpecsFile(w, r)
 		return
 	}
 
-	serveFilteredSpecs(w, bundleFilter)
+	serveFilteredSpecs(w, r, bundleFilter)
 }
 
-func serveSpecsFile(w http.ResponseWriter) {
+func serveSpecsFile(w http.ResponseWriter, r *http.Request) {
 	f, err := os.Open(specsFilePath)
 	if err != nil {
-		handleFileError(w, err)
+		handleFileError(w, r, err)
 		return
 	}
 	defer f.Close()
 
 	if _, err := io.Copy(w, f); err != nil {
-		logrus.Errorf("failed to stream specs file %s: %v", specsFilePath, err)
+		requestlogger.LogFor(r.Context()).WithField("error_type", fmt.Sprintf("%T", err)).Error("specs response streaming failed")
 	}
 }
 
-func serveFilteredSpecs(w http.ResponseWriter, bundle string) {
+func serveFilteredSpecs(w http.ResponseWriter, r *http.Request, bundle string) {
 	data, err := os.ReadFile(specsFilePath)
 	if err != nil {
-		handleFileError(w, err)
+		handleFileError(w, r, err)
 		return
 	}
 
 	var allSpecs map[string][]apiDocEntry
 	if err := json.Unmarshal(data, &allSpecs); err != nil {
-		logrus.Errorf("failed to parse specs file %s: %v", specsFilePath, err)
+		requestlogger.LogFor(r.Context()).WithField("error_type", fmt.Sprintf("%T", err)).Error("specs file parsing failed")
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(util.ErrorResponse{Errors: []string{"failed to parse specs file"}})
 		return
@@ -72,18 +73,19 @@ func serveFilteredSpecs(w http.ResponseWriter, bundle string) {
 		}
 	}
 
-	json.NewEncoder(w).Encode(filtered)
+	if err := json.NewEncoder(w).Encode(filtered); err != nil {
+		requestlogger.LogFor(r.Context()).WithField("error_type", fmt.Sprintf("%T", err)).Error("filtered specs response encoding failed")
+	}
 }
 
-func handleFileError(w http.ResponseWriter, err error) {
+func handleFileError(w http.ResponseWriter, r *http.Request, err error) {
 	if errors.Is(err, os.ErrNotExist) {
-		logrus.Warnf("specs file not found at %s, returning empty object", specsFilePath)
 		if _, writeErr := w.Write([]byte("{}")); writeErr != nil {
-			logrus.Errorf("failed to write fallback response: %v", writeErr)
+			requestlogger.LogFor(r.Context()).WithField("error_type", fmt.Sprintf("%T", writeErr)).Error("empty specs fallback response failed")
 		}
 		return
 	}
-	logrus.Errorf("failed to open specs file %s: %v", specsFilePath, err)
+	requestlogger.LogFor(r.Context()).WithField("error_type", fmt.Sprintf("%T", err)).Error("specs file read failed")
 	w.WriteHeader(http.StatusInternalServerError)
 	json.NewEncoder(w).Encode(util.ErrorResponse{Errors: []string{"failed to read specs file"}})
 }

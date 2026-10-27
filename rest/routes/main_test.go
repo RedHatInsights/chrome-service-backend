@@ -22,7 +22,9 @@ func TestMain(t *testing.M) {
 	config.Get().DbName = dbName
 	service.LoadBaseLayout()
 
-	database.Init()
+	if err := database.Init(); err != nil {
+		panic(err)
+	}
 	err := database.DB.AutoMigrate(&models.DashboardTemplate{}, &models.UserIdentity{})
 	if err != nil {
 		panic(err)

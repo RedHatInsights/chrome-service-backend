@@ -13,18 +13,18 @@ import (
 
 // Package-level test constants
 const (
-	testUserID       uint   = 1
-	testAccountID    string = "test-account-123"
-	testPathname1    string = "/insights/dashboard"
-	testPathname2    string = "/insights/advisor"
-	testPathname3    string = "/insights/policies"
+	testUserID    uint   = 1
+	testAccountID string = "test-account-123"
+	testPathname1 string = "/insights/dashboard"
+	testPathname2 string = "/insights/advisor"
+	testPathname3 string = "/insights/policies"
 )
 
 // setupTestUser initializes the database and creates a test user with automatic cleanup
 func setupTestUser(t *testing.T) *models.UserIdentity {
 	t.Helper()
 
-	database.Init()
+	require.NoError(t, database.Init())
 
 	user := &models.UserIdentity{AccountId: testAccountID}
 	err := database.DB.Create(user).Error
@@ -86,10 +86,10 @@ func TestCheckIfExistsInDB(t *testing.T) {
 	}
 
 	tests := []struct {
-		name            string
-		allPages        []models.FavoritePage
-		newPage         models.FavoritePage
-		expectedExists  bool
+		name             string
+		allPages         []models.FavoritePage
+		newPage          models.FavoritePage
+		expectedExists   bool
 		expectedGlobalID uint
 	}{
 		{
@@ -100,7 +100,7 @@ func TestCheckIfExistsInDB(t *testing.T) {
 				Favorite:       true,
 				UserIdentityID: testUserID,
 			},
-			expectedExists:  true,
+			expectedExists:   true,
 			expectedGlobalID: 1,
 		},
 		{
@@ -111,7 +111,7 @@ func TestCheckIfExistsInDB(t *testing.T) {
 				Favorite:       true,
 				UserIdentityID: testUserID,
 			},
-			expectedExists:  false,
+			expectedExists:   false,
 			expectedGlobalID: 0,
 		},
 		{
@@ -122,7 +122,7 @@ func TestCheckIfExistsInDB(t *testing.T) {
 				Favorite:       true,
 				UserIdentityID: testUserID,
 			},
-			expectedExists:  false,
+			expectedExists:   false,
 			expectedGlobalID: 0,
 		},
 		{
@@ -133,7 +133,7 @@ func TestCheckIfExistsInDB(t *testing.T) {
 				Favorite:       true,
 				UserIdentityID: testUserID,
 			},
-			expectedExists:  true,
+			expectedExists:   true,
 			expectedGlobalID: 2,
 		},
 	}
@@ -399,11 +399,11 @@ func TestSaveUserFavoritePage(t *testing.T) {
 	user := setupTestUser(t)
 
 	tests := []struct {
-		name            string
-		existingPages   []models.FavoritePage
-		newPage         models.FavoritePage
-		expectError     bool
-		validateFunc    func(*testing.T, uint)
+		name          string
+		existingPages []models.FavoritePage
+		newPage       models.FavoritePage
+		expectError   bool
+		validateFunc  func(*testing.T, uint)
 	}{
 		{
 			name:          "creates new favorite page",

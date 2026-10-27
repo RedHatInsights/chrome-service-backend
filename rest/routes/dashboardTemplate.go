@@ -12,12 +12,10 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
-	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
 
 func handleDashboardError(err error, w http.ResponseWriter) {
-	logrus.Errorln(err)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil && errors.Is(err, gorm.ErrRecordNotFound) {
 		resp := util.ErrorResponse{
@@ -43,7 +41,6 @@ func handleDashboardError(err error, w http.ResponseWriter) {
 
 		return
 	} else if err != nil {
-		logrus.Errorln(err)
 		resp := util.ErrorResponse{
 			Errors: []string{err.Error()},
 		}

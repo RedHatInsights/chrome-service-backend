@@ -240,6 +240,7 @@ All authenticated endpoints require `x-rh-identity` header (base64-encoded JSON 
 | `docs/user-identity.md` | User identity model details |
 | `docs/websocket.md` | WebSocket implementation details |
 | `docs/intercom-keys.md` | Intercom integration keys |
+| `docs/logging.md` | Structured log levels, fields, and CloudWatch queries |
 | `e2e/README.md` | E2E test suite documentation |
 
 ## Common Pitfalls

@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	requestlogger "github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
 	"github.com/sirupsen/logrus"
@@ -93,7 +94,36 @@ func TestLogShutdown(t *testing.T) {
 	assert.Contains(t, output, "security_event")
 	assert.Contains(t, output, "SHUTDOWN")
 	assert.Contains(t, output, "server stopped")
+	assert.Contains(t, output, "level=info")
+	assert.Contains(t, output, "outcome=success")
+}
+
+func TestLogShutdownFailure(t *testing.T) {
+	output := captureOutput(func() {
+		LogShutdownWithOutcome("chrome-service-backend", "http server failed", true)
+	})
+
+	assert.Contains(t, output, "SHUTDOWN")
+	assert.Contains(t, output, "outcome=failure")
 	assert.Contains(t, output, "level=error")
+}
+
+func TestRequestSecurityEventHasRequestCorrelation(t *testing.T) {
+	ctx := context.WithValue(context.Background(), util.IDENTITY_CTX_KEY, &identity.XRHID{
+		Identity: identity.Identity{
+			OrgID: "org-456",
+			User:  &identity.User{UserID: "user-789"},
+		},
+	})
+	ctx = requestlogger.WithLogger(ctx, logrus.WithField("request_id", "request-123"))
+	output := captureOutput(func() {
+		Log(ctx, "READ", "user_identity", "user-456", "success")
+	})
+
+	assert.Contains(t, output, "request_id=request-123")
+	assert.Contains(t, output, "user_id=user-789")
+	assert.Contains(t, output, "org_id=org-456")
+	assert.Contains(t, output, "user_identity")
 }
 
 func TestLogWithPrincipal(t *testing.T) {

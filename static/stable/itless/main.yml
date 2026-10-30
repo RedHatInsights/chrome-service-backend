@@ -4,20 +4,6 @@ acs:
     versions:
       - v1
 
-advisor:
-  title: Advisor
-  api:
-    versions:
-      - v1
-    apiName: insights
-
-compliance:
-  title: Compliance
-  api:
-    versions:
-      - v1
-      - v2
-
 cost-management:
   title: Cost Management
   api:
@@ -36,12 +22,6 @@ integrations:
     versions:
       - v1
 
-inventory:
-  title: Managed Inventory
-  api:
-    versions:
-      - v1
-
 notifications:
   title: Notifications
   api:
@@ -54,27 +34,8 @@ openshift:
     versions:
       - v1
 
-patch:
-  title: Patch
-  api:
-    versions:
-      - v3
-
-
 rbac:
   title: Role-based Access Control
-  api:
-    versions:
-      - v1
-
-remediations:
-  title: Remediations
-  api:
-    versions:
-      - v1
-
-ros:
-  title: Resource Optimization
   api:
     versions:
       - v1
@@ -110,20 +71,8 @@ subscriptions:
     alias:
       - rhsm-subscriptions
 
-vulnerability:
-  title: Vulnerability Management
-  api:
-    versions:
-      - v1
-
 app-studio-docs:
   title: App Studio Docs
-  api:
-    versions:
-      - v1
-
-malware-detection:
-  title: Malware Detection
   api:
     versions:
       - v1

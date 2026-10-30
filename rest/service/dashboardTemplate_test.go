@@ -164,16 +164,17 @@ var dbName string
 
 func setUp() {
 	cfg := config.Get()
-	database.Init()
 	cfg.Test = true
 	// This is critical for the dashboard template loader CWD
 	cfg.DashboardConfig.TemplatesWD = "../../"
 	time := time.Now().UnixNano()
 	dbName = fmt.Sprintf("%d-services.db", time)
-	config.Get().DbName = dbName
+	cfg.DbName = dbName
 	LoadBaseLayout()
 
-	database.Init()
+	if err := database.Init(); err != nil {
+		panic(err)
+	}
 	err := database.DB.AutoMigrate(&models.DashboardTemplate{}, &models.UserIdentity{})
 	if err != nil {
 		panic(err)

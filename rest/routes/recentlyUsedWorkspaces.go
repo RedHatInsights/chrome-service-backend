@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/RedHatInsights/chrome-service-backend/config"
+	requestlogger "github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
@@ -122,12 +123,15 @@ func cleanIncomingWorkspaces(workspaces []models.Workspace) []models.Workspace {
 }
 
 // sendJSONResponse is a helper function to be able to send JSON responses to the callers.
-func sendJSONResponse(w http.ResponseWriter, status int, body any) {
+func sendJSONResponse(w http.ResponseWriter, r *http.Request, status int, body any) {
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(status)
 
 	if err := json.NewEncoder(w).Encode(body); err != nil {
-		logrus.WithFields(logrus.Fields{"status": status, "body": body}).Errorf("Unable to encode response body to send it to the client: %s", err)
+		requestlogger.LogFor(r.Context()).WithFields(logrus.Fields{
+			"status":     status,
+			"error_type": fmt.Sprintf("%T", err),
+		}).Error("response encoding failed")
 	}
 }
 
@@ -151,7 +155,7 @@ func GetRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	sendJSONResponse(w, http.StatusOK, responseBody)
+	sendJSONResponse(w, r, http.StatusOK, responseBody)
 }
 
 // SaveRecentlyUsedWorkspaces grabs the recently used workspaces from the payload and stores them in the user's profile
@@ -160,9 +164,9 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 	// Get the user's identity object.
 	user, ok := r.Context().Value(util.USER_CTX_KEY).(models.UserIdentity)
 	if !ok {
-		logrus.Errorf(`Unable to obtain the user identity from request %#v`, r)
+		requestlogger.LogFor(r.Context()).Error("request identity unavailable")
 
-		sendJSONResponse(w, http.StatusInternalServerError, util.ErrorResponse{
+		sendJSONResponse(w, r, http.StatusInternalServerError, util.ErrorResponse{
 			Errors: []string{"Internal server error"},
 		})
 
@@ -171,9 +175,9 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 
 	// An empty body is not an acceptable request body.
 	if r.Body == http.NoBody {
-		logrus.Debug(`Returning a "bad requestWorkspaces" response to a "save recently used workspaces" requestWorkspaces because the incoming body is empty`)
+		requestlogger.LogFor(r.Context()).Debug("empty recently used workspaces request")
 
-		sendJSONResponse(w, http.StatusBadRequest, util.ErrorResponse{
+		sendJSONResponse(w, r, http.StatusBadRequest, util.ErrorResponse{
 			Errors: []string{"Request body is empty"},
 		})
 
@@ -183,9 +187,9 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 	// Attempt decoding the incoming payload.
 	var requestWorkspaces []models.Workspace
 	if err := json.NewDecoder(r.Body).Decode(&requestWorkspaces); err != nil {
-		logrus.Debugf(`unable to decode the body from the incoming "store recently used workspaces" requestWorkspaces: %s`, err)
+		requestlogger.LogFor(r.Context()).WithField("error_type", fmt.Sprintf("%T", err)).Debug("recently used workspaces request decode failed")
 
-		sendJSONResponse(w, http.StatusBadRequest, util.ErrorResponse{
+		sendJSONResponse(w, r, http.StatusBadRequest, util.ErrorResponse{
 			Errors: []string{"Unexpected body specified. Please send a list of workspaces."},
 		})
 
@@ -194,9 +198,9 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 
 	// There should be at least one workspace in the payload.
 	if len(requestWorkspaces) == 0 {
-		logrus.Debug(`Returning a "bad requestWorkspaces" response to a "save recently used workspaces" requestWorkspaces because the incoming body does not contain a single workspace we can save`)
+		requestlogger.LogFor(r.Context()).Debug("recently used workspaces request is empty")
 
-		sendJSONResponse(w, http.StatusBadRequest, util.ErrorResponse{
+		sendJSONResponse(w, r, http.StatusBadRequest, util.ErrorResponse{
 			Errors: []string{"At least one workspace needs to be specified in the request"},
 		})
 
@@ -206,9 +210,9 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 	// Validate that the workspaces contain the right input.
 	for _, incomingWorkspace := range requestWorkspaces {
 		if errors := validateWorkspace(incomingWorkspace); len(errors) > 0 {
-			logrus.Debugf(`Returning a "bad requestWorkspaces" response to a "save recently used workspaces" requestWorkspaces because the input has the following validation problems: %v`, errors)
+			requestlogger.LogFor(r.Context()).WithField("validation_error_count", len(errors)).Debug("recently used workspaces validation failed")
 
-			sendJSONResponse(w, http.StatusBadRequest, util.ErrorResponse{
+			sendJSONResponse(w, r, http.StatusBadRequest, util.ErrorResponse{
 				Errors: errors,
 			})
 
@@ -222,10 +226,9 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 
 	// Save the most recently used workspaces in the database.
 	if err := service.SaveRecentlyUsedWorkspaces(&user, workspacesToSave); err != nil {
-		logrus.Errorf(`unable to save the recently used workspaces in the database: %s`, err)
 		securitylog.LogWithReason(r.Context(), "UPDATE", "recently_used_workspaces", user.AccountId, "failure", "save failed")
 
-		sendJSONResponse(w, http.StatusInternalServerError, util.ErrorResponse{
+		sendJSONResponse(w, r, http.StatusInternalServerError, util.ErrorResponse{
 			Errors: []string{"Unable to save recently used workspaces"},
 		})
 
@@ -242,7 +245,7 @@ func SaveRecentlyUsedWorkspaces(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	sendJSONResponse(w, http.StatusCreated, responseBody)
+	sendJSONResponse(w, r, http.StatusCreated, responseBody)
 }
 
 func MakeRecentlyUsedWorkspacesRoutes(sub chi.Router) {

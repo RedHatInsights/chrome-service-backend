@@ -15,6 +15,7 @@ import (
 var cwHook *cloudwatch.LogrusHook
 
 func SetupCloudWatch(cfg *config.ChromeServiceConfig) {
+	logrus.SetOutput(os.Stdout)
 	logrus.SetFormatter(&logrus.JSONFormatter{
 		FieldMap: logrus.FieldMap{
 			logrus.FieldKeyMsg: "message",
@@ -47,7 +48,7 @@ func SetupCloudWatch(cfg *config.ChromeServiceConfig) {
 		5*time.Second,
 	)
 	if err != nil {
-		logrus.Errorf("Failed to initialize CloudWatch writer: %v", err)
+		logrus.WithField("error_type", fmt.Sprintf("%T", err)).Error("CloudWatch writer initialization failed")
 		return
 	}
 

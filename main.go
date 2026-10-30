@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -29,29 +29,83 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
+	"runtime/debug"
 )
-
-func init() {
-	godotenv.Load()
-	flag.Parse()
-	database.Init()
-	util.InitUserIdentitiesCache()
-	util.CreateChromeConfiguration()
-}
 
 func main() {
 	cfg := config.Get()
+	setupGlobalLogger(cfg)
+	if err := run(cfg); err != nil {
+		fields := logrus.Fields{"error_type": rootErrorType(err)}
+		var failure *lifecycleError
+		if errors.As(err, &failure) {
+			fields["component"] = failure.component
+			if failure.panicType != "" {
+				fields["panic_type"] = failure.panicType
+				fields["stack"] = failure.stack
+			}
+		}
+		var databaseFailure *database.InitError
+		if errors.As(err, &databaseFailure) {
+			fields["stage"] = databaseFailure.Stage
+		}
+		logrus.WithFields(fields).Error("service stopped unexpectedly")
+		logger.FlushCloudWatch()
+		os.Exit(1)
+	}
+	logger.FlushCloudWatch()
+}
+
+type lifecycleError struct {
+	component string
+	err       error
+	panicType string
+	stack     string
+}
+
+func (e *lifecycleError) Error() string { return e.component + " failed" }
+func (e *lifecycleError) Unwrap() error { return e.err }
+
+func rootErrorType(err error) string {
+	for errors.Unwrap(err) != nil {
+		err = errors.Unwrap(err)
+	}
+	if err == nil {
+		return "unknown"
+	}
+	return fmt.Sprintf("%T", err)
+}
+
+func run(cfg *config.ChromeServiceConfig) (result error) {
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			stack := debug.Stack()
+			if len(stack) > 8192 {
+				stack = stack[:8192]
+			}
+			result = &lifecycleError{component: "startup", panicType: fmt.Sprintf("%T", recovered), stack: string(stack)}
+		}
+	}()
+
+	flag.Parse()
+	if err := godotenv.Load(); err != nil && !errors.Is(err, os.ErrNotExist) {
+		logrus.WithField("error_type", fmt.Sprintf("%T", err)).Warn("environment file could not be loaded")
+	}
+	if err := database.Init(); err != nil {
+		return &lifecycleError{component: "database", err: err}
+	}
+	logrus.Info("database initialized")
+	util.InitUserIdentitiesCache()
+	util.CreateChromeConfiguration()
 	service.LoadBaseLayout()
 	featureflags.Init(cfg)
-	setupGlobalLogger(cfg)
-	defer logger.FlushCloudWatch()
 	router := chi.NewRouter()
 	metricsRouter := chi.NewRouter()
 
 	router.Use(middleware.RequestID)
 	router.Use(logger.InjectLogger)
 	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, logrus.StandardLogger())))
-	router.Use(middleware.Recoverer)
+	router.Use(logger.Recoverer)
 	router.Use(middleware.URLFormat)
 
 	router.Get("/health", HealthProbe)
@@ -102,6 +156,7 @@ func main() {
 				},
 			}))
 			subrouter.Use(m.ParseHeaders)
+			subrouter.Use(logger.EnrichLoggerWithIdentity)
 			subrouter.Route("/ws", routes.MakeWsRoute)
 		})
 	} else {
@@ -110,43 +165,62 @@ func main() {
 
 	metricsRouter.Handle("/metrics", promhttp.Handler())
 
-	go func() {
-		metricsStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.MetricsPort))
-		if err := http.ListenAndServe(metricsStringAddr, metricsRouter); err != nil {
-			logger.FlushCloudWatch()
-			log.Fatalf("Metrics server stopped %v", err)
-		}
-	}()
-
 	securitylog.LogStartup("chrome-service-backend", cfg.WebPort)
 
 	serverStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.WebPort))
 	server := &http.Server{Addr: serverStringAddr, Handler: router}
-
+	metricsStringAddr := fmt.Sprintf(":%s", strconv.Itoa(cfg.MetricsPort))
+	metricsServer := &http.Server{Addr: metricsStringAddr, Handler: metricsRouter}
+	type serveResult struct {
+		component string
+		err       error
+	}
+	serveErrors := make(chan serveResult, 2)
+	serve := func(component string, server *http.Server) {
+		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			serveErrors <- serveResult{component: component, err: err}
+		}
+	}
 	// Handle SIGTERM/SIGINT for graceful shutdown with security logging.
 	// Signal wait is synchronous in main so shutdown completes before exit.
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGTERM, syscall.SIGINT)
+	defer signal.Stop(sigChan)
+	go serve("http", server)
+	go serve("metrics", metricsServer)
 
-	go func() {
-		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("server error: %v", err))
-			logger.FlushCloudWatch()
-			log.Fatalf("Chrome-service-api has stopped due to %v", err)
-		}
-	}()
-
-	// Block until shutdown signal received.
-	sig := <-sigChan
-	securitylog.LogShutdown("chrome-service-backend", fmt.Sprintf("received %s", sig))
+	var shutdownReason string
+	var shutdownFailure error
+	shutdownComponent := "shutdown"
+	select {
+	case sig := <-sigChan:
+		shutdownReason = fmt.Sprintf("received %s", sig)
+	case failed := <-serveErrors:
+		shutdownReason = failed.component + " server failed"
+		shutdownFailure = failed.err
+		shutdownComponent = failed.component
+	}
 
 	// Graceful shutdown with bounded timeout to drain active connections.
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	if err := server.Shutdown(ctx); err != nil {
-		log.Printf("Graceful shutdown error: %v", err)
+		if shutdownFailure == nil {
+			shutdownFailure = err
+			shutdownComponent = "http_shutdown"
+		}
 	}
-	logger.FlushCloudWatch()
+	if err := metricsServer.Shutdown(ctx); err != nil {
+		if shutdownFailure == nil {
+			shutdownFailure = err
+			shutdownComponent = "metrics_shutdown"
+		}
+	}
+	securitylog.LogShutdownWithOutcome("chrome-service-backend", shutdownReason, shutdownFailure != nil)
+	if shutdownFailure != nil {
+		return &lifecycleError{component: shutdownComponent, err: shutdownFailure}
+	}
+	return nil
 }
 
 func HelloWorld(response http.ResponseWriter, request *http.Request) {

@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
-	"github.com/sirupsen/logrus"
 )
 
 func ParseXRHIdentityHeader(identityHeader string) (*identity.XRHID, error) {
@@ -20,11 +19,9 @@ func ParseXRHIdentityHeader(identityHeader string) (*identity.XRHID, error) {
 
 	if err != nil {
 		err = fmt.Errorf("x-rh-identity header is not a valid json: %w", err)
-		logrus.Error(err)
 		return nil, err
 	}
 
 	// XRHIdentity.Identity.User.UserID
 	return &XRHIdentity, nil
 }
-

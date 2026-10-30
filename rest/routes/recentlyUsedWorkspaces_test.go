@@ -72,7 +72,9 @@ func generateWorkspace(t *testing.T, amountToGenerate int) []models.Workspace {
 
 // TestFetchRecentlyUsedWorkspaces tests that a proper response is returned when fetching a principal's workspaces.
 func TestFetchRecentlyUsedWorkspaces(t *testing.T) {
-	database.Init()
+	if err := database.Init(); err != nil {
+		t.Fatalf("unable to initialize test database: %v", err)
+	}
 
 	// Set up a function that will help asserting the requests to fetch the recently used workspaces.
 	assertRequest := func(user models.UserIdentity, expectedWorkspaces []models.Workspace, expectedCount int, expectedTotal int) {
@@ -266,7 +268,9 @@ func TestInvalidRequestBodiesReturnBadRequest(t *testing.T) {
 // TestSaveWorkspacesSuccessfully tests that the "save workspaces" handler successfully saves the workspaces in the
 // database, and that only the maximum number of specified workspaces in the configuration are saved.
 func TestSaveWorkspacesSuccessfully(t *testing.T) {
-	database.Init()
+	if err := database.Init(); err != nil {
+		t.Fatalf("unable to initialize test database: %v", err)
+	}
 
 	// Generate one workspace more than the maximum number of workspaces we store in the database.
 	generatedWorkspaces := generateWorkspace(t, configuration.MaximumNumberRecentlyUsedWorkspaces+1)
@@ -337,7 +341,9 @@ func TestSaveWorkspacesSuccessfully(t *testing.T) {
 // the list of workspaces to be saved and moved to the top. Also, it makes sure that no more than the allowed number
 // of workspaces are saved in the database.
 func TestSaveWorkspacesWithRepeatedAndOverLimit(t *testing.T) {
-	database.Init()
+	if err := database.Init(); err != nil {
+		t.Fatalf("unable to initialize test database: %v", err)
+	}
 
 	// Generate one workspace more than the maximum number of workspaces we store in the database.
 	generatedWorkspaces := generateWorkspace(t, configuration.MaximumNumberRecentlyUsedWorkspaces)

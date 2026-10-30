@@ -14,7 +14,6 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
-	"github.com/sirupsen/logrus"
 
 	"gorm.io/datatypes"
 )
@@ -51,15 +50,6 @@ const (
 	Vulnerability       IntercomApp = "vulnerability"
 )
 
-func debugFavoritesIdentity(userId string) {
-	c := config.Get()
-	for _, i := range c.DebugConfig.DebugFavoriteIds {
-		if i == userId {
-			logrus.Warningln("DEBUG_FAVORITES_ACCOUNT_ID", userId)
-		}
-	}
-}
-
 func (ib IntercomApp) IsValidApp() error {
 	switch ib {
 	case OpenShift, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS, ActivationKeys, Advisor, Compliance, Connector, ContentSources, Dashboard, ImageBuilder, Inventory, Malware, Patch, Policies, Registration, Remediations, Ros, Tasks, Vulnerability:
@@ -83,7 +73,6 @@ func parseUserBundles(user models.UserIdentity) (map[string]bool, error) {
 func GetUserIdentityData(user models.UserIdentity) (models.UserIdentity, error) {
 	var favoritePages []models.FavoritePage
 	err := database.DB.Model(&user).Association("FavoritePages").Find(&favoritePages)
-	debugFavoritesIdentity(user.AccountId)
 
 	user.FavoritePages = favoritePages
 	return user, err
@@ -180,7 +169,6 @@ func GetUserIntercomHash(userId string, namespace IntercomApp) (IntercomPayload,
 	err := namespace.IsValidApp()
 	response := IntercomPayload{}
 	if err != nil {
-		logrus.Infof("Unable to verify intercom namespace %s", namespace)
 		return response, nil
 	}
 	devNamespace := fmt.Sprintf("%s_dev", namespace)

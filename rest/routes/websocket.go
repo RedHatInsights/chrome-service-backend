@@ -6,12 +6,12 @@ import (
 	"strings"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
+	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
 	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
-	"github.com/sirupsen/logrus"
 )
 
 var allowedOriginSuffixes = []string{
@@ -55,15 +55,13 @@ func MakeWsRoute(sub chi.Router) {
 func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	xrhid, ok := r.Context().Value(util.IDENTITY_CTX_KEY).(*identity.XRHID)
 	if !ok || xrhid == nil || xrhid.Identity.User == nil {
-		logrus.Errorln("WebSocket connection rejected: missing or invalid X-RH-Identity")
-		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "missing verified identity")
+		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", "websocket", "failure", "missing verified identity")
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
 
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		logrus.Errorln("Unable to upgrade WS connection", err)
 		return
 	}
 
@@ -74,9 +72,9 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}
-	logrus.Infoln("Registering new client with the connection hub: ", client.User)
+	logger.LogFor(r.Context()).Debug("websocket client registration requested")
 	connectionhub.ConnectionHub.Register <- client
-	logrus.Infoln("Client registration accepted by the connection hub: ", client.User)
+	logger.LogFor(r.Context()).Debug("websocket client registration accepted")
 	go client.WritePump()
 	client.ReadPump()
 }

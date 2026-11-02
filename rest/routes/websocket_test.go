@@ -107,7 +107,7 @@ func TestHandleWsConnectionLogsStructuredOriginRejection(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			entry, output := newTestRequestLogger("request-correlation-123")
+			entry, output := newTestRequestLogger(t, "request-correlation-123")
 			r := websocketUpgradeRequest()
 			tt.setOrigin(r.Header)
 			r = r.WithContext(context.WithValue(r.Context(), util.IDENTITY_CTX_KEY, &identity.XRHID{Identity: identity.Identity{User: &identity.User{}}}))
@@ -135,7 +135,7 @@ func TestHandleWsConnectionLogsStructuredOriginRejection(t *testing.T) {
 }
 
 func TestHandleWsConnectionDoesNotMisclassifyOtherUpgradeFailures(t *testing.T) {
-	entry, output := newTestRequestLogger("request-correlation-456")
+	entry, output := newTestRequestLogger(t, "request-correlation-456")
 	r := httptest.NewRequest(http.MethodGet, "/ws?query-secret=never-log", nil)
 	r.Header.Set("Origin", "https://console.redhat.com")
 	r = r.WithContext(context.WithValue(r.Context(), util.IDENTITY_CTX_KEY, &identity.XRHID{Identity: identity.Identity{User: &identity.User{}}}))
@@ -152,7 +152,7 @@ func TestHandleWsConnectionDoesNotMisclassifyOtherUpgradeFailures(t *testing.T) 
 }
 
 func TestRejectedOriginDiagnosticsBoundAndRedactFields(t *testing.T) {
-	entry, output := newTestRequestLogger("request-correlation-bounds")
+	entry, output := newTestRequestLogger(t, "request-correlation-bounds")
 	r := websocketUpgradeRequest()
 	r.Header.Set("Origin", "https://user:origin-secret@evil.example/path?token=query-secret#fragment-secret")
 	r.Header.Set("User-Agent", strings.Repeat("x", 100)+"\n\ttoken=ua-secret"+strings.Repeat("y", 400))
@@ -184,7 +184,7 @@ func TestRejectedOriginDiagnosticsBoundAndRedactFields(t *testing.T) {
 }
 
 func TestRejectedOriginDiagnosticsRedactCredentialMarkerInRequestHost(t *testing.T) {
-	entry, output := newTestRequestLogger("request-correlation-host")
+	entry, output := newTestRequestLogger(t, "request-correlation-host")
 	r := websocketUpgradeRequest()
 	r.Header.Set("Origin", "https://evil.example")
 	r.Host = "secret.example:8080"
@@ -211,11 +211,21 @@ func websocketUpgradeRequest() *http.Request {
 	return r
 }
 
-func newTestRequestLogger(requestID string) (*logrus.Entry, *strings.Builder) {
+func newTestRequestLogger(t *testing.T, requestID string) (*logrus.Entry, *strings.Builder) {
+	t.Helper()
 	output := &strings.Builder{}
-	testLogger := logrus.New()
+	testLogger := logrus.StandardLogger()
+	previousOutput := testLogger.Out
+	previousFormatter := testLogger.Formatter
+	previousLevel := testLogger.Level
 	testLogger.SetOutput(output)
 	testLogger.SetFormatter(&logrus.JSONFormatter{})
+	testLogger.SetLevel(logrus.DebugLevel)
+	t.Cleanup(func() {
+		testLogger.SetOutput(previousOutput)
+		testLogger.SetFormatter(previousFormatter)
+		testLogger.SetLevel(previousLevel)
+	})
 	return logrus.NewEntry(testLogger).WithField("request_id", requestID), output
 }
 

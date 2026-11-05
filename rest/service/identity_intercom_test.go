@@ -1,9 +1,9 @@
 package service_test
 
 import (
-	"context"
 	"crypto/hmac"
 	"crypto/sha256"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"net/http"
@@ -13,10 +13,13 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/RedHatInsights/chrome-service-backend/rest/middleware"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/RedHatInsights/chrome-service-backend/rest/routes"
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
+	"github.com/go-chi/chi/v5"
+	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -62,13 +65,30 @@ func testAutomationAnalyticsIntercomHMACMapping(t *testing.T) {
 	assert.Equal(t, expectedProd, payload.Prod)
 	assert.Equal(t, expectedDev, payload.Dev)
 
-	request := httptest.NewRequest(http.MethodGet, "/intercom?app=automationAnalytics", nil)
-	user := models.UserIdentity{AccountId: intercomTestUserID}
-	request = request.WithContext(context.WithValue(request.Context(), util.USER_CTX_KEY, user))
-	response := httptest.NewRecorder()
-	routes.GetIntercomHash(response, request)
+	// Seed the user cache so InjectUser can resolve this synthetic account without
+	// requiring a database. The request still traverses the API auth middleware.
+	util.InitUserIdentitiesCache()
+	util.UsersCache.Set(intercomTestUserID, models.UserIdentity{AccountId: intercomTestUserID})
 
-	assert.Equal(t, http.StatusOK, response.Code)
+	router := chi.NewRouter()
+	router.Route("/api/chrome-service/v1", func(sub chi.Router) {
+		sub.Use(middleware.ParseHeaders)
+		sub.Use(middleware.InjectUser)
+		sub.Route("/user", routes.MakeUserIdentityRoutes)
+	})
+
+	identityHeader, err := json.Marshal(identity.XRHID{
+		Identity: identity.Identity{
+			User: &identity.User{UserID: intercomTestUserID},
+		},
+	})
+	require.NoError(t, err)
+	request := httptest.NewRequest(http.MethodGet, "/api/chrome-service/v1/user/intercom?app=automationAnalytics", nil)
+	request.Header.Set(util.XRHIDENTITY, base64.StdEncoding.EncodeToString(identityHeader))
+	response := httptest.NewRecorder()
+	router.ServeHTTP(response, request)
+
+	require.Equal(t, http.StatusOK, response.Code)
 	var body util.EntityResponse[service.IntercomPayload]
 	require.NoError(t, json.Unmarshal(response.Body.Bytes(), &body))
 	assert.Equal(t, expectedProd, body.Data.Prod)

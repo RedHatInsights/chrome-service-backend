@@ -307,12 +307,6 @@ subscriptions:
     alias:
       - rhsm-subscriptions
 
-tasks:
-  title: Tasks
-  api:
-    versions:
-      - v1
-
 upgrades-info:
   title: Upgrades Information
   api:

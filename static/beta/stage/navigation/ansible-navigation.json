@@ -236,21 +236,6 @@
             "icon": "AnsibleIcon",
             "product": "Red Hat Insights",
             "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
-        },
-        {
-            "id": "tasks",
-            "appId": "tasks",
-            "title": "Tasks",
-            "href": "/ansible/tasks",
-            "icon": "AnsibleIcon",
-            "product": "Red Hat Insights",
-            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness.",
-            "permissions": [
-              {
-                "method": "featureFlag",
-                "args": ["platform.tasks.enabled", true]
-              }
-            ]
         }
     ]
 }

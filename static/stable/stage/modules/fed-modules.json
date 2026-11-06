@@ -585,44 +585,6 @@
           }
       ]
   },
-  "tasks": {
-    "analytics": {
-        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
-    },
-      "manifestLocation": "/apps/tasks/fed-mods.json",
-      "config": {
-          "supportCaseData": {
-                "product": "Red Hat Insights",
-                "version": "Tasks"
-            }
-      },
-      "modules": [
-          {
-              "id": "tasks",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/insights/tasks",
-                      "permissions": [
-                        {
-                          "method": "featureFlag",
-                          "args": ["platform.tasks.enabled", true]
-                        }
-                      ]
-                  },
-                  {
-                      "pathname": "/ansible/tasks",
-                      "permissions": [
-                        {
-                          "method": "featureFlag",
-                          "args": ["platform.tasks.enabled", true]
-                        }
-                      ]
-                  }
-              ]
-          }
-      ]
-  },
   "ansibleDashboard": {
       "manifestLocation": "/apps/ansible-dashboard/fed-mods.json",
       "analytics": {

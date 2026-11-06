@@ -262,25 +262,6 @@
             ]
         },
         {
-            "appId": "tasks",
-            "id": "tasks",
-            "title": "Tasks",
-            "href": "/ansible/tasks",
-            "icon": "AnsibleIcon",
-            "product": "Red Hat Insights",
-            "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness.",
-            "permissions": [
-              {
-                "method": "featureFlag",
-                "args": ["platform.lightspeed-rebrand", false]
-              },
-              {
-                "method": "featureFlag",
-                "args": ["platform.tasks.enabled", true]
-              }
-            ]
-        },
-        {
             "title": "Red Hat Lightspeed",
             "expandable": true,
             "permissions": [
@@ -362,21 +343,6 @@
                     "icon": "AnsibleIcon",
                     "product": "Red Hat Insights",
                     "description": "Resolve issues with security, configuration, compliance, and policy recommendations."
-                },
-                {
-                    "appId": "tasks",
-                    "id": "tasks-lightspeed",
-                    "title": "Tasks",
-                    "href": "/ansible/tasks",
-                    "icon": "AnsibleIcon",
-                    "product": "Red Hat Insights",
-                    "description": "Perform Red Hat-recommended analysis for your Ansible Automation Platform, like upgrade and conversion readiness.",
-                    "permissions": [
-                      {
-                        "method": "featureFlag",
-                        "args": ["platform.tasks.enabled", true]
-                      }
-                    ]
                 }
             ]
         }

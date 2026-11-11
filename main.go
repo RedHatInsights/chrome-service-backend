@@ -32,6 +32,13 @@ import (
 	"runtime/debug"
 )
 
+const (
+	openAPISpecRoute    = "/api/chrome-service/v1/openapi.json"
+	openAPISpecFilePath = "./spec/openapi.json"
+	openAPIYAMLRoute    = "/api/chrome-service/v1/openapi.yaml"
+	openAPIYAMLFilePath = "./spec/openapi.yaml"
+)
+
 func main() {
 	cfg := config.Get()
 	setupGlobalLogger(cfg)
@@ -112,12 +119,9 @@ func run(cfg *config.ChromeServiceConfig) (result error) {
 	fs := http.FileServer(http.Dir("./static/"))
 	http.Handle("/", fs)
 
-	fsApiSpec := http.FileServer(http.Dir("./spec/"))
-	http.Handle("/spec/", fsApiSpec)
-
 	// can't be in sub router as we don't enforce identity header
 	router.Handle("/api/chrome-service/v1/static/*", http.StripPrefix("/api/chrome-service/v1/static", fs))
-	router.Handle("/api/chrome-service/v1/spec/*", http.StripPrefix("/api/chrome-service/v1/spec", fsApiSpec))
+	registerOpenAPIRoute(router)
 
 	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
 		subrouter.Use(m.ParseHeaders)
@@ -221,6 +225,19 @@ func run(cfg *config.ChromeServiceConfig) (result error) {
 		return &lifecycleError{component: shutdownComponent, err: shutdownFailure}
 	}
 	return nil
+}
+
+func registerOpenAPIRoute(router chi.Router) {
+	router.Get(openAPISpecRoute, serveOpenAPISpec)
+	router.Get(openAPIYAMLRoute, serveOpenAPIYAML)
+}
+
+func serveOpenAPISpec(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, openAPISpecFilePath)
+}
+
+func serveOpenAPIYAML(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, openAPIYAMLFilePath)
 }
 
 func HelloWorld(response http.ResponseWriter, request *http.Request) {

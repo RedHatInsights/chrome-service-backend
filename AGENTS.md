@@ -100,7 +100,7 @@ Go backend service for the Red Hat Hybrid Cloud Console (HCC) Chrome UI framewor
 ### Request Flow
 
 1. **main.go** initializes: godotenv → database → user cache → chrome config → feature flags → chi router
-2. Public routes (no auth): `/health`, `/api/chrome-service/v1/static/*`, `/api/chrome-service/v1/spec/*`
+2. Public routes (no auth): `/health`, `/api/chrome-service/v1/static/*`, `/api/chrome-service/v1/openapi.json`, `/api/chrome-service/v1/openapi.yaml`
 3. Authenticated routes (`/api/chrome-service/v1/`):
    - `ParseHeaders` middleware: extracts and decodes `x-rh-identity` base64 header
    - `InjectUser` middleware: resolves `UserIdentity` from DB (with in-memory cache), injects into context
@@ -215,7 +215,8 @@ All authenticated endpoints require `x-rh-identity` header (base64-encoded JSON 
 |--------|------|-------------|
 | GET | `/health` | Health check (no auth) |
 | GET | `/api/chrome-service/v1/static/*` | Static navigation files (no auth) |
-| GET | `/api/chrome-service/v1/spec/*` | OpenAPI spec (no auth) |
+| GET | `/api/chrome-service/v1/openapi.json` | OpenAPI JSON spec (no auth) |
+| GET | `/api/chrome-service/v1/openapi.yaml` | OpenAPI YAML spec (no auth) |
 | GET/POST | `/api/chrome-service/v1/last-visited` | Last visited pages |
 | GET/POST | `/api/chrome-service/v1/recently-used-workspaces` | Recently used workspaces |
 | GET/POST | `/api/chrome-service/v1/favorite-pages` | Favorite pages |

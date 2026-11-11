@@ -33,9 +33,10 @@ import (
 )
 
 const (
-	openAPISpecRoute    = "/api/chrome-service/v1/openapi.json"
+	openAPIRoute        = "/api/chrome-service/v1/openapi"
+	openAPISpecRoute    = openAPIRoute + ".json"
 	openAPISpecFilePath = "./spec/openapi.json"
-	openAPIYAMLRoute    = "/api/chrome-service/v1/openapi.yaml"
+	openAPIYAMLRoute    = openAPIRoute + ".yaml"
 	openAPIYAMLFilePath = "./spec/openapi.yaml"
 )
 
@@ -106,36 +107,8 @@ func run(cfg *config.ChromeServiceConfig) (result error) {
 	util.CreateChromeConfiguration()
 	service.LoadBaseLayout()
 	featureflags.Init(cfg)
-	router := chi.NewRouter()
+	router := newRouter(cfg)
 	metricsRouter := chi.NewRouter()
-
-	router.Use(middleware.RequestID)
-	router.Use(logger.InjectLogger)
-	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, logrus.StandardLogger())))
-	router.Use(logger.Recoverer)
-	router.Use(middleware.URLFormat)
-
-	router.Get("/health", HealthProbe)
-	fs := http.FileServer(http.Dir("./static/"))
-	http.Handle("/", fs)
-
-	// can't be in sub router as we don't enforce identity header
-	router.Handle("/api/chrome-service/v1/static/*", http.StripPrefix("/api/chrome-service/v1/static", fs))
-	registerOpenAPIRoute(router)
-
-	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
-		subrouter.Use(m.ParseHeaders)
-		subrouter.Use(logger.EnrichLoggerWithIdentity)
-		subrouter.Use(m.InjectUser)
-		subrouter.Get("/hello-world", HelloWorld)
-		subrouter.Route("/last-visited", routes.MakeLastVisitedRoutes)
-		subrouter.Route("/recently-used-workspaces", routes.MakeRecentlyUsedWorkspacesRoutes)
-		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
-		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
-		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
-		subrouter.Route("/dashboard-templates", routes.MakeDashboardTemplateRoutes)
-		subrouter.Route("/api-docs", routes.MakeApiDocsRoutes)
-	})
 
 	// We might want to set up some event listeners at some point, but the pod will
 	// have to restart for these to take effect. We can't enable and disable websockets on the fly
@@ -227,17 +200,53 @@ func run(cfg *config.ChromeServiceConfig) (result error) {
 	return nil
 }
 
+func newRouter(cfg *config.ChromeServiceConfig) chi.Router {
+	router := chi.NewRouter()
+	router.Use(middleware.RequestID)
+	router.Use(logger.InjectLogger)
+	router.Use(middleware.RequestLogger(logger.NewLogger(cfg, logrus.StandardLogger())))
+	router.Use(logger.Recoverer)
+	router.Use(middleware.URLFormat)
+
+	router.Get("/health", HealthProbe)
+	fs := http.FileServer(http.Dir("./static/"))
+
+	// can't be in sub router as we don't enforce identity header
+	router.Handle("/api/chrome-service/v1/static/*", http.StripPrefix("/api/chrome-service/v1/static", fs))
+	registerOpenAPIRoute(router)
+
+	router.Route("/api/chrome-service/v1/", func(subrouter chi.Router) {
+		subrouter.Use(m.ParseHeaders)
+		subrouter.Use(logger.EnrichLoggerWithIdentity)
+		subrouter.Use(m.InjectUser)
+		subrouter.Get("/hello-world", HelloWorld)
+		subrouter.Route("/last-visited", routes.MakeLastVisitedRoutes)
+		subrouter.Route("/recently-used-workspaces", routes.MakeRecentlyUsedWorkspacesRoutes)
+		subrouter.Route("/favorite-pages", routes.MakeFavoritePagesRoutes)
+		subrouter.Route("/self-report", routes.MakeSelfReportRoutes)
+		subrouter.Route("/user", routes.MakeUserIdentityRoutes)
+		subrouter.Route("/dashboard-templates", routes.MakeDashboardTemplateRoutes)
+		subrouter.Route("/api-docs", routes.MakeApiDocsRoutes)
+	})
+
+	return router
+}
+
 func registerOpenAPIRoute(router chi.Router) {
-	router.Get(openAPISpecRoute, serveOpenAPISpec)
-	router.Get(openAPIYAMLRoute, serveOpenAPIYAML)
+	router.Get(openAPIRoute, serveOpenAPI)
+	router.Head(openAPIRoute, serveOpenAPI)
 }
 
-func serveOpenAPISpec(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, openAPISpecFilePath)
-}
-
-func serveOpenAPIYAML(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, openAPIYAMLFilePath)
+func serveOpenAPI(w http.ResponseWriter, r *http.Request) {
+	format, _ := r.Context().Value(middleware.URLFormatCtxKey).(string)
+	switch format {
+	case "json":
+		http.ServeFile(w, r, openAPISpecFilePath)
+	case "yaml":
+		http.ServeFile(w, r, openAPIYAMLFilePath)
+	default:
+		http.NotFound(w, r)
+	}
 }
 
 func HelloWorld(response http.ResponseWriter, request *http.Request) {

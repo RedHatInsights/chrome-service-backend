@@ -24,6 +24,8 @@ make test-e2e
 | `GET/POST /last-visited` | 3 | `lastVisited_test.go` |
 | `GET/POST /recently-used-workspaces` | 6 | `recentlyUsedWorkspaces_test.go` |
 | `GET/PATCH /self-report` | 2 | `selfReport_test.go` |
+| `GET /openapi.json` | 1 | `openapi_test.go` |
+| `GET /openapi.yaml` | 1 | `openapi_test.go` |
 
 ## Configuration
 

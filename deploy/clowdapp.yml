@@ -29,6 +29,8 @@ objects:
               enabled: true
               whitelistPaths:
                 - /api/chrome-service/v1/static/*
+                - /api/chrome-service/v1/openapi.json
+                - /api/chrome-service/v1/openapi.yaml
         podSpec:
           image: ${IMAGE}:${IMAGE_TAG}
           initContainers:

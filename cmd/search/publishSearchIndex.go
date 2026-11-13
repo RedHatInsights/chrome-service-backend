@@ -45,19 +45,18 @@ type TokenResponse struct {
 }
 
 type ModuleIndexEntry struct {
-	Icon            string        `json:"icon,omitempty"`
-	Title           []string      `json:"title"`
-	Bundle          []string      `json:"bundle"`
-	BundleTitle     []string      `json:"bundleTitle"`
-	AltTitle        []string      `json:"alt_title,omitempty"`
-	Id              string        `json:"id"`
-	Uri             string        `json:"uri"`
-	SolrCommand     string        `json:"solrCommand"`
-	ContentType     string        `json:"contentType"`
-	ViewUri         string        `json:"view_uri"`
-	RelativeUri     string        `json:"relative_uri"`
-	PocDescriptionT string        `json:"poc_description_t"`
-	Permissions     []interface{} `json:"permissions,omitempty"`
+	Icon            string   `json:"icon,omitempty"`
+	Title           []string `json:"title"`
+	Bundle          []string `json:"bundle"`
+	BundleTitle     []string `json:"bundle_title"`
+	AltTitle        []string `json:"alt_title,omitempty"`
+	Id              string   `json:"id"`
+	Uri             string   `json:"uri"`
+	SolrCommand     string   `json:"solr_command"`
+	ContentType     string   `json:"content_type"`
+	ViewUri         string   `json:"view_uri"`
+	RelativeUri     string   `json:"relative_uri"`
+	PocDescriptionT string   `json:"poc_description_t"`
 }
 
 type LinkEntry struct {
@@ -418,7 +417,6 @@ func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEnt
 				ViewUri:         fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
 				RelativeUri:     e.Href,
 				AltTitle:        e.AltTitle,
-				Permissions:     e.Permissions,
 			}
 			flatLinks = append(flatLinks, newLink)
 		}
@@ -537,7 +535,7 @@ func getEnvToken(secret string, host string) (string, error) {
 }
 
 type UploadPayload struct {
-	DataSource string             `json:"dataSource"`
+	DataSource string             `json:"data_source"`
 	Documents  []ModuleIndexEntry `json:"documents"`
 }
 
@@ -594,15 +592,18 @@ func deployIndex(env SearchEnv, envSecret string, ssoHost string, hydraHost stri
 	}
 	token, err := getEnvToken(envSecret, ssoHost)
 	if err != nil {
+		fmt.Println("error 1")
 		return err
 	}
 	index, err := constructIndex(env, "stable")
 	if err != nil {
+		fmt.Println("error 2")
 		return err
 	}
 
 	err = uploadIndex(token, index, hydraHost)
 	if err != nil {
+		fmt.Println("error 3")
 		return err
 	}
 

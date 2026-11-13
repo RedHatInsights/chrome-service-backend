@@ -209,13 +209,6 @@ rbac:
     versions:
       - v1
 
-connector:
-  title: Red Hat Connector
-  api:
-    versions:
-      - v2
-    apiName: config-manager
-
 remediations:
   title: Remediations
   api:
@@ -259,12 +252,6 @@ subscriptions:
       - v1
     alias:
       - rhsm-subscriptions
-
-tasks:
-  title: Tasks
-  api:
-    versions:
-      - v1
 
 vulnerability:
   title: Vulnerability Management

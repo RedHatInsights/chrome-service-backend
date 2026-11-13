@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -19,17 +20,30 @@ func LoadBaseLayout() {
 	// yaml extensions
 	modulesFiles, err := filepath.Glob(templatesWD + "widget-dashboard-defaults/*.yaml")
 	if err != nil {
-		logrus.Errorln("error discovering widget dashboard yaml files")
+		logrus.WithFields(logrus.Fields{
+			"component":  "dashboard_templates",
+			"operation":  "discover",
+			"extension":  "yaml",
+			"error_type": fmt.Sprintf("%T", err),
+		}).Error("dashboard template discovery failed")
 	}
 	// yml extensions
 	modulesFiles2, err := filepath.Glob(templatesWD + "widget-dashboard-defaults/*.yml")
 	if err != nil {
-		logrus.Errorln("error discovering widget dashboard yml files")
+		logrus.WithFields(logrus.Fields{
+			"component":  "dashboard_templates",
+			"operation":  "discover",
+			"extension":  "yml",
+			"error_type": fmt.Sprintf("%T", err),
+		}).Error("dashboard template discovery failed")
 	}
 	modulesFiles = append(modulesFiles, modulesFiles2...)
 
 	if len(modulesFiles) == 0 {
-		logrus.Errorln("no widget dashboard files found")
+		logrus.WithFields(logrus.Fields{
+			"component": "dashboard_templates",
+			"operation": "discover",
+		}).Error("no dashboard template files found")
 	}
 
 	for _, file := range modulesFiles {
@@ -37,32 +51,51 @@ func LoadBaseLayout() {
 		var jsonTemplate map[string]interface{}
 		yamlFile, err := os.ReadFile(file)
 		if err != nil {
-			logrus.Errorln("error reading widget dashboard file" + file)
+			logrus.WithFields(logrus.Fields{
+				"component":  "dashboard_templates",
+				"operation":  "read",
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("dashboard template file read failed")
+			continue
 		}
 		err = yaml.Unmarshal(yamlFile, &template)
 		if err != nil {
-			logrus.Errorln("error Unmarshal widget dashboard file" + file)
-			logrus.Errorln(err)
+			logrus.WithFields(logrus.Fields{
+				"component":  "dashboard_templates",
+				"operation":  "decode",
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("dashboard template decode failed")
 			break
 		}
 		dashboardType := models.AvailableTemplates(template.Name)
 		err = dashboardType.IsValid()
 		if err != nil {
-			logrus.Errorln("unknown dashboard type: " + dashboardType)
-			logrus.Errorln(err)
+			logrus.WithFields(logrus.Fields{
+				"component":  "dashboard_templates",
+				"operation":  "validate_type",
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("dashboard template type is invalid")
 			break
 		}
 
 		err = template.TemplateConfig.IsValid()
 
 		if err != nil {
-			logrus.Errorln("invalid template config in file: " + file + "\n" + err.Error())
+			logrus.WithFields(logrus.Fields{
+				"component":  "dashboard_templates",
+				"operation":  "validate_config",
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("dashboard template config is invalid")
 			break
 		}
 		err = yaml.Unmarshal(yamlFile, &jsonTemplate)
 
 		if err != nil {
-			logrus.Errorln("invalid template config in file: " + file + "\n" + err.Error())
+			logrus.WithFields(logrus.Fields{
+				"component":  "dashboard_templates",
+				"operation":  "decode_config",
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("dashboard template config decode failed")
 			break
 		}
 
@@ -72,7 +105,11 @@ func LoadBaseLayout() {
 
 	for template, found := range foundTemplateDefaults {
 		if !found {
-			logrus.Errorln("missing default template for " + template.String())
+			logrus.WithFields(logrus.Fields{
+				"component": "dashboard_templates",
+				"operation": "validate_defaults",
+				"template":  template.String(),
+			}).Error("dashboard template default is missing")
 		}
 	}
 

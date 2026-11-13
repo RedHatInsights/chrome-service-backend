@@ -11,7 +11,9 @@ package securitylog
 
 import (
 	"context"
+	"unicode"
 
+	requestlogger "github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/redhatinsights/platform-go-middlewares/v2/identity"
 	"github.com/sirupsen/logrus"
@@ -30,22 +32,22 @@ func Log(ctx context.Context, action, resourceType, resourceID, outcome string) 
 func LogWithReason(ctx context.Context, action, resourceType, resourceID, outcome, reason string) {
 	fields := logrus.Fields{
 		"event":         "security",
-		"action":        action,
-		"resource_type": resourceType,
-		"resource_id":   resourceID,
-		"outcome":       outcome,
+		"action":        boundedField(action, 32),
+		"resource_type": boundedField(resourceType, 64),
+		"resource_id":   boundedField(resourceID, 256),
+		"outcome":       boundedField(outcome, 16),
 	}
 
 	if reason != "" {
-		fields["reason"] = reason
+		fields["reason"] = boundedField(reason, 128)
 	}
 
 	addPrincipal(ctx, fields)
 
 	if outcome == "failure" {
-		logrus.WithFields(fields).Warn("security_event")
+		requestlogger.LogFor(ctx).WithFields(fields).Warn("security_event")
 	} else {
-		logrus.WithFields(fields).Info("security_event")
+		requestlogger.LogFor(ctx).WithFields(fields).Info("security_event")
 	}
 }
 
@@ -65,14 +67,25 @@ func LogStartup(serviceName string, port int) {
 // LogShutdown emits a process shutdown event.
 // SEC-MON-REQ-1 compliance (EOI-5 process_status)
 func LogShutdown(serviceName, reason string) {
+	LogShutdownWithOutcome(serviceName, reason, false)
+}
+
+// LogShutdownWithOutcome marks unexpected termination or a failed drain as failure.
+func LogShutdownWithOutcome(serviceName, reason string, failed bool) {
+	outcome := "success"
+	level := logrus.InfoLevel
+	if failed {
+		outcome = "failure"
+		level = logrus.ErrorLevel
+	}
 	logrus.WithFields(logrus.Fields{
 		"event":         "security",
 		"action":        "SHUTDOWN",
 		"resource_type": "process",
 		"resource_id":   serviceName,
-		"outcome":       "failure",
-		"reason":        reason,
-	}).Error("security_event")
+		"outcome":       outcome,
+		"reason":        boundedField(reason, 128),
+	}).Log(level, "security_event")
 }
 
 // addPrincipal extracts user_id and org_id from the request context and adds
@@ -84,8 +97,22 @@ func addPrincipal(ctx context.Context, fields logrus.Fields) {
 	}
 	if id, ok := ctx.Value(util.IDENTITY_CTX_KEY).(*identity.XRHID); ok && id != nil {
 		if id.Identity.User != nil {
-			fields["user_id"] = id.Identity.User.UserID
+			fields["user_id"] = boundedField(id.Identity.User.UserID, 128)
 		}
-		fields["org_id"] = id.Identity.OrgID
+		fields["org_id"] = boundedField(id.Identity.OrgID, 128)
 	}
+}
+
+func boundedField(value string, maxLength int) string {
+	var safe []rune
+	for _, char := range value {
+		if len(safe) >= maxLength {
+			break
+		}
+		if unicode.IsControl(char) {
+			char = '_'
+		}
+		safe = append(safe, char)
+	}
+	return string(safe)
 }

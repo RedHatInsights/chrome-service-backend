@@ -1,6 +1,7 @@
 package featureflags
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
@@ -52,7 +53,6 @@ func New(cfg *config.ChromeServiceConfig) error {
 	c, err := newClientWrapper(cfg)
 	if err != nil {
 		ffClient = nil
-		logrus.Infof("Unable to contact unleash server due to: %v", err)
 		return err
 	}
 	ffClient = &FFClient{
@@ -82,7 +82,12 @@ func Close() {
 func Init(cfg *config.ChromeServiceConfig) {
 	err := New(cfg)
 	if err != nil {
-		logrus.Infoln("all feature flags are set to false")
+		logrus.WithFields(logrus.Fields{
+			"component":  "feature_flags",
+			"dependency": "unleash",
+			"operation":  "initialize",
+			"error_type": fmt.Sprintf("%T", err),
+		}).Warn("feature flags unavailable; defaulting to disabled")
 	}
 }
 

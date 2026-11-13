@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 )
 
 // main runs database migrations as an init container before the service starts.
@@ -21,13 +21,15 @@ import (
 // pg_indexes query, etc.) so the DDL is never issued when the object already exists.
 func main() {
 	godotenv.Load()
-	database.Init()
+	if err := database.Init(); err != nil {
+		logrus.WithField("error_type", fmt.Sprintf("%T", err)).Fatal("database initialization failed")
+	}
 
 	var bundleRes *gorm.DB
 	var visitedRes *gorm.DB
 	var activeWorkspaceRes *gorm.DB
 	tx := database.DB.Begin().Session(&gorm.Session{
-		Logger: logger.Default.LogMode(logger.Info),
+		Logger: database.NewStructuredLogger(200 * time.Millisecond),
 	})
 	defer func() {
 		if r := recover(); r != nil {

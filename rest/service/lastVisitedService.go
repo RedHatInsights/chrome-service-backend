@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
-	"github.com/sirupsen/logrus"
 	"gorm.io/datatypes"
 	"math"
 )
@@ -20,7 +19,6 @@ func HandlePostLastVisitedPages(recentPages []models.VisitedPage, user *models.U
 	}
 	visitedPages := datatypes.NewJSONType[[]models.VisitedPage](newPages)
 
-	logrus.Debugf("Pages to be inserted: %+v\n", recentPages)
 	err := database.DB.Model(&user).Updates(models.UserIdentity{LastVisitedPages: visitedPages}).Error
 
 	return err

@@ -4,14 +4,16 @@
     "icon": "UsersIcon",
     "title": "Identity and Access Management",
     "description": "Ensure that the right users have the appropriate access to technology resources.",
-    "links": [{
-      "isGroup": true,
-      "title": "IAM",
-      "links": [
-        "iam.users",
-        "iam.groups"
-      ]
-    }]
+    "links": [
+      {
+        "isGroup": true,
+        "title": "IAM",
+        "links": [
+          "iam.users",
+          "iam.groups"
+        ]
+      }
+    ]
   },
   {
     "id": "inventories",
@@ -21,147 +23,9 @@
     "links": [
       {
         "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          "insights.inventory",
-          "insights.groups",
-          "insights.workspaces"
-        ]
-      },
-      {
-        "isGroup": true,
         "title": "OpenShift",
         "links": [
           "openshift.clusters"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "observe",
-    "icon": "ChartLineIcon",
-    "title": "Observe",
-    "description": "Monitor, troubleshoot, and improve application performance.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          "insights.advisories",
-          "insights.patchSystems",
-          {
-            "href": "/insights/advisor/recommendations",
-            "title": "Advisor",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
-            "alt_title": [
-              "advisor",
-              "Rules",
-              "rules",
-              "rule",
-              "Rule",
-              "insights",
-              "security",
-              "stability",
-              "performance",
-              "incidents",
-              "recommendations",
-              "configuration",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "security",
-    "icon": "CloudSecurityIcon",
-    "title": "Security",
-    "description": "Meet your policy and compliance objectives.",
-    "links": [
-      {
-        "isGroup": true,
-        "title": "Red Hat Enterprise Linux",
-        "links": [
-          "insights.advisories",
-          {
-            "href": "/insights/advisor/recommendations",
-            "title": "Advisor",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "See targeted recommendations to optimize your Red Hat Enterprise Linux systems' availability, performance, and security.",
-            "alt_title": [
-              "advisor",
-              "Rules",
-              "rules",
-              "rule",
-              "Rule",
-              "insights",
-              "security",
-              "stability",
-              "performance",
-              "incidents",
-              "recommendations",
-              "configuration",
-              "pathways",
-              "critical",
-              "upgrade",
-              "upgrade risk",
-              "incident",
-              "recommendation",
-              "pathway"
-            ]
-          },
-          {
-            "href": "/insights/vulnerability/cves",
-            "icon": "InsightsIcon",
-            "title": "Vulnerability",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Identify and prioritize security vulnerabilities within your Red Hat Enterprise Linux systems based on severity and frequency."
-          },
-          {
-            "href": "/insights/compliance/reports",
-            "icon": "InsightsIcon",
-            "title": "Compliance",
-            "subtitle":"Red Hat Insights for RHEL",
-            "description": "Evaluate your Red Hat Enterprise systems’ compliance with security or regulatory standards.",
-            "alt_title": [
-              "security",
-              "policies",
-              "SCAP",
-              "policy",
-              "insights",
-              "regulatory",
-              "regulations",
-              "OpenSCAP",
-              "PCI",
-              "HIPAA",
-              "DSS",
-              "CSI",
-              "C2S",
-              "rules",
-              "DISA STIG",
-              "PCI-DSS",
-              "NIST",
-              "OSPP"
-            ]
-          },
-          {
-            "href": "/insights/malware/signatures",
-            "title": "Malware",
-            "icon": "InsightsIcon",
-            "subtitle": "Red Hat Insights for RHEL",
-            "description": "Identify potential malware on your Red Hat Enterprise Linux systems."
-          },
-          "insights.remediations"
         ]
       }
     ]

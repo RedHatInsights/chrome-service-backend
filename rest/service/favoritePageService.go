@@ -1,12 +1,8 @@
 package service
 
 import (
-	"fmt"
-
-	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/database"
 	"github.com/RedHatInsights/chrome-service-backend/rest/models"
-	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
 
@@ -74,16 +70,7 @@ func DeleteOrUpdateFavoritePage(favoritePage models.FavoritePage) error {
 	return nil
 }
 
-func debugFavoritesEntry(accountId string, payload models.FavoritePage) {
-	c := config.Get()
-	for _, i := range c.DebugConfig.DebugFavoriteIds {
-		if i == accountId {
-			logrus.Warningln(fmt.Sprintf("\n_____\nDEBUG_FAVORITES_ACCOUNT_ID: %s\nDEBUG_FAVORITES_PATH: %s\nDEBUG_FAVORITES_FLAG: %s\n_____", accountId, payload.Pathname, fmt.Sprint(payload.Favorite)))
-		}
-	}
-}
-
-func SaveUserFavoritePage(userID uint, accountId string, newFavoritePage models.FavoritePage) error {
+func SaveUserFavoritePage(userID uint, _ string, newFavoritePage models.FavoritePage) error {
 	var userFavoritePages, err = GetAllUserFavoritePages(userID)
 
 	if err != nil {
@@ -95,10 +82,7 @@ func SaveUserFavoritePage(userID uint, accountId string, newFavoritePage models.
 	if alreadyInDB {
 		newFavoritePage.ID = newFavoriteGlobalId
 		err = DeleteOrUpdateFavoritePage(newFavoritePage)
-		logrus.Debugf("Deleted %+v\n", newFavoritePage)
-		debugFavoritesEntry(accountId, newFavoritePage)
 	} else {
-		debugFavoritesEntry(accountId, newFavoritePage)
 		err = database.DB.Create(&newFavoritePage).Error
 	}
 

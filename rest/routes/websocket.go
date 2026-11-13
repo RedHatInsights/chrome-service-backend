@@ -2,10 +2,9 @@ package routes
 
 import (
 	"net/http"
-	"net/url"
-	"strings"
 
 	"github.com/RedHatInsights/chrome-service-backend/rest/connectionhub"
+	"github.com/RedHatInsights/chrome-service-backend/rest/logger"
 	"github.com/RedHatInsights/chrome-service-backend/rest/securitylog"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
@@ -31,21 +30,7 @@ var upgrader = websocket.Upgrader{
 // checkOrigin validates the WebSocket upgrade Origin header.
 // Must stay in sync with CORS AllowedOrigins in main.go.
 func checkOrigin(r *http.Request) bool {
-	origin := r.Header.Get("Origin")
-	if origin == "" {
-		return false
-	}
-	parsed, err := url.Parse(origin)
-	if err != nil || parsed.Scheme != "https" {
-		return false
-	}
-	host := parsed.Hostname()
-	for _, suffix := range allowedOriginSuffixes {
-		if strings.HasSuffix(host, suffix) {
-			return true
-		}
-	}
-	return host == "console.redhat.com" || host == "console.stage.redhat.com" || host == "console.dev.redhat.com"
+	return originRejectionReason(r) == ""
 }
 
 func MakeWsRoute(sub chi.Router) {
@@ -55,15 +40,28 @@ func MakeWsRoute(sub chi.Router) {
 func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 	xrhid, ok := r.Context().Value(util.IDENTITY_CTX_KEY).(*identity.XRHID)
 	if !ok || xrhid == nil || xrhid.Identity.User == nil {
-		logrus.Errorln("WebSocket connection rejected: missing or invalid X-RH-Identity")
-		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", r.RemoteAddr, "failure", "missing verified identity")
+		securitylog.LogWithReason(r.Context(), "AUTHENTICATE", "websocket", "websocket", "failure", "missing verified identity")
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
 
-	ws, err := upgrader.Upgrade(w, r, nil)
+	// Copy the upgrader so the request-local callback can record why this
+	// specific upgrade was rejected without sharing mutable state across requests.
+	requestUpgrader := upgrader
+	originReason := ""
+	requestUpgrader.CheckOrigin = func(req *http.Request) bool {
+		originReason = originRejectionReason(req)
+		return originReason == ""
+	}
+	ws, err := requestUpgrader.Upgrade(w, r, nil)
 	if err != nil {
-		logrus.Errorln("Unable to upgrade WS connection", err)
+		if originReason != "" {
+			logRejectedWebSocketOrigin(r, originReason)
+		} else {
+			logger.LogFor(r.Context()).WithFields(logrus.Fields{
+				"upgrade_error_category": "upgrade_failed",
+			}).WithError(err).Error("Unable to upgrade WS connection")
+		}
 		return
 	}
 
@@ -74,9 +72,9 @@ func HandleWsConnection(w http.ResponseWriter, r *http.Request) {
 		Roles:        []string{},
 		Conn:         &connectionhub.Connection{Send: make(chan []byte, 256), Ws: ws},
 	}
-	logrus.Infoln("Registering new client with the connection hub: ", client.User)
+	logger.LogFor(r.Context()).Debug("websocket client registration requested")
 	connectionhub.ConnectionHub.Register <- client
-	logrus.Infoln("Client registration accepted by the connection hub: ", client.User)
+	logger.LogFor(r.Context()).Debug("websocket client registration accepted")
 	go client.WritePump()
 	client.ReadPump()
 }

@@ -15,7 +15,9 @@ var user models.UserIdentity
 
 func SeedDatabase() {
 	util.LoadEnv()
-	database.Init()
+	if err := database.Init(); err != nil {
+		panic(err)
+	}
 	pages := datatypes.NewJSONType[[]models.VisitedPage]([]models.VisitedPage{{
 		Title:    "Advisor",
 		Pathname: "insights/first",

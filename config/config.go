@@ -75,8 +75,6 @@ type IntercomConfig struct {
 	remediations_dev        string
 	ros                     string
 	ros_dev                 string
-	tasks                   string
-	tasks_dev               string
 	vulnerability           string
 	vulnerability_dev       string
 }
@@ -92,14 +90,10 @@ type FeatureFlagsConfig struct {
 }
 
 type CloudWatchCfg struct {
-	AccessKeyId    string
+	AccessKeyId     string
 	SecretAccessKey string
-	Region         string
-	LogGroup       string
-}
-
-type DebugConfig struct {
-	DebugFavoriteIds []string
+	Region          string
+	LogGroup        string
 }
 
 type WidgetDashboardConfig struct {
@@ -123,7 +117,6 @@ type ChromeServiceConfig struct {
 	KafkaConfig                         KafkaCfg
 	IntercomConfig                      IntercomConfig
 	FeatureFlagConfig                   FeatureFlagsConfig
-	DebugConfig                         DebugConfig
 	DashboardConfig                     WidgetDashboardConfig
 	MaximumNumberRecentlyUsedWorkspaces int
 }
@@ -184,10 +177,10 @@ func init() {
 
 		if cfg.Logging.Cloudwatch != nil {
 			options.CloudWatch = CloudWatchCfg{
-				AccessKeyId:    cfg.Logging.Cloudwatch.AccessKeyId,
+				AccessKeyId:     cfg.Logging.Cloudwatch.AccessKeyId,
 				SecretAccessKey: cfg.Logging.Cloudwatch.SecretAccessKey,
-				Region:         cfg.Logging.Cloudwatch.Region,
-				LogGroup:       cfg.Logging.Cloudwatch.LogGroup,
+				Region:          cfg.Logging.Cloudwatch.Region,
+				LogGroup:        cfg.Logging.Cloudwatch.LogGroup,
 			}
 		}
 
@@ -299,14 +292,8 @@ func init() {
 		remediations_dev:        os.Getenv("INTERCOM_INSIGHTS_DEV"),
 		ros:                     os.Getenv("INTERCOM_INSIGHTS"),
 		ros_dev:                 os.Getenv("INTERCOM_INSIGHTS_DEV"),
-		tasks:                   os.Getenv("INTERCOM_INSIGHTS"),
-		tasks_dev:               os.Getenv("INTERCOM_INSIGHTS_DEV"),
 		vulnerability:           os.Getenv("INTERCOM_INSIGHTS"),
 		vulnerability_dev:       os.Getenv("INTERCOM_INSIGHTS_DEV"),
-	}
-
-	options.DebugConfig = DebugConfig{
-		DebugFavoriteIds: []string{"", os.Getenv("DEBUG_FAVORITES_ACCOUNT_1")},
 	}
 
 	options.DashboardConfig = WidgetDashboardConfig{

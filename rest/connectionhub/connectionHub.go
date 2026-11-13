@@ -1,6 +1,7 @@
 package connectionhub
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -114,7 +115,7 @@ func registerClient(c Client, h *connectionHub) {
 	registerClientRoles(c, h)
 	registerClientOrg(c, h)
 	registerClientUsername(c, h)
-	logrus.Infoln("Client registered with connection hub: user=", c.User, "org=", c.Organization)
+	logrus.WithField("role_count", len(c.Roles)).Debug("websocket client registered")
 }
 
 func unregisterClientOrg(c Client, h *connectionHub) {
@@ -144,7 +145,7 @@ func unregisterClient(c Client, h *connectionHub) {
 	if h.Clients[c.User] != nil {
 		delete(h.Clients, c.User)
 	}
-	logrus.Infoln("Client unregistered from connection hub: user=", c.User, "org=", c.Organization)
+	logrus.Debug("websocket client unregistered")
 }
 
 func emitMessage(m Message, h *connectionHub) {
@@ -202,13 +203,13 @@ func (h *connectionHub) Run() {
 			registerClient(c, h)
 		case c := <-h.Unregister:
 			unregisterClient(c, h)
-		case m := <-h.Broadcast:
+		case <-h.Broadcast:
 			// Broadcast is intentionally unsupported: log and drop the message,
 			// but keep the loop running. A bare `return` here previously exited
 			// this goroutine permanently on the first broadcast message, which
 			// silently deadlocked all future Register/Unregister/Emit sends
 			// (unbuffered channels, no receiver) for every user on the pod.
-			logrus.Errorln("Broadcast messages are not supported; dropping message. Source: ", m.Origin)
+			logrus.Warn("websocket broadcast dropped: unsupported operation")
 		case m := <-h.Emit:
 			emitMessage(m, h)
 		}
@@ -219,9 +220,10 @@ func (c Client) ReadPump() {
 	conn := c.Conn
 	// close connection after client is removed
 	defer func() {
-		logrus.Debugln(c)
 		ConnectionHub.Unregister <- c
-		conn.Ws.Close()
+		if err := conn.Ws.Close(); err != nil {
+			logrus.WithField("error_type", fmt.Sprintf("%T", err)).Debug("websocket close failed")
+		}
 	}()
 	// configure ws connection
 	conn.Ws.SetReadLimit(maxMessageSize)
@@ -238,7 +240,7 @@ func (c Client) ReadPump() {
 		_, _, err := conn.Ws.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				logrus.Debugln("Websocket client going away", err)
+				logrus.WithField("error_type", fmt.Sprintf("%T", err)).Debug("websocket client disconnected unexpectedly")
 			}
 			break
 		}
@@ -249,7 +251,7 @@ func (c Client) ReadPump() {
 func (c *Connection) write(mt int, payload []byte) error {
 	err := c.Ws.SetWriteDeadline(time.Now().Add(writeWait))
 	if err != nil {
-		logrus.Errorf("Cannot write message %v", err)
+		return err
 	}
 	return c.Ws.WriteMessage(mt, payload)
 }
@@ -260,23 +262,25 @@ func (c Client) WritePump() {
 	ticker := time.NewTicker(pingPeriod)
 	defer func() {
 		ticker.Stop()
-		conn.Ws.Close()
+		if err := conn.Ws.Close(); err != nil {
+			logrus.WithField("error_type", fmt.Sprintf("%T", err)).Debug("websocket close failed")
+		}
 	}()
 
 	for {
 		select {
 		case message, ok := <-conn.Send:
 			if !ok {
-				logrus.Errorln("sending message has failed", message)
-				conn.write(websocket.CloseMessage, []byte{})
+				logrus.Debug("websocket send channel closed")
+				return
 			}
 			if err := conn.write(websocket.TextMessage, message); err != nil {
-				logrus.Errorln("Unable to write message to WS connection: ", err)
+				logrus.WithField("error_type", fmt.Sprintf("%T", err)).Error("websocket message write failed")
 				return
 			}
 		case <-ticker.C:
 			if err := conn.write(websocket.PingMessage, []byte{}); err != nil {
-				logrus.Errorln("Heart beat frame failed to be send: ", err)
+				logrus.WithField("error_type", fmt.Sprintf("%T", err)).Debug("websocket heartbeat write failed")
 				return
 			}
 		}

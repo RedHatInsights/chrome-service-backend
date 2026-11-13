@@ -10,7 +10,6 @@ import (
 	"github.com/RedHatInsights/chrome-service-backend/rest/service"
 	"github.com/RedHatInsights/chrome-service-backend/rest/util"
 	"github.com/go-chi/chi/v5"
-	"github.com/sirupsen/logrus"
 )
 
 func GetUserSelfReport(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +51,6 @@ func UpdateUserSelfReport(w http.ResponseWriter, r *http.Request) {
 		errString := "Unable to update self report."
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(errString))
-		logrus.Errorf("unable to update self report, %s", err.Error())
 		securitylog.LogWithReason(r.Context(), "UPDATE", "self_report", user.AccountId, "failure", "update failed")
 		return
 	}

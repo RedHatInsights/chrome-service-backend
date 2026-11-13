@@ -7,10 +7,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
+	"unicode"
+	"unicode/utf8"
 
 	"github.com/RedHatInsights/chrome-service-backend/config"
 	"github.com/RedHatInsights/chrome-service-backend/rest/cloudevents"
@@ -140,7 +141,11 @@ func createReader(topic string) *kafka.Reader {
 	cfg := config.Get()
 	hostname, err := os.Hostname()
 	if err != nil {
-		logrus.Errorln("Couldn't get hostname, using UUID")
+		logrus.WithFields(logrus.Fields{
+			"component":  "kafka",
+			"operation":  "resolve_hostname",
+			"error_type": fmt.Sprintf("%T", err),
+		}).Warn("kafka consumer using generated hostname")
 		hostname = uuid.NewString()
 	}
 
@@ -152,13 +157,21 @@ func createReader(topic string) *kafka.Reader {
 	if cfg.KafkaConfig.BrokerConfig.Authtype != nil {
 		dialer, err = createDialer(&cfg.KafkaConfig.BrokerConfig)
 		if err != nil {
-			logrus.Errorln("Couldn't create dialer for Kafka: ", err)
+			logrus.WithFields(logrus.Fields{
+				"component":  "kafka",
+				"operation":  "create_dialer",
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("kafka dialer initialization failed")
 		}
 	}
 	if err == nil {
 		dialer.SASLMechanism = mechanism
 	} else {
-		logrus.Errorln("Couldn't create SASL mechanism for Kafka: ", err)
+		logrus.WithFields(logrus.Fields{
+			"component":  "kafka",
+			"operation":  "create_sasl_mechanism",
+			"error_type": fmt.Sprintf("%T", err),
+		}).Error("kafka SASL mechanism initialization failed")
 	}
 
 	r := kafka.NewReader(kafka.ReaderConfig{
@@ -173,7 +186,7 @@ func createReader(topic string) *kafka.Reader {
 		MaxBytes:    TenMb,
 		Dialer:      dialer,
 	})
-	logrus.Infoln("Creating new kafka reader for topic:", topic)
+	logrus.WithField("topic", safeTopic(topic)).Info("kafka reader created")
 	return r
 }
 
@@ -192,29 +205,68 @@ func InitializeConsumers() {
 	}
 }
 
-func startKafkaReader(r *kafka.Reader) {
-	defer r.Close()
-	for {
-		logrus.Infoln("Reading from ", r.Config().Topic)
-		m, err := r.ReadMessage(context.Background())
-		if err != nil {
-			logrus.Errorln("Error reading message: ", err)
+func safeTopic(topic string) string {
+	var safe strings.Builder
+	for _, char := range topic {
+		if safe.Len()+utf8.RuneLen(char) > 128 {
 			break
 		}
-		logrus.Infoln(fmt.Sprintf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value)))
+		if unicode.IsControl(char) {
+			char = '_'
+		}
+		safe.WriteRune(char)
+	}
+	return safe.String()
+}
+
+func startKafkaReader(r *kafka.Reader) {
+	topic := safeTopic(r.Config().Topic)
+	defer func() {
+		if err := r.Close(); err != nil {
+			logrus.WithFields(logrus.Fields{
+				"topic":      topic,
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("failed to close kafka reader")
+		}
+	}()
+	for {
+		m, err := r.ReadMessage(context.Background())
+		if err != nil {
+			logrus.WithFields(logrus.Fields{
+				"topic":      topic,
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("kafka message read failed")
+			break
+		}
+		logrus.WithFields(logrus.Fields{
+			"topic":    topic,
+			"offset":   m.Offset,
+			"byte_len": len(m.Value),
+		}).Debug("kafka message received")
 
 		var p cloudevents.KafkaEnvelope
 		err = json.Unmarshal(m.Value, &p)
 		if err != nil {
-			logrus.Errorln(fmt.Sprintf("Unable to unmarshal message %s\n", string(m.Value)))
+			logrus.WithFields(logrus.Fields{
+				"topic":      topic,
+				"offset":     m.Offset,
+				"error_type": fmt.Sprintf("%T", err),
+			}).Error("kafka message decode failed")
 		} else if p.Data.Payload == nil {
-			logrus.Errorln(fmt.Sprintf("No message will be emitted due to missing payload %s! Message might not follow cloud events spec.\n", string(m.Value)))
+			logrus.WithFields(logrus.Fields{
+				"topic":  topic,
+				"offset": m.Offset,
+			}).Warn("kafka message has no payload")
 		} else {
 			event := cloudevents.WrapPayload(p.Data.Payload, p.Source, p.Id, p.Type)
 			event.Time = p.Time
 			data, err := json.Marshal(event)
 			if err != nil {
-				log.Println("Unable to marshal payload data", p, err)
+				logrus.WithFields(logrus.Fields{
+					"topic":      topic,
+					"offset":     m.Offset,
+					"error_type": fmt.Sprintf("%T", err),
+				}).Error("kafka event encoding failed")
 			} else {
 				validateErr := cloudevents.ValidatePayload(p)
 				if validateErr == nil {
@@ -229,22 +281,24 @@ func startKafkaReader(r *kafka.Reader) {
 						Data:      data,
 					}
 					if p.Data.Broadcast {
-						logrus.Infoln("Emitting new broadcast message from kafka reader: ", string(newMessage.Data))
 						connectionhub.ConnectionHub.Broadcast <- newMessage
-						logrus.Infoln("Broadcast message accepted by connection hub, offset: ", m.Offset)
 					} else {
-						logrus.Infoln("Emitting new message from kafka reader: ", string(newMessage.Data))
 						connectionhub.ConnectionHub.Emit <- newMessage
-						logrus.Infoln("Message accepted by connection hub, offset: ", m.Offset)
 					}
+					logrus.WithFields(logrus.Fields{
+						"topic":     topic,
+						"offset":    m.Offset,
+						"broadcast": p.Data.Broadcast,
+					}).Debug("kafka event accepted by connection hub")
 				} else {
-					logrus.Errorln(validateErr)
+					logrus.WithFields(logrus.Fields{
+						"topic":      topic,
+						"offset":     m.Offset,
+						"error_type": fmt.Sprintf("%T", validateErr),
+					}).Error("kafka event validation failed")
 				}
 			}
 		}
 	}
 
-	if err := r.Close(); err != nil {
-		log.Fatal("failed to close reader:", err)
-	}
 }

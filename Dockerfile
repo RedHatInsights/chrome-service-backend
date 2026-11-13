@@ -62,6 +62,9 @@ RUN mkdir -p /app && \
 RUN mkdir -p /static && \
     chgrp -R 0 /static && \
     chmod -R g=u /static
+RUN mkdir -p /spec && \
+    chgrp -R 0 /spec && \
+    chmod -R g=u /spec
 
 COPY --from=builder /workspace/chrome-service-backend /app/chrome-service-backend
 COPY --from=builder /workspace/chrome-migrate /usr/bin/
@@ -69,6 +72,8 @@ COPY --from=builder /workspace/chrome-search-index /usr/bin/
 COPY --from=builder /workspace/chrome-fetch-specs /usr/bin/
 # Copy chrome static JSON assets to server binary entry point
 COPY --from=builder /workspace/static /static
+# Copy the OpenAPI specification to the server binary entry point
+COPY --from=builder /workspace/spec /spec
 # Copy widget dashboard defaults to server binary entry point
 COPY --from=builder /workspace/widget-dashboard-defaults /widget-dashboard-defaults
 

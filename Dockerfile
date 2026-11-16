@@ -43,7 +43,7 @@ RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
 RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
     CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-migrate cmd/migrate/migrate.go
 RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
-    CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-search-index cmd/search/publishSearchIndex.go
+    CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-search-index ./cmd/search
 RUN if [ -f /cachi2/cachi2.env ]; then . /cachi2/cachi2.env; fi && \
     CGO_ENABLED=1 go build -ldflags "-w -s" -o chrome-fetch-specs cmd/fetchSpecs/fetchSpecs.go
 

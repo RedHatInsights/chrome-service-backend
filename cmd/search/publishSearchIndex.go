@@ -45,19 +45,18 @@ type TokenResponse struct {
 }
 
 type ModuleIndexEntry struct {
-	Icon            string        `json:"icon,omitempty"`
-	Title           []string      `json:"title"`
-	Bundle          []string      `json:"bundle"`
-	BundleTitle     []string      `json:"bundleTitle"`
-	AltTitle        []string      `json:"alt_title,omitempty"`
-	Id              string        `json:"id"`
-	Uri             string        `json:"uri"`
-	SolrCommand     string        `json:"solrCommand"`
-	ContentType     string        `json:"contentType"`
-	ViewUri         string        `json:"view_uri"`
-	RelativeUri     string        `json:"relative_uri"`
-	PocDescriptionT string        `json:"poc_description_t"`
-	Permissions     []interface{} `json:"permissions,omitempty"`
+	Icon            string   `json:"icon,omitempty"`
+	Title           []string `json:"title"`
+	Bundle          []string `json:"bundle"`
+	BundleTitle     []string `json:"bundle_title"`
+	AltTitle        []string `json:"alt_title,omitempty"`
+	Id              string   `json:"id"`
+	Uri             string   `json:"uri"`
+	SolrCommand     string   `json:"solr_command"`
+	ContentType     string   `json:"content_type"`
+	ViewUri         string   `json:"view_uri"`
+	RelativeUri     string   `json:"relative_uri"`
+	PocDescriptionT string   `json:"poc_description_t"`
 }
 
 type LinkEntry struct {
@@ -383,42 +382,23 @@ func injectLinks(templateData []byte, flatLinks []LinkEntry) ([]ServiceEntry, er
 }
 
 func flattenIndexBase(indexBase []ServiceEntry, env SearchEnv) ([]ModuleIndexEntry, error) {
-	hccOrigins := EnvMap{
-		Prod:   "https://console.redhat.com",
-		Stage:  "https://console.stage.redhat.com",
-		Itless: "https://console.openshiftusgov.com",
-	}
-	bundleMapping := map[string]string{
-		"application-services": "Application Services",
-		"openshift":            "OpenShift",
-		"ansible":              "Ansible",
-		"insights":             "RHEL",
-		"settings":             "Settings",
-		"landing":              "Home",
-		"allservices":          "Home",
-		"iam":                  "Identity & Access Management",
-		"internal":             "Internal",
-		"containers":           "Containers",
-		"quay":                 "Quay.io",
-	}
 	var flatLinks []ModuleIndexEntry
 	for _, s := range indexBase {
 		for _, e := range s.Links {
-			bundle := strings.Split(e.Href, "/")[1]
+			bundle := bundleFromHref(e.Href)
 			newLink := ModuleIndexEntry{
 				Icon:            s.Icon,
 				PocDescriptionT: e.Description,
 				Title:           []string{e.Title},
 				Bundle:          []string{bundle},
 				BundleTitle:     []string{bundleMapping[bundle]},
-				Id:              fmt.Sprintf("hcc-module-%s-%s", e.Href, e.Id),
-				Uri:             fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
+				Id:              fmt.Sprintf("%s%s-%s", legacyModuleIdPrefix, e.Href, e.Id),
+				Uri:             resolveURI(e.Href, env),
 				SolrCommand:     "index",
-				ContentType:     "moduleDefinition",
-				ViewUri:         fmt.Sprintf("%s%s", hccOrigins[env], e.Href),
+				ContentType:     moduleContentType,
+				ViewUri:         resolveURI(e.Href, env),
 				RelativeUri:     e.Href,
 				AltTitle:        e.AltTitle,
-				Permissions:     e.Permissions,
 			}
 			flatLinks = append(flatLinks, newLink)
 		}
@@ -499,7 +479,10 @@ func getEnvToken(secret string, host string) (string, error) {
 	data.Set("grant_type", "client_credentials")
 	data.Set("scope", "email profile openid")
 	data.Set("client_secret", secret)
+	return requestToken(data, host)
+}
 
+func requestToken(data url.Values, host string) (string, error) {
 	// create request and encode data
 	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", host, ssoPathname), strings.NewReader(data.Encode()))
 	if err != nil {
@@ -537,13 +520,11 @@ func getEnvToken(secret string, host string) (string, error) {
 }
 
 type UploadPayload struct {
-	DataSource string             `json:"dataSource"`
+	DataSource string             `json:"data_source"`
 	Documents  []ModuleIndexEntry `json:"documents"`
 }
 
 func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
-	// fmt.Println(index)
-	// return nil
 	payload := UploadPayload{
 		DataSource: "console",
 		Documents:  index,
@@ -587,23 +568,71 @@ func uploadIndex(token string, index []ModuleIndexEntry, host string) error {
 	return nil
 }
 
-func deployIndex(env SearchEnv, envSecret string, ssoHost string, hydraHost string) error {
+// HydraSources holds the optional additional inputs for the published (Hydra) index.
+type HydraSources struct {
+	// FeoIndexPaths maps an environment to a frontend-operator search index JSON file
+	FeoIndexPaths EnvMap
+	// QuickstartsPath is the docs/quickstarts directory of the quickstarts repository
+	QuickstartsPath string
+}
+
+// constructHydraIndex builds the full index that is published to Hydra: FEO search entries,
+// navigation/services based module entries and quickstarts.
+func constructHydraIndex(env SearchEnv, sources HydraSources) ([]ModuleIndexEntry, error) {
+	moduleIndex, err := constructIndex(env, Stable)
+	if err != nil {
+		return nil, fmt.Errorf("constructing module index: %w", err)
+	}
+
+	feoIndex := []ModuleIndexEntry{}
+	if path := sources.FeoIndexPaths[env]; path != "" {
+		feoIndex, err = loadFeoSearchIndex(path, env)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		fmt.Println("[WARN] No FEO search index provided for", env)
+	}
+
+	quickstarts := []ModuleIndexEntry{}
+	if sources.QuickstartsPath != "" {
+		quickstarts, err = loadQuickstarts(sources.QuickstartsPath, env)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		fmt.Println("[WARN] No quickstarts path provided for", env)
+	}
+
+	index := mergeIndexes(feoIndex, moduleIndex, quickstarts)
+	fmt.Printf("%s index: %d FEO, %d module, %d quickstart documents -> %d after merge\n", env, len(feoIndex), len(moduleIndex), len(quickstarts), len(index))
+	return index, nil
+}
+
+func writeHydraPayload(index []ModuleIndexEntry, path string) error {
+	b, err := json.MarshalIndent(UploadPayload{DataSource: "console", Documents: index}, "", "  ")
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(path, b, 0644)
+}
+
+func deployIndex(env SearchEnv, index []ModuleIndexEntry, envSecret string, ssoHost string, hydraHost string) error {
 	err := env.IsValidEnv()
 	if err != nil {
 		return err
 	}
+	if envSecret == "" {
+		return fmt.Errorf("missing search client secret for %s environment", env)
+	}
 	token, err := getEnvToken(envSecret, ssoHost)
 	if err != nil {
-		return err
-	}
-	index, err := constructIndex(env, "stable")
-	if err != nil {
-		return err
+		return fmt.Errorf("requesting SSO token: %w", err)
 	}
 
 	err = uploadIndex(token, index, hydraHost)
 	if err != nil {
-		return err
+		return fmt.Errorf("uploading index to Hydra: %w", err)
 	}
 
 	return nil
@@ -692,14 +721,43 @@ func main() {
 		return
 	}
 
-	for _, env := range []SearchEnv{Stage, Prod} {
-		var err error
-		if dryRun {
-			fmt.Println("Attempt dry run search index for", env, "environment.")
-			_, err = constructIndex(env, "stable")
-		} else {
-			fmt.Println("Attempt to publish search index for", env, "environment.")
-			err = deployIndex(env, secrets[env], ssoHosts[env], hydraHost[env])
+	sources := HydraSources{
+		FeoIndexPaths: EnvMap{
+			Prod:  os.Getenv("SEARCH_FEO_INDEX_PROD"),
+			Stage: os.Getenv("SEARCH_FEO_INDEX_STAGE"),
+		},
+		QuickstartsPath: os.Getenv("SEARCH_QUICKSTARTS_PATH"),
+	}
+	// optional directory to write the upload payloads to for review
+	outputDir := os.Getenv("SEARCH_INDEX_OUTPUT_DIR")
+
+	publishEnvs := []SearchEnv{Stage, Prod}
+	if envList := os.Getenv("SEARCH_INDEX_ENVS"); envList != "" {
+		publishEnvs = []SearchEnv{}
+		for _, e := range strings.Split(envList, ",") {
+			publishEnvs = append(publishEnvs, SearchEnv(strings.TrimSpace(e)))
+		}
+	}
+
+	for _, env := range publishEnvs {
+		if err := env.IsValidEnv(); err != nil {
+			errors = append(errors, err)
+			continue
+		}
+		index, err := constructHydraIndex(env, sources)
+		if err == nil && outputDir != "" {
+			path := filepath.Join(outputDir, fmt.Sprintf("hydra-payload-%s.json", env))
+			if err = writeHydraPayload(index, path); err == nil {
+				fmt.Println("Wrote", env, "payload to", path)
+			}
+		}
+		if err == nil {
+			if dryRun {
+				fmt.Println("Dry run, skipping publish of search index for", env, "environment.")
+			} else {
+				fmt.Println("Attempt to publish search index for", env, "environment.")
+				err = deployIndex(env, index, secrets[env], ssoHosts[env], hydraHost[env])
+			}
 		}
 		if err != nil {
 			fmt.Println("[ERROR] Failed to deploy search index for", env, "environment.")

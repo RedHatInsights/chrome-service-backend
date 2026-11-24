@@ -45,13 +45,12 @@ const (
 	Policies            IntercomApp = "policies"
 	Registration        IntercomApp = "registration"
 	Remediations        IntercomApp = "remediations"
-	Ros                 IntercomApp = "ros"
 	Vulnerability       IntercomApp = "vulnerability"
 )
 
 func (ib IntercomApp) IsValidApp() error {
 	switch ib {
-	case OpenShift, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS, ActivationKeys, Advisor, Compliance, Connector, ContentSources, Dashboard, ImageBuilder, Inventory, Malware, Patch, Policies, Registration, Remediations, Ros, Vulnerability:
+	case OpenShift, Ansible, Acs, AnsibleDashboard, AutomationHub, AutomationAnalytics, DBAAS, ActivationKeys, Advisor, Compliance, Connector, ContentSources, Dashboard, ImageBuilder, Inventory, Malware, Patch, Policies, Registration, Remediations, Vulnerability:
 		return nil
 	}
 

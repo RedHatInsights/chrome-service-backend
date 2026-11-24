@@ -208,12 +208,6 @@ remediations:
     versions:
       - v1
 
-ros:
-  title: Resource Optimization
-  api:
-    versions:
-      - v1
-
 ruledev:
   title: Rule Development
   api:

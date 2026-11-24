@@ -530,30 +530,6 @@
       "expandable": true,
       "routes": [
         {
-          "id": "ros",
-          "appId": "ros",
-          "title": "Resource Optimization",
-          "href": "/insights/ros",
-          "icon": "InsightsIcon",
-          "product": "Red Hat Insights",
-          "subtitle": "Red Hat Insights for RHEL",
-          "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance.",
-          "feoReplacement": "ros",
-          "alt_title": [
-            "optimization",
-            "optimisation",
-            "optimize",
-            "optimise",
-            "usage",
-            "utilization",
-            "utilisation",
-            "save",
-            "savings",
-            "resource optimization",
-            "resource optimisation"
-          ]
-        },
-        {
           "id": "subscriptions",
           "appId": "subscriptions",
           "title": "Subscriptions",

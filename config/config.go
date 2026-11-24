@@ -73,8 +73,6 @@ type IntercomConfig struct {
 	registration_dev        string
 	remediations            string
 	remediations_dev        string
-	ros                     string
-	ros_dev                 string
 	vulnerability           string
 	vulnerability_dev       string
 }
@@ -290,8 +288,6 @@ func init() {
 		registration_dev:        os.Getenv("INTERCOM_INSIGHTS_DEV"),
 		remediations:            os.Getenv("INTERCOM_INSIGHTS"),
 		remediations_dev:        os.Getenv("INTERCOM_INSIGHTS_DEV"),
-		ros:                     os.Getenv("INTERCOM_INSIGHTS"),
-		ros_dev:                 os.Getenv("INTERCOM_INSIGHTS_DEV"),
 		vulnerability:           os.Getenv("INTERCOM_INSIGHTS"),
 		vulnerability_dev:       os.Getenv("INTERCOM_INSIGHTS_DEV"),
 	}

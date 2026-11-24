@@ -275,12 +275,6 @@ rhacs:
   api:
     url: https://api.openshift.com/api/rhacs/v1/openapi
 
-ros:
-  title: Resource Optimization
-  api:
-    versions:
-      - v1
-
 ruledev:
   title: Rule Development
   api:

@@ -519,13 +519,6 @@
             "href": "/subscriptions/usage/rhel",
             "icon": "OpenShiftIcon",
             "description": "Drive purchasing and IT operations decisions with comprehensive, account-wide usage reporting of that highlights how and where your technology is being used."
-          },
-          {
-            "title": "Resource Optimization",
-            "filterable": false,
-            "href": "/insights/ros",
-            "icon": "OpenShiftIcon",
-	    "description": "Optimize your public cloud-based Red Hat Enterprise Linux systems based on CPU, memory, and disk input/output performance."
           }
         ]
       },

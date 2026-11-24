@@ -515,29 +515,6 @@
           }
       ]
   },
-  "ros": {
-    "analytics": {
-        "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"
-    },
-      "manifestLocation": "/apps/ros/fed-mods.json",
-      "config": {
-        "supportCaseData": {
-            "product": "Red Hat Insights",
-            "version": "Resource Optimizations"
-        }
-      },
-      "modules": [
-          {
-              "id": "ros",
-              "module": "./RootApp",
-              "routes": [
-                  {
-                      "pathname": "/insights/ros"
-                  }
-              ]
-          }
-      ]
-  },
   "registration": {
     "analytics": {
         "APIKey": "aMINBssUhXV1okzk7ZBaqwdTgtA0ySpg"

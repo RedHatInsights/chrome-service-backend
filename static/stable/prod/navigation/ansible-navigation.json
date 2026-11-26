@@ -226,22 +226,6 @@
             ]
         },
         {
-            "id": "registerSystems",
-            "appId": "registration",
-            "title": "Registration Assistant",
-            "filterable": false,
-            "href": "/ansible/registration",
-            "product": "Red Hat Insights",
-            "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console.",
-            "permissions": [
-              {
-                "method": "featureFlag",
-                "args": ["platform.lightspeed-rebrand", false]
-              }
-            ],
-            "feoReplacement": "registration"
-        },
-        {
             "id": "remediations",
             "appId": "remediations",
             "title": "Remediations",
@@ -320,15 +304,6 @@
                             "product": "Red Hat Insights"
                         }
                     ]
-                },
-                {
-                    "appId": "registration",
-                    "id": "registerSystems-lightspeed",
-                    "title": "Registration Assistant",
-                    "filterable": false,
-                    "href": "/ansible/registration",
-                    "product": "Red Hat Insights",
-                    "description": "Register your Ansible Automation Platform systems with the Red Hat Insights Client to view them on the Red Hat Hybrid Cloud Console."
                 },
                 {
                     "appId": "remediations",
